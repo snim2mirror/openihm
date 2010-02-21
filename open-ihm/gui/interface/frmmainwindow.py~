@@ -36,7 +36,6 @@ class FrmMainWindow(Ui_MainWindow):
 		self.form.show()
 
         def manageFoodTypes(self):
-                ''' Creates and Shows the Manage Food Types form'''
 		self.form = QtGui.QDialog()
 		self.ui = FrmManageFoodTypes()
 		self.ui.setupUi(self.form,self.mdi)
