@@ -17,7 +17,7 @@ app = QtGui.QApplication(sys.argv)
 window = QtGui.QMainWindow()
 ui = FrmMainWindow()
 ui.setupUi(window)
-window.show()
+window.showMaximized()
 
 # enter the application event loop - accept and handle events until
 # user exists the application.

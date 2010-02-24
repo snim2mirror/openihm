@@ -11,11 +11,12 @@ from PyQt4 import QtGui, QtCore
 from gui.designs.ui_newproject import Ui_NewProject
 
 class FrmNewProject(Ui_NewProject):	
-	''' Creates the Create (New) Project from. Uses the design class
-		in gui.designs.ui_newproject. '''	
-	def setupUi(self, Form, Mdi):
-		''' Set up the dialog box interface '''
-		Ui_NewProject.setupUi(self, Form)
-		
-		# connect relevant signals and slots
-		QtCore.QObject.connect(self.BtnProjectCancel, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
+    ''' Creates the Create (New) Project from. Uses the design class
+    in gui.designs.ui_newproject. '''	
+
+    def setupUi(self, Form, Mdi):
+        ''' Set up the dialog box interface '''
+        Ui_NewProject.setupUi(self, Form)
+        
+        # connect relevant signals and slots
+        QtCore.QObject.connect(self.BtnProjectCancel, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
