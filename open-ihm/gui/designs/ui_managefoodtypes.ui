@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>foodTypes</class>
- <widget class="QDialog" name="foodTypes" >
+ <class>FoodTypes</class>
+ <widget class="QDialog" name="FoodTypes" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -18,7 +18,7 @@
   <property name="windowTitle" >
    <string>Food Types</string>
   </property>
-  <widget class="QPushButton" name="btnManageFoodCancel" >
+  <widget class="QPushButton" name="btnManageFoodClose" >
    <property name="geometry" >
     <rect>
      <x>270</x>
@@ -28,7 +28,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>Cacel</string>
+    <string>Close</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3" >
