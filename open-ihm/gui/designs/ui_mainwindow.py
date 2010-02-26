@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Fri Feb 19 14:18:56 2010
-#      by: PyQt4 UI code generator 4.7
+# Created: Fri Feb 26 11:06:16 2010
+#      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,83 +12,148 @@ from PyQt4 import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(QtCore.QSize(QtCore.QRect(0,0,800,600).size()).expandedTo(MainWindow.minimumSizeHint()))
+
         self.centralwidget = QtGui.QWidget(MainWindow)
+        self.centralwidget.setGeometry(QtCore.QRect(0,26,800,551))
         self.centralwidget.setObjectName("centralwidget")
         MainWindow.setCentralWidget(self.centralwidget)
+
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 20))
+        self.menubar.setGeometry(QtCore.QRect(0,0,800,26))
         self.menubar.setObjectName("menubar")
+
         self.menu_File = QtGui.QMenu(self.menubar)
         self.menu_File.setObjectName("menu_File")
+
         self.menuEdit = QtGui.QMenu(self.menubar)
         self.menuEdit.setObjectName("menuEdit")
+
         self.menuProject = QtGui.QMenu(self.menubar)
         self.menuProject.setObjectName("menuProject")
+
         self.menuHousehold = QtGui.QMenu(self.menuProject)
         self.menuHousehold.setObjectName("menuHousehold")
+
         self.menuData_Management = QtGui.QMenu(self.menubar)
         self.menuData_Management.setObjectName("menuData_Management")
+
         self.menuHelp = QtGui.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
         MainWindow.setMenuBar(self.menubar)
+
         self.statusbar = QtGui.QStatusBar(MainWindow)
+        self.statusbar.setGeometry(QtCore.QRect(0,577,800,23))
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+
         self.actionNew_Project = QtGui.QAction(MainWindow)
         self.actionNew_Project.setObjectName("actionNew_Project")
+
         self.actionOpen_Project = QtGui.QAction(MainWindow)
         self.actionOpen_Project.setObjectName("actionOpen_Project")
+
         self.actionClose_Project = QtGui.QAction(MainWindow)
         self.actionClose_Project.setObjectName("actionClose_Project")
+
         self.actionExit = QtGui.QAction(MainWindow)
         self.actionExit.setObjectName("actionExit")
+
         self.actionDelete_Project = QtGui.QAction(MainWindow)
         self.actionDelete_Project.setObjectName("actionDelete_Project")
+
         self.actionExport_Project_Data = QtGui.QAction(MainWindow)
         self.actionExport_Project_Data.setObjectName("actionExport_Project_Data")
+
         self.actionFind_Project = QtGui.QAction(MainWindow)
         self.actionFind_Project.setObjectName("actionFind_Project")
+
         self.actionFind_Project_2 = QtGui.QAction(MainWindow)
         self.actionFind_Project_2.setObjectName("actionFind_Project_2")
+
         self.actionEdit_Project = QtGui.QAction(MainWindow)
         self.actionEdit_Project.setObjectName("actionEdit_Project")
+
         self.actionAdd_Household = QtGui.QAction(MainWindow)
         self.actionAdd_Household.setObjectName("actionAdd_Household")
+
         self.actionOpen_Household = QtGui.QAction(MainWindow)
         self.actionOpen_Household.setObjectName("actionOpen_Household")
+
         self.actionConfigure_Project = QtGui.QAction(MainWindow)
         self.actionConfigure_Project.setObjectName("actionConfigure_Project")
+
         self.actionMembers = QtGui.QAction(MainWindow)
         self.actionMembers.setObjectName("actionMembers")
+
         self.actionExpenditure = QtGui.QAction(MainWindow)
         self.actionExpenditure.setObjectName("actionExpenditure")
+
         self.actionIncome = QtGui.QAction(MainWindow)
         self.actionIncome.setObjectName("actionIncome")
+
         self.actionAssets = QtGui.QAction(MainWindow)
         self.actionAssets.setObjectName("actionAssets")
+
         self.actionHousehold_Characteristics = QtGui.QAction(MainWindow)
         self.actionHousehold_Characteristics.setObjectName("actionHousehold_Characteristics")
+
         self.actionHousehold_Characteristics_2 = QtGui.QAction(MainWindow)
         self.actionHousehold_Characteristics_2.setObjectName("actionHousehold_Characteristics_2")
+
         self.actionPersonal_Characteristics = QtGui.QAction(MainWindow)
         self.actionPersonal_Characteristics.setObjectName("actionPersonal_Characteristics")
+
         self.actionAsset_Types = QtGui.QAction(MainWindow)
         self.actionAsset_Types.setObjectName("actionAsset_Types")
+
         self.actionIncome_Types = QtGui.QAction(MainWindow)
         self.actionIncome_Types.setObjectName("actionIncome_Types")
+
         self.actionFood_Types = QtGui.QAction(MainWindow)
         self.actionFood_Types.setObjectName("actionFood_Types")
+
         self.actionLand_Types = QtGui.QAction(MainWindow)
         self.actionLand_Types.setObjectName("actionLand_Types")
+
         self.actionExpenditure_Types = QtGui.QAction(MainWindow)
         self.actionExpenditure_Types.setObjectName("actionExpenditure_Types")
+
         self.actionContents = QtGui.QAction(MainWindow)
         self.actionContents.setObjectName("actionContents")
+
         self.actionIndex = QtGui.QAction(MainWindow)
         self.actionIndex.setObjectName("actionIndex")
+
         self.actionImport_Project_Data = QtGui.QAction(MainWindow)
         self.actionImport_Project_Data.setObjectName("actionImport_Project_Data")
+
+        self.actionLivestock = QtGui.QAction(MainWindow)
+        self.actionLivestock.setObjectName("actionLivestock")
+
+        self.actionLivestock_Products = QtGui.QAction(MainWindow)
+        self.actionLivestock_Products.setObjectName("actionLivestock_Products")
+
+        self.actionTrees = QtGui.QAction(MainWindow)
+        self.actionTrees.setObjectName("actionTrees")
+
+        self.actionEmployment = QtGui.QAction(MainWindow)
+        self.actionEmployment.setObjectName("actionEmployment")
+
+        self.actionGifts = QtGui.QAction(MainWindow)
+        self.actionGifts.setObjectName("actionGifts")
+
+        self.actionExternal_Aid = QtGui.QAction(MainWindow)
+        self.actionExternal_Aid.setObjectName("actionExternal_Aid")
+
+        self.actionWild_Foods = QtGui.QAction(MainWindow)
+        self.actionWild_Foods.setObjectName("actionWild_Foods")
+
+        self.actionHunting_and_Fishing = QtGui.QAction(MainWindow)
+        self.actionHunting_and_Fishing.setObjectName("actionHunting_and_Fishing")
+
+        self.actionOther_Tradable_Goods = QtGui.QAction(MainWindow)
+        self.actionOther_Tradable_Goods.setObjectName("actionOther_Tradable_Goods")
         self.menu_File.addAction(self.actionNew_Project)
         self.menu_File.addAction(self.actionOpen_Project)
         self.menu_File.addAction(self.actionDelete_Project)
@@ -112,13 +177,22 @@ class Ui_MainWindow(object):
         self.menuProject.addAction(self.menuHousehold.menuAction())
         self.menuProject.addSeparator()
         self.menuProject.addAction(self.actionConfigure_Project)
-        self.menuData_Management.addAction(self.actionHousehold_Characteristics_2)
-        self.menuData_Management.addAction(self.actionPersonal_Characteristics)
         self.menuData_Management.addAction(self.actionAsset_Types)
-        self.menuData_Management.addAction(self.actionIncome_Types)
+        self.menuData_Management.addAction(self.actionEmployment)
         self.menuData_Management.addAction(self.actionExpenditure_Types)
+        self.menuData_Management.addAction(self.actionExternal_Aid)
         self.menuData_Management.addAction(self.actionFood_Types)
+        self.menuData_Management.addAction(self.actionGifts)
+        self.menuData_Management.addAction(self.actionHousehold_Characteristics_2)
+        self.menuData_Management.addAction(self.actionHunting_and_Fishing)
+        self.menuData_Management.addAction(self.actionIncome_Types)
         self.menuData_Management.addAction(self.actionLand_Types)
+        self.menuData_Management.addAction(self.actionLivestock)
+        self.menuData_Management.addAction(self.actionLivestock_Products)
+        self.menuData_Management.addAction(self.actionPersonal_Characteristics)
+        self.menuData_Management.addAction(self.actionTrees)
+        self.menuData_Management.addAction(self.actionWild_Foods)
+        self.menuData_Management.addAction(self.actionOther_Tradable_Goods)
         self.menuHelp.addAction(self.actionContents)
         self.menuHelp.addAction(self.actionIndex)
         self.menubar.addAction(self.menu_File.menuAction())
@@ -170,4 +244,13 @@ class Ui_MainWindow(object):
         self.actionContents.setShortcut(QtGui.QApplication.translate("MainWindow", "F1", None, QtGui.QApplication.UnicodeUTF8))
         self.actionIndex.setText(QtGui.QApplication.translate("MainWindow", "About Open IHM", None, QtGui.QApplication.UnicodeUTF8))
         self.actionImport_Project_Data.setText(QtGui.QApplication.translate("MainWindow", "Import Project Data", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionLivestock.setText(QtGui.QApplication.translate("MainWindow", "Livestock", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionLivestock_Products.setText(QtGui.QApplication.translate("MainWindow", "Livestock Products", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionTrees.setText(QtGui.QApplication.translate("MainWindow", "Trees", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionEmployment.setText(QtGui.QApplication.translate("MainWindow", "Employment", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionGifts.setText(QtGui.QApplication.translate("MainWindow", "Gifts", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionExternal_Aid.setText(QtGui.QApplication.translate("MainWindow", "External Aid", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionWild_Foods.setText(QtGui.QApplication.translate("MainWindow", "Wild Foods", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionHunting_and_Fishing.setText(QtGui.QApplication.translate("MainWindow", "Hunting and Fishing", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionOther_Tradable_Goods.setText(QtGui.QApplication.translate("MainWindow", "Other Tradable Goods", None, QtGui.QApplication.UnicodeUTF8))
 

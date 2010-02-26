@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0">
+<ui version="4.0" >
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
-  <property name="geometry">
+ <widget class="QMainWindow" name="MainWindow" >
+  <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
@@ -10,236 +9,308 @@
     <height>600</height>
    </rect>
   </property>
-  <property name="windowTitle">
+  <property name="windowTitle" >
    <string>Open IHM</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
+  <widget class="QWidget" name="centralwidget" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>26</y>
+     <width>800</width>
+     <height>551</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QMenuBar" name="menubar" >
+   <property name="geometry" >
     <rect>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>26</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu_File">
-    <property name="title">
+   <widget class="QMenu" name="menu_File" >
+    <property name="title" >
      <string>&amp;File</string>
     </property>
-    <addaction name="actionNew_Project"/>
-    <addaction name="actionOpen_Project"/>
-    <addaction name="actionDelete_Project"/>
-    <addaction name="actionClose_Project"/>
-    <addaction name="separator"/>
-    <addaction name="actionImport_Project_Data"/>
-    <addaction name="actionExport_Project_Data"/>
-    <addaction name="separator"/>
-    <addaction name="actionExit"/>
+    <addaction name="actionNew_Project" />
+    <addaction name="actionOpen_Project" />
+    <addaction name="actionDelete_Project" />
+    <addaction name="actionClose_Project" />
+    <addaction name="separator" />
+    <addaction name="actionImport_Project_Data" />
+    <addaction name="actionExport_Project_Data" />
+    <addaction name="separator" />
+    <addaction name="actionExit" />
    </widget>
-   <widget class="QMenu" name="menuEdit">
-    <property name="title">
+   <widget class="QMenu" name="menuEdit" >
+    <property name="title" >
      <string>&amp;Edit</string>
     </property>
-    <addaction name="actionFind_Project"/>
-    <addaction name="actionFind_Project_2"/>
+    <addaction name="actionFind_Project" />
+    <addaction name="actionFind_Project_2" />
    </widget>
-   <widget class="QMenu" name="menuProject">
-    <property name="title">
+   <widget class="QMenu" name="menuProject" >
+    <property name="title" >
      <string>&amp;Project</string>
     </property>
-    <widget class="QMenu" name="menuHousehold">
-     <property name="title">
+    <widget class="QMenu" name="menuHousehold" >
+     <property name="title" >
       <string>View Household</string>
      </property>
-     <addaction name="actionMembers"/>
-     <addaction name="actionExpenditure"/>
-     <addaction name="actionIncome"/>
-     <addaction name="actionAssets"/>
-     <addaction name="actionHousehold_Characteristics"/>
+     <addaction name="actionMembers" />
+     <addaction name="actionExpenditure" />
+     <addaction name="actionIncome" />
+     <addaction name="actionAssets" />
+     <addaction name="actionHousehold_Characteristics" />
     </widget>
-    <addaction name="actionEdit_Project"/>
-    <addaction name="separator"/>
-    <addaction name="actionAdd_Household"/>
-    <addaction name="actionOpen_Household"/>
-    <addaction name="menuHousehold"/>
-    <addaction name="separator"/>
-    <addaction name="actionConfigure_Project"/>
+    <addaction name="actionEdit_Project" />
+    <addaction name="separator" />
+    <addaction name="actionAdd_Household" />
+    <addaction name="actionOpen_Household" />
+    <addaction name="menuHousehold" />
+    <addaction name="separator" />
+    <addaction name="actionConfigure_Project" />
    </widget>
-   <widget class="QMenu" name="menuData_Management">
-    <property name="title">
+   <widget class="QMenu" name="menuData_Management" >
+    <property name="title" >
      <string>Data &amp;Management</string>
     </property>
-    <addaction name="actionHousehold_Characteristics_2"/>
-    <addaction name="actionPersonal_Characteristics"/>
-    <addaction name="actionAsset_Types"/>
-    <addaction name="actionIncome_Types"/>
-    <addaction name="actionExpenditure_Types"/>
-    <addaction name="actionFood_Types"/>
-    <addaction name="actionLand_Types"/>
+    <addaction name="actionAsset_Types" />
+    <addaction name="actionEmployment" />
+    <addaction name="actionExpenditure_Types" />
+    <addaction name="actionExternal_Aid" />
+    <addaction name="actionFood_Types" />
+    <addaction name="actionGifts" />
+    <addaction name="actionHousehold_Characteristics_2" />
+    <addaction name="actionHunting_and_Fishing" />
+    <addaction name="actionIncome_Types" />
+    <addaction name="actionLand_Types" />
+    <addaction name="actionLivestock" />
+    <addaction name="actionLivestock_Products" />
+    <addaction name="actionPersonal_Characteristics" />
+    <addaction name="actionTrees" />
+    <addaction name="actionWild_Foods" />
+    <addaction name="actionOther_Tradable_Goods" />
    </widget>
-   <widget class="QMenu" name="menuHelp">
-    <property name="title">
+   <widget class="QMenu" name="menuHelp" >
+    <property name="title" >
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionContents"/>
-    <addaction name="actionIndex"/>
+    <addaction name="actionContents" />
+    <addaction name="actionIndex" />
    </widget>
-   <addaction name="menu_File"/>
-   <addaction name="menuEdit"/>
-   <addaction name="menuProject"/>
-   <addaction name="menuData_Management"/>
-   <addaction name="menuHelp"/>
+   <addaction name="menu_File" />
+   <addaction name="menuEdit" />
+   <addaction name="menuProject" />
+   <addaction name="menuData_Management" />
+   <addaction name="menuHelp" />
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionNew_Project">
-   <property name="text">
+  <widget class="QStatusBar" name="statusbar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>577</y>
+     <width>800</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <action name="actionNew_Project" >
+   <property name="text" >
     <string>Create Project</string>
    </property>
-   <property name="shortcut">
+   <property name="shortcut" >
     <string>Ctrl+N</string>
    </property>
   </action>
-  <action name="actionOpen_Project">
-   <property name="text">
+  <action name="actionOpen_Project" >
+   <property name="text" >
     <string>Open Project</string>
    </property>
-   <property name="shortcut">
+   <property name="shortcut" >
     <string>Ctrl+O</string>
    </property>
   </action>
-  <action name="actionClose_Project">
-   <property name="text">
+  <action name="actionClose_Project" >
+   <property name="text" >
     <string>Close Project</string>
    </property>
   </action>
-  <action name="actionExit">
-   <property name="text">
+  <action name="actionExit" >
+   <property name="text" >
     <string>E&amp;xit</string>
    </property>
   </action>
-  <action name="actionDelete_Project">
-   <property name="text">
+  <action name="actionDelete_Project" >
+   <property name="text" >
     <string>Delete Project</string>
    </property>
   </action>
-  <action name="actionExport_Project_Data">
-   <property name="text">
+  <action name="actionExport_Project_Data" >
+   <property name="text" >
     <string>Export Project Data</string>
    </property>
   </action>
-  <action name="actionFind_Project">
-   <property name="text">
+  <action name="actionFind_Project" >
+   <property name="text" >
     <string>Find Project</string>
    </property>
-   <property name="shortcut">
+   <property name="shortcut" >
     <string>Ctrl+Shift+P</string>
    </property>
   </action>
-  <action name="actionFind_Project_2">
-   <property name="text">
+  <action name="actionFind_Project_2" >
+   <property name="text" >
     <string>Find Household</string>
    </property>
-   <property name="shortcut">
+   <property name="shortcut" >
     <string>Ctrl+Shift+H</string>
    </property>
   </action>
-  <action name="actionEdit_Project">
-   <property name="text">
+  <action name="actionEdit_Project" >
+   <property name="text" >
     <string>Edit Project</string>
    </property>
   </action>
-  <action name="actionAdd_Household">
-   <property name="text">
+  <action name="actionAdd_Household" >
+   <property name="text" >
     <string>Add Household</string>
    </property>
   </action>
-  <action name="actionOpen_Household">
-   <property name="text">
+  <action name="actionOpen_Household" >
+   <property name="text" >
     <string>Edit Household</string>
    </property>
   </action>
-  <action name="actionConfigure_Project">
-   <property name="text">
+  <action name="actionConfigure_Project" >
+   <property name="text" >
     <string>Configure Project</string>
    </property>
   </action>
-  <action name="actionMembers">
-   <property name="text">
+  <action name="actionMembers" >
+   <property name="text" >
     <string>Members</string>
    </property>
   </action>
-  <action name="actionExpenditure">
-   <property name="text">
+  <action name="actionExpenditure" >
+   <property name="text" >
     <string>Expenditure</string>
    </property>
   </action>
-  <action name="actionIncome">
-   <property name="text">
+  <action name="actionIncome" >
+   <property name="text" >
     <string>Income</string>
    </property>
   </action>
-  <action name="actionAssets">
-   <property name="text">
+  <action name="actionAssets" >
+   <property name="text" >
     <string>Assets</string>
    </property>
   </action>
-  <action name="actionHousehold_Characteristics">
-   <property name="text">
+  <action name="actionHousehold_Characteristics" >
+   <property name="text" >
     <string>Household Characteristics</string>
    </property>
   </action>
-  <action name="actionHousehold_Characteristics_2">
-   <property name="text">
+  <action name="actionHousehold_Characteristics_2" >
+   <property name="text" >
     <string>Household Characteristics</string>
    </property>
   </action>
-  <action name="actionPersonal_Characteristics">
-   <property name="text">
+  <action name="actionPersonal_Characteristics" >
+   <property name="text" >
     <string>Personal Characteristics</string>
    </property>
   </action>
-  <action name="actionAsset_Types">
-   <property name="text">
+  <action name="actionAsset_Types" >
+   <property name="text" >
     <string>Asset Types</string>
    </property>
   </action>
-  <action name="actionIncome_Types">
-   <property name="text">
+  <action name="actionIncome_Types" >
+   <property name="text" >
     <string>Income Types</string>
    </property>
   </action>
-  <action name="actionFood_Types">
-   <property name="text">
+  <action name="actionFood_Types" >
+   <property name="text" >
     <string>Food Types</string>
    </property>
   </action>
-  <action name="actionLand_Types">
-   <property name="text">
+  <action name="actionLand_Types" >
+   <property name="text" >
     <string>Land Types</string>
    </property>
   </action>
-  <action name="actionExpenditure_Types">
-   <property name="text">
+  <action name="actionExpenditure_Types" >
+   <property name="text" >
     <string>Expenditure Types</string>
    </property>
   </action>
-  <action name="actionContents">
-   <property name="text">
+  <action name="actionContents" >
+   <property name="text" >
     <string>Contents</string>
    </property>
-   <property name="shortcut">
+   <property name="shortcut" >
     <string>F1</string>
    </property>
   </action>
-  <action name="actionIndex">
-   <property name="text">
+  <action name="actionIndex" >
+   <property name="text" >
     <string>About Open IHM</string>
    </property>
   </action>
-  <action name="actionImport_Project_Data">
-   <property name="text">
+  <action name="actionImport_Project_Data" >
+   <property name="text" >
     <string>Import Project Data</string>
+   </property>
+  </action>
+  <action name="actionLivestock" >
+   <property name="text" >
+    <string>Livestock</string>
+   </property>
+  </action>
+  <action name="actionLivestock_Products" >
+   <property name="text" >
+    <string>Livestock Products</string>
+   </property>
+  </action>
+  <action name="actionTrees" >
+   <property name="text" >
+    <string>Trees</string>
+   </property>
+  </action>
+  <action name="actionEmployment" >
+   <property name="text" >
+    <string>Employment</string>
+   </property>
+  </action>
+  <action name="actionGifts" >
+   <property name="text" >
+    <string>Gifts</string>
+   </property>
+  </action>
+  <action name="actionExternal_Aid" >
+   <property name="text" >
+    <string>External Aid</string>
+   </property>
+  </action>
+  <action name="actionWild_Foods" >
+   <property name="text" >
+    <string>Wild Foods</string>
+   </property>
+  </action>
+  <action name="actionHunting_and_Fishing" >
+   <property name="text" >
+    <string>Hunting and Fishing</string>
+   </property>
+  </action>
+  <action name="actionOther_Tradable_Goods" >
+   <property name="text" >
+    <string>Other Tradable Goods</string>
    </property>
   </action>
  </widget>
