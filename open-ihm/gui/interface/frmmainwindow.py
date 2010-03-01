@@ -22,6 +22,13 @@ from frmassettypes import FrmAssetTypes
 from frmincomesourcetypes import FrmIncomeSourcesTypes
 from frmexpendituretypes import FrmExpenditureTypes
 from frmmanagelandtypes import FrmManageLandTypes
+from frmothertradablegoods import FrmOtherTradableGoods
+from frmmanageassettrees import FrmManageAssetTrees
+from frmmanagewildfoods import FrmManageWildFoods
+from frmmanagelivestock import FrmManageLivestock
+from frmmanagelivestockproducts import FrmManageLivestockProducts
+from frmmanagehuntingfishing import FrmManageHuntingFishing
+from frmmanageemployment import FrmManageEmployment
 
 class FrmMainWindow(Ui_MainWindow):
 	''' Creates the Main Window of the application using the main 
@@ -117,6 +124,69 @@ class FrmMainWindow(Ui_MainWindow):
 		subWin = self.mdi.addSubWindow(self.form)
         	self.centerSubWindow(subWin)
 		self.form.show()
+
+        def manageOtherTradableGoods(self):
+                ''' Creates and Shows the Manage Other Tradable Goods form'''
+		self.form = QtGui.QDialog()
+		self.ui = FrmOtherTradableGoods()
+		self.ui.setupUi(self.form,self.mdi)
+		subWin = self.mdi.addSubWindow(self.form)
+        	self.centerSubWindow(subWin)
+		self.form.show()
+
+        def manageAssetTrees(self):
+                ''' Creates and Shows the Manage Asset Trees form'''
+		self.form = QtGui.QDialog()
+		self.ui = FrmManageAssetTrees()
+		self.ui.setupUi(self.form,self.mdi)
+		subWin = self.mdi.addSubWindow(self.form)
+        	self.centerSubWindow(subWin)
+		self.form.show()
+
+        def manageWildFoods(self):
+                ''' Creates and Shows the Manage Wild Foods form'''
+		self.form = QtGui.QDialog()
+		self.ui = FrmManageWildFoods()
+		self.ui.setupUi(self.form,self.mdi)
+		subWin = self.mdi.addSubWindow(self.form)
+        	self.centerSubWindow(subWin)
+		self.form.show()
+        
+	def manageLivestock(self):
+                ''' Creates and Shows the Manage Livestock form'''
+		self.form = QtGui.QDialog()
+		self.ui = FrmManageLivestock()
+		self.ui.setupUi(self.form,self.mdi)
+		subWin = self.mdi.addSubWindow(self.form)
+        	self.centerSubWindow(subWin)
+		self.form.show()
+
+	def manageLivestockproducts(self):
+                ''' Creates and Shows the Manage Livestock Products form'''
+		self.form = QtGui.QDialog()
+		self.ui = FrmManageLivestockProducts()
+		self.ui.setupUi(self.form,self.mdi)
+		subWin = self.mdi.addSubWindow(self.form)
+        	self.centerSubWindow(subWin)
+		self.form.show()
+
+	def manageHuntingFishing(self):
+                ''' Creates and Shows the Manage Hunting and Fishing form'''
+		self.form = QtGui.QDialog()
+		self.ui = FrmManageHuntingFishing()
+		self.ui.setupUi(self.form,self.mdi)
+		subWin = self.mdi.addSubWindow(self.form)
+        	self.centerSubWindow(subWin)
+		self.form.show()
+
+	def manageEmployment(self):
+                ''' Creates and Shows the Manage Employment Details form'''
+		self.form = QtGui.QDialog()
+		self.ui = FrmManageEmployment()
+		self.ui.setupUi(self.form,self.mdi)
+		subWin = self.mdi.addSubWindow(self.form)
+        	self.centerSubWindow(subWin)
+		self.form.show()
  
         def setupUi(self, MainWindow):
 		''' Sets up the main window adding signal and slot connections
@@ -135,4 +205,11 @@ class FrmMainWindow(Ui_MainWindow):
 		QtCore.QObject.connect(self.actionIncome_Types, QtCore.SIGNAL("triggered()"), self.manageIncomeSourceTypes)
 		QtCore.QObject.connect(self.actionExpenditure_Types, QtCore.SIGNAL("triggered()"), self.manageExpenditureTypes)
 		QtCore.QObject.connect(self.actionLand_Types, QtCore.SIGNAL("triggered()"), self.manageLandTypes)
+		QtCore.QObject.connect(self.actionOther_Tradable_Goods, QtCore.SIGNAL("triggered()"), self.manageOtherTradableGoods)
+		QtCore.QObject.connect(self.actionTrees, QtCore.SIGNAL("triggered()"), self.manageAssetTrees)
+		QtCore.QObject.connect(self.actionWild_Foods, QtCore.SIGNAL("triggered()"), self.manageWildFoods)
+		QtCore.QObject.connect(self.actionLivestock, QtCore.SIGNAL("triggered()"), self.manageLivestock)
+		QtCore.QObject.connect(self.actionLivestock_Products, QtCore.SIGNAL("triggered()"), self.manageLivestockproducts)
+		QtCore.QObject.connect(self.actionHunting_and_Fishing, QtCore.SIGNAL("triggered()"), self.manageHuntingFishing)
+		QtCore.QObject.connect(self.actionEmployment, QtCore.SIGNAL("triggered()"), self.manageEmployment)
 
