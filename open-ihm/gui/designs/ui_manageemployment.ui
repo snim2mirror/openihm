@@ -1,0 +1,213 @@
+<ui version="4.0" >
+ <class>ManageEmployment</class>
+ <widget class="QDialog" name="ManageEmployment" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>389</width>
+    <height>270</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>389</width>
+    <height>261</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Manage Employment Details</string>
+  </property>
+  <widget class="QPushButton" name="btnManageEmploymentClose" >
+   <property name="geometry" >
+    <rect>
+     <x>270</x>
+     <y>230</y>
+     <width>80</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Close</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3" >
+   <property name="geometry" >
+    <rect>
+     <x>40</x>
+     <y>230</y>
+     <width>80</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Save</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>20</y>
+     <width>221</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>30</y>
+     <width>111</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Type of Employment</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_3" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>180</y>
+     <width>131</width>
+     <height>27</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>190</y>
+     <width>91</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Daily Rate</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton" >
+   <property name="geometry" >
+    <rect>
+     <x>160</x>
+     <y>230</y>
+     <width>80</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Delete</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>60</y>
+     <width>221</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string/>
+   </property>
+   <widget class="QRadioButton" name="radioButton" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>91</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Males</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_2" >
+    <property name="geometry" >
+     <rect>
+      <x>100</x>
+      <y>10</y>
+      <width>91</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Females</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="label_2" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>111</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Work is Done By?</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2" >
+   <property name="geometry" >
+    <rect>
+     <x>140</x>
+     <y>120</y>
+     <width>221</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="title" >
+    <string/>
+   </property>
+   <widget class="QCheckBox" name="checkBox" >
+    <property name="geometry" >
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Cash</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_2" >
+    <property name="geometry" >
+     <rect>
+      <x>100</x>
+      <y>10</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text" >
+     <string>Kind</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="label_4" >
+   <property name="geometry" >
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>101</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Payment Type</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
