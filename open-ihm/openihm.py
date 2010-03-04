@@ -14,9 +14,7 @@ from gui.interface.frmmainwindow import FrmMainWindow
 
 # initiate application, main window and show main window
 app = QtGui.QApplication(sys.argv)
-window = QtGui.QMainWindow()
-ui = FrmMainWindow()
-ui.setupUi(window)
+window = FrmMainWindow()
 window.showMaximized()
 
 # enter the application event loop - accept and handle events until
