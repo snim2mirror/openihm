@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Fri Mar  5 12:29:53 2010
+# Created: Fri Mar  5 17:05:29 2010
 #      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -107,8 +107,8 @@ class Ui_MainWindow(object):
         self.actionAsset_Details = QtGui.QAction(MainWindow)
         self.actionAsset_Details.setObjectName("actionAsset_Details")
 
-        self.actionIncome_Type_Details = QtGui.QAction(MainWindow)
-        self.actionIncome_Type_Details.setObjectName("actionIncome_Type_Details")
+        self.actionIncome_Source_Details = QtGui.QAction(MainWindow)
+        self.actionIncome_Source_Details.setObjectName("actionIncome_Source_Details")
 
         self.actionCrop_Types = QtGui.QAction(MainWindow)
         self.actionCrop_Types.setObjectName("actionCrop_Types")
@@ -181,7 +181,7 @@ class Ui_MainWindow(object):
         self.menuData_Management.addAction(self.actionExpenditure_Types)
         self.menuData_Management.addAction(self.actionCrop_Types)
         self.menuData_Management.addAction(self.actionHousehold_Characteristics_2)
-        self.menuData_Management.addAction(self.actionIncome_Type_Details)
+        self.menuData_Management.addAction(self.actionIncome_Source_Details)
         self.menuData_Management.addAction(self.actionPersonal_Characteristics)
         self.menuHelp.addAction(self.actionContents)
         self.menuHelp.addAction(self.actionIndex)
@@ -226,7 +226,7 @@ class Ui_MainWindow(object):
         self.actionHousehold_Characteristics_2.setText(QtGui.QApplication.translate("MainWindow", "Household Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.actionPersonal_Characteristics.setText(QtGui.QApplication.translate("MainWindow", "Personal Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAsset_Details.setText(QtGui.QApplication.translate("MainWindow", "Asset Details", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionIncome_Type_Details.setText(QtGui.QApplication.translate("MainWindow", "Income Type Details", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionIncome_Source_Details.setText(QtGui.QApplication.translate("MainWindow", "Income Source Details", None, QtGui.QApplication.UnicodeUTF8))
         self.actionCrop_Types.setText(QtGui.QApplication.translate("MainWindow", "Crop Type Details", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLand_Types.setText(QtGui.QApplication.translate("MainWindow", "Land Types", None, QtGui.QApplication.UnicodeUTF8))
         self.actionExpenditure_Types.setText(QtGui.QApplication.translate("MainWindow", "Expenditure Details", None, QtGui.QApplication.UnicodeUTF8))

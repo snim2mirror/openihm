@@ -82,7 +82,7 @@
     <addaction name="actionExpenditure_Types" />
     <addaction name="actionCrop_Types" />
     <addaction name="actionHousehold_Characteristics_2" />
-    <addaction name="actionIncome_Type_Details" />
+    <addaction name="actionIncome_Source_Details" />
     <addaction name="actionPersonal_Characteristics" />
    </widget>
    <widget class="QMenu" name="menuHelp" >
@@ -220,9 +220,9 @@
     <string>Asset Details</string>
    </property>
   </action>
-  <action name="actionIncome_Type_Details" >
+  <action name="actionIncome_Source_Details" >
    <property name="text" >
-    <string>Income Type Details</string>
+    <string>Income Source Details</string>
    </property>
   </action>
   <action name="actionCrop_Types" >

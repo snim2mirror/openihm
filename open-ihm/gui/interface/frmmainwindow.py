@@ -21,7 +21,6 @@ from frmmanagefoodtypes import FrmManageFoodTypes
 from frmhousehold_add import FrmAddHousehold
 from frmhousecharacteristics import FrmHouseCharacteristics
 from frmpersonalcharacteristics import FrmPersonalCharacteristics
-from frmincomesourcetypes import FrmIncomeSourcesTypes
 from frmexpendituretypes import FrmExpenditureTypes
 from frmmanageassets import FrmManageAssetDetails
 from frmincomesourcedetails import FrmIncomeSourceDetails
@@ -42,7 +41,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.connect(self.actionExit, QtCore.SIGNAL("triggered()"), self.close)
         self.connect(self.actionNew_Project, QtCore.SIGNAL("triggered()"), self.newProject)
 	self.connect(self.actionAsset_Details, QtCore.SIGNAL("triggered()"), self.manageAssetDetails)
-	self.connect(self.actionIncome_Type_Details, QtCore.SIGNAL("triggered()"), self.manageIncomeSourceDetails)
+	self.connect(self.actionIncome_Source_Details, QtCore.SIGNAL("triggered()"), self.manageIncomeDetails)
         self.connect(self.actionNew_Project, QtCore.SIGNAL("triggered()"), self.newProject)
         self.connect(self.actionEdit_Project, QtCore.SIGNAL("triggered()"), self.editProject)
         self.connect(self.actionConfigure_Project, QtCore.SIGNAL("triggered()"), self.configureProject)
@@ -124,9 +123,9 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
        	self.centerSubWindow(subWin)
         form.show()
 
-    def manageIncomeSourceDetails(self):
+    def manageIncomeDetails(self):
         ''' Creates and Shows the Manage Income Details form '''
-        form = FrmManageIncomeSourceDetails(self.mdi)
+        form = FrmIncomeSourceDetails(self.mdi)
         subWin = self.mdi.addSubWindow(form)
        	self.centerSubWindow(subWin)
         form.show()

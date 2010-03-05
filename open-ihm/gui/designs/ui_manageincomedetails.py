@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageincomedetails.ui'
 #
-# Created: Fri Mar  5 12:43:09 2010
+# Created: Fri Mar  5 17:07:16 2010
 #      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ class Ui_ManageIncome(object):
 
         self.tabWidget = QtGui.QTabWidget(ManageIncome)
         self.tabWidget.setGeometry(QtCore.QRect(0,0,571,341))
-        self.tabWidget.setMinimumSize(QtCore.QSize(571,341))
+        self.tabWidget.setMinimumSize(QtCore.QSize(0,0))
         self.tabWidget.setObjectName("tabWidget")
 
         self.tab = QtGui.QWidget()

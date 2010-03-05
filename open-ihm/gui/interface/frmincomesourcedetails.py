@@ -10,12 +10,13 @@ from PyQt4 import QtGui, QtCore
 # import the Manage Income Dialog design class
 from gui.designs.ui_manageincomedetails import Ui_ManageIncome
 
-class FrmIncomeSourceDetails(Ui_ManageIncome):	
+class FrmIncomeSourceDetails(QtGui.QDialog, Ui_ManageIncome):	
 	''' Creates the Manage Income Source Details from. Uses the design class
 		in gui.designs.ui_manageincomedetails. '''	
-	def setupUi(self, Form, Mdi):
+	def __init__(self, Mdi):
 		''' Set up the dialog box interface '''
-		Ui_ManageIncome.setupUi(self, Form)
-		
+		QtGui.QDialog.__init__(self)
+		self.setupUi(self)
+
 		# connect relevant signals and slots
 		QtCore.QObject.connect(self.btnManageIncomeClose, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
