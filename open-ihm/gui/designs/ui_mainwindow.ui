@@ -78,22 +78,12 @@
     <property name="title" >
      <string>Data &amp;Management</string>
     </property>
-    <addaction name="actionAsset_Types" />
-    <addaction name="actionEmployment" />
+    <addaction name="actionAsset_Details" />
     <addaction name="actionExpenditure_Types" />
-    <addaction name="actionExternal_Aid" />
-    <addaction name="actionFood_Types" />
-    <addaction name="actionGifts" />
+    <addaction name="actionCrop_Types" />
     <addaction name="actionHousehold_Characteristics_2" />
-    <addaction name="actionHunting_and_Fishing" />
-    <addaction name="actionIncome_Types" />
-    <addaction name="actionLand_Types" />
-    <addaction name="actionLivestock" />
-    <addaction name="actionLivestock_Products" />
+    <addaction name="actionIncome_Type_Details" />
     <addaction name="actionPersonal_Characteristics" />
-    <addaction name="actionTrees" />
-    <addaction name="actionWild_Foods" />
-    <addaction name="actionOther_Tradable_Goods" />
    </widget>
    <widget class="QMenu" name="menuHelp" >
     <property name="title" >
@@ -225,19 +215,19 @@
     <string>Personal Characteristics</string>
    </property>
   </action>
-  <action name="actionAsset_Types" >
+  <action name="actionAsset_Details" >
    <property name="text" >
-    <string>Asset Types</string>
+    <string>Asset Details</string>
    </property>
   </action>
-  <action name="actionIncome_Types" >
+  <action name="actionIncome_Type_Details" >
    <property name="text" >
-    <string>Income Types</string>
+    <string>Income Type Details</string>
    </property>
   </action>
-  <action name="actionFood_Types" >
+  <action name="actionCrop_Types" >
    <property name="text" >
-    <string>Food Types</string>
+    <string>Crop Type Details</string>
    </property>
   </action>
   <action name="actionLand_Types" >
@@ -247,7 +237,7 @@
   </action>
   <action name="actionExpenditure_Types" >
    <property name="text" >
-    <string>Expenditure Types</string>
+    <string>Expenditure Details</string>
    </property>
   </action>
   <action name="actionContents" >

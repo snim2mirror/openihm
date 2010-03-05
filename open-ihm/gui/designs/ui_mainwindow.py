@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Sun Feb 28 12:42:47 2010
+# Created: Fri Mar  5 12:29:53 2010
 #      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -104,14 +104,14 @@ class Ui_MainWindow(object):
         self.actionPersonal_Characteristics = QtGui.QAction(MainWindow)
         self.actionPersonal_Characteristics.setObjectName("actionPersonal_Characteristics")
 
-        self.actionAsset_Types = QtGui.QAction(MainWindow)
-        self.actionAsset_Types.setObjectName("actionAsset_Types")
+        self.actionAsset_Details = QtGui.QAction(MainWindow)
+        self.actionAsset_Details.setObjectName("actionAsset_Details")
 
-        self.actionIncome_Types = QtGui.QAction(MainWindow)
-        self.actionIncome_Types.setObjectName("actionIncome_Types")
+        self.actionIncome_Type_Details = QtGui.QAction(MainWindow)
+        self.actionIncome_Type_Details.setObjectName("actionIncome_Type_Details")
 
-        self.actionFood_Types = QtGui.QAction(MainWindow)
-        self.actionFood_Types.setObjectName("actionFood_Types")
+        self.actionCrop_Types = QtGui.QAction(MainWindow)
+        self.actionCrop_Types.setObjectName("actionCrop_Types")
 
         self.actionLand_Types = QtGui.QAction(MainWindow)
         self.actionLand_Types.setObjectName("actionLand_Types")
@@ -177,22 +177,12 @@ class Ui_MainWindow(object):
         self.menuProject.addAction(self.menuHousehold.menuAction())
         self.menuProject.addSeparator()
         self.menuProject.addAction(self.actionConfigure_Project)
-        self.menuData_Management.addAction(self.actionAsset_Types)
-        self.menuData_Management.addAction(self.actionEmployment)
+        self.menuData_Management.addAction(self.actionAsset_Details)
         self.menuData_Management.addAction(self.actionExpenditure_Types)
-        self.menuData_Management.addAction(self.actionExternal_Aid)
-        self.menuData_Management.addAction(self.actionFood_Types)
-        self.menuData_Management.addAction(self.actionGifts)
+        self.menuData_Management.addAction(self.actionCrop_Types)
         self.menuData_Management.addAction(self.actionHousehold_Characteristics_2)
-        self.menuData_Management.addAction(self.actionHunting_and_Fishing)
-        self.menuData_Management.addAction(self.actionIncome_Types)
-        self.menuData_Management.addAction(self.actionLand_Types)
-        self.menuData_Management.addAction(self.actionLivestock)
-        self.menuData_Management.addAction(self.actionLivestock_Products)
+        self.menuData_Management.addAction(self.actionIncome_Type_Details)
         self.menuData_Management.addAction(self.actionPersonal_Characteristics)
-        self.menuData_Management.addAction(self.actionTrees)
-        self.menuData_Management.addAction(self.actionWild_Foods)
-        self.menuData_Management.addAction(self.actionOther_Tradable_Goods)
         self.menuHelp.addAction(self.actionContents)
         self.menuHelp.addAction(self.actionIndex)
         self.menubar.addAction(self.menu_File.menuAction())
@@ -235,11 +225,11 @@ class Ui_MainWindow(object):
         self.actionHousehold_Characteristics.setText(QtGui.QApplication.translate("MainWindow", "Household Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.actionHousehold_Characteristics_2.setText(QtGui.QApplication.translate("MainWindow", "Household Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.actionPersonal_Characteristics.setText(QtGui.QApplication.translate("MainWindow", "Personal Characteristics", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionAsset_Types.setText(QtGui.QApplication.translate("MainWindow", "Asset Types", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionIncome_Types.setText(QtGui.QApplication.translate("MainWindow", "Income Types", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionFood_Types.setText(QtGui.QApplication.translate("MainWindow", "Food Types", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAsset_Details.setText(QtGui.QApplication.translate("MainWindow", "Asset Details", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionIncome_Type_Details.setText(QtGui.QApplication.translate("MainWindow", "Income Type Details", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionCrop_Types.setText(QtGui.QApplication.translate("MainWindow", "Crop Type Details", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLand_Types.setText(QtGui.QApplication.translate("MainWindow", "Land Types", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionExpenditure_Types.setText(QtGui.QApplication.translate("MainWindow", "Expenditure Types", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionExpenditure_Types.setText(QtGui.QApplication.translate("MainWindow", "Expenditure Details", None, QtGui.QApplication.UnicodeUTF8))
         self.actionContents.setText(QtGui.QApplication.translate("MainWindow", "Contents", None, QtGui.QApplication.UnicodeUTF8))
         self.actionContents.setShortcut(QtGui.QApplication.translate("MainWindow", "F1", None, QtGui.QApplication.UnicodeUTF8))
         self.actionIndex.setText(QtGui.QApplication.translate("MainWindow", "About Open IHM", None, QtGui.QApplication.UnicodeUTF8))

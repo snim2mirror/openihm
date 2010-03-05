@@ -18,7 +18,7 @@
   <property name="windowTitle" >
    <string>Manage Crop Types</string>
   </property>
-  <widget class="QPushButton" name="btnManageFoodClose" >
+  <widget class="QPushButton" name="btnManageCropsClose" >
    <property name="geometry" >
     <rect>
      <x>270</x>
