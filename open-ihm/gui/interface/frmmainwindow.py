@@ -14,6 +14,8 @@ from gui.designs.ui_mainwindow import Ui_MainWindow
 
 # import subwindows
 from frmnewproject import FrmNewProject
+from frmproject_edit import FrmEditProject
+from frmproject_configure import FrmConfigureProject
 from frmmanagefoodtypes import FrmManageFoodTypes
 from frmhousehold_add import FrmAddHousehold
 from frmhousecharacteristics import FrmHouseCharacteristics
@@ -45,6 +47,8 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         # connect relevant signals and slots
         self.connect(self.actionExit, QtCore.SIGNAL("triggered()"), self.close)
         self.connect(self.actionNew_Project, QtCore.SIGNAL("triggered()"), self.newProject)
+        self.connect(self.actionEdit_Project, QtCore.SIGNAL("triggered()"), self.editProject)
+        self.connect(self.actionConfigure_Project, QtCore.SIGNAL("triggered()"), self.configureProject)
 
         QtCore.QObject.connect(self.actionFood_Types, QtCore.SIGNAL("triggered()"), self.manageFoodTypes)
         QtCore.QObject.connect(self.actionAdd_Household, QtCore.SIGNAL("triggered()"), self.addHousehold)
@@ -71,6 +75,20 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def newProject(self):
         ''' Creates and Shows the New Project form '''
         form = FrmNewProject(self.mdi)
+        subWin = self.mdi.addSubWindow(form)
+        self.centerSubWindow(subWin)
+        form.show()
+        
+    def editProject(self):
+        ''' Creates and Shows the Edit Project form '''
+        form = FrmEditProject(self.mdi)
+        subWin = self.mdi.addSubWindow(form)
+        self.centerSubWindow(subWin)
+        form.show()
+        
+    def configureProject(self):
+        ''' Creates and Shows the Edit Project form '''
+        form = FrmConfigureProject(self.mdi)
         subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
         form.show()

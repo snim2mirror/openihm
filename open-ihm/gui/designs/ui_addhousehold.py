@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_addhousehold.ui'
 #
-# Created: Wed Feb 24 11:58:31 2010
+# Created: Fri Mar 05 11:11:25 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -33,10 +33,10 @@ class Ui_AddHousehold(object):
         self.dtpDateVisted.setGeometry(QtCore.QRect(130, 100, 111, 22))
         self.dtpDateVisted.setObjectName("dtpDateVisted")
         self.btnSave = QtGui.QPushButton(AddHousehold)
-        self.btnSave.setGeometry(QtCore.QRect(10, 140, 75, 23))
+        self.btnSave.setGeometry(QtCore.QRect(10, 132, 75, 31))
         self.btnSave.setObjectName("btnSave")
         self.btnCancel = QtGui.QPushButton(AddHousehold)
-        self.btnCancel.setGeometry(QtCore.QRect(300, 140, 75, 23))
+        self.btnCancel.setGeometry(QtCore.QRect(300, 132, 75, 31))
         self.btnCancel.setObjectName("btnCancel")
         self.label_6 = QtGui.QLabel(AddHousehold)
         self.label_6.setGeometry(QtCore.QRect(10, 70, 121, 16))
@@ -56,5 +56,5 @@ class Ui_AddHousehold(object):
         self.label_5.setText(QtGui.QApplication.translate("AddHousehold", "Date Visited:", None, QtGui.QApplication.UnicodeUTF8))
         self.btnSave.setText(QtGui.QApplication.translate("AddHousehold", "Save", None, QtGui.QApplication.UnicodeUTF8))
         self.btnCancel.setText(QtGui.QApplication.translate("AddHousehold", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_6.setText(QtGui.QApplication.translate("AddHousehold", "Short Household Name:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("AddHousehold", "Household Number:", None, QtGui.QApplication.UnicodeUTF8))
 

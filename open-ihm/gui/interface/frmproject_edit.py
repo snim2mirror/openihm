@@ -1,18 +1,17 @@
 #-------------------------------------------------------------------	
-#	Filename: frmnewproject.py
+#	Filename: frmproject_edit.py
 #
-#	Class to create the Create Project form - FrmNewProject.
+#	Class to create the Edit Project form - FrmEditProject.
 #-------------------------------------------------------------------
 
 # imports from PyQt4 package
 from PyQt4 import QtGui, QtCore
 
 # import the Create Project Dialog design class
-from gui.designs.ui_newproject import Ui_NewProject
+from gui.designs.ui_editproject_details import Ui_EditProject
 
-class FrmNewProject(QtGui.QDialog, Ui_NewProject):	
-	''' Creates the Create (New) Project from. Uses the design class
-		in gui.designs.ui_newproject. '''	
+class FrmEditProject(QtGui.QDialog, Ui_EditProject):	
+	''' Creates the Edit Project form. '''	
 	def __init__(self, Mdi):
 		''' Set up the dialog box interface '''
 		QtGui.QDialog.__init__(self)
