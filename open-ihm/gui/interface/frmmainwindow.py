@@ -44,8 +44,8 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         # connect relevant signals and slots
         self.connect(self.actionExit, QtCore.SIGNAL("triggered()"), self.close)
         self.connect(self.actionNew_Project, QtCore.SIGNAL("triggered()"), self.newProject)
-	self.connect(self.actionAsset_Details, QtCore.SIGNAL("triggered()"), self.manageAssetDetails)
-	self.connect(self.actionIncome_Source_Details, QtCore.SIGNAL("triggered()"), self.manageIncomeDetails)
+        self.connect(self.actionAsset_Details, QtCore.SIGNAL("triggered()"), self.manageAssetDetails)
+        self.connect(self.actionIncome_Source_Details, QtCore.SIGNAL("triggered()"), self.manageIncomeDetails)
         self.connect(self.actionNew_Project, QtCore.SIGNAL("triggered()"), self.newProject)
         self.connect(self.actionEdit_Project, QtCore.SIGNAL("triggered()"), self.editProject)
         self.connect(self.actionConfigure_Project, QtCore.SIGNAL("triggered()"), self.configureProject)
@@ -54,10 +54,10 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.connect(self.actionView_All_Households, QtCore.SIGNAL("triggered()"), self.viewAllHouseholds)
 	self.connect(self.actionFind_Project, QtCore.SIGNAL("triggered()"), self.findProject)
 
-        QtCore.QObject.connect(self.actionCrop_Types, QtCore.SIGNAL("triggered()"), self.manageCropTypes)
-        QtCore.QObject.connect(self.actionAdd_Household, QtCore.SIGNAL("triggered()"), self.addHousehold)
-        QtCore.QObject.connect(self.actionHousehold_Characteristics_2, QtCore.SIGNAL("triggered()"), self.manageHouseholdCharacteristics)
-        QtCore.QObject.connect(self.actionPersonal_Characteristics, QtCore.SIGNAL("triggered()"), self.managePersonalCharacteristics)
+        self.connect(self.actionCrop_Types, QtCore.SIGNAL("triggered()"), self.manageCropTypes)
+        self.connect(self.actionAdd_Household, QtCore.SIGNAL("triggered()"), self.addHousehold)
+        self.connect(self.actionHousehold_Characteristics_2, QtCore.SIGNAL("triggered()"), self.manageHouseholdCharacteristics)
+        self.connect(self.actionPersonal_Characteristics, QtCore.SIGNAL("triggered()"), self.managePersonalCharacteristics)
 
 
     def centerSubWindow(self, subWin):
@@ -148,7 +148,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         ''' Creates and Shows the Manage Asset Details form '''
         form = FrmManageAssetDetails(self.mdi)
         subWin = self.mdi.addSubWindow(form)
-       	self.centerSubWindow(subWin)
+        self.centerSubWindow(subWin)
         form.show()
 
     def manageIncomeDetails(self):
@@ -162,6 +162,6 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         ''' Creates and Shows the Find Project form '''
         form = FrmFindProject(self.mdi)
         subWin = self.mdi.addSubWindow(form)
-       	self.centerSubWindow(subWin)
+        self.centerSubWindow(subWin)
         form.show()
     
