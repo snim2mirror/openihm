@@ -27,6 +27,7 @@ from frmpersonalcharacteristics import FrmPersonalCharacteristics
 from frmexpendituretypes import FrmExpenditureTypes
 from frmmanageassets import FrmManageAssetDetails
 from frmincomesourcedetails import FrmIncomeSourceDetails
+from frmfindproject import FrmFindProject
 
 class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     ''' Creates the Main Window of the application using the main 
@@ -51,7 +52,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.connect(self.actionOpen_Household, QtCore.SIGNAL("triggered()"), self.editProjectHousehold)
         self.connect(self.actionHousehold_Data, QtCore.SIGNAL("triggered()"), self.viewHouseholdData)
         self.connect(self.actionView_All_Households, QtCore.SIGNAL("triggered()"), self.viewAllHouseholds)
-
+	self.connect(self.actionFind_Project, QtCore.SIGNAL("triggered()"), self.findProject)
 
         QtCore.QObject.connect(self.actionCrop_Types, QtCore.SIGNAL("triggered()"), self.manageCropTypes)
         QtCore.QObject.connect(self.actionAdd_Household, QtCore.SIGNAL("triggered()"), self.addHousehold)
@@ -153,6 +154,13 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def manageIncomeDetails(self):
         ''' Creates and Shows the Manage Income Details form '''
         form = FrmIncomeSourceDetails(self.mdi)
+        subWin = self.mdi.addSubWindow(form)
+       	self.centerSubWindow(subWin)
+        form.show()
+
+    def findProject(self):
+        ''' Creates and Shows the Find Project form '''
+        form = FrmFindProject(self.mdi)
         subWin = self.mdi.addSubWindow(form)
        	self.centerSubWindow(subWin)
         form.show()
