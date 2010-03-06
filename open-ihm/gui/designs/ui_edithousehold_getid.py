@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_edithousehold_getid.ui'
 #
-# Created: Fri Mar 05 11:17:21 2010
+# Created: Fri Mar 05 16:02:16 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,6 +13,7 @@ class Ui_EditHouseholdGetID(object):
     def setupUi(self, EditHouseholdGetID):
         EditHouseholdGetID.setObjectName("EditHouseholdGetID")
         EditHouseholdGetID.resize(393, 114)
+        EditHouseholdGetID.setMinimumSize(QtCore.QSize(393, 114))
         self.cmdOk = QtGui.QPushButton(EditHouseholdGetID)
         self.cmdOk.setGeometry(QtCore.QRect(10, 60, 75, 31))
         self.cmdOk.setObjectName("cmdOk")
