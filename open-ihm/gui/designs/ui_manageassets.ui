@@ -1,0 +1,865 @@
+<ui version="4.0" >
+ <class>ManageAssetDetails</class>
+ <widget class="QDialog" name="ManageAssetDetails" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>572</width>
+    <height>380</height>
+   </rect>
+  </property>
+  <property name="minimumSize" >
+   <size>
+    <width>572</width>
+    <height>380</height>
+   </size>
+  </property>
+  <property name="windowTitle" >
+   <string>Manage Asset Details</string>
+  </property>
+  <widget class="QTabWidget" name="tabWidget" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>571</width>
+     <height>341</height>
+    </rect>
+   </property>
+   <property name="minimumSize" >
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="currentIndex" >
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tabAssetsGeneral" >
+    <property name="geometry" >
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>567</width>
+      <height>313</height>
+     </rect>
+    </property>
+    <attribute name="title" >
+     <string>General</string>
+    </attribute>
+    <widget class="QListWidget" name="listWidget" >
+     <property name="geometry" >
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>241</width>
+       <height>261</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit" >
+     <property name="geometry" >
+      <rect>
+       <x>280</x>
+       <y>40</y>
+       <width>281</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton" >
+     <property name="geometry" >
+      <rect>
+       <x>280</x>
+       <y>120</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_2" >
+     <property name="geometry" >
+      <rect>
+       <x>480</x>
+       <y>120</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label" >
+     <property name="geometry" >
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>271</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Existing Asset Categories</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2" >
+     <property name="geometry" >
+      <rect>
+       <x>280</x>
+       <y>10</y>
+       <width>251</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add/Edit Asset Category</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabCashSavings" >
+    <property name="geometry" >
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>567</width>
+      <height>313</height>
+     </rect>
+    </property>
+    <attribute name="title" >
+     <string>Cash Savings</string>
+    </attribute>
+    <widget class="QLabel" name="label_23" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>60</y>
+       <width>121</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Cash Saving Type</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_15" >
+     <property name="geometry" >
+      <rect>
+       <x>480</x>
+       <y>150</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_14" >
+     <property name="geometry" >
+      <rect>
+       <x>372</x>
+       <y>60</y>
+       <width>181</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_25" >
+     <property name="geometry" >
+      <rect>
+       <x>290</x>
+       <y>10</y>
+       <width>241</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add/ Edit Cash Saving Details</string>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="listWidget_6" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>70</y>
+       <width>241</width>
+       <height>231</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_26" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>221</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Select Cash Saving Type</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_16" >
+     <property name="geometry" >
+      <rect>
+       <x>370</x>
+       <y>150</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_5" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>40</y>
+       <width>241</width>
+       <height>27</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabFoodStock" >
+    <property name="geometry" >
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>640</width>
+      <height>320</height>
+     </rect>
+    </property>
+    <attribute name="title" >
+     <string>Food Stock</string>
+    </attribute>
+    <widget class="QListWidget" name="listWidget_2" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>70</y>
+       <width>241</width>
+       <height>231</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>40</y>
+       <width>241</width>
+       <height>27</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_2" >
+     <property name="geometry" >
+      <rect>
+       <x>352</x>
+       <y>60</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_3" >
+     <property name="geometry" >
+      <rect>
+       <x>350</x>
+       <y>110</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_4" >
+     <property name="geometry" >
+      <rect>
+       <x>350</x>
+       <y>160</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_3" >
+     <property name="geometry" >
+      <rect>
+       <x>350</x>
+       <y>240</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4" >
+     <property name="geometry" >
+      <rect>
+       <x>460</x>
+       <y>240</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>60</y>
+       <width>54</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Type</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>170</y>
+       <width>81</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Price per Unit</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>120</y>
+       <width>54</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>KCalories</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>221</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Select Food Stock Type</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_16" >
+     <property name="geometry" >
+      <rect>
+       <x>290</x>
+       <y>10</y>
+       <width>241</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add/ Edit Food Stock Details</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabLand" >
+    <property name="geometry" >
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>640</width>
+      <height>320</height>
+     </rect>
+    </property>
+    <attribute name="title" >
+     <string>Land</string>
+    </attribute>
+    <widget class="QLineEdit" name="lineEdit_5" >
+     <property name="geometry" >
+      <rect>
+       <x>352</x>
+       <y>60</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_9" >
+     <property name="geometry" >
+      <rect>
+       <x>350</x>
+       <y>240</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_2" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>40</y>
+       <width>241</width>
+       <height>27</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>60</y>
+       <width>54</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Type</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>120</y>
+       <width>91</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Unit of Measure</string>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="listWidget_3" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>70</y>
+       <width>241</width>
+       <height>231</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_6" >
+     <property name="geometry" >
+      <rect>
+       <x>350</x>
+       <y>110</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_17" >
+     <property name="geometry" >
+      <rect>
+       <x>290</x>
+       <y>10</y>
+       <width>241</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add/ Edit Land Details</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>170</y>
+       <width>81</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Price per Unit</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_10" >
+     <property name="geometry" >
+      <rect>
+       <x>460</x>
+       <y>240</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_18" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>221</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Select Land Type</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_7" >
+     <property name="geometry" >
+      <rect>
+       <x>350</x>
+       <y>160</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabTrees" >
+    <property name="geometry" >
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>640</width>
+      <height>320</height>
+     </rect>
+    </property>
+    <attribute name="title" >
+     <string>Trees</string>
+    </attribute>
+    <widget class="QLabel" name="label_10" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>60</y>
+       <width>54</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Type</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>170</y>
+       <width>81</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Price per Unit</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_11" >
+     <property name="geometry" >
+      <rect>
+       <x>460</x>
+       <y>240</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_8" >
+     <property name="geometry" >
+      <rect>
+       <x>352</x>
+       <y>60</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_9" >
+     <property name="geometry" >
+      <rect>
+       <x>350</x>
+       <y>160</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_19" >
+     <property name="geometry" >
+      <rect>
+       <x>290</x>
+       <y>10</y>
+       <width>241</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add/ Edit Tree Details</string>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="listWidget_4" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>70</y>
+       <width>241</width>
+       <height>231</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_10" >
+     <property name="geometry" >
+      <rect>
+       <x>350</x>
+       <y>110</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_20" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>221</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Select Tree Type</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>120</y>
+       <width>91</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Unit of Measure</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_12" >
+     <property name="geometry" >
+      <rect>
+       <x>350</x>
+       <y>240</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_3" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>40</y>
+       <width>241</width>
+       <height>27</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabOtherTradableGoods" >
+    <property name="geometry" >
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>640</width>
+      <height>320</height>
+     </rect>
+    </property>
+    <attribute name="title" >
+     <string>Other Tradable Goods</string>
+    </attribute>
+    <widget class="QLabel" name="label_13" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>60</y>
+       <width>54</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Type</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>170</y>
+       <width>81</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Price per Unit</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_13" >
+     <property name="geometry" >
+      <rect>
+       <x>460</x>
+       <y>240</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_11" >
+     <property name="geometry" >
+      <rect>
+       <x>352</x>
+       <y>60</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_12" >
+     <property name="geometry" >
+      <rect>
+       <x>350</x>
+       <y>160</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_21" >
+     <property name="geometry" >
+      <rect>
+       <x>290</x>
+       <y>10</y>
+       <width>241</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add/ Edit Good Details</string>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="listWidget_5" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>70</y>
+       <width>241</width>
+       <height>231</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_13" >
+     <property name="geometry" >
+      <rect>
+       <x>350</x>
+       <y>110</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_22" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>221</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Select Good</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_15" >
+     <property name="geometry" >
+      <rect>
+       <x>260</x>
+       <y>120</y>
+       <width>91</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Unit of Measure</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_14" >
+     <property name="geometry" >
+      <rect>
+       <x>350</x>
+       <y>240</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_4" >
+     <property name="geometry" >
+      <rect>
+       <x>0</x>
+       <y>40</y>
+       <width>241</width>
+       <height>27</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="btnAssetsClose" >
+   <property name="geometry" >
+    <rect>
+     <x>490</x>
+     <y>350</y>
+     <width>80</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Close</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
