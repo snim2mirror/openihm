@@ -39,6 +39,9 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         QtGui.QMainWindow.__init__(self)
         self.setupUi(self)
 
+        self.projectid = -1
+        self.projectname = ""
+        
         self.mdi = QtGui.QMdiArea()
         self.setCentralWidget(self.mdi)
 
@@ -47,7 +50,6 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.connect(self.actionNew_Project, QtCore.SIGNAL("triggered()"), self.newProject)
         self.connect(self.actionAsset_Details, QtCore.SIGNAL("triggered()"), self.manageAssetDetails)
         self.connect(self.actionIncome_Source_Details, QtCore.SIGNAL("triggered()"), self.manageIncomeDetails)
-        self.connect(self.actionNew_Project, QtCore.SIGNAL("triggered()"), self.newProject)
         self.connect(self.actionEdit_Project, QtCore.SIGNAL("triggered()"), self.editProject)
         self.connect(self.actionConfigure_Project, QtCore.SIGNAL("triggered()"), self.configureProject)
         self.connect(self.actionOpen_Household, QtCore.SIGNAL("triggered()"), self.editProjectHousehold)
@@ -85,15 +87,23 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
     def closeProject(self):
         ''' Creates and Shows the Open Project form '''
+        # close all open project sub windows
         self.mdi.closeAllSubWindows()
+        # change the main window title bar caption
         self.setWindowTitle("Open IHM")
+        # indicate that no project is active
+        self.projectid = -1
+        self.projectname = ""
         
     def editProject(self):
         ''' Creates and Shows the Edit Project form '''
-        form = FrmEditProject(self.mdi)
-        subWin = self.mdi.addSubWindow(form)
-        self.centerSubWindow(subWin)
-        form.show()
+        if self.projectid == -1:
+            QtGui.QMessageBox.information(self,"Notice","No project is active. First create a new project or open an existing project.")
+        else:
+            form = FrmEditProject(self)
+            subWin = self.mdi.addSubWindow(form)
+            self.centerSubWindow(subWin)
+            form.show()
         
     def configureProject(self):
         ''' Creates and Shows the Configure Project form '''
@@ -104,12 +114,10 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
     def addHousehold(self):
         ''' Creates and Shows the Add House Hold form '''
-        self.form = QtGui.QDialog()
-        self.ui = FrmAddHousehold()
-        self.ui.setupUi(self.form, self.mdi)
-        subWin = self.mdi.addSubWindow(self.form)
+        form = FrmAddHousehold(self.mdi)
+        subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
-        self.form.show()
+        form.show()
         
     def editProjectHousehold(self):
         ''' Creates and Shows the Edit Household GetID form '''
@@ -170,7 +178,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         ''' Creates and Shows the Manage Income Details form '''
         form = FrmIncomeSourceDetails(self.mdi)
         subWin = self.mdi.addSubWindow(form)
-       	self.centerSubWindow(subWin)
+        self.centerSubWindow(subWin)
         form.show()
 
     def findProject(self):
@@ -179,4 +187,3 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
         form.show()
-    

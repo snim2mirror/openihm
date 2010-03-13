@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_addhousehold.ui'
 #
-# Created: Fri Mar 05 11:11:25 2010
+# Created: Sat Mar 13 11:34:13 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -32,12 +32,12 @@ class Ui_AddHousehold(object):
         self.dtpDateVisted = QtGui.QDateEdit(AddHousehold)
         self.dtpDateVisted.setGeometry(QtCore.QRect(130, 100, 111, 22))
         self.dtpDateVisted.setObjectName("dtpDateVisted")
-        self.btnSave = QtGui.QPushButton(AddHousehold)
-        self.btnSave.setGeometry(QtCore.QRect(10, 132, 75, 31))
-        self.btnSave.setObjectName("btnSave")
-        self.btnCancel = QtGui.QPushButton(AddHousehold)
-        self.btnCancel.setGeometry(QtCore.QRect(300, 132, 75, 31))
-        self.btnCancel.setObjectName("btnCancel")
+        self.cmdSave = QtGui.QPushButton(AddHousehold)
+        self.cmdSave.setGeometry(QtCore.QRect(10, 132, 75, 31))
+        self.cmdSave.setObjectName("cmdSave")
+        self.cmdCancel = QtGui.QPushButton(AddHousehold)
+        self.cmdCancel.setGeometry(QtCore.QRect(300, 132, 75, 31))
+        self.cmdCancel.setObjectName("cmdCancel")
         self.label_6 = QtGui.QLabel(AddHousehold)
         self.label_6.setGeometry(QtCore.QRect(10, 70, 121, 16))
         self.label_6.setObjectName("label_6")
@@ -54,7 +54,7 @@ class Ui_AddHousehold(object):
         self.label_3.setText(QtGui.QApplication.translate("AddHousehold", "Project Name:", None, QtGui.QApplication.UnicodeUTF8))
         self.lblProjectName.setText(QtGui.QApplication.translate("AddHousehold", "{projectname}", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("AddHousehold", "Date Visited:", None, QtGui.QApplication.UnicodeUTF8))
-        self.btnSave.setText(QtGui.QApplication.translate("AddHousehold", "Save", None, QtGui.QApplication.UnicodeUTF8))
-        self.btnCancel.setText(QtGui.QApplication.translate("AddHousehold", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdSave.setText(QtGui.QApplication.translate("AddHousehold", "Save", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdCancel.setText(QtGui.QApplication.translate("AddHousehold", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("AddHousehold", "Household Number:", None, QtGui.QApplication.UnicodeUTF8))
 

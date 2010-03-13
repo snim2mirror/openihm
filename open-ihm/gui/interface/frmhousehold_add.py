@@ -10,13 +10,14 @@ from PyQt4 import QtGui, QtCore
 # import the Create Project Dialog design class
 from gui.designs.ui_addhousehold import Ui_AddHousehold
 
-class FrmAddHousehold(Ui_AddHousehold):	
+class FrmAddHousehold(QtGui.QDialog, Ui_AddHousehold):	
     ''' Creates the Create (New) Project from. Uses the design class
     in gui.designs.ui_addhousehold. '''	
 
-    def setupUi(self, Form, Mdi):
+    def __init__(self, Mdi):
         ''' Set up the dialog box interface '''
-        Ui_AddHousehold.setupUi(self, Form)
+        QtGui.QDialog.__init__(self)
+        self.setupUi(self)
         
         # connect relevant signals and slots
-        QtCore.QObject.connect(self.btnCancel, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
+        self.connect(self.cmdCancel, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)

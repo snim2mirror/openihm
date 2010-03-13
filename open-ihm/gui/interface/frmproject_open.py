@@ -23,5 +23,7 @@ class FrmOpenProject(QtGui.QDialog, Ui_OpenProject):
     
     def openProject(self):
         ''' Show Household Details '''
+        self.parent.projectid = self.cboProjectName.currentIndex()
+        self.parent.projectname = self.cboProjectName.currentText()
         self.parent.setWindowTitle("Open IHM - " + self.cboProjectName.currentText())
         self.parent.mdi.closeActiveSubWindow()
