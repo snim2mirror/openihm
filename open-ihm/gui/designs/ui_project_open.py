@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_project_open.ui'
 #
-# Created: Sat Mar 06 13:08:06 2010
+# Created: Sat Apr 17 02:26:52 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,8 +26,6 @@ class Ui_OpenProject(object):
         self.cboProjectName = QtGui.QComboBox(OpenProject)
         self.cboProjectName.setGeometry(QtCore.QRect(100, 20, 281, 22))
         self.cboProjectName.setObjectName("cboProjectName")
-        self.cboProjectName.addItem("")
-        self.cboProjectName.addItem("")
 
         self.retranslateUi(OpenProject)
         QtCore.QMetaObject.connectSlotsByName(OpenProject)
@@ -37,6 +35,4 @@ class Ui_OpenProject(object):
         self.cmdOk.setText(QtGui.QApplication.translate("OpenProject", "Ok", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdCancel.setText(QtGui.QApplication.translate("OpenProject", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("OpenProject", "Project Name:", None, QtGui.QApplication.UnicodeUTF8))
-        self.cboProjectName.setItemText(0, QtGui.QApplication.translate("OpenProject", "Dummy Project 1", None, QtGui.QApplication.UnicodeUTF8))
-        self.cboProjectName.setItemText(1, QtGui.QApplication.translate("OpenProject", "Dummy Project 2", None, QtGui.QApplication.UnicodeUTF8))
 

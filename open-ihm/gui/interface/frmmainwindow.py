@@ -73,7 +73,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
     def newProject(self):
         ''' Creates and Shows the New Project form '''
-        form = FrmNewProject(self.mdi)
+        form = FrmNewProject(self)
         subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
         form.show()
