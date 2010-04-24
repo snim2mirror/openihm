@@ -41,9 +41,9 @@ DROP TABLE IF EXISTS `openihmdb`.`households` ;
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`households` (
   `hhid` INT NOT NULL ,
   `householdname` VARCHAR(100) NOT NULL ,
-  `totalassetvalue` DOUBLE NOT NULL ,
-  `totalincomevalue` DOUBLE NOT NULL ,
-  `totalexpenditure` DOUBLE NOT NULL ,
+  `totalassetvalue` DOUBLE NOT NULL DEFAULT 0,
+  `totalincomevalue` DOUBLE NOT NULL DEFAULT 0,
+  `totalexpenditure` DOUBLE NOT NULL DEFAULT 0,
   `dateofcollection` DATE NOT NULL ,
   `pid` INT NOT NULL ,
   PRIMARY KEY (`hhid`) ,
