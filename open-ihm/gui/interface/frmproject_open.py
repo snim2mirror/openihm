@@ -20,7 +20,6 @@ class FrmOpenProject(QtGui.QDialog, Ui_OpenProject):
         QtGui.QDialog.__init__(self)
         self.setupUi(self)
         
-        self.setupUi(self)
         self.parent = parent
         self.config = Config.dbinfo().copy()
         
