@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageincomedetails.ui'
 #
-# Created: Fri Mar  5 17:07:16 2010
+# Created: Mon Apr 26 21:46:01 2010
 #      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,45 +12,16 @@ from PyQt4 import QtCore, QtGui
 class Ui_ManageIncome(object):
     def setupUi(self, ManageIncome):
         ManageIncome.setObjectName("ManageIncome")
-        ManageIncome.resize(QtCore.QSize(QtCore.QRect(0,0,572,380).size()).expandedTo(ManageIncome.minimumSizeHint()))
-        ManageIncome.setMinimumSize(QtCore.QSize(572,380))
+        ManageIncome.resize(QtCore.QSize(QtCore.QRect(0,0,612,380).size()).expandedTo(ManageIncome.minimumSizeHint()))
+        ManageIncome.setMinimumSize(QtCore.QSize(611,380))
 
         self.tabWidget = QtGui.QTabWidget(ManageIncome)
-        self.tabWidget.setGeometry(QtCore.QRect(0,0,571,341))
-        self.tabWidget.setMinimumSize(QtCore.QSize(0,0))
+        self.tabWidget.setGeometry(QtCore.QRect(0,0,611,341))
+        self.tabWidget.setMinimumSize(QtCore.QSize(611,311))
         self.tabWidget.setObjectName("tabWidget")
 
-        self.tab = QtGui.QWidget()
-        self.tab.setGeometry(QtCore.QRect(0,0,567,313))
-        self.tab.setObjectName("tab")
-
-        self.lineEdit = QtGui.QLineEdit(self.tab)
-        self.lineEdit.setGeometry(QtCore.QRect(270,40,281,28))
-        self.lineEdit.setObjectName("lineEdit")
-
-        self.pushButton = QtGui.QPushButton(self.tab)
-        self.pushButton.setGeometry(QtCore.QRect(270,120,80,28))
-        self.pushButton.setObjectName("pushButton")
-
-        self.label_2 = QtGui.QLabel(self.tab)
-        self.label_2.setGeometry(QtCore.QRect(270,10,251,18))
-        self.label_2.setObjectName("label_2")
-
-        self.label = QtGui.QLabel(self.tab)
-        self.label.setGeometry(QtCore.QRect(0,10,271,18))
-        self.label.setObjectName("label")
-
-        self.pushButton_2 = QtGui.QPushButton(self.tab)
-        self.pushButton_2.setGeometry(QtCore.QRect(470,120,80,28))
-        self.pushButton_2.setObjectName("pushButton_2")
-
-        self.listWidget = QtGui.QListWidget(self.tab)
-        self.listWidget.setGeometry(QtCore.QRect(0,40,241,261))
-        self.listWidget.setObjectName("listWidget")
-        self.tabWidget.addTab(self.tab,"")
-
         self.tabIncomeCrops = QtGui.QWidget()
-        self.tabIncomeCrops.setGeometry(QtCore.QRect(0,0,567,313))
+        self.tabIncomeCrops.setGeometry(QtCore.QRect(0,0,607,313))
         self.tabIncomeCrops.setObjectName("tabIncomeCrops")
 
         self.label_26 = QtGui.QLabel(self.tabIncomeCrops)
@@ -111,7 +82,7 @@ class Ui_ManageIncome(object):
         self.tabWidget.addTab(self.tabIncomeCrops,"")
 
         self.tabEmployment = QtGui.QWidget()
-        self.tabEmployment.setGeometry(QtCore.QRect(0,0,640,320))
+        self.tabEmployment.setGeometry(QtCore.QRect(0,0,607,313))
         self.tabEmployment.setObjectName("tabEmployment")
 
         self.pushButton_11 = QtGui.QPushButton(self.tabEmployment)
@@ -172,7 +143,7 @@ class Ui_ManageIncome(object):
         self.tabWidget.addTab(self.tabEmployment,"")
 
         self.tabIncomeLivestock = QtGui.QWidget()
-        self.tabIncomeLivestock.setGeometry(QtCore.QRect(0,0,640,320))
+        self.tabIncomeLivestock.setGeometry(QtCore.QRect(0,0,607,313))
         self.tabIncomeLivestock.setObjectName("tabIncomeLivestock")
 
         self.comboBox_6 = QtGui.QComboBox(self.tabIncomeLivestock)
@@ -233,7 +204,7 @@ class Ui_ManageIncome(object):
         self.tabWidget.addTab(self.tabIncomeLivestock,"")
 
         self.tabIncomeTransfers = QtGui.QWidget()
-        self.tabIncomeTransfers.setGeometry(QtCore.QRect(0,0,640,320))
+        self.tabIncomeTransfers.setGeometry(QtCore.QRect(0,0,607,313))
         self.tabIncomeTransfers.setObjectName("tabIncomeTransfers")
 
         self.comboBox_13 = QtGui.QComboBox(self.tabIncomeTransfers)
@@ -266,7 +237,7 @@ class Ui_ManageIncome(object):
         self.tabWidget.addTab(self.tabIncomeTransfers,"")
 
         self.tab_2 = QtGui.QWidget()
-        self.tab_2.setGeometry(QtCore.QRect(0,0,567,313))
+        self.tab_2.setGeometry(QtCore.QRect(0,0,607,313))
         self.tab_2.setObjectName("tab_2")
 
         self.comboBox_9 = QtGui.QComboBox(self.tab_2)
@@ -274,7 +245,7 @@ class Ui_ManageIncome(object):
         self.comboBox_9.setObjectName("comboBox_9")
 
         self.label_11 = QtGui.QLabel(self.tab_2)
-        self.label_11.setGeometry(QtCore.QRect(280,110,91,18))
+        self.label_11.setGeometry(QtCore.QRect(280,100,91,18))
         self.label_11.setObjectName("label_11")
 
         self.label_29 = QtGui.QLabel(self.tab_2)
@@ -286,7 +257,7 @@ class Ui_ManageIncome(object):
         self.listWidget_8.setObjectName("listWidget_8")
 
         self.comboBox_10 = QtGui.QComboBox(self.tab_2)
-        self.comboBox_10.setGeometry(QtCore.QRect(370,100,151,27))
+        self.comboBox_10.setGeometry(QtCore.QRect(370,90,151,27))
         self.comboBox_10.setObjectName("comboBox_10")
 
         self.comboBox_11 = QtGui.QComboBox(self.tab_2)
@@ -306,7 +277,7 @@ class Ui_ManageIncome(object):
         self.label_12.setObjectName("label_12")
 
         self.lineEdit_4 = QtGui.QLineEdit(self.tab_2)
-        self.lineEdit_4.setGeometry(QtCore.QRect(370,180,151,28))
+        self.lineEdit_4.setGeometry(QtCore.QRect(370,170,151,28))
         self.lineEdit_4.setObjectName("lineEdit_4")
 
         self.label_13 = QtGui.QLabel(self.tab_2)
@@ -318,29 +289,24 @@ class Ui_ManageIncome(object):
         self.pushButton_8.setObjectName("pushButton_8")
 
         self.comboBox_12 = QtGui.QComboBox(self.tab_2)
-        self.comboBox_12.setGeometry(QtCore.QRect(370,140,151,27))
+        self.comboBox_12.setGeometry(QtCore.QRect(370,130,151,27))
         self.comboBox_12.setObjectName("comboBox_12")
 
         self.label_14 = QtGui.QLabel(self.tab_2)
-        self.label_14.setGeometry(QtCore.QRect(280,190,81,18))
+        self.label_14.setGeometry(QtCore.QRect(280,180,81,18))
         self.label_14.setObjectName("label_14")
         self.tabWidget.addTab(self.tab_2,"")
 
         self.btnManageIncomeClose = QtGui.QPushButton(ManageIncome)
-        self.btnManageIncomeClose.setGeometry(QtCore.QRect(490,350,80,28))
+        self.btnManageIncomeClose.setGeometry(QtCore.QRect(530,350,80,28))
         self.btnManageIncomeClose.setObjectName("btnManageIncomeClose")
 
         self.retranslateUi(ManageIncome)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(4)
         QtCore.QMetaObject.connectSlotsByName(ManageIncome)
 
     def retranslateUi(self, ManageIncome):
         ManageIncome.setWindowTitle(QtGui.QApplication.translate("ManageIncome", "Manage Income Details", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton.setText(QtGui.QApplication.translate("ManageIncome", "Add", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_2.setText(QtGui.QApplication.translate("ManageIncome", "Add/Edit Asset Category", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("ManageIncome", "Existing Asset Categories", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton_2.setText(QtGui.QApplication.translate("ManageIncome", "Delete", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QtGui.QApplication.translate("ManageIncome", "General", None, QtGui.QApplication.UnicodeUTF8))
         self.label_26.setText(QtGui.QApplication.translate("ManageIncome", "Select Crop Type", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("ManageIncome", "Unit of Measure", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("ManageIncome", "Price per Unit", None, QtGui.QApplication.UnicodeUTF8))
