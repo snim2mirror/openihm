@@ -54,7 +54,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.connect(self.actionConfigure_Project, QtCore.SIGNAL("triggered()"), self.configureProject)
         self.connect(self.actionEdit_Household, QtCore.SIGNAL("triggered()"), self.editProjectHousehold)
         self.connect(self.actionEnter_Household_Data, QtCore.SIGNAL("triggered()"), self.viewHouseholdData)
-        self.connect(self.actionView_All_Households, QtCore.SIGNAL("triggered()"), self.viewAllHouseholds)
+        self.connect(self.actionView_All_Households_2, QtCore.SIGNAL("triggered()"), self.viewAllHouseholds)
         self.connect(self.actionFind_Project, QtCore.SIGNAL("triggered()"), self.findProject)
         self.connect(self.actionOpen_Project, QtCore.SIGNAL("triggered()"), self.openProject)
         self.connect(self.actionClose_Project, QtCore.SIGNAL("triggered()"), self.closeProject)
