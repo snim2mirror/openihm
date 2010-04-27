@@ -35,7 +35,7 @@
     <attribute name="title">
      <string>Members</string>
     </attribute>
-    <widget class="QTableView" name="tableView">
+    <widget class="QTableView" name="tblMembers">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -85,65 +85,11 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="tabHouseholdIncome">
-    <attribute name="title">
-     <string>Income</string>
-    </attribute>
-    <widget class="QTableView" name="tableView_2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>751</width>
-       <height>451</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdAddIncome">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdEditIncome">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_6">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-   </widget>
    <widget class="QWidget" name="tabHouseholdAssets">
     <attribute name="title">
      <string>Assets</string>
     </attribute>
-    <widget class="QTableView" name="tableView_3">
+    <widget class="QTableView" name="tblAssets">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -193,11 +139,65 @@
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="tabHouseholdIncome">
+    <attribute name="title">
+     <string>Income</string>
+    </attribute>
+    <widget class="QTableView" name="tblIncome">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>751</width>
+       <height>451</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdAddIncome">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>470</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdEditIncome">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>470</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Edit</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_6">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>470</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
+   </widget>
    <widget class="QWidget" name="tabHouseholdExpenditure">
     <attribute name="title">
      <string>Expenditure</string>
     </attribute>
-    <widget class="QTableView" name="tableView_4">
+    <widget class="QTableView" name="tblExpenditure">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -251,7 +251,7 @@
     <attribute name="title">
      <string>Characteristics</string>
     </attribute>
-    <widget class="QTableView" name="tableView_5">
+    <widget class="QTableView" name="tblCharacteristics">
      <property name="geometry">
       <rect>
        <x>10</x>

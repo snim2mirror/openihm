@@ -160,7 +160,7 @@ DROP TABLE IF EXISTS `openihmdb`.`householdmembers` ;
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`householdmembers` (
   `hhid` INT NOT NULL ,
   `personid` INT NOT NULL ,
-  `headofhousehold` TINYINT(1) NOT NULL ,
+  `headofhousehold` ENUM('Yes','No') NOT NULL ,
   `dateofbith` DATE NOT NULL ,
   `sex` ENUM('Male','Female') NOT NULL ,
   `education` VARCHAR(200) NOT NULL ,
