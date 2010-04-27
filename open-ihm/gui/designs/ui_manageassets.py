@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageassets.ui'
 #
-# Created: Fri Mar  5 15:50:04 2010
+# Created: Mon Apr 26 21:34:38 2010
 #      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -19,35 +19,6 @@ class Ui_ManageAssetDetails(object):
         self.tabWidget.setGeometry(QtCore.QRect(0,0,571,341))
         self.tabWidget.setMinimumSize(QtCore.QSize(0,0))
         self.tabWidget.setObjectName("tabWidget")
-
-        self.tabAssetsGeneral = QtGui.QWidget()
-        self.tabAssetsGeneral.setGeometry(QtCore.QRect(0,0,567,313))
-        self.tabAssetsGeneral.setObjectName("tabAssetsGeneral")
-
-        self.listWidget = QtGui.QListWidget(self.tabAssetsGeneral)
-        self.listWidget.setGeometry(QtCore.QRect(10,40,241,261))
-        self.listWidget.setObjectName("listWidget")
-
-        self.lineEdit = QtGui.QLineEdit(self.tabAssetsGeneral)
-        self.lineEdit.setGeometry(QtCore.QRect(280,40,281,28))
-        self.lineEdit.setObjectName("lineEdit")
-
-        self.pushButton = QtGui.QPushButton(self.tabAssetsGeneral)
-        self.pushButton.setGeometry(QtCore.QRect(280,120,80,28))
-        self.pushButton.setObjectName("pushButton")
-
-        self.pushButton_2 = QtGui.QPushButton(self.tabAssetsGeneral)
-        self.pushButton_2.setGeometry(QtCore.QRect(480,120,80,28))
-        self.pushButton_2.setObjectName("pushButton_2")
-
-        self.label = QtGui.QLabel(self.tabAssetsGeneral)
-        self.label.setGeometry(QtCore.QRect(10,10,271,18))
-        self.label.setObjectName("label")
-
-        self.label_2 = QtGui.QLabel(self.tabAssetsGeneral)
-        self.label_2.setGeometry(QtCore.QRect(280,10,251,18))
-        self.label_2.setObjectName("label_2")
-        self.tabWidget.addTab(self.tabAssetsGeneral,"")
 
         self.tabCashSavings = QtGui.QWidget()
         self.tabCashSavings.setGeometry(QtCore.QRect(0,0,567,313))
@@ -87,7 +58,7 @@ class Ui_ManageAssetDetails(object):
         self.tabWidget.addTab(self.tabCashSavings,"")
 
         self.tabFoodStock = QtGui.QWidget()
-        self.tabFoodStock.setGeometry(QtCore.QRect(0,0,640,320))
+        self.tabFoodStock.setGeometry(QtCore.QRect(0,0,567,313))
         self.tabFoodStock.setObjectName("tabFoodStock")
 
         self.listWidget_2 = QtGui.QListWidget(self.tabFoodStock)
@@ -140,7 +111,7 @@ class Ui_ManageAssetDetails(object):
         self.tabWidget.addTab(self.tabFoodStock,"")
 
         self.tabLand = QtGui.QWidget()
-        self.tabLand.setGeometry(QtCore.QRect(0,0,640,320))
+        self.tabLand.setGeometry(QtCore.QRect(0,0,567,313))
         self.tabLand.setObjectName("tabLand")
 
         self.lineEdit_5 = QtGui.QLineEdit(self.tabLand)
@@ -193,7 +164,7 @@ class Ui_ManageAssetDetails(object):
         self.tabWidget.addTab(self.tabLand,"")
 
         self.tabTrees = QtGui.QWidget()
-        self.tabTrees.setGeometry(QtCore.QRect(0,0,640,320))
+        self.tabTrees.setGeometry(QtCore.QRect(0,0,567,313))
         self.tabTrees.setObjectName("tabTrees")
 
         self.label_10 = QtGui.QLabel(self.tabTrees)
@@ -246,7 +217,7 @@ class Ui_ManageAssetDetails(object):
         self.tabWidget.addTab(self.tabTrees,"")
 
         self.tabOtherTradableGoods = QtGui.QWidget()
-        self.tabOtherTradableGoods.setGeometry(QtCore.QRect(0,0,640,320))
+        self.tabOtherTradableGoods.setGeometry(QtCore.QRect(0,0,567,313))
         self.tabOtherTradableGoods.setObjectName("tabOtherTradableGoods")
 
         self.label_13 = QtGui.QLabel(self.tabOtherTradableGoods)
@@ -298,21 +269,45 @@ class Ui_ManageAssetDetails(object):
         self.comboBox_4.setObjectName("comboBox_4")
         self.tabWidget.addTab(self.tabOtherTradableGoods,"")
 
+        self.tabAssetsGeneral = QtGui.QWidget()
+        self.tabAssetsGeneral.setGeometry(QtCore.QRect(0,0,567,313))
+        self.tabAssetsGeneral.setObjectName("tabAssetsGeneral")
+
+        self.listWidget = QtGui.QListWidget(self.tabAssetsGeneral)
+        self.listWidget.setGeometry(QtCore.QRect(10,40,241,261))
+        self.listWidget.setObjectName("listWidget")
+
+        self.lineEdit = QtGui.QLineEdit(self.tabAssetsGeneral)
+        self.lineEdit.setGeometry(QtCore.QRect(280,40,281,28))
+        self.lineEdit.setObjectName("lineEdit")
+
+        self.pushButton = QtGui.QPushButton(self.tabAssetsGeneral)
+        self.pushButton.setGeometry(QtCore.QRect(280,120,80,28))
+        self.pushButton.setObjectName("pushButton")
+
+        self.pushButton_2 = QtGui.QPushButton(self.tabAssetsGeneral)
+        self.pushButton_2.setGeometry(QtCore.QRect(480,120,80,28))
+        self.pushButton_2.setObjectName("pushButton_2")
+
+        self.label = QtGui.QLabel(self.tabAssetsGeneral)
+        self.label.setGeometry(QtCore.QRect(10,10,271,18))
+        self.label.setObjectName("label")
+
+        self.label_2 = QtGui.QLabel(self.tabAssetsGeneral)
+        self.label_2.setGeometry(QtCore.QRect(280,10,251,18))
+        self.label_2.setObjectName("label_2")
+        self.tabWidget.addTab(self.tabAssetsGeneral,"")
+
         self.btnAssetsClose = QtGui.QPushButton(ManageAssetDetails)
         self.btnAssetsClose.setGeometry(QtCore.QRect(490,350,80,28))
         self.btnAssetsClose.setObjectName("btnAssetsClose")
 
         self.retranslateUi(ManageAssetDetails)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(5)
         QtCore.QMetaObject.connectSlotsByName(ManageAssetDetails)
 
     def retranslateUi(self, ManageAssetDetails):
         ManageAssetDetails.setWindowTitle(QtGui.QApplication.translate("ManageAssetDetails", "Manage Asset Details", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton.setText(QtGui.QApplication.translate("ManageAssetDetails", "Add", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton_2.setText(QtGui.QApplication.translate("ManageAssetDetails", "Delete", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("ManageAssetDetails", "Existing Asset Categories", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_2.setText(QtGui.QApplication.translate("ManageAssetDetails", "Add/Edit Asset Category", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabAssetsGeneral), QtGui.QApplication.translate("ManageAssetDetails", "General", None, QtGui.QApplication.UnicodeUTF8))
         self.label_23.setText(QtGui.QApplication.translate("ManageAssetDetails", "Cash Saving Type", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_15.setText(QtGui.QApplication.translate("ManageAssetDetails", "Delete", None, QtGui.QApplication.UnicodeUTF8))
         self.label_25.setText(QtGui.QApplication.translate("ManageAssetDetails", "Add/ Edit Cash Saving Details", None, QtGui.QApplication.UnicodeUTF8))
@@ -350,6 +345,11 @@ class Ui_ManageAssetDetails(object):
         self.label_22.setText(QtGui.QApplication.translate("ManageAssetDetails", "Select Good", None, QtGui.QApplication.UnicodeUTF8))
         self.label_15.setText(QtGui.QApplication.translate("ManageAssetDetails", "Unit of Measure", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_14.setText(QtGui.QApplication.translate("ManageAssetDetails", "Add", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabOtherTradableGoods), QtGui.QApplication.translate("ManageAssetDetails", "Other Tradable Goods", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabOtherTradableGoods), QtGui.QApplication.translate("ManageAssetDetails", "Tradable Goods", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton.setText(QtGui.QApplication.translate("ManageAssetDetails", "Add", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushButton_2.setText(QtGui.QApplication.translate("ManageAssetDetails", "Delete", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("ManageAssetDetails", "Existing Asset Categories", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("ManageAssetDetails", "Add/Edit Asset Category", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabAssetsGeneral), QtGui.QApplication.translate("ManageAssetDetails", "Manage Category Types", None, QtGui.QApplication.UnicodeUTF8))
         self.btnAssetsClose.setText(QtGui.QApplication.translate("ManageAssetDetails", "Close", None, QtGui.QApplication.UnicodeUTF8))
 

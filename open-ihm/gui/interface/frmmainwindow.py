@@ -47,19 +47,19 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
         # connect relevant signals and slots
         self.connect(self.actionExit, QtCore.SIGNAL("triggered()"), self.close)
-        self.connect(self.actionNew_Project, QtCore.SIGNAL("triggered()"), self.newProject)
+        self.connect(self.actionCreate_Project, QtCore.SIGNAL("triggered()"), self.newProject)
         self.connect(self.actionAsset_Details, QtCore.SIGNAL("triggered()"), self.manageAssetDetails)
         self.connect(self.actionIncome_Source_Details, QtCore.SIGNAL("triggered()"), self.manageIncomeDetails)
         self.connect(self.actionEdit_Project, QtCore.SIGNAL("triggered()"), self.editProject)
         self.connect(self.actionConfigure_Project, QtCore.SIGNAL("triggered()"), self.configureProject)
-        self.connect(self.actionOpen_Household, QtCore.SIGNAL("triggered()"), self.editProjectHousehold)
-        self.connect(self.actionHousehold_Data, QtCore.SIGNAL("triggered()"), self.viewHouseholdData)
+        self.connect(self.actionEdit_Household, QtCore.SIGNAL("triggered()"), self.editProjectHousehold)
+        self.connect(self.actionEnter_Household_Data, QtCore.SIGNAL("triggered()"), self.viewHouseholdData)
         self.connect(self.actionView_All_Households, QtCore.SIGNAL("triggered()"), self.viewAllHouseholds)
         self.connect(self.actionFind_Project, QtCore.SIGNAL("triggered()"), self.findProject)
         self.connect(self.actionOpen_Project, QtCore.SIGNAL("triggered()"), self.openProject)
         self.connect(self.actionClose_Project, QtCore.SIGNAL("triggered()"), self.closeProject)
 
-        self.connect(self.actionCrop_Types, QtCore.SIGNAL("triggered()"), self.manageCropTypes)
+        self.connect(self.actionFood_Types, QtCore.SIGNAL("triggered()"), self.manageFoodTypes)
         self.connect(self.actionAdd_Household, QtCore.SIGNAL("triggered()"), self.addHousehold)
         self.connect(self.actionHousehold_Characteristics_2, QtCore.SIGNAL("triggered()"), self.manageHouseholdCharacteristics)
         self.connect(self.actionPersonal_Characteristics, QtCore.SIGNAL("triggered()"), self.managePersonalCharacteristics)
@@ -143,7 +143,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.centerSubWindow(subWin)
         form.show()
 
-    def manageCropTypes(self):
+    def manageFoodTypes(self):
         ''' Creates and Shows the Manage Crop Types form'''
         self.form = QtGui.QDialog()
         self.ui = FrmManageCropTypes()

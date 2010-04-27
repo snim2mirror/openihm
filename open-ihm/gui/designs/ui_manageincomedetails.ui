@@ -5,13 +5,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>572</width>
+    <width>612</width>
     <height>380</height>
    </rect>
   </property>
   <property name="minimumSize" >
    <size>
-    <width>572</width>
+    <width>611</width>
     <height>380</height>
    </size>
   </property>
@@ -23,110 +23,25 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>571</width>
+     <width>611</width>
      <height>341</height>
     </rect>
    </property>
    <property name="minimumSize" >
     <size>
-     <width>0</width>
-     <height>0</height>
+     <width>611</width>
+     <height>311</height>
     </size>
    </property>
    <property name="currentIndex" >
-    <number>1</number>
+    <number>4</number>
    </property>
-   <widget class="QWidget" name="tab" >
-    <property name="geometry" >
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>567</width>
-      <height>313</height>
-     </rect>
-    </property>
-    <attribute name="title" >
-     <string>General</string>
-    </attribute>
-    <widget class="QLineEdit" name="lineEdit" >
-     <property name="geometry" >
-      <rect>
-       <x>270</x>
-       <y>40</y>
-       <width>281</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton" >
-     <property name="geometry" >
-      <rect>
-       <x>270</x>
-       <y>120</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Add</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2" >
-     <property name="geometry" >
-      <rect>
-       <x>270</x>
-       <y>10</y>
-       <width>251</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Add/Edit Asset Category</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label" >
-     <property name="geometry" >
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>271</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Existing Asset Categories</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_2" >
-     <property name="geometry" >
-      <rect>
-       <x>470</x>
-       <y>120</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Delete</string>
-     </property>
-    </widget>
-    <widget class="QListWidget" name="listWidget" >
-     <property name="geometry" >
-      <rect>
-       <x>0</x>
-       <y>40</y>
-       <width>241</width>
-       <height>261</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
    <widget class="QWidget" name="tabIncomeCrops" >
     <property name="geometry" >
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>567</width>
+      <width>607</width>
       <height>313</height>
      </rect>
     </property>
@@ -303,8 +218,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>640</width>
-      <height>320</height>
+      <width>607</width>
+      <height>313</height>
      </rect>
     </property>
     <attribute name="title" >
@@ -511,8 +426,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>640</width>
-      <height>320</height>
+      <width>607</width>
+      <height>313</height>
      </rect>
     </property>
     <attribute name="title" >
@@ -688,8 +603,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>640</width>
-      <height>320</height>
+      <width>607</width>
+      <height>313</height>
      </rect>
     </property>
     <attribute name="title" >
@@ -783,7 +698,7 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>567</width>
+      <width>607</width>
       <height>313</height>
      </rect>
     </property>
@@ -804,7 +719,7 @@
      <property name="geometry" >
       <rect>
        <x>280</x>
-       <y>110</y>
+       <y>100</y>
        <width>91</width>
        <height>18</height>
       </rect>
@@ -840,7 +755,7 @@
      <property name="geometry" >
       <rect>
        <x>370</x>
-       <y>100</y>
+       <y>90</y>
        <width>151</width>
        <height>27</height>
       </rect>
@@ -899,7 +814,7 @@
      <property name="geometry" >
       <rect>
        <x>370</x>
-       <y>180</y>
+       <y>170</y>
        <width>151</width>
        <height>28</height>
       </rect>
@@ -935,7 +850,7 @@
      <property name="geometry" >
       <rect>
        <x>370</x>
-       <y>140</y>
+       <y>130</y>
        <width>151</width>
        <height>27</height>
       </rect>
@@ -945,7 +860,7 @@
      <property name="geometry" >
       <rect>
        <x>280</x>
-       <y>190</y>
+       <y>180</y>
        <width>81</width>
        <height>18</height>
       </rect>
@@ -959,7 +874,7 @@
   <widget class="QPushButton" name="btnManageIncomeClose" >
    <property name="geometry" >
     <rect>
-     <x>490</x>
+     <x>530</x>
      <y>350</y>
      <width>80</width>
      <height>28</height>

@@ -34,93 +34,8 @@
     </size>
    </property>
    <property name="currentIndex" >
-    <number>0</number>
+    <number>5</number>
    </property>
-   <widget class="QWidget" name="tabAssetsGeneral" >
-    <property name="geometry" >
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>567</width>
-      <height>313</height>
-     </rect>
-    </property>
-    <attribute name="title" >
-     <string>General</string>
-    </attribute>
-    <widget class="QListWidget" name="listWidget" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>241</width>
-       <height>261</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit" >
-     <property name="geometry" >
-      <rect>
-       <x>280</x>
-       <y>40</y>
-       <width>281</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton" >
-     <property name="geometry" >
-      <rect>
-       <x>280</x>
-       <y>120</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Add</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_2" >
-     <property name="geometry" >
-      <rect>
-       <x>480</x>
-       <y>120</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Delete</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label" >
-     <property name="geometry" >
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>271</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Existing Asset Categories</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2" >
-     <property name="geometry" >
-      <rect>
-       <x>280</x>
-       <y>10</y>
-       <width>251</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text" >
-      <string>Add/Edit Asset Category</string>
-     </property>
-    </widget>
-   </widget>
    <widget class="QWidget" name="tabCashSavings" >
     <property name="geometry" >
      <rect>
@@ -234,8 +149,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>640</width>
-      <height>320</height>
+      <width>567</width>
+      <height>313</height>
      </rect>
     </property>
     <attribute name="title" >
@@ -388,8 +303,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>640</width>
-      <height>320</height>
+      <width>567</width>
+      <height>313</height>
      </rect>
     </property>
     <attribute name="title" >
@@ -542,8 +457,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>640</width>
-      <height>320</height>
+      <width>567</width>
+      <height>313</height>
      </rect>
     </property>
     <attribute name="title" >
@@ -696,12 +611,12 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>640</width>
-      <height>320</height>
+      <width>567</width>
+      <height>313</height>
      </rect>
     </property>
     <attribute name="title" >
-     <string>Other Tradable Goods</string>
+     <string>Tradable Goods</string>
     </attribute>
     <widget class="QLabel" name="label_13" >
      <property name="geometry" >
@@ -842,6 +757,91 @@
        <width>241</width>
        <height>27</height>
       </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabAssetsGeneral" >
+    <property name="geometry" >
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>567</width>
+      <height>313</height>
+     </rect>
+    </property>
+    <attribute name="title" >
+     <string>Manage Category Types</string>
+    </attribute>
+    <widget class="QListWidget" name="listWidget" >
+     <property name="geometry" >
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>241</width>
+       <height>261</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit" >
+     <property name="geometry" >
+      <rect>
+       <x>280</x>
+       <y>40</y>
+       <width>281</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton" >
+     <property name="geometry" >
+      <rect>
+       <x>280</x>
+       <y>120</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_2" >
+     <property name="geometry" >
+      <rect>
+       <x>480</x>
+       <y>120</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label" >
+     <property name="geometry" >
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>271</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Existing Asset Categories</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2" >
+     <property name="geometry" >
+      <rect>
+       <x>280</x>
+       <y>10</y>
+       <width>251</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text" >
+      <string>Add/Edit Asset Category</string>
      </property>
     </widget>
    </widget>
