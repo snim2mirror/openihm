@@ -57,7 +57,7 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds):
             qtHouseholdNo.setTextAlignment( Qt.AlignCenter )
             
             qtHouseholdName = QStandardItem( row[1] )
-            
+	                
             qtAssetValue = QStandardItem( "%i" % row[2] )
             qtAssetValue.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
             
