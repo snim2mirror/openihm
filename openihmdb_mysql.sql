@@ -302,6 +302,7 @@ DROP TABLE IF EXISTS `openihmdb`.`foodenergyvalue` ;
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`foodenergyvalue` (
   `foodtype` VARCHAR(100) NOT NULL ,
   `energyvalue` DOUBLE NULL ,
+  `measuringunit` VARCHAR(45) NULL , 
   PRIMARY KEY (`foodtype`) )
 ENGINE = InnoDB;
 

@@ -141,27 +141,27 @@
   </action>
   <action name="actionHousehold_Characteristics_2" >
    <property name="text" >
-    <string>Manage Household Characteristics</string>
+    <string>Household Characteristics</string>
    </property>
   </action>
   <action name="actionPersonal_Characteristics" >
    <property name="text" >
-    <string>Manage Personal Characteristics</string>
+    <string>Personal Characteristics</string>
    </property>
   </action>
   <action name="actionAsset_Details" >
    <property name="text" >
-    <string>Manage Asset Details</string>
+    <string>Asset Details</string>
    </property>
   </action>
   <action name="actionIncome_Source_Details" >
    <property name="text" >
-    <string>Manage Income Source Details</string>
+    <string>Income Source Details</string>
    </property>
   </action>
   <action name="actionFood_Types" >
    <property name="text" >
-    <string>Manage Food Type Details</string>
+    <string>Food Type Details</string>
    </property>
   </action>
   <action name="actionLand_Types" >
@@ -171,7 +171,7 @@
   </action>
   <action name="actionExpenditure_Types" >
    <property name="text" >
-    <string>Manage Expenditure Details</string>
+    <string>Expenditure Details</string>
    </property>
   </action>
   <action name="actionContents" >

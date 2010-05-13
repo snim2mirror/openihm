@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_housecharacteristics.ui'
 #
-# Created: Wed Feb 24 17:40:54 2010
+# Created: Sat May  8 18:51:15 2010
 #      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,27 +12,27 @@ from PyQt4 import QtCore, QtGui
 class Ui_HouseCharacteristics(object):
     def setupUi(self, HouseCharacteristics):
         HouseCharacteristics.setObjectName("HouseCharacteristics")
-        HouseCharacteristics.resize(QtCore.QSize(QtCore.QRect(0,0,389,261).size()).expandedTo(HouseCharacteristics.minimumSizeHint()))
-        HouseCharacteristics.setMinimumSize(QtCore.QSize(389,261))
+        HouseCharacteristics.resize(QtCore.QSize(QtCore.QRect(0,0,341,200).size()).expandedTo(HouseCharacteristics.minimumSizeHint()))
+        HouseCharacteristics.setMinimumSize(QtCore.QSize(341,200))
 
         self.btnHouseClose = QtGui.QPushButton(HouseCharacteristics)
-        self.btnHouseClose.setGeometry(QtCore.QRect(280,180,80,28))
+        self.btnHouseClose.setGeometry(QtCore.QRect(250,160,80,28))
         self.btnHouseClose.setObjectName("btnHouseClose")
 
         self.pushButton_2 = QtGui.QPushButton(HouseCharacteristics)
-        self.pushButton_2.setGeometry(QtCore.QRect(180,180,80,28))
+        self.pushButton_2.setGeometry(QtCore.QRect(150,160,80,28))
         self.pushButton_2.setObjectName("pushButton_2")
 
         self.pushButton_3 = QtGui.QPushButton(HouseCharacteristics)
-        self.pushButton_3.setGeometry(QtCore.QRect(80,180,80,28))
+        self.pushButton_3.setGeometry(QtCore.QRect(50,160,80,28))
         self.pushButton_3.setObjectName("pushButton_3")
 
         self.comboBox = QtGui.QComboBox(HouseCharacteristics)
-        self.comboBox.setGeometry(QtCore.QRect(100,10,251,27))
+        self.comboBox.setGeometry(QtCore.QRect(80,10,251,27))
         self.comboBox.setObjectName("comboBox")
 
         self.comboBox_2 = QtGui.QComboBox(HouseCharacteristics)
-        self.comboBox_2.setGeometry(QtCore.QRect(100,60,251,27))
+        self.comboBox_2.setGeometry(QtCore.QRect(80,60,251,27))
         self.comboBox_2.setObjectName("comboBox_2")
 
         self.label = QtGui.QLabel(HouseCharacteristics)
@@ -44,7 +44,7 @@ class Ui_HouseCharacteristics(object):
         self.label_2.setObjectName("label_2")
 
         self.lineEdit = QtGui.QLineEdit(HouseCharacteristics)
-        self.lineEdit.setGeometry(QtCore.QRect(100,110,251,28))
+        self.lineEdit.setGeometry(QtCore.QRect(80,110,251,28))
         self.lineEdit.setObjectName("lineEdit")
 
         self.label_3 = QtGui.QLabel(HouseCharacteristics)

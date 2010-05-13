@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Wed Apr 28 13:55:49 2010
+# Created: Thu Apr 29 17:22:07 2010
 #      by: PyQt4 UI code generator 4.3.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -217,13 +217,13 @@ class Ui_MainWindow(object):
         self.actionIncome.setText(QtGui.QApplication.translate("MainWindow", "Income", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAssets.setText(QtGui.QApplication.translate("MainWindow", "Assets", None, QtGui.QApplication.UnicodeUTF8))
         self.actionHousehold_Characteristics.setText(QtGui.QApplication.translate("MainWindow", "Household Characteristics", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionHousehold_Characteristics_2.setText(QtGui.QApplication.translate("MainWindow", "Manage Household Characteristics", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionPersonal_Characteristics.setText(QtGui.QApplication.translate("MainWindow", "Manage Personal Characteristics", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionAsset_Details.setText(QtGui.QApplication.translate("MainWindow", "Manage Asset Details", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionIncome_Source_Details.setText(QtGui.QApplication.translate("MainWindow", "Manage Income Source Details", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionFood_Types.setText(QtGui.QApplication.translate("MainWindow", "Manage Food Type Details", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionHousehold_Characteristics_2.setText(QtGui.QApplication.translate("MainWindow", "Household Characteristics", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionPersonal_Characteristics.setText(QtGui.QApplication.translate("MainWindow", "Personal Characteristics", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAsset_Details.setText(QtGui.QApplication.translate("MainWindow", "Asset Details", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionIncome_Source_Details.setText(QtGui.QApplication.translate("MainWindow", "Income Source Details", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionFood_Types.setText(QtGui.QApplication.translate("MainWindow", "Food Type Details", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLand_Types.setText(QtGui.QApplication.translate("MainWindow", "Land Types", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionExpenditure_Types.setText(QtGui.QApplication.translate("MainWindow", "Manage Expenditure Details", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionExpenditure_Types.setText(QtGui.QApplication.translate("MainWindow", "Expenditure Details", None, QtGui.QApplication.UnicodeUTF8))
         self.actionContents.setText(QtGui.QApplication.translate("MainWindow", "Contents", None, QtGui.QApplication.UnicodeUTF8))
         self.actionContents.setShortcut(QtGui.QApplication.translate("MainWindow", "F1", None, QtGui.QApplication.UnicodeUTF8))
         self.actionIndex.setText(QtGui.QApplication.translate("MainWindow", "About Open IHM", None, QtGui.QApplication.UnicodeUTF8))
