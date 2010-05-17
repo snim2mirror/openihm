@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_data.ui'
 #
-# Created: Tue Apr 27 11:35:05 2010
+# Created: Sat May 15 18:39:37 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -121,5 +121,5 @@ class Ui_HouseholdData(object):
         self.cmdEditCharacteristic.setText(QtGui.QApplication.translate("HouseholdData", "Edit", None, QtGui.QApplication.UnicodeUTF8))
         self.tabHouseHold.setTabText(self.tabHouseHold.indexOf(self.tabHouseholdCharacteristics), QtGui.QApplication.translate("HouseholdData", "Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdClose.setText(QtGui.QApplication.translate("HouseholdData", "Close", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("HouseholdData", "Household Number:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("HouseholdData", "Household Name:", None, QtGui.QApplication.UnicodeUTF8))
 

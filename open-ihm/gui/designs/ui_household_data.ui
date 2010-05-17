@@ -309,7 +309,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Household Number:</string>
+    <string>Household Name:</string>
    </property>
   </widget>
  </widget>

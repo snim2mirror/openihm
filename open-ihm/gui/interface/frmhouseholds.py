@@ -79,4 +79,5 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds):
             num = num + 1
         
         self.tableView.setModel(model)
+        self.tableView.show()
 

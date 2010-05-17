@@ -131,7 +131,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
     def viewHouseholdData(self):
         ''' shows household data (expenditure, income, assets, etc) '''
-        form = FrmHouseholdData(self.mdi)
+        form = FrmHouseholdData(self)
         subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
         form.show()
