@@ -159,7 +159,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def manageFoodTypes(self):
         ''' Creates and Shows the Manage Crop Types form'''
         self.form = QtGui.QDialog()
-        self.ui = FrmManageCropTypes()
+        self.ui = FrmManageFoodTypes()
         self.ui.setupUi(self.form,self.mdi)
         subWin = self.mdi.addSubWindow(self.form)
         self.centerSubWindow(subWin)
