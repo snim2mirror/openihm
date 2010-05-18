@@ -45,13 +45,13 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember):
         dateofbirth  	= self.dtpDOB.date().toString("yyyy-MM-dd")
         education       = self.txtEducation.text()
         if self.chkHeadHousehold.isChecked():
-        	headhousehold = 1
+        	headhousehold = "Yes"
         else:
-        	headhousehold = 0
+        	headhousehold = "No"
         
         # create UPDATE query
         query = '''INSERT INTO householdmembers 
-			    VALUES(%s,%s,%s,'%s','%s','%s')''' % (self.hhid, memberid, headhousehold, dateofbirth, sex, education)
+			    VALUES(%s,'%s','%s','%s','%s','%s')''' % (self.hhid, memberid, headhousehold, dateofbirth, sex, education)
     
         # execute query and commit changes
         cursor =  self.db.cursor()

@@ -18,6 +18,7 @@ from frmmanagecroptypes import FrmManageCropTypes
 from frmproject_edit import FrmEditProject
 from frmproject_configure import FrmConfigureProject
 from frmhousehold_edit_getid import FrmEditHouseholdGetID
+from frmhousehold_delete import FrmDelHousehold
 from frmhousehold_data import FrmHouseholdData
 from frmhouseholds import FrmHouseholds
 from frmmanagefoodtypes import FrmManageFoodTypes
@@ -61,6 +62,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
         self.connect(self.actionFood_Types, QtCore.SIGNAL("triggered()"), self.manageFoodTypes)
         self.connect(self.actionAdd_Household, QtCore.SIGNAL("triggered()"), self.addHousehold)
+        self.connect(self.actionDelete_Household, QtCore.SIGNAL("triggered()"), self.delHousehold)
         self.connect(self.actionHousehold_Characteristics_2, QtCore.SIGNAL("triggered()"), self.manageHouseholdCharacteristics)
         self.connect(self.actionPersonal_Characteristics, QtCore.SIGNAL("triggered()"), self.managePersonalCharacteristics)
 
@@ -98,7 +100,8 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def editProject(self):
         ''' Creates and Shows the Edit Project form '''
         if self.projectid == -1:
-            QtGui.QMessageBox.information(self,"Notice","No project is active. First create a new project or open an existing project.")
+			msg = "No project is active. First create a new project or open an existing project."
+			QtGui.QMessageBox.information(self,"Notice",msg)
         else:
             form = FrmEditProject(self)
             subWin = self.mdi.addSubWindow(form)
@@ -115,7 +118,8 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def addHousehold(self):
         ''' Creates and Shows the Add House Hold form '''
         if self.projectid == -1:
-            QtGui.QMessageBox.information(self,"Notice","No project is active. First create a new project or open an existing project.")
+			msg = "No project is active. First create a new project or open an existing project."
+			QtGui.QMessageBox.information(self,"Notice",msg)
         else:
             form = FrmAddHousehold(self)
             subWin = self.mdi.addSubWindow(form)
@@ -128,6 +132,15 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
         form.show()
+    
+    def delHousehold(self):
+        ''' Creates and Shows the Delete House Hold form '''
+        if self.projectid == -1:
+			msg = "No project is active. First open a project under which the household to be deleted belongs."
+			QtGui.QMessageBox.information(self,"Notice",msg)
+        else:
+            form = FrmDelHousehold(self)
+            form.exec_()
         
     def viewHouseholdData(self):
         ''' shows household data (expenditure, income, assets, etc) '''

@@ -42,7 +42,7 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember):
     def getMemberDetails(self):
 		''' retrieves and displays details of the member being editted '''
 		# query to retrieve member details
-		query = '''SELECT personid, headofhousehold, dateofbith, sex, education 
+		query = '''SELECT personid, headofhousehold, dateofbirth, sex, education 
 		           FROM householdmembers WHERE hhid=%s AND personid=%s''' % (self.hhid, self.currentid)
 		
 		# execute query and commit changes
@@ -51,9 +51,9 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember):
 		cursor.execute(query)
         
 		for row in cursor.fetchall():
-			self.txtMemberID.setText( "%i" % row[0])
+			self.txtMemberID.setText( row[0])
 			
-			if row[1] == 1:
+			if row[1] == "Yes":
 				self.chkHeadHousehold.setChecked(True)	
 			
 			self.dtpDOB.setDate( row[2] )
@@ -76,12 +76,12 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember):
 		dateofbirth  	= self.dtpDOB.date().toString("yyyy-MM-dd")
 		education       = self.txtEducation.text()
 		if self.chkHeadHousehold.isChecked():
-			headhousehold = 1
+			headhousehold = "Yes"
 		else:
-			headhousehold = 0
+			headhousehold = "No"
 		
 		# create UPDATE query
-		query = '''UPDATE householdmembers SET personid=%s, headofhousehold=%s, dateofbith='%s', sex='%s',
+		query = '''UPDATE householdmembers SET personid='%s', headofhousehold='%s', dateofbirth='%s', sex='%s',
 			    education='%s' WHERE hhid=%s AND personid=%s ''' % (memberid, headhousehold, dateofbirth, sex, education, self.hhid, self.currentid)
     
 		# execute query and commit changes

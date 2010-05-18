@@ -134,7 +134,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			cursor =  db.cursor()
 			
 			for memberid in selectedIds:
-				query = '''DELETE FROM householdmembers WHERE hhid=%s AND personid=%s ''' % (hhid, memberid)	
+				query = '''DELETE FROM householdmembers WHERE hhid=%s AND personid='%s' ''' % (hhid, memberid)	
 				cursor.execute(query)
 				db.commit()
     
@@ -145,14 +145,14 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			self.retrieveHouseholdMembers()
 
 		else:
-			QMessageBox.information(self,"Edit Member","Please select the row containing a member to be editted.")
+			QMessageBox.information(self,"Delete Members","Please select the rows containing members to be deleted.")
 		
 	def retrieveHouseholdMembers(self):
 		''' retrieves and shows a list of household members '''
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 		hhid = temp[0]
 		# select query to retrieve household members
-		query = '''SELECT personid, headofhousehold, dateofbith, sex, education 
+		query = '''SELECT personid, headofhousehold, dateofbirth, sex, education 
 		             FROM householdmembers WHERE hhid=%i''' % (hhid)
 		
 		# retrieve and display members
@@ -174,14 +174,9 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		num = 0
 		
 		for row in cursor.fetchall():
-			qtMemberID = QStandardItem( "%i" % row[0])
+			qtMemberID = QStandardItem(row[0])
 			qtMemberID.setTextAlignment( Qt.AlignCenter )
-			
-			if row[1] == 1:
-				qtHouseholdHead = QStandardItem( "Yes" )
-			else:
-				qtHouseholdHead = QStandardItem( "No" )
-			
+			qtHouseholdHead = QStandardItem( row[1] )	
 			qtDOB = QStandardItem( QDate(row[2]).toString("dd/MM/yyyy") )
 			qtDOB.setTextAlignment( Qt.AlignCenter )
 			
