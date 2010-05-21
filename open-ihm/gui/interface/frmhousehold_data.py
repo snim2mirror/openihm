@@ -29,6 +29,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		# get house holds
 		self.getHouseholds()
 		
+		# set current house hold
+		if hhid != 0:
+			self.cboHouseholdNumber.setCurrentIndex(self.cboHouseholdNumber.findData(QVariant(hhid)))
+		
 		# retrieve members
 		self.retrieveHouseholdMembers()
 		# connect relevant signals and slots

@@ -1,42 +1,44 @@
 #------------------------------------------------------------------------------------------------	
-#	Filename: frmhousehold_add.py
+#	Filename: frmhouseholds_add.py
 #
 #	Class to create the Add Household form - FrmAddHousehold.
 #------------------------------------------------------------------------------------------------
 
 # imports from PyQt4 package
-from PyQt4 import QtGui, QtCore
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 
 from data.config import Config
 import data.mysql.connector 
 
 # import the Create Project Dialog design class
-from gui.designs.ui_addhousehold import Ui_AddHousehold
+from gui.designs.ui_households_add import Ui_Households_Add
 
-class FrmAddHousehold(QtGui.QDialog, Ui_AddHousehold):	
+class FrmAddHousehold(QDialog, Ui_Households_Add):	
     ''' Creates the add household form '''	
 
-    def __init__(self, parent):
+    def __init__(self, parent, projectid, projectname):
         ''' Set up the dialog box interface '''
-        QtGui.QDialog.__init__(self)
+        QDialog.__init__(self)
         
         self.setupUi(self)
         self.parent = parent
+        self.projectid = projectid
         self.config = Config.dbinfo().copy()
         
         # set the dates to the date of today
-        now = QtCore.QDate.currentDate()
+        now = QDate.currentDate()
         self.dtpDateVisted.setDate(now)
         
         # allow the calendar widget to pop up
         self.dtpDateVisted.setCalendarPopup(True)
         
         # display project name
-        self.lblProjectName.setText(self.parent.projectname)
+        self.lblProjectName.setText(projectname)
         
         # connect relevant signals and slots
-        self.connect(self.cmdCancel, QtCore.SIGNAL("clicked()"), parent.mdi.closeActiveSubWindow)
-        self.connect(self.cmdSave, QtCore.SIGNAL("clicked()"), self.saveHousehold)
+        self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
+        self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveHousehold)
         
     def saveHousehold(self):
         ''' Saves newly created household data to database '''
@@ -46,10 +48,10 @@ class FrmAddHousehold(QtGui.QDialog, Ui_AddHousehold):
         cursor = db.cursor()
         
         # get the data entered by user
-        hhid                = self.txtShortHouseHoldName.text()
-        householdname = self.txtHouseholdName.text()
-        dateofcollection       = self.dtpDateVisted.date().toString("yyyy-MM-dd")
-        pid              = self.parent.projectid
+        hhid             = self.txtShortHouseHoldName.text()
+        householdname 	 = self.txtHouseholdName.text()
+        dateofcollection = self.dtpDateVisted.date().toString("yyyy-MM-dd")
+        pid              = self.projectid
         
         # create INSERT INTO query
         query = '''INSERT INTO households(hhid,pid,dateofcollection,householdname) 
@@ -64,4 +66,5 @@ class FrmAddHousehold(QtGui.QDialog, Ui_AddHousehold):
         db.close()
         
         # close new project window
-        self.parent.mdi.closeActiveSubWindow()
+        self.parent.getHouseholds()
+        self.close()

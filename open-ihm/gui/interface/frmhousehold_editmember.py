@@ -12,7 +12,7 @@ import data.mysql.connector
 from gui.designs.ui_household_editmember import Ui_EditHouseholdMember
 
 class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember):	
-    ''' Creates the Add Household Member form. '''	
+    ''' Creates the Edit Household Member form. '''	
     def __init__(self, parent,  hhid, hhname, memberid):
         ''' Set up the dialog box interface '''
         QDialog.__init__(self)
