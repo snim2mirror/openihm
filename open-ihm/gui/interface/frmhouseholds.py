@@ -99,6 +99,7 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds):
 		
 		# show the add household  form
 		form = FrmAddHousehold(self, projectid, projectname)
+		form.setWindowIcon(QIcon('resources/images/openihm.png'))
 		form.exec_()
 		
 	def editHousehold(self):
@@ -111,6 +112,7 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds):
 			projectname = self.parent.projectname
 			# show edit household member form
 			form = FrmEditHousehold(self, projectid, projectname, hhid)
+			form.setWindowIcon(QIcon('resources/images/openihm.png'))
 			form.exec_()
 			
 		else:

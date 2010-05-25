@@ -91,6 +91,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		hhid = temp[0]
 		hhname = self.cboHouseholdNumber.currentText()
 		form = FrmAddHouseholdMember(self, hhid, hhname)
+		form.setWindowIcon(QIcon('resources/images/openihm.png'))
 		# show the add household member form
 		form.exec_()
 		
@@ -105,6 +106,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			hhname = self.cboHouseholdNumber.currentText()
 			# show edit household member form
 			form = FrmEditHouseholdMember(self, hhid, hhname, memberid)
+			form.setWindowIcon(QIcon('resources/images/openihm.png'))
 			form.exec_()
 			
 		else:
@@ -154,7 +156,8 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 	def retrieveHouseholdMembers(self):
 		''' retrieves and shows a list of household members '''
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
-		hhid = temp[0]
+		hhid = temp[0] 
+		self.setWindowTitle("Household Data - " + self.cboHouseholdNumber.currentText())
 		# select query to retrieve household members
 		query = '''SELECT personid, headofhousehold, dateofbirth, sex, education 
 		             FROM householdmembers WHERE hhid=%i''' % (hhid)
