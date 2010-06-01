@@ -70,6 +70,7 @@ class FrmNewProject(QtGui.QDialog, Ui_NewProject):
         self.parent.projectid = projectid
         self.parent.projectname = projectname
         self.parent.setWindowTitle("Open IHM - " + projectname)
+        self.parent.actionClose_Project.setDisabled(False)
         
         # close database connection
         cursor.close()

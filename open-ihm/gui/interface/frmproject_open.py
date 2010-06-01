@@ -51,4 +51,5 @@ class FrmOpenProject(QtGui.QDialog, Ui_OpenProject):
         self.parent.projectid = temp[0]
         self.parent.projectname = self.cboProjectName.currentText()
         self.parent.setWindowTitle("Open IHM - " + self.cboProjectName.currentText())
+        self.parent.actionClose_Project.setDisabled(False)
         self.parent.mdi.closeActiveSubWindow()
