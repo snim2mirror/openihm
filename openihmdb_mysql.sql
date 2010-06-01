@@ -299,6 +299,17 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `openihmdb`.`savingscategories`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`savingscategories` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`savingscategories` (
+  `savingscategory` VARCHAR(100) NOT NULL ,
+  PRIMARY KEY (`savingscategory`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `openihmdb`.`currencies`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `openihmdb`.`currencies` ;

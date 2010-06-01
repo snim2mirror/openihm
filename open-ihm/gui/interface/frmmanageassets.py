@@ -25,17 +25,25 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
        		self.setupUi(self)
         	self.parent = parent
         			
-		# get asset types
+		# get asset and savings types
         	self.getAssetCategories()
+        	self.getSavingsCategories()
 
-		# connect relevant signals and slots
 		#self.connect(self.btnAssetsClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
 		#self.connect(self.listView.selectionModel(), SIGNAL("currentChanged(QModelIndex,QModelIndex)"), self.manageCategories)
+                #signals for managing asset category types
 		self.connect(self.btnCatSave, SIGNAL("clicked()"), self.saveCategoryType)
 		self.connect(self.btnCatDelete, SIGNAL("clicked()"), self.deleteCategoryType)
-		self.connect(self.listView, SIGNAL("clicked(QModelIndex)"), self.getCategories)
+		self.connect(self.categoriesListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedCategory)
 
+		#signals for managing savings types
+		self.connect(self.savingsListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedSaving)
+		self.connect(self.btnCashSave, SIGNAL("clicked()"), self.saveSavingsType)
+		self.connect(self.btnCashDelete, SIGNAL("clicked()"), self.deleteSavingsType)
+		
+	#Begin block of methods for managing Asset Categories 	
 	def getAssetCategories(self):
+                '''Get pre-existing assets categories from database and populate categories list'''
                	# select query to retrieve Asset Categories
         	query = '''SELECT assettype FROM assettypes'''
         	
@@ -51,12 +59,12 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
             		model.setItem( num, 0, qtAssetType )
             		num = num + 1
                         		
-        	self.listView.setModel(model)
-		self.listView.show()
+        	self.categoriesListView.setModel(model)
+		self.categoriesListView.show()
 
-        def getCategories(self,index):
-                #get selected item and populate categories textbox
-                selectedItem = self.listView.model().item(index.row(),0).text()
+        def pickSelectedCategory(self,index):
+                '''get selected item and populate categories textbox'''
+                selectedItem = self.categoriesListView.model().item(index.row(),0).text()
                 self.txtAssetCategories.setText(selectedItem)
                 
         def saveCategoryType(self):
@@ -115,7 +123,98 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
         		#self.cmbKCalories.clear()
 			
 			#refresh categories list
-			self.getCategories()			
+			self.getAssetCategories()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
+        #End block of methods for managing Asset Categories
+
+
+	#Begin block of methods for managing Savings Categories 
+	def getSavingsCategories(self):
+                '''Get pre-existing savings categories from database and populate categories list'''
+               	# select query to retrieve Savings Categories
+        	query = '''SELECT savingscategory FROM savingscategories'''
+        	
+                p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+				
+		model = QStandardItemModel()
+		num = 0
+
+       		for row in recordset:
+			qtSavingType = QStandardItem( "%s" % row[0])
+            		qtSavingType.setTextAlignment( Qt.AlignLeft )
+            		model.setItem( num, 0, qtSavingType )
+            		num = num + 1
+                        		
+        	self.savingsListView.setModel(model)
+		self.savingsListView.show()	
+
+        def pickSelectedSaving(self,index):
+                '''get selected item and populate categories textbox'''
+                selectedItem = self.savingsListView.model().item(index.row(),0).text()
+                self.txtSavingCategories.setText(selectedItem)
+
+        def saveSavingsType(self):
+        	''' Saves newly created data to database '''
+
+        	# get the data entered by user
+        	categorytype = self.txtSavingCategories.text()		
+        	
+		# check if record exists
+		query = '''SELECT savingscategory FROM savingscategories WHERE savingscategory='%s' ''' % (categorytype)    
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+				      	
+		if numrows == 0:
+			
+			query = '''INSERT INTO savingscategories(savingscategory) 
+                     		VALUES('%s')''' % (categorytype)
+		else:
+			query = '''UPDATE savingscategories SET savingscategory='%s'	WHERE assettype='%s' ''' % (categorytype, categorytype)
+    
+        	# execute query and commit changes
+        	temp = GenericDBOP(query)
+                recordset = temp.runUpdateQuery()
+		#refresh categories list
+		#self.getCategories()                
+                
+	def deleteSavingsType(self):
+		''' Deletes record from database '''
+
+        	# get the data entered by user
+        	categorytype = self.txtSavingCategories.text()		
+        	
+		# check if record exists
+		query = '''SELECT savingscategory FROM savingscategories WHERE savingscategory='%s' ''' % (categorytype)    
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+
+		if numrows <> 0:
+			
+			query = '''DELETE FROM savingscategories WHERE savingscategory='%s' ''' % (categorytype)
+
+			# execute query and commit changes
+        		temp = GenericDBOP(query)
+                        recordset = temp.runUpdateQuery()
+
+			
+        		#self.cmbKCalories.clear()
+			
+			#refresh categories list
+			self.getAssetCategories()			
+			
+		else:
+			QMessageBox.information(self, 'Delete Food Type', "Record not found")
+        #End block of methods for managing Savings Categories
+
