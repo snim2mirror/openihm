@@ -2,7 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE SCHEMA IF NOT EXISTS `openihmdb` DEFAULT CHARACTER SET latin1 ;
+CREATE SCHEMA IF NOT EXISTS `openihmdb` ;
 USE `openihmdb`;
 
 -- -----------------------------------------------------
@@ -299,16 +299,228 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`foodenergyvalue`
+-- Table `openihmdb`.`currencies`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `openihmdb`.`foodenergyvalue` ;
+DROP TABLE IF EXISTS `openihmdb`.`currencies` ;
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`foodenergyvalue` (
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`currencies` (
+  `id` INT NOT NULL ,
+  `currencyname` VARCHAR(250) NOT NULL ,
+  `abbreviation` VARCHAR(45) NOT NULL ,
+  `symbol` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`globalhouseholdharacteristics`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`globalhouseholdharacteristics` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`globalhouseholdharacteristics` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `characteristic` VARCHAR(250) NOT NULL ,
+  `datatype` INT NOT NULL ,
+  `description` VARCHAR(250) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`globalpersonalcharacteristics`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`globalpersonalcharacteristics` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`globalpersonalcharacteristics` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `characteristic` VARCHAR(250) NULL DEFAULT NULL ,
+  `datatype` INT NULL DEFAULT NULL ,
+  `description` VARCHAR(250) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`creditandloans`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`creditandloans` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`creditandloans` (
+  `id` INT NOT NULL ,
+  `creditsource` VARCHAR(200) NULL DEFAULT NULL ,
+  `unit` VARCHAR(45) NULL DEFAULT NULL ,
+  `creditvalue` DOUBLE NULL DEFAULT NULL ,
+  `credituse` VARCHAR(200) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`transfers`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`transfers` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`transfers` (
+  `id` INT NOT NULL ,
+  `assistancetype` VARCHAR(200) NOT NULL ,
+  `unitofmeasure` VARCHAR(45) NOT NULL ,
+  `sourcetype` ENUM('Internal','External') NOT NULL ,
+  `foodperdistribution` DOUBLE NULL DEFAULT NULL ,
+  `cashperdistribution` DOUBLE NULL DEFAULT NULL ,
+  `numberoftimesreceived` INT NULL DEFAULT NULL ,
+  `unitsconsumed` DOUBLE NULL DEFAULT NULL ,
+  `cashperyear` DOUBLE NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`employmentincome`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`employmentincome` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`employmentincome` (
+  `id` INT NOT NULL ,
+  `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
+  `foodtypepaid` VARCHAR(200) NULL DEFAULT NULL ,
+  `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
+  `unitspaid` DOUBLE NULL DEFAULT NULL ,
+  `incomekcal` DOUBLE NULL DEFAULT NULL ,
+  `cashincome` DOUBLE NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`livestockincome`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`livestockincome` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`livestockincome` (
+  `id` INT NOT NULL ,
+  `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
+  `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
+  `unitsconsumed` DOUBLE NULL DEFAULT NULL ,
+  `unitssold` DOUBLE NULL DEFAULT NULL ,
+  `unitprice` DOUBLE NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`cropincome`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`cropincome` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`cropincome` (
+  `id` INT NOT NULL ,
+  `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
+  `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
+  `unitsconsumed` DOUBLE NULL DEFAULT NULL ,
+  `unitssold` DOUBLE NULL DEFAULT NULL ,
+  `unitprice` DOUBLE NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_transfers`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_transfers` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_transfers` (
+  `id` INT NOT NULL ,
+  `assistancetype` VARCHAR(200) NOT NULL ,
+  `unitofmeasure` VARCHAR(45) NOT NULL ,
+  `sourcetype` ENUM('Internal','External') NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_crops`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_crops` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_crops` (
   `foodtype` VARCHAR(100) NOT NULL ,
-  `energyvalue` DOUBLE NULL DEFAULT NULL ,
-  `measuringunit` VARCHAR(45) NULL , 
+  `energyvalueperunit` DOUBLE NULL DEFAULT NULL ,
+  `measuringunit` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`foodtype`) )
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_employment`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_employment` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_employment` (
+  `id` INT NOT NULL ,
+  `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_livestock`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_livestock` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_livestock` (
+  `id` INT NOT NULL ,
+  `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
+  `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
+  `energyvalueperunit` DOUBLE NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`tradeablegoods`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`tradeablegoods` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`tradeablegoods` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `type` VARCHAR(200) NOT NULL ,
+  `unitofmeasure` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`wildfoods`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`wildfoods` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`wildfoods` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `incomesource` VARCHAR(200) NULL ,
+  `unitofmeasure` VARCHAR(45) NULL ,
+  `unitsconsumed` DOUBLE NULL ,
+  `unitsold` DOUBLE NULL ,
+  `unitprice` DOUBLE NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_wildfoods`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_wildfoods` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_wildfoods` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `incomesource` VARCHAR(200) NULL ,
+  `unitofmeasure` VARCHAR(45) NULL ,
+  `energyvalueperunit` DOUBLE NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
 -- User `openihm@localhost`

@@ -65,6 +65,8 @@ class FrmNewProject(QtGui.QDialog, Ui_NewProject):
         
         for row in cursor.fetchall():
             projectid = row[0]
+            
+        # create project specific tables (e.g. householdcharacteristics & personalcharacteristics)
          
         # set the newly inserted project as the current project
         self.parent.projectid = projectid
