@@ -462,6 +462,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `openihmdb`.`setup_treetypes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_treetypes` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_treetypes` (
+  `treetype` VARCHAR(100) NOT NULL ,
+  `measuringunit` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`treetype`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `openihmdb`.`setup_employment`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `openihmdb`.`setup_employment` ;
@@ -488,13 +500,26 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`tradeablegoods`
+-- Table `openihmdb`.`setup_landtypes`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `openihmdb`.`tradeablegoods` ;
+DROP TABLE IF EXISTS `openihmdb`.`setup_landtypes` ;
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`tradeablegoods` (
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_landtypes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `landtype` VARCHAR(200) NULL DEFAULT NULL ,
+  `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_tradablegoods`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_tradablegoods` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_tradablegoods` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `type` VARCHAR(200) NOT NULL ,
+  `tradablegoodtype` VARCHAR(200) NOT NULL ,
   `unitofmeasure` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;

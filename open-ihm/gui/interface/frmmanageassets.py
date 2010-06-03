@@ -25,9 +25,13 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
        		self.setupUi(self)
         	self.parent = parent
         			
-		# get asset and savings types
+		# populate tab list controls
         	self.getAssetCategories()
         	self.getSavingsCategories()
+        	self.getFoodTypes()
+        	self.getLandTypes()
+        	self.getTreeTypes()
+        	self.getTradableGoodTypes()
 
 		#self.connect(self.btnAssetsClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
 		#self.connect(self.listView.selectionModel(), SIGNAL("currentChanged(QModelIndex,QModelIndex)"), self.manageCategories)
@@ -40,6 +44,28 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
 		self.connect(self.savingsListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedSaving)
 		self.connect(self.btnCashSave, SIGNAL("clicked()"), self.saveSavingsType)
 		self.connect(self.btnCashDelete, SIGNAL("clicked()"), self.deleteSavingsType)
+
+		#signals for managing food types
+		self.connect(self.foodListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedFoodItem)
+		self.connect(self.btnFoodStockSave, SIGNAL("clicked()"), self.saveFoodStockType)
+		self.connect(self.btnFoodStockDelete, SIGNAL("clicked()"), self.deleteFoodStockType)
+
+		#signals for managing Land types
+		self.connect(self.landListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedLandType)
+		self.connect(self.btnLandSave, SIGNAL("clicked()"), self.saveLandType)
+		self.connect(self.btnLandDelete, SIGNAL("clicked()"), self.deleteLandType)
+
+		#signals for managing Land types
+		self.connect(self.treeListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedTreeType)
+		self.connect(self.btnTreeSave, SIGNAL("clicked()"), self.saveTreeType)
+		self.connect(self.btnTreeDelete, SIGNAL("clicked()"), self.deleteTreeType)
+
+		#signals for managing Tradable Goods types
+		self.connect(self.tradableGoodsListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedTradableGoodType)
+		self.connect(self.btnTGoodSave, SIGNAL("clicked()"), self.saveTradableGoodType)
+		self.connect(self.btnTGoodDelete, SIGNAL("clicked()"), self.deleteTradableGoodType)
+		
+
 		
 	#Begin block of methods for managing Asset Categories 	
 	def getAssetCategories(self):
@@ -183,8 +209,8 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
 		#refresh categories list
-		#self.getCategories()                
-                
+		#self.getCategories()
+                                
 	def deleteSavingsType(self):
 		''' Deletes record from database '''
 
@@ -218,3 +244,414 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
         #End block of methods for managing Savings Categories
 
+        #Begin block of methods for managing Foodstock details 
+	def getFoodTypes(self):
+                '''Get pre-existing savings categories from database and populate categories list'''
+               	# select query to retrieve Food types
+        	query = '''SELECT foodtype FROM setup_crops'''
+        	
+                p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+				
+		model = QStandardItemModel()
+		num = 0
+
+       		for row in recordset:
+			qtFoodType = QStandardItem( "%s" % row[0])
+            		qtFoodType.setTextAlignment( Qt.AlignLeft )
+            		model.setItem( num, 0, qtFoodType )
+            		num = num + 1
+                        		
+        	self.foodListView.setModel(model)
+		self.foodListView.show()	
+
+        def pickSelectedFoodItem(self,index):
+                '''get selected item and populate categories textbox'''
+                
+                selectedFoodItem = self.foodListView.model().item(index.row(),0).text()
+                self.txtFoodStockType.setText(selectedFoodItem)
+                #select query to retrieve food-energy value and measuring unit for selected food item 
+        	query = '''SELECT energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (selectedFoodItem)
+
+        	p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+	      		
+		for row in recordset:
+                        kcalValue = row[0]
+			unitOfMeasure = row[1]
+
+		self.txtEnergyValue.setText(str(kcalValue))
+                self.txtMeasuringUnit.setText(unitOfMeasure)
+
+        def saveFoodStockType(self):
+        	''' Saves newly created data to database '''
+
+        	# get the data entered by user
+        	myfoodtype = self.txtFoodStockType.text()
+        	myenergyvalue = self.txtEnergyValue.text()
+        	unitofmeasure = self.txtMeasuringUnit.text()
+                        	
+		# check if record exists
+		query = '''SELECT energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+				      	
+		if numrows == 0:
+			
+			query = '''INSERT INTO setup_crops(foodtype, energyvalueperunit, measuringunit) 
+                     		VALUES('%s',%s,'%s')''' % (myfoodtype, myenergyvalue, unitofmeasure)
+		else:
+			query = '''UPDATE setup_crops SET foodtype='%s', energyvalueperunit=%s, measuringunit='%s'
+                     		WHERE foodtype='%s' ''' % (myfoodtype, myenergyvalue, unitofmeasure, myfoodtype)
+    
+        	# execute query and commit changes
+        	temp = GenericDBOP(query)
+                recordset = temp.runUpdateQuery()
+		#refresh categories list
+		#self.getCategories()
+                                
+	def deleteFoodStockType(self):
+		''' Deletes record from database '''
+
+        	# get the data entered by user
+        	myfoodtype = self.txtFoodStockType.text()		
+        	
+		# check if record exists
+		query = '''SELECT energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+
+		if numrows <> 0:
+			
+			query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)
+
+			# execute query and commit changes
+        		temp = GenericDBOP(query)
+                        recordset = temp.runUpdateQuery()
+
+			
+        		#self.cmbKCalories.clear()
+			
+			#refresh categories list
+			self.getAssetCategories()			
+			
+		else:
+			QMessageBox.information(self, 'Delete Food Type', "Record not found")
+        #End block of methods for managing Food Stocks
+
+        #Begin block of methods for managing Land details 
+	def getLandTypes(self):
+                '''Get pre-existing land types from database and populate categories list'''
+               	# select query to retrieve Food types
+        	query = '''SELECT landtype FROM setup_landtypes'''
+        	
+                p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+				
+		model = QStandardItemModel()
+		num = 0
+
+       		for row in recordset:
+			qtLandType = QStandardItem( "%s" % row[0])
+            		qtLandType.setTextAlignment( Qt.AlignLeft )
+            		model.setItem( num, 0, qtLandType )
+            		num = num + 1
+                        		
+        	self.landListView.setModel(model)
+		self.landListView.show()	
+
+        def pickSelectedLandType(self,index):
+                '''get selected item and populate categories textbox'''
+                
+                selectedLandType = self.landListView.model().item(index.row(),0).text()
+                self.txtLandType.setText(selectedLandType)
+                #select query to retrieve measuring unit for selected land type
+        	query = '''SELECT unitofmeasure FROM setup_landtypes WHERE landtype='%s' ''' % (selectedLandType)
+
+        	p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+	      		
+		for row in recordset:
+                        unitOfMeasure = row[0]
+
+		self.txtLandMeasuringUnit.setText(unitOfMeasure)
+
+        def saveLandType(self):
+        	''' Saves newly created data to database '''
+
+        	# get the data entered by user
+        	mylandtype = self.txtLandType.text()
+        	myunitofmeasure = self.txtLandMeasuringUnit.text()
+                        	
+		# check if record exists
+		query = '''SELECT landtype, unitofmeasure FROM setup_landtypes WHERE landtype='%s' ''' % (mylandtype)    
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+				      	
+		if numrows == 0:
+			
+			query = '''INSERT INTO setup_landtypes(landtype, unitofmeasure) 
+                     		VALUES('%s','%s')''' % (mylandtype, myunitofmeasure)
+		else:
+			query = '''UPDATE setup_landtypes SET landtype='%s', unitofmeasure='%s'
+                     		WHERE landtype='%s' ''' % (mylandtype, myunitofmeasure, mylandtype)
+    
+        	# execute query and commit changes
+        	temp = GenericDBOP(query)
+                recordset = temp.runUpdateQuery()
+		#refresh categories list
+		#self.getCategories()
+                                
+	def deleteLandType(self):
+		''' Deletes record from database '''
+
+        	# get the data entered by user
+        	mylandtype = self.txtLandType.text()		
+        	
+		# check if record exists
+		query = '''SELECT landtype, unitofmeasure FROM setup_landtypes WHERE landtype='%s' ''' % (mylandtype)
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+
+		if numrows <> 0:
+			
+			query = '''DELETE FROM setup_landtypes WHERE landtype='%s' ''' % (mylandtype)
+
+			# execute query and commit changes
+        		temp = GenericDBOP(query)
+                        recordset = temp.runUpdateQuery()
+
+			
+        		#self.cmbKCalories.clear()
+			
+			#refresh categories list
+			self.getAssetCategories()			
+			
+		else:
+			QMessageBox.information(self, 'Delete Land Type', "Record not found")
+        #End block of methods for managing Land details
+
+
+        #Begin block of methods for managing Tree details 
+	def getTreeTypes(self):
+                '''Get pre-existing tree types from database and populate categories list'''
+               	# select query to retrieve Food types
+        	query = '''SELECT treetype FROM setup_treetypes'''
+        	
+                p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+				
+		model = QStandardItemModel()
+		num = 0
+
+       		for row in recordset:
+			qtTreeType = QStandardItem( "%s" % row[0])
+            		qtTreeType.setTextAlignment( Qt.AlignLeft )
+            		model.setItem( num, 0, qtTreeType )
+            		num = num + 1
+                        		
+        	self.treeListView.setModel(model)
+		self.treeListView.show()	
+
+        def pickSelectedTreeType(self,index):
+                '''get selected item and populate categories textbox'''
+                
+                selectedTreeType = self.treeListView.model().item(index.row(),0).text()
+                self.txtTreeType.setText(selectedTreeType)
+                #select query to retrieve measuring unit for selected tree type
+        	query = '''SELECT measuringunit FROM setup_treetypes WHERE treetype='%s' ''' % (selectedTreeType)
+
+        	p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+	      		
+		for row in recordset:
+                        unitOfMeasure = row[0]
+
+		self.txtTreeMeasuringUnit.setText(unitOfMeasure)
+
+        def saveTreeType(self):
+        	''' Saves newly created data to database '''
+
+        	# get the data entered by user
+        	mytreetype = self.txtTreeType.text()
+        	mymeasuringunit = self.txtTreeMeasuringUnit.text()
+                        	
+		# check if record exists
+		query = '''SELECT treetype, measuringunit FROM setup_treetypes WHERE treetype='%s' ''' % (mytreetype)    
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+				      	
+		if numrows == 0:
+			
+			query = '''INSERT INTO setup_treetypes(treetype, measuringunit) 
+                     		VALUES('%s','%s')''' % (mytreetype, mymeasuringunit)
+		else:
+			query = '''UPDATE setup_treetypes SET treetype='%s', measuringunit='%s'
+                     		WHERE treetype='%s' ''' % (mytreetype, mymeasuringunit, mytreetype)
+    
+        	# execute query and commit changes
+        	temp = GenericDBOP(query)
+                recordset = temp.runUpdateQuery()
+		#refresh categories list
+		#self.getCategories()
+                                
+	def deleteTreeType(self):
+		''' Deletes record from database '''
+
+        	# get the data entered by user
+        	mytreetype = self.txtTreeType.text()		
+        	
+		# check if record exists
+		query = '''SELECT treetype, measuringunit FROM setup_treetypes WHERE treetype='%s' ''' % (mytreetype)
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+
+		if numrows <> 0:
+			
+			query = '''DELETE FROM setup_treetypes WHERE treetype='%s' ''' % (mytreetype)
+
+			# execute query and commit changes
+        		temp = GenericDBOP(query)
+                        recordset = temp.runUpdateQuery()
+
+			
+        		#self.cmbKCalories.clear()
+			
+			#refresh categories list
+			self.getAssetCategories()			
+			
+		else:
+			QMessageBox.information(self, 'Delete Tree Type', "Record not found")
+        #End block of methods for managing Tree details
+
+        #Begin block of methods for managing TradableGood details 
+        def getTradableGoodTypes(self):
+                       
+                '''Get pre-existing tree types from database and populate categories list'''
+                # select query to retrieve Food types
+                query = '''SELECT tradablegoodtype FROM setup_tradablegoods'''
+        	
+                p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+				
+                model = QStandardItemModel()
+                num = 0
+
+                for row in recordset:
+                        qtTradableGoodType = QStandardItem( "%s" % row[0])
+                        qtTradableGoodType.setTextAlignment( Qt.AlignLeft )
+                        model.setItem( num, 0, qtTradableGoodType )
+                        num = num + 1
+                        		
+                self.tradableGoodsListView.setModel(model)
+                self.tradableGoodsListView.show()	
+
+        def pickSelectedTradableGoodType(self,index):
+                '''get selected item and populate categories textbox'''
+                
+                selectedTradableGoodType = self.tradableGoodsListView.model().item(index.row(),0).text()
+                self.txtTradableGoodType.setText(selectedTradableGoodType)
+                #select query to retrieve measuring unit for selected tree type
+                query = '''SELECT unitofmeasure FROM setup_tradablegoods WHERE tradablegoodtype='%s' ''' % (selectedTradableGoodType)
+
+                p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+	      		
+                for row in recordset:
+                    unitOfMeasure = row[0]
+
+                self.txtTradableGoodMeasuringUnit.setText(unitOfMeasure)
+
+        def saveTradableGoodType(self):
+                ''' Saves newly created data to database '''
+
+                # get the data entered by user
+                mytradablegood = self.txtTradableGoodType.text()
+                mymeasuringunit = self.txtTradableGoodMeasuringUnit.text()
+                        	
+                # check if record exists
+                query = '''SELECT tradablegoodtype, unitofmeasure FROM setup_tradablegoods WHERE tradablegoodtype='%s' ''' % (mytradablegood)    
+		
+                p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+
+                numrows = 0		
+                for row in recordset:
+                    numrows = numrows + 1
+				      	
+                if numrows == 0:
+			
+                        query = '''INSERT INTO setup_tradablegoods(tradablegoodtype, unitofmeasure) 
+                     		VALUES('%s','%s')''' % (mytradablegood, mymeasuringunit)
+                else:
+                        query = '''UPDATE setup_tradablegoods SET tradablegoodtype='%s', unitofmeasure='%s'
+                     		WHERE tradablegoodtype='%s' ''' % (mytradablegood, mymeasuringunit, mytradablegood)
+    
+                # execute query and commit changes
+                temp = GenericDBOP(query)
+                recordset = temp.runUpdateQuery()
+                #refresh categories list
+                #self.getCategories()
+                                
+        def deleteTradableGoodType(self):
+                ''' Deletes record from database '''
+
+                # get the data entered by user
+                mytradablegood = self.txtTradableGoodType.text()		
+        	
+                # check if record exists
+                query = '''SELECT tradablegoodtype, unitofmeasure FROM setup_tradablegoods WHERE tradablegoodtype='%s' ''' % (mytradablegood)
+		
+                p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+                numrows = 0		
+                for row in recordset:
+                        numrows = numrows + 1
+
+                if numrows <> 0:
+			
+                        query = '''DELETE FROM setup_tradablegoods WHERE tradablegoodtype='%s' ''' % (mytradablegood)
+
+                        # execute query and commit changes
+                        temp = GenericDBOP(query)
+                        recordset = temp.runUpdateQuery()
+
+			
+                        #self.cmbKCalories.clear()
+			
+                        #refresh categories list
+                        self.getAssetCategories()			
+			
+                else:
+                        QMessageBox.information(self, 'Delete TradableGood Type', "Record not found")
+                #End block of methods for managing TradableGood details
+
+
+    

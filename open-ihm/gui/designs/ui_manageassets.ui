@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="tabCashSavings">
     <attribute name="title">
@@ -131,17 +131,7 @@
     <attribute name="title">
      <string>Food Stock</string>
     </attribute>
-    <widget class="QListWidget" name="listWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>60</y>
-       <width>241</width>
-       <height>241</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_2">
+    <widget class="QLineEdit" name="txtFoodStockType">
      <property name="geometry">
       <rect>
        <x>352</x>
@@ -151,7 +141,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_3">
+    <widget class="QLineEdit" name="txtEnergyValue">
      <property name="geometry">
       <rect>
        <x>350</x>
@@ -239,12 +229,45 @@
       <string>Add/ Edit Food Stock Details</string>
      </property>
     </widget>
+    <widget class="QLineEdit" name="txtMeasuringUnit">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>160</y>
+       <width>201</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>170</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Unit of Measure</string>
+     </property>
+    </widget>
+    <widget class="QListView" name="foodListView">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>241</width>
+       <height>201</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tabLand">
     <attribute name="title">
      <string>Land</string>
     </attribute>
-    <widget class="QLineEdit" name="lineEdit_5">
+    <widget class="QLineEdit" name="txtLandType">
      <property name="geometry">
       <rect>
        <x>352</x>
@@ -293,17 +316,7 @@
       <string>Unit of Measure</string>
      </property>
     </widget>
-    <widget class="QListWidget" name="listWidget_3">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>60</y>
-       <width>241</width>
-       <height>241</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_6">
+    <widget class="QLineEdit" name="txtLandMeasuringUnit">
      <property name="geometry">
       <rect>
        <x>350</x>
@@ -352,6 +365,16 @@
       <string>Select Land Type</string>
      </property>
     </widget>
+    <widget class="QListView" name="landListView">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>50</y>
+       <width>241</width>
+       <height>201</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tabTrees">
     <attribute name="title">
@@ -370,7 +393,7 @@
       <string>Type</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="btTreeDelete">
+    <widget class="QPushButton" name="btnTreeDelete">
      <property name="geometry">
       <rect>
        <x>460</x>
@@ -383,7 +406,7 @@
       <string>Delete</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit_8">
+    <widget class="QLineEdit" name="txtTreeType">
      <property name="geometry">
       <rect>
        <x>352</x>
@@ -406,17 +429,7 @@
       <string>Add/ Edit Tree Details</string>
      </property>
     </widget>
-    <widget class="QListWidget" name="listWidget_4">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>60</y>
-       <width>241</width>
-       <height>241</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="lineEdit_10">
+    <widget class="QLineEdit" name="txtTreeMeasuringUnit">
      <property name="geometry">
       <rect>
        <x>350</x>
@@ -465,6 +478,16 @@
       <string>Save</string>
      </property>
     </widget>
+    <widget class="QListView" name="treeListView">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>50</y>
+       <width>241</width>
+       <height>201</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tabOtherTradableGoods">
     <attribute name="title">
@@ -496,7 +519,7 @@
       <string>Delete</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="txtTGoodType">
+    <widget class="QLineEdit" name="txtTradableGoodType">
      <property name="geometry">
       <rect>
        <x>352</x>
@@ -519,7 +542,7 @@
       <string>Add/ Edit Good Details</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="txtTGoodMUnit">
+    <widget class="QLineEdit" name="txtTradableGoodMeasuringUnit">
      <property name="geometry">
       <rect>
        <x>350</x>
@@ -568,13 +591,13 @@
       <string>Save</string>
      </property>
     </widget>
-    <widget class="QListView" name="listView_2">
+    <widget class="QListView" name="tradableGoodsListView">
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>60</y>
-       <width>241</width>
-       <height>231</height>
+       <y>50</y>
+       <width>251</width>
+       <height>192</height>
       </rect>
      </property>
     </widget>
