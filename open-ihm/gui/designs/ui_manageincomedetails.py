@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageincomedetails.ui'
 #
-# Created: Thu Jun 03 08:02:03 2010
+# Created: Thu Jun 03 09:52:03 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -176,7 +176,7 @@ class Ui_ManageIncome(object):
         self.btnManageIncomeClose.setObjectName("btnManageIncomeClose")
 
         self.retranslateUi(ManageIncome)
-        self.tabWidget.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(1)
         QtCore.QMetaObject.connectSlotsByName(ManageIncome)
 
     def retranslateUi(self, ManageIncome):
