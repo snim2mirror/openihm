@@ -24,7 +24,7 @@ class FrmManageFoodTypes(Ui_FoodTypes):
 	
 	def getFoodTypes(self):
                	# select query to retrieve Food Types and related information
-        	query = '''SELECT foodtype FROM foodenergyvalue'''
+        	query = '''SELECT foodtype FROM setup_crops'''
 
         	p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
@@ -44,7 +44,7 @@ class FrmManageFoodTypes(Ui_FoodTypes):
 		self.cmbUnitOfMeasure.clear()
 
         	# select query to retrieve Food Types and related information
-        	query = '''SELECT foodtype, energyvalue, measuringunit FROM foodenergyvalue WHERE foodtype ='%s' ''' % (foodtype)
+        	query = '''SELECT foodtype, energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype ='%s' ''' % (foodtype)
         	p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
        		
@@ -65,8 +65,8 @@ class FrmManageFoodTypes(Ui_FoodTypes):
         	myenergyvalue  = self.cmbKCalories.currentText()
         	
 		# check if record exists
-		query = '''SELECT foodtype, energyvalue, measuringunit
-				FROM foodenergyvalue WHERE foodtype='%s' ''' % (myfoodtype)    
+		query = '''SELECT foodtype, energyvalueperunit, measuringunit
+				FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
@@ -77,10 +77,10 @@ class FrmManageFoodTypes(Ui_FoodTypes):
 				      	
 		if numrows == 0:
 			
-			query = '''INSERT INTO foodenergyvalue(foodtype, energyvalue, measuringunit) 
+			query = '''INSERT INTO setup_crops(foodtype, energyvalueperunit, measuringunit) 
                      		VALUES('%s',%s,'%s')''' % (myfoodtype, myenergyvalue, mymeasuringunit)
 		else:
-			query = '''UPDATE foodenergyvalue SET foodtype='%s', energyvalue=%s, measuringunit='%s'
+			query = '''UPDATE setup_crops SET foodtype='%s', energyvalueperunit=%s, measuringunit='%s'
                      		WHERE foodtype='%s' ''' % (myfoodtype, myenergyvalue, mymeasuringunit, myfoodtype)
     
         	# execute query and commit changes
@@ -95,7 +95,7 @@ class FrmManageFoodTypes(Ui_FoodTypes):
 
 		#check if record exists
 		query = '''SELECT foodtype, energyvalue, measuringunit
-				FROM foodenergyvalue WHERE foodtype='%s' ''' % (myfoodtype)  
+				FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)  
 
       		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
@@ -105,7 +105,7 @@ class FrmManageFoodTypes(Ui_FoodTypes):
 
 		if numrows <> 0:
 			
-			query = '''DELETE FROM foodenergyvalue WHERE foodtype='%s' ''' % (myfoodtype)
+			query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)
 
 			# execute query and commit changes
         		temp = GenericDBOP(query)
