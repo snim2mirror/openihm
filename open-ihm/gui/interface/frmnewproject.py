@@ -37,46 +37,82 @@ class FrmNewProject(QtGui.QDialog, Ui_NewProject):
         self.connect(self.cmdSave, QtCore.SIGNAL("clicked()"), self.saveProject)
         
     def saveProject(self):
-        ''' Saves newly created data to database '''
-        
-        # connect to mysql database
-        db = data.mysql.connector.Connect(**self.config)
-        cursor = db.cursor()
-        
-        # get the data entered by user
-        projectname = self.txtProjectName.text()
-        startdate     = self.dtpStartDate.date().toString("yyyy-MM-dd")
-        enddate       = self.dtpEndDate.date().toString("yyyy-MM-dd")
-        description   = self.txtDescription.toPlainText()
-        currency      = self.cmbCurrency.currentText()
-        
-        # create INSERT INTO query
-        query = '''INSERT INTO projects(projectname,startdate,enddate,description,currency) 
-                     VALUES('%s','%s', '%s', '%s', '%s')''' % (projectname, startdate, enddate, description, currency)
-    
-        # execute query and commit changes
-        cursor.execute(query)
-        db.commit()
-        
-        # get the ID of the newly inserted project
-        query = "SELECT LAST_INSERT_ID()"
-        
-        cursor.execute(query)
-        
-        for row in cursor.fetchall():
-            projectid = row[0]
-            
-        # create project specific tables (e.g. householdcharacteristics & personalcharacteristics)
-         
-        # set the newly inserted project as the current project
-        self.parent.projectid = projectid
-        self.parent.projectname = projectname
-        self.parent.setWindowTitle("Open IHM - " + projectname)
-        self.parent.actionClose_Project.setDisabled(False)
-        
-        # close database connection
-        cursor.close()
-        db.close()
-        
-        # close new project window
-        self.parent.mdi.closeActiveSubWindow()
+		''' Saves newly created data to database '''
+		
+		# connect to mysql database
+		db = data.mysql.connector.Connect(**self.config)
+		cursor = db.cursor()
+		
+		# get the data entered by user
+		projectname = self.txtProjectName.text()
+		startdate     = self.dtpStartDate.date().toString("yyyy-MM-dd")
+		enddate       = self.dtpEndDate.date().toString("yyyy-MM-dd")
+		description   = self.txtDescription.toPlainText()
+		currency      = self.cmbCurrency.currentText()
+		
+		# create INSERT INTO query
+		query = '''INSERT INTO projects(projectname,startdate,enddate,description,currency) 
+		             VALUES('%s','%s', '%s', '%s', '%s')''' % (projectname, startdate, enddate, description, currency)
+		
+		# execute query and commit changes
+		cursor.execute(query)
+		db.commit()
+		
+		# get the ID of the newly inserted project
+		query = "SELECT LAST_INSERT_ID()"
+		
+		cursor.execute(query)
+		
+		for row in cursor.fetchall():
+		    projectid = row[0]
+		    
+		# create project specific tables (e.g. householdcharacteristics & personalcharacteristics)
+		
+		HouseholdCharacteristicsTableName 	= '''p%iHouseholdCharacteristics''' % (projectid)
+		PersonalCharactericticsTableName	= '''p%iPersonalCharacteristics''' % (projectid)
+		
+		queryDrop = '''DROP TABLE IF EXISTS `openihmdb`.`%s` ;''' % (HouseholdCharacteristicsTableName)
+		queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` 
+						(
+							`hhid` INT NOT NULL ,
+							PRIMARY KEY (`hhid`) ,
+							INDEX `fk_p%i_householdcharacteristics_households` (`hhid` ASC) ,
+							CONSTRAINT `fk_p%i_householdcharacteristics_households`
+							FOREIGN KEY (`hhid` )
+							REFERENCES `openihmdb`.`households` (`hhid` )
+							ON DELETE CASCADE
+							ON UPDATE CASCADE)
+						ENGINE = InnoDB;''' % (HouseholdCharacteristicsTableName, projectid, projectid)
+						
+		cursor.execute(queryDrop)
+		cursor.execute(queryCreate)
+		
+		queryDrop = '''DROP TABLE IF EXISTS `openihmdb`.`%s` ;''' % (PersonalCharactericticsTableName)
+		
+		queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` (
+						  `hhid` INT NOT NULL ,
+						  `personid` VARCHAR(20) NOT NULL ,
+						  PRIMARY KEY (`personid`, `hhid`) ,
+						  INDEX `fk_p%i_personalcharacteristics_householdmembers` (`personid` ASC, `hhid` ASC) ,
+						  CONSTRAINT `fk_p%i_personalcharacteristics_householdmembers`
+						    FOREIGN KEY (`personid` , `hhid` )
+						    REFERENCES `openihmdb`.`householdmembers` (`personid` , `hhid` )
+						    ON DELETE CASCADE
+						    ON UPDATE CASCADE)
+						ENGINE = InnoDB;''' % (PersonalCharactericticsTableName, projectid, projectid)
+		
+		cursor.execute(queryDrop)
+		cursor.execute(queryCreate)
+		
+		# set the newly inserted project as the current project
+		self.parent.projectid = projectid
+		self.parent.projectname = projectname
+		self.parent.setWindowTitle("Open IHM - " + projectname)
+		self.parent.actionClose_Project.setDisabled(False)
+		
+		# close database connection
+		cursor.close()
+		db.close()
+		
+		# close new project window
+		self.parent.mdi.closeActiveSubWindow()

@@ -41,9 +41,9 @@
   <widget class="QLabel" name="lblProjectName">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>100</x>
      <y>10</y>
-     <width>71</width>
+     <width>431</width>
      <height>16</height>
     </rect>
    </property>
@@ -61,111 +61,8 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
-   <widget class="QWidget" name="tabProjectPersonalCharacteristics">
-    <attribute name="title">
-     <string>Personal Characteristics</string>
-    </attribute>
-    <widget class="QListView" name="lstPersonalAvailableChars">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>261</width>
-       <height>361</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QListView" name="lstPersonalSelectedChars">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>30</y>
-       <width>261</width>
-       <height>361</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdPersonalMoveAll">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>130</y>
-       <width>81</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>&gt;&gt;</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdPersonalRemoveAll">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>170</y>
-       <width>81</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>&lt;&lt;</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdPersonalMoveSelected">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>210</y>
-       <width>81</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>&gt;</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdPersonalRemoveSelected">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>250</y>
-       <width>81</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>&lt;</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>10</y>
-       <width>171</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Available Personal Characteristics</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_4">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>10</y>
-       <width>211</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Selected Personal Characteristics</string>
-     </property>
-    </widget>
-   </widget>
    <widget class="QWidget" name="tabProjectHouseholdCharacteristics">
     <attribute name="title">
      <string>Household Characteristics</string>
@@ -209,26 +106,6 @@
       <string>Available Household Characteristics</string>
      </property>
     </widget>
-    <widget class="QListView" name="lstHouseholdAvailableChars">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>261</width>
-       <height>361</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QListView" name="lstHouseholdSelectedChars">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>30</y>
-       <width>261</width>
-       <height>361</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="cmdHouseholdMoveAll">
      <property name="geometry">
       <rect>
@@ -266,6 +143,129 @@
      </property>
      <property name="text">
       <string>Selected Household Characteristics</string>
+     </property>
+    </widget>
+    <widget class="QListView" name="lstHouseholdAvailableChars">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>261</width>
+       <height>361</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QListView" name="lstHouseholdSelectedChars">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>30</y>
+       <width>261</width>
+       <height>361</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabProjectPersonalCharacteristics">
+    <attribute name="title">
+     <string>Personal Characteristics</string>
+    </attribute>
+    <widget class="QPushButton" name="cmdPersonalRemoveSelected">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>250</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>10</y>
+       <width>211</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Selected Personal Characteristics</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdPersonalMoveSelected">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>210</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&gt;</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdPersonalMoveAll">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>130</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&gt;&gt;</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Available Personal Characteristics</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdPersonalRemoveAll">
+     <property name="geometry">
+      <rect>
+       <x>280</x>
+       <y>170</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;&lt;</string>
+     </property>
+    </widget>
+    <widget class="QListView" name="lstPersonalAvailableChars">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>261</width>
+       <height>361</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QListView" name="lstPersonalSelectedChars">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>30</y>
+       <width>261</width>
+       <height>361</height>
+      </rect>
      </property>
     </widget>
    </widget>

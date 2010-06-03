@@ -6,18 +6,6 @@ CREATE SCHEMA IF NOT EXISTS `openihmdb` ;
 USE `openihmdb`;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`interviewers`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `openihmdb`.`interviewers` ;
-
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`interviewers` (
-  `id` VARCHAR(45) NOT NULL ,
-  `name` VARCHAR(100) NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `openihmdb`.`projects`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `openihmdb`.`projects` ;
@@ -51,57 +39,6 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`households` (
   CONSTRAINT `fk_household_projects`
     FOREIGN KEY (`pid` )
     REFERENCES `openihmdb`.`projects` (`pid` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `openihmdb`.`householdinterviews`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `openihmdb`.`householdinterviews` ;
-
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`householdinterviews` (
-  `hhid` INT NOT NULL ,
-  `id` VARCHAR(45) NOT NULL ,
-  `notesonhousehold` INT NOT NULL ,
-  PRIMARY KEY (`hhid`, `id`) ,
-  INDEX `fk_householdinterviews_households1` (`hhid` ASC) ,
-  INDEX `fk_householdinterviews_interviewers1` (`id` ASC) ,
-  CONSTRAINT `fk_householdinterviews_households1`
-    FOREIGN KEY (`hhid` )
-    REFERENCES `openihmdb`.`households` (`hhid` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_householdinterviews_interviewers1`
-    FOREIGN KEY (`id` )
-    REFERENCES `openihmdb`.`interviewers` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `openihmdb`.`income`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `openihmdb`.`income` ;
-
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`income` (
-  `hhid` INT NOT NULL ,
-  `incomeid` INT NOT NULL ,
-  `incometype` VARCHAR(45) NOT NULL ,
-  `category` VARCHAR(45) NOT NULL ,
-  `unitofmeasure` VARCHAR(45) NOT NULL ,
-  `priceperunit` DOUBLE NULL DEFAULT NULL ,
-  `kcalperunit` DOUBLE NULL DEFAULT NULL ,
-  `unitsproduced` DOUBLE NOT NULL ,
-  `unitsconsumed` DOUBLE NULL DEFAULT NULL ,
-  `unitssold` DOUBLE NULL DEFAULT NULL ,
-  PRIMARY KEY (`incomeid`, `hhid`) ,
-  INDEX `fk_income_households1` (`hhid` ASC) ,
-  CONSTRAINT `fk_income_households1`
-    FOREIGN KEY (`hhid` )
-    REFERENCES `openihmdb`.`households` (`hhid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -175,44 +112,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`personalcharacteristics`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `openihmdb`.`personalcharacteristics` ;
-
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`personalcharacteristics` (
-  `hhid` INT NOT NULL ,
-  `personid` VARCHAR(20) NOT NULL ,
-  `height` DOUBLE NOT NULL ,
-  `weight` DOUBLE NOT NULL ,
-  PRIMARY KEY (`personid`, `hhid`) ,
-  INDEX `fk_personalcharacteristics_householdmembers1` (`personid` ASC, `hhid` ASC) ,
-  CONSTRAINT `fk_personalcharacteristics_householdmembers1`
-    FOREIGN KEY (`personid` , `hhid` )
-    REFERENCES `openihmdb`.`householdmembers` (`personid` , `hhid` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `openihmdb`.`householdcharacteristics`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `openihmdb`.`householdcharacteristics` ;
-
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`householdcharacteristics` (
-  `hhid` INT NOT NULL ,
-  `childheaded` TINYINT(1) NOT NULL ,
-  PRIMARY KEY (`hhid`) ,
-  INDEX `fk_householdcharacteristics_households1` (`hhid` ASC) ,
-  CONSTRAINT `fk_householdcharacteristics_households1`
-    FOREIGN KEY (`hhid` )
-    REFERENCES `openihmdb`.`households` (`hhid` )
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `openihmdb`.`absencefromhousehold`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `openihmdb`.`absencefromhousehold` ;
@@ -231,29 +130,6 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`absencefromhousehold` (
     REFERENCES `openihmdb`.`householdmembers` (`personid` , `hhid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `openihmdb`.`incomeseasonality`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `openihmdb`.`incomeseasonality` ;
-
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`incomeseasonality` (
-  `incometype` VARCHAR(45) NOT NULL ,
-  `jan` DOUBLE NOT NULL ,
-  `feb` DOUBLE NOT NULL ,
-  `mar` DOUBLE NOT NULL ,
-  `apr` DOUBLE NOT NULL ,
-  `may` DOUBLE NOT NULL ,
-  `jun` DOUBLE NOT NULL ,
-  `jul` DOUBLE NOT NULL ,
-  `aug` DOUBLE NOT NULL ,
-  `sep` DOUBLE NOT NULL ,
-  `oct` DOUBLE NOT NULL ,
-  `nov` DOUBLE NOT NULL ,
-  `dec` DOUBLE NOT NULL ,
-  PRIMARY KEY (`incometype`) )
 ENGINE = InnoDB;
 
 
@@ -324,11 +200,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`globalhouseholdharacteristics`
+-- Table `openihmdb`.`globalhouseholdcharacteristics`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `openihmdb`.`globalhouseholdharacteristics` ;
+DROP TABLE IF EXISTS `openihmdb`.`globalhouseholdcharacteristics` ;
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`globalhouseholdharacteristics` (
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`globalhouseholdcharacteristics` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `characteristic` VARCHAR(250) NOT NULL ,
   `datatype` INT NOT NULL ,
@@ -373,6 +249,7 @@ DROP TABLE IF EXISTS `openihmdb`.`transfers` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`transfers` (
   `id` INT NOT NULL ,
+  `hhid` INT NOT NULL ,
   `assistancetype` VARCHAR(200) NOT NULL ,
   `unitofmeasure` VARCHAR(45) NOT NULL ,
   `sourcetype` ENUM('Internal','External') NOT NULL ,
@@ -381,7 +258,13 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`transfers` (
   `numberoftimesreceived` INT NULL DEFAULT NULL ,
   `unitsconsumed` DOUBLE NULL DEFAULT NULL ,
   `cashperyear` DOUBLE NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`id`, `hhid`) ,
+  INDEX `fk_transfers_households1` (`hhid` ASC) ,
+  CONSTRAINT `fk_transfers_households1`
+    FOREIGN KEY (`hhid` )
+    REFERENCES `openihmdb`.`households` (`hhid` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -392,13 +275,20 @@ DROP TABLE IF EXISTS `openihmdb`.`employmentincome` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`employmentincome` (
   `id` INT NOT NULL ,
+  `hhid` INT NOT NULL ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
   `foodtypepaid` VARCHAR(200) NULL DEFAULT NULL ,
   `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
   `unitspaid` DOUBLE NULL DEFAULT NULL ,
   `incomekcal` DOUBLE NULL DEFAULT NULL ,
   `cashincome` DOUBLE NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`id`, `hhid`) ,
+  INDEX `fk_employmentincome_households1` (`hhid` ASC) ,
+  CONSTRAINT `fk_employmentincome_households1`
+    FOREIGN KEY (`hhid` )
+    REFERENCES `openihmdb`.`households` (`hhid` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -409,12 +299,19 @@ DROP TABLE IF EXISTS `openihmdb`.`livestockincome` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`livestockincome` (
   `id` INT NOT NULL ,
+  `hhid` INT NOT NULL ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
   `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
   `unitsconsumed` DOUBLE NULL DEFAULT NULL ,
   `unitssold` DOUBLE NULL DEFAULT NULL ,
   `unitprice` DOUBLE NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`id`, `hhid`) ,
+  INDEX `fk_livestockincome_households1` (`hhid` ASC) ,
+  CONSTRAINT `fk_livestockincome_households1`
+    FOREIGN KEY (`hhid` )
+    REFERENCES `openihmdb`.`households` (`hhid` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -425,12 +322,19 @@ DROP TABLE IF EXISTS `openihmdb`.`cropincome` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`cropincome` (
   `id` INT NOT NULL ,
+  `hhid` INT NOT NULL ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
   `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
   `unitsconsumed` DOUBLE NULL DEFAULT NULL ,
   `unitssold` DOUBLE NULL DEFAULT NULL ,
   `unitprice` DOUBLE NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`id`, `hhid`) ,
+  INDEX `fk_cropincome_households1` (`hhid` ASC) ,
+  CONSTRAINT `fk_cropincome_households1`
+    FOREIGN KEY (`hhid` )
+    REFERENCES `openihmdb`.`households` (`hhid` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -531,12 +435,19 @@ DROP TABLE IF EXISTS `openihmdb`.`wildfoods` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`wildfoods` (
   `id` INT NOT NULL AUTO_INCREMENT ,
+  `hhid` INT NOT NULL ,
   `incomesource` VARCHAR(200) NULL ,
   `unitofmeasure` VARCHAR(45) NULL ,
   `unitsconsumed` DOUBLE NULL ,
   `unitsold` DOUBLE NULL ,
   `unitprice` DOUBLE NULL ,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`id`, `hhid`) ,
+  INDEX `fk_wildfoods_households1` (`hhid` ASC) ,
+  CONSTRAINT `fk_wildfoods_households1`
+    FOREIGN KEY (`hhid` )
+    REFERENCES `openihmdb`.`households` (`hhid` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -550,6 +461,29 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_wildfoods` (
   `energyvalueperunit` DOUBLE NULL ,
   `unitofmeasure` VARCHAR(45) NULL ,
   PRIMARY KEY (`incomesource`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`incomeseasonality`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`incomeseasonality` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`incomeseasonality` (
+  `incometype` VARCHAR(45) NOT NULL ,
+  `jan` DOUBLE NOT NULL ,
+  `feb` DOUBLE NOT NULL ,
+  `mar` DOUBLE NOT NULL ,
+  `apr` DOUBLE NOT NULL ,
+  `may` DOUBLE NOT NULL ,
+  `jun` DOUBLE NOT NULL ,
+  `jul` DOUBLE NOT NULL ,
+  `aug` DOUBLE NOT NULL ,
+  `sep` DOUBLE NOT NULL ,
+  `oct` DOUBLE NOT NULL ,
+  `nov` DOUBLE NOT NULL ,
+  `dec` DOUBLE NOT NULL ,
+  PRIMARY KEY (`incometype`) )
 ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;

@@ -124,10 +124,14 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    
 	def configureProject(self):
 	    ''' Creates and Shows the Configure Project form '''
-	    form = FrmConfigureProject(self.mdi)
-	    subWin = self.mdi.addSubWindow(form)
-	    self.centerSubWindow(subWin)
-	    form.show()
+	    if self.projectid == -1:
+			msg = "No project is active. First create a new project or open an existing project."
+			QtGui.QMessageBox.information(self,"Notice",msg)
+	    else:
+	        form = FrmConfigureProject(self)
+	        subWin = self.mdi.addSubWindow(form)
+	        self.centerSubWindow(subWin)
+	        form.show()
 	    
 	def addHousehold(self):
 	    ''' Creates and Shows the Add House Hold form '''
