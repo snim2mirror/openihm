@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>PersonalCharacteristics</class>
- <widget class="QDialog" name="PersonalCharacteristics" >
-  <property name="geometry" >
+ <widget class="QDialog" name="PersonalCharacteristics">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,17 +10,17 @@
     <height>206</height>
    </rect>
   </property>
-  <property name="minimumSize" >
+  <property name="minimumSize">
    <size>
     <width>341</width>
     <height>206</height>
    </size>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Personal Characteristics</string>
   </property>
-  <widget class="QPushButton" name="btnPCharsClose" >
-   <property name="geometry" >
+  <widget class="QPushButton" name="btnPCharsClose">
+   <property name="geometry">
     <rect>
      <x>250</x>
      <y>170</y>
@@ -27,12 +28,12 @@
      <height>28</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Close</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2" >
-   <property name="geometry" >
+  <widget class="QPushButton" name="btnCharacteristicDelete">
+   <property name="geometry">
     <rect>
      <x>150</x>
      <y>170</y>
@@ -40,12 +41,12 @@
      <height>28</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Delete</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3" >
-   <property name="geometry" >
+  <widget class="QPushButton" name="btnCharacteristicSave">
+   <property name="geometry">
     <rect>
      <x>50</x>
      <y>170</y>
@@ -53,12 +54,12 @@
      <height>28</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Save</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox" >
-   <property name="geometry" >
+  <widget class="QComboBox" name="cmbCharacteristic">
+   <property name="geometry">
     <rect>
      <x>90</x>
      <y>20</y>
@@ -66,9 +67,12 @@
      <height>27</height>
     </rect>
    </property>
+   <property name="editable">
+    <bool>true</bool>
+   </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_2" >
-   <property name="geometry" >
+  <widget class="QComboBox" name="cmbDataType">
+   <property name="geometry">
     <rect>
      <x>90</x>
      <y>70</y>
@@ -77,8 +81,8 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>20</y>
@@ -86,12 +90,12 @@
      <height>18</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Name</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>80</y>
@@ -99,12 +103,12 @@
      <height>18</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Data Type</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>120</y>
@@ -112,12 +116,12 @@
      <height>18</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Description</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit" >
-   <property name="geometry" >
+  <widget class="QLineEdit" name="txtDescription">
+   <property name="geometry">
     <rect>
      <x>90</x>
      <y>120</y>
