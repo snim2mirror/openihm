@@ -16,7 +16,7 @@ class FrmPersonalCharacteristics(Ui_PersonalCharacteristics):
 	def setupUi(self,Form,Mdi):
 		Ui_PersonalCharacteristics.setupUi(self,Form)
 
-		# get food type
+		# get personal type
         	self.getPersonalCharacteristics()
 		
 		QtCore.QObject.connect(self.btnCharacteristicSave, QtCore.SIGNAL("clicked()"), self.savePersonalCharacteristic)
@@ -39,6 +39,9 @@ class FrmPersonalCharacteristics(Ui_PersonalCharacteristics):
 		self.cmbDataType.addItem('boolean/Yes/No')
 		self.cmbDataType.addItem('Integer')
 		self.cmbDataType.addItem('String')
+		self.cmbDataType.setCurrentIndex(-1)
+		self.cmbCharacteristic.setCurrentIndex(-1)
+		
 			
 	def populateForm(self):
 		'''
@@ -53,6 +56,8 @@ class FrmPersonalCharacteristics(Ui_PersonalCharacteristics):
         	query = '''SELECT characteristic, datatype, description FROM globalpersonalcharacteristics WHERE characteristic ='%s' ''' % (mycharacteristic)
         	p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
+                formdatatype = 0
+                description = ''
        		
 		for row in recordset:
 			formdatatype = row[1]
@@ -110,6 +115,8 @@ class FrmPersonalCharacteristics(Ui_PersonalCharacteristics):
         	# execute query and commit changes
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
+		#populate Food Types Combobox
+		self.getPersonalCharacteristics()                
 
 	def deletePersonalCharacteristic(self):
 		''' Deletes record from database '''
@@ -137,11 +144,11 @@ class FrmPersonalCharacteristics(Ui_PersonalCharacteristics):
 
 			self.cmbCharacteristic.clear()
 			self.cmbDataType.clear()
-        		self.cmbKCalories.clear()
+        		self.txtDescription.clear()
 			
 			#populate Food Types Combobox
 			self.getPersonalCharacteristics()			
 			
 		else:
-			QMessageBox.information(self, 'Delete Food Type', "Record not found")
+			QMessageBox.information(self, 'Delete Personal characteristic', "Record not found")
 
