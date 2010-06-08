@@ -33,7 +33,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
         	self.getTreeTypes()
         	self.getTradableGoodTypes()
 
-		#self.connect(self.btnAssetsClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
+		self.connect(self.btnAssetsClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
 		#self.connect(self.listView.selectionModel(), SIGNAL("currentChanged(QModelIndex,QModelIndex)"), self.manageCategories)
                 #signals for managing asset category types
 		self.connect(self.btnCatSave, SIGNAL("clicked()"), self.saveCategoryType)

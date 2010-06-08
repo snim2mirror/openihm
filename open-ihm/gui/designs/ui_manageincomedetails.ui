@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="tabIncomeCrops">
     <attribute name="title">
@@ -403,77 +403,185 @@
     <attribute name="title">
      <string>Transfers</string>
     </attribute>
-    <widget class="QLabel" name="label_31">
+    <widget class="QTabWidget" name="tabTransferDetails">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>10</y>
-       <width>221</width>
-       <height>18</height>
+       <width>601</width>
+       <height>301</height>
       </rect>
      </property>
-     <property name="text">
-      <string>Select Transfer Source</string>
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-    </widget>
-    <widget class="QLabel" name="label_32">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>10</y>
-       <width>271</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add/ Edit Transfer Source</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnTransferSave">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>120</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnTransferDelete">
-     <property name="geometry">
-      <rect>
-       <x>480</x>
-       <y>120</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtTransferSource">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>40</y>
-       <width>281</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QListView" name="transfersListView">
-     <property name="geometry">
-      <rect>
-       <x>5</x>
-       <y>40</y>
-       <width>251</width>
-       <height>192</height>
-      </rect>
-     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Assistance Type</string>
+      </attribute>
+      <widget class="QLabel" name="label_32">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>10</y>
+         <width>271</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add/ Edit Transfer Type</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="transferTypesListView">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>40</y>
+         <width>251</width>
+         <height>192</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnTransferTypeDelete">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>140</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_31">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>221</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Select Transfer Type</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnTransferTypeSave">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>140</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtTransferType">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>40</y>
+         <width>281</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtTransferUnitofMeasure">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>90</y>
+         <width>281</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Assistance Source(External or Internal?)</string>
+      </attribute>
+      <widget class="QLabel" name="label_35">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>10</y>
+         <width>271</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add/ Edit Transfer Source</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="transferSourcesListView">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>40</y>
+         <width>251</width>
+         <height>192</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnTransferSourcesDelete">
+       <property name="geometry">
+        <rect>
+         <x>480</x>
+         <y>120</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_36">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>221</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Select Transfer Source</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnTransferSourcesSave">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>120</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtTransferSources">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>40</y>
+         <width>281</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>Transfer Source should be 'Internal' or 'External'</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_2">

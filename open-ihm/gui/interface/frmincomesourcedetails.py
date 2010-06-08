@@ -28,9 +28,11 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		self.getEmploymentCategories()
 		self.getWildFoodTypes()
 		self.getLivestockTypes()
+		self.getTransferSourceCategories()
+		self.getTransferTypes()
 
 		# connect relevant signals and slots
-		#self.connect(self.btnManageIncomeClose, SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
+		self.connect(self.btnManageIncomeClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
 		#signals for managing food types
 		self.connect(self.cropListView, SIGNAL("clicked(QModelIndex)"), self.pickselectedCropItem)
 		self.connect(self.btnCropSave, SIGNAL("clicked()"), self.saveCropType)
@@ -51,7 +53,15 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		self.connect(self.btnLivestockSave, SIGNAL("clicked()"), self.saveLivestockType)
 		self.connect(self.btnLivestockDelete, SIGNAL("clicked()"), self.deleteLivestockType)
 
+		#signals for managing trasfer Sources
+		self.connect(self.transferSourcesListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedTransferSource)
+		self.connect(self.btnTransferSourcesSave, SIGNAL("clicked()"), self.saveTransferSourceType)
+		self.connect(self.btnTransferSourcesDelete, SIGNAL("clicked()"), self.deleteTransferSourceType)
 
+		#signals for managing assistance types
+		self.connect(self.transferTypesListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedTransfer)
+		self.connect(self.btnTransferTypeSave, SIGNAL("clicked()"), self.saveTransferType)
+		self.connect(self.btnTransferTypeDelete, SIGNAL("clicked()"), self.deleteTransferType)
 
 
         #Begin block of methods for managing Foodstock details 
@@ -158,7 +168,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
         #End block of methods for managing Crop Types
 
-	#Begin block of methods for managing Asset Categories 	
+	#Begin block of methods for managing Employment Categories 	
 	def getEmploymentCategories(self):
                 '''Get pre-existing assets categories from database and populate categories list'''
                	# select query to retrieve Asset Categories
@@ -244,7 +254,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
-        #End block of methods for managing Asset Categories
+        #End block of methods for managing Employment Categories
 
 
         #Begin block of methods for managing Wild Foods details 
@@ -455,3 +465,199 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
         #End block of methods for managing Livestock Types
+
+	#Begin block of methods for managing Transfer Source Categories	
+	def getTransferSourceCategories(self):
+                '''Get pre-existing assets categories from database and populate categories list'''
+               	# select query to retrieve Asset Categories
+        	query = '''SELECT sourcetype FROM setup_transfersources'''
+        	
+                p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+				
+		model = QStandardItemModel()
+		num = 0
+
+       		for row in recordset:
+			qtTransferSourceType = QStandardItem( "%s" % row[0])
+            		qtTransferSourceType.setTextAlignment( Qt.AlignLeft )
+            		model.setItem( num, 0, qtTransferSourceType )
+            		num = num + 1
+                        		
+        	self.transferSourcesListView.setModel(model)
+		self.transferSourcesListView.show()
+
+        def pickSelectedTransferSource(self,index):
+                '''get selected item and populate categories textbox'''
+                selectedItem = self.transferSourcesListView.model().item(index.row(),0).text()
+                self.txtTransferSources.setText(selectedItem)
+                
+        def saveTransferSourceType(self):
+        	''' Saves newly created data to database '''
+
+        	# get the data entered by user
+        	mytransfersource = self.txtTransferSources.text()		
+        	
+		# check if record exists
+		query = '''SELECT sourcetype FROM setup_transfersources WHERE sourcetype='%s' ''' % (mytransfersource)    
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+				      	
+		if numrows == 0:
+			
+			query = '''INSERT INTO setup_transfersources(sourcetype) 
+                     		VALUES('%s')''' % (mytransfersource)
+		else:
+			query = '''UPDATE setup_transfersources SET sourcetype='%s'	WHERE sourcetype='%s' ''' % (mytransfersource, mytransfersource)
+    
+        	# execute query and commit changes
+        	temp = GenericDBOP(query)
+                recordset = temp.runUpdateQuery()
+                self.txtTransferSources.clear()
+		#refresh categories list
+		self.getTransferSourceCategories()               
+                
+	def deleteTransferSourceType(self):
+		''' Deletes record from database '''
+
+        	# get the data entered by user
+        	mytransfersource = self.txtTransferSources.text()		
+        	
+		# check if record exists
+		query = '''SELECT sourcetype FROM setup_transfersources WHERE sourcetype='%s' ''' % (mytransfersource)    
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+
+		if numrows <> 0:
+			
+			query = '''DELETE FROM setup_transfersources WHERE sourcetype='%s' ''' % (mytransfersource)
+
+			# execute query and commit changes
+        		temp = GenericDBOP(query)
+                        recordset = temp.runUpdateQuery()
+
+			
+        		self.txtTransferSources.clear()
+			
+			#refresh categories list
+			self.getTransferSourceCategories()			
+			
+		else:
+			QMessageBox.information(self, 'Delete Transfer Source', "Record not found")
+        #End block of methods for managing Transfer Source Categories
+
+	#Begin block of methods for managing Transfer Types	
+	def getTransferTypes(self):
+                '''Get pre-existing assets categories from database and populate categories list'''
+               	# select query to retrieve Asset Categories
+        	query = '''SELECT assistancetype FROM setup_transfers'''
+        	
+                p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+				
+		model = QStandardItemModel()
+		num = 0
+
+       		for row in recordset:
+			qtTransferType = QStandardItem( "%s" % row[0])
+            		qtTransferType.setTextAlignment( Qt.AlignLeft )
+            		model.setItem( num, 0, qtTransferType )
+            		num = num + 1
+                        		
+        	self.transferTypesListView.setModel(model)
+		self.transferTypesListView.show()
+
+        def pickSelectedTransfer(self,index):
+                '''get selected item and populate categories textbox'''
+                selectedItem = self.transferTypesListView.model().item(index.row(),0).text()
+                self.txtTransferType.setText(selectedItem)
+
+                #select query to retrieve food-energy value and measuring unit for selected food item 
+        	query = '''SELECT unitofmeasure FROM setup_transfers WHERE assistancetype='%s' ''' % (selectedItem)
+
+        	p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+	      		
+		for row in recordset:
+                        unitOfMeasure = row[0]
+
+		self.txtTransferUnitofMeasure.setText(unitOfMeasure)
+                
+                
+        def saveTransferType(self):
+        	''' Saves newly created data to database '''
+
+        	# get the data entered by user
+        	mytransfertype = self.txtTransferType.text()
+        	mymeasuringUnit = self.txtTransferUnitofMeasure.text()
+        	
+		# check if record exists
+		query = '''SELECT assistancetype FROM setup_transfers WHERE assistancetype='%s' ''' % (mytransfertype)    
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+				      	
+		if numrows == 0:
+			
+			query = '''INSERT INTO setup_transfers(assistancetype, unitofmeasure) 
+                     		VALUES('%s', '%s')''' % (mytransfertype,mymeasuringUnit)
+		else:
+			query = '''UPDATE setup_transfers SET assistancetype='%s', unitofmeasure='%s' 	WHERE assistancetype='%s' ''' % (mytransfertype, mymeasuringUnit,mytransfertype)
+    
+        	# execute query and commit changes
+        	temp = GenericDBOP(query)
+                recordset = temp.runUpdateQuery()
+                self.txtTransferType.clear()
+        	self.txtTransferUnitofMeasure.clear()
+                        
+		#refresh categories list
+		self.getTransferTypes()               
+                
+	def deleteTransferType(self):
+		''' Deletes record from database '''
+
+        	# get the data entered by user
+        	mytransfertype = self.txtTransferType.text()		
+        	
+		# check if record exists
+		query = '''SELECT assistancetype FROM setup_transfers WHERE assistancetype='%s' ''' % (mytransfertype)    
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+
+		if numrows <> 0:
+			
+			query = '''DELETE FROM setup_transfers WHERE assistancetype='%s' ''' % (mytransfertype)
+
+			# execute query and commit changes
+        		temp = GenericDBOP(query)
+                        recordset = temp.runUpdateQuery()
+
+			
+        		#self.cmbKCalories.clear()
+			
+			#refresh categories list
+			self.getTransferTypes()
+                        self.txtTransferType.clear()
+                        self.txtTransferUnitofMeasure.clear()
+			
+			
+		else:
+			QMessageBox.information(self, 'Delete Transfer Type', "Record not found")
+        #End block of methods for managing Transfer Types

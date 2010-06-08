@@ -347,6 +347,17 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_transfers` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `assistancetype` VARCHAR(200) NOT NULL ,
   `unitofmeasure` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_transfersources`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_transfersources` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_transfersources` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `sourcetype` ENUM('Internal','External') NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
