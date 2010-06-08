@@ -390,6 +390,30 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `openihmdb`.`setup_expenditurecategories`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_expenditurecategories` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_expenditurecategories` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `expenditurecategory` VARCHAR(200) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_expendituretypes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_expendituretypes` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_expendituretypes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `expendituretype` VARCHAR(200) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `openihmdb`.`setup_livestock`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `openihmdb`.`setup_livestock` ;

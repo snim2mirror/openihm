@@ -51,6 +51,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.connect(self.actionCreate_Project, QtCore.SIGNAL("triggered()"), self.newProject)
 		self.connect(self.actionAsset_Details, QtCore.SIGNAL("triggered()"), self.manageAssetDetails)
 		self.connect(self.actionIncome_Source_Details, QtCore.SIGNAL("triggered()"), self.manageIncomeDetails)
+		self.connect(self.actionExpenditure_Types, QtCore.SIGNAL("triggered()"), self.manageBaseExpenditureDetails)		
 		self.connect(self.actionEdit_Project, QtCore.SIGNAL("triggered()"), self.editProject)
 		self.connect(self.actionConfigure_Project, QtCore.SIGNAL("triggered()"), self.configureProject)
 		self.connect(self.actionEdit_Household, QtCore.SIGNAL("triggered()"), self.editProjectHousehold)
@@ -214,10 +215,19 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
 	    form.show()
-	
+
+	def manageBaseExpenditureDetails(self):
+	    ''' Creates and Shows the Manage Expenditure Details form '''
+	    form = FrmExpenditureTypes(self.mdi)
+	    subWin = self.mdi.addSubWindow(form)
+	    self.centerSubWindow(subWin)
+	    form.show()
+
 	def findProject(self):
 	    ''' Creates and Shows the Find Project form '''
 	    form = FrmFindProject(self.mdi)
 	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
 	    form.show()
+
+	    
