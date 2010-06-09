@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FindProjectResults</class>
+ <widget class="QDialog" name="FindProjectResults">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>548</width>
+    <height>424</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>548</width>
+    <height>424</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Project Search Results</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>531</width>
+     <height>121</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Search Criteria</string>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>71</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Project ID:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtProjectID">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>50</y>
+      <width>151</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Project Title:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtProjectTitle">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>80</y>
+      <width>301</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="cmdSearch">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>70</y>
+      <width>75</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Search</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>341</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Enter Project ID or Project Title [entering nothing will list all projects]</string>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QTableView" name="tblResults">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>170</y>
+     <width>531</width>
+     <height>201</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cmdOpen">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>380</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cmdClose">
+   <property name="geometry">
+    <rect>
+     <x>454</x>
+     <y>380</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>140</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Found Projects</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

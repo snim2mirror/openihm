@@ -87,18 +87,31 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    subWin.move((screen.width()-size.width())/2, (screen.height()-size.height())/2)
 	    
 	def newProject(self):
-	    ''' Creates and Shows the New Project form '''
-	    form = FrmNewProject(self)
-	    subWin = self.mdi.addSubWindow(form)
-	    self.centerSubWindow(subWin)
-	    form.show()
+		''' Creates and Shows the New Project form '''
+		if ( self.projectid != -1 ):
+			msg = "Creating a new project will close the current project. Are you sure you want to create a new project?"
+			ret = QtGui.QMessageBox.question(self,"Confirm Project Creation", msg, QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
+			if ( ret == QtGui.QMessageBox.No ):
+				return
+		self.mdi.closeAllSubWindows()
+		form = FrmNewProject(self)
+		subWin = self.mdi.addSubWindow(form)
+		self.centerSubWindow(subWin)
+		form.show()
 	    
 	def openProject(self):
-	    ''' Creates and Shows the Open Project form '''
-	    form = FrmOpenProject(self)
-	    subWin = self.mdi.addSubWindow(form)
-	    self.centerSubWindow(subWin)
-	    form.show()
+		''' Creates and Shows the Open Project form '''
+		if ( self.projectid != -1 ):
+			msg = "Opening another project will close the current project. Are you sure you want to open another project?"
+			ret = QtGui.QMessageBox.question(self,"Confirm Opening", msg, QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
+			# if opening is rejected return
+			if ( ret == QtGui.QMessageBox.No ):
+				return
+		self.mdi.closeAllSubWindows()
+		form = FrmOpenProject(self)
+		subWin = self.mdi.addSubWindow(form)
+		self.centerSubWindow(subWin)
+		form.show()
 	    
 	def closeProject(self):
 	    ''' Creates and Shows the Open Project form '''
@@ -217,7 +230,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	
 	def findProject(self):
 	    ''' Creates and Shows the Find Project form '''
-	    form = FrmFindProject(self.mdi)
+	    form = FrmFindProject(self)
 	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
 	    form.show()
