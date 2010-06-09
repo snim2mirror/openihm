@@ -344,9 +344,20 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `openihmdb`.`setup_transfers` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_transfers` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `assistancetype` VARCHAR(200) NOT NULL ,
   `unitofmeasure` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_transfersources`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_transfersources` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_transfersources` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `sourcetype` ENUM('Internal','External') NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -366,13 +377,49 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `openihmdb`.`setup_treetypes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_treetypes` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_treetypes` (
+  `treetype` VARCHAR(100) NOT NULL ,
+  `measuringunit` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`treetype`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `openihmdb`.`setup_employment`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `openihmdb`.`setup_employment` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_employment` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_expenditurecategories`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_expenditurecategories` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_expenditurecategories` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `expenditurecategory` VARCHAR(200) NULL DEFAULT NULL ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_expendituretypes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_expendituretypes` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_expendituretypes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `expendituretype` VARCHAR(200) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
@@ -383,22 +430,34 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `openihmdb`.`setup_livestock` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_livestock` (
-  `id` INT NOT NULL ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
-  `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
   `energyvalueperunit` DOUBLE NULL DEFAULT NULL ,
+  `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`incomesource`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_landtypes`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`setup_landtypes` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_landtypes` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `landtype` VARCHAR(200) NULL DEFAULT NULL ,
+  `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`tradeablegoods`
+-- Table `openihmdb`.`setup_tradablegoods`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `openihmdb`.`tradeablegoods` ;
+DROP TABLE IF EXISTS `openihmdb`.`setup_tradablegoods` ;
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`tradeablegoods` (
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_tradablegoods` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `type` VARCHAR(200) NOT NULL ,
+  `tradablegoodtype` VARCHAR(200) NOT NULL ,
   `unitofmeasure` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
@@ -433,11 +492,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `openihmdb`.`setup_wildfoods` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_wildfoods` (
-  `id` INT NOT NULL AUTO_INCREMENT ,
   `incomesource` VARCHAR(200) NULL ,
-  `unitofmeasure` VARCHAR(45) NULL ,
   `energyvalueperunit` DOUBLE NULL ,
-  PRIMARY KEY (`id`) )
+  `unitofmeasure` VARCHAR(45) NULL ,
+  PRIMARY KEY (`incomesource`) )
 ENGINE = InnoDB;
 
 
