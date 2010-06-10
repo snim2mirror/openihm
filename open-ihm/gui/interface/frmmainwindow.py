@@ -29,6 +29,8 @@ from frmexpendituretypes import FrmExpenditureTypes
 from frmmanageassets import FrmManageAssetDetails
 from frmincomesourcedetails import FrmIncomeSourceDetails
 from frmfindproject import FrmFindProject
+from frmfindhousehold import FrmFindHousehold
+from frmfindhouseholdresults import FrmFindHouseholdResults
 from frmproject_open import FrmOpenProject
 
 class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
@@ -56,6 +58,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.connect(self.actionConfigure_Project, QtCore.SIGNAL("triggered()"), self.configureProject)
 		self.connect(self.actionEdit_Household, QtCore.SIGNAL("triggered()"), self.editProjectHousehold)
 		self.connect(self.actionEnter_Household_Data, QtCore.SIGNAL("triggered()"), self.viewHouseholdData)
+		self.connect(self.actionFind_Household, QtCore.SIGNAL("triggered()"), self.findHousehold)
 		self.connect(self.actionView_All_Households_2, QtCore.SIGNAL("triggered()"), self.viewAllHouseholds)
 		self.connect(self.actionFind_Project, QtCore.SIGNAL("triggered()"), self.findProject)
 		self.connect(self.actionOpen_Project, QtCore.SIGNAL("triggered()"), self.openProject)
@@ -160,10 +163,14 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    
 	def editProjectHousehold(self):
 	    ''' Creates and Shows the Edit Household GetID form '''
-	    form = FrmEditHouseholdGetID(self)
-	    subWin = self.mdi.addSubWindow(form)
-	    self.centerSubWindow(subWin)
-	    form.show()
+	    if self.projectid == -1:
+			msg = "No project is active. First create a new project or open an existing project."
+			QtGui.QMessageBox.information(self,"Notice",msg)
+	    else:
+		    form = FrmEditHouseholdGetID(self)
+		    subWin = self.mdi.addSubWindow(form)
+		    self.centerSubWindow(subWin)
+		    form.show()
 	
 	def delHousehold(self):
 	    ''' Creates and Shows the Delete House Hold form '''
@@ -176,17 +183,36 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    
 	def viewHouseholdData(self):
 	    ''' shows household data (expenditure, income, assets, etc) '''
-	    form = FrmHouseholdData(self)
-	    subWin = self.mdi.addSubWindow(form)
-	    self.centerSubWindow(subWin)
-	    form.show()
+	    if self.projectid == -1:
+			msg = "No project is active. First create a new project or open an existing project."
+			QtGui.QMessageBox.information(self,"Notice",msg)
+	    else:
+		    form = FrmHouseholdData(self)
+		    subWin = self.mdi.addSubWindow(form)
+		    self.centerSubWindow(subWin)
+		    form.show()
+	    
+	def findHousehold(self):
+	    ''' Creates and Shows the Find Household form '''
+	    if self.projectid == -1:
+			msg = "No project is active. First create a new project or open an existing project."
+			QtGui.QMessageBox.information(self,"Notice",msg)
+	    else:
+	        form = FrmFindHousehold(self)
+	        subWin = self.mdi.addSubWindow(form)
+	        self.centerSubWindow(subWin)
+	        form.show()
 	    
 	def viewAllHouseholds(self):
 	    ''' shows all households '''
-	    form = FrmHouseholds(self)
-	    subWin = self.mdi.addSubWindow(form)
-	    self.centerSubWindow(subWin)
-	    form.show()
+	    if self.projectid == -1:
+			msg = "No project is active. First create a new project or open an existing project."
+			QtGui.QMessageBox.information(self,"Notice",msg)
+	    else:
+		    form = FrmFindHouseholdResults(self)
+		    subWin = self.mdi.addSubWindow(form)
+		    self.centerSubWindow(subWin)
+		    form.show()
 	
 	def manageFoodTypes(self):
 	    ''' Creates and Shows the Manage Crop Types form'''

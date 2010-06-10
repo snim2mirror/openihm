@@ -64,7 +64,6 @@ class FrmFindProject(QDialog, Ui_FindProject):
 		else:
 			msg = "No project matching the criteria specified exists."
 			QMessageBox.information(self,"Find Project", msg)
-			self.parent.mdi.closeActiveSubWindow()
 			
 		
 				

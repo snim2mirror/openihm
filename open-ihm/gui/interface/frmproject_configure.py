@@ -80,7 +80,6 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
 		# select query to retrieve global characteristics
 		query = '''SELECT characteristic, datatype FROM %s ORDER BY id ASC''' % (tbl)
 		
-		# retrieve and display members
 		db = data.mysql.connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
@@ -112,10 +111,9 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
 	def displaySelectedChars(self, tbl, lstSelected):
 		''' Retrieve and display Project Characteristics (Household or Personal)'''
 				
-		# select query to retrieve global characteristics
+		# select query to retrieve selected characteristics
 		query = '''SHOW COLUMNS FROM %s''' % (tbl)
 		
-		# retrieve and display members
 		db = data.mysql.connector.Connect(**self.config)             
 		cursor = db.cursor()
 		

@@ -89,6 +89,7 @@ class FrmFindProjectResults(QDialog, Ui_FindProjectResults):
 		    num = num + 1
 	    
 		self.tblResults.setModel(model)
+		self.tblResults.resizeColumnsToContents()
 		self.tblResults.show()
 		
 		cursor.close()

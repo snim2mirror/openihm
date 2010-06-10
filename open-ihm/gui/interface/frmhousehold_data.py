@@ -12,6 +12,7 @@ import data.mysql.connector
 from gui.designs.ui_household_data import Ui_HouseholdData
 from frmhousehold_addmember import FrmAddHouseholdMember
 from frmhousehold_editmember import FrmEditHouseholdMember
+from frmhousehold_editcharacteristic import FrmEditHouseholdCharacteristic
 
 class FrmHouseholdData(QDialog, Ui_HouseholdData):	
 	''' Creates the household data (income, assets, expenditure, etc) form '''	
@@ -21,10 +22,9 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		self.setupUi(self)
 		self.parent = parent
 		
+		self.hhCharacteristicsTable = "p%iHouseholdCharacteristics" % (self.parent.projectid )
 		# connect to database
 		self.config = Config.dbinfo().copy()
-		
-		self.tabHouseHold.setCurrentIndex(0)
 		
 		# get house holds
 		self.getHouseholds()
@@ -34,14 +34,15 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			self.cboHouseholdNumber.setCurrentIndex(self.cboHouseholdNumber.findData(QVariant(hhid)))
 		
 		# retrieve members
-		self.retrieveHouseholdMembers()
+		self.displayHouseholdData()
 		# connect relevant signals and slots
 		
 		self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
 		self.connect(self.cmdAddMember, SIGNAL("clicked()"), self.addHouseholdMember)
 		self.connect(self.cmdEditMember, SIGNAL("clicked()"), self.editHouseholdMember)	
-		self.connect(self.cmdDelMember, SIGNAL("clicked()"), self.delHouseholdMembers)					
-		self.connect(self.cboHouseholdNumber, SIGNAL("currentIndexChanged(int)"), self.displayHouseholdMembers)
+		self.connect(self.cmdDelMember, SIGNAL("clicked()"), self.delHouseholdMembers)
+		self.connect(self.cmdEditCharacteristic, SIGNAL("clicked()"), self.editCharacteristic)						
+		self.connect(self.cboHouseholdNumber, SIGNAL("currentIndexChanged(int)"), self.displayHouseholdData)
 		
 	def countRowsSelected(self, tblVw):
 		selectedRows = self.getSelectedRows(tblVw)
@@ -61,10 +62,11 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 	def getCurrentRow(self, tblVw):
 		indexVal = tblVw.currentIndex()
 		return indexVal.row()
-		
-	def displayHouseholdMembers(self):
-		self.tabHouseHold.setCurrentIndex(0)
+	
+	def displayHouseholdData(self):
 		self.retrieveHouseholdMembers()
+		self.retrieveHouseholdCharacteristics()
+		self.tabHouseHold.setCurrentIndex(0)
 		
 	def getHouseholds(self):
 		# select query to retrieve project data
@@ -202,7 +204,91 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		cursor.close()   
 		db.close()
 		self.tblMembers.setModel(model)
+		self.tblMembers.resizeColumnsToContents()
 		self.tblMembers.show()
 		
+	#-----------------------------------------------------------------------------------
+	#	Household Characteristics
+	#-----------------------------------------------------------------------------------
+	
+	def getCharacteristicDataType(self, charName):
+		tbl = "globalhouseholdcharacteristics"
+		query = '''SELECT datatype FROM %s WHERE characteristic='%s' ''' % (tbl, charName)
 		
+		db = data.mysql.connector.Connect(**self.config)             
+		cursor = db.cursor()
+		
+		cursor.execute(query)
+		
+		for row in cursor.fetchall():
+			return row[0]
+	
+	def retrieveHouseholdCharacteristics( self ):
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0]
+		tbl = self.hhCharacteristicsTable
+		# select query to retrieve project household characteristics
+		query = '''SHOW COLUMNS FROM %s''' % (tbl)
+		
+		db = data.mysql.connector.Connect(**self.config)             
+		cursor = db.cursor()
+		
+		cursor.execute(query)
+		
+		fields = []
+		for row in cursor.fetchall():
+			if ( row[0] != "hhid" ):
+				fields.append( row[0] )
+		
+		model = QStandardItemModel(1,1)
+		
+		# set model headers
+		model.setHorizontalHeaderItem(0,QStandardItem('Characteristic'))
+		model.setHorizontalHeaderItem(1,QStandardItem('Value'))
+		
+		# add  data rows
+		num = 0
+		
+		for field in fields:
+			query = '''SELECT `%s` FROM %s WHERE hhid=%i ''' % ( field, tbl, hhid )	
+			cursor.execute(query)
+			val = "Not Set"
+			for row in cursor.fetchall():
+				if ( row[0] != None ):
+					val = row[0]
+					
+			qtChar 	= QStandardItem( field )
+			if ( ( self.getCharacteristicDataType( field ) == 2 ) and (val != "Not Set") ):
+				qtVal	= QStandardItem( "%i" % val )
+			else:
+				qtVal	= QStandardItem( "%s" % val )
+				
+			model.setItem( num, 0, qtChar )
+			model.setItem( num, 1, qtVal )
+				
+			num = num + 1
+		
+		cursor.close()   
+		db.close()
+		
+		self.tblCharacteristics.setModel(model)
+		self.tblCharacteristics.resizeColumnsToContents()
+		self.tblCharacteristics.show()
+		
+	def editCharacteristic(self):
+		if self.countRowsSelected(self.tblCharacteristics) != 0:
+			# get the member id of the selected member
+			selectedRow = self.getCurrentRow(self.tblCharacteristics)
+			charName = self.tblCharacteristics.model().item(selectedRow,0).text()
+			charVal	 = self.tblCharacteristics.model().item(selectedRow,1).text()
+			# get household id and name
+			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+			hhid = temp[0]
+			# show edit household member form
+			form = FrmEditHouseholdCharacteristic(self, self.parent.projectid, hhid, charName, charVal)
+			form.setWindowIcon(QIcon('resources/images/openihm.png'))
+			form.exec_()
+			
+		else:
+			QMessageBox.information(self,"Edit Characteristic","Please select the row containing a characteristic to be editted.")	
 		
