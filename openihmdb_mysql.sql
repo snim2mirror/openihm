@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `openihmdb`.`expenditure` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`expenditure` (
   `hhid` INT NOT NULL ,
-  `expid` INT NOT NULL ,
+  `expid` INT NOT NULL AUTO_INCREMENT ,
   `exptype` VARCHAR(100) NULL DEFAULT NULL ,
   `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
   `priceperunit` DOUBLE NULL DEFAULT NULL ,
@@ -74,7 +74,7 @@ DROP TABLE IF EXISTS `openihmdb`.`assets` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`assets` (
   `hhid` INT NOT NULL ,
-  `assetid` INT NOT NULL ,
+  `assetid` INT NOT NULL AUTO_INCREMENT ,
   `assettype` VARCHAR(100) NOT NULL ,
   `unitofmeasure` VARCHAR(45) NOT NULL ,
   `unitcost` DOUBLE NOT NULL ,
@@ -191,7 +191,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `openihmdb`.`currencies` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`currencies` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `currencyname` VARCHAR(250) NOT NULL ,
   `abbreviation` VARCHAR(45) NOT NULL ,
   `symbol` VARCHAR(45) NULL DEFAULT NULL ,
@@ -248,7 +248,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `openihmdb`.`transfers` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`transfers` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `hhid` INT NOT NULL ,
   `assistancetype` VARCHAR(200) NOT NULL ,
   `unitofmeasure` VARCHAR(45) NOT NULL ,
@@ -274,7 +274,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `openihmdb`.`employmentincome` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`employmentincome` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `hhid` INT NOT NULL ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
   `foodtypepaid` VARCHAR(200) NULL DEFAULT NULL ,
@@ -298,7 +298,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `openihmdb`.`livestockincome` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`livestockincome` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `hhid` INT NOT NULL ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
   `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
@@ -321,7 +321,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `openihmdb`.`cropincome` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`cropincome` (
-  `id` INT NOT NULL ,
+  `id` INT NOT NULL AUTO_INCREMENT ,
   `hhid` INT NOT NULL ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
   `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,

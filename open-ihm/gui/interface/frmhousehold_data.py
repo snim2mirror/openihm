@@ -13,6 +13,8 @@ from gui.designs.ui_household_data import Ui_HouseholdData
 from frmhousehold_addmember import FrmAddHouseholdMember
 from frmhousehold_editmember import FrmEditHouseholdMember
 from frmhousehold_editcharacteristic import FrmEditHouseholdCharacteristic
+from frmhousehold_addasset import FrmHouseholdAsset
+from frmhousehold_addexpense import FrmHouseholdExpense
 
 class FrmHouseholdData(QDialog, Ui_HouseholdData):	
 	''' Creates the household data (income, assets, expenditure, etc) form '''	
@@ -43,6 +45,12 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		self.connect(self.cmdDelMember, SIGNAL("clicked()"), self.delHouseholdMembers)
 		self.connect(self.cmdEditCharacteristic, SIGNAL("clicked()"), self.editCharacteristic)						
 		self.connect(self.cboHouseholdNumber, SIGNAL("currentIndexChanged(int)"), self.displayHouseholdData)
+		self.connect(self.cmdAddAsset, SIGNAL("clicked()"), self.addHouseholdAsset)
+		self.connect(self.cmdEditAsset, SIGNAL("clicked()"), self.editHouseholdAsset)
+		self.connect(self.cmdDelAsset, SIGNAL("clicked()"), self.delHouseholdAssets)
+		self.connect(self.cmdAddExpenditure, SIGNAL("clicked()"), self.addHouseholdExpenditure)
+		self.connect(self.cmdEditExpenditure, SIGNAL("clicked()"), self.editHouseholdExpenditure)
+		self.connect(self.cmdDelExpenditure, SIGNAL("clicked()"), self.delHouseholdExpenses)	
 		
 	def countRowsSelected(self, tblVw):
 		selectedRows = self.getSelectedRows(tblVw)
@@ -64,7 +72,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		return indexVal.row()
 	
 	def displayHouseholdData(self):
+		self.setWindowTitle("Household Data - " + self.cboHouseholdNumber.currentText())
 		self.retrieveHouseholdMembers()
+		self.retrieveHouseholdAssets()
+		self.retrieveHouseholdExpenses()
 		self.retrieveHouseholdCharacteristics()
 		self.tabHouseHold.setCurrentIndex(0)
 		
@@ -159,7 +170,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		''' retrieves and shows a list of household members '''
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 		hhid = temp[0] 
-		self.setWindowTitle("Household Data - " + self.cboHouseholdNumber.currentText())
 		# select query to retrieve household members
 		query = '''SELECT personid, headofhousehold, dateofbirth, sex, education 
 		             FROM householdmembers WHERE hhid=%i''' % (hhid)
@@ -290,5 +300,258 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			form.exec_()
 			
 		else:
-			QMessageBox.information(self,"Edit Characteristic","Please select the row containing a characteristic to be editted.")	
+			msg = "Please select the row containing a characteristic to be editted."
+			QMessageBox.information(self,"Edit Characteristic", msg)	
 		
+	#-------------------------------------------------------------------------------------------------------
+	# Assets
+	#-------------------------------------------------------------------------------------------------------
+	
+	def addHouseholdAsset(self):
+		''' Show the Add Household Member form '''
+		# get household id and name
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0]
+		hhname = self.cboHouseholdNumber.currentText()
+		form = FrmHouseholdAsset(self, hhid, hhname)
+		form.setWindowIcon(QIcon('resources/images/openihm.png'))
+		# show the add household asset form
+		form.exec_()
+		
+	def editHouseholdAsset(self):
+		if self.countRowsSelected(self.tblAssets) != 0:
+			# get the asset id of the selected asset
+			selectedRow = self.getCurrentRow(self.tblAssets)
+			assetid = self.tblAssets.model().item(selectedRow,0).text()
+			# get household id and name
+			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+			hhid = temp[0]
+			hhname = self.cboHouseholdNumber.currentText()
+			# show edit household asset form
+			form = FrmHouseholdAsset(self, hhid, hhname, assetid)
+			form.setWindowIcon(QIcon('resources/images/openihm.png'))
+			form.exec_()
+			
+		else:
+			QMessageBox.information(self,"Edit Member","Please select the row containing an asset to be editted.")
+			
+	def delHouseholdAssets(self):
+		numSelected = self.countRowsSelected(self.tblAssets)
+		if  numSelected != 0:
+			# confirm deletion
+			if numSelected == 1:
+				msg = "Are you sure you want to delete the selected household asset?"
+			else:
+				msg = "Are you sure you want to delete the selected household assets?"
+				
+			ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+			# if deletion is rejected return without deleting
+			if ret == QMessageBox.No:
+				return
+			# get the asset id of the selected assets
+			selectedRows = self.getSelectedRows(self.tblAssets)
+			selectedIds = []
+			for row in selectedRows:
+				selectedIds.append( self.tblAssets.model().item(row,0).text() )
+			 
+			# get household id
+			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+			hhid = temp[0]
+			# delete selected assets
+			
+			db = data.mysql.connector.Connect(**self.config)
+			cursor =  db.cursor()
+			
+			for assetid in selectedIds:
+				query = '''DELETE FROM assets WHERE hhid=%s AND assetid='%s' ''' % (hhid, assetid)	
+				cursor.execute(query)
+				db.commit()
+    
+			# close database connection
+			cursor.close()
+			db.close()
+			
+			self.retrieveHouseholdAssets()
+
+		else:
+			QMessageBox.information(self,"Delete Assets","Please select the rows containing assets to be deleted.")
+		
+	def retrieveHouseholdAssets(self):
+		''' retrieves and shows a list of household asset '''
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0] 
+		# select query to retrieve household assets
+		query = '''SELECT * FROM assets WHERE hhid=%i''' % (hhid)
+		
+		# retrieve and display assets
+		db = data.mysql.connector.Connect(**self.config)             
+		cursor = db.cursor()
+		
+		cursor.execute(query)
+		
+		model = QStandardItemModel(1,2)
+		
+		# set model headers
+		model.setHorizontalHeaderItem(0,QStandardItem('Asset ID.'))
+		model.setHorizontalHeaderItem(1,QStandardItem('Asset Type'))
+		model.setHorizontalHeaderItem(2,QStandardItem('Unit of Measure'))
+		model.setHorizontalHeaderItem(3,QStandardItem('Cost Per Unit'))
+		model.setHorizontalHeaderItem(4,QStandardItem('Number of Units'))
+		
+		# add  data rows
+		num = 0
+		
+		for row in cursor.fetchall():
+			qtAssetID = QStandardItem( "%i" % row[1])
+			qtAssetID.setTextAlignment( Qt.AlignCenter )
+			qtAssetType = QStandardItem( row[2] )	
+			qtUnitOfMeasure = QStandardItem( row[3] )
+			qtCostPerUnit = QStandardItem( "%f" % row[4] )
+			qtNumUnits = QStandardItem( "%f" % row[5] )
+			
+			model.setItem( num, 0, qtAssetID )
+			model.setItem( num, 1, qtAssetType )
+			model.setItem( num, 2, qtUnitOfMeasure )
+			model.setItem( num, 3, qtCostPerUnit )
+			model.setItem( num, 4, qtNumUnits )
+			num = num + 1
+		
+		cursor.close()   
+		db.close()
+		
+		self.tblAssets.setModel(model)
+		self.tblAssets.resizeColumnsToContents()
+		self.tblAssets.show()
+	
+	#-------------------------------------------------------------------------------------------------------
+	# Income
+	#-------------------------------------------------------------------------------------------------------
+	
+	
+	#-------------------------------------------------------------------------------------------------------
+	# Expenditure
+	#-------------------------------------------------------------------------------------------------------
+	
+	def addHouseholdExpenditure(self):
+		''' Show the Add Household Ependiture form '''
+		# get household id and name
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0]
+		hhname = self.cboHouseholdNumber.currentText()
+		form = FrmHouseholdExpense(self, hhid, hhname)
+		form.setWindowIcon(QIcon('resources/images/openihm.png'))
+		# show the add household expenditure form
+		form.exec_()
+		
+	def editHouseholdExpenditure(self):
+		if self.countRowsSelected(self.tblExpenditure) != 0:
+			# get the expenditure id of the selected expense
+			selectedRow = self.getCurrentRow(self.tblExpenditure)
+			expid = self.tblExpenditure.model().item(selectedRow,0).text()
+			# get household id and name
+			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+			hhid = temp[0]
+			hhname = self.cboHouseholdNumber.currentText()
+			# show edit household expense form
+			form = FrmHouseholdExpense(self, hhid, hhname, expid)
+			form.setWindowIcon(QIcon('resources/images/openihm.png'))
+			form.exec_()
+			
+		else:
+			msg = "Please select the row containing an expenditure item to be editted."
+			QMessageBox.information( self, "Edit Expenditure", msg )
+			
+	def delHouseholdExpenses(self):
+		numSelected = self.countRowsSelected(self.tblExpenditure)
+		if  numSelected != 0:
+			# confirm deletion
+			if numSelected == 1:
+				msg = "Are you sure you want to delete the selected household expenditure item?"
+			else:
+				msg = "Are you sure you want to delete the selected household expenditure items?"
+				
+			ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+			# if deletion is rejected return without deleting
+			if ret == QMessageBox.No:
+				return
+			# get the expenditure id of the selected expenses
+			selectedRows = self.getSelectedRows(self.tblExpenditure)
+			selectedIds = []
+			for row in selectedRows:
+				selectedIds.append( self.tblExpenditure.model().item(row,0).text() )
+			 
+			# get household id
+			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+			hhid = temp[0]
+			# delete selected expenses
+			
+			db = data.mysql.connector.Connect(**self.config)
+			cursor =  db.cursor()
+			
+			for expid in selectedIds:
+				query = '''DELETE FROM expenditure WHERE hhid=%s AND expid='%s' ''' % (hhid, expid)	
+				cursor.execute(query)
+				db.commit()
+    
+			# close database connection
+			cursor.close()
+			db.close()
+			
+			self.retrieveHouseholdExpenses()
+
+		else:
+			msg = "Please select the rows containing expenditure items to be deleted."
+			QMessageBox.information( self, "Delete Expenditure", msg )
+		
+	def retrieveHouseholdExpenses(self):
+		''' retrieves and shows a list of household expenses '''
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0] 
+		# select query to retrieve household expenses
+		query = '''SELECT * FROM expenditure WHERE hhid=%i''' % (hhid)
+		
+		# retrieve and display assets
+		db = data.mysql.connector.Connect(**self.config)             
+		cursor = db.cursor()
+		
+		cursor.execute(query)
+		
+		model = QStandardItemModel(1,2)
+		
+		# set model headers
+		model.setHorizontalHeaderItem(0,QStandardItem('Exp. ID.'))
+		model.setHorizontalHeaderItem(1,QStandardItem('Exp. Type'))
+		model.setHorizontalHeaderItem(2,QStandardItem('Unit of Measure'))
+		model.setHorizontalHeaderItem(3,QStandardItem('Cost Per Unit'))
+		model.setHorizontalHeaderItem(4,QStandardItem('KCal Per Unit'))
+		model.setHorizontalHeaderItem(5,QStandardItem('Number of Units'))
+		
+		# add  data rows
+		num = 0
+		
+		for row in cursor.fetchall():
+			qtAssetID = QStandardItem( "%i" % row[1])
+			qtAssetID.setTextAlignment( Qt.AlignCenter )
+			qtAssetType = QStandardItem( row[2] )	
+			qtUnitOfMeasure = QStandardItem( row[3] )
+			qtCostPerUnit = QStandardItem( "%f" % row[4] )
+			if ( row[5] != None ):
+				qtKCalPerUnit = QStandardItem( "%f" % row[5] )
+			else:
+				qtKCalPerUnit = QStandardItem( "" )
+			qtNumUnits = QStandardItem( "%f" % row[6] )
+			
+			model.setItem( num, 0, qtAssetID )
+			model.setItem( num, 1, qtAssetType )
+			model.setItem( num, 2, qtUnitOfMeasure )
+			model.setItem( num, 3, qtCostPerUnit )
+			model.setItem( num, 4, qtKCalPerUnit )
+			model.setItem( num, 5, qtNumUnits )
+			num = num + 1
+		
+		cursor.close()   
+		db.close()
+		
+		self.tblExpenditure.setModel(model)
+		self.tblExpenditure.resizeColumnsToContents()
+		self.tblExpenditure.show()

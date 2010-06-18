@@ -95,5 +95,5 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember):
 		db.close()
 		
 		# close new project window
-		self.parent.displayHouseholdMembers()
+		self.parent.retrieveHouseholdMembers()
 		self.close()

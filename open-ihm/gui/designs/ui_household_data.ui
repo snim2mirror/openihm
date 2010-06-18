@@ -29,7 +29,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="tabHouseHoldMembers">
     <attribute name="title">
@@ -143,54 +143,459 @@
     <attribute name="title">
      <string>Income</string>
     </attribute>
-    <widget class="QTableView" name="tblIncome">
+    <widget class="QTabWidget" name="tabWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>10</y>
        <width>751</width>
-       <height>451</height>
+       <height>491</height>
       </rect>
      </property>
-    </widget>
-    <widget class="QPushButton" name="cmdAddIncome">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
+     <property name="tabPosition">
+      <enum>QTabWidget::West</enum>
      </property>
-     <property name="text">
-      <string>Add</string>
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-    </widget>
-    <widget class="QPushButton" name="cmdEditIncome">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_6">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Crops</string>
+      </attribute>
+      <widget class="QPushButton" name="cmdAddCrop">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdEditCrop">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Edit</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdDelCrop">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+      <widget class="QTableView" name="tblCropIncome">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>701</width>
+         <height>401</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>161</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Crops</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Livestock</string>
+      </attribute>
+      <widget class="QTableView" name="tblLivestockIncome">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>701</width>
+         <height>401</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Livestock</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdEditLivestock">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Edit</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdDelLivestock">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdAddLivestock">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Employment</string>
+      </attribute>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Employment</string>
+       </property>
+      </widget>
+      <widget class="QTableView" name="tblEmploymentIncome">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>701</width>
+         <height>401</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdEditEmployment">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Edit</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdDelEmployment">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdAddEmployment">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>Wildfoods and Hunting</string>
+      </attribute>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>151</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Wildfoods and Hunting</string>
+       </property>
+      </widget>
+      <widget class="QTableView" name="tblWildfoodsIncome">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>701</width>
+         <height>401</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdEditWildfoods">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Edit</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdDelWildfoods">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdAddWildfoods">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_5">
+      <attribute name="title">
+       <string>Gifts</string>
+      </attribute>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Gifts</string>
+       </property>
+      </widget>
+      <widget class="QTableView" name="tblGiftsIncome">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>701</width>
+         <height>401</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdEditGifts">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Edit</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdDelGifts">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdAddGifts">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_6">
+      <attribute name="title">
+       <string>Gifts From Orgs</string>
+      </attribute>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>201</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Gifts from External Organisations</string>
+       </property>
+      </widget>
+      <widget class="QTableView" name="tblExternalGiftsIncome">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>701</width>
+         <height>401</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdEditExternalGift">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Edit</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdDelExternalGift">
+       <property name="geometry">
+        <rect>
+         <x>220</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdAddExternalGift">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>450</y>
+         <width>91</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="tabHouseholdExpenditure">

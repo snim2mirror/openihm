@@ -63,5 +63,5 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember):
         self.db.close()
         
         # close new project window
-        self.parent.displayHouseholdMembers()
+        self.parent.retrieveHouseholdMembers()
         self.close()
