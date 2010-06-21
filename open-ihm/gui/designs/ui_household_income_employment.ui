@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>HouseholdIncomeEmployment</class>
- <widget class="QDialog" name="HouseholdIncomeEmployment">
+ <class>AddHouseholdIncomeEmployment</class>
+ <widget class="QDialog" name="AddHouseholdIncomeEmployment">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Add Employment Income</string>
   </property>
   <widget class="QLabel" name="lblHouseholdName">
    <property name="geometry">
@@ -36,7 +36,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QComboBox" name="cboAssistanceType">
+  <widget class="QComboBox" name="cboEmploymentType">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -142,7 +142,7 @@
      <string>Total Energy Value (KCals):</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="txtNumReceived">
+   <widget class="QLineEdit" name="txtUnitsPaid">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -152,7 +152,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="txtFoodPerDist">
+   <widget class="QLineEdit" name="txtUnitOfMeasure">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -175,7 +175,7 @@
      <string>Units Paid:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="txtCashPerDist">
+   <widget class="QLineEdit" name="txtTotalEnergyValue">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -224,12 +224,12 @@
   </widget>
  </widget>
  <tabstops>
-  <tabstop>cboAssistanceType</tabstop>
+  <tabstop>cboEmploymentType</tabstop>
   <tabstop>txtCashPerYear</tabstop>
   <tabstop>cboFoodType</tabstop>
-  <tabstop>txtFoodPerDist</tabstop>
-  <tabstop>txtNumReceived</tabstop>
-  <tabstop>txtCashPerDist</tabstop>
+  <tabstop>txtUnitOfMeasure</tabstop>
+  <tabstop>txtUnitsPaid</tabstop>
+  <tabstop>txtTotalEnergyValue</tabstop>
   <tabstop>cmdSave</tabstop>
   <tabstop>cmdCancel</tabstop>
  </tabstops>

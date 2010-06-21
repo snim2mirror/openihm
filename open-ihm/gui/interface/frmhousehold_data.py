@@ -15,6 +15,7 @@ from frmhousehold_editmember import FrmEditHouseholdMember
 from frmhousehold_editcharacteristic import FrmEditHouseholdCharacteristic
 from frmhousehold_addasset import FrmHouseholdAsset
 from frmhousehold_addexpense import FrmHouseholdExpense
+from frmhousehold_addincome_crop import FrmHouseholdCropIncome
 
 class FrmHouseholdData(QDialog, Ui_HouseholdData):	
 	''' Creates the household data (income, assets, expenditure, etc) form '''	
@@ -50,7 +51,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		self.connect(self.cmdDelAsset, SIGNAL("clicked()"), self.delHouseholdAssets)
 		self.connect(self.cmdAddExpenditure, SIGNAL("clicked()"), self.addHouseholdExpenditure)
 		self.connect(self.cmdEditExpenditure, SIGNAL("clicked()"), self.editHouseholdExpenditure)
-		self.connect(self.cmdDelExpenditure, SIGNAL("clicked()"), self.delHouseholdExpenses)	
+		self.connect(self.cmdDelExpenditure, SIGNAL("clicked()"), self.delHouseholdExpenses)
+		self.connect(self.cmdAddCrop, SIGNAL("clicked()"), self.addHouseholdCropIncome)
+		self.connect(self.cmdEditCrop, SIGNAL("clicked()"), self.editHouseholdCropIncome)
+		self.connect(self.cmdDelCrop, SIGNAL("clicked()"), self.delHouseholdCropIncome)	
 		
 	def countRowsSelected(self, tblVw):
 		selectedRows = self.getSelectedRows(tblVw)
@@ -76,7 +80,9 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		self.retrieveHouseholdMembers()
 		self.retrieveHouseholdAssets()
 		self.retrieveHouseholdExpenses()
+		self.retrieveHouseholdCropIncome()
 		self.retrieveHouseholdCharacteristics()
+		
 		self.tabHouseHold.setCurrentIndex(0)
 		
 	def getHouseholds(self):
@@ -424,9 +430,129 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		self.tblAssets.show()
 	
 	#-------------------------------------------------------------------------------------------------------
-	# Income
+	# Income: Crops
 	#-------------------------------------------------------------------------------------------------------
 	
+	def addHouseholdCropIncome(self):
+		''' Show the Add Household Crop Income form '''
+		# get household id and name
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0]
+		hhname = self.cboHouseholdNumber.currentText()
+		form = FrmHouseholdCropIncome(self, hhid, hhname)
+		form.setWindowIcon(QIcon('resources/images/openihm.png'))
+		# show the add household crop income form
+		form.exec_()
+		
+	def editHouseholdCropIncome(self):
+		if self.countRowsSelected(self.tblCropIncome) != 0:
+			# get the income id of the selected crop item
+			selectedRow = self.getCurrentRow(self.tblCropIncome)
+			incomeid = self.tblCropIncome.model().item(selectedRow,0).text()
+			# get household id and name
+			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+			hhid = temp[0]
+			hhname = self.cboHouseholdNumber.currentText()
+			# show edit household crop income form
+			form = FrmHouseholdCropIncome(self, hhid, hhname, incomeid)
+			form.setWindowIcon(QIcon('resources/images/openihm.png'))
+			form.exec_()
+			
+		else:
+			msg = "Please select the row containing the income item to be editted."
+			QMessageBox.information( self, "Edit Crop Income", msg )
+			
+	def delHouseholdCropIncome(self):
+		numSelected = self.countRowsSelected(self.tblCropIncome)
+		if  numSelected != 0:
+			# confirm deletion
+			if numSelected == 1:
+				msg = "Are you sure you want to delete the selected household income item?"
+			else:
+				msg = "Are you sure you want to delete the selected household income items?"
+				
+			ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+			# if deletion is rejected return without deleting
+			if ret == QMessageBox.No:
+				return
+			# get the income id of the selected crop items
+			selectedRows = self.getSelectedRows(self.tblCropIncome)
+			selectedIds = []
+			for row in selectedRows:
+				selectedIds.append( self.tblCropIncome.model().item(row,0).text() )
+			 
+			# get household id
+			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+			hhid = temp[0]
+			# delete selected crops
+			
+			db = data.mysql.connector.Connect(**self.config)
+			cursor =  db.cursor()
+			
+			for incomeid in selectedIds:
+				query = '''DELETE FROM cropincome WHERE hhid=%s AND id=%s ''' % (hhid, incomeid)	
+				cursor.execute(query)
+				db.commit()
+    
+			# close database connection
+			cursor.close()
+			db.close()
+			
+			self.retrieveHouseholdCropIncome()
+
+		else:
+			msg = "Please select the rows containing income items to be deleted."
+			QMessageBox.information( self, "Delete Crop Income", msg )
+		
+	def retrieveHouseholdCropIncome(self):
+		''' retrieves and shows a list of household crop income items '''
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0] 
+		# select query to retrieve household expenses
+		query = '''SELECT * FROM cropincome WHERE hhid=%i''' % (hhid)
+		
+		# retrieve and display assets
+		db = data.mysql.connector.Connect(**self.config)             
+		cursor = db.cursor()
+		
+		cursor.execute(query)
+		
+		model = QStandardItemModel(1,2)
+		
+		# set model headers
+		model.setHorizontalHeaderItem(0,QStandardItem('Income ID.'))
+		model.setHorizontalHeaderItem(1,QStandardItem('Income Source'))
+		model.setHorizontalHeaderItem(2,QStandardItem('Unit of Measure'))
+		model.setHorizontalHeaderItem(3,QStandardItem('Units Consumed'))
+		model.setHorizontalHeaderItem(4,QStandardItem('Units Sold'))
+		model.setHorizontalHeaderItem(5,QStandardItem('Unit Price'))
+		
+		# add  data rows
+		num = 0
+		
+		for row in cursor.fetchall():
+			qtIncomeID = QStandardItem( "%i" % row[0])
+			qtIncomeID.setTextAlignment( Qt.AlignCenter )
+			qtIncomeType = QStandardItem( row[2] )	
+			qtUnitOfMeasure = QStandardItem( row[3] )
+			qtUnitsConsumed = QStandardItem( "%f" % row[4] )
+			qtUnitsSold 	= QStandardItem( "%f" % row[5] )
+			qtUnitPrice 	= QStandardItem( "%f" % row[6] )
+			
+			model.setItem( num, 0, qtIncomeID )
+			model.setItem( num, 1, qtIncomeType )
+			model.setItem( num, 2, qtUnitOfMeasure )
+			model.setItem( num, 3, qtUnitsConsumed )
+			model.setItem( num, 4, qtUnitsSold )
+			model.setItem( num, 5, qtUnitPrice )
+			num = num + 1
+		
+		cursor.close()   
+		db.close()
+		
+		self.tblCropIncome.setModel(model)
+		self.tblCropIncome.resizeColumnsToContents()
+		self.tblCropIncome.show()
 	
 	#-------------------------------------------------------------------------------------------------------
 	# Expenditure
@@ -489,7 +615,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			cursor =  db.cursor()
 			
 			for expid in selectedIds:
-				query = '''DELETE FROM expenditure WHERE hhid=%s AND expid='%s' ''' % (hhid, expid)	
+				query = '''DELETE FROM expenditure WHERE hhid=%s AND expid=%s ''' % (hhid, expid)	
 				cursor.execute(query)
 				db.commit()
     
