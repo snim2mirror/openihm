@@ -1,0 +1,93 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'ui_household_income_employment.ui'
+#
+# Created: Mon Jun 21 12:51:04 2010
+#      by: PyQt4 UI code generator 4.7
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt4 import QtCore, QtGui
+
+class Ui_HouseholdIncomeEmployment(object):
+    def setupUi(self, HouseholdIncomeEmployment):
+        HouseholdIncomeEmployment.setObjectName("HouseholdIncomeEmployment")
+        HouseholdIncomeEmployment.resize(439, 342)
+        self.lblHouseholdName = QtGui.QLabel(HouseholdIncomeEmployment)
+        self.lblHouseholdName.setGeometry(QtCore.QRect(130, 10, 271, 21))
+        self.lblHouseholdName.setObjectName("lblHouseholdName")
+        self.txtCashPerYear = QtGui.QLineEdit(HouseholdIncomeEmployment)
+        self.txtCashPerYear.setGeometry(QtCore.QRect(130, 80, 111, 20))
+        self.txtCashPerYear.setObjectName("txtCashPerYear")
+        self.cboAssistanceType = QtGui.QComboBox(HouseholdIncomeEmployment)
+        self.cboAssistanceType.setGeometry(QtCore.QRect(130, 40, 301, 22))
+        self.cboAssistanceType.setEditable(True)
+        self.cboAssistanceType.setObjectName("cboAssistanceType")
+        self.label_7 = QtGui.QLabel(HouseholdIncomeEmployment)
+        self.label_7.setGeometry(QtCore.QRect(20, 80, 101, 21))
+        self.label_7.setObjectName("label_7")
+        self.label = QtGui.QLabel(HouseholdIncomeEmployment)
+        self.label.setGeometry(QtCore.QRect(20, 10, 91, 21))
+        self.label.setObjectName("label")
+        self.cmdSave = QtGui.QPushButton(HouseholdIncomeEmployment)
+        self.cmdSave.setGeometry(QtCore.QRect(20, 300, 75, 31))
+        self.cmdSave.setDefault(True)
+        self.cmdSave.setObjectName("cmdSave")
+        self.label_2 = QtGui.QLabel(HouseholdIncomeEmployment)
+        self.label_2.setGeometry(QtCore.QRect(20, 40, 91, 21))
+        self.label_2.setObjectName("label_2")
+        self.cmdCancel = QtGui.QPushButton(HouseholdIncomeEmployment)
+        self.cmdCancel.setGeometry(QtCore.QRect(350, 300, 75, 31))
+        self.cmdCancel.setObjectName("cmdCancel")
+        self.groupBox = QtGui.QGroupBox(HouseholdIncomeEmployment)
+        self.groupBox.setGeometry(QtCore.QRect(20, 110, 411, 171))
+        self.groupBox.setObjectName("groupBox")
+        self.label_6 = QtGui.QLabel(self.groupBox)
+        self.label_6.setGeometry(QtCore.QRect(20, 140, 131, 21))
+        self.label_6.setObjectName("label_6")
+        self.txtNumReceived = QtGui.QLineEdit(self.groupBox)
+        self.txtNumReceived.setGeometry(QtCore.QRect(110, 100, 111, 20))
+        self.txtNumReceived.setObjectName("txtNumReceived")
+        self.txtFoodPerDist = QtGui.QLineEdit(self.groupBox)
+        self.txtFoodPerDist.setGeometry(QtCore.QRect(110, 60, 111, 20))
+        self.txtFoodPerDist.setObjectName("txtFoodPerDist")
+        self.label_4 = QtGui.QLabel(self.groupBox)
+        self.label_4.setGeometry(QtCore.QRect(20, 100, 131, 21))
+        self.label_4.setObjectName("label_4")
+        self.txtCashPerDist = QtGui.QLineEdit(self.groupBox)
+        self.txtCashPerDist.setGeometry(QtCore.QRect(160, 140, 111, 20))
+        self.txtCashPerDist.setObjectName("txtCashPerDist")
+        self.label_5 = QtGui.QLabel(self.groupBox)
+        self.label_5.setGeometry(QtCore.QRect(20, 60, 111, 21))
+        self.label_5.setObjectName("label_5")
+        self.label_3 = QtGui.QLabel(self.groupBox)
+        self.label_3.setGeometry(QtCore.QRect(20, 20, 131, 21))
+        self.label_3.setObjectName("label_3")
+        self.cboFoodType = QtGui.QComboBox(self.groupBox)
+        self.cboFoodType.setGeometry(QtCore.QRect(110, 20, 291, 22))
+        self.cboFoodType.setObjectName("cboFoodType")
+
+        self.retranslateUi(HouseholdIncomeEmployment)
+        QtCore.QMetaObject.connectSlotsByName(HouseholdIncomeEmployment)
+        HouseholdIncomeEmployment.setTabOrder(self.cboAssistanceType, self.txtCashPerYear)
+        HouseholdIncomeEmployment.setTabOrder(self.txtCashPerYear, self.cboFoodType)
+        HouseholdIncomeEmployment.setTabOrder(self.cboFoodType, self.txtFoodPerDist)
+        HouseholdIncomeEmployment.setTabOrder(self.txtFoodPerDist, self.txtNumReceived)
+        HouseholdIncomeEmployment.setTabOrder(self.txtNumReceived, self.txtCashPerDist)
+        HouseholdIncomeEmployment.setTabOrder(self.txtCashPerDist, self.cmdSave)
+        HouseholdIncomeEmployment.setTabOrder(self.cmdSave, self.cmdCancel)
+
+    def retranslateUi(self, HouseholdIncomeEmployment):
+        HouseholdIncomeEmployment.setWindowTitle(QtGui.QApplication.translate("HouseholdIncomeEmployment", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
+        self.lblHouseholdName.setText(QtGui.QApplication.translate("HouseholdIncomeEmployment", "{householdname}", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_7.setText(QtGui.QApplication.translate("HouseholdIncomeEmployment", "Cash Paid:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("HouseholdIncomeEmployment", "Household Name:", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdSave.setText(QtGui.QApplication.translate("HouseholdIncomeEmployment", "Save", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("HouseholdIncomeEmployment", "Employment Type:", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdCancel.setText(QtGui.QApplication.translate("HouseholdIncomeEmployment", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox.setTitle(QtGui.QApplication.translate("HouseholdIncomeEmployment", "Food Payment", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("HouseholdIncomeEmployment", "Total Energy Value (KCals):", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("HouseholdIncomeEmployment", "Units Paid:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_5.setText(QtGui.QApplication.translate("HouseholdIncomeEmployment", "Unit of Measure:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("HouseholdIncomeEmployment", "Food Type Paid:", None, QtGui.QApplication.UnicodeUTF8))
+
