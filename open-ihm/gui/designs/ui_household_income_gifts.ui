@@ -26,7 +26,7 @@
     <string>Assistance Type:</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="cboAssistanceTypeType">
+  <widget class="QComboBox" name="cboAssistanceType">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -142,7 +142,7 @@
   </widget>
  </widget>
  <tabstops>
-  <tabstop>cboAssistanceTypeType</tabstop>
+  <tabstop>cboAssistanceType</tabstop>
   <tabstop>txtUnitOfMeasure</tabstop>
   <tabstop>txtUnitsConsumed</tabstop>
   <tabstop>cmdSave</tabstop>
