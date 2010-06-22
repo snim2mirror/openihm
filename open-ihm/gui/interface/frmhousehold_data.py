@@ -16,6 +16,7 @@ from frmhousehold_editcharacteristic import FrmEditHouseholdCharacteristic
 from frmhousehold_addasset import FrmHouseholdAsset
 from frmhousehold_addexpense import FrmHouseholdExpense
 from frmhousehold_addincome_crop import FrmHouseholdCropIncome
+from frmhousehold_addincome_livestock import FrmHouseholdLivestockIncome
 
 class FrmHouseholdData(QDialog, Ui_HouseholdData):	
 	''' Creates the household data (income, assets, expenditure, etc) form '''	
@@ -54,7 +55,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		self.connect(self.cmdDelExpenditure, SIGNAL("clicked()"), self.delHouseholdExpenses)
 		self.connect(self.cmdAddCrop, SIGNAL("clicked()"), self.addHouseholdCropIncome)
 		self.connect(self.cmdEditCrop, SIGNAL("clicked()"), self.editHouseholdCropIncome)
-		self.connect(self.cmdDelCrop, SIGNAL("clicked()"), self.delHouseholdCropIncome)	
+		self.connect(self.cmdDelCrop, SIGNAL("clicked()"), self.delHouseholdCropIncome)
+		self.connect(self.cmdAddLivestock, SIGNAL("clicked()"), self.addHouseholdLivestockIncome)
+		self.connect(self.cmdEditLivestock, SIGNAL("clicked()"), self.editHouseholdLivestockIncome)
+		self.connect(self.cmdDelLivestock, SIGNAL("clicked()"), self.delHouseholdLivestockIncome)		
 		
 	def countRowsSelected(self, tblVw):
 		selectedRows = self.getSelectedRows(tblVw)
@@ -81,6 +85,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		self.retrieveHouseholdAssets()
 		self.retrieveHouseholdExpenses()
 		self.retrieveHouseholdCropIncome()
+		self.retrieveHouseholdLivestockIncome()
 		self.retrieveHouseholdCharacteristics()
 		
 		self.tabHouseHold.setCurrentIndex(0)
@@ -553,6 +558,132 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		self.tblCropIncome.setModel(model)
 		self.tblCropIncome.resizeColumnsToContents()
 		self.tblCropIncome.show()
+	
+	
+	#-------------------------------------------------------------------------------------------------------
+	# Income: Livestock
+	#-------------------------------------------------------------------------------------------------------
+	
+	def addHouseholdLivestockIncome(self):
+		''' Show the Add Household Livestock Income form '''
+		# get household id and name
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0]
+		hhname = self.cboHouseholdNumber.currentText()
+		form = FrmHouseholdLivestockIncome(self, hhid, hhname)
+		form.setWindowIcon(QIcon('resources/images/openihm.png'))
+		# show the add household livestock income form
+		form.exec_()
+		
+	def editHouseholdLivestockIncome(self):
+		if self.countRowsSelected(self.tblLivestockIncome) != 0:
+			# get the income id of the selected livestock item
+			selectedRow = self.getCurrentRow(self.tblLivestockIncome)
+			incomeid = self.tblLivestockIncome.model().item(selectedRow,0).text()
+			# get household id and name
+			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+			hhid = temp[0]
+			hhname = self.cboHouseholdNumber.currentText()
+			# show edit household livestock income form
+			form = FrmHouseholdLivestockIncome(self, hhid, hhname, incomeid)
+			form.setWindowIcon(QIcon('resources/images/openihm.png'))
+			form.exec_()
+			
+		else:
+			msg = "Please select the row containing the income item to be editted."
+			QMessageBox.information( self, "Edit Livestock Income", msg )
+			
+	def delHouseholdLivestockIncome(self):
+		numSelected = self.countRowsSelected(self.tblLivestockIncome)
+		if  numSelected != 0:
+			# confirm deletion
+			if numSelected == 1:
+				msg = "Are you sure you want to delete the selected household income item?"
+			else:
+				msg = "Are you sure you want to delete the selected household income items?"
+				
+			ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+			# if deletion is rejected return without deleting
+			if ret == QMessageBox.No:
+				return
+			# get the income id of the selected livestock items
+			selectedRows = self.getSelectedRows(self.tblLivestockIncome)
+			selectedIds = []
+			for row in selectedRows:
+				selectedIds.append( self.tblLivestockIncome.model().item(row,0).text() )
+			 
+			# get household id
+			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+			hhid = temp[0]
+			# delete selected livestock items
+			
+			db = data.mysql.connector.Connect(**self.config)
+			cursor =  db.cursor()
+			
+			for incomeid in selectedIds:
+				query = '''DELETE FROM livestockincome WHERE hhid=%s AND id=%s ''' % (hhid, incomeid)	
+				cursor.execute(query)
+				db.commit()
+    
+			# close database connection
+			cursor.close()
+			db.close()
+			
+			self.retrieveHouseholdLivestockIncome()
+
+		else:
+			msg = "Please select the rows containing income items to be deleted."
+			QMessageBox.information( self, "Delete Livestock Income", msg )
+		
+	def retrieveHouseholdLivestockIncome(self):
+		''' retrieves and shows a list of household livestock income items '''
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0] 
+		# select query to retrieve household expenses
+		query = '''SELECT * FROM livestockincome WHERE hhid=%i''' % (hhid)
+		
+		# retrieve and display assets
+		db = data.mysql.connector.Connect(**self.config)             
+		cursor = db.cursor()
+		
+		cursor.execute(query)
+		
+		model = QStandardItemModel(1,2)
+		
+		# set model headers
+		model.setHorizontalHeaderItem(0,QStandardItem('Income ID.'))
+		model.setHorizontalHeaderItem(1,QStandardItem('Income Source'))
+		model.setHorizontalHeaderItem(2,QStandardItem('Unit of Measure'))
+		model.setHorizontalHeaderItem(3,QStandardItem('Units Consumed'))
+		model.setHorizontalHeaderItem(4,QStandardItem('Units Sold'))
+		model.setHorizontalHeaderItem(5,QStandardItem('Unit Price'))
+		
+		# add  data rows
+		num = 0
+		
+		for row in cursor.fetchall():
+			qtIncomeID = QStandardItem( "%i" % row[0])
+			qtIncomeID.setTextAlignment( Qt.AlignCenter )
+			qtIncomeType = QStandardItem( row[2] )	
+			qtUnitOfMeasure = QStandardItem( row[3] )
+			qtUnitsConsumed = QStandardItem( "%f" % row[4] )
+			qtUnitsSold 	= QStandardItem( "%f" % row[5] )
+			qtUnitPrice 	= QStandardItem( "%f" % row[6] )
+			
+			model.setItem( num, 0, qtIncomeID )
+			model.setItem( num, 1, qtIncomeType )
+			model.setItem( num, 2, qtUnitOfMeasure )
+			model.setItem( num, 3, qtUnitsConsumed )
+			model.setItem( num, 4, qtUnitsSold )
+			model.setItem( num, 5, qtUnitPrice )
+			num = num + 1
+		
+		cursor.close()   
+		db.close()
+		
+		self.tblLivestockIncome.setModel(model)
+		self.tblLivestockIncome.resizeColumnsToContents()
+		self.tblLivestockIncome.show()
 	
 	#-------------------------------------------------------------------------------------------------------
 	# Expenditure
