@@ -474,7 +474,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`wildfoods` (
   `incomesource` VARCHAR(200) NULL ,
   `unitofmeasure` VARCHAR(45) NULL ,
   `unitsconsumed` DOUBLE NULL ,
-  `unitsold` DOUBLE NULL ,
+  `unitssold` DOUBLE NULL ,
   `unitprice` DOUBLE NULL ,
   PRIMARY KEY (`id`, `hhid`) ,
   INDEX `fk_wildfoods_households1` (`hhid` ASC) ,
