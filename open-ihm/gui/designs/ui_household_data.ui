@@ -546,7 +546,7 @@
         <string>Gifts from External Organisations</string>
        </property>
       </widget>
-      <widget class="QTableView" name="tblExternalGiftsIncome">
+      <widget class="QTableView" name="tblTransferIncome">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -556,7 +556,7 @@
         </rect>
        </property>
       </widget>
-      <widget class="QPushButton" name="cmdEditExternalGift">
+      <widget class="QPushButton" name="cmdEditTransfer">
        <property name="geometry">
         <rect>
          <x>120</x>
@@ -569,7 +569,7 @@
         <string>Edit</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="cmdDelExternalGift">
+      <widget class="QPushButton" name="cmdDelTransfer">
        <property name="geometry">
         <rect>
          <x>220</x>
@@ -582,7 +582,7 @@
         <string>Delete</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="cmdAddExternalGift">
+      <widget class="QPushButton" name="cmdAddTransfer">
        <property name="geometry">
         <rect>
          <x>20</x>

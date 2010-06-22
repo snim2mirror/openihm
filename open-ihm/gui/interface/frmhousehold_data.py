@@ -19,6 +19,7 @@ from frmhousehold_addincome_crop import FrmHouseholdCropIncome
 from frmhousehold_addincome_livestock import FrmHouseholdLivestockIncome
 from frmhousehold_addincome_wildfoods import FrmHouseholdWildfoodsIncome
 from frmhousehold_addincome_gifts import FrmHouseholdGiftsIncome
+from frmhousehold_addincome_transfers import FrmHouseholdTransferIncome
 
 class FrmHouseholdData(QDialog, Ui_HouseholdData):	
 	''' Creates the household data (income, assets, expenditure, etc) form '''	
@@ -66,7 +67,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		self.connect(self.cmdDelWildfoods, SIGNAL("clicked()"), self.delHouseholdWildfoodsIncome)
 		self.connect(self.cmdAddGifts, SIGNAL("clicked()"), self.addHouseholdGiftsIncome)
 		self.connect(self.cmdEditGifts, SIGNAL("clicked()"), self.editHouseholdGiftsIncome)
-		self.connect(self.cmdDelGifts, SIGNAL("clicked()"), self.delHouseholdGiftsIncome)		
+		self.connect(self.cmdDelGifts, SIGNAL("clicked()"), self.delHouseholdGiftsIncome)
+		self.connect(self.cmdAddTransfer, SIGNAL("clicked()"), self.addHouseholdTransferIncome)
+		self.connect(self.cmdEditTransfer, SIGNAL("clicked()"), self.editHouseholdTransferIncome)
+		self.connect(self.cmdDelTransfer, SIGNAL("clicked()"), self.delHouseholdTransferIncome)		
 		
 	def countRowsSelected(self, tblVw):
 		selectedRows = self.getSelectedRows(tblVw)
@@ -96,6 +100,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		self.retrieveHouseholdLivestockIncome()
 		self.retrieveHouseholdWildfoodsIncome()
 		self.retrieveHouseholdGiftsIncome()
+		self.retrieveHouseholdTransferIncome()
 		self.retrieveHouseholdCharacteristics()
 		
 		self.tabHouseHold.setCurrentIndex(0)
@@ -815,6 +820,136 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		self.tblGiftsIncome.setModel(model)
 		self.tblGiftsIncome.resizeColumnsToContents()
 		self.tblGiftsIncome.show()
+	
+	#-------------------------------------------------------------------------------------------------------
+	# Income: Transfers
+	#-------------------------------------------------------------------------------------------------------
+	
+	def addHouseholdTransferIncome(self):
+		''' Show the Add Household Transfer Income form '''
+		# get household id and name
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0]
+		hhname = self.cboHouseholdNumber.currentText()
+		form = FrmHouseholdTransferIncome(self, hhid, hhname)
+		form.setWindowIcon(QIcon('resources/images/openihm.png'))
+		# show the add household transfer income form
+		form.exec_()
+		
+	def editHouseholdTransferIncome(self):
+		if self.countRowsSelected(self.tblTransferIncome) != 0:
+			# get the income id of the selected transfer item
+			selectedRow = self.getCurrentRow(self.tblTransferIncome)
+			incomeid = self.tblTransferIncome.model().item(selectedRow,0).text()
+			# get household id and name
+			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+			hhid = temp[0]
+			hhname = self.cboHouseholdNumber.currentText()
+			# show edit household transfer income form
+			form = FrmHouseholdTransferIncome(self, hhid, hhname, incomeid)
+			form.setWindowIcon(QIcon('resources/images/openihm.png'))
+			form.exec_()
+			
+		else:
+			msg = "Please select the row containing the income item to be editted."
+			QMessageBox.information( self, "Edit Transfer Income", msg )
+			
+	def delHouseholdTransferIncome(self):
+		numSelected = self.countRowsSelected(self.tblTransferIncome)
+		if  numSelected != 0:
+			# confirm deletion
+			if numSelected == 1:
+				msg = "Are you sure you want to delete the selected household income item?"
+			else:
+				msg = "Are you sure you want to delete the selected household income items?"
+				
+			ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+			# if deletion is rejected return without deleting
+			if ret == QMessageBox.No:
+				return
+			# get the income id of the selected transfer items
+			selectedRows = self.getSelectedRows(self.tblTransferIncome)
+			selectedIds = []
+			for row in selectedRows:
+				selectedIds.append( self.tblTransferIncome.model().item(row,0).text() )
+			 
+			# get household id
+			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+			hhid = temp[0]
+			# delete selected transfer items
+			
+			db = data.mysql.connector.Connect(**self.config)
+			cursor =  db.cursor()
+			
+			for incomeid in selectedIds:
+				query = '''DELETE FROM transfers WHERE hhid=%s AND id=%s ''' % (hhid, incomeid)	
+				cursor.execute(query)
+				db.commit()
+    
+			# close database connection
+			cursor.close()
+			db.close()
+			
+			self.retrieveHouseholdTransferIncome()
+
+		else:
+			msg = "Please select the rows containing income items to be deleted."
+			QMessageBox.information( self, "Delete Transfer Income", msg )
+		
+	def retrieveHouseholdTransferIncome(self):
+		''' retrieves and shows a list of household transfer income items '''
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0] 
+		# select query to retrieve transfer income items
+		query = '''SELECT *
+				   FROM transfers WHERE hhid=%i AND sourcetype='External' ''' % (hhid)
+		
+		# retrieve and display items
+		db = data.mysql.connector.Connect(**self.config)             
+		cursor = db.cursor()
+		
+		cursor.execute(query)
+		
+		model = QStandardItemModel(1,2)
+		
+		# set model headers
+		model.setHorizontalHeaderItem(0,QStandardItem('Income ID.'))
+		model.setHorizontalHeaderItem(1,QStandardItem('Assistance Type'))
+		model.setHorizontalHeaderItem(2,QStandardItem('Unit of Measure'))
+		model.setHorizontalHeaderItem(3,QStandardItem('Food per Dist'))
+		model.setHorizontalHeaderItem(4,QStandardItem('Cash per Dist'))
+		model.setHorizontalHeaderItem(5,QStandardItem('No. Times Received'))
+		model.setHorizontalHeaderItem(6,QStandardItem('Cash per Year'))
+		
+		# add  data rows
+		num = 0
+		
+		for row in cursor.fetchall():
+			qtIncomeID = QStandardItem( "%i" % row[0])
+			qtIncomeID.setTextAlignment( Qt.AlignCenter )
+			qtIncomeType = QStandardItem( row[2] )	
+			qtUnitOfMeasure = QStandardItem( row[3] )
+			qtFoodPerDist = QStandardItem( "%f" % row[5] )
+			qtCashPerDist = QStandardItem( "%f" % row[6] )
+			qtNumReceived = QStandardItem( "%i" % row[7] )
+			qtCashPerYear = QStandardItem( "%f" % row[9] )
+						
+			model.setItem( num, 0, qtIncomeID )
+			model.setItem( num, 1, qtIncomeType )
+			model.setItem( num, 2, qtUnitOfMeasure )
+			model.setItem( num, 3, qtFoodPerDist )
+			model.setItem( num, 4, qtCashPerDist )
+			model.setItem( num, 5, qtNumReceived )
+			model.setItem( num, 6, qtCashPerYear )
+			
+			num = num + 1
+		
+		cursor.close()   
+		db.close()
+		
+		self.tblTransferIncome.setModel(model)
+		self.tblTransferIncome.resizeColumnsToContents()
+		self.tblTransferIncome.show()
 	
 	#-------------------------------------------------------------------------------------------------------
 	# Income: Wildfoods
