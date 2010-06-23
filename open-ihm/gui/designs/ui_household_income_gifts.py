@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_gifts.ui'
 #
-# Created: Mon Jun 21 23:14:31 2010
+# Created: Tue Jun 22 22:35:50 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -16,10 +16,10 @@ class Ui_AddHouseholdIncomeGifts(object):
         self.label_2 = QtGui.QLabel(AddHouseholdIncomeGifts)
         self.label_2.setGeometry(QtCore.QRect(20, 40, 81, 21))
         self.label_2.setObjectName("label_2")
-        self.cboAssistanceTypeType = QtGui.QComboBox(AddHouseholdIncomeGifts)
-        self.cboAssistanceTypeType.setGeometry(QtCore.QRect(120, 40, 261, 22))
-        self.cboAssistanceTypeType.setEditable(True)
-        self.cboAssistanceTypeType.setObjectName("cboAssistanceTypeType")
+        self.cboAssistanceType = QtGui.QComboBox(AddHouseholdIncomeGifts)
+        self.cboAssistanceType.setGeometry(QtCore.QRect(120, 40, 261, 22))
+        self.cboAssistanceType.setEditable(True)
+        self.cboAssistanceType.setObjectName("cboAssistanceType")
         self.txtUnitOfMeasure = QtGui.QLineEdit(AddHouseholdIncomeGifts)
         self.txtUnitOfMeasure.setGeometry(QtCore.QRect(120, 80, 111, 20))
         self.txtUnitOfMeasure.setObjectName("txtUnitOfMeasure")
@@ -48,7 +48,7 @@ class Ui_AddHouseholdIncomeGifts(object):
 
         self.retranslateUi(AddHouseholdIncomeGifts)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdIncomeGifts)
-        AddHouseholdIncomeGifts.setTabOrder(self.cboAssistanceTypeType, self.txtUnitOfMeasure)
+        AddHouseholdIncomeGifts.setTabOrder(self.cboAssistanceType, self.txtUnitOfMeasure)
         AddHouseholdIncomeGifts.setTabOrder(self.txtUnitOfMeasure, self.txtUnitsConsumed)
         AddHouseholdIncomeGifts.setTabOrder(self.txtUnitsConsumed, self.cmdSave)
         AddHouseholdIncomeGifts.setTabOrder(self.cmdSave, self.cmdCancel)

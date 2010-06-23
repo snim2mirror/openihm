@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>439</width>
+    <width>450</width>
     <height>342</height>
    </rect>
   </property>
@@ -26,7 +26,7 @@
     <string>{householdname}</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txtCashPerYear">
+  <widget class="QLineEdit" name="txtCashPaid">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -220,12 +220,15 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="editable">
+     <bool>true</bool>
+    </property>
    </widget>
   </widget>
  </widget>
  <tabstops>
   <tabstop>cboEmploymentType</tabstop>
-  <tabstop>txtCashPerYear</tabstop>
+  <tabstop>txtCashPaid</tabstop>
   <tabstop>cboFoodType</tabstop>
   <tabstop>txtUnitOfMeasure</tabstop>
   <tabstop>txtUnitsPaid</tabstop>

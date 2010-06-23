@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_data.ui'
 #
-# Created: Thu Jun 17 09:43:02 2010
+# Created: Tue Jun 22 23:32:46 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -172,18 +172,18 @@ class Ui_HouseholdData(object):
         font.setBold(True)
         self.label_7.setFont(font)
         self.label_7.setObjectName("label_7")
-        self.tblExternalGiftsIncome = QtGui.QTableView(self.tab_6)
-        self.tblExternalGiftsIncome.setGeometry(QtCore.QRect(10, 40, 701, 401))
-        self.tblExternalGiftsIncome.setObjectName("tblExternalGiftsIncome")
-        self.cmdEditExternalGift = QtGui.QPushButton(self.tab_6)
-        self.cmdEditExternalGift.setGeometry(QtCore.QRect(120, 450, 91, 31))
-        self.cmdEditExternalGift.setObjectName("cmdEditExternalGift")
-        self.cmdDelExternalGift = QtGui.QPushButton(self.tab_6)
-        self.cmdDelExternalGift.setGeometry(QtCore.QRect(220, 450, 91, 31))
-        self.cmdDelExternalGift.setObjectName("cmdDelExternalGift")
-        self.cmdAddExternalGift = QtGui.QPushButton(self.tab_6)
-        self.cmdAddExternalGift.setGeometry(QtCore.QRect(20, 450, 91, 31))
-        self.cmdAddExternalGift.setObjectName("cmdAddExternalGift")
+        self.tblTransferIncome = QtGui.QTableView(self.tab_6)
+        self.tblTransferIncome.setGeometry(QtCore.QRect(10, 40, 701, 401))
+        self.tblTransferIncome.setObjectName("tblTransferIncome")
+        self.cmdEditTransfer = QtGui.QPushButton(self.tab_6)
+        self.cmdEditTransfer.setGeometry(QtCore.QRect(120, 450, 91, 31))
+        self.cmdEditTransfer.setObjectName("cmdEditTransfer")
+        self.cmdDelTransfer = QtGui.QPushButton(self.tab_6)
+        self.cmdDelTransfer.setGeometry(QtCore.QRect(220, 450, 91, 31))
+        self.cmdDelTransfer.setObjectName("cmdDelTransfer")
+        self.cmdAddTransfer = QtGui.QPushButton(self.tab_6)
+        self.cmdAddTransfer.setGeometry(QtCore.QRect(20, 450, 91, 31))
+        self.cmdAddTransfer.setObjectName("cmdAddTransfer")
         self.tabWidget.addTab(self.tab_6, "")
         self.tabHouseHold.addTab(self.tabHouseholdIncome, "")
         self.tabHouseholdExpenditure = QtGui.QWidget()
@@ -261,9 +261,9 @@ class Ui_HouseholdData(object):
         self.cmdAddGifts.setText(QtGui.QApplication.translate("HouseholdData", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QtGui.QApplication.translate("HouseholdData", "Gifts", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setText(QtGui.QApplication.translate("HouseholdData", "Gifts from External Organisations", None, QtGui.QApplication.UnicodeUTF8))
-        self.cmdEditExternalGift.setText(QtGui.QApplication.translate("HouseholdData", "Edit", None, QtGui.QApplication.UnicodeUTF8))
-        self.cmdDelExternalGift.setText(QtGui.QApplication.translate("HouseholdData", "Delete", None, QtGui.QApplication.UnicodeUTF8))
-        self.cmdAddExternalGift.setText(QtGui.QApplication.translate("HouseholdData", "Add", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdEditTransfer.setText(QtGui.QApplication.translate("HouseholdData", "Edit", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdDelTransfer.setText(QtGui.QApplication.translate("HouseholdData", "Delete", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdAddTransfer.setText(QtGui.QApplication.translate("HouseholdData", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), QtGui.QApplication.translate("HouseholdData", "Gifts From Orgs", None, QtGui.QApplication.UnicodeUTF8))
         self.tabHouseHold.setTabText(self.tabHouseHold.indexOf(self.tabHouseholdIncome), QtGui.QApplication.translate("HouseholdData", "Income", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdAddExpenditure.setText(QtGui.QApplication.translate("HouseholdData", "Add", None, QtGui.QApplication.UnicodeUTF8))

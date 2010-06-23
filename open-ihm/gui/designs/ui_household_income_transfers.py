@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_transfers.ui'
 #
-# Created: Mon Jun 21 23:14:34 2010
+# Created: Tue Jun 22 23:36:51 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -32,9 +32,9 @@ class Ui_AddHouseholdIncomeTransfers(object):
         self.label_6 = QtGui.QLabel(AddHouseholdIncomeTransfers)
         self.label_6.setGeometry(QtCore.QRect(20, 200, 111, 21))
         self.label_6.setObjectName("label_6")
-        self.txtUnitofMeasure = QtGui.QLineEdit(AddHouseholdIncomeTransfers)
-        self.txtUnitofMeasure.setGeometry(QtCore.QRect(160, 80, 111, 20))
-        self.txtUnitofMeasure.setObjectName("txtUnitofMeasure")
+        self.txtUnitOfMeasure = QtGui.QLineEdit(AddHouseholdIncomeTransfers)
+        self.txtUnitOfMeasure.setGeometry(QtCore.QRect(160, 80, 111, 20))
+        self.txtUnitOfMeasure.setObjectName("txtUnitOfMeasure")
         self.label = QtGui.QLabel(AddHouseholdIncomeTransfers)
         self.label.setGeometry(QtCore.QRect(20, 10, 91, 21))
         self.label.setObjectName("label")
@@ -66,8 +66,8 @@ class Ui_AddHouseholdIncomeTransfers(object):
 
         self.retranslateUi(AddHouseholdIncomeTransfers)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdIncomeTransfers)
-        AddHouseholdIncomeTransfers.setTabOrder(self.cboAssistanceType, self.txtUnitofMeasure)
-        AddHouseholdIncomeTransfers.setTabOrder(self.txtUnitofMeasure, self.txtFoodPerDist)
+        AddHouseholdIncomeTransfers.setTabOrder(self.cboAssistanceType, self.txtUnitOfMeasure)
+        AddHouseholdIncomeTransfers.setTabOrder(self.txtUnitOfMeasure, self.txtFoodPerDist)
         AddHouseholdIncomeTransfers.setTabOrder(self.txtFoodPerDist, self.txtNumReceived)
         AddHouseholdIncomeTransfers.setTabOrder(self.txtNumReceived, self.txtCashPerDist)
         AddHouseholdIncomeTransfers.setTabOrder(self.txtCashPerDist, self.txtCashPerYear)

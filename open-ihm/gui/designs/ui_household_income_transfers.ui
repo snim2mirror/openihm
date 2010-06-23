@@ -91,7 +91,7 @@
     <string>Cash per Distribution:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txtUnitofMeasure">
+  <widget class="QLineEdit" name="txtUnitOfMeasure">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -212,7 +212,7 @@
  </widget>
  <tabstops>
   <tabstop>cboAssistanceType</tabstop>
-  <tabstop>txtUnitofMeasure</tabstop>
+  <tabstop>txtUnitOfMeasure</tabstop>
   <tabstop>txtFoodPerDist</tabstop>
   <tabstop>txtNumReceived</tabstop>
   <tabstop>txtCashPerDist</tabstop>
