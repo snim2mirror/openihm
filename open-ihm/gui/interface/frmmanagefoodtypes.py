@@ -15,12 +15,18 @@ class FrmManageFoodTypes(Ui_FoodTypes):
 		
         	# get food type
         	self.getFoodTypes()
-		
+
+                #set input validator and restrict input to numeric values,
+                myDblVal = QtGui.QDoubleValidator(-999.99, 999999.99, 2, self.txtKCalories)
+                myDblVal.setNotation(QtGui.QDoubleValidator.StandardNotation)
+                self.txtKCalories.setValidator(myDblVal);
+
+                #connect relevant signals
 		QtCore.QObject.connect(self.cmdManageFoodClose, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
 		QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL("clicked()"), self.saveFoodType)
 		QtCore.QObject.connect(self.cmdDelete, QtCore.SIGNAL("clicked()"), self.deleteFoodType)
 		QtCore.QObject.connect(self.cmbFoodType, QtCore.SIGNAL("currentIndexChanged(int)"), self.populateForm)
-		
+              
 	
 	def getFoodTypes(self):
                	# select query to retrieve Food Types and related information
@@ -32,7 +38,9 @@ class FrmManageFoodTypes(Ui_FoodTypes):
 		for row in recordset:
 			foodtype = row[0]
             		self.cmbFoodType.addItem(foodtype)
-			
+
+            	self.cmbFoodType.setCurrentIndex(-1)
+
 	
 	def populateForm(self):
 		'''
@@ -40,7 +48,7 @@ class FrmManageFoodTypes(Ui_FoodTypes):
 		'''
 		
 		foodtype = self.cmbFoodType.currentText()
-		self.cmbKCalories.clear()
+		self.txtKCalories.clear()
 		self.cmbUnitOfMeasure.clear()
 
         	# select query to retrieve Food Types and related information
@@ -53,7 +61,7 @@ class FrmManageFoodTypes(Ui_FoodTypes):
 			measuringunit = str(row[2])
 			
 			#populate the form controls
-			self.cmbKCalories.addItem(energyvalue)
+			self.txtKCalories.setText(energyvalue)
 			self.cmbUnitOfMeasure.addItem(measuringunit)
 	
 	def saveFoodType(self):
@@ -62,7 +70,7 @@ class FrmManageFoodTypes(Ui_FoodTypes):
         	# get the data entered by user
         	myfoodtype = self.cmbFoodType.currentText()
 		mymeasuringunit = self.cmbUnitOfMeasure.currentText()
-        	myenergyvalue  = self.cmbKCalories.currentText()
+        	myenergyvalue  = self.txtKCalories.text()
         	
 		# check if record exists
 		query = '''SELECT foodtype, energyvalueperunit, measuringunit
@@ -88,7 +96,7 @@ class FrmManageFoodTypes(Ui_FoodTypes):
                 recordset = temp.runUpdateQuery()
 
 	def deleteFoodType(self):
-		''' Deletes record from database '''
+		''' Deletes Food Type record from database '''
 
         	# get user selection
         	myfoodtype = self.cmbFoodType.currentText()
@@ -113,7 +121,7 @@ class FrmManageFoodTypes(Ui_FoodTypes):
 
 			self.cmbFoodType.clear()
 			self.cmbUnitOfMeasure.clear()
-        		self.cmbKCalories.clear()
+        		self.txtKCalories.clear()
 			
 			#populate Food Types Combobox
 			self.getFoodTypes()			
