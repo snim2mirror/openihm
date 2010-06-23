@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_employment.ui'
 #
-# Created: Mon Jun 21 23:14:39 2010
+# Created: Wed Jun 23 11:22:32 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,13 +12,13 @@ from PyQt4 import QtCore, QtGui
 class Ui_AddHouseholdIncomeEmployment(object):
     def setupUi(self, AddHouseholdIncomeEmployment):
         AddHouseholdIncomeEmployment.setObjectName("AddHouseholdIncomeEmployment")
-        AddHouseholdIncomeEmployment.resize(439, 342)
+        AddHouseholdIncomeEmployment.resize(450, 342)
         self.lblHouseholdName = QtGui.QLabel(AddHouseholdIncomeEmployment)
         self.lblHouseholdName.setGeometry(QtCore.QRect(130, 10, 271, 21))
         self.lblHouseholdName.setObjectName("lblHouseholdName")
-        self.txtCashPerYear = QtGui.QLineEdit(AddHouseholdIncomeEmployment)
-        self.txtCashPerYear.setGeometry(QtCore.QRect(130, 80, 111, 20))
-        self.txtCashPerYear.setObjectName("txtCashPerYear")
+        self.txtCashPaid = QtGui.QLineEdit(AddHouseholdIncomeEmployment)
+        self.txtCashPaid.setGeometry(QtCore.QRect(130, 80, 111, 20))
+        self.txtCashPaid.setObjectName("txtCashPaid")
         self.cboEmploymentType = QtGui.QComboBox(AddHouseholdIncomeEmployment)
         self.cboEmploymentType.setGeometry(QtCore.QRect(130, 40, 301, 22))
         self.cboEmploymentType.setEditable(True)
@@ -65,12 +65,13 @@ class Ui_AddHouseholdIncomeEmployment(object):
         self.label_3.setObjectName("label_3")
         self.cboFoodType = QtGui.QComboBox(self.groupBox)
         self.cboFoodType.setGeometry(QtCore.QRect(110, 20, 291, 22))
+        self.cboFoodType.setEditable(True)
         self.cboFoodType.setObjectName("cboFoodType")
 
         self.retranslateUi(AddHouseholdIncomeEmployment)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdIncomeEmployment)
-        AddHouseholdIncomeEmployment.setTabOrder(self.cboEmploymentType, self.txtCashPerYear)
-        AddHouseholdIncomeEmployment.setTabOrder(self.txtCashPerYear, self.cboFoodType)
+        AddHouseholdIncomeEmployment.setTabOrder(self.cboEmploymentType, self.txtCashPaid)
+        AddHouseholdIncomeEmployment.setTabOrder(self.txtCashPaid, self.cboFoodType)
         AddHouseholdIncomeEmployment.setTabOrder(self.cboFoodType, self.txtUnitOfMeasure)
         AddHouseholdIncomeEmployment.setTabOrder(self.txtUnitOfMeasure, self.txtUnitsPaid)
         AddHouseholdIncomeEmployment.setTabOrder(self.txtUnitsPaid, self.txtTotalEnergyValue)
