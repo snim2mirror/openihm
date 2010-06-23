@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageincomedetails.ui'
 #
-# Created: Tue Jun 08 13:55:08 2010
+# Created: Wed Jun 23 15:39:18 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -122,10 +122,10 @@ class Ui_ManageIncome(object):
         self.tab = QtGui.QWidget()
         self.tab.setObjectName("tab")
         self.label_32 = QtGui.QLabel(self.tab)
-        self.label_32.setGeometry(QtCore.QRect(280, 10, 271, 18))
+        self.label_32.setGeometry(QtCore.QRect(300, 10, 271, 18))
         self.label_32.setObjectName("label_32")
         self.transferTypesListView = QtGui.QListView(self.tab)
-        self.transferTypesListView.setGeometry(QtCore.QRect(5, 40, 251, 192))
+        self.transferTypesListView.setGeometry(QtCore.QRect(5, 40, 241, 192))
         self.transferTypesListView.setObjectName("transferTypesListView")
         self.btnTransferTypeDelete = QtGui.QPushButton(self.tab)
         self.btnTransferTypeDelete.setGeometry(QtCore.QRect(480, 140, 80, 28))
@@ -137,11 +137,17 @@ class Ui_ManageIncome(object):
         self.btnTransferTypeSave.setGeometry(QtCore.QRect(280, 140, 80, 28))
         self.btnTransferTypeSave.setObjectName("btnTransferTypeSave")
         self.txtTransferType = QtGui.QLineEdit(self.tab)
-        self.txtTransferType.setGeometry(QtCore.QRect(280, 40, 281, 28))
+        self.txtTransferType.setGeometry(QtCore.QRect(340, 40, 221, 28))
         self.txtTransferType.setObjectName("txtTransferType")
         self.txtTransferUnitofMeasure = QtGui.QLineEdit(self.tab)
-        self.txtTransferUnitofMeasure.setGeometry(QtCore.QRect(280, 90, 281, 28))
+        self.txtTransferUnitofMeasure.setGeometry(QtCore.QRect(340, 90, 221, 28))
         self.txtTransferUnitofMeasure.setObjectName("txtTransferUnitofMeasure")
+        self.label = QtGui.QLabel(self.tab)
+        self.label.setGeometry(QtCore.QRect(260, 100, 81, 16))
+        self.label.setObjectName("label")
+        self.label_2 = QtGui.QLabel(self.tab)
+        self.label_2.setGeometry(QtCore.QRect(260, 50, 71, 16))
+        self.label_2.setObjectName("label_2")
         self.tabTransferDetails.addTab(self.tab, "")
         self.tab_3 = QtGui.QWidget()
         self.tab_3.setObjectName("tab_3")
@@ -206,7 +212,7 @@ class Ui_ManageIncome(object):
         self.btnManageIncomeClose.setObjectName("btnManageIncomeClose")
 
         self.retranslateUi(ManageIncome)
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(4)
         self.tabTransferDetails.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(ManageIncome)
 
@@ -238,6 +244,8 @@ class Ui_ManageIncome(object):
         self.btnTransferTypeDelete.setText(QtGui.QApplication.translate("ManageIncome", "Delete", None, QtGui.QApplication.UnicodeUTF8))
         self.label_31.setText(QtGui.QApplication.translate("ManageIncome", "Select Transfer Type", None, QtGui.QApplication.UnicodeUTF8))
         self.btnTransferTypeSave.setText(QtGui.QApplication.translate("ManageIncome", "Save", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("ManageIncome", "Unit of Measure", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_2.setText(QtGui.QApplication.translate("ManageIncome", "Transfer Type", None, QtGui.QApplication.UnicodeUTF8))
         self.tabTransferDetails.setTabText(self.tabTransferDetails.indexOf(self.tab), QtGui.QApplication.translate("ManageIncome", "Assistance Type", None, QtGui.QApplication.UnicodeUTF8))
         self.label_35.setText(QtGui.QApplication.translate("ManageIncome", "Add/ Edit Transfer Source", None, QtGui.QApplication.UnicodeUTF8))
         self.btnTransferSourcesDelete.setText(QtGui.QApplication.translate("ManageIncome", "Delete", None, QtGui.QApplication.UnicodeUTF8))
