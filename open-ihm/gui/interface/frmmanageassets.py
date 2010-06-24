@@ -34,9 +34,8 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
         	self.getTradableGoodTypes()
         	
                 #set input validator and restrict input to numeric values,
-                myDblVal = QDoubleValidator(-999.99, 999999.99, 2, self.txtEnergyValue)
-                myDblVal.setNotation(QDoubleValidator.StandardNotation)
-                self.txtEnergyValue.setValidator(myDblVal);
+                myIntVal = QIntValidator(0, 10000, self.txtEnergyValue)
+                self.txtEnergyValue.setValidator(myIntVal);
       	
 
 		self.connect(self.btnAssetsClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)

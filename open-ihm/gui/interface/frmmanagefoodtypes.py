@@ -17,9 +17,8 @@ class FrmManageFoodTypes(Ui_FoodTypes):
         	self.getFoodTypes()
 
                 #set input validator and restrict input to numeric values,
-                myDblVal = QtGui.QDoubleValidator(-999.99, 999999.99, 2, self.txtKCalories)
-                myDblVal.setNotation(QtGui.QDoubleValidator.StandardNotation)
-                self.txtKCalories.setValidator(myDblVal);
+                myIntVal = QtGui.QIntValidator(0, 10000, self.txtKCalories)
+                self.txtKCalories.setValidator(myIntVal);
 
                 #connect relevant signals
 		QtCore.QObject.connect(self.cmdManageFoodClose, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
@@ -100,9 +99,10 @@ class FrmManageFoodTypes(Ui_FoodTypes):
 
         	# get user selection
         	myfoodtype = self.cmbFoodType.currentText()
+        	print myfoodtype
 
 		#check if record exists
-		query = '''SELECT foodtype, energyvalue, measuringunit
+		query = '''SELECT foodtype, energyvalueperunit, measuringunit
 				FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)  
 
       		p = GenericDBOP(query)

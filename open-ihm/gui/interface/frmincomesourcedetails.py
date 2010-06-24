@@ -32,13 +32,12 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		self.getTransferTypes()
 
 		#set input validator and restrict input to numeric values,
-                myDblVal = QDoubleValidator(-999.99, 999999.99, 2, self.txtEnergyValue)
-                myDblVal.setNotation(QDoubleValidator.StandardNotation)
-                
-                self.txtEnergyValue.setValidator(myDblVal)
-                self.txtLivestockUnit.setValidator(myDblVal)
-                self.txtLivestockEnergyValue.setValidator(myDblVal)
-                self.txtWildFoodEnergyValue.setValidator(myDblVal)
+                myIntVal = QIntValidator(0, 10000, self.txtEnergyValue)
+                                
+                self.txtEnergyValue.setValidator(myIntVal)
+                self.txtLivestockUnit.setValidator(myIntVal)
+                self.txtLivestockEnergyValue.setValidator(myIntVal)
+                self.txtWildFoodEnergyValue.setValidator(myIntVal)
 
 
 		# connect relevant signals and slots
