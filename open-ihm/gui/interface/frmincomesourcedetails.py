@@ -31,8 +31,18 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		self.getTransferSourceCategories()
 		self.getTransferTypes()
 
+		#set input validator and restrict input to numeric values,
+                myIntVal = QIntValidator(0, 10000, self.txtEnergyValue)
+                                
+                self.txtEnergyValue.setValidator(myIntVal)
+                self.txtLivestockUnit.setValidator(myIntVal)
+                self.txtLivestockEnergyValue.setValidator(myIntVal)
+                self.txtWildFoodEnergyValue.setValidator(myIntVal)
+
+
 		# connect relevant signals and slots
 		self.connect(self.btnManageIncomeClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
+
 		#signals for managing food types
 		self.connect(self.cropListView, SIGNAL("clicked(QModelIndex)"), self.pickselectedCropItem)
 		self.connect(self.btnCropSave, SIGNAL("clicked()"), self.saveCropType)

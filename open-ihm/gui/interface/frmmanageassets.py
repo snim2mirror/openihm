@@ -32,6 +32,11 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
         	self.getLandTypes()
         	self.getTreeTypes()
         	self.getTradableGoodTypes()
+        	
+                #set input validator and restrict input to numeric values,
+                myIntVal = QIntValidator(0, 10000, self.txtEnergyValue)
+                self.txtEnergyValue.setValidator(myIntVal);
+      	
 
 		self.connect(self.btnAssetsClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
 		#self.connect(self.listView.selectionModel(), SIGNAL("currentChanged(QModelIndex,QModelIndex)"), self.manageCategories)
