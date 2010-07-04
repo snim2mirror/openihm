@@ -6,8 +6,7 @@
 # imports from PyQt4 package
 from PyQt4 import QtGui, QtCore
 
-from data.config import Config
-import data.mysql.connector 
+from data.controller import Controller
 
 # import forms required to edit household
 from gui.designs.ui_project_open import Ui_OpenProject
@@ -20,9 +19,6 @@ class FrmOpenProject(QtGui.QDialog, Ui_OpenProject):
         QtGui.QDialog.__init__(self)
         self.setupUi(self)
         
-        self.parent = parent
-        self.config = Config.dbinfo().copy()
-        
         # get projects
         self.getProjects()
         
@@ -32,17 +28,11 @@ class FrmOpenProject(QtGui.QDialog, Ui_OpenProject):
         
     def getProjects(self):
         # connect to mysql database
-        db = data.mysql.connector.Connect(**self.config)
-        cursor = db.cursor()
+        controller = Controller()
         
-        # select query to retrieve project data
-        query = '''SELECT pid, projectname FROM projects'''
-        
-        cursor.execute(query)
-        
-        for row in cursor.fetchall():
-            projectid = row[0]
-            projectname = row[1]
+        for project in controller.getProjects():
+            projectid = project.getProjectID()
+            projectname = project.getProjectName()
             self.cboProjectName.addItem(projectname, QtCore.QVariant(projectid))
     
     def openProject(self):

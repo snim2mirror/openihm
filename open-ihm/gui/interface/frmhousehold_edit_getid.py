@@ -8,8 +8,7 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-from data.config import Config
-import data.mysql.connector 
+from data.controller import Controller
 
 # import forms required to edit household
 from gui.designs.ui_edithousehold_getid import Ui_EditHouseholdGetID
@@ -23,8 +22,6 @@ class FrmEditHouseholdGetID(QDialog, Ui_EditHouseholdGetID):
         QDialog.__init__(self)
         self.setupUi(self)
         
-        self.config = Config.dbinfo().copy()
-        
         # get projects
         self.getHouseholds()
         
@@ -33,19 +30,13 @@ class FrmEditHouseholdGetID(QDialog, Ui_EditHouseholdGetID):
         self.connect(self.cmdOk, SIGNAL("clicked()"), self.showDetails)
         
     def getHouseholds(self):
-        # connect to mysql database
-        db = data.mysql.connector.Connect(**self.config)
-        cursor = db.cursor()
+        controller = Controller()
+        project = controller.getProject( self.parent.projectid )
+        households = project.getHouseholds()
         
-        # select query to retrieve project data
-        query = '''SELECT hhid, householdname 
-                     FROM households WHERE pid=%i''' % (self.parent.projectid)
-        
-        cursor.execute(query)
-        
-        for row in cursor.fetchall():
-            hhid = row[0]
-            householdname = row[1]
+        for household in households:
+            hhid = household.getHouseholdID()
+            householdname = household.getHouseholdName()
             self.cboHouseholdName.addItem(householdname, QVariant(hhid))
     
     def showDetails(self):
