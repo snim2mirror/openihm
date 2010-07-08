@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_managefoodtypes.ui'
 #
-# Created: Tue Jun 01 20:34:18 2010
+# Created: Wed Jun 23 12:04:00 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -34,16 +34,15 @@ class Ui_FoodTypes(object):
         self.label_3 = QtGui.QLabel(FoodTypes)
         self.label_3.setGeometry(QtCore.QRect(10, 120, 91, 18))
         self.label_3.setObjectName("label_3")
-        self.cmbKCalories = QtGui.QComboBox(FoodTypes)
-        self.cmbKCalories.setGeometry(QtCore.QRect(120, 60, 131, 27))
-        self.cmbKCalories.setEditable(True)
-        self.cmbKCalories.setObjectName("cmbKCalories")
         self.label_4 = QtGui.QLabel(FoodTypes)
         self.label_4.setGeometry(QtCore.QRect(10, 60, 101, 18))
         self.label_4.setObjectName("label_4")
         self.cmdDelete = QtGui.QPushButton(FoodTypes)
         self.cmdDelete.setGeometry(QtCore.QRect(190, 170, 80, 28))
         self.cmdDelete.setObjectName("cmdDelete")
+        self.txtKCalories = QtGui.QLineEdit(FoodTypes)
+        self.txtKCalories.setGeometry(QtCore.QRect(120, 60, 131, 31))
+        self.txtKCalories.setObjectName("txtKCalories")
 
         self.retranslateUi(FoodTypes)
         QtCore.QMetaObject.connectSlotsByName(FoodTypes)

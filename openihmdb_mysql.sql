@@ -529,4 +529,4 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- User `openihm@localhost`
 -- -----------------------------------------------------
 
-GRANT ALL ON openihmdb.* TO openihm IDENTIFIED BY 'ihm2010'; 
+GRANT ALL ON openihmdb.* TO openihm@localhost IDENTIFIED BY 'ihm2010'; 

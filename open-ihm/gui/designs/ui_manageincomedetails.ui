@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="tabIncomeCrops">
     <attribute name="title">
@@ -422,7 +422,7 @@
       <widget class="QLabel" name="label_32">
        <property name="geometry">
         <rect>
-         <x>280</x>
+         <x>300</x>
          <y>10</y>
          <width>271</width>
          <height>18</height>
@@ -437,7 +437,7 @@
         <rect>
          <x>5</x>
          <y>40</y>
-         <width>251</width>
+         <width>241</width>
          <height>192</height>
         </rect>
        </property>
@@ -484,9 +484,9 @@
       <widget class="QLineEdit" name="txtTransferType">
        <property name="geometry">
         <rect>
-         <x>280</x>
+         <x>340</x>
          <y>40</y>
-         <width>281</width>
+         <width>221</width>
          <height>28</height>
         </rect>
        </property>
@@ -494,11 +494,37 @@
       <widget class="QLineEdit" name="txtTransferUnitofMeasure">
        <property name="geometry">
         <rect>
-         <x>280</x>
+         <x>340</x>
          <y>90</y>
-         <width>281</width>
+         <width>221</width>
          <height>28</height>
         </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>100</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Unit of Measure</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>50</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Transfer Type</string>
        </property>
       </widget>
      </widget>
