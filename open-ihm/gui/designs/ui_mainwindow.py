@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Thu Apr 29 17:22:07 2010
-#      by: PyQt4 UI code generator 4.3.3
+# Created: Wed Aug 18 18:43:26 2010
+#      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,158 +12,107 @@ from PyQt4 import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(QtCore.QSize(QtCore.QRect(0,0,800,600).size()).expandedTo(MainWindow.minimumSizeHint()))
-
+        MainWindow.resize(800, 600)
         self.centralwidget = QtGui.QWidget(MainWindow)
-        self.centralwidget.setGeometry(QtCore.QRect(0,26,800,551))
         self.centralwidget.setObjectName("centralwidget")
         MainWindow.setCentralWidget(self.centralwidget)
-
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0,0,800,26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
-
         self.menuProject = QtGui.QMenu(self.menubar)
         self.menuProject.setObjectName("menuProject")
-
         self.menuData_Management = QtGui.QMenu(self.menubar)
         self.menuData_Management.setObjectName("menuData_Management")
-
         self.menuHelp = QtGui.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
-
         self.menuHousehold = QtGui.QMenu(self.menubar)
         self.menuHousehold.setObjectName("menuHousehold")
         MainWindow.setMenuBar(self.menubar)
-
         self.statusbar = QtGui.QStatusBar(MainWindow)
-        self.statusbar.setGeometry(QtCore.QRect(0,577,800,23))
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
         self.actionDelete_Project = QtGui.QAction(MainWindow)
         self.actionDelete_Project.setObjectName("actionDelete_Project")
-
         self.actionEdit_Project = QtGui.QAction(MainWindow)
         self.actionEdit_Project.setObjectName("actionEdit_Project")
-
         self.actionOpen_Household = QtGui.QAction(MainWindow)
         self.actionOpen_Household.setObjectName("actionOpen_Household")
-
         self.actionConfigure_Project = QtGui.QAction(MainWindow)
         self.actionConfigure_Project.setObjectName("actionConfigure_Project")
-
         self.actionMembers = QtGui.QAction(MainWindow)
         self.actionMembers.setObjectName("actionMembers")
-
         self.actionExpenditure = QtGui.QAction(MainWindow)
         self.actionExpenditure.setObjectName("actionExpenditure")
-
         self.actionIncome = QtGui.QAction(MainWindow)
         self.actionIncome.setObjectName("actionIncome")
-
         self.actionAssets = QtGui.QAction(MainWindow)
         self.actionAssets.setObjectName("actionAssets")
-
         self.actionHousehold_Characteristics = QtGui.QAction(MainWindow)
         self.actionHousehold_Characteristics.setObjectName("actionHousehold_Characteristics")
-
         self.actionHousehold_Characteristics_2 = QtGui.QAction(MainWindow)
         self.actionHousehold_Characteristics_2.setObjectName("actionHousehold_Characteristics_2")
-
         self.actionPersonal_Characteristics = QtGui.QAction(MainWindow)
         self.actionPersonal_Characteristics.setObjectName("actionPersonal_Characteristics")
-
         self.actionAsset_Details = QtGui.QAction(MainWindow)
         self.actionAsset_Details.setObjectName("actionAsset_Details")
-
         self.actionIncome_Source_Details = QtGui.QAction(MainWindow)
         self.actionIncome_Source_Details.setObjectName("actionIncome_Source_Details")
-
         self.actionFood_Types = QtGui.QAction(MainWindow)
         self.actionFood_Types.setObjectName("actionFood_Types")
-
         self.actionLand_Types = QtGui.QAction(MainWindow)
         self.actionLand_Types.setObjectName("actionLand_Types")
-
         self.actionExpenditure_Types = QtGui.QAction(MainWindow)
         self.actionExpenditure_Types.setObjectName("actionExpenditure_Types")
-
         self.actionContents = QtGui.QAction(MainWindow)
         self.actionContents.setObjectName("actionContents")
-
-        self.actionIndex = QtGui.QAction(MainWindow)
-        self.actionIndex.setObjectName("actionIndex")
-
+        self.actionAboutOpenIHM = QtGui.QAction(MainWindow)
+        self.actionAboutOpenIHM.setObjectName("actionAboutOpenIHM")
         self.actionLivestock = QtGui.QAction(MainWindow)
         self.actionLivestock.setObjectName("actionLivestock")
-
         self.actionLivestock_Products = QtGui.QAction(MainWindow)
         self.actionLivestock_Products.setObjectName("actionLivestock_Products")
-
         self.actionTrees = QtGui.QAction(MainWindow)
         self.actionTrees.setObjectName("actionTrees")
-
         self.actionEmployment = QtGui.QAction(MainWindow)
         self.actionEmployment.setObjectName("actionEmployment")
-
         self.actionGifts = QtGui.QAction(MainWindow)
         self.actionGifts.setObjectName("actionGifts")
-
         self.actionExternal_Aid = QtGui.QAction(MainWindow)
         self.actionExternal_Aid.setObjectName("actionExternal_Aid")
-
         self.actionWild_Foods = QtGui.QAction(MainWindow)
         self.actionWild_Foods.setObjectName("actionWild_Foods")
-
         self.actionHunting_and_Fishing = QtGui.QAction(MainWindow)
         self.actionHunting_and_Fishing.setObjectName("actionHunting_and_Fishing")
-
         self.actionOther_Tradable_Goods = QtGui.QAction(MainWindow)
         self.actionOther_Tradable_Goods.setObjectName("actionOther_Tradable_Goods")
-
         self.actionView_All_Households = QtGui.QAction(MainWindow)
         self.actionView_All_Households.setObjectName("actionView_All_Households")
-
         self.actionHousehold_Data = QtGui.QAction(MainWindow)
         self.actionHousehold_Data.setObjectName("actionHousehold_Data")
-
         self.actionFind_Project = QtGui.QAction(MainWindow)
         self.actionFind_Project.setObjectName("actionFind_Project")
-
         self.actionCreate_Project = QtGui.QAction(MainWindow)
         self.actionCreate_Project.setObjectName("actionCreate_Project")
-
         self.actionOpen_Project = QtGui.QAction(MainWindow)
         self.actionOpen_Project.setObjectName("actionOpen_Project")
-
         self.actionClose_Project = QtGui.QAction(MainWindow)
         self.actionClose_Project.setObjectName("actionClose_Project")
-
         self.actionImport_Project_Data = QtGui.QAction(MainWindow)
         self.actionImport_Project_Data.setObjectName("actionImport_Project_Data")
-
         self.actionExport_Project_Data = QtGui.QAction(MainWindow)
         self.actionExport_Project_Data.setObjectName("actionExport_Project_Data")
-
         self.actionAdd_Household = QtGui.QAction(MainWindow)
         self.actionAdd_Household.setObjectName("actionAdd_Household")
-
         self.actionEdit_Household = QtGui.QAction(MainWindow)
         self.actionEdit_Household.setObjectName("actionEdit_Household")
-
         self.actionDelete_Household = QtGui.QAction(MainWindow)
         self.actionDelete_Household.setObjectName("actionDelete_Household")
-
         self.actionEnter_Household_Data = QtGui.QAction(MainWindow)
         self.actionEnter_Household_Data.setObjectName("actionEnter_Household_Data")
-
         self.actionExit = QtGui.QAction(MainWindow)
         self.actionExit.setObjectName("actionExit")
-
         self.actionFind_Household = QtGui.QAction(MainWindow)
         self.actionFind_Household.setObjectName("actionFind_Household")
-
         self.actionView_All_Households_2 = QtGui.QAction(MainWindow)
         self.actionView_All_Households_2.setObjectName("actionView_All_Households_2")
         self.menuProject.addAction(self.actionCreate_Project)
@@ -185,7 +134,7 @@ class Ui_MainWindow(object):
         self.menuData_Management.addAction(self.actionIncome_Source_Details)
         self.menuData_Management.addAction(self.actionPersonal_Characteristics)
         self.menuHelp.addAction(self.actionContents)
-        self.menuHelp.addAction(self.actionIndex)
+        self.menuHelp.addAction(self.actionAboutOpenIHM)
         self.menuHousehold.addAction(self.actionAdd_Household)
         self.menuHousehold.addAction(self.actionEdit_Household)
         self.menuHousehold.addAction(self.actionDelete_Household)
@@ -226,7 +175,7 @@ class Ui_MainWindow(object):
         self.actionExpenditure_Types.setText(QtGui.QApplication.translate("MainWindow", "Expenditure Details", None, QtGui.QApplication.UnicodeUTF8))
         self.actionContents.setText(QtGui.QApplication.translate("MainWindow", "Contents", None, QtGui.QApplication.UnicodeUTF8))
         self.actionContents.setShortcut(QtGui.QApplication.translate("MainWindow", "F1", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionIndex.setText(QtGui.QApplication.translate("MainWindow", "About Open IHM", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAboutOpenIHM.setText(QtGui.QApplication.translate("MainWindow", "About Open IHM", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLivestock.setText(QtGui.QApplication.translate("MainWindow", "Livestock", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLivestock_Products.setText(QtGui.QApplication.translate("MainWindow", "Livestock Products", None, QtGui.QApplication.UnicodeUTF8))
         self.actionTrees.setText(QtGui.QApplication.translate("MainWindow", "Trees", None, QtGui.QApplication.UnicodeUTF8))
