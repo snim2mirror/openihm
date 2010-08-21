@@ -24,7 +24,7 @@ class FrmEditProject(QtGui.QDialog, Ui_EditProject):
         # get current project details
         controller  = Controller()
         self.project     = controller.getProject( self.parent.projectid )
-        self.showProjectDetails()
+        self.getProjectData()
         
         # allow the calendar widget to pop up
         self.dtpStartDate.setCalendarPopup(True)
