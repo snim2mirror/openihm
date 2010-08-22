@@ -28,7 +28,7 @@ def rmoldpyc():
         excess_pyc_files = filter(lambda pyc_filename: pyc_filename[:-1] not in py_files, pyc_files)
         for excess_pyc_file in excess_pyc_files:
             full_path = os.path.join(root, excess_pyc_file)
-            print "Removing old PYC file:", full_path
+            print "Removing old .pyc file:", full_path
             os.remove(full_path)
     return False # Tell Mercurial to carry on, if this is a controlling hook.
 
