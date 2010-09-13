@@ -377,6 +377,20 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `openihmdb`.`lookup_energy_needs`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`lookup_energy_needs` ;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`lookup_energy_needs` (
+  `ageM` INT NOT NULL ,
+  `ageF` INT NOT NULL ,
+  `kCalNeedM` INT DEFAULT NULL,
+  `kCalNeedF` INT DEFAULT NULL,
+  PRIMARY KEY (ageM,ageF) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `openihmdb`.`setup_treetypes`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `openihmdb`.`setup_treetypes` ;
