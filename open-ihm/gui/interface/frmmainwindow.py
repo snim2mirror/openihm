@@ -33,6 +33,7 @@ from frmfindhousehold import FrmFindHousehold
 from frmfindhouseholdresults import FrmFindHouseholdResults
 from frmproject_open import FrmOpenProject
 from frm_about_openihm import FrmAboutOpenIHM
+from frmfoodenergy_requirements import  FrmFoodEnergyRequirements
 
 class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	''' Creates the Main Window of the application using the main 
@@ -84,6 +85,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.setWindowIcon(QtGui.QIcon('resources/images/openihm.png'))
 
 		self.connect(self.actionAboutOpenIHM, QtCore.SIGNAL("triggered()"), self.aboutOpenIHM)
+		self.connect(self.actionEnergy_Requirements, QtCore.SIGNAL("triggered()"), self.viewFoodEnergyRequirements)
 	
 	
 	def centerSubWindow(self, subWin):
@@ -279,3 +281,10 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    self.centerSubWindow(subWin)
 	    form.show()
 	    
+
+        def viewFoodEnergyRequirements(self):
+	    ''' Creates and Shows the View Food Energy Requirements form '''
+	    form = FrmFoodEnergyRequirements(self.mdi)
+	    subWin = self.mdi.addSubWindow(form)
+	    self.centerSubWindow(subWin)
+	    form.show()

@@ -50,6 +50,7 @@
     <addaction name="actionHousehold_Characteristics_2"/>
     <addaction name="actionIncome_Source_Details"/>
     <addaction name="actionPersonal_Characteristics"/>
+    <addaction name="actionEnergy_Requirements"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -288,6 +289,11 @@
   <action name="actionView_All_Households_2">
    <property name="text">
     <string>View All Households</string>
+   </property>
+  </action>
+  <action name="actionEnergy_Requirements">
+   <property name="text">
+    <string>Food Energy Requirements</string>
    </property>
   </action>
  </widget>

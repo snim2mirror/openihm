@@ -382,11 +382,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `openihmdb`.`lookup_energy_needs` ;
 
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`lookup_energy_needs` (
-  `ageM` INT NOT NULL ,
-  `ageF` INT NOT NULL ,
+  `age` INT NOT NULL ,
   `kCalNeedM` INT DEFAULT NULL,
   `kCalNeedF` INT DEFAULT NULL,
-  PRIMARY KEY (ageM,ageF) )
+  PRIMARY KEY (age) )
 ENGINE = InnoDB;
 
 
