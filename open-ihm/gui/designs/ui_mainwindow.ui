@@ -296,6 +296,11 @@
     <string>Food Energy Requirements</string>
    </property>
   </action>
+  <action name="actionAdd">
+   <property name="text">
+    <string>Add</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

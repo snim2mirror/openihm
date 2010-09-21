@@ -288,3 +288,4 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
 	    form.show()
+

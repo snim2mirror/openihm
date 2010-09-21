@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_foodenergy_requirements.ui'
 #
-# Created: Fri Sep 17 15:01:08 2010
+# Created: Tue Sep 21 14:51:08 2010
 #      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -14,33 +14,34 @@ try:
 except AttributeError:
     _fromUtf8 = lambda s: s
 
-class Ui_FrmFoodEnergyRequirements(object):
-    def setupUi(self, FrmFoodEnergyRequirements):
-        FrmFoodEnergyRequirements.setObjectName(_fromUtf8("FrmFoodEnergyRequirements"))
-        FrmFoodEnergyRequirements.resize(486, 317)
-        FrmFoodEnergyRequirements.setMinimumSize(QtCore.QSize(486, 317))
-        self.tblFoodEnergyRequirements = QtGui.QTableWidget(FrmFoodEnergyRequirements)
-        self.tblFoodEnergyRequirements.setGeometry(QtCore.QRect(0, 10, 481, 261))
-        self.tblFoodEnergyRequirements.setObjectName(_fromUtf8("tblFoodEnergyRequirements"))
-        self.tblFoodEnergyRequirements.setColumnCount(3)
-        self.tblFoodEnergyRequirements.setRowCount(0)
-        item = QtGui.QTableWidgetItem()
-        self.tblFoodEnergyRequirements.setHorizontalHeaderItem(0, item)
-        item = QtGui.QTableWidgetItem()
-        self.tblFoodEnergyRequirements.setHorizontalHeaderItem(1, item)
-        item = QtGui.QTableWidgetItem()
-        self.tblFoodEnergyRequirements.setHorizontalHeaderItem(2, item)
-        self.cmdFERequirementsClose = QtGui.QPushButton(FrmFoodEnergyRequirements)
-        self.cmdFERequirementsClose.setGeometry(QtCore.QRect(400, 290, 75, 23))
+class Ui_FoodEnergyRequirements(object):
+    def setupUi(self, FoodEnergyRequirements):
+        FoodEnergyRequirements.setObjectName(_fromUtf8("FoodEnergyRequirements"))
+        FoodEnergyRequirements.resize(452, 532)
+        FoodEnergyRequirements.setMinimumSize(QtCore.QSize(452, 532))
+        self.cmdFERequirementsClose = QtGui.QPushButton(FoodEnergyRequirements)
+        self.cmdFERequirementsClose.setGeometry(QtCore.QRect(370, 500, 75, 23))
         self.cmdFERequirementsClose.setObjectName(_fromUtf8("cmdFERequirementsClose"))
+        self.cmdAddRow = QtGui.QPushButton(FoodEnergyRequirements)
+        self.cmdAddRow.setGeometry(QtCore.QRect(70, 500, 75, 23))
+        self.cmdAddRow.setObjectName(_fromUtf8("cmdAddRow"))
+        self.cmdEditRow = QtGui.QPushButton(FoodEnergyRequirements)
+        self.cmdEditRow.setGeometry(QtCore.QRect(170, 500, 75, 23))
+        self.cmdEditRow.setObjectName(_fromUtf8("cmdEditRow"))
+        self.DeleteRow = QtGui.QPushButton(FoodEnergyRequirements)
+        self.DeleteRow.setGeometry(QtCore.QRect(270, 500, 75, 23))
+        self.DeleteRow.setObjectName(_fromUtf8("DeleteRow"))
+        self.tableView = QtGui.QTableView(FoodEnergyRequirements)
+        self.tableView.setGeometry(QtCore.QRect(0, 10, 441, 461))
+        self.tableView.setObjectName(_fromUtf8("tableView"))
 
-        self.retranslateUi(FrmFoodEnergyRequirements)
-        QtCore.QMetaObject.connectSlotsByName(FrmFoodEnergyRequirements)
+        self.retranslateUi(FoodEnergyRequirements)
+        QtCore.QMetaObject.connectSlotsByName(FoodEnergyRequirements)
 
-    def retranslateUi(self, FrmFoodEnergyRequirements):
-        FrmFoodEnergyRequirements.setWindowTitle(QtGui.QApplication.translate("FrmFoodEnergyRequirements", "View Food Energy Requirements", None, QtGui.QApplication.UnicodeUTF8))
-        self.tblFoodEnergyRequirements.horizontalHeaderItem(0).setText(QtGui.QApplication.translate("FrmFoodEnergyRequirements", "Age", None, QtGui.QApplication.UnicodeUTF8))
-        self.tblFoodEnergyRequirements.horizontalHeaderItem(1).setText(QtGui.QApplication.translate("FrmFoodEnergyRequirements", "FoodReqM", None, QtGui.QApplication.UnicodeUTF8))
-        self.tblFoodEnergyRequirements.horizontalHeaderItem(2).setText(QtGui.QApplication.translate("FrmFoodEnergyRequirements", "FoodReqF", None, QtGui.QApplication.UnicodeUTF8))
-        self.cmdFERequirementsClose.setText(QtGui.QApplication.translate("FrmFoodEnergyRequirements", "Close", None, QtGui.QApplication.UnicodeUTF8))
+    def retranslateUi(self, FoodEnergyRequirements):
+        FoodEnergyRequirements.setWindowTitle(QtGui.QApplication.translate("FoodEnergyRequirements", "Food Energy Requirements", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdFERequirementsClose.setText(QtGui.QApplication.translate("FoodEnergyRequirements", "Close", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdAddRow.setText(QtGui.QApplication.translate("FoodEnergyRequirements", "Add", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdEditRow.setText(QtGui.QApplication.translate("FoodEnergyRequirements", "Edit", None, QtGui.QApplication.UnicodeUTF8))
+        self.DeleteRow.setText(QtGui.QApplication.translate("FoodEnergyRequirements", "Delete", None, QtGui.QApplication.UnicodeUTF8))
 

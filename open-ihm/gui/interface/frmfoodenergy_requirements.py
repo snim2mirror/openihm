@@ -9,12 +9,12 @@ from PyQt4.QtGui import *
 from data.config import Config
 import data.mysql.connector 
 
-from gui.designs.ui_foodenergy_requirements import Ui_FrmFoodEnergyRequirements
-#from frmhouseholds_add import FrmAddHousehold
-#from frmhouseholds_edit import FrmEditHousehold
-#from frmhousehold_data import FrmHouseholdData
+from gui.designs.ui_foodenergy_requirements import Ui_FoodEnergyRequirements
+from frmfoodenergyrequirement_add import FrmAddEnergyRequirement
+from frmfoodenergyrequirement_edit import FrmEditEnergyRequirement
+from data.foodenergyrequirement import FoodEnergyRequirement
 
-class FrmFoodEnergyRequirements(QDialog, Ui_FrmFoodEnergyRequirements):	
+class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements):	
 	''' Creates the view food energy requirements form '''	
 	def __init__(self, parent):
 	    ''' Set up the dialog box interface '''
@@ -25,8 +25,199 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FrmFoodEnergyRequirements):
 	    self.config = Config.dbinfo().copy()
 	    
 	    # get food energy requirement details by sex and age
-	    #self.getFoodEnergyRequirements()
+	    self.getFoodEnergyRequirements()
 	    
 	    # connect relevant signals and slots
 	    self.connect(self.cmdFERequirementsClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
+	    self.connect(self.cmdAddRow, SIGNAL("clicked()"), self.addFoodEnergyRequirement)
+	    self.connect(self.DeleteRow, SIGNAL("clicked()"), self.deleteSelectedEnergyRequirements)
+	    self.connect(self.cmdEditRow, SIGNAL("clicked()"), self.editFoodEnergyRequirement)
 	
+
+	def getFoodEnergyRequirements(self):
+		# connect to mysql database
+		db = data.mysql.connector.Connect(**self.config)
+		cursor = db.cursor()
+		
+		# select query to retrieve project households
+                query = '''SELECT age, kCalNeedM, kCalNeedF FROM lookup_energy_needs'''
+                
+		cursor.execute(query)
+		
+		model = QStandardItemModel(1,2)
+				
+		# set model headers
+		model.setHorizontalHeaderItem(0,QStandardItem('''Person's Age'''))
+		model.setHorizontalHeaderItem(1,QStandardItem('Energy Requirement - Males'))
+		model.setHorizontalHeaderItem(2,QStandardItem('Energy Requirement - Females'))
+		
+		# add  data rows
+		num = 0
+	    
+		for row in cursor.fetchall():
+		    qtAge = QStandardItem( "%i" % row[0])
+		    qtAge.setTextAlignment( Qt.AlignCenter )
+		    
+		    qtEnergyRequirementMales = QStandardItem( "%i" % row[1] )
+		    qtEnergyRequirementMales.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
+		    
+		    qtEnergyRequirementFemales = QStandardItem( "%i" % row[2] )
+		    qtEnergyRequirementFemales.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
+		    
+		    model.setItem( num, 0, qtAge )
+		    model.setItem( num, 1, qtEnergyRequirementMales )
+		    model.setItem( num, 2, qtEnergyRequirementFemales )
+		    num = num + 1
+	    
+		self.tableView.setModel(model)
+		#self.tableView.verticalHeader().hide()
+                self.tableView.horizontalHeader().setResizeMode(0, QHeaderView.ResizeToContents)                                              
+		self.tableView.horizontalHeader().setResizeMode(1, QHeaderView.ResizeToContents)
+		self.tableView.horizontalHeader().setResizeMode(2, QHeaderView.ResizeToContents)
+		self.tableView.show()
+		
+		cursor.close()
+		db.close()
+		
+
+
+	def addFoodEnergyRequirement(self):
+		''' Show the Add Food Energy Requirement form '''
+		
+		form = FrmAddEnergyRequirement(self)
+		form.setWindowIcon(QIcon('resources/images/openihm.png'))
+		form.exec_()
+		self.getFoodEnergyRequirements()
+
+	def editFoodEnergyRequirement(self):
+		if self.countRowsSelected(self.tableView) != 0:
+			# get the age of the selected record
+			selectedRow = self.getCurrentRow(self.tableView)
+			selectedage = self.tableView.model().item(selectedRow,0).text()
+			energyreqmale = self.tableView.model().item(selectedRow,1).text()
+			energyreqfemale = self.tableView.model().item(selectedRow,2).text()
+
+			print energyreqmale
+			print energyreqfemale
+
+			# show edit food energy requirement form
+			form = FrmEditEnergyRequirement(self,selectedage,energyreqmale,energyreqfemale)
+			form.setWindowIcon(QIcon('resources/images/openihm.png'))
+			form.exec_()
+			self.getFoodEnergyRequirements()
+			
+		else:
+			QMessageBox.information(self,"Edit Food Energy Requirement","Please select the row containing a household to be edited.")
+
+
+	def deleteSelectedEnergyRequirements(self):
+
+		numSelected = self.countRowsSelected(self.tableView)
+		if  numSelected != 0:
+			# confirm deletion
+			if numSelected == 1:
+				msg = "Are you sure you want to delete the selected record?"
+			else:
+				msg = "Are you sure you want to delete the selected records?"
+				
+			ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+			# if deletion is rejected return without deleting
+			if ret == QMessageBox.No:
+				return
+			# get the age of the selected records
+			selectedRows = self.getSelectedRows(self.tableView)
+			selectedIds = []
+			for row in selectedRows:
+				selectedIds.append( self.tableView.model().item(row,0).text() )
+			 
+			# delete record with selected age
+			
+			db = data.mysql.connector.Connect(**self.config)
+			cursor =  db.cursor()
+			
+			for myage in selectedIds:
+				query = '''DELETE FROM lookup_energy_needs WHERE age=%s ''' % (myage)	
+				cursor.execute(query)
+				db.commit()
+    
+			# close database connection
+			cursor.close()
+			db.close()
+			
+			self.getFoodEnergyRequirements()
+
+		else:
+			QMessageBox.information(self,"Delete Food Energy Requirements","Please select the rows containing food energy requirements to be deleted.")
+
+	def countRowsSelected(self, tblVw):
+		selectedRows = self.getSelectedRows(tblVw)
+		return len(selectedRows)
+		
+	def getSelectedRows(self, tblVw):
+		
+		selectedRows = []
+		selectedIndexes = tblVw.selectedIndexes()
+		
+		for indexVal in selectedIndexes:
+			if indexVal.row() not in selectedRows:
+				selectedRows.append(indexVal.row())
+				
+		return selectedRows
+	
+	def getCurrentRow(self, tblVw):
+		indexVal = tblVw.currentIndex()
+		return indexVal.row()
+
+
+                '''#get selections
+                selection = QItemSelection()
+                #selection = self.tableView.selectionModel().selection()
+                selection = self.tableView.selectionModel().selectedIndexes()
+                myitem = selection[0]
+                print self.tableView.model().data(myitem,0)'''
+
+                '''      #find out selected rows
+                removeRows = []
+                for index in selection.indexes():
+                        if not (index.row () in removeRows): #.contains(index.row()):
+                                removeRows.append(index.row())
+
+                #loop through all selected rows
+                removeRows.sort()
+                print removeRows
+                
+                #i = 0
+                x = 0
+                count = removeRows.count(x)- 1
+                
+
+                #
+                final = -1
+                if not count == -1:
+                        for i in (0,x):
+                                current = removeRows[i]
+                                if not current == final:
+                                        model.removeRows( current, 1 )
+                                        final = current
+                        print i
+                        i = i + 1'''
+
+                        
+                        
+                '''for i in removeRows[i]:
+                        current = removeRows[i]
+                        if not current == prev:
+                                self.tableView.model.removeRows( current, 1 )
+                                prev = current
+                        i = i - 1'''
+                        
+                '''for i in (removeRows.count()-1):
+                        
+                        #decrement all rows after the current - as the row-number will change if we remove the current
+                        j = i
+                        for j in (removeRows.count()-1):
+                                if(removeRows.at(j) > removeRows.at(i)):
+                                        removeRows[j]--
+
+                        #remove the selected row
+                        self.tableView.model.removeRows(removeRows.at(i), 1)'''

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Fri Sep 17 14:21:31 2010
+# Created: Sun Sep 19 11:42:10 2010
 #      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -122,6 +122,8 @@ class Ui_MainWindow(object):
         self.actionView_All_Households_2.setObjectName(_fromUtf8("actionView_All_Households_2"))
         self.actionEnergy_Requirements = QtGui.QAction(MainWindow)
         self.actionEnergy_Requirements.setObjectName(_fromUtf8("actionEnergy_Requirements"))
+        self.actionAdd = QtGui.QAction(MainWindow)
+        self.actionAdd.setObjectName(_fromUtf8("actionAdd"))
         self.menuProject.addAction(self.actionCreate_Project)
         self.menuProject.addAction(self.actionOpen_Project)
         self.menuProject.addAction(self.actionFind_Project)
@@ -209,4 +211,5 @@ class Ui_MainWindow(object):
         self.actionFind_Household.setText(QtGui.QApplication.translate("MainWindow", "Find Household", None, QtGui.QApplication.UnicodeUTF8))
         self.actionView_All_Households_2.setText(QtGui.QApplication.translate("MainWindow", "View All Households", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEnergy_Requirements.setText(QtGui.QApplication.translate("MainWindow", "Food Energy Requirements", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAdd.setText(QtGui.QApplication.translate("MainWindow", "Add", None, QtGui.QApplication.UnicodeUTF8))
 
