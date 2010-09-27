@@ -51,6 +51,7 @@
     <addaction name="actionIncome_Source_Details"/>
     <addaction name="actionPersonal_Characteristics"/>
     <addaction name="actionEnergy_Requirements"/>
+    <addaction name="actionManage_Currencies"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -311,6 +312,11 @@
   <action name="actionHousehold_by_Characteristics">
    <property name="text">
     <string>Household by Characteristics</string>
+   </property>
+  </action>
+  <action name="actionManage_Currencies">
+   <property name="text">
+    <string>Manage Currencies</string>
    </property>
   </action>
  </widget>
