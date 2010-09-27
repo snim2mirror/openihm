@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Sun Sep 19 11:42:10 2010
+# Created: Sun Sep 26 18:56:25 2010
 #      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -32,6 +32,8 @@ class Ui_MainWindow(object):
         self.menuHelp.setObjectName(_fromUtf8("menuHelp"))
         self.menuHousehold = QtGui.QMenu(self.menubar)
         self.menuHousehold.setObjectName(_fromUtf8("menuHousehold"))
+        self.menuOutputs = QtGui.QMenu(self.menubar)
+        self.menuOutputs.setObjectName(_fromUtf8("menuOutputs"))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -124,6 +126,8 @@ class Ui_MainWindow(object):
         self.actionEnergy_Requirements.setObjectName(_fromUtf8("actionEnergy_Requirements"))
         self.actionAdd = QtGui.QAction(MainWindow)
         self.actionAdd.setObjectName(_fromUtf8("actionAdd"))
+        self.actionHousehold_by_Characteristics = QtGui.QAction(MainWindow)
+        self.actionHousehold_by_Characteristics.setObjectName(_fromUtf8("actionHousehold_by_Characteristics"))
         self.menuProject.addAction(self.actionCreate_Project)
         self.menuProject.addAction(self.actionOpen_Project)
         self.menuProject.addAction(self.actionFind_Project)
@@ -153,9 +157,11 @@ class Ui_MainWindow(object):
         self.menuHousehold.addSeparator()
         self.menuHousehold.addAction(self.actionFind_Household)
         self.menuHousehold.addAction(self.actionView_All_Households_2)
+        self.menuOutputs.addAction(self.actionHousehold_by_Characteristics)
         self.menubar.addAction(self.menuProject.menuAction())
         self.menubar.addAction(self.menuHousehold.menuAction())
         self.menubar.addAction(self.menuData_Management.menuAction())
+        self.menubar.addAction(self.menuOutputs.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -167,6 +173,7 @@ class Ui_MainWindow(object):
         self.menuData_Management.setTitle(QtGui.QApplication.translate("MainWindow", "Data &Management", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHelp.setTitle(QtGui.QApplication.translate("MainWindow", "&Help", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHousehold.setTitle(QtGui.QApplication.translate("MainWindow", "Household", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuOutputs.setTitle(QtGui.QApplication.translate("MainWindow", "Reports", None, QtGui.QApplication.UnicodeUTF8))
         self.actionDelete_Project.setText(QtGui.QApplication.translate("MainWindow", "Delete Project", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEdit_Project.setText(QtGui.QApplication.translate("MainWindow", "Edit Project", None, QtGui.QApplication.UnicodeUTF8))
         self.actionOpen_Household.setText(QtGui.QApplication.translate("MainWindow", "Edit Household", None, QtGui.QApplication.UnicodeUTF8))
@@ -212,4 +219,5 @@ class Ui_MainWindow(object):
         self.actionView_All_Households_2.setText(QtGui.QApplication.translate("MainWindow", "View All Households", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEnergy_Requirements.setText(QtGui.QApplication.translate("MainWindow", "Food Energy Requirements", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAdd.setText(QtGui.QApplication.translate("MainWindow", "Add", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionHousehold_by_Characteristics.setText(QtGui.QApplication.translate("MainWindow", "Household by Characteristics", None, QtGui.QApplication.UnicodeUTF8))
 

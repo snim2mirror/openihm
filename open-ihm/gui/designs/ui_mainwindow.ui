@@ -72,9 +72,16 @@
     <addaction name="actionFind_Household"/>
     <addaction name="actionView_All_Households_2"/>
    </widget>
+   <widget class="QMenu" name="menuOutputs">
+    <property name="title">
+     <string>Reports</string>
+    </property>
+    <addaction name="actionHousehold_by_Characteristics"/>
+   </widget>
    <addaction name="menuProject"/>
    <addaction name="menuHousehold"/>
    <addaction name="menuData_Management"/>
+   <addaction name="menuOutputs"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -299,6 +306,11 @@
   <action name="actionAdd">
    <property name="text">
     <string>Add</string>
+   </property>
+  </action>
+  <action name="actionHousehold_by_Characteristics">
+   <property name="text">
+    <string>Household by Characteristics</string>
    </property>
   </action>
  </widget>
