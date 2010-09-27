@@ -34,6 +34,7 @@ from frmfindhouseholdresults import FrmFindHouseholdResults
 from frmproject_open import FrmOpenProject
 from frm_about_openihm import FrmAboutOpenIHM
 from frmfoodenergy_requirements import  FrmFoodEnergyRequirements
+from frmcurrencymanager import FrmCurrencyManager
 
 class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	''' Creates the Main Window of the application using the main 
@@ -86,8 +87,8 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
 		self.connect(self.actionAboutOpenIHM, QtCore.SIGNAL("triggered()"), self.aboutOpenIHM)
 		self.connect(self.actionEnergy_Requirements, QtCore.SIGNAL("triggered()"), self.viewFoodEnergyRequirements)
-	
-	
+		self.connect(self.actionManage_Currencies, QtCore.SIGNAL("triggered()"), self.manageCurrencies)
+
 	def centerSubWindow(self, subWin):
 	    ''' Moves a subwindow to the center of the Mdi Area'''
 	    screen = self.mdi.geometry()
@@ -273,8 +274,15 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    self.centerSubWindow(subWin)
 	    form.show()
 
+	def manageCurrencies(self):
+	    ''' Creates and Shows the Find Project form '''
+	    form = FrmCurrencyManager(self)
+	    subWin = self.mdi.addSubWindow(form)
+	    self.centerSubWindow(subWin)
+	    form.show()
+
 	    
-        def aboutOpenIHM(self):
+	def aboutOpenIHM(self):
 	    ''' Creates and Shows the About OpenIHM form '''
 	    form = FrmAboutOpenIHM(self.mdi)
 	    subWin = self.mdi.addSubWindow(form)
@@ -282,7 +290,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    form.show()
 	    
 
-        def viewFoodEnergyRequirements(self):
+	def viewFoodEnergyRequirements(self):
 	    ''' Creates and Shows the View Food Energy Requirements form '''
 	    form = FrmFoodEnergyRequirements(self.mdi)
 	    subWin = self.mdi.addSubWindow(form)
