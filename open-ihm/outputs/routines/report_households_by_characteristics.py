@@ -13,14 +13,12 @@ class HouseholdsByCharacteristics:
     def buildPCharacteristicsQuery(self,pcharacteristics, tablename):
         ''' build query for selecting households that meet selected personal characteristics from the report interface'''
         
-        #settingsmanager = ReportsSettingsManager()
         houseid = tablename + '.hhid'
         
         basequery = '''SELECT households.hhid, households.householdname FROM households JOIN %s ON households.hhid = %s''' % (tablename,houseid)
         for coulumnname in pcharacteristics:
             currentcolumn =  tablename + '.' + coulumnname
             basequery = basequery + ' and %s IS NOT NULL' % (currentcolumn)
-        print basequery
         return basequery
         
     def buildHCharacteristicsQuery(self,hcharacteristics, tablename):
@@ -33,30 +31,27 @@ class HouseholdsByCharacteristics:
         for coulumnname in hcharacteristics:
             currentcolumn =  tablename + '.' + coulumnname
             basequery = basequery + ' and %s IS NOT NULL' % (currentcolumn)
-        print basequery
         return basequery
 
-    def getReportTable(self,projectid,pquery,hquery):
+    def getReportTable(self,projectid,pcharselected,hcharselected,pquery,hquery):
         ''' generate report tables'''
         
         pcharstable =self.getPcharacteristicsTable(pquery)
         hcharstable = self.getHcharacteristicsTable(hquery)
         x = len(pcharstable)
         y = len(hcharstable)
+        reporttable = []
 
-        #if x != 0 and y !=0: this line has been commented out bcoz the interface currently provides no way to add pchars so the pcharstable is always empty
-        #if y !=0:
-        #query = '''SELECT households.hhid, households.householdname FROM households WHERE households.hhid IN (%s) ''' % htuple
-        query = ''' SELECT * FROM (%s UNION ALL %s) AS tbl GROUP BY tbl.hhid HAVING COUNT(*) = 2''' % (pquery,hquery)
-        #query = ''' %s  UNION %s''' % (pquery,hquery)
-        print query
-        self.database.open()
-        reporttable = self.database.execSelectQuery( query )
-        
-        self.database.close()
-        #else: reporttable = []
-        print reporttable
-        return reporttable
+        if (x ==0 and y== 0)or (x == 0 and pcharselected !=0)or (y == 0 and hcharselected !=0):
+            return reporttable
+        elif (x !=0 and y != 0):
+            query = ''' SELECT * FROM (%s UNION ALL %s) AS tbl GROUP BY tbl.hhid HAVING COUNT(*) = 2''' % (pquery,hquery)
+            reporttable = self.getFinalReportTableData(query)
+            return reporttable
+        elif (x == 0 and pcharselected ==0):
+            return hcharstable
+        elif (y == 0 and hcharselected ==0):
+            return pcharstable
 
     def getPcharacteristicsTable(self,pquery):
         ''' get households where selected personal characteristics from the interface are met'''
@@ -72,4 +67,10 @@ class HouseholdsByCharacteristics:
         self.database.close()
         return htable
     
+    def getFinalReportTableData(self, query):
+        '''get reporttable where user has selected both household and personal characteristics as output criteria'''
+        self.database.open()
+        reporttable = self.database.execSelectQuery( query )
+        self.database.close()
+        return reporttable
         

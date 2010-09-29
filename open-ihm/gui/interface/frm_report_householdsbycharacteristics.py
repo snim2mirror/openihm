@@ -29,7 +29,7 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
         	self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
         	self.connect(self.cmbProjectNames, SIGNAL("currentIndexChanged(int)"), self.getHouseholdCharacteristics)
         	self.connect(self.cmbProjectNames, SIGNAL("currentIndexChanged(int)"), self.getPersonalCharacteristics)
-        	self.connect(self.cmdGenerateReport, SIGNAL("clicked()"), self.getReportData)
+        	self.connect(self.cmdGenerateReport, SIGNAL("clicked()"), self.writeReport)
 
 
 
@@ -166,16 +166,20 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
                 pquery = self.getPersonalCharacteristicsQuery()
                 hquery = self.getHouseholdCharacteristicsQuery()
                 projectid = self.getProjectID()
+                
+                #check if any characteristics have been selected
+                pcharselected = len(self.getSelectedPIndexes())
+                hcharselected = len(self.getSelectedHIndexes())
+                
                 reporttable = []
                 report = HouseholdsByCharacteristics()
-                reporttable = report.getReportTable(projectid,pquery,hquery)
-                print reporttable
+                reporttable = report.getReportTable(projectid,pcharselected,hcharselected,pquery,hquery)
                 return reporttable
                 
-        '''def writeReport(self):
+        def writeReport(self):
                 # write report in a spreadsheet file
 
                 freporttable = self.getReportData()
                 report = HouseholdsByCharacteristicsWrite()
                 print freporttable
-                report.writeSpreadsheetReport(freporttable)'''
+                report.writeSpreadsheetReport(freporttable)
