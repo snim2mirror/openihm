@@ -7,9 +7,11 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-# import the About OpenIHM design class
+# import packages
 from gui.designs.ui_report_householdsbycharacteristics import Ui_HouseHoldReport
 from data.report_settingsmanager import ReportsSettingsManager
+from outputs.routines.report_households_by_characteristics import HouseholdsByCharacteristics
+from outputs.routines.report_households_by_characteristics_write import HouseholdsByCharacteristicsWrite
 
 class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):	
 	''' Creates the Report Households by Characteristics from. Uses the design class
@@ -27,11 +29,13 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
         	self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
         	self.connect(self.cmbProjectNames, SIGNAL("currentIndexChanged(int)"), self.getHouseholdCharacteristics)
         	self.connect(self.cmbProjectNames, SIGNAL("currentIndexChanged(int)"), self.getPersonalCharacteristics)
-        	self.connect(self.cmdGenerateReport, SIGNAL("clicked()"), self.getHouseholdCharacteristicsQuery)
-        	self.connect(self.cmdGenerateReport, SIGNAL("clicked()"), self.getPersonalCharacteristicsQuery)
+        	self.connect(self.cmdGenerateReport, SIGNAL("clicked()"), self.getReportData)
+
 
 
         def getProjectNames(self):
+                ''' populate projects combobox with available projects'''
+                
                 settingsmgr = ReportsSettingsManager()
                 rows = settingsmgr.getProjectNames()
 
@@ -43,9 +47,14 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
                 self.cmbHouseholds.setCurrentIndex(-1)
 
         def getselectedProject(self):
+                ''' get name of project selected by user'''
+                
                 selectproject = self.cmbProjectNames.currentText()
                 
         def getProjectID(self):
+
+                ''' get ID for the selected project'''
+                
                 selectedproject = self.cmbProjectNames.currentText()
                 if selectedproject !="":
                         settingsmgr = ReportsSettingsManager()
@@ -54,6 +63,8 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
                 else: return 0
                 
         def getHouseholdCharacteristics(self):
+                ''' get household characteristics relevant to selected project'''
+                
                 projectid = self.getProjectID()
                 settingsmgr = ReportsSettingsManager()
                 rows = settingsmgr.getHouseholdCharacteristics(projectid)
@@ -73,6 +84,8 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
                 self.listViewHCharacteristics.show()	
 
         def getPersonalCharacteristics(self):
+                ''' get personal characteristics relevant to the elected project'''
+                
                 projectid = self.getProjectID()
                 settingsmgr = ReportsSettingsManager()
                 rows = settingsmgr.getPersonalCharacteristics(projectid)
@@ -93,6 +106,7 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
                 self.listViewPersonalCharacteristics.show()	
 
 	def getSelectedHouseholdCharacteristics(self):
+                ''' get list of user selected household characteristics as part of the criteria for report generation'''
 		
 		selectedHChars = []
 		selectedIndexes = self.listViewHCharacteristics.selectedIndexes()
@@ -100,11 +114,11 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
 		for indexVal in selectedIndexes:
                         currentitem = self.listViewHCharacteristics.model().item(indexVal.row(),0).text()
 			if currentitem not in selectedHChars:
-				selectedHChars.append(currentitem)
-		print selectedHChars		
+				selectedHChars.append(str(currentitem))
 		return selectedHChars
 
 	def getSelectedPersonalCharacteristics(self):
+                ''' get list of user selected househpersonal characteristics as part of the criteria for report generation'''
 		
 		selectedRows = []
 		selectedIndexes = self.listViewPersonalCharacteristics.selectedIndexes()
@@ -112,21 +126,50 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
 		for indexVal in selectedIndexes:
                         currentitem = self.listViewPersonalCharacteristics.model().item(indexVal.row(),0).text()
 			if currentitem not in selectedRows:
-				selectedRows.append(currentitem)
-		print selectedRows		
+				selectedRows.append(str(currentitem))
 		return selectedRows
 	 
 
         def getPersonalCharacteristicsQuery(self):
+                ''' build query for selecting household that match the selected personal characteristics'''
+                
                 selectedRows = []
                 selectedRows = self.getSelectedPersonalCharacteristics()
-                
+                projectid = self.getProjectID()
+                pchars = ReportsSettingsManager ()
+                tablename = pchars.setPCharacteristicsTableName(projectid)
+                households = HouseholdsByCharacteristics()
+                pquery = households.buildPCharacteristicsQuery(selectedRows,tablename)
+                return pquery
                 
         def getHouseholdCharacteristicsQuery(self):
+                ''' build query for selecting household that match the selected household characteristics'''
+                
                 selectedHChars = []
                 selectedHChars = self.getSelectedHouseholdCharacteristics()
+                projectid = self.getProjectID()
+                hchars = ReportsSettingsManager ()
+                tablename = hchars.setHCharacteristicsTableName(projectid)
+                households = HouseholdsByCharacteristics()
+                hquery = households.buildHCharacteristicsQuery(selectedHChars,tablename)
+                return hquery
                 
         def getReportData(self):
-                pass
-        def writeReport(self):
-                pass
+                ''' get households that meet the combined criteria of household and personal characteristics'''
+                
+                pquery = self.getPersonalCharacteristicsQuery()
+                hquery = self.getHouseholdCharacteristicsQuery()
+                projectid = self.getProjectID()
+                reporttable = []
+                report = HouseholdsByCharacteristics()
+                reporttable = report.getReportTable(projectid,pquery,hquery)
+                print reporttable
+                return reporttable
+                
+        '''def writeReport(self):
+                # write report in a spreadsheet file
+
+                freporttable = self.getReportData()
+                report = HouseholdsByCharacteristicsWrite()
+                print freporttable
+                report.writeSpreadsheetReport(freporttable)'''

@@ -3,8 +3,6 @@
 #-------------------------------------------------------------------
 
 from database import Database
-#from globalhouseholdcharacteristic import GlobalHouseholdCharacteristic
-#from globalpersoncharacteristic import GlobalPersonCharacteristic
 
 class ReportsSettingsManager:
     def __init__(self):
@@ -33,7 +31,7 @@ class ReportsSettingsManager:
         rows =[]
         
         if projectid != 0: 
-            tablename = 'p' + '%s' %(projectid) + 'householdcharacteristics'
+            tablename = self.setHCharacteristicsTableName(projectid)
             query = '''SELECT column_name FROM information_schema.columns WHERE table_name='%s' ''' % (tablename)
             self.database.open()
             rows = self.database.execSelectQuery( query )
@@ -44,7 +42,8 @@ class ReportsSettingsManager:
         
         rows =[]
         if projectid != 0:
-            tablename = 'p' + '%s' %(projectid) + 'personalcharacteristics'
+            
+            tablename = self.setPCharacteristicsTableName(projectid)
             query = '''SELECT column_name FROM information_schema.columns WHERE table_name='%s' ''' % (tablename)
             self.database.open()
             rows = self.database.execSelectQuery( query )
@@ -63,4 +62,10 @@ class ReportsSettingsManager:
             self.database.close()
         return rows
        
-        
+    def setPCharacteristicsTableName(self, projectid):
+        tablename = 'p' + '%s' %(projectid) + 'personalcharacteristics'
+        return tablename
+         
+    def setHCharacteristicsTableName(self, projectid):
+        tablename = 'p' + '%s' %(projectid) + 'householdcharacteristics'
+        return tablename
