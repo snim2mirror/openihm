@@ -84,7 +84,7 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
                 self.listViewHCharacteristics.show()	
 
         def getPersonalCharacteristics(self):
-                ''' get personal characteristics relevant to the elected project'''
+                ''' get personal characteristics relevant to the selected project'''
                 
                 projectid = self.getProjectID()
                 settingsmgr = ReportsSettingsManager()
@@ -109,7 +109,7 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
                 ''' get list of user selected household characteristics as part of the criteria for report generation'''
 		
 		selectedHChars = []
-		selectedIndexes = self.listViewHCharacteristics.selectedIndexes()
+		selectedIndexes = self.getSelectedHIndexes()
 		
 		for indexVal in selectedIndexes:
                         currentitem = self.listViewHCharacteristics.model().item(indexVal.row(),0).text()
@@ -117,18 +117,24 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
 				selectedHChars.append(str(currentitem))
 		return selectedHChars
 
+        def getSelectedHIndexes(self):
+                return self.listViewHCharacteristics.selectedIndexes()
+
 	def getSelectedPersonalCharacteristics(self):
                 ''' get list of user selected househpersonal characteristics as part of the criteria for report generation'''
 		
 		selectedRows = []
-		selectedIndexes = self.listViewPersonalCharacteristics.selectedIndexes()
+		selectedIndexes = self.getSelectedPIndexes()
 		
 		for indexVal in selectedIndexes:
                         currentitem = self.listViewPersonalCharacteristics.model().item(indexVal.row(),0).text()
 			if currentitem not in selectedRows:
 				selectedRows.append(str(currentitem))
 		return selectedRows
-	 
+
+
+        def getSelectedPIndexes(self):
+                return self.listViewPersonalCharacteristics.selectedIndexes()
 
         def getPersonalCharacteristicsQuery(self):
                 ''' build query for selecting household that match the selected personal characteristics'''

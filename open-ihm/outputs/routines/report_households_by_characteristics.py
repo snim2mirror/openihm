@@ -43,21 +43,12 @@ class HouseholdsByCharacteristics:
         hcharstable = self.getHcharacteristicsTable(hquery)
         x = len(pcharstable)
         y = len(hcharstable)
-        pidlist =[]
-        for row in pcharstable:
-            pidlist.append(row[0])
-        
-        hidlist =[]
-        for row in hcharstable:
-            hidlist.append(row[0])
-        htuple = tuple(hidlist)
-        print str(htuple)
 
         #if x != 0 and y !=0: this line has been commented out bcoz the interface currently provides no way to add pchars so the pcharstable is always empty
         #if y !=0:
-        query = '''SELECT households.hhid, households.householdname FROM households WHERE households.hhid IN (%s) ''' % htuple
-            #query = ''' %s WHERE households.hhid IN (%s)''' % (pquery,hquery)
-        #query = ''' %s JOIN (%s) ON pchars.hhid=hchars.hid''' % (pquery,hquery)
+        #query = '''SELECT households.hhid, households.householdname FROM households WHERE households.hhid IN (%s) ''' % htuple
+        query = ''' SELECT * FROM (%s UNION ALL %s) AS tbl GROUP BY tbl.hhid HAVING COUNT(*) = 2''' % (pquery,hquery)
+        #query = ''' %s  UNION %s''' % (pquery,hquery)
         print query
         self.database.open()
         reporttable = self.database.execSelectQuery( query )
