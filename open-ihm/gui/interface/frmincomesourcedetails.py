@@ -161,18 +161,21 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 			numrows = numrows + 1
 
 		if numrows <> 0:
-			
-			query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)
+                        			
+                        msg = "Are sure sure you want to delete this record?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)
 
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
 			
-        		#self.cmbKCalories.clear()
+                                #self.cmbKCalories.clear()
 			
-			#refresh categories list
-			self.getCropTypes()			
+                                #refresh categories list
+                                self.getCropTypes()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
@@ -250,17 +253,17 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 
 		if numrows <> 0:
 			
-			query = '''DELETE FROM setup_employment WHERE incomesource='%s' ''' % (employment)
+                        msg = "Are sure sure you want to delete this Employment Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                query = '''DELETE FROM setup_employment WHERE incomesource='%s' ''' % (employment)
 
-			
-        		#self.cmbKCalories.clear()
-			
-			#refresh categories list
-			self.getEmploymentCategories()			
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
+                                #refresh categories list
+                                self.getEmploymentCategories()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
@@ -355,17 +358,17 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 
 		if numrows <> 0:
 			
-			query = '''DELETE FROM setup_wildfoods WHERE incomesource='%s' ''' % (myincomesource)
+                        msg = "Are sure sure you want to delete this Food Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                query = '''DELETE FROM setup_wildfoods WHERE incomesource='%s' ''' % (myincomesource)
 
-			
-        		#self.cmbKCalories.clear()
-			
-			#refresh categories list
-			self.getWildFoodTypes()			
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
+                                #refresh categories list
+                                self.getWildFoodTypes()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
@@ -460,17 +463,17 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 
 		if numrows <> 0:
 			
-			query = '''DELETE FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)
+                        msg = "Are sure sure you want to delete this Livestock Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                query = '''DELETE FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)
 
-			
-        		#self.cmbKCalories.clear()
-			
-			#refresh categories list
-			self.getLivestockTypes()			
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
+                                #refresh categories list
+                                self.getLivestockTypes()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
@@ -549,17 +552,21 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 
 		if numrows <> 0:
 			
-			query = '''DELETE FROM setup_transfersources WHERE sourcetype='%s' ''' % (mytransfersource)
+                        msg = "Are sure sure you want to delete this Transfer Source Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                query = '''DELETE FROM setup_transfersources WHERE sourcetype='%s' ''' % (mytransfersource)
+
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
 
 			
-        		self.txtTransferSources.clear()
+                                self.txtTransferSources.clear()
 			
-			#refresh categories list
-			self.getTransferSourceCategories()			
+                                #refresh categories list
+                                self.getTransferSourceCategories()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Transfer Source', "Record not found")
@@ -637,7 +644,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		self.getTransferTypes()               
                 
 	def deleteTransferType(self):
-		''' Deletes record from database '''
+		''' Deletes Transfer Type record from database '''
 
         	# get the data entered by user
         	mytransfertype = self.txtTransferType.text()		
@@ -653,19 +660,20 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 
 		if numrows <> 0:
 			
-			query = '''DELETE FROM setup_transfers WHERE assistancetype='%s' ''' % (mytransfertype)
+                        msg = "Are sure sure you want to delete this record?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                query = '''DELETE FROM setup_transfers WHERE assistancetype='%s' ''' % (mytransfertype)
 
-			
-        		#self.cmbKCalories.clear()
-			
-			#refresh categories list
-			self.getTransferTypes()
-                        self.txtTransferType.clear()
-                        self.txtTransferUnitofMeasure.clear()
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
+
+                                #refresh categories list
+                                self.getTransferTypes()
+                                self.txtTransferType.clear()
+                                self.txtTransferUnitofMeasure.clear()
 			
 			
 		else:

@@ -4,8 +4,9 @@
 #	Class to create the form for adding, editing, or deleting Household characteristics - FrmHouseCharacteristics.
 #----------------------------------------------------------------------------------------------------------------------
 
-# imports from PyQt4 package
-from PyQt4 import QtGui, QtCore
+#from PyQt4 import QtGui, QtCore
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 
 # import the Create House Characteristics Dialog design class
 from gui.designs.ui_housecharacteristics import Ui_HouseCharacteristics
@@ -13,18 +14,23 @@ from gui.designs.ui_housecharacteristics import Ui_HouseCharacteristics
 #Import class with persistence management methods
 from data.GenericDBOP import GenericDBOP
 
-class FrmHouseCharacteristics(Ui_HouseCharacteristics):		
-	def setupUi(self,Form,Mdi):
-		Ui_HouseCharacteristics.setupUi(self,Form)
+class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics):		
+        ''' Creates the Edit Project form. '''	
+        def __init__(self, parent):
+                
+                ''' Set up the dialog box interface '''
+                self.parent = parent
+                QDialog.__init__(self)
+                self.setupUi(self)
 		
 
 		# get personal type
         	self.getHouseholdCharacteristics()
 		
-		QtCore.QObject.connect(self.btnCharacteristicSave, QtCore.SIGNAL("clicked()"), self.saveHouseholdCharacteristic)
-		QtCore.QObject.connect(self.btnCharacteristicDelete, QtCore.SIGNAL("clicked()"), self.deleteHouseholdCharacteristic)
-		QtCore.QObject.connect(self.cmbCharacteristic, QtCore.SIGNAL("currentIndexChanged(int)"), self.populateForm)
-		QtCore.QObject.connect(self.btnHouseClose, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
+		self.connect(self.btnCharacteristicSave, SIGNAL("clicked()"), self.saveHouseholdCharacteristic)
+		self.connect(self.btnCharacteristicDelete, SIGNAL("clicked()"), self.deleteHouseholdCharacteristic)
+		self.connect(self.cmbCharacteristic, SIGNAL("currentIndexChanged(int)"), self.populateForm)
+		self.connect(self.btnHouseClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
 	
 	def getHouseholdCharacteristics(self):
                	# select query to retrieve Food Types and related information
@@ -132,19 +138,23 @@ class FrmHouseCharacteristics(Ui_HouseCharacteristics):
 			numrows = numrows + 1
 
 		if numrows <> 0:
-			
-			query = '''DELETE FROM globalhouseholdcharacteristics WHERE characteristic='%s' ''' % (mycharacteristic)
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
-
-			self.cmbCharacteristic.clear()
-			self.cmbDataType.clear()
-        		self.txtDescription.clear()
+                        msg = "Are sure sure you want to delete this Household Characteristic?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 			
-			#populate Food Types Combobox
-			self.getHouseholdCharacteristics()			
+                                query = '''DELETE FROM globalhouseholdcharacteristics WHERE characteristic='%s' ''' % (mycharacteristic)
+
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
+
+                                self.cmbCharacteristic.clear()
+                                self.cmbDataType.clear()
+                                self.txtDescription.clear()
+			
+                                #populate Food Types Combobox
+                                self.getHouseholdCharacteristics()			
 			
 		else:
 			QMessageBox.information(self, 'Household Characteristic', "Record not found")

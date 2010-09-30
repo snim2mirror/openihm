@@ -5,24 +5,28 @@
 #----------------------------------------------------------------------------------------------------------------------
 
 # imports from PyQt4 package
-from PyQt4 import QtGui, QtCore
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
 
 from data.GenericDBOP import GenericDBOP
 
 # import the Create House Characteristics Dialog design class
 from gui.designs.ui_personalcharacteristics import Ui_PersonalCharacteristics
 
-class FrmPersonalCharacteristics(Ui_PersonalCharacteristics):		
-	def setupUi(self,Form,Mdi):
-		Ui_PersonalCharacteristics.setupUi(self,Form)
+class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics):
+        def __init__(self, parent):
+                ''' Set up the dialog box interface '''
+                self.parent = parent
+                QDialog.__init__(self)
+                self.setupUi(self)
 
 		# get personal type
         	self.getPersonalCharacteristics()
 		
-		QtCore.QObject.connect(self.btnCharacteristicSave, QtCore.SIGNAL("clicked()"), self.savePersonalCharacteristic)
-		QtCore.QObject.connect(self.btnCharacteristicDelete, QtCore.SIGNAL("clicked()"), self.deletePersonalCharacteristic)
-		QtCore.QObject.connect(self.cmbCharacteristic, QtCore.SIGNAL("currentIndexChanged(int)"), self.populateForm)
-		QtCore.QObject.connect(self.btnPCharsClose, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
+		self.connect(self.btnCharacteristicSave, SIGNAL("clicked()"), self.savePersonalCharacteristic)
+		self.connect(self.btnCharacteristicDelete, SIGNAL("clicked()"), self.deletePersonalCharacteristic)
+		self.connect(self.cmbCharacteristic, SIGNAL("currentIndexChanged(int)"), self.populateForm)
+		self.connect(self.btnPCharsClose, SIGNAL("clicked()"), parent.closeActiveSubWindow)
 	
 	def getPersonalCharacteristics(self):
                	# select query to retrieve Food Types and related information
@@ -136,18 +140,22 @@ class FrmPersonalCharacteristics(Ui_PersonalCharacteristics):
 
 		if numrows <> 0:
 			
-			query = '''DELETE FROM globalpersonalcharacteristics WHERE characteristic='%s' ''' % (mycharacteristic)
+                        msg = "Are sure sure you want to delete this Characteristic?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                query = '''DELETE FROM globalpersonalcharacteristics WHERE characteristic='%s' ''' % (mycharacteristic)
 
-			self.cmbCharacteristic.clear()
-			self.cmbDataType.clear()
-        		self.txtDescription.clear()
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
+
+                                self.cmbCharacteristic.clear()
+                                self.cmbDataType.clear()
+                                self.txtDescription.clear()
 			
-			#populate Food Types Combobox
-			self.getPersonalCharacteristics()			
+                                #populate Food Types Combobox
+                                self.getPersonalCharacteristics()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Personal characteristic', "Record not found")

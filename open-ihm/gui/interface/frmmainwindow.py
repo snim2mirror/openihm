@@ -224,30 +224,32 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	
 	def manageFoodTypes(self):
 	    ''' Creates and Shows the Manage Crop Types form'''
-	    self.form = QtGui.QDialog()
+	    form = FrmManageFoodTypes(self.mdi)
+	    subWin = self.mdi.addSubWindow(form)
+	    self.centerSubWindow(subWin)
+	    form.show()
+
+
+	    '''self.form = QtGui.QDialog()
 	    self.ui = FrmManageFoodTypes()
 	    self.ui.setupUi(self.form,self.mdi)
 	    subWin = self.mdi.addSubWindow(self.form)
 	    self.centerSubWindow(subWin)
-	    self.form.show()
+	    self.form.show()'''
 	
 	def manageHouseholdCharacteristics(self):
 	    ''' Creates and Shows the Household Characteristics form'''
-	    self.form = QtGui.QDialog()
-	    self.ui = FrmHouseCharacteristics()
-	    self.ui.setupUi(self.form,self.mdi)
-	    subWin = self.mdi.addSubWindow(self.form)
+	    form = FrmHouseCharacteristics(self.mdi)
+	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
-	    self.form.show()
+	    form.show()
 	   
 	def managePersonalCharacteristics(self):
 	    ''' Creates and Shows the Personal Characteristics form'''
-	    self.form = QtGui.QDialog()
-	    self.ui = FrmPersonalCharacteristics()
-	    self.ui.setupUi(self.form,self.mdi)
-	    subWin = self.mdi.addSubWindow(self.form)
+	    form = FrmPersonalCharacteristics(self.mdi)
+	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
-	    self.form.show()
+	    form.show()
 	
 	def manageAssetDetails(self):
 	    ''' Creates and Shows the Manage Asset Details form '''

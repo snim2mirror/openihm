@@ -4,27 +4,35 @@
 #	Class to create the form for adding, editing, or deleting Food Types - FrmManageFoodTypes.
 #------------------------------------------------------------------------------------------------
 
-from PyQt4 import QtGui, QtCore
+#from PyQt4 import QtGui, QtCore
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
+
 from gui.designs.ui_managefoodtypes import Ui_FoodTypes
 
 from data.GenericDBOP import GenericDBOP
 
-class FrmManageFoodTypes(Ui_FoodTypes):		
-	def setupUi(self,Form,Mdi):
-		Ui_FoodTypes.setupUi(self,Form)
+class FrmManageFoodTypes(QDialog, Ui_FoodTypes):		
+        ''' Creates the Edit Project form. '''	
+        def __init__(self, parent):
+                
+                ''' Set up the dialog box interface '''
+                self.parent = parent
+                QDialog.__init__(self)
+                self.setupUi(self)
 		
         	# get food type
         	self.getFoodTypes()
 
                 #set input validator and restrict input to numeric values,
-                myIntVal = QtGui.QIntValidator(0, 10000, self.txtKCalories)
+                myIntVal = QIntValidator(0, 10000, self.txtKCalories)
                 self.txtKCalories.setValidator(myIntVal);
 
                 #connect relevant signals
-		QtCore.QObject.connect(self.cmdManageFoodClose, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
-		QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL("clicked()"), self.saveFoodType)
-		QtCore.QObject.connect(self.cmdDelete, QtCore.SIGNAL("clicked()"), self.deleteFoodType)
-		QtCore.QObject.connect(self.cmbFoodType, QtCore.SIGNAL("currentIndexChanged(int)"), self.populateForm)
+		self.connect(self.cmdManageFoodClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
+		self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveFoodType)
+		self.connect(self.cmdDelete, SIGNAL("clicked()"), self.deleteFoodType)
+		self.connect(self.cmbFoodType, SIGNAL("currentIndexChanged(int)"), self.populateForm)
               
 	
 	def getFoodTypes(self):
@@ -112,19 +120,21 @@ class FrmManageFoodTypes(Ui_FoodTypes):
 			numrows = numrows + 1
 
 		if numrows <> 0:
-			
-			query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)
+                        msg = "Are sure sure you want to delete this record?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
+                                query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
 
-			self.cmbFoodType.clear()
-			self.cmbUnitOfMeasure.clear()
-        		self.txtKCalories.clear()
+                                self.cmbFoodType.clear()
+                                self.cmbUnitOfMeasure.clear()
+                                self.txtKCalories.clear()
 			
-			#populate Food Types Combobox
-			self.getFoodTypes()			
+                                #populate Food Types Combobox
+                                self.getFoodTypes()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
