@@ -22,7 +22,7 @@ dbstatus = dbInitialiser.initialiseDB()
 # initiate application, main window and show main window
 app = QtGui.QApplication(sys.argv)
 
-if ( dbstatus['mysqlstarted'] == True and dbstatus['dbinstalled'] == True):
+if ( dbstatus['mysqlstarted'] == True and dbstatus['dbinstalled'] == True and dbstatus['dbuptodate']):
      window = FrmMainWindow()
      window.showMaximized()
 elif ( dbstatus['mysqlstarted'] == False ):
@@ -30,6 +30,13 @@ elif ( dbstatus['mysqlstarted'] == False ):
      msg = '''MySQL Server is currently not running. OpenIHM data is stored in a MySQL Database. \n\nPlease start MySQL before running Open-IHM.'''
      window = FrmDatabaseMessage(msg)
      window.show()
+elif ( dbstatus['dbuptodate'] == False ):
+     # inform user mysal not started
+     msg = '''Failed to automatically update the database is not up to date.'''
+     window = FrmDatabaseMessage(msg)
+     window.show()
+     window = FrmMainWindow()
+     window.showMaximized()
 elif ( dbstatus['dbinstalled'] == False ):
      # inform  the user that automatic installation of the database failed
      msg1 = '''Failed to install the database automatically. '''

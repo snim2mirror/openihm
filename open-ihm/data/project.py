@@ -55,31 +55,34 @@ class Project:
         HouseholdCharacteristicsTableName 	= '''p%iHouseholdCharacteristics''' % (projectid)
         PersonalCharactericticsTableName	= '''p%iPersonalCharacteristics''' % (projectid)
         
-        queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` 
-                        (
-                            `hhid` INT NOT NULL ,
-                            PRIMARY KEY (`hhid`) ,
-                            INDEX `fk_p%i_householdcharacteristics_households` (`hhid` ASC) ,
-                            CONSTRAINT `fk_p%i_householdcharacteristics_households`
-                            FOREIGN KEY (`hhid` )
-                            REFERENCES `openihmdb`.`households` (`hhid` )
-                            ON DELETE CASCADE
-                            ON UPDATE CASCADE)
-                        ENGINE = InnoDB;''' % (HouseholdCharacteristicsTableName, projectid, projectid)
+        queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` (
+							`hhid` INT(11) NOT NULL ,
+							`pid` INT(11) NOT NULL ,
+							PRIMARY KEY (`hhid`, `pid`) ,
+							INDEX `fk_p%i_householdcharacteristics_households` (`hhid` ASC, `pid` ASC) ,
+							CONSTRAINT `fk_p%i_householdcharacteristics_households`
+							FOREIGN KEY (`hhid` , `pid` )
+							REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
+							ON DELETE CASCADE
+							ON UPDATE CASCADE)
+						 ENGINE = InnoDB
+						 DEFAULT CHARACTER SET = latin1;''' % (HouseholdCharacteristicsTableName, projectid, projectid)
                         
         self.database.execDefinitionQuery( queryCreate )
         
         queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` (
-                          `hhid` INT NOT NULL ,
-                          `personid` VARCHAR(20) NOT NULL ,
-                          PRIMARY KEY (`personid`, `hhid`) ,
-                          INDEX `fk_p%i_personalcharacteristics_householdmembers` (`personid` ASC, `hhid` ASC) ,
-                          CONSTRAINT `fk_p%i_personalcharacteristics_householdmembers`
-                            FOREIGN KEY (`personid` , `hhid` )
-                            REFERENCES `openihmdb`.`householdmembers` (`personid` , `hhid` )
-                            ON DELETE CASCADE
-                            ON UPDATE CASCADE)
-                        ENGINE = InnoDB;''' % (PersonalCharactericticsTableName, projectid, projectid)
+						  `personid` VARCHAR(20) NOT NULL ,
+						  `hhid` INT(11) NOT NULL ,
+						  `pid` INT(11) NOT NULL ,
+						  PRIMARY KEY (`personid`, `hhid`, `pid`) ,
+						  INDEX `fk_p%i_personalcharacteristics_householdmembers` (`personid` ASC, `hhid` ASC, `pid` ASC) ,
+						  CONSTRAINT `fk_p%i_personalcharacteristics_householdmembers`
+						  FOREIGN KEY (`personid` , `hhid` , `pid` )
+						  REFERENCES `openihmdb`.`householdmembers` (`personid` , `hhid` , `pid` )
+						  ON DELETE CASCADE
+						  ON UPDATE CASCADE)
+						 ENGINE = InnoDB
+						 DEFAULT CHARACTER SET = latin1;''' % (PersonalCharactericticsTableName, projectid, projectid)
         
         self.database.execDefinitionQuery( queryCreate )
         self.database.close()

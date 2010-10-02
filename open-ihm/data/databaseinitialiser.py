@@ -49,10 +49,14 @@ class DatabaseInitialiser:
          # OperationalError or ProgrammingError happen if the db does not exist
          except ( errors.OperationalError,  errors.ProgrammingError) as e:
              dbinstalled = self.createDatabase()
+             
+         if ( dbinstalled ):
+                 dbuptodate = self.updateDatabase()
 
          dbstatus = dict()
          dbstatus['mysqlstarted'] = mysqlstarted
          dbstatus['dbinstalled'] = dbinstalled
+         dbstatus['dbuptodate'] = dbuptodate
      
          return dbstatus
      
@@ -81,3 +85,59 @@ class DatabaseInitialiser:
          
          except ( errors.OperationalError,  errors.ProgrammingError) as e:
              return False
+             
+     def databaseUpToDate(self):
+         # check if the database is already up to date: i.e. there is pid in expenditure or assets or livestockincome ...
+         #   checks in assets
+         
+         config = DbConfig(self.host, 'openihmdb', 'openihm', 'ihm2010')
+         dbinfo = config.dbinfo().copy()
+         db = Connect(**dbinfo)             
+         cursor = db.cursor()
+         
+         query = "SHOW COLUMNS FROM assets"
+         
+         cursor.execute(query)
+         rows = cursor.fetchall()
+         
+         cursor.close()
+         db.close()
+         
+         upToDate = False
+         for row in rows:
+             for field in row:
+                 if field == "pid":
+                     upToDate = True
+         
+         return upToDate
+        
+     def updateDatabase(self):
+         # if database is already up to date return
+         if self.databaseUpToDate():
+             return True
+         # else update the database    
+         else:
+             sqlfile = file('data/scripts/openihmdb_mysql_update.sql', 'r')
+             commands = sqlfile.read()
+             commandlist = commands.split(';')
+             sqlfile.close()
+             try:
+                 config = DbConfig(self.host, '', 'root', self.rootpwd)
+                 dbinfo = config.dbinfo().copy()
+                 db = Connect(**dbinfo)             
+                 cursor = db.cursor()
+
+                 for command in commandlist:
+                     if ( not command.isspace() ):
+                         cursor.execute(command)
+             
+                 cursor.close()
+                 db.close()
+         
+                 return True
+         
+             except errors.InterfaceError,  e:
+                 return False
+         
+             except ( errors.OperationalError,  errors.ProgrammingError) as e:
+                 return False
