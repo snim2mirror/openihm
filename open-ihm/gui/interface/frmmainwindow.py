@@ -229,14 +229,6 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    self.centerSubWindow(subWin)
 	    form.show()
 
-
-	    '''self.form = QtGui.QDialog()
-	    self.ui = FrmManageFoodTypes()
-	    self.ui.setupUi(self.form,self.mdi)
-	    subWin = self.mdi.addSubWindow(self.form)
-	    self.centerSubWindow(subWin)
-	    self.form.show()'''
-	
 	def manageHouseholdCharacteristics(self):
 	    ''' Creates and Shows the Household Characteristics form'''
 	    form = FrmHouseCharacteristics(self.mdi)
@@ -297,14 +289,14 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
 	def viewFoodEnergyRequirements(self):
 	    ''' Creates and Shows the View Food Energy Requirements form '''
-	    form = FrmFoodEnergyRequirements(self.mdi)
+	    form = FrmFoodEnergyRequirements(self)
 	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
 	    form.show()
 
         def reportHouholdsByCharacteristics(self):
 	    ''' Creates and Shows the View Food Energy Requirements form '''
-	    form = RepHouseholdsByCharacteristics(self.mdi)
+	    form = RepHouseholdsByCharacteristics(self)
 	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
 	    form.show()

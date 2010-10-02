@@ -18,7 +18,7 @@ class FrmAddEnergyRequirement(QDialog, Ui_AddFoodEnergyRequirement):
 
     def __init__(self,parent):
         ''' Set up the dialog box interface '''
-       # self.parent = parent
+        self.parent = parent
         QDialog.__init__(self)
         
         self.setupUi(self)

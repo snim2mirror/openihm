@@ -11,7 +11,7 @@ from PyQt4.QtGui import *
 from gui.designs.ui_report_householdsbycharacteristics import Ui_HouseHoldReport
 from data.report_settingsmanager import ReportsSettingsManager
 from outputs.routines.report_households_by_characteristics import HouseholdsByCharacteristics
-from outputs.routines.report_households_by_characteristics_write import HouseholdsByCharacteristicsWrite
+from frm_report_householdsbycharacteristics_display import HouseholdsByCharDisplay
 
 class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):	
 	''' Creates the Report Households by Characteristics from. Uses the design class
@@ -26,10 +26,10 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
 
         	self.getProjectNames()
         	
-        	self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
+        	self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
         	self.connect(self.cmbProjectNames, SIGNAL("currentIndexChanged(int)"), self.getHouseholdCharacteristics)
         	self.connect(self.cmbProjectNames, SIGNAL("currentIndexChanged(int)"), self.getPersonalCharacteristics)
-        	self.connect(self.cmdGenerateReport, SIGNAL("clicked()"), self.writeReport)
+        	self.connect(self.cmdGenerateReport, SIGNAL("clicked()"), self.displayReport)
 
 
 
@@ -176,10 +176,12 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
                 reporttable = report.getReportTable(projectid,pcharselected,hcharselected,pquery,hquery)
                 return reporttable
                 
-        def writeReport(self):
-                # write report in a spreadsheet file
+        def displayReport(self):
+            ''' Creates and Shows the Report: Households by characteristics form '''
+            freporttable = self.getReportData()
+	    form = HouseholdsByCharDisplay(self.parent,freporttable)
+	    subWin = self.parent.mdi.addSubWindow(form)
+	    self.parent.centerSubWindow(subWin)
+	    form.show()
 
-                freporttable = self.getReportData()
-                report = HouseholdsByCharacteristicsWrite()
-                print freporttable
-                report.writeSpreadsheetReport(freporttable)
+                
