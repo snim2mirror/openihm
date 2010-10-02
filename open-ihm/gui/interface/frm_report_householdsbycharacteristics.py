@@ -76,7 +76,7 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
                 for row in rows:
                         qtHCharacteristic = QStandardItem( "%s" % row[0])
                         qtHCharacteristic.setTextAlignment( Qt.AlignLeft )
-                        if qtHCharacteristic.text() != 'hhid':
+                        if ((qtHCharacteristic.text() != 'hhid')and(qtHCharacteristic.text() != 'pid') ):
                                 model.setItem( num, 0, qtHCharacteristic )
                                 num = num + 1
                         		
@@ -98,7 +98,7 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
                         qtPCharacteristic = QStandardItem( "%s" % row[0])
                         qtPCharacteristic.setTextAlignment( Qt.AlignLeft )
                         
-                        if ((qtPCharacteristic.text() != 'hhid')and(qtPCharacteristic.text() != 'personid')):
+                        if ((qtPCharacteristic.text() != 'hhid')and(qtPCharacteristic.text() != 'personid') and (qtPCharacteristic.text() != 'pid')):
                                 model.setItem( num, 0, qtPCharacteristic )
                                 num = num + 1
                         		

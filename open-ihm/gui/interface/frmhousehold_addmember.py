@@ -49,9 +49,10 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember):
         else:
         	headhousehold = "No"
         
+        pid = self.parent.parent.projectid
         # create UPDATE query
         query = '''INSERT INTO householdmembers 
-			    VALUES(%s,'%s','%s','%s','%s','%s')''' % (self.hhid, memberid, headhousehold, dateofbirth, sex, education)
+			    VALUES('%s',%s,'%s','%s','%s','%s',%s)''' % (memberid, self.hhid, headhousehold, dateofbirth, sex, education, pid)
     
         # execute query and commit changes
         cursor =  self.db.cursor()

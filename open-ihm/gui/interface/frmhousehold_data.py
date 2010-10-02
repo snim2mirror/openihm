@@ -184,7 +184,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			cursor =  db.cursor()
 			
 			for memberid in selectedIds:
-				query = '''DELETE FROM householdmembers WHERE hhid=%s AND personid='%s' ''' % (hhid, memberid)	
+				query = '''DELETE FROM householdmembers WHERE pid=%i and hhid=%s AND personid='%s' ''' % (self.parent.projectid, hhid, memberid)	
 				cursor.execute(query)
 				db.commit()
     
@@ -201,9 +201,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		''' retrieves and shows a list of household members '''
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 		hhid = temp[0] 
+		pid = self.parent.projectid
 		# select query to retrieve household members
 		query = '''SELECT personid, headofhousehold, dateofbirth, sex, education 
-		             FROM householdmembers WHERE hhid=%i''' % (hhid)
+		             FROM householdmembers WHERE hhid=%i and pid=%i''' % (hhid,  pid)
 		
 		# retrieve and display members
 		db = data.mysql.connector.Connect(**self.config)             

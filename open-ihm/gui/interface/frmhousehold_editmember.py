@@ -41,9 +41,10 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember):
         
     def getMemberDetails(self):
 		''' retrieves and displays details of the member being editted '''
+		pid = self.parent.parent.projectid
 		# query to retrieve member details
 		query = '''SELECT personid, headofhousehold, dateofbirth, sex, education 
-		           FROM householdmembers WHERE hhid=%s AND personid='%s' ''' % (self.hhid, self.currentid)
+		           FROM householdmembers WHERE hhid=%s AND personid='%s' AND pid=%s ''' % (self.hhid, self.currentid, pid)
 		
 		# execute query and commit changes
 		db = data.mysql.connector.Connect(**self.config)
@@ -80,9 +81,10 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember):
 		else:
 			headhousehold = "No"
 		
+		pid = self.parent.parent.projectid
 		# create UPDATE query
 		query = '''UPDATE householdmembers SET personid='%s', headofhousehold='%s', dateofbirth='%s', sex='%s',
-			    education='%s' WHERE hhid=%s AND personid='%s' ''' % (memberid, headhousehold, dateofbirth, sex, education, self.hhid, self.currentid)
+			    education='%s' WHERE hhid=%s AND personid='%s' AND pid=%s''' % (memberid, headhousehold, dateofbirth, sex, education, self.hhid, self.currentid, pid)
     
 		# execute query and commit changes
 		db = data.mysql.connector.Connect(**self.config)
