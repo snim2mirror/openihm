@@ -28,7 +28,7 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements):
 	    self.getFoodEnergyRequirements()
 	    
 	    # connect relevant signals and slots
-	    self.connect(self.cmdFERequirementsClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
+	    self.connect(self.cmdFERequirementsClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
 	    self.connect(self.cmdAddRow, SIGNAL("clicked()"), self.addFoodEnergyRequirement)
 	    self.connect(self.DeleteRow, SIGNAL("clicked()"), self.deleteSelectedEnergyRequirements)
 	    self.connect(self.cmdEditRow, SIGNAL("clicked()"), self.editFoodEnergyRequirement)
@@ -86,7 +86,7 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements):
 		
 		form = FrmAddEnergyRequirement(self)
 		form.setWindowIcon(QIcon('resources/images/openihm.png'))
-		form.exec_()
+                form.exec_()
 		self.getFoodEnergyRequirements()
 
 	def editFoodEnergyRequirement(self):
@@ -97,17 +97,14 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements):
 			energyreqmale = self.tableView.model().item(selectedRow,1).text()
 			energyreqfemale = self.tableView.model().item(selectedRow,2).text()
 
-			print energyreqmale
-			print energyreqfemale
-
 			# show edit food energy requirement form
-			form = FrmEditEnergyRequirement(self,selectedage,energyreqmale,energyreqfemale)
+			form = FrmEditEnergyRequirement(self.parent,selectedage,energyreqmale,energyreqfemale)
 			form.setWindowIcon(QIcon('resources/images/openihm.png'))
 			form.exec_()
 			self.getFoodEnergyRequirements()
 			
 		else:
-			QMessageBox.information(self,"Edit Food Energy Requirement","Please select the row containing a household to be edited.")
+			QMessageBox.information(self,"Edit Food Energy Requirement","Please select the row containing food energy requirements to be edited.")
 
 
 	def deleteSelectedEnergyRequirements(self):
