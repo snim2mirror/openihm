@@ -279,7 +279,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		
 		fields = []
 		for row in cursor.fetchall():
-			if ( row[0] != "hhid" ):
+			if ( (row[0] != "hhid")  and (row[0]!= "pid" ) ):
 				fields.append( row[0] )
 		
 		model = QStandardItemModel(1,1)

@@ -19,6 +19,7 @@ class FrmEditHouseholdCharacteristic(QDialog, Ui_EditHouseholdCharacteristic):
         self.setupUi(self)
         self.parent = parent
         self.hhid = hhid
+        self.pid = pid
         self.charName = charName
         self.hhCharacteristicsTable = "p%iHouseholdCharacteristics" % (pid )
         # connect to database
@@ -54,12 +55,12 @@ class FrmEditHouseholdCharacteristic(QDialog, Ui_EditHouseholdCharacteristic):
 			charVal = self.txtValue.text()
 			
 		if ( self.parent.getCharacteristicDataType( self.charName ) == 2 ):
-			queryInsert = '''INSERT INTO %s (hhid,`%s`) VALUES (%s, %s )''' % (tbl, self.charName, self.hhid, charVal )
-			queryUpdate	= '''UPDATE %s SET `%s`=%s WHERE hhid=%s''' % (tbl, self.charName, charVal, self.hhid )
+			queryInsert = '''INSERT INTO %s (hhid, pid,`%s`) VALUES (%s, %s, %s )''' % (tbl, self.charName, self.hhid, self.pid,  charVal )
+			queryUpdate	= '''UPDATE %s SET `%s`=%s WHERE hhid=%s and pid=%s''' % (tbl, self.charName, charVal, self.hhid,  self.pid )
 		else:
-		 	queryInsert = '''INSERT INTO %s (hhid,`%s`) VALUES (%s, '%s' )''' % (tbl, self.charName, self.hhid, charVal )
-			queryUpdate	= '''UPDATE %s SET `%s`='%s' WHERE hhid=%s''' % (tbl, self.charName, charVal, self.hhid )
-			
+		 	queryInsert = '''INSERT INTO %s (hhid, pid,`%s`) VALUES (%s, %s, '%s' )''' % (tbl, self.charName, self.hhid, self.pid,  charVal )
+		 	queryUpdate	= '''UPDATE %s SET `%s`='%s' WHERE hhid=%s and pid=%s''' % (tbl, self.charName, charVal, self.hhid,  self.pid )
+		 	
 		try:
 			cursor.execute(queryInsert)
 		except:
