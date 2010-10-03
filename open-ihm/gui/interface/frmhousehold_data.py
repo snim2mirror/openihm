@@ -386,16 +386,17 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			for row in selectedRows:
 				selectedIds.append( self.tblAssets.model().item(row,0).text() )
 			 
-			# get household id
+			# get household id and pid
 			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 			hhid = temp[0]
+			pid = self.parent.pid
 			# delete selected assets
 			
 			db = data.mysql.connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for assetid in selectedIds:
-				query = '''DELETE FROM assets WHERE hhid=%s AND assetid='%s' ''' % (hhid, assetid)	
+				query = '''DELETE FROM assets WHERE hhid=%s AND pid=%s AND assetid='%s' ''' % (hhid, pid,  assetid)	
 				cursor.execute(query)
 				db.commit()
     
@@ -411,9 +412,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 	def retrieveHouseholdAssets(self):
 		''' retrieves and shows a list of household asset '''
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
-		hhid = temp[0] 
+		hhid = temp[0]
+		pid = self.parent.projectid
 		# select query to retrieve household assets
-		query = '''SELECT * FROM assets WHERE hhid=%i''' % (hhid)
+		query = '''SELECT * FROM assets WHERE hhid=%i AND pid=%s''' % (hhid, pid)
 		
 		# retrieve and display assets
 		db = data.mysql.connector.Connect(**self.config)             
@@ -434,7 +436,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		num = 0
 		
 		for row in cursor.fetchall():
-			qtAssetID = QStandardItem( "%i" % row[1])
+			qtAssetID = QStandardItem( "%i" % row[0])
 			qtAssetID.setTextAlignment( Qt.AlignCenter )
 			qtAssetType = QStandardItem( row[2] )	
 			qtUnitOfMeasure = QStandardItem( row[3] )
@@ -1264,16 +1266,17 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			for row in selectedRows:
 				selectedIds.append( self.tblExpenditure.model().item(row,0).text() )
 			 
-			# get household id
+			# get household id and pid
 			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
-			hhid = temp[0]
+			hhid = temp[0] 
+			pid = self.parent.projectid
 			# delete selected expenses
 			
 			db = data.mysql.connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for expid in selectedIds:
-				query = '''DELETE FROM expenditure WHERE hhid=%s AND expid=%s ''' % (hhid, expid)	
+				query = '''DELETE FROM expenditure WHERE hhid=%s AND pid=%s AND expid=%s ''' % (hhid, pid,  expid)	
 				cursor.execute(query)
 				db.commit()
     
@@ -1291,8 +1294,9 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		''' retrieves and shows a list of household expenses '''
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 		hhid = temp[0] 
+		pid = self.parent.projectid
 		# select query to retrieve household expenses
-		query = '''SELECT * FROM expenditure WHERE hhid=%i''' % (hhid)
+		query = '''SELECT * FROM expenditure WHERE hhid=%i AND pid=%s''' % (hhid,  pid)
 		
 		# retrieve and display assets
 		db = data.mysql.connector.Connect(**self.config)             
@@ -1314,7 +1318,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		num = 0
 		
 		for row in cursor.fetchall():
-			qtAssetID = QStandardItem( "%i" % row[1])
+			qtAssetID = QStandardItem( "%i" % row[0])
 			qtAssetID.setTextAlignment( Qt.AlignCenter )
 			qtAssetType = QStandardItem( row[2] )	
 			qtUnitOfMeasure = QStandardItem( row[3] )

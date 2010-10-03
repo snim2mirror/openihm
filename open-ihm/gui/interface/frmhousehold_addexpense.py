@@ -18,6 +18,7 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense):
 		QDialog.__init__(self)
 		self.setupUi(self)
 		self.parent 	= parent
+		self.pid  = parent.parent.projectid
 		self.hhid 		= hhid
 		self.expid 		= expid
 		
@@ -55,7 +56,7 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense):
         
     def displayExpenditureDetails(self):
 		''' Retrieve and display Household Expenditure details '''
-		query = '''SELECT * FROM expenditure WHERE hhid=%s AND expid=%s ''' % ( self.hhid, self.expid )
+		query = '''SELECT * FROM expenditure WHERE hhid=%s AND pid=%s AND expid=%s ''' % ( self.hhid, self.pid, self.expid )
 		
 		db = data.mysql.connector.Connect(**self.config)             
 		cursor = db.cursor()
@@ -98,12 +99,14 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense):
 			kcalperunit = "NULL"
 			
 		if (expid == 0):
-			query = '''INSERT INTO expenditure (hhid, exptype, unitofmeasure, priceperunit, kcalperunit, totalunits )
-			    VALUES(%s,'%s','%s',%s,%s,%s) ''' % ( hhid, exptype, unitofmeasure, costperunit, kcalperunit, numunits )
+			query = '''INSERT INTO expenditure (hhid, exptype, unitofmeasure, priceperunit, kcalperunit, totalunits, pid )
+			    VALUES(%s,'%s','%s',%s,%s,%s,%s) ''' % ( hhid, exptype, unitofmeasure, costperunit, kcalperunit, numunits,  self.pid )
 		else:
 			query = ''' UPDATE expenditure SET exptype='%s', unitofmeasure='%s', priceperunit=%s, kcalperunit=%s,
-						totalunits=%s WHERE hhid=%s 
-						AND expid=%s ''' % ( exptype, unitofmeasure, costperunit, kcalperunit, numunits, hhid, expid )
+						totalunits=%s WHERE hhid=%s AND pid=%s 
+						AND expid=%s ''' % ( exptype, unitofmeasure, costperunit, kcalperunit, numunits, hhid, self.pid,  expid )
+                        
+		QMessageBox.information(self,"Edit Member",query)
 		
 		# execute query and commit changes
 		cursor =  db.cursor()

@@ -160,7 +160,7 @@ class Project:
         
         chars = []
         for row in rows:
-            if "hhid" != row[0]:
+            if (("hhid" != row[0]) and ("pid" != row[0])):
                 char = ProjectHouseholdCharacteristic( self.pid,  row[0] )
                 chars.append( char )
                 
@@ -196,7 +196,7 @@ class Project:
         
         chars = []
         for row in rows:
-            if "hhid" != row[0] and "personid" != row[0]:
+            if (("hhid" != row[0]) and ("personid" != row[0]) and ("pid" != row[0])):
                 char = ProjectPersonCharacteristic( self.pid,  row[0] )
                 chars.append( char )
                 

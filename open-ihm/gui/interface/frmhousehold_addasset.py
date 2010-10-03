@@ -19,6 +19,7 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset):
 		self.setupUi(self)
 		self.parent 	= parent
 		self.hhid 		= hhid
+		self.pid           = parent.parent.projectid
 		self.assetid 	= assetid
 		
 		self.config = Config.dbinfo().copy()
@@ -55,7 +56,7 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset):
         
     def displayAssetDetails(self):
 		''' Retrieve and display Household Asset details '''
-		query = '''SELECT * FROM assets WHERE hhid=%s AND assetid=%s ''' % ( self.hhid, self.assetid )
+		query = '''SELECT * FROM assets WHERE hhid=%s AND pid=%s AND assetid=%s ''' % ( self.hhid, self.pid,  self.assetid )
 		
 		db = data.mysql.connector.Connect(**self.config)             
 		cursor = db.cursor()
@@ -88,12 +89,12 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset):
 		
 		# create UPDATE query
 		if (self.assetid == 0):
-			query = '''INSERT INTO assets (hhid, assettype, unitofmeasure, unitcost, totalunits )
-			    VALUES(%s,'%s','%s',%s,%s) ''' % ( self.hhid, assettype, unitofmeasure, costperunit, numunits )
+			query = '''INSERT INTO assets (hhid, assettype, unitofmeasure, unitcost, totalunits, pid )
+			    VALUES(%s,'%s','%s',%s,%s,%s) ''' % ( self.hhid, assettype, unitofmeasure, costperunit, numunits, self.pid )
 		else:
 			query = ''' UPDATE assets SET assettype='%s', unitofmeasure='%s', unitcost=%s, totalunits=%s
-						WHERE hhid=%s 
-						AND assetid=%s ''' % ( assettype, unitofmeasure, costperunit, numunits, self.hhid, self.assetid)
+						WHERE hhid=%s AND pid=%s 
+						AND assetid=%s ''' % ( assettype, unitofmeasure, costperunit, numunits, self.hhid, self.pid,  self.assetid)
 		
 		# execute query and commit changes
 		cursor =  db.cursor()
