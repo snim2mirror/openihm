@@ -25,7 +25,7 @@ from frmmanagefoodtypes import FrmManageFoodTypes
 from frmhousehold_add import FrmAddHousehold
 from frmhousecharacteristics import FrmHouseCharacteristics
 from frmpersonalcharacteristics import FrmPersonalCharacteristics
-#from frmexpendituretypes import FrmExpenditureTypes
+from frmexpendituretypes import FrmExpenditureTypes
 from frmmanageassets import FrmManageAssetDetails
 from frmincomesourcedetails import FrmIncomeSourceDetails
 from frmfindproject import FrmFindProject
