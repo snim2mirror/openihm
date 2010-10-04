@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_newproject.ui'
 #
-# Created: Sat Mar 13 08:30:37 2010
+# Created: Mon Oct 04 16:53:45 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -48,10 +48,8 @@ class Ui_NewProject(object):
         self.label_6.setGeometry(QtCore.QRect(20, 140, 46, 13))
         self.label_6.setObjectName("label_6")
         self.cmbCurrency = QtGui.QComboBox(NewProject)
-        self.cmbCurrency.setGeometry(QtCore.QRect(100, 140, 111, 22))
+        self.cmbCurrency.setGeometry(QtCore.QRect(100, 140, 231, 22))
         self.cmbCurrency.setObjectName("cmbCurrency")
-        self.cmbCurrency.addItem("")
-        self.cmbCurrency.addItem("")
 
         self.retranslateUi(NewProject)
         QtCore.QMetaObject.connectSlotsByName(NewProject)
@@ -65,6 +63,4 @@ class Ui_NewProject(object):
         self.label_4.setText(QtGui.QApplication.translate("NewProject", "End Date", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("NewProject", "Description", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("NewProject", "Currency", None, QtGui.QApplication.UnicodeUTF8))
-        self.cmbCurrency.setItemText(0, QtGui.QApplication.translate("NewProject", "MK", None, QtGui.QApplication.UnicodeUTF8))
-        self.cmbCurrency.setItemText(1, QtGui.QApplication.translate("NewProject", "USD", None, QtGui.QApplication.UnicodeUTF8))
 

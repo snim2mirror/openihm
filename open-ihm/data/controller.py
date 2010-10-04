@@ -97,4 +97,10 @@ class Controller:
         settingsmgr = SettingsManager()
         chars = settingsmgr.getPersonCharacteristics()
         return chars
+        
+    def getCurrencies(self):
+         settingsmgr = SettingsManager()
+         currencies = settingsmgr.getCurrencies()
+         return currencies
+         
 

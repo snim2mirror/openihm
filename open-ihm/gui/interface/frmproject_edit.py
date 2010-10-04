@@ -23,6 +23,7 @@ class FrmEditProject(QtGui.QDialog, Ui_EditProject):
         
         # get current project details
         controller  = Controller()
+        self.getCurrencies()
         self.project     = controller.getProject( self.parent.projectid )
         self.getProjectData()
         
@@ -33,6 +34,13 @@ class FrmEditProject(QtGui.QDialog, Ui_EditProject):
         # connect relevant signals and slots
         self.connect(self.cmdCancel, QtCore.SIGNAL("clicked()"), parent.mdi.closeActiveSubWindow)
         self.connect(self.cmdSave, QtCore.SIGNAL("clicked()"), self.saveProject)
+        
+    def getCurrencies(self):
+         ''' Loads currencies into the currency combo box '''
+         controller      = Controller()
+         currencies = controller.getCurrencies()
+         for currency in currencies:
+             self.cmbCurrency.addItem(currency.name)
         
     def getProjectData(self):
         ''' Retrieves project data from the database '''

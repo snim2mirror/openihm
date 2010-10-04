@@ -155,20 +155,10 @@
     <rect>
      <x>100</x>
      <y>140</y>
-     <width>111</width>
+     <width>231</width>
      <height>22</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>MK</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>USD</string>
-    </property>
-   </item>
   </widget>
  </widget>
  <resources/>

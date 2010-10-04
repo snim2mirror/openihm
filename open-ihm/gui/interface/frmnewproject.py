@@ -26,6 +26,8 @@ class FrmNewProject(QtGui.QDialog, Ui_NewProject):
         self.dtpStartDate.setDate(now)
         self.dtpEndDate.setDate(now)
         
+        self.getCurrencies()
+        
         # allow the calendar widget to pop up
         self.dtpStartDate.setCalendarPopup(True)
         self.dtpEndDate.setCalendarPopup(True)
@@ -33,7 +35,14 @@ class FrmNewProject(QtGui.QDialog, Ui_NewProject):
         # connect relevant signals and slots
         self.connect(self.cmdCancel, QtCore.SIGNAL("clicked()"), parent.mdi.closeActiveSubWindow)
         self.connect(self.cmdSave, QtCore.SIGNAL("clicked()"), self.saveProject)
-        
+    
+    def getCurrencies(self):
+         ''' Loads currencies into the currency combo box '''
+         controller      = Controller()
+         currencies = controller.getCurrencies()
+         for currency in currencies:
+             self.cmbCurrency.addItem(currency.name)
+             
     def saveProject(self):
         ''' Saves newly created data to database '''
         # get the data entered by user
