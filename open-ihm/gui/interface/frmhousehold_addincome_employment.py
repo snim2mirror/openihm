@@ -19,6 +19,7 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment):
 		self.setupUi(self)
 		self.parent 	= parent
 		self.hhid 		= hhid
+		self.pid = parent.parent.projectid
 		self.incomeid 	= incomeid
 		
 		self.config = Config.dbinfo().copy()
@@ -75,7 +76,7 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment):
 	def displayIncomeDetails(self):
 		''' Retrieve and display Household Income details '''
 		query = '''SELECT *
-				   FROM employmentincome WHERE hhid=%s AND id=%s ''' % ( self.hhid, self.incomeid )
+				   FROM employmentincome WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
 		
 		db = data.mysql.connector.Connect(**self.config)             
 		cursor = db.cursor()
@@ -121,14 +122,14 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment):
 		# create UPDATE query
 		if (self.incomeid == 0):
 			query = '''INSERT INTO employmentincome (hhid, incomesource, foodtypepaid, unitofmeasure, unitspaid,
-			           incomekcal, cashincome ) VALUES(%s,'%s','%s','%s',%s,%s,%s)
-					''' % (self.hhid, employmenttype, foodtype, unitofmeasure, unitspaid, incomekcal, cashpaid)
+			           incomekcal, cashincome, pid ) VALUES(%s,'%s','%s','%s',%s,%s,%s,%s)
+					''' % (self.hhid, employmenttype, foodtype, unitofmeasure, unitspaid, incomekcal, cashpaid, self.pid)
 		else:
 			query = ''' UPDATE employmentincome 
 					    SET incomesource='%s', foodtypepaid='%s', unitofmeasure='%s', unitspaid=%s, incomekcal=%s,
 					    cashincome=%s
-						WHERE hhid=%s AND id=%s 
-					''' % ( employmenttype, foodtype, unitofmeasure, unitspaid, incomekcal, cashpaid, self.hhid, self.incomeid)
+						WHERE hhid=%s AND pid=%s AND id=%s 
+					''' % ( employmenttype, foodtype, unitofmeasure, unitspaid, incomekcal, cashpaid, self.hhid, self.pid, self.incomeid)
 		
 		# execute query and commit changes
 		cursor =  db.cursor()

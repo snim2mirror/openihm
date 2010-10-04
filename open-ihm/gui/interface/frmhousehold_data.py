@@ -389,7 +389,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			# get household id and pid
 			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 			hhid = temp[0]
-			pid = self.parent.pid
+			pid = self.parent.projectid
 			# delete selected assets
 			
 			db = data.mysql.connector.Connect(**self.config)
@@ -512,13 +512,14 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			# get household id
 			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 			hhid = temp[0]
+			pid = self.parent.projectid
 			# delete selected crops
 			
 			db = data.mysql.connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for incomeid in selectedIds:
-				query = '''DELETE FROM cropincome WHERE hhid=%s AND id=%s ''' % (hhid, incomeid)	
+				query = '''DELETE FROM cropincome WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid)	
 				cursor.execute(query)
 				db.commit()
     
@@ -535,9 +536,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 	def retrieveHouseholdCropIncome(self):
 		''' retrieves and shows a list of household crop income items '''
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
-		hhid = temp[0] 
+		hhid = temp[0]
+		pid = self.parent.projectid 
 		# select query to retrieve household expenses
-		query = '''SELECT * FROM cropincome WHERE hhid=%i''' % (hhid)
+		query = '''SELECT * FROM cropincome WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
 		
 		# retrieve and display assets
 		db = data.mysql.connector.Connect(**self.config)             
@@ -638,13 +640,14 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			# get household id
 			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 			hhid = temp[0]
+			pid = self.parent.projectid
 			# delete selected livestock items
 			
 			db = data.mysql.connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for incomeid in selectedIds:
-				query = '''DELETE FROM livestockincome WHERE hhid=%s AND id=%s ''' % (hhid, incomeid)	
+				query = '''DELETE FROM livestockincome WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid)	
 				cursor.execute(query)
 				db.commit()
     
@@ -662,8 +665,9 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		''' retrieves and shows a list of household livestock income items '''
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 		hhid = temp[0] 
+		pid = self.parent.projectid
 		# select query to retrieve household expenses
-		query = '''SELECT * FROM livestockincome WHERE hhid=%i''' % (hhid)
+		query = '''SELECT * FROM livestockincome WHERE hhid=%i AND pid=%s ''' % (hhid,  pid)
 		
 		# retrieve and display assets
 		db = data.mysql.connector.Connect(**self.config)             
@@ -763,13 +767,14 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			# get household id
 			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 			hhid = temp[0]
+			pid = self.parent.projectid
 			# delete selected gifts items
 			
 			db = data.mysql.connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for incomeid in selectedIds:
-				query = '''DELETE FROM transfers WHERE hhid=%s AND id=%s ''' % (hhid, incomeid)	
+				query = '''DELETE FROM transfers WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid)	
 				cursor.execute(query)
 				db.commit()
     
@@ -787,9 +792,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		''' retrieves and shows a list of household gifts income items '''
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 		hhid = temp[0] 
+		pid = self.parent.projectid
 		# select query to retrieve gifts income items
 		query = '''SELECT id, assistancetype, unitofmeasure, unitsconsumed
-				   FROM transfers WHERE hhid=%i AND sourcetype='Internal' ''' % (hhid)
+				   FROM transfers WHERE hhid=%i AND pid=%s AND sourcetype='Internal' ''' % (hhid,  pid)
 		
 		# retrieve and display items
 		db = data.mysql.connector.Connect(**self.config)             
@@ -884,13 +890,14 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			# get household id
 			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 			hhid = temp[0]
+			pid = self.parent.projectid
 			# delete selected employment items
 			
 			db = data.mysql.connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for incomeid in selectedIds:
-				query = '''DELETE FROM employmentincome WHERE hhid=%s AND id=%s ''' % (hhid, incomeid)	
+				query = '''DELETE FROM employmentincome WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid)	
 				cursor.execute(query)
 				db.commit()
     
@@ -908,9 +915,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		''' retrieves and shows a list of household employment income items '''
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 		hhid = temp[0] 
+		pid = self.parent.projectid        
 		# select query to retrieve employment income items
 		query = '''SELECT *
-				   FROM employmentincome WHERE hhid=%i''' % (hhid)
+				   FROM employmentincome WHERE hhid=%i AND pid=%s ''' % (hhid,  pid)
 		
 		# retrieve and display items
 		db = data.mysql.connector.Connect(**self.config)             
@@ -1014,13 +1022,14 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			# get household id
 			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 			hhid = temp[0]
+			pid = self.parent.projectid
 			# delete selected transfer items
 			
 			db = data.mysql.connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for incomeid in selectedIds:
-				query = '''DELETE FROM transfers WHERE hhid=%s AND id=%s ''' % (hhid, incomeid)	
+				query = '''DELETE FROM transfers WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid, incomeid)	
 				cursor.execute(query)
 				db.commit()
     
@@ -1037,10 +1046,11 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 	def retrieveHouseholdTransferIncome(self):
 		''' retrieves and shows a list of household transfer income items '''
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
-		hhid = temp[0] 
+		hhid = temp[0]
+		pid = self.parent.projectid        
 		# select query to retrieve transfer income items
 		query = '''SELECT *
-				   FROM transfers WHERE hhid=%i AND sourcetype='External' ''' % (hhid)
+				   FROM transfers WHERE hhid=%i AND pid=%s AND sourcetype='External' ''' % (hhid, pid)
 		
 		# retrieve and display items
 		db = data.mysql.connector.Connect(**self.config)             
@@ -1144,13 +1154,14 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			# get household id
 			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 			hhid = temp[0]
+			pid = self.parent.projectid
 			# delete selected wildfoods items
 			
 			db = data.mysql.connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for incomeid in selectedIds:
-				query = '''DELETE FROM wildfoods WHERE hhid=%s AND id=%s ''' % (hhid, incomeid)	
+				query = '''DELETE FROM wildfoods WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid)	
 				cursor.execute(query)
 				db.commit()
     
@@ -1168,8 +1179,9 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		''' retrieves and shows a list of household wildfoods income items '''
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 		hhid = temp[0] 
+		pid = self.parent.projectid
 		# select query to retrieve wildfoods income items
-		query = '''SELECT * FROM wildfoods WHERE hhid=%i''' % (hhid)
+		query = '''SELECT * FROM wildfoods WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
 		
 		# retrieve and display items
 		db = data.mysql.connector.Connect(**self.config)             

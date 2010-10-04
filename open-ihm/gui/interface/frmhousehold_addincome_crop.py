@@ -19,6 +19,7 @@ class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops):
 		self.setupUi(self)
 		self.parent 	= parent
 		self.hhid 		= hhid
+		self.pid = parent.parent.projectid
 		self.incomeid 	= incomeid
 		
 		self.config = Config.dbinfo().copy()
@@ -55,7 +56,7 @@ class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops):
         
     def displayIncomeDetails(self):
 		''' Retrieve and display Household Income details '''
-		query = '''SELECT * FROM cropincome WHERE hhid=%s AND id=%s ''' % ( self.hhid, self.incomeid )
+		query = '''SELECT * FROM cropincome WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
 		
 		db = data.mysql.connector.Connect(**self.config)             
 		cursor = db.cursor()
@@ -91,12 +92,12 @@ class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops):
 		
 		# create UPDATE query
 		if (self.incomeid == 0):
-			query = '''INSERT INTO cropincome (hhid, incomesource, unitofmeasure, unitsconsumed, unitssold, unitprice )
-			    VALUES(%s,'%s','%s',%s,%s,%s) ''' % ( self.hhid, croptype, unitofmeasure, unitsconsumed, unitssold, unitprice )
+			query = '''INSERT INTO cropincome (hhid, incomesource, unitofmeasure, unitsconsumed, unitssold, unitprice, pid )
+			    VALUES(%s,'%s','%s',%s,%s,%s, %s) ''' % ( self.hhid, croptype, unitofmeasure, unitsconsumed, unitssold, unitprice,  self.pid )
 		else:
 			query = ''' UPDATE cropincome SET incomesource='%s', unitofmeasure='%s', unitsconsumed=%s, unitssold=%s,
-						unitprice=%s WHERE hhid=%s 
-						AND id=%s ''' % ( croptype, unitofmeasure, unitsconsumed, unitssold, unitprice, self.hhid, self.incomeid)
+						unitprice=%s WHERE hhid=%s AND pid=%s 
+						AND id=%s ''' % ( croptype, unitofmeasure, unitsconsumed, unitssold, unitprice, self.hhid, self.pid,  self.incomeid)
 		
 		# execute query and commit changes
 		cursor =  db.cursor()

@@ -19,6 +19,7 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers):
 		self.setupUi(self)
 		self.parent 	= parent
 		self.hhid 		= hhid
+		self.pid = parent.parent.projectid
 		self.incomeid 	= incomeid
 		
 		self.config = Config.dbinfo().copy()
@@ -56,7 +57,7 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers):
     def displayIncomeDetails(self):
 		''' Retrieve and display Household Income details '''
 		query = '''SELECT *
-				   FROM transfers WHERE hhid=%s AND id=%s ''' % ( self.hhid, self.incomeid )
+				   FROM transfers WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
 		
 		db = data.mysql.connector.Connect(**self.config)             
 		cursor = db.cursor()
@@ -97,14 +98,14 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers):
 		# create UPDATE query
 		if (self.incomeid == 0):
 			query = '''INSERT INTO transfers (hhid, assistancetype, unitofmeasure, sourcetype, foodperdistribution,
-			           cashperdistribution, numberoftimesreceived, cashperyear ) VALUES(%s,'%s','%s','%s',%s,%s,%s,%s)
-					''' % (self.hhid, assistancetype, unitofmeasure, sourcetype, foodperdist, cashperdist, numreceived, cashperyear)
+			           cashperdistribution, numberoftimesreceived, cashperyear, pid ) VALUES(%s,'%s','%s','%s',%s,%s,%s,%s,%s)
+					''' % (self.hhid, assistancetype, unitofmeasure, sourcetype, foodperdist, cashperdist, numreceived, cashperyear, self.pid)
 		else:
 			query = ''' UPDATE transfers 
 					    SET assistancetype='%s', unitofmeasure='%s', sourcetype='%s', foodperdistribution=%s, cashperdistribution=%s,
 					    numberoftimesreceived=%s, cashperyear=%s
-						WHERE hhid=%s AND id=%s 
-					''' % ( assistancetype, unitofmeasure, sourcetype, foodperdist, cashperdist, numreceived, cashperyear, self.hhid, self.incomeid)
+						WHERE hhid=%s AND pid=%s AND id=%s 
+					''' % ( assistancetype, unitofmeasure, sourcetype, foodperdist, cashperdist, numreceived, cashperyear, self.hhid, self.pid,  self.incomeid)
 		
 		# execute query and commit changes
 		cursor =  db.cursor()
