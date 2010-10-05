@@ -111,15 +111,19 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes):
 			numrows = numrows + 1
 
 		if numrows <> 0:
+                        msg = "Are sure sure you want to delete this Expenditure Category Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 			
-			query = '''DELETE FROM setup_expenditurecategories WHERE expenditurecategory='%s' ''' % (categorytype)
+                                query = '''DELETE FROM setup_expenditurecategories WHERE expenditurecategory='%s' ''' % (categorytype)
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
 
-			#refresh categories list
-			self.getExpenditureCategories()			
+                                self.txtCategory.clear()
+                                #refresh categories list
+                                self.getExpenditureCategories()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
@@ -196,15 +200,19 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes):
 			numrows = numrows + 1
 
 		if numrows <> 0:
+                        msg = "Are sure sure you want to delete this Expenditure Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 			
-			query = '''DELETE FROM setup_expendituretypes WHERE expendituretype='%s' ''' % (myexpendituretype)
+                                query = '''DELETE FROM setup_expendituretypes WHERE expendituretype='%s' ''' % (myexpendituretype)
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
-				
-			#refresh categories list
-			self.getExpenditureTypes()			
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
+
+                                self.txtExpenseType.clear()
+                                #refresh categories list
+                                self.getExpenditureTypes()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Expenditure Type', "Record not found")

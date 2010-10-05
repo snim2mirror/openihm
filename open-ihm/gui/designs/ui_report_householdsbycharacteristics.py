@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdsbycharacteristics.ui'
 #
-# Created: Mon Sep 27 17:35:16 2010
+# Created: Mon Oct 04 18:02:07 2010
 #      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,6 +31,8 @@ class Ui_HouseHoldReport(object):
         self.cmbOrderCriteria1 = QtGui.QComboBox(HouseHoldReport)
         self.cmbOrderCriteria1.setGeometry(QtCore.QRect(370, 130, 101, 22))
         self.cmbOrderCriteria1.setObjectName(_fromUtf8("cmbOrderCriteria1"))
+        self.cmbOrderCriteria1.addItem(_fromUtf8(""))
+        self.cmbOrderCriteria1.addItem(_fromUtf8(""))
         self.cmbOrderCriteria2 = QtGui.QComboBox(HouseHoldReport)
         self.cmbOrderCriteria2.setGeometry(QtCore.QRect(486, 130, 101, 22))
         self.cmbOrderCriteria2.setObjectName(_fromUtf8("cmbOrderCriteria2"))
@@ -110,6 +112,8 @@ class Ui_HouseHoldReport(object):
         HouseHoldReport.setWindowTitle(QtGui.QApplication.translate("HouseHoldReport", "Report Households by Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.cmbHouseholds.setItemText(0, QtGui.QApplication.translate("HouseHoldReport", "All Households", None, QtGui.QApplication.UnicodeUTF8))
         self.cmbHouseholds.setItemText(1, QtGui.QApplication.translate("HouseHoldReport", "Select by Characteristics", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbOrderCriteria1.setItemText(0, QtGui.QApplication.translate("HouseHoldReport", "Household Number", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbOrderCriteria1.setItemText(1, QtGui.QApplication.translate("HouseHoldReport", "Household Name", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("HouseHoldReport", "Select Project Name", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("HouseHoldReport", "Select Household(s)", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("HouseHoldReport", "Household Characteristics", None, QtGui.QApplication.UnicodeUTF8))

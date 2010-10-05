@@ -61,6 +61,16 @@
      <height>22</height>
     </rect>
    </property>
+   <item>
+    <property name="text">
+     <string>Household Number</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Household Name</string>
+    </property>
+   </item>
   </widget>
   <widget class="QComboBox" name="cmbOrderCriteria2">
    <property name="geometry">
