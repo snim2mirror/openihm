@@ -35,7 +35,6 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
                 myIntVal = QIntValidator(0, 10000, self.txtEnergyValue)
                                 
                 self.txtEnergyValue.setValidator(myIntVal)
-                self.txtLivestockUnit.setValidator(myIntVal)
                 self.txtLivestockEnergyValue.setValidator(myIntVal)
                 self.txtWildFoodEnergyValue.setValidator(myIntVal)
 

@@ -78,6 +78,7 @@
      <string>Reports</string>
     </property>
     <addaction name="actionHousehold_by_Characteristics"/>
+    <addaction name="actionIncome_By_Source"/>
    </widget>
    <addaction name="menuProject"/>
    <addaction name="menuHousehold"/>
@@ -311,12 +312,17 @@
   </action>
   <action name="actionHousehold_by_Characteristics">
    <property name="text">
-    <string>Household by Characteristics</string>
+    <string>Households List by Characteristics</string>
    </property>
   </action>
   <action name="actionManage_Currencies">
    <property name="text">
     <string>Manage Currencies</string>
+   </property>
+  </action>
+  <action name="actionIncome_By_Source">
+   <property name="text">
+    <string>Income By Source</string>
    </property>
   </action>
  </widget>
