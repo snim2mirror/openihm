@@ -73,4 +73,6 @@ class HouseholdsByCharacteristics:
         reporttable = self.database.execSelectQuery( query )
         self.database.close()
         return reporttable
+    def getHouseholdsForReport(self):
+        pass
         

@@ -45,6 +45,8 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
 
             	self.cmbProjectNames.setCurrentIndex(-1)
                 self.cmbHouseholds.setCurrentIndex(-1)
+ 
+
 
         def getselectedProject(self):
                 ''' get name of project selected by user'''

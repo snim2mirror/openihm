@@ -69,6 +69,7 @@ class ReportsSettingsManager:
     def setHCharacteristicsTableName(self, projectid):
         tablename = 'p' + '%s' %(projectid) + 'householdcharacteristics'
         return tablename
+
     def getProjectHouseholds(self, projectid):
         rows =[]
         if projectid != 0:
