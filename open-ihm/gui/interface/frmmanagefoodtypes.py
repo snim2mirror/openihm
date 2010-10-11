@@ -8,9 +8,12 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-from gui.designs.ui_managefoodtypes import Ui_FoodTypes
-
+#from gui.designs.ui_managefoodtypes import Ui_FoodTypes
+from gui.designs.ui_managefoodtypes_1 import Ui_FoodTypes
 from data.GenericDBOP import GenericDBOP
+from data.database import Database
+from frm_managefoodtypes_add import FrmAddCropType
+from frm_managefoodtypes_edit import FrmEditCropType
 
 class FrmManageFoodTypes(QDialog, Ui_FoodTypes):		
         ''' Creates the Edit Project form. '''	
@@ -24,118 +27,155 @@ class FrmManageFoodTypes(QDialog, Ui_FoodTypes):
         	# get food type
         	self.getFoodTypes()
 
-                #set input validator and restrict input to numeric values,
-                myIntVal = QIntValidator(0, 10000, self.txtKCalories)
-                self.txtKCalories.setValidator(myIntVal);
-
                 #connect relevant signals
-		self.connect(self.cmdManageFoodClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
-		self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveFoodType)
+		'''self.connect(self.cmdManageFoodClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
+		
 		self.connect(self.cmdDelete, SIGNAL("clicked()"), self.deleteFoodType)
-		self.connect(self.cmbFoodType, SIGNAL("currentIndexChanged(int)"), self.populateForm)
-              
+		'''
+		self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
+		self.connect(self.cmdDeleteRows, SIGNAL("clicked()"), self.deleteSelectedCropTypes)
+		self.connect(self.cmdAddRow, SIGNAL("clicked()"), self.saveCropType)
+		self.connect(self.cmdEditRow, SIGNAL("clicked()"), self.editCropType)
+		self.connect(self.cmdSearch, SIGNAL("clicked()"), self.searchCropType)
 	
 	def getFoodTypes(self):
                	# select query to retrieve Food Types and related information
-        	query = '''SELECT foodtype FROM setup_crops'''
+        	query = '''SELECT foodtype,measuringunit,energyvalueperunit FROM setup_crops'''
 
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-	      		
-		for row in recordset:
-			foodtype = row[0]
-            		self.cmbFoodType.addItem(foodtype)
+        	database = Database()
+        	database.open()
+                recordset = database.execSelectQuery(query)
+                database.close()
 
-            	self.cmbFoodType.setCurrentIndex(-1)
-
-	
-	def populateForm(self):
-		'''
-		populate form controls when user selects a particular food type	
-		'''
+		model = QStandardItemModel(1,2)
+		# set model headers
+		model.setHorizontalHeaderItem(0,QStandardItem('''Food Type'''))
+		model.setHorizontalHeaderItem(1,QStandardItem('Unit of Measure'))
+		model.setHorizontalHeaderItem(2,QStandardItem('Kcals per Kg'))
 		
-		foodtype = self.cmbFoodType.currentText()
-		self.txtKCalories.clear()
-		self.cmbUnitOfMeasure.clear()
-
-        	# select query to retrieve Food Types and related information
-        	query = '''SELECT foodtype, energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype ='%s' ''' % (foodtype)
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-       		
+		# add  data rows
+		num = 0
+	    
 		for row in recordset:
-			energyvalue = str(row[1])
-			measuringunit = str(row[2])
-			
-			#populate the form controls
-			self.txtKCalories.setText(energyvalue)
-			self.cmbUnitOfMeasure.addItem(measuringunit)
-	
-	def saveFoodType(self):
-        	''' Saves newly created data to database '''
-
-        	# get the data entered by user
-        	myfoodtype = self.cmbFoodType.currentText()
-		mymeasuringunit = self.cmbUnitOfMeasure.currentText()
-        	myenergyvalue  = self.txtKCalories.text()
-        	
-		# check if record exists
-		query = '''SELECT foodtype, energyvalueperunit, measuringunit
-				FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
+		    qtCrop = QStandardItem( "%s" % row[0])
+		    qtCrop.setTextAlignment( Qt.AlignLeft | Qt.AlignVCenter )
+		    
+		    qtUnitOfMeasure = QStandardItem( "%s" % row[1] )
+		    qtUnitOfMeasure.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
+		    
+		    qtUnitKcals = QStandardItem( "%i" % row[2] )
+		    qtUnitKcals.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
+		    
+		    model.setItem( num, 0, qtCrop )
+		    model.setItem( num, 1, qtUnitOfMeasure )
+		    model.setItem( num, 2, qtUnitKcals )
+		    num = num + 1
+	    
+		self.tableView.setModel(model)
+		#self.tableView.verticalHeader().hide()
+                self.tableView.horizontalHeader().setResizeMode(0, QHeaderView.ResizeToContents)                                              
+		self.tableView.horizontalHeader().setResizeMode(1, QHeaderView.ResizeToContents)
+		self.tableView.horizontalHeader().setResizeMode(2, QHeaderView.ResizeToContents)
+		self.tableView.show()
+            	
+	def saveCropType(self):
+		''' Show the Add Food Types form '''
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+		form = FrmAddCropType(self)
+		form.setWindowIcon(QIcon('resources/images/openihm.png'))
+                form.exec_()
+		self.getFoodTypes()
 
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
-				      	
-		if numrows == 0:
+	def editCropType(self):
+                
+                if self.countRowsSelected(self.tableView) != 0:
+                        
+			# get the age of the selected record
+			selectedRow = self.getCurrentRow(self.tableView)
+			selectedcrop = self.tableView.model().item(selectedRow,0).text()
+			measuringunit = self.tableView.model().item(selectedRow,1).text()
+			energyvalue = self.tableView.model().item(selectedRow,2).text()
+
+			# show edit food energy requirement form
+			form = FrmEditCropType(self.parent,selectedcrop,measuringunit,energyvalue)
+			form.setWindowIcon(QIcon('resources/images/openihm.png'))
+			form.exec_()
+			self.getFoodTypes()
 			
-			query = '''INSERT INTO setup_crops(foodtype, energyvalueperunit, measuringunit) 
-                     		VALUES('%s',%s,'%s')''' % (myfoodtype, myenergyvalue, mymeasuringunit)
 		else:
-			query = '''UPDATE setup_crops SET foodtype='%s', energyvalueperunit=%s, measuringunit='%s'
-                     		WHERE foodtype='%s' ''' % (myfoodtype, myenergyvalue, mymeasuringunit, myfoodtype)
+			QMessageBox.information(self,"Edit Food Type","Please select the row containing food type to be edited.")
+                
+	def deleteSelectedCropTypes(self):
+
+		numSelected = self.countRowsSelected(self.tableView)
+		if  numSelected != 0:
+			# confirm deletion
+			if numSelected == 1:
+				msg = "Are you sure you want to delete the selected record?"
+			else:
+				msg = "Are you sure you want to delete the selected records?"
+				
+			ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+			# if deletion is rejected return without deleting
+			if ret == QMessageBox.No:
+				return
+			# get the crop names for the selected records
+			selectedRows = self.getSelectedRows(self.tableView)
+			selectedIds = []
+			for row in selectedRows:
+				selectedIds.append( self.tableView.model().item(row,0).text() )
+			 
+			# delete record with selected food type
+			database = Database()
+			database.open()
+			
+			for cropname in selectedIds:
+				query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (cropname)	
+				database.execUpdateQuery(query)
     
-        	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
-
-	def deleteFoodType(self):
-		''' Deletes Food Type record from database '''
-
-        	# get user selection
-        	myfoodtype = self.cmbFoodType.currentText()
-        	print myfoodtype
-
-		#check if record exists
-		query = '''SELECT foodtype, energyvalueperunit, measuringunit
-				FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)  
-
-      		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
-
-		if numrows <> 0:
-                        msg = "Are sure sure you want to delete this record?"
-                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
-                        if ret == QMessageBox.Yes:
-                                query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)
-
-                                # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
-
-                                self.cmbFoodType.clear()
-                                self.cmbUnitOfMeasure.clear()
-                                self.txtKCalories.clear()
+			# close database connection
+			database.close()
 			
-                                #populate Food Types Combobox
-                                self.getFoodTypes()			
-			
+			self.getFoodTypes()
+
 		else:
-			QMessageBox.information(self, 'Delete Food Type', "Record not found")
+			QMessageBox.information(self,"Delete Food Types","Please select the rows containing food type(s) to be deleted.")
 
+	def countRowsSelected(self, tblVw):
+		selectedRows = self.getSelectedRows(tblVw)
+		return len(selectedRows)
+		
+	def getSelectedRows(self, tblVw):
+		
+		selectedRows = []
+		selectedIndexes = tblVw.selectedIndexes()
+		
+		for indexVal in selectedIndexes:
+			if indexVal.row() not in selectedRows:
+				selectedRows.append(indexVal.row())
+				
+		return selectedRows
+	
+	def getCurrentRow(self, tblVw):
+		indexVal = tblVw.currentIndex()
+		return indexVal.row()
+
+        def searchCropType(self):
+                croptype = self.txtSearchCrop.text()
+                numrows = self.tableView.model().rowCount()
+                counter = 0
+                cropfound = 0
+                for counter in range(0,numrows):
+                        currentIndex = self.tableView.model().index(counter,0)
+                        currentitem = self.tableView.model().item(currentIndex.row(),0).text()
+                        if croptype == currentitem:
+                                cropfound = 1
+                                desiredIndex = currentIndex
+                if cropfound:
+                        self.tableView.scrollTo(currentIndex,QAbstractItemView.EnsureVisible)
+                        self.tableView.selectRow(currentIndex.row())
+                else:
+                        QMessageBox.information(self,"Item Not Found","Item not found")
+                        
+                                
+                                

@@ -52,6 +52,7 @@
     <addaction name="actionPersonal_Characteristics"/>
     <addaction name="actionEnergy_Requirements"/>
     <addaction name="actionManage_Currencies"/>
+    <addaction name="actionInitialise_Food_Energy_Table"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -323,6 +324,11 @@
   <action name="actionIncome_By_Source">
    <property name="text">
     <string>Income By Source</string>
+   </property>
+  </action>
+  <action name="actionInitialise_Food_Energy_Table">
+   <property name="text">
+    <string>Initialise Food Energy Table</string>
    </property>
   </action>
  </widget>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Fri Oct 08 16:40:05 2010
+# Created: Mon Oct 11 19:05:04 2010
 #      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -132,6 +132,8 @@ class Ui_MainWindow(object):
         self.actionManage_Currencies.setObjectName(_fromUtf8("actionManage_Currencies"))
         self.actionIncome_By_Source = QtGui.QAction(MainWindow)
         self.actionIncome_By_Source.setObjectName(_fromUtf8("actionIncome_By_Source"))
+        self.actionInitialise_Food_Energy_Table = QtGui.QAction(MainWindow)
+        self.actionInitialise_Food_Energy_Table.setObjectName(_fromUtf8("actionInitialise_Food_Energy_Table"))
         self.menuProject.addAction(self.actionCreate_Project)
         self.menuProject.addAction(self.actionOpen_Project)
         self.menuProject.addAction(self.actionFind_Project)
@@ -152,6 +154,7 @@ class Ui_MainWindow(object):
         self.menuData_Management.addAction(self.actionPersonal_Characteristics)
         self.menuData_Management.addAction(self.actionEnergy_Requirements)
         self.menuData_Management.addAction(self.actionManage_Currencies)
+        self.menuData_Management.addAction(self.actionInitialise_Food_Energy_Table)
         self.menuHelp.addAction(self.actionContents)
         self.menuHelp.addAction(self.actionAboutOpenIHM)
         self.menuHousehold.addAction(self.actionAdd_Household)
@@ -228,4 +231,5 @@ class Ui_MainWindow(object):
         self.actionHousehold_by_Characteristics.setText(QtGui.QApplication.translate("MainWindow", "Households List by Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.actionManage_Currencies.setText(QtGui.QApplication.translate("MainWindow", "Manage Currencies", None, QtGui.QApplication.UnicodeUTF8))
         self.actionIncome_By_Source.setText(QtGui.QApplication.translate("MainWindow", "Income By Source", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionInitialise_Food_Energy_Table.setText(QtGui.QApplication.translate("MainWindow", "Initialise Food Energy Table", None, QtGui.QApplication.UnicodeUTF8))
 

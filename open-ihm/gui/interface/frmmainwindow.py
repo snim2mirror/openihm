@@ -37,6 +37,7 @@ from frmfoodenergy_requirements import  FrmFoodEnergyRequirements
 from frm_report_householdsbycharacteristics import RepHouseholdsByCharacteristics
 from frmcurrencymanager import FrmCurrencyManager
 from frm_report_householdincome import HouseholdIncomeReport
+from data.setup_crops_startupvalues import FoodValuesStartup
 
 class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	''' Creates the Main Window of the application using the main 
@@ -93,6 +94,8 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		#signals and slots for repoerts
 		self.connect(self.actionHousehold_by_Characteristics, QtCore.SIGNAL("triggered()"), self.reportHouholdsByCharacteristics)
 		self.connect(self.actionIncome_By_Source, QtCore.SIGNAL("triggered()"), self.reportHouholdsByIncomeSource)
+                self.connect(self.actionInitialise_Food_Energy_Table, QtCore.SIGNAL("triggered()"), self.initialiseFoodEnergyLookupTable)
+		
 		
 
 	def centerSubWindow(self, subWin):
@@ -310,3 +313,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
 	    form.show()
+
+	def initialiseFoodEnergyLookupTable(self):
+                initialiser = FoodValuesStartup()
+                initialiser.insertSartUpValues()
