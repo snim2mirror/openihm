@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_data.ui'
 #
-# Created: Tue Jun 22 23:32:46 2010
+# Created: Sat Oct 16 11:24:19 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -16,6 +16,9 @@ class Ui_HouseholdData(object):
         HouseholdData.setMinimumSize(QtCore.QSize(797, 620))
         self.tabHouseHold = QtGui.QTabWidget(HouseholdData)
         self.tabHouseHold.setGeometry(QtCore.QRect(10, 40, 781, 531))
+        font = QtGui.QFont()
+        font.setPointSize(8)
+        self.tabHouseHold.setFont(font)
         self.tabHouseHold.setObjectName("tabHouseHold")
         self.tabHouseHoldMembers = QtGui.QWidget()
         self.tabHouseHoldMembers.setObjectName("tabHouseHoldMembers")
@@ -29,8 +32,11 @@ class Ui_HouseholdData(object):
         self.cmdEditMember.setGeometry(QtCore.QRect(110, 470, 91, 31))
         self.cmdEditMember.setObjectName("cmdEditMember")
         self.cmdDelMember = QtGui.QPushButton(self.tabHouseHoldMembers)
-        self.cmdDelMember.setGeometry(QtCore.QRect(210, 470, 91, 31))
+        self.cmdDelMember.setGeometry(QtCore.QRect(390, 470, 91, 31))
         self.cmdDelMember.setObjectName("cmdDelMember")
+        self.cmdEditPersonalChars = QtGui.QPushButton(self.tabHouseHoldMembers)
+        self.cmdEditPersonalChars.setGeometry(QtCore.QRect(210, 470, 171, 31))
+        self.cmdEditPersonalChars.setObjectName("cmdEditPersonalChars")
         self.tabHouseHold.addTab(self.tabHouseHoldMembers, "")
         self.tabHouseholdAssets = QtGui.QWidget()
         self.tabHouseholdAssets.setObjectName("tabHouseholdAssets")
@@ -166,7 +172,7 @@ class Ui_HouseholdData(object):
         self.tab_6 = QtGui.QWidget()
         self.tab_6.setObjectName("tab_6")
         self.label_7 = QtGui.QLabel(self.tab_6)
-        self.label_7.setGeometry(QtCore.QRect(20, 10, 201, 21))
+        self.label_7.setGeometry(QtCore.QRect(20, 10, 221, 21))
         font = QtGui.QFont()
         font.setWeight(75)
         font.setBold(True)
@@ -221,7 +227,7 @@ class Ui_HouseholdData(object):
         self.label.setObjectName("label")
 
         self.retranslateUi(HouseholdData)
-        self.tabHouseHold.setCurrentIndex(2)
+        self.tabHouseHold.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(HouseholdData)
 
@@ -230,6 +236,7 @@ class Ui_HouseholdData(object):
         self.cmdAddMember.setText(QtGui.QApplication.translate("HouseholdData", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdEditMember.setText(QtGui.QApplication.translate("HouseholdData", "Edit", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdDelMember.setText(QtGui.QApplication.translate("HouseholdData", "Delete", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdEditPersonalChars.setText(QtGui.QApplication.translate("HouseholdData", "Edit Personal Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.tabHouseHold.setTabText(self.tabHouseHold.indexOf(self.tabHouseHoldMembers), QtGui.QApplication.translate("HouseholdData", "Members", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdAddAsset.setText(QtGui.QApplication.translate("HouseholdData", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdEditAsset.setText(QtGui.QApplication.translate("HouseholdData", "Edit", None, QtGui.QApplication.UnicodeUTF8))
@@ -254,17 +261,17 @@ class Ui_HouseholdData(object):
         self.cmdEditWildfoods.setText(QtGui.QApplication.translate("HouseholdData", "Edit", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdDelWildfoods.setText(QtGui.QApplication.translate("HouseholdData", "Delete", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdAddWildfoods.setText(QtGui.QApplication.translate("HouseholdData", "Add", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QtGui.QApplication.translate("HouseholdData", "Wildfoods and Hunting", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_6.setText(QtGui.QApplication.translate("HouseholdData", "Gifts", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QtGui.QApplication.translate("HouseholdData", "Wildfoods", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_6.setText(QtGui.QApplication.translate("HouseholdData", "Transfers", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdEditGifts.setText(QtGui.QApplication.translate("HouseholdData", "Edit", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdDelGifts.setText(QtGui.QApplication.translate("HouseholdData", "Delete", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdAddGifts.setText(QtGui.QApplication.translate("HouseholdData", "Add", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QtGui.QApplication.translate("HouseholdData", "Gifts", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_7.setText(QtGui.QApplication.translate("HouseholdData", "Gifts from External Organisations", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QtGui.QApplication.translate("HouseholdData", "Transfers", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_7.setText(QtGui.QApplication.translate("HouseholdData", "Transfers from Organisations", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdEditTransfer.setText(QtGui.QApplication.translate("HouseholdData", "Edit", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdDelTransfer.setText(QtGui.QApplication.translate("HouseholdData", "Delete", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdAddTransfer.setText(QtGui.QApplication.translate("HouseholdData", "Add", None, QtGui.QApplication.UnicodeUTF8))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), QtGui.QApplication.translate("HouseholdData", "Gifts From Orgs", None, QtGui.QApplication.UnicodeUTF8))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_6), QtGui.QApplication.translate("HouseholdData", "Transfers From Orgs", None, QtGui.QApplication.UnicodeUTF8))
         self.tabHouseHold.setTabText(self.tabHouseHold.indexOf(self.tabHouseholdIncome), QtGui.QApplication.translate("HouseholdData", "Income", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdAddExpenditure.setText(QtGui.QApplication.translate("HouseholdData", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdEditExpenditure.setText(QtGui.QApplication.translate("HouseholdData", "Edit", None, QtGui.QApplication.UnicodeUTF8))

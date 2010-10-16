@@ -28,8 +28,13 @@
      <height>531</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tabHouseHoldMembers">
     <attribute name="title">
@@ -74,7 +79,7 @@
     <widget class="QPushButton" name="cmdDelMember">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>390</x>
        <y>470</y>
        <width>91</width>
        <height>31</height>
@@ -82,6 +87,19 @@
      </property>
      <property name="text">
       <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdEditPersonalChars">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>470</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Edit Personal Characteristics</string>
      </property>
     </widget>
    </widget>
@@ -379,7 +397,7 @@
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
-       <string>Wildfoods and Hunting</string>
+       <string>Wildfoods</string>
       </attribute>
       <widget class="QLabel" name="label_5">
        <property name="geometry">
@@ -452,7 +470,7 @@
      </widget>
      <widget class="QWidget" name="tab_5">
       <attribute name="title">
-       <string>Gifts</string>
+       <string>Transfers</string>
       </attribute>
       <widget class="QLabel" name="label_6">
        <property name="geometry">
@@ -470,7 +488,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Gifts</string>
+        <string>Transfers</string>
        </property>
       </widget>
       <widget class="QTableView" name="tblGiftsIncome">
@@ -525,14 +543,14 @@
      </widget>
      <widget class="QWidget" name="tab_6">
       <attribute name="title">
-       <string>Gifts From Orgs</string>
+       <string>Transfers From Orgs</string>
       </attribute>
       <widget class="QLabel" name="label_7">
        <property name="geometry">
         <rect>
          <x>20</x>
          <y>10</y>
-         <width>201</width>
+         <width>221</width>
          <height>21</height>
         </rect>
        </property>
@@ -543,7 +561,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Gifts from External Organisations</string>
+        <string>Transfers from Organisations</string>
        </property>
       </widget>
       <widget class="QTableView" name="tblTransferIncome">

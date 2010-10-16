@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>322</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,8 +29,8 @@
   <widget class="QLineEdit" name="txtUnitPrice">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>200</y>
+     <x>270</x>
+     <y>160</y>
      <width>111</width>
      <height>20</height>
     </rect>
@@ -49,22 +49,22 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txtUnitOfMeasure">
+  <widget class="QLineEdit" name="txtUnitsProduced">
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>80</y>
-     <width>111</width>
+     <y>120</y>
+     <width>71</width>
      <height>20</height>
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txtUnitsSold">
+  <widget class="QLineEdit" name="txtUnitsConsumed">
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>160</y>
-     <width>111</width>
+     <y>240</y>
+     <width>71</width>
      <height>20</height>
     </rect>
    </property>
@@ -72,8 +72,8 @@
   <widget class="QPushButton" name="cmdCancel">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>240</y>
+     <x>310</x>
+     <y>280</y>
      <width>75</width>
      <height>31</height>
     </rect>
@@ -85,9 +85,9 @@
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>200</y>
-     <width>91</width>
+     <x>200</x>
+     <y>160</y>
+     <width>61</width>
      <height>21</height>
     </rect>
    </property>
@@ -112,34 +112,34 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>80</y>
+     <y>120</y>
      <width>91</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>Unit of Measure:</string>
+    <string>Units Produced:</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>160</y>
+     <y>240</y>
      <width>91</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>Units Sold:</string>
+    <string>Units Consumed:</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txtUnitsConsumed">
+  <widget class="QLineEdit" name="txtUnitsSold">
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>120</y>
-     <width>111</width>
+     <y>160</y>
+     <width>71</width>
      <height>20</height>
     </rect>
    </property>
@@ -161,20 +161,20 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>120</y>
+     <y>160</y>
      <width>81</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>Units Consumed:</string>
+    <string>Units Sold:</string>
    </property>
   </widget>
   <widget class="QPushButton" name="cmdSave">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>240</y>
+     <y>280</y>
      <width>75</width>
      <height>31</height>
     </rect>
@@ -186,13 +186,61 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Unit of Measure:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtUnitOfMeasure">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>80</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtUnitsOtherUses">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>200</y>
+     <width>71</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>200</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Other Uses:</string>
+   </property>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>cboIncomeType</tabstop>
   <tabstop>txtUnitOfMeasure</tabstop>
-  <tabstop>txtUnitsConsumed</tabstop>
+  <tabstop>txtUnitsProduced</tabstop>
   <tabstop>txtUnitsSold</tabstop>
   <tabstop>txtUnitPrice</tabstop>
+  <tabstop>txtUnitsOtherUses</tabstop>
+  <tabstop>txtUnitsConsumed</tabstop>
   <tabstop>cmdSave</tabstop>
   <tabstop>cmdCancel</tabstop>
  </tabstops>
