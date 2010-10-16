@@ -79,3 +79,56 @@ class ReportsSettingsManager:
             self.database.close()
         return rows
 
+    def getCropIncomeSources(self,projectid):
+        rows =[]
+        if projectid != 0:
+            query = ''' SELECT incomesource FROM cropincome WHERE pid='%s' ''' %(projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
+    def getEmploymentIncomeSources(self,projectid):
+        rows =[]
+        if projectid != 0:
+            query = ''' SELECT incomesource FROM employmentincome WHERE pid='%s' ''' %(projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
+    def getLivestockIncomeSources(self,projectid):
+        rows =[]
+        if projectid != 0:
+            query = ''' SELECT incomesource FROM livestockincome WHERE pid='%s' ''' %(projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
+    def getWildfoodsIncomeSources(self,projectid):
+        rows =[]
+        if projectid != 0:
+            query = ''' SELECT incomesource FROM wildfoods WHERE pid='%s' ''' %(projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
+    def getTransferIncomeSources(self,projectid):
+        rows =[]
+        if projectid != 0:
+            query = ''' SELECT assistancetype FROM transfers WHERE pid='%s' ''' %(projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
+    def getLoanIncomeSources(self,projectid):
+        rows =[]
+        if projectid != 0:
+            query = ''' SELECT creditsource FROM creditandloans WHERE pid='%s' ''' %(projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
