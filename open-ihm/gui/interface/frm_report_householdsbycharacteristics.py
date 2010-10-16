@@ -13,8 +13,8 @@ from data.report_settingsmanager import ReportsSettingsManager
 from outputs.routines.report_households_by_characteristics import HouseholdsByCharacteristics
 from frm_report_householdsbycharacteristics_display import HouseholdsByCharDisplay
 
-class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):	
-	''' Creates the Report Households by Characteristics from. Uses the design class
+class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
+        ''' Creates the Report Households by Characteristics from. Uses the design class
 		in gui.designs.ui_report_householdsbycharacteristics. '''	
 	
 	def __init__(self, parent):
@@ -29,7 +29,7 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
         	self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
         	self.connect(self.cmbProjectNames, SIGNAL("currentIndexChanged(int)"), self.getHouseholdCharacteristics)
         	self.connect(self.cmbProjectNames, SIGNAL("currentIndexChanged(int)"), self.getPersonalCharacteristics)
-        	self.connect(self.cmdGenerateReport, SIGNAL("clicked()"), self.displayReport)
+        	self.connect(self.cmdGenerateReport, SIGNAL("clicked()"), self.getReportData)
 
 
 
@@ -45,6 +45,8 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
 
             	self.cmbProjectNames.setCurrentIndex(-1)
                 self.cmbHouseholds.setCurrentIndex(-1)
+ 
+
 
         def getselectedProject(self):
                 ''' get name of project selected by user'''
@@ -176,12 +178,12 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
                 reporttable = report.getReportTable(projectid,pcharselected,hcharselected,pquery,hquery)
                 return reporttable
                 
-        def displayReport(self):
-            ''' Creates and Shows the Report: Households by characteristics form '''
-            freporttable = self.getReportData()
-	    form = HouseholdsByCharDisplay(self.parent,freporttable)
-	    subWin = self.parent.mdi.addSubWindow(form)
-	    self.parent.centerSubWindow(subWin)
-	    form.show()
-
+                #def displayReport(self):
+                ''' Creates and Shows the Report: Households by characteristics form '''
+                '''freporttable = self.getReportData()
+                form = HouseholdsByCharDisplay(self.parent,freporttable)
+                subWin = self.parent.mdi.addSubWindow(form)
+                self.parent.centerSubWindow(subWin)
+                form.show()'''
+        
                 

@@ -69,3 +69,13 @@ class ReportsSettingsManager:
     def setHCharacteristicsTableName(self, projectid):
         tablename = 'p' + '%s' %(projectid) + 'householdcharacteristics'
         return tablename
+
+    def getProjectHouseholds(self, projectid):
+        rows =[]
+        if projectid != 0:
+            query = '''SELECT householdname FROM households WHERE pid='%s' ''' % (projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+

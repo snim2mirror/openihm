@@ -124,6 +124,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
         	# execute query and commit changes
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
+                self.getAssetCategories()
 		#refresh categories list
 		#self.getCategories()                
                 
@@ -144,20 +145,23 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
 
 		if numrows <> 0:
 			
-			query = '''DELETE FROM assettypes WHERE assettype='%s' ''' % (categorytype)
+                        msg = "Are sure sure you want to delete this Asset Category Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
+                                
+                                query = '''DELETE FROM assettypes WHERE assettype='%s' ''' % (categorytype)
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
 
-			
-        		#self.cmbKCalories.clear()
-			
-			#refresh categories list
-			self.getAssetCategories()			
+                                self.txtAssetCategories.clear()
+                                #refresh categories list
+                                self.getAssetCategories()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
+		self.getAssetCategories()
         #End block of methods for managing Asset Categories
 
 
@@ -213,8 +217,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
         	# execute query and commit changes
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
-		#refresh categories list
-		#self.getCategories()
+                self.getSavingsCategories()
                                 
 	def deleteSavingsType(self):
 		''' Deletes record from database '''
@@ -233,20 +236,23 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
 
 		if numrows <> 0:
 			
-			query = '''DELETE FROM savingscategories WHERE savingscategory='%s' ''' % (categorytype)
+                        msg = "Are sure sure you want to delete this Savings Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
+                                
+                                query = '''DELETE FROM savingscategories WHERE savingscategory='%s' ''' % (categorytype)
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
 
-			
-        		#self.cmbKCalories.clear()
-			
-			#refresh categories list
-			self.getAssetCategories()			
+                                self.txtSavingCategories.clear()		
+                                #refresh categories list
+                                self.getSavingsCategories()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
+		
         #End block of methods for managing Savings Categories
 
         #Begin block of methods for managing Foodstock details 
@@ -317,6 +323,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
         	# execute query and commit changes
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
+                self.getFoodTypes()
 		#refresh categories list
 		#self.getCategories()
                                 
@@ -336,21 +343,25 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
 			numrows = numrows + 1
 
 		if numrows <> 0:
+                        msg = "Are sure sure you want to delete this Food Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 			
-			query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)
+                                query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
 
-			
-        		#self.cmbKCalories.clear()
-			
-			#refresh categories list
-			self.getAssetCategories()			
+                                self.txtFoodStockType.clear()
+                                self.txtEnergyValue.clear()
+                                self.txtMeasuringUnit.clear()
+                                #refresh foodtype list
+                                self.getFoodTypes()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
+		
         #End block of methods for managing Food Stocks
 
         #Begin block of methods for managing Land details 
@@ -418,6 +429,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
         	# execute query and commit changes
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
+                self.getLandTypes()
 		#refresh categories list
 		#self.getCategories()
                                 
@@ -437,21 +449,23 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
 			numrows = numrows + 1
 
 		if numrows <> 0:
+                        msg = "Are sure sure you want to delete this Land Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 			
-			query = '''DELETE FROM setup_landtypes WHERE landtype='%s' ''' % (mylandtype)
+                                query = '''DELETE FROM setup_landtypes WHERE landtype='%s' ''' % (mylandtype)
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
+                                self.txtLandType.clear()
+                                self.txtLandMeasuringUnit.clear()
 
-			
-        		#self.cmbKCalories.clear()
-			
-			#refresh categories list
-			self.getAssetCategories()			
+                                self.getLandTypes()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Land Type', "Record not found")
+		
         #End block of methods for managing Land details
 
 
@@ -520,8 +534,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
         	# execute query and commit changes
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
-		#refresh categories list
-		#self.getCategories()
+                self.getTreeTypes()
                                 
 	def deleteTreeType(self):
 		''' Deletes record from database '''
@@ -539,21 +552,24 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
 			numrows = numrows + 1
 
 		if numrows <> 0:
+                        msg = "Are sure sure you want to delete this Tree Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
 			
-			query = '''DELETE FROM setup_treetypes WHERE treetype='%s' ''' % (mytreetype)
+                                query = '''DELETE FROM setup_treetypes WHERE treetype='%s' ''' % (mytreetype)
 
-			# execute query and commit changes
-        		temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
 
-			
-        		#self.cmbKCalories.clear()
-			
-			#refresh categories list
-			self.getAssetCategories()			
+                                self.txtTreeType.clear()
+                                self.txtTreeMeasuringUnit.clear()
+                                #refresh categories list
+                                self.getTreeTypes()			
 			
 		else:
 			QMessageBox.information(self, 'Delete Tree Type', "Record not found")
+		
         #End block of methods for managing Tree details
 
         #Begin block of methods for managing TradableGood details 
@@ -622,8 +638,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
                 # execute query and commit changes
                 temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
-                #refresh categories list
-                #self.getCategories()
+                self.getTradableGoodTypes()
                                 
         def deleteTradableGoodType(self):
                 ''' Deletes record from database '''
@@ -641,21 +656,24 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
                         numrows = numrows + 1
 
                 if numrows <> 0:
-			
-                        query = '''DELETE FROM setup_tradablegoods WHERE tradablegoodtype='%s' ''' % (mytradablegood)
+			msg = "Are sure sure you want to delete this Tradable Good Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
+                                query = '''DELETE FROM setup_tradablegoods WHERE tradablegoodtype='%s' ''' % (mytradablegood)
 
-                        # execute query and commit changes
-                        temp = GenericDBOP(query)
-                        recordset = temp.runUpdateQuery()
-
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
 			
-                        #self.cmbKCalories.clear()
+                                self.txtTradableGoodType.clear()
+                                self.txtTradableGoodMeasuringUnit.clear()
 			
-                        #refresh categories list
-                        self.getAssetCategories()			
+                                #refresh categories list
+                                self.getTradableGoodTypes()			
 			
                 else:
                         QMessageBox.information(self, 'Delete TradableGood Type', "Record not found")
+                
                 #End block of methods for managing TradableGood details
 
 

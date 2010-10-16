@@ -79,7 +79,6 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics):
                 else:
                         dataIndex = -1
 
-                print dataIndex
 		self.cmbDataType.setCurrentIndex(dataIndex)
 		self.txtDescription.setText(description)
 	
@@ -120,6 +119,13 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics):
         	# execute query and commit changes
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
+
+                #refresh interface
+                self.cmbCharacteristic.clear()
+		self.txtDescription.clear()
+		self.cmbDataType.clear()
+                self.getHouseholdCharacteristics()
+                
 
 	def deleteHouseholdCharacteristic(self):
 		''' Deletes record from database '''

@@ -13,12 +13,14 @@ from data.foodenergyrequirement import FoodEnergyRequirement
 # import the Create Add Food Energy Requirement Dialog design class
 from gui.designs.ui_edit_foodenergyrequirement import Ui_EditFoodEnergyRequirement
 
-class FrmEditEnergyRequirement(QDialog, Ui_EditFoodEnergyRequirement):	
+class FrmEditEnergyRequirement(QDialog, Ui_EditFoodEnergyRequirement):
+    
     ''' Creates the edit food energy requirement form '''	
 
     def __init__(self,parent,selectedage,energyreqmale,energyreqfemale):
+        
         ''' Set up the dialog box interface '''
-       # self.parent = parent
+        # self.parent = parent
         QDialog.__init__(self)
         
         self.setupUi(self)
