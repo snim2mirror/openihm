@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdincome.ui'
 #
-# Created: Wed Oct 13 23:37:16 2010
+# Created: Sun Oct 17 13:58:35 2010
 #      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -33,6 +33,7 @@ class Ui_HouseholdIncomeReport(object):
         self.cmdShowReport.setObjectName(_fromUtf8("cmdShowReport"))
         self.treeView = QtGui.QTreeView(HouseholdIncomeReport)
         self.treeView.setGeometry(QtCore.QRect(10, 220, 201, 291))
+        self.treeView.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.treeView.setObjectName(_fromUtf8("treeView"))
         self.listViewHCharacteristics = QtGui.QListView(HouseholdIncomeReport)
         self.listViewHCharacteristics.setGeometry(QtCore.QRect(220, 220, 201, 291))

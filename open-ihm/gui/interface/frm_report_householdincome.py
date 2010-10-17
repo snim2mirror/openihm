@@ -34,7 +34,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         self.connect(self.cmbProjects, SIGNAL("currentIndexChanged(int)"), self.putHouseholdNames)
         self.connect(self.cmbProjects, SIGNAL("currentIndexChanged(int)"), self.putCropIncomeSources)
 
-        self.connect(self.cmdShowReport, SIGNAL("clicked()"), self.getCropReportDetails)
+        self.connect(self.cmdShowReport, SIGNAL("clicked()"), self.getReportTable)
 
     def getProjectNames(self):
         ''' populate projects combobox with available projects'''
@@ -332,12 +332,16 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         return self.treeViewHouseholds.selectedIndexes()
         
     def getReportHouseholdIDs (self):
+
+        selectedids = []
         
         householdIDsQuery =self.getHouseholdIDsQuery()
         connector = HouseholdIncome()
         householdIDs = connector.getReportHouseholdIDs(householdIDsQuery)
-        print householdIDs
-        return householdIDs
+        for hid in householdIDs:
+            selectedids.append(str(hid[0]))
+        print selectedids
+        return selectedids
 
     def getHouseholdIDsQuery(self):
 
@@ -549,3 +553,26 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
 
         print incomeIndexes
         return incomeIndexes
+
+    def getReportTable (self):
+        
+        reportQuery =self.getFinalReportTableQuery()
+        connector = HouseholdIncome()
+        reportTable = connector.getReportTable(reportQuery)
+        print reportTable
+        return reportTable
+
+    def getFinalReportTableQuery(self):
+
+        projectid = self.getProjectID()
+        householdIDs = self.getReportHouseholdIDs()
+        cropdetails = self.getCropReportDetails()
+        employmentdetails = self.getEmploymentReportDetails()
+        livestockdetails = self.getLivestockReportDetails()
+        loandetails = self.getLoansReportDetails()
+        transferdetails = self.getTransfersDetails()
+        wildfoodsdetails = self.getTransfersDetails()
+
+        connector = HouseholdIncome()
+        householdIDsQuery = connector.buildFinalIncomeReportTableQuery(projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails )
+        return householdIDsQuery
