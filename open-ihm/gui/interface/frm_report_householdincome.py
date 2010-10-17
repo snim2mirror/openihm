@@ -29,12 +29,19 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         self.insertHouseholdsHeader()
         	
         self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-        self.connect(self.cmbProjects, SIGNAL("currentIndexChanged(int)"), self.getHouseholdCharacteristics)
-        self.connect(self.cmbProjects, SIGNAL("currentIndexChanged(int)"), self.getPersonalCharacteristics)
-        self.connect(self.cmbProjects, SIGNAL("currentIndexChanged(int)"), self.putHouseholdNames)
-        self.connect(self.cmbProjects, SIGNAL("currentIndexChanged(int)"), self.putCropIncomeSources)
-
+        self.connect(self.cmbProjects, SIGNAL("currentIndexChanged(int)"), self.updateDialogData)
         self.connect(self.cmdShowReport, SIGNAL("clicked()"), self.getReportTable)
+
+    def updateDialogData(self):
+        self.putCropIncomeSources()
+        self.getHouseholdCharacteristics()
+        self.getPersonalCharacteristics()
+        self.putHouseholdNames()
+        self.putEmploymentIncomeSources()
+        self.putLivestockIncomeSources()
+        #self.putLoanSources()
+        self.putTransferIncomeSources()
+        self.putwildFoodIncomeSources()
 
     def getProjectNames(self):
         ''' populate projects combobox with available projects'''
