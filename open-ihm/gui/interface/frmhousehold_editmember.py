@@ -3,6 +3,7 @@
 #-------------------------------------------------------------------
 
 # imports from PyQt4 package
+from datetime import date
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
@@ -24,10 +25,10 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember):
         # configure connect to database
         self.config = Config.dbinfo().copy()
         
-        # allow the calendar widget to pop up
-        now = QDate.currentDate()
-        self.dtpDOB.setDate(now)
-        self.dtpDOB.setCalendarPopup(True)
+        # add years to the year of birth combo box: current year to 150 years ago
+        thisyear = date.today().year
+        for year in range(thisyear, thisyear-151,  -1):
+             self.cmbYearOfBirth.addItem("%i" % year)
         
         # display household name
         self.lblHouseholdName.setText(hhname)
@@ -36,46 +37,68 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember):
         self.getMemberDetails()
         
         # connect relevant signals and slots
+        self.connect(self.txtAge, SIGNAL("textChanged()"), self.updateYearOfBirth)
+        self.connect(self.txtAge, SIGNAL("editingFinished()"), self.updateYearOfBirth)
+        self.connect(self.cmbYearOfBirth, SIGNAL("currentIndexChanged(int)"), self.updateAge)
         self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
         self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveMember)
+        
+    def updateYearOfBirth(self):
+        ''' updates year of birth when the value of age is modified '''
+        thisyear = date.today().year
+        age = self.txtAge.text()
+        yearOfBirth = thisyear - int(age)
+        self.cmbYearOfBirth.setCurrentIndex( self.cmbYearOfBirth.findText( "%i" % yearOfBirth ) )
+        
+    def updateAge(self):
+        ''' updates age when year of birth is modified'''
+        yearOfBirth = self.cmbYearOfBirth.currentText()
+        thisyear = date.today().year
+        age = thisyear - int(yearOfBirth)
+        self.txtAge.setText( "%i" % age )
         
     def getMemberDetails(self):
 		''' retrieves and displays details of the member being editted '''
 		pid = self.parent.parent.projectid
 		# query to retrieve member details
-		query = '''SELECT personid, headofhousehold, dateofbirth, sex, education 
+		query = '''SELECT personid, headofhousehold, yearofbirth, sex 
 		           FROM householdmembers WHERE hhid=%s AND personid='%s' AND pid=%s ''' % (self.hhid, self.currentid, pid)
 		
 		# execute query and commit changes
 		db = data.mysql.connector.Connect(**self.config)
 		cursor =  db.cursor()
 		cursor.execute(query)
-        
+		
 		for row in cursor.fetchall():
-			self.txtMemberID.setText( row[0])
+			self.lblMemberID.setText( row[0] )
 			
 			if row[1] == "Yes":
 				self.chkHeadHousehold.setChecked(True)	
 			
-			self.dtpDOB.setDate( row[2] )
+			age = date.today().year - row[2]
+			self.txtAge.setText( "%i" % age )
+			self.cmbYearOfBirth.setCurrentIndex( self.cmbYearOfBirth.findText( "%i" % row[2] ) )
 			
 			self.cboSex.setCurrentIndex(self.cboSex.findText(row[3]))
-			
-			self.txtEducation.setText( row[4] )
 			
 		# close database connection
 		cursor.close()
 		db.close()
-        	
-        
+			
     def saveMember(self):
 		''' Saves changes to household to database '''    	
 		
 		# get the data entered by user
-		memberid        = self.txtMemberID.text()
 		sex   			= self.cboSex.currentText()
-		dateofbirth  	= self.dtpDOB.date().toString("yyyy-MM-dd")
-		education       = self.txtEducation.text()
+		age = self.txtAge.text()
+		
+		if ( sex == "Male"):
+		     memberid = "m%s" % age
+		else:
+		     memberid = "f%s" % age
+		     
+		education       = ""
+		yearofbirth = self.cmbYearOfBirth.currentText()
 		if self.chkHeadHousehold.isChecked():
 			headhousehold = "Yes"
 		else:
@@ -83,8 +106,8 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember):
 		
 		pid = self.parent.parent.projectid
 		# create UPDATE query
-		query = '''UPDATE householdmembers SET personid='%s', headofhousehold='%s', dateofbirth='%s', sex='%s',
-			    education='%s' WHERE hhid=%s AND personid='%s' AND pid=%s''' % (memberid, headhousehold, dateofbirth, sex, education, self.hhid, self.currentid, pid)
+		query = '''UPDATE householdmembers SET personid='%s', headofhousehold='%s', yearofbirth=%s, sex='%s',
+			    education='%s' WHERE hhid=%s AND personid='%s' AND pid=%s''' % (memberid, headhousehold, yearofbirth, sex, education, self.hhid, self.currentid, pid)
     
 		# execute query and commit changes
 		db = data.mysql.connector.Connect(**self.config)

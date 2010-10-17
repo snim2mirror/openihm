@@ -3,6 +3,7 @@
 #-------------------------------------------------------------------
 
 # imports from PyQt4 package
+from datetime import date
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
@@ -13,6 +14,7 @@ from gui.designs.ui_household_data import Ui_HouseholdData
 from frmhousehold_addmember import FrmAddHouseholdMember
 from frmhousehold_editmember import FrmEditHouseholdMember
 from frmhousehold_editcharacteristic import FrmEditHouseholdCharacteristic
+from frmhousehold_editpersonalcharacteristic import FrmEditPersonalCharacteristic
 from frmhousehold_addasset import FrmHouseholdAsset
 from frmhousehold_addexpense import FrmHouseholdExpense
 from frmhousehold_addincome_crop import FrmHouseholdCropIncome
@@ -31,6 +33,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		self.parent = parent
 		
 		self.hhCharacteristicsTable = "p%iHouseholdCharacteristics" % (self.parent.projectid )
+		self.psCharacteristicsTable = "p%iPersonalCharacteristics" % (self.parent.projectid )
 		# connect to database
 		self.config = Config.dbinfo().copy()
 		
@@ -44,11 +47,12 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		# retrieve members
 		self.displayHouseholdData()
 		# connect relevant signals and slots
-		
 		self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
 		self.connect(self.cmdAddMember, SIGNAL("clicked()"), self.addHouseholdMember)
 		self.connect(self.cmdEditMember, SIGNAL("clicked()"), self.editHouseholdMember)	
 		self.connect(self.cmdDelMember, SIGNAL("clicked()"), self.delHouseholdMembers)
+		self.connect(self.cmdEditPersonalCharacteristic, SIGNAL("clicked()"), self.editPersonalCharacteristic)
+		self.connect(self.tblMembers, SIGNAL("clicked(QModelIndex)"), self.showMemberPersonalCharacteristics)
 		self.connect(self.cmdEditCharacteristic, SIGNAL("clicked()"), self.editCharacteristic)						
 		self.connect(self.cboHouseholdNumber, SIGNAL("currentIndexChanged(int)"), self.displayHouseholdData)
 		self.connect(self.cmdAddAsset, SIGNAL("clicked()"), self.addHouseholdAsset)
@@ -127,6 +131,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		 
 		cursor.close()   
 		db.close()
+		
+	#-----------------------------------------------------------------------------------
+	#	Household Members
+	#-----------------------------------------------------------------------------------
 	
 	def addHouseholdMember(self):
 		''' Show the Add Household Member form '''
@@ -143,7 +151,12 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		if self.countRowsSelected(self.tblMembers) != 0:
 			# get the member id of the selected member
 			selectedRow = self.getCurrentRow(self.tblMembers)
-			memberid = self.tblMembers.model().item(selectedRow,0).text()
+			if ( self.tblMembers.model().item(selectedRow, 0) != None ):
+			     memberid = self.tblMembers.model().item(selectedRow,0).text()
+			else:
+			     memberid = ""
+			if ( memberid == "" ):
+			     return
 			# get household id and name
 			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 			hhid = temp[0]
@@ -203,8 +216,8 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		hhid = temp[0] 
 		pid = self.parent.projectid
 		# select query to retrieve household members
-		query = '''SELECT personid, headofhousehold, dateofbirth, sex, education 
-		             FROM householdmembers WHERE hhid=%i and pid=%i''' % (hhid,  pid)
+		query = '''SELECT personid, headofhousehold, yearofbirth, sex 
+		             FROM householdmembers WHERE hhid=%i and pid=%i ORDER BY yearofbirth ''' % (hhid,  pid)
 		
 		# retrieve and display members
 		db = data.mysql.connector.Connect(**self.config)             
@@ -217,9 +230,8 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		# set model headers
 		model.setHorizontalHeaderItem(0,QStandardItem('Member ID.'))
 		model.setHorizontalHeaderItem(1,QStandardItem('Head of Household'))
-		model.setHorizontalHeaderItem(2,QStandardItem('Date of Birth'))
+		model.setHorizontalHeaderItem(2,QStandardItem('Age'))
 		model.setHorizontalHeaderItem(3,QStandardItem('Sex'))
-		model.setHorizontalHeaderItem(4,QStandardItem('Education'))
 		
 		# add  data rows
 		num = 0
@@ -227,28 +239,145 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		for row in cursor.fetchall():
 			qtMemberID = QStandardItem(row[0])
 			qtMemberID.setTextAlignment( Qt.AlignCenter )
-			qtHouseholdHead = QStandardItem( row[1] )	
-			qtDOB = QStandardItem( QDate(row[2]).toString("dd/MM/yyyy") )
-			qtDOB.setTextAlignment( Qt.AlignCenter )
+			qtHouseholdHead = QStandardItem( row[1] )
+			age = date.today().year - row[2]
+			qtAge = QStandardItem( "%i" % age )
 			
 			qtSex = QStandardItem( row[3] )
-			
-			qtEducation = QStandardItem( row[4] )
 			
 			
 			model.setItem( num, 0, qtMemberID )
 			model.setItem( num, 1, qtHouseholdHead )
-			model.setItem( num, 2, qtDOB )
+			model.setItem( num, 2, qtAge )
 			model.setItem( num, 3, qtSex )
-			model.setItem( num, 4, qtEducation )
 			num = num + 1
 		
 		cursor.close()   
 		db.close()
 		self.tblMembers.setModel(model)
 		self.tblMembers.resizeColumnsToContents()
-		self.tblMembers.show()
+		# display personal characteristics
+		personid = "0"
+		if ( num > 0 ):
+		     self.tblMembers.selectRow(0)
+		     selectedRow = self.getCurrentRow(self.tblMembers)
+		     personid = self.tblMembers.model().item(selectedRow,0).text()
+		     self.cmdEditMember.setEnabled( True )
+		     self.cmdDelMember.setEnabled( True )
+		else:
+		     self.cmdEditMember.setEnabled( False )
+		     self.cmdDelMember.setEnabled( False )
+		     
+		self.retrievePersonalCharacteristics(personid)
 		
+	def showMemberPersonalCharacteristics(self):
+         ''' show personal characteristics of selected household member '''
+         selectedRow = self.getCurrentRow(self.tblMembers)
+         if ( self.tblMembers.model().item(selectedRow, 0) != None ):
+             personid = self.tblMembers.model().item(selectedRow,0).text()
+         else:
+             personid = "0"
+         self.retrievePersonalCharacteristics(personid)
+         
+	#-----------------------------------------------------------------------------------
+	#	Personal Characteristics
+	#-----------------------------------------------------------------------------------
+	
+	def getPersonalCharacteristicDataType(self, charName):
+		tbl = "globalpersonalcharacteristics"
+		query = '''SELECT datatype FROM %s WHERE characteristic='%s' ''' % (tbl, charName)
+		
+		db = data.mysql.connector.Connect(**self.config)             
+		cursor = db.cursor()
+		
+		cursor.execute(query)
+		
+		for row in cursor.fetchall():
+			return row[0]
+	
+	def retrievePersonalCharacteristics( self,  personid ):
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0]
+		tbl = self.psCharacteristicsTable
+		# select query to retrieve project household characteristics
+		query = '''SHOW COLUMNS FROM %s''' % (tbl)
+		
+		db = data.mysql.connector.Connect(**self.config)             
+		cursor = db.cursor()
+		
+		cursor.execute(query)
+		
+		fields = []
+		for row in cursor.fetchall():
+			if ( (row[0] != "hhid")  and (row[0]!= "pid" )  and (row[0]!= "personid" ) ):
+				fields.append( row[0] )
+		
+		model = QStandardItemModel(1,1)
+		
+		# set model headers
+		model.setHorizontalHeaderItem(0,QStandardItem('Characteristic'))
+		model.setHorizontalHeaderItem(1,QStandardItem('Value'))
+		
+		# add  data rows
+		num = 0
+		
+		for field in fields:
+			query = '''SELECT `%s` FROM %s WHERE hhid=%i AND personid='%s' ''' % ( field, tbl, hhid,  personid )	
+			cursor.execute(query)
+			val = "Not Set"
+			for row in cursor.fetchall():
+				if ( row[0] != None ):
+					val = row[0]
+					
+			qtChar 	= QStandardItem( field )
+			if ( ( self.getPersonalCharacteristicDataType( field ) == 2 ) and (val != "Not Set") ):
+				qtVal	= QStandardItem( "%i" % val )
+			else:
+				qtVal	= QStandardItem( "%s" % val )
+				
+			model.setItem( num, 0, qtChar )
+			model.setItem( num, 1, qtVal )
+				
+			num = num + 1
+		
+		cursor.close()   
+		db.close()
+		
+		self.tblPersonalCharacteristics.setModel(model)
+		self.tblPersonalCharacteristics.resizeColumnsToContents()
+		self.tblPersonalCharacteristics.show()
+		
+		header = "Personal Characteristics for %s" % personid if personid != "0" else "Personal Characteristics"
+		self.lblPersonalCharacteristicsHeader.setText( header )
+		if ( personid != "0" ):
+		     self.cmdEditPersonalCharacteristic.setEnabled( True )
+		else:
+		     self.cmdEditPersonalCharacteristic.setEnabled( False )
+		
+	def editPersonalCharacteristic(self):
+		if self.countRowsSelected(self.tblPersonalCharacteristics) != 0:
+			# get member id
+			selectedRow = self.getCurrentRow(self.tblMembers)
+			if ( self.tblMembers.model().item(selectedRow, 0) != None ):
+			     personid = self.tblMembers.model().item(selectedRow,0).text()
+			else:
+			     personid = "0"
+			# get current details of the selected characteristics
+			selectedRow = self.getCurrentRow(self.tblPersonalCharacteristics)
+			charName = self.tblPersonalCharacteristics.model().item(selectedRow,0).text()
+			charVal	 = self.tblPersonalCharacteristics.model().item(selectedRow,1).text()
+			# get household id and name
+			temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+			hhid = temp[0]
+			# show edit household member form
+			form = FrmEditPersonalCharacteristic(self, self.parent.projectid, hhid, personid, charName, charVal)
+			form.setWindowIcon(QIcon('resources/images/openihm.png'))
+			form.exec_()
+			
+		else:
+			msg = "Please select the row containing a characteristic to be editted."
+			QMessageBox.information(self,"Edit Characteristic", msg)	
+	
 	#-----------------------------------------------------------------------------------
 	#	Household Characteristics
 	#-----------------------------------------------------------------------------------

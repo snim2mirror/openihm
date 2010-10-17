@@ -95,7 +95,7 @@ class DatabaseInitialiser:
          db = Connect(**dbinfo)             
          cursor = db.cursor()
          
-         query = "SHOW COLUMNS FROM assets"
+         query = "SHOW COLUMNS FROM householdmembers"
          
          cursor.execute(query)
          rows = cursor.fetchall()
@@ -106,7 +106,7 @@ class DatabaseInitialiser:
          upToDate = False
          for row in rows:
              for field in row:
-                 if field == "pid":
+                 if field == "yearofbirth":
                      upToDate = True
          
          return upToDate
@@ -137,7 +137,9 @@ class DatabaseInitialiser:
                  return True
          
              except errors.InterfaceError,  e:
+                 print e
                  return False
          
              except ( errors.OperationalError,  errors.ProgrammingError) as e:
+                 print e
                  return False

@@ -28,8 +28,13 @@
      <height>531</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>8</pointsize>
+    </font>
+   </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tabHouseHoldMembers">
     <attribute name="title">
@@ -39,9 +44,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
-       <width>751</width>
-       <height>451</height>
+       <y>30</y>
+       <width>371</width>
+       <height>431</height>
       </rect>
      </property>
     </widget>
@@ -82,6 +87,55 @@
      </property>
      <property name="text">
       <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QTableView" name="tblPersonalCharacteristics">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>30</y>
+       <width>371</width>
+       <height>431</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdEditPersonalCharacteristic">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
+       <y>470</y>
+       <width>141</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Edit Characteristic</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Household Members</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblPersonalCharacteristicsHeader">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>10</y>
+       <width>231</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Personal Characteristics:</string>
      </property>
     </widget>
    </widget>
@@ -379,7 +433,7 @@
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
-       <string>Wildfoods and Hunting</string>
+       <string>Wildfoods</string>
       </attribute>
       <widget class="QLabel" name="label_5">
        <property name="geometry">
@@ -452,7 +506,7 @@
      </widget>
      <widget class="QWidget" name="tab_5">
       <attribute name="title">
-       <string>Gifts</string>
+       <string>Transfers</string>
       </attribute>
       <widget class="QLabel" name="label_6">
        <property name="geometry">
@@ -470,7 +524,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Gifts</string>
+        <string>Transfers</string>
        </property>
       </widget>
       <widget class="QTableView" name="tblGiftsIncome">
@@ -525,14 +579,14 @@
      </widget>
      <widget class="QWidget" name="tab_6">
       <attribute name="title">
-       <string>Gifts From Orgs</string>
+       <string>Transfers From Orgs</string>
       </attribute>
       <widget class="QLabel" name="label_7">
        <property name="geometry">
         <rect>
          <x>20</x>
          <y>10</y>
-         <width>201</width>
+         <width>221</width>
          <height>21</height>
         </rect>
        </property>
@@ -543,7 +597,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Gifts from External Organisations</string>
+        <string>Transfers from Organisations</string>
        </property>
       </widget>
       <widget class="QTableView" name="tblTransferIncome">

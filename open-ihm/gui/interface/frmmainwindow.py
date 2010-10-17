@@ -36,7 +36,7 @@ from frm_about_openihm import FrmAboutOpenIHM
 from frmfoodenergy_requirements import  FrmFoodEnergyRequirements
 from frm_report_householdsbycharacteristics import RepHouseholdsByCharacteristics
 from frmcurrencymanager import FrmCurrencyManager
-from frm_report_householdincome import HouseholdIncomeReport
+#from frm_report_householdincome import HouseholdIncomeReport
 from data.setup_crops_startupvalues import FoodValuesStartup
 
 class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):

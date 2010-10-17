@@ -10,28 +10,18 @@
     <x>0</x>
     <y>0</y>
     <width>392</width>
-    <height>241</height>
+    <height>248</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Add Household Member</string>
   </property>
-  <widget class="QLineEdit" name="txtMemberID">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>40</y>
-     <width>121</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QCheckBox" name="chkHeadHousehold">
    <property name="geometry">
     <rect>
-     <x>260</x>
-     <y>40</y>
-     <width>121</width>
+     <x>20</x>
+     <y>180</y>
+     <width>231</width>
      <height>17</height>
     </rect>
    </property>
@@ -41,38 +31,20 @@
     </font>
    </property>
    <property name="text">
-    <string>Household Head</string>
+    <string>This member is head of household</string>
    </property>
   </widget>
   <widget class="QPushButton" name="cmdSave">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>200</y>
+     <y>210</y>
      <width>91</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>Save</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>80</y>
-     <width>81</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Date of Birth:</string>
    </property>
   </widget>
   <widget class="QLabel" name="lblHouseholdName">
@@ -102,7 +74,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>20</x>
      <y>10</y>
      <width>111</width>
      <height>16</height>
@@ -117,49 +89,11 @@
     <string>Household Name:</string>
    </property>
   </widget>
-  <widget class="QDateEdit" name="dtpDOB">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>80</y>
-     <width>121</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>160</y>
-     <width>61</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Education:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="txtEducation">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>160</y>
-     <width>251</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QComboBox" name="cboSex">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>120</y>
+     <x>200</x>
+     <y>40</y>
      <width>121</width>
      <height>22</height>
     </rect>
@@ -175,29 +109,11 @@
     </property>
    </item>
   </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>40</y>
-     <width>71</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Member ID:</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>120</y>
+     <x>20</x>
+     <y>40</y>
      <width>31</width>
      <height>21</height>
     </rect>
@@ -214,8 +130,8 @@
   <widget class="QPushButton" name="cmdCancel">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>200</y>
+     <x>280</x>
+     <y>210</y>
      <width>91</width>
      <height>31</height>
     </rect>
@@ -224,7 +140,89 @@
     <string>Cancel</string>
    </property>
   </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>371</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="title">
+    <string>Household Member's Age or Year of Birth</string>
+   </property>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Year of Birth:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cmbYearOfBirth">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>60</y>
+      <width>121</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>171</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Age of Household Member:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtAge">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>30</y>
+      <width>121</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
  </widget>
+ <tabstops>
+  <tabstop>chkHeadHousehold</tabstop>
+  <tabstop>cboSex</tabstop>
+  <tabstop>txtAge</tabstop>
+  <tabstop>cmbYearOfBirth</tabstop>
+  <tabstop>cmdSave</tabstop>
+  <tabstop>cmdCancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
