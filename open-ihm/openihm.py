@@ -40,7 +40,7 @@ if __name__ == '__main__':
           log.info('Creating GUI.')
           app = QtGui.QApplication(sys.argv)
 
-          if ( dbstatus['mysqlstarted'] == True and dbstatus['dbinstalled'] == True and dbstatus['dbuptodate']):
+          if ( dbstatus['mysqlstarted'] == True and dbstatus['dbinstalled'] == True and dbstatus['dbuptodate'] ):
                log.info('Started MySQL, DB up to date and DB installed.')
                window = FrmMainWindow()
                window.showMaximized()
@@ -55,7 +55,7 @@ if __name__ == '__main__':
           elif ( dbstatus['dbuptodate'] == False ):
                log.info('DB not up to date.')
                # inform user mysal not started
-               msg = '''Failed to automatically update the database is not up to date.'''
+               msg = '''Failed to automatically update the database.'''
                window = FrmDatabaseMessage(msg)
                window.show()
                window = FrmMainWindow()
