@@ -19,7 +19,7 @@ class FrmHouseholdWildfoodsIncome(QDialog, Ui_AddHouseholdIncomeWildfoods):
 		self.setupUi(self)
 		self.parent 	= parent
 		self.hhid 		= hhid
-		self.pid = parent.parent.pid
+		self.pid = parent.parent.projectid
 		self.incomeid 	= incomeid
 		
 		self.config = Config.dbinfo().copy()
