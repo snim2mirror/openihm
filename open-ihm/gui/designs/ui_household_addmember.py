@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_addmember.ui'
 #
-# Created: Sat Oct 16 11:25:30 2010
+# Created: Sat Oct 16 19:05:17 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -15,7 +15,7 @@ class Ui_AddHouseholdMember(object):
         AddHouseholdMember.setWindowModality(QtCore.Qt.NonModal)
         AddHouseholdMember.resize(392, 248)
         self.chkHeadHousehold = QtGui.QCheckBox(AddHouseholdMember)
-        self.chkHeadHousehold.setGeometry(QtCore.QRect(20, 40, 231, 17))
+        self.chkHeadHousehold.setGeometry(QtCore.QRect(20, 180, 231, 17))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.chkHeadHousehold.setFont(font)
@@ -41,12 +41,12 @@ class Ui_AddHouseholdMember(object):
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.cboSex = QtGui.QComboBox(AddHouseholdMember)
-        self.cboSex.setGeometry(QtCore.QRect(200, 70, 121, 22))
+        self.cboSex.setGeometry(QtCore.QRect(200, 40, 121, 22))
         self.cboSex.setObjectName("cboSex")
         self.cboSex.addItem("")
         self.cboSex.addItem("")
         self.label_4 = QtGui.QLabel(AddHouseholdMember)
-        self.label_4.setGeometry(QtCore.QRect(20, 70, 31, 21))
+        self.label_4.setGeometry(QtCore.QRect(20, 40, 31, 21))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_4.setFont(font)
@@ -55,7 +55,7 @@ class Ui_AddHouseholdMember(object):
         self.cmdCancel.setGeometry(QtCore.QRect(280, 210, 91, 31))
         self.cmdCancel.setObjectName("cmdCancel")
         self.groupBox = QtGui.QGroupBox(AddHouseholdMember)
-        self.groupBox.setGeometry(QtCore.QRect(10, 100, 371, 101))
+        self.groupBox.setGeometry(QtCore.QRect(10, 70, 371, 101))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.groupBox.setFont(font)
@@ -66,25 +66,25 @@ class Ui_AddHouseholdMember(object):
         font.setPointSize(10)
         self.label_3.setFont(font)
         self.label_3.setObjectName("label_3")
-        self.comboBox = QtGui.QComboBox(self.groupBox)
-        self.comboBox.setGeometry(QtCore.QRect(190, 60, 121, 22))
-        self.comboBox.setObjectName("comboBox")
+        self.cmbYearOfBirth = QtGui.QComboBox(self.groupBox)
+        self.cmbYearOfBirth.setGeometry(QtCore.QRect(190, 60, 121, 22))
+        self.cmbYearOfBirth.setObjectName("cmbYearOfBirth")
         self.label_2 = QtGui.QLabel(self.groupBox)
         self.label_2.setGeometry(QtCore.QRect(20, 30, 171, 16))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-        self.lineEdit = QtGui.QLineEdit(self.groupBox)
-        self.lineEdit.setGeometry(QtCore.QRect(190, 30, 121, 20))
-        self.lineEdit.setObjectName("lineEdit")
+        self.txtAge = QtGui.QLineEdit(self.groupBox)
+        self.txtAge.setGeometry(QtCore.QRect(190, 30, 121, 20))
+        self.txtAge.setObjectName("txtAge")
 
         self.retranslateUi(AddHouseholdMember)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdMember)
         AddHouseholdMember.setTabOrder(self.chkHeadHousehold, self.cboSex)
-        AddHouseholdMember.setTabOrder(self.cboSex, self.lineEdit)
-        AddHouseholdMember.setTabOrder(self.lineEdit, self.comboBox)
-        AddHouseholdMember.setTabOrder(self.comboBox, self.cmdSave)
+        AddHouseholdMember.setTabOrder(self.cboSex, self.txtAge)
+        AddHouseholdMember.setTabOrder(self.txtAge, self.cmbYearOfBirth)
+        AddHouseholdMember.setTabOrder(self.cmbYearOfBirth, self.cmdSave)
         AddHouseholdMember.setTabOrder(self.cmdSave, self.cmdCancel)
 
     def retranslateUi(self, AddHouseholdMember):

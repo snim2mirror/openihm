@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_data.ui'
 #
-# Created: Sat Oct 16 11:24:19 2010
+# Created: Sun Oct 17 08:29:21 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ class Ui_HouseholdData(object):
         self.tabHouseHoldMembers = QtGui.QWidget()
         self.tabHouseHoldMembers.setObjectName("tabHouseHoldMembers")
         self.tblMembers = QtGui.QTableView(self.tabHouseHoldMembers)
-        self.tblMembers.setGeometry(QtCore.QRect(10, 10, 751, 451))
+        self.tblMembers.setGeometry(QtCore.QRect(10, 30, 371, 431))
         self.tblMembers.setObjectName("tblMembers")
         self.cmdAddMember = QtGui.QPushButton(self.tabHouseHoldMembers)
         self.cmdAddMember.setGeometry(QtCore.QRect(10, 470, 91, 31))
@@ -32,11 +32,20 @@ class Ui_HouseholdData(object):
         self.cmdEditMember.setGeometry(QtCore.QRect(110, 470, 91, 31))
         self.cmdEditMember.setObjectName("cmdEditMember")
         self.cmdDelMember = QtGui.QPushButton(self.tabHouseHoldMembers)
-        self.cmdDelMember.setGeometry(QtCore.QRect(390, 470, 91, 31))
+        self.cmdDelMember.setGeometry(QtCore.QRect(210, 470, 91, 31))
         self.cmdDelMember.setObjectName("cmdDelMember")
-        self.cmdEditPersonalChars = QtGui.QPushButton(self.tabHouseHoldMembers)
-        self.cmdEditPersonalChars.setGeometry(QtCore.QRect(210, 470, 171, 31))
-        self.cmdEditPersonalChars.setObjectName("cmdEditPersonalChars")
+        self.tblPersonalCharacteristics = QtGui.QTableView(self.tabHouseHoldMembers)
+        self.tblPersonalCharacteristics.setGeometry(QtCore.QRect(390, 30, 371, 431))
+        self.tblPersonalCharacteristics.setObjectName("tblPersonalCharacteristics")
+        self.cmdEditPersonalCharacteristic = QtGui.QPushButton(self.tabHouseHoldMembers)
+        self.cmdEditPersonalCharacteristic.setGeometry(QtCore.QRect(390, 470, 141, 31))
+        self.cmdEditPersonalCharacteristic.setObjectName("cmdEditPersonalCharacteristic")
+        self.label_8 = QtGui.QLabel(self.tabHouseHoldMembers)
+        self.label_8.setGeometry(QtCore.QRect(20, 10, 111, 16))
+        self.label_8.setObjectName("label_8")
+        self.lblPersonalCharacteristicsHeader = QtGui.QLabel(self.tabHouseHoldMembers)
+        self.lblPersonalCharacteristicsHeader.setGeometry(QtCore.QRect(400, 10, 231, 16))
+        self.lblPersonalCharacteristicsHeader.setObjectName("lblPersonalCharacteristicsHeader")
         self.tabHouseHold.addTab(self.tabHouseHoldMembers, "")
         self.tabHouseholdAssets = QtGui.QWidget()
         self.tabHouseholdAssets.setObjectName("tabHouseholdAssets")
@@ -236,7 +245,9 @@ class Ui_HouseholdData(object):
         self.cmdAddMember.setText(QtGui.QApplication.translate("HouseholdData", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdEditMember.setText(QtGui.QApplication.translate("HouseholdData", "Edit", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdDelMember.setText(QtGui.QApplication.translate("HouseholdData", "Delete", None, QtGui.QApplication.UnicodeUTF8))
-        self.cmdEditPersonalChars.setText(QtGui.QApplication.translate("HouseholdData", "Edit Personal Characteristics", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdEditPersonalCharacteristic.setText(QtGui.QApplication.translate("HouseholdData", "Edit Characteristic", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_8.setText(QtGui.QApplication.translate("HouseholdData", "Household Members", None, QtGui.QApplication.UnicodeUTF8))
+        self.lblPersonalCharacteristicsHeader.setText(QtGui.QApplication.translate("HouseholdData", "Personal Characteristics:", None, QtGui.QApplication.UnicodeUTF8))
         self.tabHouseHold.setTabText(self.tabHouseHold.indexOf(self.tabHouseHoldMembers), QtGui.QApplication.translate("HouseholdData", "Members", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdAddAsset.setText(QtGui.QApplication.translate("HouseholdData", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdEditAsset.setText(QtGui.QApplication.translate("HouseholdData", "Edit", None, QtGui.QApplication.UnicodeUTF8))

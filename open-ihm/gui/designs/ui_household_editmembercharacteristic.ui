@@ -1,215 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>EditMemberCharacteristics</class>
- <widget class="QDialog" name="EditMemberCharacteristics">
+ <class>EditMemberCharacteristic</class>
+ <widget class="QDialog" name="EditMemberCharacteristic">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>390</width>
-    <height>415</height>
+    <width>402</width>
+    <height>137</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Edit Household Member Characteristics</string>
+   <string>Edit Personal Characteristics</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="lblCharName">
    <property name="geometry">
     <rect>
-     <x>9</x>
-     <y>9</y>
-     <width>101</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Household Name:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblHouseholdName">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
+     <x>90</x>
      <y>10</y>
-     <width>44</width>
-     <height>16</height>
+     <width>301</width>
+     <height>21</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
    <property name="text">
-    <string>{name}</string>
+    <string>{charname}</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>40</y>
-     <width>112</width>
-     <height>16</height>
+     <y>50</y>
+     <width>71</width>
+     <height>21</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
    <property name="text">
-    <string>Head of Household:</string>
+    <string>Value:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="lblHeadOfHousehold">
+  <widget class="QPushButton" name="cmdCancel">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>40</y>
-     <width>109</width>
-     <height>16</height>
+     <x>310</x>
+     <y>90</y>
+     <width>75</width>
+     <height>31</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
    <property name="text">
-    <string>{headofhousehold}</string>
+    <string>Cancel</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lblMemberAge">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>70</y>
-     <width>46</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>{age}</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>70</y>
-     <width>101</width>
-     <height>16</height>
+     <y>10</y>
+     <width>71</width>
+     <height>21</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
    <property name="text">
-    <string>Member's Age:</string>
+    <string>Characteristic:</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
+  <widget class="QPushButton" name="cmdOk">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>100</y>
-     <width>46</width>
-     <height>13</height>
+     <y>90</y>
+     <width>75</width>
+     <height>31</height>
     </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
    </property>
    <property name="text">
-    <string>Sex:</string>
+    <string>OK</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lblMemberSex">
+  <widget class="QLineEdit" name="txtValue">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>100</y>
-     <width>46</width>
-     <height>13</height>
+     <x>90</x>
+     <y>50</y>
+     <width>301</width>
+     <height>20</height>
     </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>{sex}</string>
    </property>
   </widget>
-  <widget class="QGroupBox" name="groupBox">
+  <widget class="QComboBox" name="cboYesNoVal">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>130</y>
-     <width>371</width>
-     <height>271</height>
+     <x>90</x>
+     <y>50</y>
+     <width>131</width>
+     <height>22</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="title">
-    <string>Personal Characteristics</string>
-   </property>
-   <widget class="QTableView" name="tblPersonalChars">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>351</width>
-      <height>201</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="cmdEdit">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>230</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
+   <item>
     <property name="text">
-     <string>Edit</string>
+     <string>Yes</string>
     </property>
-   </widget>
-   <widget class="QPushButton" name="cmdClose">
-    <property name="geometry">
-     <rect>
-      <x>274</x>
-      <y>230</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
+   </item>
+   <item>
     <property name="text">
-     <string>Close</string>
+     <string>No</string>
     </property>
-   </widget>
+   </item>
   </widget>
  </widget>
  <resources/>

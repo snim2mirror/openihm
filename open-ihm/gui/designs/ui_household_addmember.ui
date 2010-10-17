@@ -20,7 +20,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>40</y>
+     <y>180</y>
      <width>231</width>
      <height>17</height>
     </rect>
@@ -93,7 +93,7 @@
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>70</y>
+     <y>40</y>
      <width>121</width>
      <height>22</height>
     </rect>
@@ -113,7 +113,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>70</y>
+     <y>40</y>
      <width>31</width>
      <height>21</height>
     </rect>
@@ -144,7 +144,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>100</y>
+     <y>70</y>
      <width>371</width>
      <height>101</height>
     </rect>
@@ -175,7 +175,7 @@
      <string>Year of Birth:</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox">
+   <widget class="QComboBox" name="cmbYearOfBirth">
     <property name="geometry">
      <rect>
       <x>190</x>
@@ -203,7 +203,7 @@
      <string>Age of Household Member:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="txtAge">
     <property name="geometry">
      <rect>
       <x>190</x>
@@ -218,8 +218,8 @@
  <tabstops>
   <tabstop>chkHeadHousehold</tabstop>
   <tabstop>cboSex</tabstop>
-  <tabstop>lineEdit</tabstop>
-  <tabstop>comboBox</tabstop>
+  <tabstop>txtAge</tabstop>
+  <tabstop>cmbYearOfBirth</tabstop>
   <tabstop>cmdSave</tabstop>
   <tabstop>cmdCancel</tabstop>
  </tabstops>

@@ -44,9 +44,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
-       <width>751</width>
-       <height>451</height>
+       <y>30</y>
+       <width>371</width>
+       <height>431</height>
       </rect>
      </property>
     </widget>
@@ -79,7 +79,7 @@
     <widget class="QPushButton" name="cmdDelMember">
      <property name="geometry">
       <rect>
-       <x>390</x>
+       <x>210</x>
        <y>470</y>
        <width>91</width>
        <height>31</height>
@@ -89,17 +89,53 @@
       <string>Delete</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="cmdEditPersonalChars">
+    <widget class="QTableView" name="tblPersonalCharacteristics">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>390</x>
+       <y>30</y>
+       <width>371</width>
+       <height>431</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdEditPersonalCharacteristic">
+     <property name="geometry">
+      <rect>
+       <x>390</x>
        <y>470</y>
-       <width>171</width>
+       <width>141</width>
        <height>31</height>
       </rect>
      </property>
      <property name="text">
-      <string>Edit Personal Characteristics</string>
+      <string>Edit Characteristic</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Household Members</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblPersonalCharacteristicsHeader">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>10</y>
+       <width>231</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Personal Characteristics:</string>
      </property>
     </widget>
    </widget>
