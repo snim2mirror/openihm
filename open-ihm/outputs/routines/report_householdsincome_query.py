@@ -86,35 +86,35 @@ class HouseholdIncomeQuery:
 
 
             elif cropsQuery !='' and employmentQuery !='':
-                pass
-            elif cropsQuery !='' and livestockQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (cropsQuery,employmentQuery)
+             elif cropsQuery !='' and livestockQuery !='':
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (cropsQuery,livestockQuery)
             elif cropsQuery !='' and loansQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (cropsQuery,loansQuery)
             elif cropsQuery !='' and transfersQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (cropsQuery,transfersQuery)
             elif cropsQuery !='' and wildfoodsQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (cropsQuery,wildfoodsQuery)
             elif employmentQuery !='' and livestockQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (employmentQuery,livestockQuery)
             elif employmentQuery !='' and loansQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (employmentQuery,loansQuery)
             elif employmentQuery !='' and transfersQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (employmentQuery,transfersQuery)
             elif employmentQuery !='' and wildfoodsQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (employmentQuery,wildfoodsQuery)
             elif livestockQuery !='' and loansQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (livestockQuery,loansQuery)
             elif livestockQuery !='' and transfersQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (livestockQuery,transfersQuery)
             elif livestockQuery !='' and wildfoodsQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (livestockQuery,wildfoodsQuery)
             elif loansQuery !='' and transfersQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (loansQuery,transfersQuery)
             elif loansQuery !='' and wildfoodsQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (loansQuery,wildfoodsQuery)
             elif transfersQuery !='' and wildfoodsQuery !='':
-                pass
+                query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (transfersQuery,wildfoodsQuery)
 
             elif cropsQuery !='':
                 query = cropsQuery

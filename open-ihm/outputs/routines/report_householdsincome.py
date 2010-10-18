@@ -68,6 +68,13 @@ class HouseholdIncome:
                 query = householdsquery
                 print householdsquery
                 householdids = self.getReportHouseholdIDs(query)
+                
+            elif len(selectedpchars) !=0 and len(selectedhchars) !=0:
+                pcharsQuery =self.buildPCharacteristicsQuery(pcharselected, pharsTable)
+                hcharsQuery = self.buildHCharacteristicsQuery(hcharselected, hcharsTable)
+                print householdsquery
+                query = '''SELECT * FROM (%s UNION ALL %s UNION ALL %s) AS tbl GROUP BY tbl.hhid HAVING COUNT(*) = 3 ''' % (householdsquery,pcharsQuery,hcharsQuery)
+                
             elif len(selectedhchars) !=0:
                 hcharsQuery = self.buildHCharacteristicsQuery(hcharselected, hcharsTable)
                 print householdsquery
@@ -78,11 +85,7 @@ class HouseholdIncome:
                 print householdsquery
                 query = '''SELECT * FROM (%s UNION ALL %s) AS tbl GROUP BY tbl.hhid HAVING COUNT(*) = 2 ''' % (householdsquery,pcharsQuery)
                 print query
-            elif len(selectedpchars) !=0 and len(selectedhchars) !=0:
-                pcharsQuery =self.buildPCharacteristicsQuery(pcharselected, pharsTable)
-                hcharsQuery = self.buildHCharacteristicsQuery(hcharselected, hcharsTable)
-                print householdsquery
-                query = '''SELECT * FROM (%s UNION ALL %s UNION ALL %s) AS tbl GROUP BY tbl.hhid HAVING COUNT(*) = 3 ''' % (householdsquery,pcharsQuery,hcharsQuery)
+            
                 print query
         return query
 
@@ -90,9 +93,9 @@ class HouseholdIncome:
         print selectedhouseholds
         households = tuple(selectedhouseholds)
         if len(households)==1:
-            query = ''' SELECT hhid FROM households WHERE householdname ='%s' AND pid=%s ''' % (households[0],projectid)
+            query = ''' SELECT hhid, pid FROM households WHERE householdname ='%s' AND pid=%s ''' % (households[0],projectid)
         else:
-            query = ''' SELECT hhid FROM households WHERE householdname IN %s AND pid=%s ''' % (households,projectid)
+            query = ''' SELECT hhid, pid FROM households WHERE householdname IN %s AND pid=%s ''' % (households,projectid)
         print query
         return query
 
@@ -123,7 +126,7 @@ class HouseholdIncome:
                 query = '''SELECT hhid,SUM(unitssold * unitprice) AS cropincome FROM cropincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 if len(incomesources)==1:
-                    query = '''SELECT hhid,incomesource,(unitssold * unitprice) AS cropincome FROM cropincome WHERE pid=%s AND hhid=%s AND incomesource ='%s' GROUP BY hhid''' % (projectid,houseids[0],incomesources[0])
+                    query = '''SELECT hhid,incomesource,(unitssold * unitprice) AS cropincome FROM cropincome WHERE pid=%s AND hhid IN (%s) AND incomesource ='%s' GROUP BY hhid''' % (projectid,houseids,incomesources[0])
                 else:
                     query = '''SELECT hhid,incomesource,(unitssold * unitprice) AS cropincome FROM cropincome WHERE pid=%s AND hhid IN (%s) AND incomesource IN %s''' % (projectid,houseids,incomesources)
         return query            
@@ -138,9 +141,9 @@ class HouseholdIncome:
                 query = '''SELECT hhid,SUM(cashincome) AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 if len(incomesources)==1:
-                    query = '''SELECT incomesource,cashincome AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid=%s AND incomesource ='%s' ''' % (projectid,houseids[0],incomesources[0])
+                    query = '''SELECT hhid,incomesource,cashincome AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) AND incomesource ='%s' ''' % (projectid,houseids,incomesources[0])
                 else:
-                    query = '''SELECT incomesource,cashincome AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) AND incomesource IN %s''' % (projectid,houseids,incomesources)
+                    query = '''SELECT hhid,incomesource,cashincome AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) AND incomesource IN %s''' % (projectid,houseids,incomesources)
         return query            
 
     def buildLivestockIncomeQuery(self,projectid,livestockdetails,householdids):
@@ -153,9 +156,9 @@ class HouseholdIncome:
                 query = '''SELECT hhid,SUM(unitssold * unitprice) AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 if len(incomesources)==1:
-                    query = '''SELECT incomesource,unitssold * unitprice AS livestockincome FROM livestockincome WHERE pid = %s AND hhid=%s AND incomesource='%s' ''' % (projectid,houseids[0],incomesources[0])
+                    query = '''SELECT hhid,incomesource,unitssold * unitprice AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN (%s) AND incomesource='%s' ''' % (projectid,houseids,incomesources[0])
                 else:
-                    query = '''SELECT incomesource,unitssold * unitprice AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN (%s) AND incomesource IN %s''' % (projectid,houseids,incomesources)
+                    query = '''SELECT hhid,incomesource,unitssold * unitprice AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN (%s) AND incomesource IN %s''' % (projectid,houseids,incomesources)
         return query            
 
     def buildLoanIncomeQuery(self,projectid,loandetails,householdids):
@@ -168,9 +171,9 @@ class HouseholdIncome:
                 query = '''SELECT hhid,SUM(creditvalue) AS loanincome FROM creditandloans WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 if len(incomesources)==1:
-                    query = '''SELECT creditsource,creditvalue AS loanincome FROM creditandloans WHERE pid = %s AND hhid=%s AND creditsource='%s' ''' % (projectid,houseids[0],incomesources[0])
+                    query = '''SELECT hhid,creditsource,creditvalue AS loanincome FROM creditandloans WHERE pid = %s AND hhid IN (%s) AND creditsource='%s' ''' % (projectid,houseids,incomesources[0])
                 else:
-                    query = '''SELECT creditsource,creditvalue AS loanincome FROM creditandloans WHERE pid = %s AND hhid IN (%s) AND creditsource IN %s''' % (projectid,houseids,incomesources)
+                    query = '''SELECT hhid,creditsource,creditvalue AS loanincome FROM creditandloans WHERE pid = %s AND hhid IN (%s) AND creditsource IN %s''' % (projectid,houseids,incomesources)
         return query            
 
     def buildTransferIncomeQuery(self,projectid,transferdetails,householdids):
@@ -184,9 +187,9 @@ class HouseholdIncome:
                 query = '''SELECT hhid,SUM(cashperyear) AS transferincome FROM creditandloans WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 if len(incomesources)==1:
-                    query = '''SELECT sourcetype,cashperyear AS transferincome FROM creditandloans WHERE pid = %s AND hhid=%s AND sourcetype='%s' ''' % (projectid,houseids[0],incomesources[0])
+                    query = '''SELECT hhid,sourcetype,cashperyear AS transferincome FROM creditandloans WHERE pid = %s AND hhid IN (%s) AND sourcetype='%s' ''' % (projectid,houseids,incomesources[0])
                 else:
-                    query = '''SELECT sourcetype,cashperyear AS transferincome FROM creditandloans WHERE pid = %s AND hhid IN (%s) AND sourcetype IN %s''' % (projectid,houseids,incomesources)
+                    query = '''SELECT hhid,sourcetype,cashperyear AS transferincome FROM creditandloans WHERE pid = %s AND hhid IN (%s) AND sourcetype IN %s''' % (projectid,houseids,incomesources)
         return query            
 
     def buildWildFoodsIncomeQuery(self,projectid,wildfoodsdetails,householdids):
@@ -200,9 +203,9 @@ class HouseholdIncome:
                 query = '''SELECT hhid,SUM(unitssold * unitprice) AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 if len(incomesources)==1:
-                    query = '''SELECT incomesource,unitssold * unitprice AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid=%s AND incomesource='%s' ''' % (projectid,houseids[0],incomesources[0])
+                    query = '''SELECT hhid,incomesource,unitssold * unitprice AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) AND incomesource='%s' ''' % (projectid,houseids,incomesources[0])
                 else:
-                    query = '''SELECT incomesource,unitssold * unitprice AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) AND incomesource IN (%s)''' % (projectid,houseids,incomesources)
+                    query = '''SELECT hhid,incomesource,unitssold * unitprice AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) AND incomesource IN (%s)''' % (projectid,houseids,incomesources)
         return query            
 
     def getReportTable(self,query):

@@ -531,7 +531,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         print incomeIndexes
         return incomeIndexes
 
-    def getTransfersDetails(self):
+    def getWildFoodDetails(self):
         householdIDs = self.getReportHouseholdIDs()
         requiredDetailType =[]
         
@@ -578,7 +578,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         livestockdetails = self.getLivestockReportDetails()
         loandetails = self.getLoansReportDetails()
         transferdetails = self.getTransfersDetails()
-        wildfoodsdetails = self.getTransfersDetails()
+        wildfoodsdetails = self.getWildFoodDetails()
 
         connector = HouseholdIncome()
         householdIDsQuery = connector.getFinalIncomeReportTableQuery(projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails )
