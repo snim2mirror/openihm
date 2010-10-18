@@ -87,7 +87,7 @@ class HouseholdIncomeQuery:
 
             elif cropsQuery !='' and employmentQuery !='':
                 query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (cropsQuery,employmentQuery)
-             elif cropsQuery !='' and livestockQuery !='':
+            elif cropsQuery !='' and livestockQuery !='':
                 query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (cropsQuery,livestockQuery)
             elif cropsQuery !='' and loansQuery !='':
                 query = ''' SELECT * FROM ((%s) table1 JOIN (%s) table2 ON table1.hhid = table2.hhid)''' % (cropsQuery,loansQuery)
