@@ -581,5 +581,5 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         wildfoodsdetails = self.getTransfersDetails()
 
         connector = HouseholdIncome()
-        householdIDsQuery = connector.buildFinalIncomeReportTableQuery(projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails )
+        householdIDsQuery = connector.getFinalIncomeReportTableQuery(projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails )
         return householdIDsQuery

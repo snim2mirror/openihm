@@ -4,6 +4,7 @@
 
 from data.database import Database
 from data.report_settingsmanager import ReportsSettingsManager
+from report_householdsincome_query import HouseholdIncomeQuery
 
 class HouseholdIncome:
     def __init__(self):
@@ -95,7 +96,7 @@ class HouseholdIncome:
         print query
         return query
 
-    def buildFinalIncomeReportTableQuery(self,projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails):
+    def getFinalIncomeReportTableQuery(self,projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails):
 
         cropsQuery = self.buildCropIncomeQuery(projectid,cropdetails,householdIDs)
         employmentQuery = self.buildEmploymentIncomeQuery(projectid,employmentdetails,householdIDs)
@@ -103,38 +104,15 @@ class HouseholdIncome:
         loansQuery = self.buildLoanIncomeQuery(projectid,loandetails,householdIDs)
         transfersQuery = self.buildTransferIncomeQuery(projectid,transferdetails,householdIDs)
         wildfoodsQuery = self.buildWildFoodsIncomeQuery(projectid,wildfoodsdetails,householdIDs)
-        householdids = tuple(householdIDs)
-        print 'these are the ones', householdids
-        basequery ='''SELECT hhid FROM households WHERE pid = %s AND hhid IN %s''' % (projectid,householdids)
 
-        if len(householdIDs)!=0:
-            if len (cropdetails)==0 and len(employmentdetails)==0 and len(livestockdetails)==0 and len(loandetails)==0 and len(transferdetails)==0 and len(wildfoodsdetails)==0:
-                QMessageBox.information(self,"Households By Income Source","No Income sources Selected")
-            elif len (cropdetails)!=0:
-                query = cropsQuery
+        queryconnector = HouseholdIncomeQuery()
+        query = queryconnector.buildFinalReportQuery (householdIDs,cropsQuery,employmentQuery,livestockQuery,loansQuery,transfersQuery,wildfoodsQuery)
 
-            elif len(employmentdetails)!=0:
-                query = employmentQuery
-
-            elif len(livestockdetails)!=0:
-                query = livestockQuery
-
-            elif len(loandetails)!=0:
-                query = loansQuery
-
-            elif len(transferdetails)!=0:
-                query = transfersQuery
-
-            elif len(wildfoodsdetails)!=0:
-                query = wildfoodsQuery
-                
-            elif len(cropdetails) !=0 and len(employmentdetails)!=0 and len(livestockdetails)!=0 and len(loandetails) !=0 and len(transferdetails)!=0 and len(wildfoodsdetails)!=0:
-                query = '''SELECT * FROM (%s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s) AS householdincome''' % (basequery, cropsQuery,employmentQuery,livestockQuery,loansQuery,transfersQuery,wildfoodsQuery)
         print query
         return query
                 
     def buildCropIncomeQuery(self,projectid,cropdetails,householdids):
-        houseids = tuple(householdids)
+        houseids = ','.join(householdids)
         print 'nawa ma details a mbewu', cropdetails
         incomesources = tuple(cropdetails)
         print 'zinazo',incomesources
@@ -142,88 +120,89 @@ class HouseholdIncome:
         query =''
         if len(cropdetails)!=0:
             if allincomesources in cropdetails:
-                query = '''SELECT hhid,SUM(unitssold * unitprice) AS cropincome FROM cropincome WHERE pid = %s AND hhid IN %s GROUP BY hhid''' % (projectid,houseids)
+                query = '''SELECT hhid,SUM(unitssold * unitprice) AS cropincome FROM cropincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 if len(incomesources)==1:
                     query = '''SELECT hhid,incomesource,(unitssold * unitprice) AS cropincome FROM cropincome WHERE pid=%s AND hhid=%s AND incomesource ='%s' GROUP BY hhid''' % (projectid,houseids[0],incomesources[0])
                 else:
-                    query = '''SELECT hhid,incomesource,(unitssold * unitprice) AS cropincome FROM cropincome WHERE pid=%s AND hhid IN %s AND incomesource IN %s GROUP BY hhid''' % (projectid,houseids,incomesources)
+                    query = '''SELECT hhid,incomesource,(unitssold * unitprice) AS cropincome FROM cropincome WHERE pid=%s AND hhid IN (%s) AND incomesource IN %s''' % (projectid,houseids,incomesources)
         return query            
 
     def buildEmploymentIncomeQuery(self,projectid,employmentdetails,householdids):
-        houseids = tuple(householdids)
+        houseids = ','.join(householdids)
         incomesources = tuple(employmentdetails)
         allincomesources = 'All'
         query =''
         if len(employmentdetails)!=0:
             if allincomesources in employmentdetails:
-                query = '''SELECT SUM(cashincome) AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN %s GROUP BY hhid''' % (projectid,houseids)
+                query = '''SELECT hhid,SUM(cashincome) AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 if len(incomesources)==1:
                     query = '''SELECT incomesource,cashincome AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid=%s AND incomesource ='%s' ''' % (projectid,houseids[0],incomesources[0])
                 else:
-                    query = '''SELECT incomesource,cashincome AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN %s AND incomesource IN %s''' % (projectid,houseids,incomesources)
+                    query = '''SELECT incomesource,cashincome AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) AND incomesource IN %s''' % (projectid,houseids,incomesources)
         return query            
 
     def buildLivestockIncomeQuery(self,projectid,livestockdetails,householdids):
-        houseids = tuple(householdids)
+        houseids = ','.join(householdids)
         incomesources = tuple(livestockdetails)
         allincomesources = 'All'
         query =''
         if len(livestockdetails)!=0:
             if allincomesources in livestockdetails:
-                query = '''SELECT SUM(unitssold * unitprice) AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN %s GROUP BY hhid''' % (projectid,houseids)
+                query = '''SELECT hhid,SUM(unitssold * unitprice) AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
-                if len(incomesources):
+                if len(incomesources)==1:
                     query = '''SELECT incomesource,unitssold * unitprice AS livestockincome FROM livestockincome WHERE pid = %s AND hhid=%s AND incomesource='%s' ''' % (projectid,houseids[0],incomesources[0])
                 else:
-                    query = '''SELECT incomesource,unitssold * unitprice AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN %s AND incomesource IN %s''' % (projectid,houseids,incomesources)
+                    query = '''SELECT incomesource,unitssold * unitprice AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN (%s) AND incomesource IN %s''' % (projectid,houseids,incomesources)
         return query            
 
     def buildLoanIncomeQuery(self,projectid,loandetails,householdids):
-        houseids = tuple(householdids)
+        houseids = ','.join(householdids)
         incomesources = tuple(loandetails)
         allincomesources = 'All'
         query =''
         if len(loandetails)!=0:
             if allincomesources in loandetails:
-                query = '''SELECT SUM(creditvalue) AS loanincome FROM creditandloans WHERE pid = %s AND hhid IN %s GROUP BY hhid''' % (projectid,houseids)
+                query = '''SELECT hhid,SUM(creditvalue) AS loanincome FROM creditandloans WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 if len(incomesources)==1:
                     query = '''SELECT creditsource,creditvalue AS loanincome FROM creditandloans WHERE pid = %s AND hhid=%s AND creditsource='%s' ''' % (projectid,houseids[0],incomesources[0])
                 else:
-                    query = '''SELECT creditsource,creditvalue AS loanincome FROM creditandloans WHERE pid = %s AND hhid IN %s AND creditsource IN %s''' % (projectid,houseids,incomesources)
+                    query = '''SELECT creditsource,creditvalue AS loanincome FROM creditandloans WHERE pid = %s AND hhid IN (%s) AND creditsource IN %s''' % (projectid,houseids,incomesources)
         return query            
 
     def buildTransferIncomeQuery(self,projectid,transferdetails,householdids):
-        houseids = tuple(householdids)
+        houseids = ','.join(householdids)
         incomesources = tuple(transferdetails)
 
         allincomesources = 'All'
         query =''
         if len(transferdetails)!=0:
             if allincomesources in transferdetails:
-                query = '''SELECT SUM(cashperyear) AS transferincome FROM creditandloans WHERE pid = %s AND hhid IN %s GROUP BY hhid''' % (projectid,houseids)
+                query = '''SELECT hhid,SUM(cashperyear) AS transferincome FROM creditandloans WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 if len(incomesources)==1:
                     query = '''SELECT sourcetype,cashperyear AS transferincome FROM creditandloans WHERE pid = %s AND hhid=%s AND sourcetype='%s' ''' % (projectid,houseids[0],incomesources[0])
                 else:
-                    query = '''SELECT sourcetype,cashperyear AS transferincome FROM creditandloans WHERE pid = %s AND hhid IN %s AND sourcetype IN %s''' % (projectid,houseids,incomesources)
+                    query = '''SELECT sourcetype,cashperyear AS transferincome FROM creditandloans WHERE pid = %s AND hhid IN (%s) AND sourcetype IN %s''' % (projectid,houseids,incomesources)
         return query            
 
     def buildWildFoodsIncomeQuery(self,projectid,wildfoodsdetails,householdids):
-        houseids = tuple(householdids)
+        houseids = ','.join(householdids)
+        print houseids
         incomesources = tuple(wildfoodsdetails)
         allincomesources = 'All'
         query =''
         if len(wildfoodsdetails)!=0:
             if allincomesources in wildfoodsdetails:
-                query = '''SELECT SUM(unitssold * unitprice) AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN %s GROUP BY hhid''' % (projectid,houseids)
+                query = '''SELECT hhid,SUM(unitssold * unitprice) AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 if len(incomesources)==1:
                     query = '''SELECT incomesource,unitssold * unitprice AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid=%s AND incomesource='%s' ''' % (projectid,houseids[0],incomesources[0])
                 else:
-                    query = '''SELECT incomesource,unitssold * unitprice AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN %s AND incomesource IN %s''' % (projectid,houseids,incomesources)
+                    query = '''SELECT incomesource,unitssold * unitprice AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) AND incomesource IN (%s)''' % (projectid,houseids,incomesources)
         return query            
 
     def getReportTable(self,query):
