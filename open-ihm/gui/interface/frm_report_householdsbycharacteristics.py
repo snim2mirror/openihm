@@ -31,8 +31,6 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
         	self.connect(self.cmbProjectNames, SIGNAL("currentIndexChanged(int)"), self.getPersonalCharacteristics)
         	self.connect(self.cmdGenerateReport, SIGNAL("clicked()"), self.getReportData)
 
-
-
         def getProjectNames(self):
                 ''' populate projects combobox with available projects'''
                 
@@ -45,8 +43,6 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
 
             	self.cmbProjectNames.setCurrentIndex(-1)
                 self.cmbHouseholds.setCurrentIndex(-1)
- 
-
 
         def getselectedProject(self):
                 ''' get name of project selected by user'''
@@ -133,7 +129,6 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
 			if currentitem not in selectedRows:
 				selectedRows.append(str(currentitem))
 		return selectedRows
-
 
         def getSelectedPIndexes(self):
                 return self.listViewPersonalCharacteristics.selectedIndexes()
