@@ -109,7 +109,7 @@ class HouseholdIncome:
         wildfoodsQuery = self.buildWildFoodsIncomeQuery(projectid,wildfoodsdetails,householdIDs)
 
         queryconnector = HouseholdIncomeQuery()
-        query = queryconnector.buildFinalReportQuery (householdIDs,cropsQuery,employmentQuery,livestockQuery,loansQuery,transfersQuery,wildfoodsQuery)
+        query = queryconnector.buildFinalReportQuery (projectid,householdIDs,cropsQuery,employmentQuery,livestockQuery,loansQuery,transfersQuery,wildfoodsQuery)
 
         print query
         return query
