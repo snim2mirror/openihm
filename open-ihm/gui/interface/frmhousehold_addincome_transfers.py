@@ -33,6 +33,9 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers):
 		# display household name
 		self.lblHouseholdName.setText(hhname)
 		
+		#temporarily disable saving
+		self.cmdSave.setEnabled( False )
+		
 		# connect relevant signals and slots
 		self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
 		self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveIncome)

@@ -6,32 +6,32 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>208</height>
+    <width>432</width>
+    <height>382</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Add Gifts</string>
+   <string>Add Transfer</string>
   </property>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
      <x>20</x>
      <y>40</y>
-     <width>81</width>
+     <width>101</width>
      <height>21</height>
     </rect>
    </property>
    <property name="text">
-    <string>Assistance Type:</string>
+    <string>Source of Transfer:</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="cboAssistanceType">
+  <widget class="QComboBox" name="cmbSourceOfTransfer">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>130</x>
      <y>40</y>
-     <width>261</width>
+     <width>251</width>
      <height>22</height>
     </rect>
    </property>
@@ -39,10 +39,10 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txtUnitOfMeasure">
+  <widget class="QLineEdit" name="txtCash">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>130</x>
      <y>80</y>
      <width>111</width>
      <height>20</height>
@@ -52,8 +52,8 @@
   <widget class="QPushButton" name="cmdCancel">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>160</y>
+     <x>340</x>
+     <y>340</y>
      <width>75</width>
      <height>31</height>
     </rect>
@@ -85,23 +85,13 @@
     </rect>
    </property>
    <property name="text">
-    <string>Unit of Measure:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="txtUnitsConsumed">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>120</y>
-     <width>111</width>
-     <height>20</height>
-    </rect>
+    <string>Cash Given:</string>
    </property>
   </widget>
   <widget class="QLabel" name="lblHouseholdName">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>130</x>
      <y>10</y>
      <width>271</width>
      <height>21</height>
@@ -111,24 +101,11 @@
     <string>{householdname}</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>120</y>
-     <width>81</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Units Consumed:</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="cmdSave">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>160</y>
+     <y>340</y>
      <width>75</width>
      <height>31</height>
     </rect>
@@ -140,11 +117,141 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>110</y>
+     <width>411</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Food Transfer</string>
+   </property>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>140</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Units Sold:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtUnitsConsumed">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>100</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtUnitsGiven">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>60</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>100</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Units Consumed:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtUnitsSold">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>140</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Units Given:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Food Type Paid:</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cmbFoodType">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>20</y>
+      <width>281</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="editable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtUnitPrice">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>180</y>
+      <width>111</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>180</y>
+      <width>81</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Price per Unit:</string>
+    </property>
+   </widget>
+  </widget>
  </widget>
  <tabstops>
-  <tabstop>cboAssistanceType</tabstop>
-  <tabstop>txtUnitOfMeasure</tabstop>
-  <tabstop>txtUnitsConsumed</tabstop>
+  <tabstop>cmbSourceOfTransfer</tabstop>
+  <tabstop>txtCash</tabstop>
   <tabstop>cmdSave</tabstop>
   <tabstop>cmdCancel</tabstop>
  </tabstops>
