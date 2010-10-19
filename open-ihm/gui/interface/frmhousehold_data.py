@@ -43,6 +43,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		# set current house hold
 		if hhid != 0:
 			self.cboHouseholdNumber.setCurrentIndex(self.cboHouseholdNumber.findData(QVariant(hhid)))
+			
+		# temporarily disable editing of transfers and transfers from orgs
+		self.cmdEditGifts.setEnabled( False )
+		self.cmdEditTransfer.setEnabled( False )
 		
 		# retrieve members
 		self.displayHouseholdData()
@@ -349,7 +353,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		
 		header = "Personal Characteristics for %s" % personid if personid != "0" else "Personal Characteristics"
 		self.lblPersonalCharacteristicsHeader.setText( header )
-		if ( personid != "0" ):
+		if ( ( personid != "0" ) and ( num != 0 ) ):
 		     self.cmdEditPersonalCharacteristic.setEnabled( True )
 		else:
 		     self.cmdEditPersonalCharacteristic.setEnabled( False )
