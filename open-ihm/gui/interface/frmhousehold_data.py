@@ -671,11 +671,11 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
          temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
          hhid = temp[0]
          pid = self.parent.projectid 
-         # select query to retrieve household expenses
+         # select query to retrieve household crop income
          query = '''SELECT id, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed 
                  FROM cropincome WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
 
-         # retrieve and display assets
+         # run query
          db = data.mysql.connector.Connect(**self.config)             
          cursor = db.cursor()
 
@@ -802,55 +802,64 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			QMessageBox.information( self, "Delete Livestock Income", msg )
 		
 	def retrieveHouseholdLivestockIncome(self):
-		''' retrieves and shows a list of household livestock income items '''
-		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
-		hhid = temp[0] 
-		pid = self.parent.projectid
-		# select query to retrieve household expenses
-		query = '''SELECT * FROM livestockincome WHERE hhid=%i AND pid=%s ''' % (hhid,  pid)
-		
-		# retrieve and display assets
-		db = data.mysql.connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
-		
-		model = QStandardItemModel(1,2)
-		
-		# set model headers
-		model.setHorizontalHeaderItem(0,QStandardItem('Income ID.'))
-		model.setHorizontalHeaderItem(1,QStandardItem('Income Source'))
-		model.setHorizontalHeaderItem(2,QStandardItem('Unit of Measure'))
-		model.setHorizontalHeaderItem(3,QStandardItem('Units Consumed'))
-		model.setHorizontalHeaderItem(4,QStandardItem('Units Sold'))
-		model.setHorizontalHeaderItem(5,QStandardItem('Unit Price'))
-		
-		# add  data rows
-		num = 0
-		
-		for row in cursor.fetchall():
-			qtIncomeID = QStandardItem( "%i" % row[0])
-			qtIncomeID.setTextAlignment( Qt.AlignCenter )
-			qtIncomeType = QStandardItem( row[2] )	
-			qtUnitOfMeasure = QStandardItem( row[3] )
-			qtUnitsConsumed = QStandardItem( "%f" % row[4] )
-			qtUnitsSold 	= QStandardItem( "%f" % row[5] )
-			qtUnitPrice 	= QStandardItem( "%f" % row[6] )
-			
-			model.setItem( num, 0, qtIncomeID )
-			model.setItem( num, 1, qtIncomeType )
-			model.setItem( num, 2, qtUnitOfMeasure )
-			model.setItem( num, 3, qtUnitsConsumed )
-			model.setItem( num, 4, qtUnitsSold )
-			model.setItem( num, 5, qtUnitPrice )
-			num = num + 1
-		
-		cursor.close()   
-		db.close()
-		
-		self.tblLivestockIncome.setModel(model)
-		self.tblLivestockIncome.resizeColumnsToContents()
-		self.tblLivestockIncome.show()
+         ''' retrieves and shows a list of household livestock income items '''
+         temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+         hhid = temp[0]
+         pid = self.parent.projectid 
+         # select query to retrieve household crop income
+         query = '''SELECT id, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed 
+                 FROM livestockincome WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
+
+         # run query
+         db = data.mysql.connector.Connect(**self.config)             
+         cursor = db.cursor()
+
+         cursor.execute(query)
+
+         model = QStandardItemModel(1,2)
+         
+         # set model headers
+         model.setHorizontalHeaderItem(0,QStandardItem('Income ID.'))
+         model.setHorizontalHeaderItem(1,QStandardItem('Income Source'))
+         model.setHorizontalHeaderItem(2,QStandardItem('Unit of Measure'))
+         model.setHorizontalHeaderItem(3,QStandardItem('Income Produced'))
+         model.setHorizontalHeaderItem(4,QStandardItem('Units Sold'))
+         model.setHorizontalHeaderItem(5,QStandardItem('Unit Price'))
+         model.setHorizontalHeaderItem(6,QStandardItem('Other Uses'))
+         model.setHorizontalHeaderItem(7,QStandardItem('Units Consumed'))
+         
+         # add  data rows
+         num = 0
+         
+         for row in cursor.fetchall():
+             qtIncomeID = QStandardItem( "%i" % row[0])
+             qtIncomeID.setTextAlignment( Qt.AlignCenter )
+             qtIncomeType = QStandardItem( row[1] )	
+             qtUnitOfMeasure = QStandardItem( row[2] )
+             qtUnitsProduced = QStandardItem( "%.2f" % row[3] )
+             qtUnitsSold 	= QStandardItem( "%.2f" % row[4] )
+             qtUnitPrice 	= QStandardItem( "%.2f" % row[5] )
+             qtOtherUses 	= QStandardItem( "%.2f" % row[6] )
+             qtUnitConsumed 	= QStandardItem( "%.2f" % row[7] )
+
+             model.setItem( num, 0, qtIncomeID )
+             model.setItem( num, 1, qtIncomeType )
+             model.setItem( num, 2, qtUnitOfMeasure )
+             model.setItem( num, 3, qtUnitsProduced )
+             model.setItem( num, 4, qtUnitsSold )
+             model.setItem( num, 5, qtUnitPrice )
+             model.setItem( num, 6, qtOtherUses )
+             model.setItem( num, 7, qtUnitConsumed )
+             num = num + 1
+
+         cursor.close()   
+         db.close()
+
+         self.tblLivestockIncome.setModel(model)
+         self.tblLivestockIncome.resizeColumnsToContents()
+         self.tblLivestockIncome.hideColumn(0)
+         self.tblLivestockIncome.show()
+
 	
 	#-------------------------------------------------------------------------------------------------------
 	# Income: Gifts
@@ -1316,56 +1325,64 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			QMessageBox.information( self, "Delete Wildfoods Income", msg )
 		
 	def retrieveHouseholdWildfoodsIncome(self):
-		''' retrieves and shows a list of household wildfoods income items '''
-		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
-		hhid = temp[0] 
-		pid = self.parent.projectid
-		# select query to retrieve wildfoods income items
-		query = '''SELECT * FROM wildfoods WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
-		
-		# retrieve and display items
-		db = data.mysql.connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
-		
-		model = QStandardItemModel(1,2)
-		
-		# set model headers
-		model.setHorizontalHeaderItem(0,QStandardItem('Income ID.'))
-		model.setHorizontalHeaderItem(1,QStandardItem('Income Source'))
-		model.setHorizontalHeaderItem(2,QStandardItem('Unit of Measure'))
-		model.setHorizontalHeaderItem(3,QStandardItem('Units Consumed'))
-		model.setHorizontalHeaderItem(4,QStandardItem('Units Sold'))
-		model.setHorizontalHeaderItem(5,QStandardItem('Unit Price'))
-		
-		# add  data rows
-		num = 0
-		
-		for row in cursor.fetchall():
-			qtIncomeID = QStandardItem( "%i" % row[0])
-			qtIncomeID.setTextAlignment( Qt.AlignCenter )
-			qtIncomeType = QStandardItem( row[2] )	
-			qtUnitOfMeasure = QStandardItem( row[3] )
-			qtUnitsConsumed = QStandardItem( "%f" % row[4] )
-			qtUnitsSold 	= QStandardItem( "%f" % row[5] )
-			qtUnitPrice 	= QStandardItem( "%f" % row[6] )
-			
-			model.setItem( num, 0, qtIncomeID )
-			model.setItem( num, 1, qtIncomeType )
-			model.setItem( num, 2, qtUnitOfMeasure )
-			model.setItem( num, 3, qtUnitsConsumed )
-			model.setItem( num, 4, qtUnitsSold )
-			model.setItem( num, 5, qtUnitPrice )
-			num = num + 1
-		
-		cursor.close()   
-		db.close()
-		
-		self.tblWildfoodsIncome.setModel(model)
-		self.tblWildfoodsIncome.resizeColumnsToContents()
-		self.tblWildfoodsIncome.show()
-	
+         ''' retrieves and shows a list of household wildfoods income items '''
+         temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+         hhid = temp[0]
+         pid = self.parent.projectid 
+         # select query to retrieve household crop income
+         query = '''SELECT id, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed 
+                 FROM wildfoods WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
+
+         # run query
+         db = data.mysql.connector.Connect(**self.config)             
+         cursor = db.cursor()
+
+         cursor.execute(query)
+
+         model = QStandardItemModel(1,2)
+         
+         # set model headers
+         model.setHorizontalHeaderItem(0,QStandardItem('Income ID.'))
+         model.setHorizontalHeaderItem(1,QStandardItem('Income Source'))
+         model.setHorizontalHeaderItem(2,QStandardItem('Unit of Measure'))
+         model.setHorizontalHeaderItem(3,QStandardItem('Income Produced'))
+         model.setHorizontalHeaderItem(4,QStandardItem('Units Sold'))
+         model.setHorizontalHeaderItem(5,QStandardItem('Unit Price'))
+         model.setHorizontalHeaderItem(6,QStandardItem('Other Uses'))
+         model.setHorizontalHeaderItem(7,QStandardItem('Units Consumed'))
+         
+         # add  data rows
+         num = 0
+         
+         for row in cursor.fetchall():
+             qtIncomeID = QStandardItem( "%i" % row[0])
+             qtIncomeID.setTextAlignment( Qt.AlignCenter )
+             qtIncomeType = QStandardItem( row[1] )	
+             qtUnitOfMeasure = QStandardItem( row[2] )
+             qtUnitsProduced = QStandardItem( "%.2f" % row[3] )
+             qtUnitsSold 	= QStandardItem( "%.2f" % row[4] )
+             qtUnitPrice 	= QStandardItem( "%.2f" % row[5] )
+             qtOtherUses 	= QStandardItem( "%.2f" % row[6] )
+             qtUnitConsumed 	= QStandardItem( "%.2f" % row[7] )
+
+             model.setItem( num, 0, qtIncomeID )
+             model.setItem( num, 1, qtIncomeType )
+             model.setItem( num, 2, qtUnitOfMeasure )
+             model.setItem( num, 3, qtUnitsProduced )
+             model.setItem( num, 4, qtUnitsSold )
+             model.setItem( num, 5, qtUnitPrice )
+             model.setItem( num, 6, qtOtherUses )
+             model.setItem( num, 7, qtUnitConsumed )
+             num = num + 1
+
+         cursor.close()   
+         db.close()
+
+         self.tblWildfoodsIncome.setModel(model)
+         self.tblWildfoodsIncome.resizeColumnsToContents()
+         self.tblWildfoodsIncome.hideColumn(0)
+         self.tblWildfoodsIncome.show()
+
 	#-------------------------------------------------------------------------------------------------------
 	# Expenditure
 	#-------------------------------------------------------------------------------------------------------
