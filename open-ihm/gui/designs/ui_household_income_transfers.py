@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_transfers.ui'
 #
-# Created: Tue Oct 19 09:45:06 2010
+# Created: Wed Oct 20 18:00:29 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -61,7 +61,7 @@ class Ui_AddHouseholdIncomeTransfers(object):
         self.label_7.setGeometry(QtCore.QRect(20, 60, 71, 21))
         self.label_7.setObjectName("label_7")
         self.label_3 = QtGui.QLabel(self.groupBox)
-        self.label_3.setGeometry(QtCore.QRect(20, 20, 131, 21))
+        self.label_3.setGeometry(QtCore.QRect(20, 20, 81, 21))
         self.label_3.setObjectName("label_3")
         self.cmbFoodType = QtGui.QComboBox(self.groupBox)
         self.cmbFoodType.setGeometry(QtCore.QRect(120, 20, 281, 22))
@@ -92,6 +92,6 @@ class Ui_AddHouseholdIncomeTransfers(object):
         self.label_6.setText(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Units Sold:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Units Consumed:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setText(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Units Given:", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_3.setText(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Food Type Paid:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Food Type:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setText(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Price per Unit:", None, QtGui.QApplication.UnicodeUTF8))
 
