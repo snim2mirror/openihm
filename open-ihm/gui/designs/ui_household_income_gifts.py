@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_gifts.ui'
 #
-# Created: Wed Oct 20 17:59:49 2010
+# Created: Wed Oct 20 18:39:41 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -85,7 +85,7 @@ class Ui_AddHouseholdIncomeGifts(object):
         self.label_2.setText(QtGui.QApplication.translate("AddHouseholdIncomeGifts", "Source of Transfer:", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdCancel.setText(QtGui.QApplication.translate("AddHouseholdIncomeGifts", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("AddHouseholdIncomeGifts", "Household Name:", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_4.setText(QtGui.QApplication.translate("AddHouseholdIncomeGifts", "Cash Given:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_4.setText(QtGui.QApplication.translate("AddHouseholdIncomeGifts", "Cash per Year:", None, QtGui.QApplication.UnicodeUTF8))
         self.lblHouseholdName.setText(QtGui.QApplication.translate("AddHouseholdIncomeGifts", "{householdname}", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdSave.setText(QtGui.QApplication.translate("AddHouseholdIncomeGifts", "Save", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox.setTitle(QtGui.QApplication.translate("AddHouseholdIncomeGifts", "Food Transfer", None, QtGui.QApplication.UnicodeUTF8))

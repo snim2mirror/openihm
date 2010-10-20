@@ -85,7 +85,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Cash Given:</string>
+    <string>Cash per Year:</string>
    </property>
   </widget>
   <widget class="QLabel" name="lblHouseholdName">
