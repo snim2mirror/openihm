@@ -22,6 +22,7 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics):
 
 		# get personal type
         	self.getPersonalCharacteristics()
+        	self.setDatatypes()
 		
 		self.connect(self.btnCharacteristicSave, SIGNAL("clicked()"), self.savePersonalCharacteristic)
 		self.connect(self.btnCharacteristicDelete, SIGNAL("clicked()"), self.deletePersonalCharacteristic)
@@ -39,13 +40,15 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics):
 			characteristic = row[0]
             		self.cmbCharacteristic.addItem(characteristic)
 
-            	self.cmbDataType.addItem(' ')
+            	self.cmbCharacteristic.setCurrentIndex(-1)
+
+        def setDatatypes(self):
+                self.cmbDataType.addItem(' ')
 		self.cmbDataType.addItem('boolean/Yes/No')
 		self.cmbDataType.addItem('Integer')
 		self.cmbDataType.addItem('String')
+		self.cmbDataType.addItem('Double')
 		self.cmbDataType.setCurrentIndex(-1)
-		self.cmbCharacteristic.setCurrentIndex(-1)
-		
 			
 	def populateForm(self):
 		'''
@@ -75,10 +78,12 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics):
                         dataIndex = 2
                 elif formdatatype == 3:
                         dataIndex = 3
+                elif formdatatype == 4:
+                        dataIndex = 4
+
                 else:
                         dataIndex = -1
 
-                print dataIndex
 		self.cmbDataType.setCurrentIndex(dataIndex)
 		self.txtDescription.setText(description)
 	
@@ -95,6 +100,8 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics):
                         mydatatype = 2
                 elif formdatatype == 'String':
                         mydatatype = 3
+                elif formdatatype == 'Double':
+                        mydatatype = 4
                 
         	
 		# check if record exists
@@ -120,7 +127,9 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics):
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
 		#populate Food Types Combobox
-		self.getPersonalCharacteristics()                
+		self.getPersonalCharacteristics()
+		self.cmbDataType.setCurrentIndex(-1)
+
 
 	def deletePersonalCharacteristic(self):
 		''' Deletes record from database '''
