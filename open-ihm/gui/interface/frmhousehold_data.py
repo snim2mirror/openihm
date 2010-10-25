@@ -43,9 +43,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		# set current house hold
 		if hhid != 0:
 			self.cboHouseholdNumber.setCurrentIndex(self.cboHouseholdNumber.findData(QVariant(hhid)))
-			
-		# temporarily disable editing of transfers and transfers from orgs
-		self.cmdEditTransfer.setEnabled( False )
 		
 		# retrieve members
 		self.displayHouseholdData()
