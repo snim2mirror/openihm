@@ -45,7 +45,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			self.cboHouseholdNumber.setCurrentIndex(self.cboHouseholdNumber.findData(QVariant(hhid)))
 			
 		# temporarily disable editing of transfers and transfers from orgs
-		self.cmdEditGifts.setEnabled( False )
 		self.cmdEditTransfer.setEnabled( False )
 		
 		# retrieve members

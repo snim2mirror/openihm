@@ -152,7 +152,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="txtUnitsGiven">
+   <widget class="QLineEdit" name="txtUnitOfMeasure">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -190,12 +190,12 @@
      <rect>
       <x>20</x>
       <y>60</y>
-      <width>71</width>
+      <width>91</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Units Given:</string>
+     <string>Unit of Measure:</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">

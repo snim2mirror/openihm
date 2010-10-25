@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_transfers.ui'
 #
-# Created: Wed Oct 20 18:39:32 2010
+# Created: Mon Oct 25 17:03:06 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -48,9 +48,9 @@ class Ui_AddHouseholdIncomeTransfers(object):
         self.txtUnitsConsumed = QtGui.QLineEdit(self.groupBox)
         self.txtUnitsConsumed.setGeometry(QtCore.QRect(120, 100, 111, 20))
         self.txtUnitsConsumed.setObjectName("txtUnitsConsumed")
-        self.txtUnitsGiven = QtGui.QLineEdit(self.groupBox)
-        self.txtUnitsGiven.setGeometry(QtCore.QRect(120, 60, 111, 20))
-        self.txtUnitsGiven.setObjectName("txtUnitsGiven")
+        self.txtUnitOfMeasure = QtGui.QLineEdit(self.groupBox)
+        self.txtUnitOfMeasure.setGeometry(QtCore.QRect(120, 60, 111, 20))
+        self.txtUnitOfMeasure.setObjectName("txtUnitOfMeasure")
         self.label_5 = QtGui.QLabel(self.groupBox)
         self.label_5.setGeometry(QtCore.QRect(20, 100, 91, 21))
         self.label_5.setObjectName("label_5")
@@ -58,7 +58,7 @@ class Ui_AddHouseholdIncomeTransfers(object):
         self.txtUnitsSold.setGeometry(QtCore.QRect(120, 140, 111, 20))
         self.txtUnitsSold.setObjectName("txtUnitsSold")
         self.label_7 = QtGui.QLabel(self.groupBox)
-        self.label_7.setGeometry(QtCore.QRect(20, 60, 71, 21))
+        self.label_7.setGeometry(QtCore.QRect(20, 60, 91, 21))
         self.label_7.setObjectName("label_7")
         self.label_3 = QtGui.QLabel(self.groupBox)
         self.label_3.setGeometry(QtCore.QRect(20, 20, 81, 21))
@@ -91,7 +91,7 @@ class Ui_AddHouseholdIncomeTransfers(object):
         self.groupBox.setTitle(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Food Transfer", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Units Sold:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Units Consumed:", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_7.setText(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Units Given:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_7.setText(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Unit of Measure:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Food Type:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setText(QtGui.QApplication.translate("AddHouseholdIncomeTransfers", "Price per Unit:", None, QtGui.QApplication.UnicodeUTF8))
 
