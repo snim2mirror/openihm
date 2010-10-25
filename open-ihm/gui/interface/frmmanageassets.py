@@ -26,24 +26,20 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
         	self.parent = parent
         			
 		# populate tab list controls
-        	self.getAssetCategories()
         	self.getSavingsCategories()
         	self.getFoodTypes()
         	self.getLandTypes()
         	self.getTreeTypes()
         	self.getTradableGoodTypes()
+        	self.getLivestockTypes()
         	
                 #set input validator and restrict input to numeric values,
                 myIntVal = QIntValidator(0, 10000, self.txtEnergyValue)
                 self.txtEnergyValue.setValidator(myIntVal);
-      	
+                self.txtLivestockEnergyValue.setValidator(myIntVal)
 
 		self.connect(self.btnAssetsClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
 		#self.connect(self.listView.selectionModel(), SIGNAL("currentChanged(QModelIndex,QModelIndex)"), self.manageCategories)
-                #signals for managing asset category types
-		self.connect(self.btnCatSave, SIGNAL("clicked()"), self.saveCategoryType)
-		self.connect(self.btnCatDelete, SIGNAL("clicked()"), self.deleteCategoryType)
-		self.connect(self.categoriesListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedCategory)
 
 		#signals for managing savings types
 		self.connect(self.savingsListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedSaving)
@@ -70,100 +66,10 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
 		self.connect(self.btnTGoodSave, SIGNAL("clicked()"), self.saveTradableGoodType)
 		self.connect(self.btnTGoodDelete, SIGNAL("clicked()"), self.deleteTradableGoodType)
 		
-
-		
-	#Begin block of methods for managing Asset Categories 	
-	def getAssetCategories(self):
-                '''Get pre-existing assets categories from database and populate categories list'''
-               	# select query to retrieve Asset Categories
-        	query = '''SELECT assettype FROM assettypes'''
-        	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-				
-		model = QStandardItemModel()
-		num = 0
-
-       		for row in recordset:
-			qtAssetType = QStandardItem( "%s" % row[0])
-            		qtAssetType.setTextAlignment( Qt.AlignLeft )
-            		model.setItem( num, 0, qtAssetType )
-            		num = num + 1
-                        		
-        	self.categoriesListView.setModel(model)
-		self.categoriesListView.show()
-
-        def pickSelectedCategory(self,index):
-                '''get selected item and populate categories textbox'''
-                selectedItem = self.categoriesListView.model().item(index.row(),0).text()
-                self.txtAssetCategories.setText(selectedItem)
-                
-        def saveCategoryType(self):
-        	''' Saves newly created data to database '''
-
-        	# get the data entered by user
-        	categorytype = self.txtAssetCategories.text()		
-        	
-		# check if record exists
-		query = '''SELECT assettype FROM assettypes WHERE assettype='%s' ''' % (categorytype)    
-		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
-				      	
-		if numrows == 0:
-			
-			query = '''INSERT INTO assettypes(assettype) 
-                     		VALUES('%s')''' % (categorytype)
-		else:
-			query = '''UPDATE assettypes SET assettype='%s'	WHERE assettype='%s' ''' % (categorytype, categorytype)
-    
-        	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
-                self.getAssetCategories()
-		#refresh categories list
-		#self.getCategories()                
-                
-	def deleteCategoryType(self):
-		''' Deletes record from database '''
-
-        	# get the data entered by user
-        	categorytype = self.txtAssetCategories.text()		
-        	
-		# check if record exists
-		query = '''SELECT assettype FROM assettypes WHERE assettype='%s' ''' % (categorytype)    
-		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
-
-		if numrows <> 0:
-			
-                        msg = "Are sure sure you want to delete this Asset Category Type?"
-                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
-                        if ret == QMessageBox.Yes:
-                                
-                                query = '''DELETE FROM assettypes WHERE assettype='%s' ''' % (categorytype)
-
-                                # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
-
-                                self.txtAssetCategories.clear()
-                                #refresh categories list
-                                self.getAssetCategories()			
-			
-		else:
-			QMessageBox.information(self, 'Delete Food Type', "Record not found")
-		self.getAssetCategories()
-        #End block of methods for managing Asset Categories
-
+		#signals for managing Livestock
+		self.connect(self.livestockListView, SIGNAL("clicked(QModelIndex)"), self.pickselectedLivestockItem)
+		self.connect(self.btnLivestockSave, SIGNAL("clicked()"), self.saveLivestockType)
+		self.connect(self.btnLivestockDelete, SIGNAL("clicked()"), self.deleteLivestockType)
 
 	#Begin block of methods for managing Savings Categories 
 	def getSavingsCategories(self):
@@ -675,6 +581,110 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
                         QMessageBox.information(self, 'Delete TradableGood Type', "Record not found")
                 
                 #End block of methods for managing TradableGood details
+
+        #Begin block of methods for managing Livestock details 
+	def getLivestockTypes(self):
+                '''Get pre-existing savings categories from database and populate categories list'''
+               	# select query to retrieve Food types
+        	query = '''SELECT incomesource FROM setup_livestock'''
+        	
+                p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+				
+		model = QStandardItemModel()
+		num = 0
+
+       		for row in recordset:
+			qtFoodType = QStandardItem( "%s" % row[0])
+            		qtFoodType.setTextAlignment( Qt.AlignLeft )
+            		model.setItem( num, 0, qtFoodType )
+            		num = num + 1
+                        		
+        	self.livestockListView.setModel(model)
+		self.livestockListView.show()	
+
+        def pickselectedLivestockItem(self,index):
+                '''get selected item and populate categories textbox'''
+                
+                selectedLivestockItem = self.livestockListView.model().item(index.row(),0).text()
+                self.txtLivestockPType.setText(selectedLivestockItem)
+                #select query to retrieve food-energy value and measuring unit for selected food item 
+        	query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (selectedLivestockItem)
+
+        	p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+	      		
+		for row in recordset:
+                        kcalValue = row[0]
+			unitOfMeasure = row[1]
+
+		self.txtLivestockEnergyValue.setText(str(kcalValue))
+                self.txtLivestockUnit.setText(unitOfMeasure)
+
+        def saveLivestockType(self):
+        	''' Saves newly created data to database '''
+
+        	# get the data entered by user
+        	myincomesource = self.txtLivestockPType.text()
+        	myenergyvalue = self.txtLivestockEnergyValue.text()
+        	unitofmeasure = self.txtLivestockUnit.text()
+                        	
+		# check if record exists
+		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)    
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+				      	
+		if numrows == 0:
+			
+			query = '''INSERT INTO setup_livestock(incomesource, energyvalueperunit, unitofmeasure) 
+                     		VALUES('%s',%s,'%s')''' % (myincomesource, myenergyvalue, unitofmeasure)
+		else:
+			query = '''UPDATE setup_livestock SET incomesource='%s', energyvalueperunit=%s, unitofmeasure='%s'
+                     		WHERE incomesource='%s' ''' % (myincomesource, myenergyvalue, unitofmeasure, myincomesource)
+    
+        	# execute query and commit changes
+        	temp = GenericDBOP(query)
+                recordset = temp.runUpdateQuery()
+		#refresh categories list
+		self.getLivestockTypes()
+                                
+	def deleteLivestockType(self):
+		''' Deletes record from database '''
+
+        	# get the data entered by user
+        	myincomesource = self.txtLivestockPType.text()		
+        	
+		# check if record exists
+		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)    
+		
+		p = GenericDBOP(query)
+                recordset = p.runSelectQuery()
+		numrows = 0		
+		for row in recordset:
+			numrows = numrows + 1
+
+		if numrows <> 0:
+			
+                        msg = "Are sure sure you want to delete this Livestock Type?"
+                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+                        if ret == QMessageBox.Yes:
+
+                                query = '''DELETE FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)
+
+                                # execute query and commit changes
+                                temp = GenericDBOP(query)
+                                recordset = temp.runUpdateQuery()
+                                #refresh categories list
+                                self.getLivestockTypes()			
+			
+		else:
+			QMessageBox.information(self, 'Delete Food Type', "Record not found")
+        #End block of methods for managing Livestock Types
 
 
     

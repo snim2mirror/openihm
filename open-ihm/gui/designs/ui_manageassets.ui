@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="tabCashSavings">
     <attribute name="title">
@@ -376,6 +376,142 @@
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="tabLivestock">
+    <attribute name="title">
+     <string>Livestock</string>
+    </attribute>
+    <widget class="QLineEdit" name="txtLivestockEnergyValue">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>110</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>170</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Unit of Measure</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>120</y>
+       <width>54</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>KCalories</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="txtLivestockUnit">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>160</y>
+       <width>201</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_24">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>10</y>
+       <width>241</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add/ Edit Livestocktock Details</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnLivestockDelete">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>240</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QListView" name="livestockListView">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>241</width>
+       <height>201</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="txtLivestockPType">
+     <property name="geometry">
+      <rect>
+       <x>352</x>
+       <y>60</y>
+       <width>201</width>
+       <height>28</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnLivestockSave">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>240</y>
+       <width>80</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Save</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_14">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>10</y>
+       <width>221</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Select Livetock Type</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_27">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>60</y>
+       <width>54</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Type</string>
+     </property>
+    </widget>
+   </widget>
    <widget class="QWidget" name="tabTrees">
     <attribute name="title">
      <string>Trees</string>
@@ -598,83 +734,6 @@
        <y>50</y>
        <width>251</width>
        <height>192</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tabAssetsGeneral">
-    <attribute name="title">
-     <string>Manage Category Types</string>
-    </attribute>
-    <widget class="QLineEdit" name="txtAssetCategories">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>40</y>
-       <width>281</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnCatSave">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>120</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Save</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnCatDelete">
-     <property name="geometry">
-      <rect>
-       <x>480</x>
-       <y>120</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>271</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Existing Asset Categories</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>10</y>
-       <width>251</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add/Edit Asset Category</string>
-     </property>
-    </widget>
-    <widget class="QListView" name="categoriesListView">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>256</width>
-       <height>261</height>
       </rect>
      </property>
     </widget>

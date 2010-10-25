@@ -26,6 +26,7 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics):
 
 		# get personal type
         	self.getHouseholdCharacteristics()
+        	self.setDataTypes()
 		
 		self.connect(self.btnCharacteristicSave, SIGNAL("clicked()"), self.saveHouseholdCharacteristic)
 		self.connect(self.btnCharacteristicDelete, SIGNAL("clicked()"), self.deleteHouseholdCharacteristic)
@@ -42,14 +43,16 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics):
 		for row in recordset:
 			characteristic = row[0]
             		self.cmbCharacteristic.addItem(characteristic)
+		self.cmbCharacteristic.setCurrentIndex(-1)
 
-            	self.cmbDataType.addItem(' ')
+        def setDataTypes(self):
+                self.cmbDataType.addItem(' ')
 		self.cmbDataType.addItem('boolean/Yes/No')
 		self.cmbDataType.addItem('Integer')
 		self.cmbDataType.addItem('String')
+		self.cmbDataType.addItem('Double')
 		self.cmbDataType.setCurrentIndex(-1)
-		self.cmbCharacteristic.setCurrentIndex(-1)
-			
+
 	def populateForm(self):
 		'''
 		populate form controls when user selects a particular food type	
@@ -76,6 +79,8 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics):
                         dataIndex = 2
                 elif formdatatype == 3:
                         dataIndex = 3
+                elif formdatatype == 4:
+                        dataIndex = 4
                 else:
                         dataIndex = -1
 
@@ -95,6 +100,8 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics):
                         mydatatype = 2
                 elif formdatatype == 'String':
                         mydatatype = 3
+                elif formdatatype == 'Double':
+                        mydatatype = 4
                 
         	
 		# check if record exists
@@ -123,9 +130,8 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics):
                 #refresh interface
                 self.cmbCharacteristic.clear()
 		self.txtDescription.clear()
-		self.cmbDataType.clear()
                 self.getHouseholdCharacteristics()
-                
+		self.cmbDataType.setCurrentIndex(-1)
 
 	def deleteHouseholdCharacteristic(self):
 		''' Deletes record from database '''
