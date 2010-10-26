@@ -182,7 +182,7 @@ class HouseholdIncome:
             else:
                 query = "SELECT hhid"
                 for myincomesource in transferdetails:
-                    query = query + ", GROUP_CONCAT(IF (sourcetype = '%s', cashperyear,NULL)) AS '%s'" %(myincomesource,myincomesource)
+                    query = query + ", GROUP_CONCAT(IF (sourceoftransfer = '%s', cashperyear,NULL)) AS '%s'" %(myincomesource,myincomesource)
                 query = query + " FROM transfers WHERE pid=%s AND hhid IN (%s) AND sourcetype IN (%s)" % (projectid,houseids,incomesources)
                 query = query + " GROUP BY hhid"
                 
@@ -221,3 +221,92 @@ class HouseholdIncome:
             db.close()
             
         return result
+
+
+
+    #Build Queries for Food Income
+    def buildCropFIncomeQuery(self,projectid,cropdetails,householdids):
+        houseids = ','.join(householdids)
+        incomesources = ','.join("'" + p + "'" for p in cropdetails)
+        allincomesources = 'All'
+        query =''
+
+        if len(cropdetails)!=0:
+            if allincomesources in cropdetails:
+                query = '''SELECT hhid,SUM(unitsconsumed * ( SELECT energyvalueperunit FROM setup_crops WHERE foodtype ='%s')) AS cropincome FROM cropincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+            else:
+                query = "SELECT hhid"
+                for myincomesource in cropdetails:
+                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitsconsumed * ( SELECT energyvalueperunit FROM setup_crops WHERE foodtype ='%s'),NULL)) AS '%s'" %(myincomesource,myincomesource,myincomesource)
+                query = query + " FROM cropincome WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
+                query = query + " GROUP BY hhid"
+        return query            
+
+setup_crops, foodtype,energyvalueperunit
+
+    def buildEmploymentFIncomeQuery(self,projectid,employmentdetails,householdids):
+        houseids = ','.join(householdids)
+        incomesources = ','.join("'" + p + "'" for p in employmentdetails)
+        allincomesources = 'All'
+        query =''
+        if len(employmentdetails)!=0:
+            if allincomesources in employmentdetails:
+                query = '''SELECT hhid,SUM(incomekcal) AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+            else:
+                query = "SELECT hhid"
+                for myincomesource in employmentdetails:
+                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', incomekcal,NULL)) AS '%s'" %(myincomesource,myincomesource)
+                query = query + " FROM employmentincome WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
+                query = query + " GROUP BY hhid"
+        return query            
+
+    def buildLivestockFIncomeQuery(self,projectid,livestockdetails,householdids):
+        houseids = ','.join(householdids)
+        incomesources = ','.join("'" + p + "'" for p in livestockdetails)
+        allincomesources = 'All'
+        query =''
+        if len(livestockdetails)!=0:
+            if allincomesources in livestockdetails:
+                query = '''SELECT hhid,SUM(unitsconsumed * ( SELECT energyvalueperunit FROM setup_livestock WHERE incomesource ='%s')) AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (myincomesource,projectid,houseids)
+            else:
+                query = "SELECT hhid"
+                for myincomesource in livestockdetails:
+                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitsconsumed * unitsconsumed * ( SELECT energyvalueperunit FROM setup_livestock WHERE incomesource ='%s'),NULL)) AS '%s'" %(myincomesource,myincomesource,myincomesource)
+                query = query + " FROM livestockincome WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
+                query = query + " GROUP BY hhid"
+        return query            
+
+
+    def buildTransferFIncomeQuery(self,projectid,transferdetails,householdids):
+        houseids = ','.join(householdids)
+        incomesources = ','.join("'" + p + "'" for p in transferdetails)
+
+        allincomesources = 'All'
+        query =''
+        if len(transferdetails)!=0:
+            if allincomesources in transferdetails:
+                query = '''SELECT hhid,SUM(cashperyear) AS transferincome FROM transfers WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+            else:
+                query = "SELECT hhid"
+                for myincomesource in transferdetails:
+                    query = query + ", GROUP_CONCAT(IF (sourcetype = '%s', cashperyear,NULL)) AS '%s'" %(myincomesource,myincomesource)
+                query = query + " FROM transfers WHERE pid=%s AND hhid IN (%s) AND sourcetype IN (%s)" % (projectid,houseids,incomesources)
+                query = query + " GROUP BY hhid"
+                
+        return query            
+
+    def buildWildFoodsFIncomeQuery(self,projectid,wildfoodsdetails,householdids):
+        houseids = ','.join(householdids)
+        incomesources = ','.join("'" + p + "'" for p in wildfoodsdetails)
+        allincomesources = 'All'
+        query =''
+        if len(wildfoodsdetails)!=0:
+            if allincomesources in wildfoodsdetails:
+                query = '''SELECT hhid,SUM(unitsconsumed * ( SELECT energyvalueperunit FROM setup_wildfoods WHERE incomesource IN (%s))) AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) AND incomesource IN (%s) GROUP BY hhid''' % (incomesources,projectid,houseids,incomesources)
+            else:
+                query = "SELECT hhid"
+                for myincomesource in wildfoodsdetails:
+                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitsconsumed * ( SELECT energyvalueperunit FROM setup_wildfoods WHERE incomesource ='%s'),NULL)) AS '%s'" %(myincomesource,myincomesource,myincomesource)
+                query = query + " FROM wildfoods WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
+                query = query + " GROUP BY hhid"
+        return query            

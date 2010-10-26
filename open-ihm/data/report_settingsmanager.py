@@ -118,7 +118,7 @@ class ReportsSettingsManager:
     def getTransferIncomeSources(self,projectid):
         rows =[]
         if projectid != 0:
-            query = ''' SELECT DISTINCT assistancetype FROM transfers WHERE pid='%s' ''' %(projectid)
+            query = ''' SELECT DISTINCT sourceoftransfer FROM transfers WHERE pid='%s' ''' %(projectid)
             self.database.open()
             rows = self.database.execSelectQuery( query )
             self.database.close()
