@@ -93,6 +93,7 @@ DEFAULT CHARACTER SET = latin1;
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`assets` (
   `assetid` INT(11) NOT NULL AUTO_INCREMENT ,
   `hhid` INT(11) NOT NULL ,
+  `assetcategory` VARCHAR(255) NOT NULL ,
   `assettype` VARCHAR(100) NOT NULL ,
   `unitofmeasure` VARCHAR(45) NOT NULL ,
   `unitcost` DOUBLE NOT NULL ,
@@ -174,14 +175,20 @@ DEFAULT CHARACTER SET = latin1;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`diet` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `pid` INT(11) NOT NULL ,
   `fooditem` VARCHAR(45) NOT NULL ,
   `unitofmeasure` VARCHAR(45) NOT NULL ,
   `percentage` DOUBLE NOT NULL ,
   `priceperunit` DOUBLE NOT NULL ,
-  PRIMARY KEY (`id`) )
+  PRIMARY KEY (`id`, `pid`) ,
+  INDEX `fk_diet_projects1` (`pid` ASC) ,
+  CONSTRAINT `fk_diet_projects1`
+    FOREIGN KEY (`pid` )
+    REFERENCES `openihmdb`.`projects` (`pid` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
-
 
 -- -----------------------------------------------------
 -- Table `openihmdb`.`employmentincome`
@@ -468,15 +475,16 @@ DEFAULT CHARACTER SET = latin1;
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`transfers` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `hhid` INT(11) NOT NULL ,
-  `assistancetype` VARCHAR(200) NOT NULL ,
-  `unitofmeasure` VARCHAR(45) NOT NULL ,
-  `sourcetype` ENUM('Internal','External') NOT NULL ,
-  `foodperdistribution` DOUBLE NULL DEFAULT NULL ,
-  `cashperdistribution` DOUBLE NULL DEFAULT NULL ,
-  `numberoftimesreceived` INT(11) NULL DEFAULT NULL ,
-  `unitsconsumed` DOUBLE NULL DEFAULT NULL ,
-  `cashperyear` DOUBLE NULL DEFAULT NULL ,
   `pid` INT(11) NOT NULL ,
+  `sourcetype` ENUM('Internal','External') NOT NULL ,
+  `sourceoftransfer` VARCHAR(255) NOT NULL ,
+  `cashperyear` DOUBLE NULL DEFAULT 0.00 ,
+  `foodtype` VARCHAR(255) NULL ,
+  `unitofmeasure` VARCHAR(45) NULL ,
+  `unitsgiven` DOUBLE NULL DEFAULT 0.00 ,
+  `unitsconsumed` DOUBLE NULL DEFAULT 0.00 ,
+  `unitssold` DOUBLE NULL DEFAULT 0.00 ,
+  `priceperunit` DOUBLE NULL DEFAULT 0.00 ,
   PRIMARY KEY (`id`, `hhid`, `pid`) ,
   INDEX `fk_transfers_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_transfers_households1`

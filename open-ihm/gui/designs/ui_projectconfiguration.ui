@@ -61,7 +61,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="tabProjectHouseholdCharacteristics">
     <attribute name="title">
@@ -267,6 +267,152 @@
        <height>361</height>
       </rect>
      </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>Diet Configuration</string>
+    </attribute>
+    <widget class="QTableView" name="tableView">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>341</width>
+       <height>381</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdDelDiet">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>350</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>10</y>
+       <width>281</width>
+       <height>211</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QComboBox" name="cmbFoodItem">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>20</y>
+        <width>141</width>
+        <height>22</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>23</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Food Item:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtUnitOfMeasure">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>60</y>
+        <width>141</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>60</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Unit Of Measure:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtPercentage">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>100</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtUnitPrice">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>140</y>
+        <width>91</width>
+        <height>20</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="cmdSaveDiet">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>170</y>
+        <width>91</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Save</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>100</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Percentage:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>140</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Price per Unit:</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

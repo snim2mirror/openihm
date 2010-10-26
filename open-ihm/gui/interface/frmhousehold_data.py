@@ -43,10 +43,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		# set current house hold
 		if hhid != 0:
 			self.cboHouseholdNumber.setCurrentIndex(self.cboHouseholdNumber.findData(QVariant(hhid)))
-			
-		# temporarily disable editing of transfers and transfers from orgs
-		self.cmdEditGifts.setEnabled( False )
-		self.cmdEditTransfer.setEnabled( False )
 		
 		# retrieve members
 		self.displayHouseholdData()
@@ -943,7 +939,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		hhid = temp[0] 
 		pid = self.parent.projectid
 		# select query to retrieve gifts income items
-		query = '''SELECT id, assistancetype, unitofmeasure, unitsconsumed
+		query = '''SELECT id, sourceoftransfer, cashperyear, foodtype, unitofmeasure, unitsconsumed , unitssold, priceperunit 
 				   FROM transfers WHERE hhid=%i AND pid=%s AND sourcetype='Internal' ''' % (hhid,  pid)
 		
 		# retrieve and display items
@@ -956,9 +952,13 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		
 		# set model headers
 		model.setHorizontalHeaderItem(0,QStandardItem('Income ID.'))
-		model.setHorizontalHeaderItem(1,QStandardItem('Assistance Type'))
-		model.setHorizontalHeaderItem(2,QStandardItem('Unit of Measure'))
-		model.setHorizontalHeaderItem(3,QStandardItem('Units Consumed'))
+		model.setHorizontalHeaderItem(1,QStandardItem('Source of Transfer'))
+		model.setHorizontalHeaderItem(2,QStandardItem('Cash Per Year'))
+		model.setHorizontalHeaderItem(3,QStandardItem('Food Type'))
+		model.setHorizontalHeaderItem(4,QStandardItem('Unit of Measure'))
+		model.setHorizontalHeaderItem(5,QStandardItem('Units Consumed'))
+		model.setHorizontalHeaderItem(6,QStandardItem('Units Sold'))
+		model.setHorizontalHeaderItem(7,QStandardItem('Price per Unit'))
 		
 		# add  data rows
 		num = 0
@@ -966,14 +966,22 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		for row in cursor.fetchall():
 			qtIncomeID = QStandardItem( "%i" % row[0])
 			qtIncomeID.setTextAlignment( Qt.AlignCenter )
-			qtIncomeType = QStandardItem( row[1] )	
-			qtUnitOfMeasure = QStandardItem( row[2] )
-			qtUnitsConsumed = QStandardItem( "%f" % row[3] )
+			qtSource = QStandardItem( row[1] )	
+			qtCashPerYear = QStandardItem( "%.2f" % row[2] )
+			qtFoodType = QStandardItem( row[3] )
+			qtUnitofMeasure = QStandardItem( row[4] )
+			qtUnitsConsumed = QStandardItem( "%.2f" % row[5] )
+			qtUnitsSold = QStandardItem( "%.2f" % row[6] )
+			qtUnitPrice = QStandardItem( "%.2f" % row[7] )
 						
 			model.setItem( num, 0, qtIncomeID )
-			model.setItem( num, 1, qtIncomeType )
-			model.setItem( num, 2, qtUnitOfMeasure )
-			model.setItem( num, 3, qtUnitsConsumed )
+			model.setItem( num, 1, qtSource )
+			model.setItem( num, 2, qtCashPerYear )
+			model.setItem( num, 3, qtFoodType )
+			model.setItem( num, 4, qtUnitofMeasure )
+			model.setItem( num, 5, qtUnitsConsumed )
+			model.setItem( num, 6, qtUnitsSold )
+			model.setItem( num, 7, qtUnitPrice )
 			
 			num = num + 1
 		
@@ -981,6 +989,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		db.close()
 		
 		self.tblGiftsIncome.setModel(model)
+		self.tblGiftsIncome.hideColumn(0)
 		self.tblGiftsIncome.resizeColumnsToContents()
 		self.tblGiftsIncome.show()
 		
@@ -1198,7 +1207,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		hhid = temp[0]
 		pid = self.parent.projectid        
 		# select query to retrieve transfer income items
-		query = '''SELECT *
+		query = '''SELECT  id, sourceoftransfer, cashperyear, foodtype, unitofmeasure, unitsconsumed , unitssold, priceperunit 
 				   FROM transfers WHERE hhid=%i AND pid=%s AND sourcetype='External' ''' % (hhid, pid)
 		
 		# retrieve and display items
@@ -1211,12 +1220,13 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		
 		# set model headers
 		model.setHorizontalHeaderItem(0,QStandardItem('Income ID.'))
-		model.setHorizontalHeaderItem(1,QStandardItem('Assistance Type'))
-		model.setHorizontalHeaderItem(2,QStandardItem('Unit of Measure'))
-		model.setHorizontalHeaderItem(3,QStandardItem('Food per Dist'))
-		model.setHorizontalHeaderItem(4,QStandardItem('Cash per Dist'))
-		model.setHorizontalHeaderItem(5,QStandardItem('No. Times Received'))
-		model.setHorizontalHeaderItem(6,QStandardItem('Cash per Year'))
+		model.setHorizontalHeaderItem(1,QStandardItem('Source of Transfer'))
+		model.setHorizontalHeaderItem(2,QStandardItem('Cash Per Year'))
+		model.setHorizontalHeaderItem(3,QStandardItem('Food Type'))
+		model.setHorizontalHeaderItem(4,QStandardItem('Unit of Measure'))
+		model.setHorizontalHeaderItem(5,QStandardItem('Units Consumed'))
+		model.setHorizontalHeaderItem(6,QStandardItem('Units Sold'))
+		model.setHorizontalHeaderItem(7,QStandardItem('Price per Unit'))
 		
 		# add  data rows
 		num = 0
@@ -1224,20 +1234,22 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		for row in cursor.fetchall():
 			qtIncomeID = QStandardItem( "%i" % row[0])
 			qtIncomeID.setTextAlignment( Qt.AlignCenter )
-			qtIncomeType = QStandardItem( row[2] )	
-			qtUnitOfMeasure = QStandardItem( row[3] )
-			qtFoodPerDist = QStandardItem( "%f" % row[5] )
-			qtCashPerDist = QStandardItem( "%f" % row[6] )
-			qtNumReceived = QStandardItem( "%i" % row[7] )
-			qtCashPerYear = QStandardItem( "%f" % row[9] )
+			qtSource = QStandardItem( row[1] )	
+			qtCashPerYear = QStandardItem( "%.2f" % row[2] )
+			qtFoodType = QStandardItem( row[3] )
+			qtUnitofMeasure = QStandardItem( row[4] )
+			qtUnitsConsumed = QStandardItem( "%.2f" % row[5] )
+			qtUnitsSold = QStandardItem( "%.2f" % row[6] )
+			qtUnitPrice = QStandardItem( "%.2f" % row[7] )
 						
 			model.setItem( num, 0, qtIncomeID )
-			model.setItem( num, 1, qtIncomeType )
-			model.setItem( num, 2, qtUnitOfMeasure )
-			model.setItem( num, 3, qtFoodPerDist )
-			model.setItem( num, 4, qtCashPerDist )
-			model.setItem( num, 5, qtNumReceived )
-			model.setItem( num, 6, qtCashPerYear )
+			model.setItem( num, 1, qtSource )
+			model.setItem( num, 2, qtCashPerYear )
+			model.setItem( num, 3, qtFoodType )
+			model.setItem( num, 4, qtUnitofMeasure )
+			model.setItem( num, 5, qtUnitsConsumed )
+			model.setItem( num, 6, qtUnitsSold )
+			model.setItem( num, 7, qtUnitPrice )
 			
 			num = num + 1
 		
@@ -1245,6 +1257,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		db.close()
 		
 		self.tblTransferIncome.setModel(model)
+		self.tblTransferIncome.hideColumn(0)
 		self.tblTransferIncome.resizeColumnsToContents()
 		self.tblTransferIncome.show()
 	
