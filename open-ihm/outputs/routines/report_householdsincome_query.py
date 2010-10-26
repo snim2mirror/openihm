@@ -27,5 +27,5 @@ class HouseholdIncomeQuery:
                     self.query  = '''SELECT * FROM ((%s) table1 LEFT JOIN (%s) table2 USING (hhid) )''' % (self.query,wildfoodsQuery)
             else:
                 QMessageBox.information(self,"Households By Income Source","No Income sources Selected")
-
+        print self.query 
         return self.query 

@@ -11,7 +11,7 @@ from PyQt4.QtGui import *
 from gui.designs.ui_report_householdincome import Ui_HouseholdIncomeReport
 from data.report_settingsmanager import ReportsSettingsManager
 from outputs.routines.report_householdsincome import HouseholdIncome
-
+from outputs.routines.report_householdsincome_write import HouseholdsIncomeWrite
 class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
     ''' Creates the Household Income Report by Source from. Uses the design class
 		in gui.designs.ui_report_householdincome. '''	
@@ -27,12 +27,15 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         self.getProjectNames()
         self.putMainIncomeCategories()
         self.insertHouseholdsHeader()
+        self.insertPCharsHeader()
         	
         self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
         self.connect(self.cmbProjects, SIGNAL("currentIndexChanged(int)"), self.updateDialogData)
-        self.connect(self.cmdShowReport, SIGNAL("clicked()"), self.getReportTable)
+        self.connect(self.cmdShowReport, SIGNAL("clicked()"), self.writeTable)
+        self.connect(self.cmdSaveDataTable, SIGNAL("clicked()"), self.writeTable)
 
     def updateDialogData(self):
+        '''Update Income Sources list to those relevant for the current project'''
         self.putCropIncomeSources()
         self.getHouseholdCharacteristics()
         self.getPersonalCharacteristics()
@@ -96,10 +99,12 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         self.treeView.show()
 
     def getCropsIndex(self):
+        '''Get index of Crops Category form the Dialog's TreeView'''
         cropsindex = self.treeView.model().index(0, 0)
         return cropsindex
     
     def putCropIncomeSources(self):
+        '''Insert Crop Income Sources into the Household Income Dialog's TreeView'''
         projectid = self.getProjectID()
         settingsmgr = ReportsSettingsManager()
         rows = settingsmgr.getCropIncomeSources(projectid)
@@ -117,11 +122,12 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
             num = num + 1
 
     def getEmploymentIndex(self):
+        '''Get index of Employment Category form the Dialog's TreeView'''
         parentindex = self.treeView.model().index(1, 0)
         return parentindex
 
-
     def putEmploymentIncomeSources(self):
+        '''Insert Employment Income Sources into the Household Income Dialog's TreeView'''
         projectid = self.getProjectID()
         settingsmgr = ReportsSettingsManager()
         rows = settingsmgr.getEmploymentIncomeSources(projectid)
@@ -139,11 +145,14 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
             num = num + 1
 
     def getLivestockIndex(self):
+        '''Get index of Livestock Category form the Dialog's TreeView'''
         parentindex = self.treeView.model().index(2, 0)
         return parentindex
 
 
     def putLivestockIncomeSources(self):
+        '''Insert Livestock Income Sources into the Household Income Dialog's TreeView'''
+        
         projectid = self.getProjectID()
         settingsmgr = ReportsSettingsManager()
         rows = settingsmgr.getLivestockIncomeSources(projectid)
@@ -161,10 +170,13 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
             num = num + 1
 
     def getLoansIndex(self):
+        '''Get index of Loans Category form the Dialog's TreeView'''
         parentindex = self.treeView.model().index(3, 0)
         return parentindex
 
     def putLoanSources(self):
+        '''Insert Loan Income Sources into the Household Income Dialog's TreeView'''
+        
         projectid = self.getProjectID()
         settingsmgr = ReportsSettingsManager()
         rows = settingsmgr.getLoanIncomeSources(projectid)
@@ -182,10 +194,13 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
             num = num + 1
 
     def getTransferIncomeIndex(self):
+        '''Get index of Transfers Category form the Dialog's TreeView'''
         parentindex = self.treeView.model().index(4, 0)
         return parentindex
 
     def putTransferIncomeSources(self):
+        '''Insert Transfer Income Sources into the Household Income Dialog's TreeView'''
+        
         projectid = self.getProjectID()
         settingsmgr = ReportsSettingsManager()
         rows = settingsmgr.getTransferIncomeSources(projectid)
@@ -203,10 +218,14 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
             num = num + 1
 
     def getWildFoodsIncomeIndex(self):
+        '''Get index of Wild Foods Category form the Dialog's TreeView'''
+        
         parentindex = self.treeView.model().index(5, 0)
         return parentindex
 
     def putwildFoodIncomeSources(self):
+        '''Insert Wild Food Income Sources into the Household Income Dialog's TreeView'''
+        
         projectid = self.getProjectID()
         settingsmgr = ReportsSettingsManager()
         rows = settingsmgr.getWildfoodsIncomeSources(projectid)
@@ -224,16 +243,27 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
             num = num + 1
 
     def getHouseholdNames(self):
+        '''Get Names of Households selected by the User on the Interface'''
         projectid = self.getProjectID()
         settingsmgr = ReportsSettingsManager()
         rows = settingsmgr.getProjectHouseholds(projectid)
         return rows
 
     def insertHouseholdsHeader(self):
+        '''Insert Title for treeViewHouseholds'''
         model = QStandardItemModel()
         model.setHorizontalHeaderItem(0,QStandardItem('Select Household Names'))
         self.treeViewHouseholds.setModel(model)
         self.treeViewHouseholds.show()	
+
+    def insertPCharsHeader(self):
+        '''Insert Title for listViewHCharacteristics'''
+        
+        model = QStandardItemModel()
+        model.setHorizontalHeaderItem(0,QStandardItem('Personal Characteristics'))
+        self.listViewHCharacteristics.setModel(model)
+        self.listViewHCharacteristics.show()	
+
 
     def putHouseholdNames(self):
         ''' Insert household names for the selected Project'''
@@ -333,24 +363,26 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
 	return selectedRows
 
     def getSelectedPIndexes(self):
+        '''Get indexes of selected Personal characteristics'''
         return self.listViewPersonalCharacteristics.selectedIndexes()
 
     def getSelectedHouseholdsIndexes(self):
+        '''Get indexes of selected Household characteristics'''
         return self.treeViewHouseholds.selectedIndexes()
         
     def getReportHouseholdIDs (self):
-
-        selectedids = []
+        '''Get a list of households that match a users selection criteria -i.e Household names + Personal Characteristics and Household Characteristics'''
         
+        selectedids = []
         householdIDsQuery =self.getHouseholdIDsQuery()
         connector = HouseholdIncome()
         householdIDs = connector.getReportHouseholdIDs(householdIDsQuery)
         for hid in householdIDs:
             selectedids.append(str(hid[0]))
-        print selectedids
         return selectedids
 
     def getHouseholdIDsQuery(self):
+        '''Get query for generating a list of households that match a users selection criteria'''
 
         projectid = self.getProjectID()
         selectedHChars = self.getSelectedHouseholdCharacteristics()
@@ -361,6 +393,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         return householdIDsQuery
 
     def getHouseholdsSelection(self):
+        '''Get names of households selected by the user for charting'''
         
         selectedIndexes = self.getSelectedHouseholdsIndexes()
         parentIndex = self.treeViewHouseholds.model().index(0, 0, QModelIndex())
@@ -371,8 +404,6 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
                 houses = self.getHouseholdNames()
                 for house in houses:
                     hholdnames.append(str(house[0]))
-                    print house
-                    
             else:
                 for indexVal in selectedIndexes:
                     currentitem = self.treeViewHouseholds.model().data(indexVal, Qt.DisplayRole).toString()
@@ -382,6 +413,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         return hholdnames
 
     def getCropReportDetails(self):
+        '''Get list of crops selected by the user for charting'''
         householdIDs = self.getReportHouseholdIDs()
         requiredDetailType =[]
         
@@ -394,9 +426,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
                 else:
                     for indexVal in selectedIndexes:
                         currentitem = self.treeView.model().data(indexVal, Qt.DisplayRole).toString()
-                        print currentitem
                         requiredDetailType.append(str(currentitem))
-        print requiredDetailType
         return requiredDetailType
         
     def getSelectedCropCriteria(self):
@@ -407,8 +437,6 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
             if (indexVal == cropsroot) or (indexVal.parent() == cropsroot):
                 if indexVal not in cropincomeIndexes:
                     cropincomeIndexes.append(indexVal)
-
-        print cropincomeIndexes
         return cropincomeIndexes
 
     def getEmploymentReportDetails(self):
@@ -424,9 +452,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
                 else:
                     for indexVal in selectedIndexes:
                         currentitem = self.treeView.model().data(indexVal, Qt.DisplayRole).toString()
-                        print currentitem
                         requiredDetailType.append(str(currentitem))
-        print requiredDetailType
         return requiredDetailType
         
     def getSelectedEmploymentCriteria(self):
@@ -437,8 +463,6 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
             if (indexVal == root) or (indexVal.parent() == root):
                 if indexVal not in incomeIndexes:
                     incomeIndexes.append(indexVal)
-
-        print incomeIndexes
         return incomeIndexes
 
     def getLivestockReportDetails(self):
@@ -454,9 +478,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
                 else:
                     for indexVal in selectedIndexes:
                         currentitem = self.treeView.model().data(indexVal, Qt.DisplayRole).toString()
-                        print currentitem
                         requiredDetailType.append(str(currentitem))
-        print requiredDetailType
         return requiredDetailType
         
     def getSelectedLivestockCriteria(self):
@@ -467,8 +489,6 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
             if (indexVal == root) or (indexVal.parent() == root):
                 if indexVal not in incomeIndexes:
                     incomeIndexes.append(indexVal)
-
-        print incomeIndexes
         return incomeIndexes
 
     def getLoansReportDetails(self):
@@ -484,9 +504,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
                 else:
                     for indexVal in selectedIndexes:
                         currentitem = self.treeView.model().data(indexVal, Qt.DisplayRole).toString()
-                        print currentitem
                         requiredDetailType.append(str(currentitem))
-        print requiredDetailType
         return requiredDetailType
         
     def getSelectedLoansCriteria(self):
@@ -497,8 +515,6 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
             if (indexVal == root) or (indexVal.parent() == root):
                 if indexVal not in incomeIndexes:
                     incomeIndexes.append(indexVal)
-
-        print incomeIndexes
         return incomeIndexes
 
     def getTransfersDetails(self):
@@ -514,9 +530,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
                 else:
                     for indexVal in selectedIndexes:
                         currentitem = self.treeView.model().data(indexVal, Qt.DisplayRole).toString()
-                        print currentitem
                         requiredDetailType.append(str(currentitem))
-        print requiredDetailType
         return requiredDetailType
         
     def getSelectedTransfersCriteria(self):
@@ -527,8 +541,6 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
             if (indexVal == root) or (indexVal.parent() == root):
                 if indexVal not in incomeIndexes:
                     incomeIndexes.append(indexVal)
-
-        print incomeIndexes
         return incomeIndexes
 
     def getWildFoodDetails(self):
@@ -544,9 +556,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
                 else:
                     for indexVal in selectedIndexes:
                         currentitem = self.treeView.model().data(indexVal, Qt.DisplayRole).toString()
-                        print currentitem
                         requiredDetailType.append(str(currentitem))
-        print requiredDetailType
         return requiredDetailType
         
     def getSelectedWildFoodsCriteria(self):
@@ -557,8 +567,6 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
             if (indexVal == root) or (indexVal.parent() == root):
                 if indexVal not in incomeIndexes:
                     incomeIndexes.append(indexVal)
-
-        print incomeIndexes
         return incomeIndexes
 
     def getReportTable (self):
@@ -566,7 +574,6 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         reportQuery =self.getFinalReportTableQuery()
         connector = HouseholdIncome()
         reportTable = connector.getReportTable(reportQuery)
-        print reportTable
         return reportTable
 
     def getFinalReportTableQuery(self):
@@ -583,3 +590,9 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         connector = HouseholdIncome()
         householdIDsQuery = connector.getFinalIncomeReportTableQuery(projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails )
         return householdIDsQuery
+
+    def writeTable(self):
+        reporttable= self.getReportTable()
+        writer = HouseholdsIncomeWrite()
+        writer.writeSpreadsheetReport(reporttable)
+        
