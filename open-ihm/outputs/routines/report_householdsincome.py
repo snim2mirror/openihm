@@ -91,14 +91,25 @@ class HouseholdIncome:
             query = ''' SELECT hhid, pid FROM households WHERE householdname IN %s AND pid=%s ''' % (households,projectid)
         return query
 
-    def getFinalIncomeReportTableQuery(self,projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails):
+    def getFinalIncomeReportTableQuery(self,reporttype,projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails):
 
-        cropsQuery = self.buildCropIncomeQuery(projectid,cropdetails,householdIDs)
-        employmentQuery = self.buildEmploymentIncomeQuery(projectid,employmentdetails,householdIDs)
-        livestockQuery = self.buildLivestockIncomeQuery(projectid,livestockdetails,householdIDs)
-        loansQuery = self.buildLoanIncomeQuery(projectid,loandetails,householdIDs)
-        transfersQuery = self.buildTransferIncomeQuery(projectid,transferdetails,householdIDs)
-        wildfoodsQuery = self.buildWildFoodsIncomeQuery(projectid,wildfoodsdetails,householdIDs)
+        if reporttype =='Cash Income - Raw':
+            cropsQuery = self.buildCropIncomeQuery(projectid,cropdetails,householdIDs)
+            employmentQuery = self.buildEmploymentIncomeQuery(projectid,employmentdetails,householdIDs)
+            livestockQuery = self.buildLivestockIncomeQuery(projectid,livestockdetails,householdIDs)
+            loansQuery =''
+            #loansQuery = self.buildLoanIncomeQuery(projectid,loandetails,householdIDs)
+            transfersQuery = self.buildTransferIncomeQuery(projectid,transferdetails,householdIDs)
+            wildfoodsQuery = self.buildWildFoodsIncomeQuery(projectid,wildfoodsdetails,householdIDs)
+
+        elif reporttype =='Food Income - Raw':
+            cropsQuery = self.buildCropFIncomeQuery(projectid,cropdetails,householdIDs)
+            employmentQuery = self.buildEmploymentFIncomeQuery(projectid,employmentdetails,householdIDs)
+            livestockQuery = self.buildLivestockFIncomeQuery(projectid,livestockdetails,householdIDs)
+            transfersQuery = self.buildTransferFIncomeQuery(projectid,transferdetails,householdIDs)
+            wildfoodsQuery = self.buildWildFoodsFIncomeQuery(projectid,wildfoodsdetails,householdIDs)
+            loansQuery =''
+
 
         queryconnector = HouseholdIncomeQuery()
         query = queryconnector.buildFinalReportQuery (projectid,householdIDs,cropsQuery,employmentQuery,livestockQuery,loansQuery,transfersQuery,wildfoodsQuery)
@@ -183,7 +194,7 @@ class HouseholdIncome:
                 query = "SELECT hhid"
                 for myincomesource in transferdetails:
                     query = query + ", GROUP_CONCAT(IF (sourceoftransfer = '%s', cashperyear,NULL)) AS '%s'" %(myincomesource,myincomesource)
-                query = query + " FROM transfers WHERE pid=%s AND hhid IN (%s) AND sourcetype IN (%s)" % (projectid,houseids,incomesources)
+                query = query + " FROM transfers WHERE pid=%s AND hhid IN (%s)" % (projectid,houseids)
                 query = query + " GROUP BY hhid"
                 
         return query            
@@ -233,7 +244,8 @@ class HouseholdIncome:
 
         if len(cropdetails)!=0:
             if allincomesources in cropdetails:
-                query = '''SELECT hhid,SUM(unitsconsumed * ( SELECT energyvalueperunit FROM setup_crops WHERE foodtype ='%s')) AS cropincome FROM cropincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+                query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_crops WHERE setup_crops.foodtype=cropincome.incomesource)) AS cropincome
+                            FROM cropincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 query = "SELECT hhid"
                 for myincomesource in cropdetails:
@@ -242,7 +254,6 @@ class HouseholdIncome:
                 query = query + " GROUP BY hhid"
         return query            
 
-setup_crops, foodtype,energyvalueperunit
 
     def buildEmploymentFIncomeQuery(self,projectid,employmentdetails,householdids):
         houseids = ','.join(householdids)
@@ -267,7 +278,8 @@ setup_crops, foodtype,energyvalueperunit
         query =''
         if len(livestockdetails)!=0:
             if allincomesources in livestockdetails:
-                query = '''SELECT hhid,SUM(unitsconsumed * ( SELECT energyvalueperunit FROM setup_livestock WHERE incomesource ='%s')) AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (myincomesource,projectid,houseids)
+                query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_livestock WHERE setup_livestock.incomesource=livestockincome.incomesource))
+                            AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 query = "SELECT hhid"
                 for myincomesource in livestockdetails:
@@ -285,15 +297,17 @@ setup_crops, foodtype,energyvalueperunit
         query =''
         if len(transferdetails)!=0:
             if allincomesources in transferdetails:
-                query = '''SELECT hhid,SUM(cashperyear) AS transferincome FROM transfers WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+                query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_crops WHERE setup_crops.foodtype=transfers.foodtype)) AS transferincome
+                            FROM transfers WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 query = "SELECT hhid"
                 for myincomesource in transferdetails:
-                    query = query + ", GROUP_CONCAT(IF (sourcetype = '%s', cashperyear,NULL)) AS '%s'" %(myincomesource,myincomesource)
-                query = query + " FROM transfers WHERE pid=%s AND hhid IN (%s) AND sourcetype IN (%s)" % (projectid,houseids,incomesources)
+                    query = query + ", GROUP_CONCAT(IF (sourceoftransfer = '%s', unitsconsumed *(SELECT energyvalueperunit FROM setup_crops WHERE setup_crops.foodtype=transfers.foodtype ),NULL)) AS '%s'" %(myincomesource,myincomesource)
+                query = query + " FROM transfers WHERE pid=%s AND hhid IN (%s)" % (projectid,houseids)
                 query = query + " GROUP BY hhid"
                 
-        return query            
+        return query
+    
 
     def buildWildFoodsFIncomeQuery(self,projectid,wildfoodsdetails,householdids):
         houseids = ','.join(householdids)
@@ -302,7 +316,8 @@ setup_crops, foodtype,energyvalueperunit
         query =''
         if len(wildfoodsdetails)!=0:
             if allincomesources in wildfoodsdetails:
-                query = '''SELECT hhid,SUM(unitsconsumed * ( SELECT energyvalueperunit FROM setup_wildfoods WHERE incomesource IN (%s))) AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) AND incomesource IN (%s) GROUP BY hhid''' % (incomesources,projectid,houseids,incomesources)
+                query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_wildfoods WHERE setup_wildfoods.incomesource=wildfoods.incomesource))
+                            AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) AND GROUP BY hhid''' % (projectid,houseids)
             else:
                 query = "SELECT hhid"
                 for myincomesource in wildfoodsdetails:

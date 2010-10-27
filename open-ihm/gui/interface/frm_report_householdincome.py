@@ -23,6 +23,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         QDialog.__init__(self)
        	self.setupUi(self)
         self.parent = parent
+        self.reporttype = self.cmbReportType.currentText()
 
         self.getProjectNames()
         self.putMainIncomeCategories()
@@ -33,6 +34,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         self.connect(self.cmbProjects, SIGNAL("currentIndexChanged(int)"), self.updateDialogData)
         self.connect(self.cmdShowReport, SIGNAL("clicked()"), self.writeTable)
         self.connect(self.cmdSaveDataTable, SIGNAL("clicked()"), self.writeTable)
+        self.connect(self.cmbReportType, SIGNAL("currentIndexChanged(int)"), self.setReportType)
 
     def updateDialogData(self):
         '''Update Income Sources list to those relevant for the current project'''
@@ -586,13 +588,18 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         loandetails = self.getLoansReportDetails()
         transferdetails = self.getTransfersDetails()
         wildfoodsdetails = self.getWildFoodDetails()
+        reporttype = self.setReportType()
 
         connector = HouseholdIncome()
-        householdIDsQuery = connector.getFinalIncomeReportTableQuery(projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails )
+        householdIDsQuery = connector.getFinalIncomeReportTableQuery(reporttype,projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails )
         return householdIDsQuery
 
     def writeTable(self):
         reporttable= self.getReportTable()
         writer = HouseholdsIncomeWrite()
-        writer.writeSpreadsheetReport(reporttable)
-        
+        reporttype = self.setReportType()
+        writer.writeSpreadsheetReport(reporttable,reporttype)
+
+    def setReportType(self):
+        reporttype = self.cmbReportType.currentText()
+        return reporttype
