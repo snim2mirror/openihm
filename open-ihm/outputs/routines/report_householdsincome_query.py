@@ -19,8 +19,8 @@ class HouseholdIncomeQuery:
                     self.query  = '''SELECT * FROM ((%s) table1 LEFT JOIN (%s) table2 USING (hhid) )''' % (self.query,employmentQuery)
                 if livestockQuery !='':
                     self.query  = '''SELECT * FROM ((%s) table1 LEFT JOIN (%s) table2 USING (hhid) )''' % (self.query,livestockQuery)
-                if loansQuery !='':
-                    self.query  = '''SELECT * FROM ((%s) table1 LEFT JOIN (%s) table2 USING (hhid) )''' % (self.query,loansQuery)
+                #if loansQuery !='':
+                #self.query  = '''SELECT * FROM ((%s) table1 LEFT JOIN (%s) table2 USING (hhid) )''' % (self.query,loansQuery)
                 if transfersQuery !='':
                     self.query  = '''SELECT * FROM ((%s) table1 LEFT JOIN (%s) table2 USING (hhid) )''' % (self.query,transfersQuery)
                 if wildfoodsQuery !='':
