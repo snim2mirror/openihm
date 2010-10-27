@@ -216,13 +216,13 @@ class HouseholdIncome:
         return query            
 
     def getReportTable(self,query):
-        reportTable=[]
+        result = []
         databaseConnector = Database()
         if query !='':
             db = data.mysql.connector.Connect(**self.config)
             cursor = db.cursor()
 	    cursor.execute(query)
-	    result = []
+	    
             columns = tuple( [d[0].decode('utf8') for d in cursor.description] )
  	    
             for row in cursor.fetchall():
