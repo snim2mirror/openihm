@@ -273,7 +273,7 @@
     <attribute name="title">
      <string>Diet Configuration</string>
     </attribute>
-    <widget class="QTableView" name="tableView">
+    <widget class="QTableView" name="tblDiets">
      <property name="geometry">
       <rect>
        <x>10</x>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_projectconfiguration.ui'
 #
-# Created: Mon Oct 25 19:43:40 2010
+# Created: Mon Nov 01 14:21:04 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -80,9 +80,9 @@ class Ui_ProjectConfiguration(object):
         self.tabProject.addTab(self.tabProjectPersonalCharacteristics, "")
         self.tab = QtGui.QWidget()
         self.tab.setObjectName("tab")
-        self.tableView = QtGui.QTableView(self.tab)
-        self.tableView.setGeometry(QtCore.QRect(10, 10, 341, 381))
-        self.tableView.setObjectName("tableView")
+        self.tblDiets = QtGui.QTableView(self.tab)
+        self.tblDiets.setGeometry(QtCore.QRect(10, 10, 341, 381))
+        self.tblDiets.setObjectName("tblDiets")
         self.cmdDelDiet = QtGui.QPushButton(self.tab)
         self.cmdDelDiet.setGeometry(QtCore.QRect(360, 350, 91, 31))
         self.cmdDelDiet.setObjectName("cmdDelDiet")
