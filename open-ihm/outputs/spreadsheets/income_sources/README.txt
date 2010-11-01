@@ -1,0 +1,1 @@
+This folder keeps spreadsheet files for income charting
