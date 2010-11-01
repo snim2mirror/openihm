@@ -82,7 +82,7 @@ class ReportsSettingsManager:
     def getCropIncomeSources(self,projectid):
         rows =[]
         if projectid != 0:
-            query = ''' SELECT incomesource FROM cropincome WHERE pid='%s' ''' %(projectid)
+            query = ''' SELECT DISTINCT incomesource FROM cropincome WHERE pid='%s' ''' %(projectid)
             self.database.open()
             rows = self.database.execSelectQuery( query )
             self.database.close()
@@ -91,7 +91,7 @@ class ReportsSettingsManager:
     def getEmploymentIncomeSources(self,projectid):
         rows =[]
         if projectid != 0:
-            query = ''' SELECT incomesource FROM employmentincome WHERE pid='%s' ''' %(projectid)
+            query = ''' SELECT DISTINCT incomesource FROM employmentincome WHERE pid='%s' ''' %(projectid)
             self.database.open()
             rows = self.database.execSelectQuery( query )
             self.database.close()
@@ -100,7 +100,7 @@ class ReportsSettingsManager:
     def getLivestockIncomeSources(self,projectid):
         rows =[]
         if projectid != 0:
-            query = ''' SELECT incomesource FROM livestockincome WHERE pid='%s' ''' %(projectid)
+            query = ''' SELECT DISTINCT incomesource FROM livestockincome WHERE pid='%s' ''' %(projectid)
             self.database.open()
             rows = self.database.execSelectQuery( query )
             self.database.close()
@@ -109,7 +109,7 @@ class ReportsSettingsManager:
     def getWildfoodsIncomeSources(self,projectid):
         rows =[]
         if projectid != 0:
-            query = ''' SELECT incomesource FROM wildfoods WHERE pid='%s' ''' %(projectid)
+            query = ''' SELECT DISTINCT incomesource FROM wildfoods WHERE pid='%s' ''' %(projectid)
             self.database.open()
             rows = self.database.execSelectQuery( query )
             self.database.close()
@@ -118,7 +118,7 @@ class ReportsSettingsManager:
     def getTransferIncomeSources(self,projectid):
         rows =[]
         if projectid != 0:
-            query = ''' SELECT assistancetype FROM transfers WHERE pid='%s' ''' %(projectid)
+            query = ''' SELECT DISTINCT sourceoftransfer FROM transfers WHERE pid='%s' ''' %(projectid)
             self.database.open()
             rows = self.database.execSelectQuery( query )
             self.database.close()
@@ -127,7 +127,7 @@ class ReportsSettingsManager:
     def getLoanIncomeSources(self,projectid):
         rows =[]
         if projectid != 0:
-            query = ''' SELECT creditsource FROM creditandloans WHERE pid='%s' ''' %(projectid)
+            query = ''' SELECT DISTINCT creditsource FROM creditandloans WHERE pid='%s' ''' %(projectid)
             self.database.open()
             rows = self.database.execSelectQuery( query )
             self.database.close()

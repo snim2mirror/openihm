@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>632</width>
-    <height>628</height>
+    <height>654</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>632</width>
-    <height>628</height>
+    <height>654</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -22,9 +22,9 @@
   <widget class="QComboBox" name="cmbProjects">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>120</x>
      <y>10</y>
-     <width>551</width>
+     <width>511</width>
      <height>22</height>
     </rect>
    </property>
@@ -46,7 +46,7 @@
    <property name="geometry">
     <rect>
      <x>530</x>
-     <y>600</y>
+     <y>630</y>
      <width>101</width>
      <height>23</height>
     </rect>
@@ -59,7 +59,7 @@
    <property name="geometry">
     <rect>
      <x>410</x>
-     <y>600</y>
+     <y>630</y>
      <width>111</width>
      <height>23</height>
     </rect>
@@ -72,9 +72,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>220</y>
+     <y>260</y>
      <width>201</width>
-     <height>291</height>
+     <height>271</height>
     </rect>
    </property>
    <property name="selectionMode">
@@ -85,9 +85,9 @@
    <property name="geometry">
     <rect>
      <x>220</x>
-     <y>220</y>
+     <y>260</y>
      <width>201</width>
-     <height>291</height>
+     <height>271</height>
     </rect>
    </property>
    <property name="selectionMode">
@@ -98,9 +98,9 @@
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>220</y>
+     <y>260</y>
      <width>191</width>
-     <height>291</height>
+     <height>271</height>
     </rect>
    </property>
    <property name="selectionMode">
@@ -111,7 +111,7 @@
    <property name="geometry">
     <rect>
      <x>225</x>
-     <y>200</y>
+     <y>240</y>
      <width>141</width>
      <height>20</height>
     </rect>
@@ -124,7 +124,7 @@
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>200</y>
+     <y>240</y>
      <width>181</width>
      <height>16</height>
     </rect>
@@ -137,7 +137,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>510</y>
+     <y>530</y>
      <width>631</width>
      <height>16</height>
     </rect>
@@ -146,89 +146,76 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QLabel" name="label_8">
+  <widget class="QTreeView" name="treeViewHouseholds">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>520</y>
-     <width>241</width>
+     <y>80</y>
+     <width>611</width>
+     <height>151</height>
+    </rect>
+   </property>
+   <property name="editTriggers">
+    <set>QAbstractItemView::NoEditTriggers</set>
+   </property>
+   <property name="selectionMode">
+    <enum>QAbstractItemView::MultiSelection</enum>
+   </property>
+   <property name="selectionBehavior">
+    <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cmdSaveDataTable">
+   <property name="geometry">
+    <rect>
+     <x>294</x>
+     <y>630</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Save Data Table</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cmbReportType">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>40</y>
+     <width>281</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>Cash Income - Raw</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Food Income - Raw</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>81</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>Report Data Sort Criteria</string>
-   </property>
-  </widget>
-  <widget class="QFrame" name="frame_2">
-   <property name="geometry">
-    <rect>
-     <x>430</x>
-     <y>560</y>
-     <width>181</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="frameShape">
-    <enum>QFrame::StyledPanel</enum>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Raised</enum>
-   </property>
-   <widget class="QRadioButton" name="opt2Ascending">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>0</y>
-      <width>82</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Ascending</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="opt2Descending">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>0</y>
-      <width>82</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Descending</string>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QComboBox" name="cmbOrderCriteria2">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>560</y>
-     <width>101</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="Line" name="line_3">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>530</y>
-     <width>631</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
+    <string>Report Type</string>
    </property>
   </widget>
   <widget class="QComboBox" name="cmbOrderCriteria1">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>560</y>
+     <y>580</y>
      <width>101</width>
      <height>22</height>
     </rect>
@@ -244,11 +231,79 @@
     </property>
    </item>
   </widget>
+  <widget class="QFrame" name="frame_2">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>580</y>
+     <width>181</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QRadioButton" name="opt2Ascending_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ascending</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="opt2Descending_2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>0</y>
+      <width>82</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Descending</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="label_8">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>540</y>
+     <width>241</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Report Data Sort Criteria</string>
+   </property>
+  </widget>
+  <widget class="Line" name="line_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>600</y>
+     <width>631</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>560</y>
+     <y>580</y>
      <width>171</width>
      <height>21</height>
     </rect>
@@ -259,7 +314,7 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QRadioButton" name="opt1Ascending">
+   <widget class="QRadioButton" name="opt1Ascending_2">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -272,7 +327,7 @@
      <string>Ascending</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="opt1Descending">
+   <widget class="QRadioButton" name="opt1Descending_2">
     <property name="geometry">
      <rect>
       <x>90</x>
@@ -286,11 +341,11 @@
     </property>
    </widget>
   </widget>
-  <widget class="Line" name="line_2">
+  <widget class="Line" name="line_3">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>580</y>
+     <y>550</y>
      <width>631</width>
      <height>20</height>
     </rect>
@@ -299,37 +354,11 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QLabel" name="label_7">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>540</y>
-     <width>111</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>2nd Ordering Criteria</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_6">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>540</y>
-     <width>111</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>1st Ordering Criteria</string>
-   </property>
-  </widget>
   <widget class="Line" name="line">
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>540</y>
+     <y>560</y>
      <width>20</width>
      <height>51</height>
     </rect>
@@ -338,23 +367,40 @@
     <enum>Qt::Vertical</enum>
    </property>
   </widget>
-  <widget class="QTreeView" name="treeViewHouseholds">
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>560</y>
+     <width>111</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>2nd Ordering Criteria</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cmbOrderCriteria2">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>580</y>
+     <width>101</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>50</y>
-     <width>611</width>
-     <height>141</height>
+     <y>560</y>
+     <width>111</width>
+     <height>16</height>
     </rect>
    </property>
-   <property name="editTriggers">
-    <set>QAbstractItemView::NoEditTriggers</set>
-   </property>
-   <property name="selectionMode">
-    <enum>QAbstractItemView::MultiSelection</enum>
-   </property>
-   <property name="selectionBehavior">
-    <enum>QAbstractItemView::SelectRows</enum>
+   <property name="text">
+    <string>1st Ordering Criteria</string>
    </property>
   </widget>
  </widget>
