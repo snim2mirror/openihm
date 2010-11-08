@@ -59,7 +59,7 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment):
 		''' Retrieve Food Types and display them in a combobox listing type of food payments '''
 		self.cboFoodType.addItem("None")
 		# select query to Food Types
-		query = '''SELECT foodtype FROM setup_crops'''
+		query = '''SELECT name FROM setup_foods_crops '''
 		
 		db = data.mysql.connector.Connect(**self.config)             
 		cursor = db.cursor()

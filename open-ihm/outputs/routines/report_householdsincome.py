@@ -244,12 +244,12 @@ class HouseholdIncome:
 
         if len(cropdetails)!=0:
             if allincomesources in cropdetails:
-                query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_crops WHERE setup_crops.foodtype=cropincome.incomesource)) AS cropincome
+                query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=cropincome.incomesource)) AS cropincome
                             FROM cropincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 query = "SELECT hhid"
                 for myincomesource in cropdetails:
-                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitsconsumed * ( SELECT energyvalueperunit FROM setup_crops WHERE foodtype ='%s'),NULL)) AS '%s'" %(myincomesource,myincomesource,myincomesource)
+                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitsconsumed * ( SELECT energyvalueperunit FROM setup_foods_crops WHERE name ='%s'),NULL)) AS '%s'" %(myincomesource,myincomesource,myincomesource)
                 query = query + " FROM cropincome WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
                 query = query + " GROUP BY hhid"
         return query            
@@ -278,12 +278,12 @@ class HouseholdIncome:
         query =''
         if len(livestockdetails)!=0:
             if allincomesources in livestockdetails:
-                query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_livestock WHERE setup_livestock.incomesource=livestockincome.incomesource))
+                query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=livestockincome.incomesource))
                             AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 query = "SELECT hhid"
                 for myincomesource in livestockdetails:
-                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitsconsumed * unitsconsumed * ( SELECT energyvalueperunit FROM setup_livestock WHERE incomesource ='%s'),NULL)) AS '%s'" %(myincomesource,myincomesource,myincomesource)
+                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitsconsumed * unitsconsumed * ( SELECT energyvalueperunit FROM setup_foods_crops WHERE name='%s'),NULL)) AS '%s'" %(myincomesource,myincomesource,myincomesource)
                 query = query + " FROM livestockincome WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
                 query = query + " GROUP BY hhid"
         return query            
@@ -297,12 +297,12 @@ class HouseholdIncome:
         query =''
         if len(transferdetails)!=0:
             if allincomesources in transferdetails:
-                query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_crops WHERE setup_crops.foodtype=transfers.foodtype)) AS transferincome
+                query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=transfers.foodtype)) AS transferincome
                             FROM transfers WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 query = "SELECT hhid"
                 for myincomesource in transferdetails:
-                    query = query + ", GROUP_CONCAT(IF (sourceoftransfer = '%s', unitsconsumed *(SELECT energyvalueperunit FROM setup_crops WHERE setup_crops.foodtype=transfers.foodtype ),NULL)) AS '%s'" %(myincomesource,myincomesource)
+                    query = query + ", GROUP_CONCAT(IF (sourceoftransfer = '%s', unitsconsumed *(SELECT energyvalueperunit FROM setup_foods_crops WHERE name='%s' ),NULL)) AS '%s'" %(myincomesource,myincomesource,myincomesource)
                 query = query + " FROM transfers WHERE pid=%s AND hhid IN (%s)" % (projectid,houseids)
                 query = query + " GROUP BY hhid"
                 
@@ -316,12 +316,12 @@ class HouseholdIncome:
         query =''
         if len(wildfoodsdetails)!=0:
             if allincomesources in wildfoodsdetails:
-                query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_wildfoods WHERE setup_wildfoods.incomesource=wildfoods.incomesource))
+                query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=wildfoods.incomesource))
                             AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) AND GROUP BY hhid''' % (projectid,houseids)
             else:
                 query = "SELECT hhid"
                 for myincomesource in wildfoodsdetails:
-                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitsconsumed * ( SELECT energyvalueperunit FROM setup_wildfoods WHERE incomesource ='%s'),NULL)) AS '%s'" %(myincomesource,myincomesource,myincomesource)
+                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitsconsumed * ( SELECT energyvalueperunit FROM setup_foods_crops WHERE name ='%s'),NULL)) AS '%s'" %(myincomesource,myincomesource,myincomesource)
                 query = query + " FROM wildfoods WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
                 query = query + " GROUP BY hhid"
         return query            

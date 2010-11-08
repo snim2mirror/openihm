@@ -14,14 +14,15 @@ from gui.designs.ui_managefoodtypes_edit import Ui_EditFoodTypes
 class FrmEditCropType(QDialog, Ui_EditFoodTypes):
     ''' Creates the edit food type form '''	
 
-    def __init__(self, parent, selectedcrop, measuringunit, energyvalue):
+    def __init__(self, parent, selectedtype,category, measuringunit, energyvalue):
         ''' Set up the dialog box interface '''
         self.parent = parent
         QDialog.__init__(self)
         
         self.setupUi(self)
         self.parent = parent
-        self.croptype = selectedcrop
+        self.name = selectedtype
+        self.categoryname = category
         self.measuringunit = measuringunit
         self.energyvalue = energyvalue
         
@@ -36,22 +37,29 @@ class FrmEditCropType(QDialog, Ui_EditFoodTypes):
 
     def showDetailsToEdit(self):
         ''' Display energy requirements data '''
-        self.txtFoodType.setText(self.croptype)
+        self.txtFoodType.setText(self.name)
         self.txtMeasuringUnit.setText(self.measuringunit)
         self.txtKCalories.setText(self.energyvalue)
+        if self.categoryname =='crops':
+            self.cmbCategory.setCurrentIndex(0)
+        elif self.categoryname =='livestock':
+            self.cmbCategory.setCurrentIndex(1)
+        if self.categoryname =='wildfoods':
+            self.cmbCategory.setCurrentIndex(2)            
 
     def saveDetails(self):
         ''' Saves newly created food energy requirement data to database '''
 
         # get the data entered by user
-        myfoodtype = self.txtFoodType.text()
+        mytype = self.txtFoodType.text()
 	mymeasuringunit = self.txtMeasuringUnit.text()
         myenergyvalue  = self.txtKCalories.text()
+        mycategory = self.cmbCategory.currentText()  
         database = Database()
-	if myfoodtype!= '':
+	if mytype!= '' and mycategory!='':
             
-            query = '''UPDATE setup_crops SET foodtype='%s', energyvalueperunit=%s, measuringunit='%s'
-                     	    WHERE foodtype='%s' ''' % (myfoodtype, myenergyvalue, mymeasuringunit, myfoodtype)
+            query = '''UPDATE setup_foods_crops SET name='%s', category='%s', energyvalueperunit=%s, unitofmeasure='%s'
+                     	    WHERE name='%s' ''' % (mytype, mycategory, myenergyvalue, mymeasuringunit, mytype)
                     
             database.open()
             database.execUpdateQuery(query)
@@ -61,7 +69,7 @@ class FrmEditCropType(QDialog, Ui_EditFoodTypes):
             self.txtKCalories.clear()
 
         else:
-            QMessageBox.information(self,"Edit Food Type","Name should not be blank")
+            QMessageBox.information(self,"Edit Food Type","Name or Category should not be blank")
 
 		
         

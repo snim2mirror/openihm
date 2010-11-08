@@ -50,7 +50,7 @@ class FrmHouseholdWildfoodsIncome(QDialog, Ui_AddHouseholdIncomeWildfoods):
      def getWildfoodsTypes(self):
          ''' Retrieve Crop Types and display them in a combobox '''
          # select query to wildfood Types
-         query = '''SELECT incomesource, unitofmeasure FROM setup_wildfoods'''
+         query = '''SELECT name, unitofmeasure FROM setup_foods_crops WHERE category='wildfoods' '''
 
          db = data.mysql.connector.Connect(**self.config)             
          cursor = db.cursor()

@@ -64,7 +64,7 @@ class FrmHouseholdGiftsIncome(QDialog, Ui_AddHouseholdIncomeGifts):
      def getCropTypes(self):
          ''' Retrieve Crop Types and display them in a combobox '''
          # select query to Crop Types
-         query = '''SELECT foodtype, measuringunit FROM setup_crops'''
+         query = '''SELECT name, unitofmeasure FROM setup_foods_crops'''
 
          db = data.mysql.connector.Connect(**self.config)             
          cursor = db.cursor()

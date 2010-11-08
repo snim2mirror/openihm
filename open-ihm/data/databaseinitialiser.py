@@ -95,7 +95,7 @@ class DatabaseInitialiser:
          db = Connect(**dbinfo)             
          cursor = db.cursor()
          
-         query = "SHOW COLUMNS FROM transfers"
+         query = "SHOW TABLES"
          
          cursor.execute(query)
          rows = cursor.fetchall()
@@ -106,7 +106,7 @@ class DatabaseInitialiser:
          upToDate = False
          for row in rows:
              for field in row:
-                 if field == "sourceoftransfer":
+                 if field == "setup_foods_crops":
                      upToDate = True
          
          return upToDate
@@ -117,7 +117,7 @@ class DatabaseInitialiser:
              return True
          # else update the database    
          else:
-             sqlfile = file('data/scripts/openihmdb_mysql_update.sql', 'r')
+             sqlfile = file('data/scripts/openihmdb_mysql_update_foods_crops.sql', 'r')
              commands = sqlfile.read()
              commandlist = commands.split(';')
              sqlfile.close()

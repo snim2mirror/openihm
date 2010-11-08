@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tabIncomeCrops">
     <attribute name="title">
@@ -70,7 +70,7 @@
     <widget class="QPushButton" name="btnCropDelete">
      <property name="geometry">
       <rect>
-       <x>480</x>
+       <x>510</x>
        <y>210</y>
        <width>80</width>
        <height>28</height>
@@ -83,7 +83,7 @@
     <widget class="QPushButton" name="btnCropSave">
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>300</x>
        <y>210</y>
        <width>80</width>
        <height>28</height>
@@ -137,7 +137,7 @@
       <rect>
        <x>370</x>
        <y>40</y>
-       <width>191</width>
+       <width>211</width>
        <height>28</height>
       </rect>
      </property>
@@ -147,7 +147,7 @@
       <rect>
        <x>370</x>
        <y>130</y>
-       <width>191</width>
+       <width>211</width>
        <height>31</height>
       </rect>
      </property>
@@ -157,7 +157,7 @@
       <rect>
        <x>370</x>
        <y>80</y>
-       <width>191</width>
+       <width>211</width>
        <height>31</height>
       </rect>
      </property>
@@ -170,6 +170,19 @@
        <width>251</width>
        <height>192</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnCropsClear">
+     <property name="geometry">
+      <rect>
+       <x>410</x>
+       <y>210</y>
+       <width>81</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Clear Text</string>
      </property>
     </widget>
    </widget>
@@ -296,9 +309,9 @@
     <widget class="QPushButton" name="btnLivestockSave">
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>300</x>
        <y>240</y>
-       <width>80</width>
+       <width>81</width>
        <height>28</height>
       </rect>
      </property>
@@ -348,9 +361,9 @@
     <widget class="QPushButton" name="btnLivestockDelete">
      <property name="geometry">
       <rect>
-       <x>480</x>
+       <x>500</x>
        <y>240</y>
-       <width>80</width>
+       <width>81</width>
        <height>28</height>
       </rect>
      </property>
@@ -363,7 +376,7 @@
       <rect>
        <x>360</x>
        <y>50</y>
-       <width>191</width>
+       <width>211</width>
        <height>31</height>
       </rect>
      </property>
@@ -373,7 +386,7 @@
       <rect>
        <x>360</x>
        <y>100</y>
-       <width>191</width>
+       <width>211</width>
        <height>31</height>
       </rect>
      </property>
@@ -383,7 +396,7 @@
       <rect>
        <x>360</x>
        <y>150</y>
-       <width>191</width>
+       <width>211</width>
        <height>31</height>
       </rect>
      </property>
@@ -396,6 +409,19 @@
        <width>251</width>
        <height>192</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnLivestockClear">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>240</y>
+       <width>81</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Clear Text</string>
      </property>
     </widget>
    </widget>
@@ -643,7 +669,7 @@
     <widget class="QPushButton" name="btnWildFoodSave">
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>300</x>
        <y>240</y>
        <width>80</width>
        <height>28</height>
@@ -695,7 +721,7 @@
     <widget class="QPushButton" name="btnWildFoodDelete">
      <property name="geometry">
       <rect>
-       <x>480</x>
+       <x>500</x>
        <y>240</y>
        <width>80</width>
        <height>28</height>
@@ -710,7 +736,7 @@
       <rect>
        <x>360</x>
        <y>50</y>
-       <width>191</width>
+       <width>211</width>
        <height>31</height>
       </rect>
      </property>
@@ -720,7 +746,7 @@
       <rect>
        <x>360</x>
        <y>100</y>
-       <width>191</width>
+       <width>211</width>
        <height>31</height>
       </rect>
      </property>
@@ -730,7 +756,7 @@
       <rect>
        <x>360</x>
        <y>150</y>
-       <width>191</width>
+       <width>211</width>
        <height>31</height>
       </rect>
      </property>
@@ -743,6 +769,19 @@
        <width>251</width>
        <height>192</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnWildFoodsClear">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>240</y>
+       <width>81</width>
+       <height>28</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Clear Text</string>
      </property>
     </widget>
    </widget>

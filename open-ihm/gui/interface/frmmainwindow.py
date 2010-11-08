@@ -21,7 +21,9 @@ from frmhousehold_edit_getid import FrmEditHouseholdGetID
 from frmhousehold_delete import FrmDelHousehold
 from frmhousehold_data import FrmHouseholdData
 from frmhouseholds import FrmHouseholds
-from frmmanagefoodtypes import FrmManageFoodTypes
+#from frmmanagefoodtypes import FrmManageFoodTypes
+from frmmanage_foods_crops import FrmManageTypes
+
 from frmhousehold_add import FrmAddHousehold
 from frmhousecharacteristics import FrmHouseCharacteristics
 from frmpersonalcharacteristics import FrmPersonalCharacteristics
@@ -230,7 +232,8 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	
 	def manageFoodTypes(self):
 	    ''' Creates and Shows the Manage Crop Types form'''
-	    form = FrmManageFoodTypes(self.mdi)
+	    #form = FrmManageFoodTypes(self.mdi)
+	    form = FrmManageTypes(self.mdi)
 	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
 	    form.show()

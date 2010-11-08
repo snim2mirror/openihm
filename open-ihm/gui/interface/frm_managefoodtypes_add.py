@@ -11,8 +11,8 @@ from data.foodenergyrequirement import FoodEnergyRequirement
 from data.database import Database
 from gui.designs.ui_managefoodtypes_add import Ui_AddFoodTypes
 
-class FrmAddCropType(QDialog, Ui_AddFoodTypes):	
-    ''' Creates the add food energy requirement form '''	
+class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes):	
+    ''' Creates the add food/crop energy requirement form '''	
 
     def __init__(self,parent):
         ''' Set up the dialog box interface '''
@@ -32,35 +32,38 @@ class FrmAddCropType(QDialog, Ui_AddFoodTypes):
         self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveDetails)
         
     def saveDetails(self):
-        ''' Saves newly created food energy requirement data to database '''
+        ''' Saves newly created food/crop energy requirement data to database '''
 
         # get the data entered by user
         myfoodtype = self.txtFoodType.text()
+        mycategory = self.cmbCategory.currentText()
 	mymeasuringunit = self.cmbUnitOfMeasure.currentText()
         myenergyvalue  = self.txtKCalories.text()
+        print mycategory
         	
 	# check if record exists
-	query = '''SELECT foodtype, energyvalueperunit, measuringunit
-			FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
+	query = '''SELECT name, energyvalueperunit, unitofmeasure
+			FROM setup_foods_crops WHERE name='%s' ''' % (myfoodtype)    
 		
 	database = Database()
 	database.open()
         recordset = database.execSelectQuery(query)
 
 	numrows = 0		
-	if myfoodtype!= '':
+	if myfoodtype!= '' and mycategory!='':
                 if len(recordset) == 0:
-                    query = '''INSERT INTO setup_crops(foodtype, energyvalueperunit, measuringunit) 
-                     	    VALUES('%s',%s,'%s')''' % (myfoodtype, myenergyvalue, mymeasuringunit)
+                    query = '''INSERT INTO setup_foods_crops(name, category,energyvalueperunit, unitofmeasure) 
+                     	    VALUES('%s','%s',%s,'%s')''' % (myfoodtype,mycategory, myenergyvalue, mymeasuringunit)
                     database.execUpdateQuery(query)
                     self.txtFoodType.clear()
+                    self.cmbCategory.setCurrentIndex(-1)
                     self.cmbUnitOfMeasure.setCurrentIndex(-1)
                     self.txtKCalories.clear()
                 
                 else:
-                    QMessageBox.information(self,"Add Food Type","Food type already exists")
+                    QMessageBox.information(self,"Add Food/Crop Type","Food/Crop type already exists")
         else:
-            QMessageBox.information(self,"Add Food Type","Name should not be blank")
+            QMessageBox.information(self,"Add Food/Crop Type","Name or Category should not be blank")
 		
         database.close()
         

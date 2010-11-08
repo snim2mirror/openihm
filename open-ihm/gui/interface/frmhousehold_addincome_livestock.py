@@ -50,7 +50,7 @@ class FrmHouseholdLivestockIncome(QDialog, Ui_AddHouseholdIncomeLivestock):
      def getLivestockTypes(self):
          ''' Retrieve Livestock Types and display them in a combobox '''
          # select query to Livestock Types
-         query = '''SELECT incomesource, unitofmeasure FROM setup_livestock'''
+         query = '''SELECT name, unitofmeasure FROM setup_foods_crops WHERE category='livestock' '''
 
          db = data.mysql.connector.Connect(**self.config)             
          cursor = db.cursor()

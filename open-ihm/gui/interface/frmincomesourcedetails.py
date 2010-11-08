@@ -42,10 +42,11 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		# connect relevant signals and slots
 		self.connect(self.btnManageIncomeClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
 
-		#signals for managing food types
+		#signals for managing crop types
 		self.connect(self.cropListView, SIGNAL("clicked(QModelIndex)"), self.pickselectedCropItem)
 		self.connect(self.btnCropSave, SIGNAL("clicked()"), self.saveCropType)
 		self.connect(self.btnCropDelete, SIGNAL("clicked()"), self.deleteCropType)
+		self.connect(self.btnCropsClear, SIGNAL("clicked()"), self.clearCropTextboxes)
 
 		#signals for managing employment types
 		self.connect(self.employmentListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedEmployment)
@@ -56,11 +57,13 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		self.connect(self.wildFoodsListView, SIGNAL("clicked(QModelIndex)"), self.pickselectedWildFoodItem)
 		self.connect(self.btnWildFoodSave, SIGNAL("clicked()"), self.saveWildFoodType)
 		self.connect(self.btnWildFoodDelete, SIGNAL("clicked()"), self.deleteWildFoodType)
+		self.connect(self.btnWildFoodsClear, SIGNAL("clicked()"), self.clearWildFoodTextboxes)
 
 		#signals for managing Livestock
 		self.connect(self.livestockListView, SIGNAL("clicked(QModelIndex)"), self.pickselectedLivestockItem)
 		self.connect(self.btnLivestockSave, SIGNAL("clicked()"), self.saveLivestockType)
 		self.connect(self.btnLivestockDelete, SIGNAL("clicked()"), self.deleteLivestockType)
+		self.connect(self.btnLivestockClear, SIGNAL("clicked()"), self.clearLivestockTextboxes)
 
 		#signals for managing trasfer Sources
 		self.connect(self.transferSourcesListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedTransferSource)
@@ -73,11 +76,16 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		self.connect(self.btnTransferTypeDelete, SIGNAL("clicked()"), self.deleteTransferType)
 
 
-        #Begin block of methods for managing Foodstock details 
+        #Begin block of methods for managing Foodstock details
+	def clearCropTextboxes(self):
+                self.txtCropTypeName.clear()
+        	self.txtEnergyValue.clear()
+        	self.txtMeasuringUnit.clear()
+        	
 	def getCropTypes(self):
                 '''Get pre-existing savings categories from database and populate categories list'''
                	# select query to retrieve Food types
-        	query = '''SELECT foodtype FROM setup_crops'''
+        	query = '''SELECT name FROM setup_foods_crops WHERE category='crops' '''
         	
                 p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
@@ -100,7 +108,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
                 selectedCropItem = self.cropListView.model().item(index.row(),0).text()
                 self.txtCropTypeName.setText(selectedCropItem)
                 #select query to retrieve food-energy value and measuring unit for selected food item 
-        	query = '''SELECT energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (selectedCropItem)
+        	query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (selectedCropItem)
 
         	p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
@@ -110,7 +118,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 			unitOfMeasure = row[1]
 
 		self.txtEnergyValue.setText(str(kcalValue))
-                self.txtMeasuringUnit.setText(unitOfMeasure)
+                self.txtMeasuringUnit.setText(str(unitOfMeasure))
 
         def saveCropType(self):
         	''' Saves newly created data to database '''
@@ -121,28 +129,29 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
         	unitofmeasure = self.txtMeasuringUnit.text()
                         	
 		# check if record exists
-		query = '''SELECT energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
+		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (myfoodtype)    
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
 
-		numrows = 0		
+		numrows = 0
+		category='crops'
 		for row in recordset:
 			numrows = numrows + 1
 				      	
 		if numrows == 0:
-			
-			query = '''INSERT INTO setup_crops(foodtype, energyvalueperunit, measuringunit) 
-                     		VALUES('%s',%s,'%s')''' % (myfoodtype, myenergyvalue, unitofmeasure)
+                        query = '''INSERT INTO setup_foods_crops(name, category,energyvalueperunit, unitofmeasure) 
+                     		VALUES('%s','%s',%s,'%s')''' % (myfoodtype,category, myenergyvalue, unitofmeasure)
 		else:
-			query = '''UPDATE setup_crops SET foodtype='%s', energyvalueperunit=%s, measuringunit='%s'
-                     		WHERE foodtype='%s' ''' % (myfoodtype, myenergyvalue, unitofmeasure, myfoodtype)
-    
+			query = '''UPDATE setup_foods_crops SET name='%s', category ='%s', energyvalueperunit=%s, unitofmeasure='%s'
+                     		WHERE name='%s' ''' % (myfoodtype, category, myenergyvalue, unitofmeasure, myfoodtype)
+			
         	# execute query and commit changes
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
 		#refresh categories list
 		self.getCropTypes()
+		self.clearCropTextboxes()
                                 
 	def deleteCropType(self):
 		''' Deletes record from database '''
@@ -151,7 +160,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
         	myfoodtype = self.txtCropTypeName.text()		
         	
 		# check if record exists
-		query = '''SELECT energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
+		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (myfoodtype)    
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
@@ -165,7 +174,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
                         ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
                         if ret == QMessageBox.Yes:
 
-                                query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)
+                                query = '''DELETE FROM setup_foods_crops WHERE name='%s' ''' % (myfoodtype)
 
                                 # execute query and commit changes
                                 temp = GenericDBOP(query)
@@ -174,7 +183,8 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
                                 #self.cmbKCalories.clear()
 			
                                 #refresh categories list
-                                self.getCropTypes()			
+                                self.getCropTypes()
+                                self.clearCropTextboxes()
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
@@ -269,11 +279,16 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
         #End block of methods for managing Employment Categories
 
 
-        #Begin block of methods for managing Wild Foods details 
+        #Begin block of methods for managing Wild Foods details
+	def clearWildFoodTextboxes(self):
+                self.txtWildFoodType.clear()
+        	self.txtWildFoodEnergyValue.clear()
+        	self.txtWildFoodUnit.clear()
+        	
 	def getWildFoodTypes(self):
                 '''Get pre-existing savings categories from database and populate categories list'''
                	# select query to retrieve Food types
-        	query = '''SELECT incomesource FROM setup_wildfoods'''
+        	query = '''SELECT name FROM setup_foods_crops WHERE category='wildfoods' '''
         	
                 p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
@@ -296,7 +311,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
                 selectedWildFoodItem = self.wildFoodsListView.model().item(index.row(),0).text()
                 self.txtWildFoodType.setText(selectedWildFoodItem)
                 #select query to retrieve food-energy value and measuring unit for selected food item 
-        	query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_wildfoods WHERE incomesource='%s' ''' % (selectedWildFoodItem)
+        	query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (selectedWildFoodItem)
 
         	p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
@@ -306,7 +321,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 			unitOfMeasure = row[1]
 
 		self.txtWildFoodEnergyValue.setText(str(kcalValue))
-                self.txtWildFoodUnit.setText(unitOfMeasure)
+                self.txtWildFoodUnit.setText(str(unitOfMeasure))
 
         def saveWildFoodType(self):
         	''' Saves newly created data to database '''
@@ -317,28 +332,30 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
         	unitofmeasure = self.txtWildFoodUnit.text()
                         	
 		# check if record exists
-		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_wildfoods WHERE incomesource='%s' ''' % (myincomesource)    
+		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (myincomesource)    
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
 
-		numrows = 0		
+		numrows = 0
+		category ='wildfoods'
 		for row in recordset:
 			numrows = numrows + 1
 				      	
 		if numrows == 0:
-			
-			query = '''INSERT INTO setup_wildfoods(incomesource, energyvalueperunit, unitofmeasure) 
-                     		VALUES('%s',%s,'%s')''' % (myincomesource, myenergyvalue, unitofmeasure)
+                        query = '''INSERT INTO setup_foods_crops(name, category,energyvalueperunit, unitofmeasure) 
+                     		VALUES('%s','%s',%s,'%s')''' % (myincomesource,category, myenergyvalue, unitofmeasure)
 		else:
-			query = '''UPDATE setup_wildfoods SET incomesource='%s', energyvalueperunit=%s, unitofmeasure='%s'
-                     		WHERE incomesource='%s' ''' % (myincomesource, myenergyvalue, unitofmeasure, myincomesource)
+			query = '''UPDATE setup_foods_crops SET name='%s', category ='%s', energyvalueperunit=%s, unitofmeasure='%s'
+                     		WHERE name='%s' ''' % (myincomesource, category, myenergyvalue, unitofmeasure, myincomesource)
+			
     
         	# execute query and commit changes
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
 		#refresh categories list
 		self.getWildFoodTypes()
+		self.clearWildFoodTextboxes()
                                 
 	def deleteWildFoodType(self):
 		''' Deletes record from database '''
@@ -347,7 +364,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
         	myincomesource = self.txtWildFoodType.text()		
         	
 		# check if record exists
-		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_wildfoods WHERE incomesource='%s' ''' % (myincomesource)    
+		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (myincomesource)    
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
@@ -361,24 +378,31 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
                         ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
                         if ret == QMessageBox.Yes:
 
-                                query = '''DELETE FROM setup_wildfoods WHERE incomesource='%s' ''' % (myincomesource)
+                                query = '''DELETE FROM setup_foods_crops WHERE name='%s' ''' % (myincomesource)
 
                                 # execute query and commit changes
                                 temp = GenericDBOP(query)
                                 recordset = temp.runUpdateQuery()
                                 #refresh categories list
-                                self.getWildFoodTypes()			
+                                self.getWildFoodTypes()
+                                self.clearWildFoodTextboxes()
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
         #End block of methods for managing WildFood Types
 			
 
-        #Begin block of methods for managing Livestock details 
+        #Begin block of methods for managing Livestock details
+
+	def clearLivestockTextboxes(self):
+                self.txtLivestockPType.clear()
+        	self.txtLivestockEnergyValue.clear()
+        	self.txtLivestockUnit.clear()
+        	
 	def getLivestockTypes(self):
                 '''Get pre-existing savings categories from database and populate categories list'''
                	# select query to retrieve Food types
-        	query = '''SELECT incomesource FROM setup_livestock'''
+        	query = '''SELECT name FROM setup_foods_crops WHERE category='livestock' '''
         	
                 p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
@@ -401,7 +425,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
                 selectedLivestockItem = self.livestockListView.model().item(index.row(),0).text()
                 self.txtLivestockPType.setText(selectedLivestockItem)
                 #select query to retrieve food-energy value and measuring unit for selected food item 
-        	query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (selectedLivestockItem)
+        	query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (selectedLivestockItem)
 
         	p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
@@ -411,7 +435,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 			unitOfMeasure = row[1]
 
 		self.txtLivestockEnergyValue.setText(str(kcalValue))
-                self.txtLivestockUnit.setText(unitOfMeasure)
+                self.txtLivestockUnit.setText(str(unitOfMeasure))
 
         def saveLivestockType(self):
         	''' Saves newly created data to database '''
@@ -422,28 +446,31 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
         	unitofmeasure = self.txtLivestockUnit.text()
                         	
 		# check if record exists
-		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)    
+		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (myincomesource)    
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
 
-		numrows = 0		
+		numrows = 0
+		category = 'livestock'
 		for row in recordset:
 			numrows = numrows + 1
 				      	
 		if numrows == 0:
 			
-			query = '''INSERT INTO setup_livestock(incomesource, energyvalueperunit, unitofmeasure) 
-                     		VALUES('%s',%s,'%s')''' % (myincomesource, myenergyvalue, unitofmeasure)
+			query = '''INSERT INTO setup_foods_crops(name, category,energyvalueperunit, unitofmeasure) 
+                     		VALUES('%s','%s',%s,'%s')''' % (myincomesource,category, myenergyvalue, unitofmeasure)
 		else:
-			query = '''UPDATE setup_livestock SET incomesource='%s', energyvalueperunit=%s, unitofmeasure='%s'
-                     		WHERE incomesource='%s' ''' % (myincomesource, myenergyvalue, unitofmeasure, myincomesource)
+			query = '''UPDATE setup_foods_crops SET name='%s', category ='%s', energyvalueperunit=%s, unitofmeasure='%s'
+                     		WHERE name='%s' ''' % (myincomesource, category, myenergyvalue, unitofmeasure, myincomesource)
     
         	# execute query and commit changes
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
 		#refresh categories list
 		self.getLivestockTypes()
+
+		self.clearLivestockTextboxes()
                                 
 	def deleteLivestockType(self):
 		''' Deletes record from database '''
@@ -452,7 +479,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
         	myincomesource = self.txtLivestockPType.text()		
         	
 		# check if record exists
-		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)    
+		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (myincomesource)    
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
@@ -466,13 +493,15 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
                         ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
                         if ret == QMessageBox.Yes:
 
-                                query = '''DELETE FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)
+                                query = '''DELETE FROM setup_foods_crops WHERE name='%s' ''' % (myincomesource)
 
                                 # execute query and commit changes
                                 temp = GenericDBOP(query)
                                 recordset = temp.runUpdateQuery()
                                 #refresh categories list
-                                self.getLivestockTypes()			
+                                self.getLivestockTypes()
+
+                                self.clearLivestockTextboxes()
 			
 		else:
 			QMessageBox.information(self, 'Delete Food Type', "Record not found")
