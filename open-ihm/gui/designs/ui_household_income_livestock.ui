@@ -229,7 +229,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Unit of Measure:</string>
+    <string>Unit:</string>
    </property>
   </widget>
  </widget>
