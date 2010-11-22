@@ -508,6 +508,18 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
+-- Table `openihmdb`.`setup_foods_crops`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_foods_crops` (
+  `name` VARCHAR(200) NOT NULL ,
+  `category` VARCHAR(200) NOT NULL ,
+  `energyvalueperunit` DOUBLE NULL ,
+  `unitofmeasure` VARCHAR(45) NULL ,
+  PRIMARY KEY (`name`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+-- -----------------------------------------------------
 -- Table `openihmdb`.`wildfoods`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`wildfoods` (
