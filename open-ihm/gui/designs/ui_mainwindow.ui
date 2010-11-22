@@ -35,6 +35,7 @@
     <addaction name="actionEdit_Project"/>
     <addaction name="actionConfigure_Project"/>
     <addaction name="separator"/>
+    <addaction name="actionGenerate_Data_Entry_Sheets"/>
     <addaction name="actionImport_Project_Data"/>
     <addaction name="actionExport_Project_Data"/>
     <addaction name="separator"/>
@@ -329,6 +330,11 @@
   <action name="actionInitialise_Food_Energy_Table">
    <property name="text">
     <string>Initialise Food Energy Table</string>
+   </property>
+  </action>
+  <action name="actionGenerate_Data_Entry_Sheets">
+   <property name="text">
+    <string>Create Data Entry Sheets</string>
    </property>
   </action>
  </widget>

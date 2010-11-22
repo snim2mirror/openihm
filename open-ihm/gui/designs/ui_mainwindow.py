@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Mon Oct 11 19:05:04 2010
+# Created: Mon Nov 22 17:23:25 2010
 #      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -134,6 +134,8 @@ class Ui_MainWindow(object):
         self.actionIncome_By_Source.setObjectName(_fromUtf8("actionIncome_By_Source"))
         self.actionInitialise_Food_Energy_Table = QtGui.QAction(MainWindow)
         self.actionInitialise_Food_Energy_Table.setObjectName(_fromUtf8("actionInitialise_Food_Energy_Table"))
+        self.actionGenerate_Data_Entry_Sheets = QtGui.QAction(MainWindow)
+        self.actionGenerate_Data_Entry_Sheets.setObjectName(_fromUtf8("actionGenerate_Data_Entry_Sheets"))
         self.menuProject.addAction(self.actionCreate_Project)
         self.menuProject.addAction(self.actionOpen_Project)
         self.menuProject.addAction(self.actionFind_Project)
@@ -142,6 +144,7 @@ class Ui_MainWindow(object):
         self.menuProject.addAction(self.actionEdit_Project)
         self.menuProject.addAction(self.actionConfigure_Project)
         self.menuProject.addSeparator()
+        self.menuProject.addAction(self.actionGenerate_Data_Entry_Sheets)
         self.menuProject.addAction(self.actionImport_Project_Data)
         self.menuProject.addAction(self.actionExport_Project_Data)
         self.menuProject.addSeparator()
@@ -232,4 +235,5 @@ class Ui_MainWindow(object):
         self.actionManage_Currencies.setText(QtGui.QApplication.translate("MainWindow", "Manage Currencies", None, QtGui.QApplication.UnicodeUTF8))
         self.actionIncome_By_Source.setText(QtGui.QApplication.translate("MainWindow", "Income By Source", None, QtGui.QApplication.UnicodeUTF8))
         self.actionInitialise_Food_Energy_Table.setText(QtGui.QApplication.translate("MainWindow", "Initialise Food Energy Table", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionGenerate_Data_Entry_Sheets.setText(QtGui.QApplication.translate("MainWindow", "Create Data Entry Sheets", None, QtGui.QApplication.UnicodeUTF8))
 
