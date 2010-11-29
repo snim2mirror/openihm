@@ -1,0 +1,273 @@
+#-------------------------------------------------------------------	
+#	Filename: read_data_entry_sheets.py
+#-------------------------------------------------------------------
+
+from xlrd import open_workbook
+from data.database import Database
+
+class ReadDataEntrySheets:
+    
+    def __init__(self,projectid):
+        self.database = Database()
+        self.pid = projectid
+
+    def readdata(self):
+        book = open_workbook('dataEntrySheet-ProjectID-5.xls')
+        projectsheet = book.sheet_by_index(0)
+        projectid = projectsheet.name
+        for sheet_index in range(2,book.nsheets):
+            householdsheet = book.sheet_by_index(sheet_index)
+            houseid = householdsheet.name
+            
+            #traverse sheet looking for section markers e.g crops
+            for row_index in range(householdsheet.nrows):
+                cellvalue = householdsheet.cell(row_index,0).value
+                print cellvalue
+                if cellvalue == 'HouseholdMembers':
+                    print "going"
+                    self.readBasicMemberDetails(householdsheet,row_index)
+                elif cellvalue == 'PersonalCharacteristics':
+                    pass
+                elif cellvalue == 'HouseholdCharacteristics':
+                    pass
+                elif cellvalue == 'Assets':
+                    self.readAssetData(householdsheet,row_index)
+                elif cellvalue == 'Expenditure':
+                    self.readExpenditureData(householdsheet,row_index)
+                elif cellvalue == 'Crops':
+                    self.readCropAndFoodsIncomeData(householdsheet,row_index,cellvalue)
+                elif cellvalue == 'Livestock':
+                    self.readCropAndFoodsIncomeData(householdsheet,row_index,cellvalue)
+                elif cellvalue == 'WildFoods':
+                    self.readCropAndFoodsIncomeData(householdsheet,row_index,cellvalue)
+                elif cellvalue == 'Employment':
+                    pass
+                elif cellvalue == 'SocialTransfer':
+                    pass
+                elif cellvalue == 'TransferFromOrganisations':
+                    pass
+                         
+    def readBasicMemberDetails(self,householdsheet,row_index):
+        
+        #print book.nsheets
+        start_row_index = row_index + 2
+        empty_cell_count = 0
+        hhid = householdsheet.name
+        database = Database()
+        database.open()
+
+        for current_row_index in range(start_row_index, householdsheet.nrows):
+            values = []
+            for col_index in range(0,4):
+                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                if cellvalue == 'PersonalCharacteristics':
+                    break
+                try:
+                    cellvalue = int(cellvalue)
+                    digitvalue = True
+                except ValueError:
+                    digitvalue = False
+
+                print "digit value ali ", digitvalue
+                print "value is ", cellvalue, "column ", col_index
+                
+                if cellvalue == '':
+                    print "entered"
+                    empty_cell_count = empty_cell_count + 1
+                    cellvalue = 'NULL'
+                if (col_index ==1 or col_index ==2) and digitvalue == False:
+                    print "apanso"
+                    cellvalue = 0
+                if col_index == 3 and (cellvalue == 1 or cellvalue.lower() =='yes' or cellvalue.lower() =='y'):
+                    cellvalue = 'Yes'
+                elif col_index == 3 and (cellvalue != 1 or cellvalue.lower() !='yes' or cellvalue.lower() !='y'):
+                    cellvalue = 'No'
+
+                print "processed value is ", cellvalue                        
+                values.append(cellvalue)
+
+            if empty_cell_count == 4:   #check if entire row is empty
+                break
+            else:
+                    
+                sex = str(values[0])
+                age = values[1]
+                yearofbirth = values[2]
+                hhead = values[3]
+                if sex.lower() == 'male' or sex.lower() == 'm':
+                    personid = 'm' + str(age)
+                elif sex.lower() == 'female' or sex.lower() == 'f':
+                    personid = 'f' + str(age)
+
+                query ='''REPLACE INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,pid)
+                            VALUES ('%s',%s,'%s',%s,'%s',%s)''' % (personid,hhid,hhead,yearofbirth,sex,self.pid)
+                                           
+                print query
+                database.execUpdateQuery(query)
+
+            empty_cell_count = 0
+                
+        database.close()
+            
+    def readAssetData(self,householdsheet,row_index):
+        
+        #print book.nsheets
+        start_row_index = row_index + 2
+        empty_cell_count = 0
+        hhid = householdsheet.name
+        database = Database()
+        database.open()
+
+        for current_row_index in range(start_row_index, householdsheet.nrows):
+            values = []
+            for col_index in range(0,5):
+                digitvalue = True
+                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                if cellvalue == 'Expenditure':
+                    break
+                
+                if cellvalue == '':
+                    
+                    empty_cell_count = empty_cell_count + 1
+                    cellvalue = 'NULL'
+                if (col_index ==3 or col_index ==4):
+                    
+                    try:
+                        cellvalue = float(cellvalue)
+                        digitvalue = True
+                    except ValueError:
+                        digitvalue = False
+                    if digitvalue == False:
+                        cellvalue = 0
+
+                print "processed value is ", cellvalue                        
+                values.append(cellvalue)
+
+            if empty_cell_count == 5 or (values[0] ='NULL' and values[1]=='NULL'):   #check if entire row is empty
+                continue
+            else:
+                    
+                category = values[0]
+                assettype = values[1]
+                unit = values[2]
+                unitcost = values[3]
+                units = values[4]
+
+                query ='''REPLACE INTO assets (hhid,assetcategory,assettype,unitofmeasure,unitcost,totalunits,pid)
+                            VALUES ('%s','%s','%s','%s',%s,%s,%s)''' % (hhid,category,assettype,unit,unitcost,units,self.pid)
+                 
+                database.execUpdateQuery(query)
+
+            empty_cell_count = 0
+                
+        database.close()
+            
+    def readExpenditureData(self,householdsheet,row_index):
+        
+        #print book.nsheets
+        start_row_index = row_index + 2
+        empty_cell_count = 0
+        hhid = householdsheet.name
+        database = Database()
+        database.open()
+
+        for current_row_index in range(start_row_index, householdsheet.nrows):
+            values = []
+            for col_index in range(0,5):
+                digitvalue = True
+                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                
+                if col_index!=0 and cellvalue == '':
+                    empty_cell_count = empty_cell_count + 1
+                    cellvalue = 'NULL'
+                if (col_index >=2 and col_index <=4):
+                    
+                    try:
+                        cellvalue = float(cellvalue)
+                        digitvalue = True
+                    except ValueError:
+                        digitvalue = False
+                    if digitvalue == False:
+                        cellvalue = 0
+
+                values.append(cellvalue)
+
+            if empty_cell_count == 4 or values[0]=='':   #check if four cell in row or cell for expenditurety are empty
+                    continue
+            else:
+                    
+                expendituretype = values[0]
+                unit = values[1]
+                kcalperunit = values[2]
+                unitcost = values[3]
+                units = values[4]
+
+                query ='''REPLACE INTO expenditure (hhid,exptype,unitofmeasure,priceperunit,kcalperunit,totalunits,pid)
+                            VALUES (%s,'%s','%s',%s,%s,%s,%s)''' % (hhid,expendituretype,unit,unitcost,kcalperunit,units,self.pid)
+
+                database.execUpdateQuery(query)
+
+            empty_cell_count = 0
+                
+        database.close()
+            
+    def readCropAndFoodsIncomeData(self,householdsheet,row_index,incometype):
+        
+        #print book.nsheets
+        start_row_index = row_index + 2
+        empty_cell_count = 0
+        hhid = householdsheet.name
+        database = Database()
+        database.open()
+
+        for current_row_index in range(start_row_index, householdsheet.nrows):
+            values = []
+            for col_index in range(0,7):
+                digitvalue = True
+                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                
+                if col_index!=0 and cellvalue == '':
+                    empty_cell_count = empty_cell_count + 1
+                    cellvalue='NULL'
+
+                if (col_index >=2 and col_index <=6):
+                    
+                    try:
+                        cellvalue = float(cellvalue)
+                        digitvalue = True
+                    except ValueError:
+                        digitvalue = False
+                    if digitvalue == False:
+                        cellvalue = 0
+
+                print "processed value is ", cellvalue                        
+                values.append(cellvalue)
+
+            if empty_cell_count >= 5 or values[0]=='':   #check if four cell in row or cell for expenditurety are empty
+                    continue
+            else:
+                    
+                name = values[0]
+                unit = values[1]
+                unitsproduced = values[2]
+                unitssold = values[3]
+                unitprice = values[4]
+                otheruses = values[5]
+                unitsconsumed = values[6]
+                if incometype=='Crops':
+                    tablename='cropincome'
+                elif incometype=='Livestock':
+                    tablename='livestockincome'
+                elif incometype=='WildFoods':
+                    tablename='wildfoods'
+
+                query ='''INSERT INTO %s (hhid,incomesource,unitofmeasure,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,pid) 
+                            VALUES (%s,'%s','%s',%s,%s,%s,%s,%s,%s)''' % (tablename,hhid,name,unit,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,self.pid)
+
+                print query
+                database.execUpdateQuery(query)
+
+            empty_cell_count = 0
+                
+        database.close()
+            

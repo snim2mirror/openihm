@@ -41,6 +41,8 @@ from frmcurrencymanager import FrmCurrencyManager
 from frm_report_householdincome import HouseholdIncomeReport
 from data.setup_crops_startupvalues import FoodValuesStartup
 from outputs.routines.generate_data_entry_sheet import DataEntrySheets
+from inputs.read_data_entry_sheets import ReadDataEntrySheets
+
 
 class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	''' Creates the Main Window of the application using the main 
@@ -100,7 +102,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 self.connect(self.actionInitialise_Food_Energy_Table, QtCore.SIGNAL("triggered()"), self.initialiseFoodEnergyLookupTable)
 
                 self.connect(self.actionGenerate_Data_Entry_Sheets, QtCore.SIGNAL("triggered()"), self.createDataEntrySheets)
-		
+		self.connect(self.actionImport_Project_Data, QtCore.SIGNAL("triggered()"), self.importData)
 		
 
 	def centerSubWindow(self, subWin):
@@ -325,6 +327,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 initialiser = FoodValuesStartup()
                 initialiser.insertSartUpValues()
                 
+                
         def createDataEntrySheets(self):
                 ''' Creates Spreadsheets for data entry'''
                 if self.projectid == -1:
@@ -333,5 +336,13 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 else:
                         datasheet = DataEntrySheets(self.projectid)
                         datasheet.writeDataSheets()
-                        print self.projectid
+
+        def importData(self):
+                ''' Import data from Spreadsheets'''
+                if self.projectid == -1:
+                        msg = "No project is active. First create a new project or open an existing project."
+                        QtGui.QMessageBox.information(self,"Notice",msg)
+                else:
+                        datasheet = ReadDataEntrySheets(self.projectid)
+                        datasheet.readdata()
                 
