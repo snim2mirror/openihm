@@ -57,9 +57,17 @@ class ReadDataEntrySheets:
         for current_row_index in range(start_row_index, householdsheet.nrows):
             values = []
             for col_index in range(0,4):
+                exitmain = False
+                skiprow =False
                 cellvalue = householdsheet.cell(current_row_index,col_index).value
                 if cellvalue == 'PersonalCharacteristics':
+                    exitmain = True
                     break
+
+                if (col_index == 0 or colindex ==1) and cellvalue=='':
+                    skiprow =True
+                    break
+                
                 try:
                     cellvalue = int(cellvalue)
                     digitvalue = True
@@ -78,23 +86,26 @@ class ReadDataEntrySheets:
 
                 values.append(cellvalue)
 
-            if empty_cell_count == 4:   #check if entire row is empty
+            if exitmain == True:
                 break
             else:
+                if empty_cell_count == 4 or skiprow == True:   #check if entire row is empty
+                    continue
+                else:
                     
-                sex = str(values[0])
-                age = values[1]
-                yearofbirth = values[2]
-                hhead = values[3]
-                if sex.lower() == 'male' or sex.lower() == 'm':
-                    personid = 'm' + str(age)
-                elif sex.lower() == 'female' or sex.lower() == 'f':
-                    personid = 'f' + str(age)
+                    sex = str(values[0])
+                    age = values[1]
+                    yearofbirth = values[2]
+                    hhead = values[3]
+                    if sex.lower() == 'male' or sex.lower() == 'm':
+                        personid = 'm' + str(age)
+                    elif sex.lower() == 'female' or sex.lower() == 'f':
+                        personid = 'f' + str(age)
 
-                query ='''REPLACE INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,pid)
+                    query ='''REPLACE INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,pid)
                             VALUES ('%s',%s,'%s',%s,'%s',%s)''' % (personid,hhid,hhead,yearofbirth,sex,self.pid)
                                            
-                database.execUpdateQuery(query)
+                    database.execUpdateQuery(query)
 
             empty_cell_count = 0
                 
@@ -113,13 +124,17 @@ class ReadDataEntrySheets:
             values = []
             for col_index in range(0,5):
                 digitvalue = True
+                skiprow = False
+                exitmain = False
                 cellvalue = householdsheet.cell(current_row_index,col_index).value
-                if (cellvalue == 'Expenditure') or (col_index == 0 and cellvalue==''):
+                if cellvalue == 'Expenditure':
                     exitmain = True
                     break
-                
-                if cellvalue == '':
+                if col_index == 0 and cellvalue=='':
+                    skiprow =True
+                    break
                     
+                if cellvalue == '':
                     empty_cell_count = empty_cell_count + 1
                     cellvalue = 'NULL'
                 if (col_index ==3 or col_index ==4):
@@ -137,7 +152,7 @@ class ReadDataEntrySheets:
             if exitmain == True:
                 break
             else:
-                if empty_cell_count >= 5:   #check if entire row is empty
+                if empty_cell_count >= 5 or skiprow == True:   #check if entire row is empty
                     continue
                 else:
                     
@@ -170,10 +185,12 @@ class ReadDataEntrySheets:
             for col_index in range(0,5):
                 exitmain = False
                 digitvalue = True
+                skiprow = False
                 cellvalue = householdsheet.cell(current_row_index,col_index).value
-                if (cellvalue == 'Crops') or (col_index == 0 and cellvalue==''):
+                if cellvalue == 'Crops':
                     exitmain = True
-                
+                if  col_index == 0 and cellvalue=='':
+                    skiprow = True
                 if col_index!=0 and cellvalue == '':
                     empty_cell_count = empty_cell_count + 1
                     cellvalue = 'NULL'
@@ -192,7 +209,7 @@ class ReadDataEntrySheets:
             if exitmain == True:
                 break
             else:
-                if empty_cell_count >= 3:   #check if at least three cell in row or cell for expenditurety are empty
+                if empty_cell_count >= 3 or skiprow == True:   #check if at least three cell in row or cell for expenditurety are empty
                     continue
                 else:
                     
