@@ -22,9 +22,7 @@ class ReadDataEntrySheets:
             #traverse sheet looking for section markers e.g crops
             for row_index in range(householdsheet.nrows):
                 cellvalue = householdsheet.cell(row_index,0).value
-                print cellvalue
                 if cellvalue == 'HouseholdMembers':
-                    print "going"
                     self.readBasicMemberDetails(householdsheet,row_index)
                 elif cellvalue == 'PersonalCharacteristics':
                     pass
@@ -68,22 +66,16 @@ class ReadDataEntrySheets:
                 except ValueError:
                     digitvalue = False
 
-                print "digit value ali ", digitvalue
-                print "value is ", cellvalue, "column ", col_index
-                
                 if cellvalue == '':
-                    print "entered"
                     empty_cell_count = empty_cell_count + 1
                     cellvalue = 'NULL'
                 if (col_index ==1 or col_index ==2) and digitvalue == False:
-                    print "apanso"
                     cellvalue = 0
                 if col_index == 3 and (cellvalue == 1 or cellvalue.lower() =='yes' or cellvalue.lower() =='y'):
                     cellvalue = 'Yes'
                 elif col_index == 3 and (cellvalue != 1 or cellvalue.lower() !='yes' or cellvalue.lower() !='y'):
                     cellvalue = 'No'
 
-                print "processed value is ", cellvalue                        
                 values.append(cellvalue)
 
             if empty_cell_count == 4:   #check if entire row is empty
@@ -102,7 +94,6 @@ class ReadDataEntrySheets:
                 query ='''REPLACE INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,pid)
                             VALUES ('%s',%s,'%s',%s,'%s',%s)''' % (personid,hhid,hhead,yearofbirth,sex,self.pid)
                                            
-                print query
                 database.execUpdateQuery(query)
 
             empty_cell_count = 0
@@ -123,7 +114,8 @@ class ReadDataEntrySheets:
             for col_index in range(0,5):
                 digitvalue = True
                 cellvalue = householdsheet.cell(current_row_index,col_index).value
-                if cellvalue == 'Expenditure':
+                if (cellvalue == 'Expenditure') or (col_index == 0 and cellvalue==''):
+                    exitmain = True
                     break
                 
                 if cellvalue == '':
@@ -140,23 +132,25 @@ class ReadDataEntrySheets:
                     if digitvalue == False:
                         cellvalue = 0
 
-                print "processed value is ", cellvalue                        
                 values.append(cellvalue)
 
-            if empty_cell_count == 5 or (values[0] =='NULL' and values[1]=='NULL'):   #check if entire row is empty
-                continue
+            if exitmain == True:
+                break
             else:
+                if empty_cell_count >= 5:   #check if entire row is empty
+                    continue
+                else:
                     
-                category = values[0]
-                assettype = values[1]
-                unit = values[2]
-                unitcost = values[3]
-                units = values[4]
+                    category = values[0]
+                    assettype = values[1]
+                    unit = values[2]
+                    unitcost = values[3]
+                    units = values[4]
 
-                query ='''REPLACE INTO assets (hhid,assetcategory,assettype,unitofmeasure,unitcost,totalunits,pid)
+                    query ='''REPLACE INTO assets (hhid,assetcategory,assettype,unitofmeasure,unitcost,totalunits,pid)
                             VALUES ('%s','%s','%s','%s',%s,%s,%s)''' % (hhid,category,assettype,unit,unitcost,units,self.pid)
                  
-                database.execUpdateQuery(query)
+                    database.execUpdateQuery(query)
 
             empty_cell_count = 0
                 
@@ -174,8 +168,11 @@ class ReadDataEntrySheets:
         for current_row_index in range(start_row_index, householdsheet.nrows):
             values = []
             for col_index in range(0,5):
+                exitmain = False
                 digitvalue = True
                 cellvalue = householdsheet.cell(current_row_index,col_index).value
+                if (cellvalue == 'Crops') or (col_index == 0 and cellvalue==''):
+                    exitmain = True
                 
                 if col_index!=0 and cellvalue == '':
                     empty_cell_count = empty_cell_count + 1
@@ -192,20 +189,23 @@ class ReadDataEntrySheets:
 
                 values.append(cellvalue)
 
-            if empty_cell_count == 4 or values[0]=='':   #check if four cell in row or cell for expenditurety are empty
-                    continue
+            if exitmain == True:
+                break
             else:
+                if empty_cell_count >= 3:   #check if at least three cell in row or cell for expenditurety are empty
+                    continue
+                else:
                     
-                expendituretype = values[0]
-                unit = values[1]
-                kcalperunit = values[2]
-                unitcost = values[3]
-                units = values[4]
+                    expendituretype = values[0]
+                    unit = values[1]
+                    kcalperunit = values[2]
+                    unitcost = values[3]
+                    units = values[4]
 
-                query ='''REPLACE INTO expenditure (hhid,exptype,unitofmeasure,priceperunit,kcalperunit,totalunits,pid)
+                    query ='''REPLACE INTO expenditure (hhid,exptype,unitofmeasure,priceperunit,kcalperunit,totalunits,pid)
                             VALUES (%s,'%s','%s',%s,%s,%s,%s)''' % (hhid,expendituretype,unit,unitcost,kcalperunit,units,self.pid)
 
-                database.execUpdateQuery(query)
+                    database.execUpdateQuery(query)
 
             empty_cell_count = 0
                 
@@ -223,9 +223,24 @@ class ReadDataEntrySheets:
         for current_row_index in range(start_row_index, householdsheet.nrows):
             values = []
             for col_index in range(0,7):
+                exitmain = False
                 digitvalue = True
                 cellvalue = householdsheet.cell(current_row_index,col_index).value
+                if incometype== 'Crops':
+                    if cellvalue == 'Livestock':
+                        exitmain = True
+                        break
+                elif incometype== 'Livestock':
+                    if cellvalue == 'WildFoods':
+                        exitmain = True
+                        break
+                elif incometype== 'WildFoods':
+                    if cellvalue == 'Employment':
+                        exitmain = True
+                        break
                 
+                if col_index == 0 and cellvalue=='':
+                    continue
                 if col_index!=0 and cellvalue == '':
                     empty_cell_count = empty_cell_count + 1
                     cellvalue='NULL'
@@ -240,32 +255,33 @@ class ReadDataEntrySheets:
                     if digitvalue == False:
                         cellvalue = 0
 
-                print "processed value is ", cellvalue                        
                 values.append(cellvalue)
 
-            if empty_cell_count >= 5 or values[0]=='':   #check if four cell in row or cell for expenditurety are empty
-                    continue
+            if exitmain == True:
+                break
             else:
+                if empty_cell_count >= 5 or values[0]=='':   #check if four cell in row or cell for expenditurety are empty
+                    continue
+                else:
                     
-                name = values[0]
-                unit = values[1]
-                unitsproduced = values[2]
-                unitssold = values[3]
-                unitprice = values[4]
-                otheruses = values[5]
-                unitsconsumed = values[6]
-                if incometype=='Crops':
-                    tablename='cropincome'
-                elif incometype=='Livestock':
-                    tablename='livestockincome'
-                elif incometype=='WildFoods':
-                    tablename='wildfoods'
+                    name = values[0]
+                    unit = values[1]
+                    unitsproduced = values[2]
+                    unitssold = values[3]
+                    unitprice = values[4]
+                    otheruses = values[5]
+                    unitsconsumed = values[6]
+                    if incometype=='Crops':
+                        tablename='cropincome'
+                    elif incometype=='Livestock':
+                        tablename='livestockincome'
+                    elif incometype=='WildFoods':
+                        tablename='wildfoods'
 
-                query ='''REPLACE INTO %s (hhid,incomesource,unitofmeasure,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,pid) 
+                    query ='''REPLACE INTO %s (hhid,incomesource,unitofmeasure,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,pid) 
                             VALUES (%s,'%s','%s',%s,%s,%s,%s,%s,%s)''' % (tablename,hhid,name,unit,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,self.pid)
 
-                print query
-                database.execUpdateQuery(query)
+                    database.execUpdateQuery(query)
 
             empty_cell_count = 0
                 
