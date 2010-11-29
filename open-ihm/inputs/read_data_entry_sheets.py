@@ -143,7 +143,7 @@ class ReadDataEntrySheets:
                 print "processed value is ", cellvalue                        
                 values.append(cellvalue)
 
-            if empty_cell_count == 5 or (values[0] ='NULL' and values[1]=='NULL'):   #check if entire row is empty
+            if empty_cell_count == 5 or (values[0] =='NULL' and values[1]=='NULL'):   #check if entire row is empty
                 continue
             else:
                     
@@ -261,7 +261,7 @@ class ReadDataEntrySheets:
                 elif incometype=='WildFoods':
                     tablename='wildfoods'
 
-                query ='''INSERT INTO %s (hhid,incomesource,unitofmeasure,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,pid) 
+                query ='''REPLACE INTO %s (hhid,incomesource,unitofmeasure,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,pid) 
                             VALUES (%s,'%s','%s',%s,%s,%s,%s,%s,%s)''' % (tablename,hhid,name,unit,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,self.pid)
 
                 print query
