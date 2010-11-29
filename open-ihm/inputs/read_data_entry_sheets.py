@@ -225,6 +225,7 @@ class ReadDataEntrySheets:
             for col_index in range(0,7):
                 exitmain = False
                 digitvalue = True
+                skiprow = False
                 cellvalue = householdsheet.cell(current_row_index,col_index).value
                 if incometype== 'Crops':
                     if cellvalue == 'Livestock':
@@ -240,7 +241,8 @@ class ReadDataEntrySheets:
                         break
                 
                 if col_index == 0 and cellvalue=='':
-                    continue
+                    skiprow = True
+                    break
                 if col_index!=0 and cellvalue == '':
                     empty_cell_count = empty_cell_count + 1
                     cellvalue='NULL'
@@ -260,7 +262,7 @@ class ReadDataEntrySheets:
             if exitmain == True:
                 break
             else:
-                if empty_cell_count >= 5 or values[0]=='':   #check if four cell in row or cell for expenditurety are empty
+                if empty_cell_count >= 5 or skiprow==True:   #check if four cell in row or cell for expenditurety are empty
                     continue
                 else:
                     
