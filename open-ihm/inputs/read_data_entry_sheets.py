@@ -2,7 +2,8 @@
 #	Filename: read_data_entry_sheets.py
 #-------------------------------------------------------------------
 
-from xlrd import open_workbook
+from xlrd import open_workbook,cellname,xldate_as_tuple
+from datetime import date
 from data.database import Database
 
 class ReadDataEntrySheets:
@@ -14,6 +15,8 @@ class ReadDataEntrySheets:
     def readdata(self):
         book = open_workbook('dataEntrySheet-ProjectID-5.xls')
         projectsheet = book.sheet_by_index(0)
+        self.readProjectHouseholdsData(book)
+        
         projectid = projectsheet.name
         for sheet_index in range(2,book.nsheets):
             householdsheet = book.sheet_by_index(sheet_index)
@@ -45,6 +48,47 @@ class ReadDataEntrySheets:
                 elif cellvalue == 'TransferFromOrganisations':
                     pass
                          
+
+    def readProjectHouseholdsData(self,book):
+        sheet1 = book.sheet_by_index(0)
+
+        # Start Block of code for importing a project's households
+        database = Database()
+        database.open()
+
+        for row in range(2,sheet1.nrows):
+            values = []
+            for col in range(sheet1.ncols):
+                skiprow =False
+                cellvalue = sheet1.cell(row,col).value
+                cell = sheet1.cell(row,col)
+                if cellvalue =='' or (col ==3 and cell.ctype!=3):
+                    skiprow =True
+                    break
+                
+                else:
+                    if cell.ctype == 3: #date
+                        date_value = xldate_as_tuple(cell.value,book.datemode)
+                        cellvalue = date(*date_value[:3])
+                    else:
+                        cellvalue = cell.value
+
+                values.append(cellvalue)
+
+            if skiprow ==True:
+                continue
+            else:
+                hhid = values[0]
+                hholdname = values[1]
+                datevisited = values[2]
+                pid= sheet1.name
+
+                query ='''REPLACE INTO households (hhid,householdname,dateofcollection,pid) VALUES (%s,'%s','%s',%s)''' % (hhid,hholdname,datevisited,pid)
+                database.execUpdateQuery(query)
+
+        database.close()
+
+
     def readBasicMemberDetails(self,householdsheet,row_index):
         
         #print book.nsheets
