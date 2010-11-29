@@ -539,53 +539,58 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			QMessageBox.information(self,"Delete Assets","Please select the rows containing assets to be deleted.")
 		
 	def retrieveHouseholdAssets(self):
-		''' retrieves and shows a list of household asset '''
-		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
-		hhid = temp[0]
-		pid = self.parent.projectid
-		# select query to retrieve household assets
-		query = '''SELECT * FROM assets WHERE hhid=%i AND pid=%s''' % (hhid, pid)
-		
-		# retrieve and display assets
-		db = data.mysql.connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
-		
-		model = QStandardItemModel(1,2)
-		
-		# set model headers
-		model.setHorizontalHeaderItem(0,QStandardItem('Asset ID.'))
-		model.setHorizontalHeaderItem(1,QStandardItem('Asset Type'))
-		model.setHorizontalHeaderItem(2,QStandardItem('Unit'))
-		model.setHorizontalHeaderItem(3,QStandardItem('Cost Per Unit'))
-		model.setHorizontalHeaderItem(4,QStandardItem('Number of Units'))
-		
-		# add  data rows
-		num = 0
-		
-		for row in cursor.fetchall():
-			qtAssetID = QStandardItem( "%i" % row[0])
-			qtAssetID.setTextAlignment( Qt.AlignCenter )
-			qtAssetType = QStandardItem( row[2] )	
-			qtUnitOfMeasure = QStandardItem( row[3] )
-			qtCostPerUnit = QStandardItem( "%f" % row[4] )
-			qtNumUnits = QStandardItem( "%f" % row[5] )
-			
-			model.setItem( num, 0, qtAssetID )
-			model.setItem( num, 1, qtAssetType )
-			model.setItem( num, 2, qtUnitOfMeasure )
-			model.setItem( num, 3, qtCostPerUnit )
-			model.setItem( num, 4, qtNumUnits )
-			num = num + 1
-		
-		cursor.close()   
-		db.close()
-		
-		self.tblAssets.setModel(model)
-		self.tblAssets.resizeColumnsToContents()
-		self.tblAssets.show()
-	
+         ''' retrieves and shows a list of household asset '''
+         temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+         hhid = temp[0]
+         pid = self.parent.projectid
+         # select query to retrieve household assets
+         query = '''SELECT assetid, assetcategory, assettype, unitofmeasure, unitcost, totalunits 
+             FROM assets WHERE hhid=%i AND pid=%s''' % (hhid, pid)
+         
+         # retrieve and display assets
+         db = data.mysql.connector.Connect(**self.config)             
+         cursor = db.cursor()
+         
+         cursor.execute(query)
+         
+         model = QStandardItemModel(1,2)
+         
+         # set model headers
+         model.setHorizontalHeaderItem(0,QStandardItem('Asset ID.'))
+         model.setHorizontalHeaderItem(1,QStandardItem('Category'))
+         model.setHorizontalHeaderItem(2,QStandardItem('Asset Type'))
+         model.setHorizontalHeaderItem(3,QStandardItem('Unit'))
+         model.setHorizontalHeaderItem(4,QStandardItem('Cost Per Unit'))
+         model.setHorizontalHeaderItem(5,QStandardItem('Number of Units'))
+         
+         # add  data rows
+         num = 0
+
+         for row in cursor.fetchall():
+             qtAssetID = QStandardItem( "%i" % row[0])
+             qtAssetID.setTextAlignment( Qt.AlignCenter )
+             qtAssetCategory = QStandardItem( row[1] )
+             qtAssetType = QStandardItem( row[2] )	
+             qtUnitOfMeasure = QStandardItem( row[3] )
+             qtCostPerUnit = QStandardItem( "%.2f" % row[4] )
+             qtNumUnits = QStandardItem( "%.2f" % row[5] )
+
+             model.setItem( num, 0, qtAssetID )
+             model.setItem( num, 1, qtAssetCategory )
+             model.setItem( num, 2, qtAssetType )
+             model.setItem( num, 3, qtUnitOfMeasure )
+             model.setItem( num, 4, qtCostPerUnit )
+             model.setItem( num, 5, qtNumUnits )
+             num = num + 1
+
+         cursor.close()   
+         db.close()
+
+         self.tblAssets.setModel(model)
+         self.tblAssets.resizeColumnsToContents()
+         self.tblAssets.hideColumn(0)
+         self.tblAssets.show()
+
 	#-------------------------------------------------------------------------------------------------------
 	# Income: Crops
 	#-------------------------------------------------------------------------------------------------------
