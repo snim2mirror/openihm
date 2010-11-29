@@ -572,8 +572,8 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
              qtAssetCategory = QStandardItem( row[1] )
              qtAssetType = QStandardItem( row[2] )	
              qtUnitOfMeasure = QStandardItem( row[3] )
-             qtCostPerUnit = QStandardItem( "%f" % row[4] )
-             qtNumUnits = QStandardItem( "%f" % row[5] )
+             qtCostPerUnit = QStandardItem( "%.2f" % row[4] )
+             qtNumUnits = QStandardItem( "%.2f" % row[5] )
 
              model.setItem( num, 0, qtAssetID )
              model.setItem( num, 1, qtAssetCategory )

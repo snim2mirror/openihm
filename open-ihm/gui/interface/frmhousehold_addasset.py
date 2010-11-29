@@ -97,7 +97,8 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset):
         
      def displayAssetDetails(self):
          ''' Retrieve and display Household Asset details '''
-         query = '''SELECT * FROM assets WHERE hhid=%s AND pid=%s AND assetid=%s ''' % ( self.hhid, self.pid,  self.assetid )
+         query = '''SELECT assetid, assetcategory, assettype, unitofmeasure, unitcost, totalunits 
+                       FROM assets WHERE hhid=%s AND pid=%s AND assetid=%s ''' % ( self.hhid, self.pid,  self.assetid )
          
          db = data.mysql.connector.Connect(**self.config)             
          cursor = db.cursor()
@@ -105,8 +106,16 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset):
          cursor.execute(query)
 
          for row in cursor.fetchall():
+             assetcategory = row[1]
+             self.cboAssetCategory.setCurrentIndex( self.cboAssetCategory.findText( assetcategory ) )
+             
+             # force pulling of asset types in the selected category; for some strange reason it is not happening automatically
+             self.getAssetTypes()
+             
+             # now show the assettype
              assettype = row[2]
              self.cboAssetType.setCurrentIndex( self.cboAssetType.findText( assettype ) )
+        
              unitofmeasure = row[3]
              self.txtUnitOfMeasure.setText( unitofmeasure )
              costperunit = row[4]
@@ -121,6 +130,7 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset):
          ''' Saves asset to database '''    	
 
          # get the data entered by user
+         category        = self.cboAssetCategory.currentText()
          assettype       = self.cboAssetType.currentText()
          unitofmeasure	= self.txtUnitOfMeasure.text()
          costperunit     = self.txtCostPerUnit.text()
@@ -130,12 +140,12 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset):
          
          # create UPDATE query
          if (self.assetid == 0):
-             query = '''INSERT INTO assets (hhid, assettype, unitofmeasure, unitcost, totalunits, pid )
-                 VALUES(%s,'%s','%s',%s,%s,%s) ''' % ( self.hhid, assettype, unitofmeasure, costperunit, numunits, self.pid )
+             query = '''INSERT INTO assets (hhid, assetcategory, assettype, unitofmeasure, unitcost, totalunits, pid )
+                 VALUES(%s,'%s','%s','%s',%s,%s,%s) ''' % ( self.hhid, category,  assettype, unitofmeasure, costperunit, numunits, self.pid )
          else:
-             query = ''' UPDATE assets SET assettype='%s', unitofmeasure='%s', unitcost=%s, totalunits=%s
+             query = ''' UPDATE assets SET assetcategory='%s', assettype='%s', unitofmeasure='%s', unitcost=%s, totalunits=%s
                      WHERE hhid=%s AND pid=%s 
-                     AND assetid=%s ''' % ( assettype, unitofmeasure, costperunit, numunits, self.hhid, self.pid,  self.assetid)
+                     AND assetid=%s ''' % ( category,  assettype, unitofmeasure, costperunit, numunits, self.hhid, self.pid,  self.assetid)
 
          # execute query and commit changes
          cursor =  db.cursor()
