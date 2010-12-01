@@ -29,7 +29,6 @@ class ReadDataEntrySheets:
             #traverse sheet looking for section markers e.g crops
             for row_index in range(householdsheet.nrows):
                 cellvalue = householdsheet.cell(row_index,0).value
-                print cellvalue
                 if cellvalue == 'HouseholdMembers':
                     self.readBasicMemberDetails(householdsheet,row_index)
                 elif cellvalue == 'PersonalCharacteristics':
@@ -49,9 +48,10 @@ class ReadDataEntrySheets:
                 elif cellvalue == 'Employment':
                     self.readEmploymentData(householdsheet,row_index)
                 elif cellvalue == 'SocialTransfer':
-                    pass
+                    self.readTransferData(householdsheet,row_index,cellvalue)
                 elif cellvalue == 'TransferFromOrganisations':
-                    pass
+                    self.readTransferData(householdsheet,row_index,cellvalue)
+            QtGui.QMessageBox.information(None, 'Importing Data', "Data Importation Completed")
                          
 
     def readProjectHouseholdsData(self,book):
@@ -151,7 +151,8 @@ class ReadDataEntrySheets:
                     elif sex.lower() == 'female' or sex.lower() == 'f':
                         personid = 'f' + str(age)
 
-                    query ='''REPLACE INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,pid)
+                    
+                    query ='''INSERT INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,pid)
                             VALUES ('%s',%s,'%s',%s,'%s',%s)''' % (personid,hhid,hhead,yearofbirth,sex,self.pid)
                                            
                     database.execUpdateQuery(query)
@@ -211,8 +212,18 @@ class ReadDataEntrySheets:
                     unitcost = values[3]
                     units = values[4]
 
-                    query ='''REPLACE INTO assets (hhid,assetcategory,assettype,unitofmeasure,unitcost,totalunits,pid)
-                            VALUES ('%s','%s','%s','%s',%s,%s,%s)''' % (hhid,category,assettype,unit,unitcost,units,self.pid)
+                    testquery ='''SELECT * FROM assets WHERE hhid=%s AND assetcategory='%s' AND assettype='%s' AND pid =%s ''' % (hhid,category,assettype,self.pid)
+                    testrecset = database.execSelectQuery(testquery)
+                    numrows =0
+                    for row in testrecset:
+			numrows = numrows + 1
+		    if numrows ==0:
+
+                        query ='''INSERT INTO assets (hhid,assetcategory,assettype,unitofmeasure,unitcost,totalunits,pid)
+                                    VALUES (%s,'%s','%s','%s',%s,%s,%s)''' % (hhid,category,assettype,unit,unitcost,units,self.pid)
+                    else:
+                        query ='''UPDATE assets SET hhid=%s,assetcategory='%s',assettype='%s',unitofmeasure='%s',unitcost=%s,totalunits=%s,pid=%s
+                                WHERE hhid=%s AND assetcategory='%s' AND assettype='%s' AND pid =%s ''' % (hhid,category,assettype,unit,unitcost,units,self.pid,hhid,category,assettype,self.pid)
                  
                     database.execUpdateQuery(query)
 
@@ -270,8 +281,15 @@ class ReadDataEntrySheets:
                     unitcost = values[3]
                     units = values[4]
 
-                    query ='''REPLACE INTO expenditure (hhid,exptype,unitofmeasure,priceperunit,kcalperunit,totalunits,pid)
+                    testquery ='''SELECT * FROM expenditure WHERE hhid=%s AND exptype='%s' AND pid =%s''' % (hhid,expendituretype,self.pid)
+                    numrows = self.checkRecordExistence(testquery)
+
+		    if numrows ==0:
+                        query ='''INSERT INTO expenditure (hhid,exptype,unitofmeasure,priceperunit,kcalperunit,totalunits,pid)
                             VALUES (%s,'%s','%s',%s,%s,%s,%s)''' % (hhid,expendituretype,unit,unitcost,kcalperunit,units,self.pid)
+                    else:
+                        query='''UPDATE expenditure SET hhid=%s,exptype='%s',unitofmeasure='%s',priceperunit=%s,kcalperunit=%s,totalunits=%s,pid=%s
+                                WHERE hhid=%s AND exptype='%s' AND pid =%s ''' % (hhid,expendituretype,unit,unitcost,kcalperunit,units,self.pid,hhid,expendituretype,self.pid)
 
                     database.execUpdateQuery(query)
 
@@ -348,8 +366,16 @@ class ReadDataEntrySheets:
                     elif incometype=='WildFoods':
                         tablename='wildfoods'
 
-                    query ='''REPLACE INTO %s (hhid,incomesource,unitofmeasure,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,pid) 
+                    testquery =''' SELECT * FROM %s WHERE hhid=%s AND incomesource='%s' AND pid=%s ''' % (tablename,hhid,name,self.pid)
+                    numrows = self.checkRecordExistence(testquery)
+
+                    if numrows ==0:
+
+                        query ='''INSERT INTO %s (hhid,incomesource,unitofmeasure,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,pid) 
                             VALUES (%s,'%s','%s',%s,%s,%s,%s,%s,%s)''' % (tablename,hhid,name,unit,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,self.pid)
+                    else:
+                        query ='''UPDATE %s  SET hhid=%s,incomesource='%s',unitofmeasure='%s',unitsproduced=%s,unitssold=%s,unitprice=%s,otheruses=%s,unitsconsumed=%s,pid=%s 
+                            WHERE hhid=%s AND incomesource='%s' AND pid=%s  ''' % (tablename,hhid,name,unit,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,self.pid,hhid,name,self.pid)
 
                     database.execUpdateQuery(query)
 
@@ -373,7 +399,6 @@ class ReadDataEntrySheets:
                 digitvalue = True
                 skiprow = False
                 cellvalue = householdsheet.cell(current_row_index,col_index).value
-                print cellvalue
 
                 if cellvalue == 'SocialTransfer':
                     exitmain = True
@@ -395,8 +420,6 @@ class ReadDataEntrySheets:
                         cellvalue = 0
 
                 values.append(cellvalue)
-            print exitmain
-            print skiprow
 
             if exitmain == True:
                 break
@@ -412,10 +435,17 @@ class ReadDataEntrySheets:
                     kcals = values[4]
                     cashincome = values[5]
 
-                    query ='''REPLACE INTO employmentincome (hhid,incomesource,foodtypepaid,unitofmeasure,unitspaid,incomekcal,cashincome,pid)
-                            VALUES (%s,'%s','%s','%s',%s,%s,%s,%s)''' % (hhid,employmenttype,foodpaid,unit,unitspaid,kcals,cashincome,self.pid)
+                    testquery = '''SELECT * FROM employmentincome WHERE hhid=%s AND incomesource='%s' AND pid =%s''' %(hhid,employmenttype,self.pid)
+                    numrows = self.checkRecordExistence(testquery)
 
-                    print query
+		    if numrows ==0:
+                        query ='''INSERT INTO employmentincome (hhid,incomesource,foodtypepaid,unitofmeasure,unitspaid,incomekcal,cashincome,pid)
+                            VALUES (%s,'%s','%s','%s',%s,%s,%s,%s)''' % (hhid,employmenttype,foodpaid,unit,unitspaid,kcals,cashincome,self.pid)
+                        
+                    else:
+                        query = '''UPDATE employmentincome SET hhid=%s,incomesource='%s',foodtypepaid='%s',unitofmeasure='%s',unitspaid=%s,incomekcal=%s,cashincome=%s,pid=%s
+                                    WHERE hhid=%s AND incomesource='%s' AND pid =%s''' % (hhid,employmenttype,foodpaid,unit,unitspaid,kcals,cashincome,self.pid,hhid,employmenttype,self.pid)
+
                     database.execUpdateQuery(query)
 
             empty_cell_count = 0
@@ -472,19 +502,24 @@ class ReadDataEntrySheets:
                     cash = values[1]
                     foodtype = values[2]
                     unit = values[3]
-                    unitsreceived = values[4]
-                    unitsconsumed = values[5]
-                    unitssold= values[6]
-                    unitprice= values[7]
+                    unitsconsumed = values[4]
+                    unitssold= values[5]
+                    unitprice= values[6]
                     
                     if incometype=='SocialTransfer':
                         sourcetype='Internal'
                     elif incometype=='TransferFromOrganisations':
                         sourcetype='External'
 
-                    query ='''REPLACE INTO tansfers (hhid,sourcetype,sourceoftransfer,cashperyear,foodtype,unitofmeasure,unitsgiven,unitsconsumed,unitssold,priceperunit,pid) 
-                            VALUES (%s,'%s','%s',%s,'%s','%s',%s,%s,%s,%s,%s)''' % (hhid,sourcetype,transfersource,cash,foodtype,unit,unitsreceived,unitsconsumed,unitssold,unitprice,self.pid)
-
+                    testquery = '''SELECT * from transfers WHERE hhid =%s AND pid=%s AND sourcetype='%s' AND sourceoftransfer='%s' ''' %(hhid,self.pid,sourcetype,transfersource)
+                    numrows = self.checkRecordExistence(testquery)
+		    if numrows ==0:
+                        
+                        query ='''INSERT INTO transfers (hhid,sourcetype,sourceoftransfer,cashperyear,foodtype,unitofmeasure,unitsconsumed,unitssold,priceperunit,pid) 
+                            VALUES (%s,'%s','%s',%s,'%s','%s',%s,%s,%s,%s)''' % (hhid,sourcetype,transfersource,cash,foodtype,unit,unitsconsumed,unitssold,unitprice,self.pid)
+                    else:
+                        query ='''UPDATE transfers SET hhid =%s,sourcetype='%s',sourceoftransfer='%s',cashperyear=%s,foodtype=%s,unitofmeasure='%s',unitsconsumed=%s,unitssold=%s,priceperunit=%s,pid=%s
+                                WHERE hhid =%s AND pid=%s AND sourcetype='%s' AND sourceoftransfer='%s' ''' % (hhid,sourcetype,transfersource,cash,foodtype,unit,unitsconsumed,unitssold,unitprice,self.pid,hhid,self.pid,sourcetype,transfersource)
                     database.execUpdateQuery(query)
 
             empty_cell_count = 0
@@ -492,3 +527,13 @@ class ReadDataEntrySheets:
         database.close()
     
  
+    def checkRecordExistence(self,testquery):
+        database = Database()
+        database.open()
+        testrecset = database.execSelectQuery(testquery)
+        numrows =0
+        for row in testrecset:
+	    numrows = numrows + 1
+        database.open()
+	return numrows
+    

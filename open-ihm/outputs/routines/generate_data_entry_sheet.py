@@ -168,10 +168,9 @@ class DataEntrySheets:
         sheet2.write(itemrow, 1, "CashPerYear", style2)
         sheet2.write(itemrow, 2, "FoodType", style2)
         sheet2.write(itemrow, 3, "Unit", style2)
-        sheet2.write(itemrow, 4, "UnitsReceived", style2)
-        sheet2.write(itemrow, 5, "UnitsConsumed", style2)
-        sheet2.write(itemrow, 6, "UnitsSold", style2)
-        sheet2.write(itemrow, 7, "PricePerUnit", style2)
+        sheet2.write(itemrow, 4, "UnitsConsumed", style2)
+        sheet2.write(itemrow, 5, "UnitsSold", style2)
+        sheet2.write(itemrow, 6, "PricePerUnit", style2)
 
         #Transfers from Organisations
         headerrow = headerrow + 11
@@ -182,13 +181,12 @@ class DataEntrySheets:
         sheet2.write(itemrow, 1, "CashPerYear", style2)
         sheet2.write(itemrow, 2, "FoodType", style2)
         sheet2.write(itemrow, 3, "Unit", style2)
-        sheet2.write(itemrow, 4, "UnitsReceived", style2)
-        sheet2.write(itemrow, 5, "UnitsConsumed", style2)
-        sheet2.write(itemrow, 6, "UnitsSold", style2)
-        sheet2.write(itemrow, 7, "PricePerUnit", style2)
+        sheet2.write(itemrow, 4, "UnitsConsumed", style2)
+        sheet2.write(itemrow, 5, "UnitsSold", style2)
+        sheet2.write(itemrow, 6, "PricePerUnit", style2)
 
         #set column width for sheet2
-        for i in range(0,8):
+        for i in range(0,7):
             sheet2.col(i).width = 6000
 
         folder = "inputs/"
