@@ -5,6 +5,9 @@
 from xlrd import open_workbook,cellname,xldate_as_tuple
 from datetime import date
 from data.database import Database
+import sys
+from PyQt4 import QtGui
+from PyQt4 import QtCore
 
 class ReadDataEntrySheets:
     
@@ -13,7 +16,8 @@ class ReadDataEntrySheets:
         self.pid = projectid
 
     def readdata(self):
-        book = open_workbook('dataEntrySheet-ProjectID-5.xls')
+        filename = QtGui.QFileDialog.getOpenFileName(None, 'Open file','/home')
+        book = open_workbook(filename)
         projectsheet = book.sheet_by_index(0)
         self.readProjectHouseholdsData(book)
         
@@ -25,6 +29,7 @@ class ReadDataEntrySheets:
             #traverse sheet looking for section markers e.g crops
             for row_index in range(householdsheet.nrows):
                 cellvalue = householdsheet.cell(row_index,0).value
+                print cellvalue
                 if cellvalue == 'HouseholdMembers':
                     self.readBasicMemberDetails(householdsheet,row_index)
                 elif cellvalue == 'PersonalCharacteristics':
@@ -42,7 +47,7 @@ class ReadDataEntrySheets:
                 elif cellvalue == 'WildFoods':
                     self.readCropAndFoodsIncomeData(householdsheet,row_index,cellvalue)
                 elif cellvalue == 'Employment':
-                    pass
+                    self.readEmploymentData(householdsheet,row_index)
                 elif cellvalue == 'SocialTransfer':
                     pass
                 elif cellvalue == 'TransferFromOrganisations':
@@ -233,8 +238,10 @@ class ReadDataEntrySheets:
                 cellvalue = householdsheet.cell(current_row_index,col_index).value
                 if cellvalue == 'Crops':
                     exitmain = True
+                    break
                 if  col_index == 0 and cellvalue=='':
                     skiprow = True
+                    break
                 if col_index!=0 and cellvalue == '':
                     empty_cell_count = empty_cell_count + 1
                     cellvalue = 'NULL'
@@ -350,3 +357,138 @@ class ReadDataEntrySheets:
                 
         database.close()
             
+    def readEmploymentData(self,householdsheet,row_index):
+        
+        #print book.nsheets
+        start_row_index = row_index + 2
+        empty_cell_count = 0
+        hhid = householdsheet.name
+        database = Database()
+        database.open()
+
+        for current_row_index in range(start_row_index, householdsheet.nrows):
+            values = []
+            for col_index in range(0,6):
+                exitmain = False
+                digitvalue = True
+                skiprow = False
+                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                print cellvalue
+
+                if cellvalue == 'SocialTransfer':
+                    exitmain = True
+                    break
+                if  col_index == 0 and cellvalue=='':
+                    skiprow = True
+                    break
+                if col_index!=0 and cellvalue == '':
+                    empty_cell_count = empty_cell_count + 1
+                    cellvalue = 'NULL'
+                if (col_index >=3 and col_index <=5):
+                    
+                    try:
+                        cellvalue = float(cellvalue)
+                        digitvalue = True
+                    except ValueError:
+                        digitvalue = False
+                    if digitvalue == False:
+                        cellvalue = 0
+
+                values.append(cellvalue)
+            print exitmain
+            print skiprow
+
+            if exitmain == True:
+                break
+            else:
+                if empty_cell_count > 4 or skiprow == True:   #check if at least three cell in row or cell for expenditurety are empty
+                    continue
+                else:
+                    
+                    employmenttype = values[0]
+                    foodpaid = values[1]
+                    unit = values[2]
+                    unitspaid = values[3]
+                    kcals = values[4]
+                    cashincome = values[5]
+
+                    query ='''REPLACE INTO employmentincome (hhid,incomesource,foodtypepaid,unitofmeasure,unitspaid,incomekcal,cashincome,pid)
+                            VALUES (%s,'%s','%s','%s',%s,%s,%s,%s)''' % (hhid,employmenttype,foodpaid,unit,unitspaid,kcals,cashincome,self.pid)
+
+                    print query
+                    database.execUpdateQuery(query)
+
+            empty_cell_count = 0
+                
+        database.close()
+
+    def readTransferData(self,householdsheet,row_index,incometype):
+        
+        start_row_index = row_index + 2
+        empty_cell_count = 0
+        hhid = householdsheet.name
+        database = Database()
+        database.open()
+
+        for current_row_index in range(start_row_index, householdsheet.nrows):
+            values = []
+            for col_index in range(0,7):
+                exitmain = False
+                digitvalue = True
+                skiprow = False
+                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                if incometype== 'SocialTransfer':
+                    if cellvalue == 'TransferFromOrganisations':
+                        exitmain = True
+                        break
+
+                if col_index == 0 and cellvalue=='':
+                    skiprow = True
+                    break
+                if col_index!=0 and cellvalue == '':
+                    empty_cell_count = empty_cell_count + 1
+                    cellvalue='NULL'
+
+                if col_index ==2 or(col_index >=4 and col_index <=7):
+                    
+                    try:
+                        cellvalue = float(cellvalue)
+                        digitvalue = True
+                    except ValueError:
+                        digitvalue = False
+                    if digitvalue == False:
+                        cellvalue = 0
+
+                values.append(cellvalue)
+
+            if exitmain == True:
+                break
+            else:
+                if empty_cell_count > 5 or skiprow==True:   #check if four cell in row or cell for expenditurety are empty
+                    continue
+                else:
+                    
+                    transfersource = values[0]
+                    cash = values[1]
+                    foodtype = values[2]
+                    unit = values[3]
+                    unitsreceived = values[4]
+                    unitsconsumed = values[5]
+                    unitssold= values[6]
+                    unitprice= values[7]
+                    
+                    if incometype=='SocialTransfer':
+                        sourcetype='Internal'
+                    elif incometype=='TransferFromOrganisations':
+                        sourcetype='External'
+
+                    query ='''REPLACE INTO tansfers (hhid,sourcetype,sourceoftransfer,cashperyear,foodtype,unitofmeasure,unitsgiven,unitsconsumed,unitssold,priceperunit,pid) 
+                            VALUES (%s,'%s','%s',%s,'%s','%s',%s,%s,%s,%s,%s)''' % (hhid,sourcetype,transfersource,cash,foodtype,unit,unitsreceived,unitsconsumed,unitssold,unitprice,self.pid)
+
+                    database.execUpdateQuery(query)
+
+            empty_cell_count = 0
+                
+        database.close()
+    
+ 
