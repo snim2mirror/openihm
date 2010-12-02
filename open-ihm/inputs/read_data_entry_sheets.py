@@ -27,6 +27,7 @@ class ReadDataEntrySheets:
             houseid = householdsheet.name
             
             #traverse sheet looking for section markers e.g crops
+            
             for row_index in range(householdsheet.nrows):
                 cellvalue = householdsheet.cell(row_index,0).value
                 if cellvalue == 'HouseholdMembers':
