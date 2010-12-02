@@ -538,3 +538,68 @@ class ReadDataEntrySheets:
         database.open()
 	return numrows
     
+    def readPCharacteristicsData(self,householdsheet,row_index):
+        
+        #print book.nsheets
+        start_row_index = row_index + 2
+        empty_cell_count = 0
+        hhid = householdsheet.name
+        database = Database()
+        database.open()
+
+        for current_row_index in range(start_row_index, householdsheet.nrows):
+            values = []
+            for col_index in range(0,5):
+                exitmain = False
+                digitvalue = True
+                skiprow = False
+                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                if cellvalue == 'Crops':
+                    exitmain = True
+                    break
+                if  col_index == 0 and cellvalue=='':
+                    skiprow = True
+                    break
+                if col_index!=0 and cellvalue == '':
+                    empty_cell_count = empty_cell_count + 1
+                    cellvalue = 'NULL'
+                if (col_index >=2 and col_index <=4):
+                    
+                    try:
+                        cellvalue = float(cellvalue)
+                        digitvalue = True
+                    except ValueError:
+                        digitvalue = False
+                    if digitvalue == False:
+                        cellvalue = 0
+
+                values.append(cellvalue)
+
+            if exitmain == True:
+                break
+            else:
+                if empty_cell_count >= 3 or skiprow == True:   #check if at least three cell in row or cell for expenditurety are empty
+                    continue
+                else:
+                    
+                    expendituretype = values[0]
+                    unit = values[1]
+                    kcalperunit = values[2]
+                    unitcost = values[3]
+                    units = values[4]
+
+                    testquery ='''SELECT * FROM expenditure WHERE hhid=%s AND exptype='%s' AND pid =%s''' % (hhid,expendituretype,self.pid)
+                    numrows = self.checkRecordExistence(testquery)
+
+		    if numrows ==0:
+                        query ='''INSERT INTO expenditure (hhid,exptype,unitofmeasure,priceperunit,kcalperunit,totalunits,pid)
+                            VALUES (%s,'%s','%s',%s,%s,%s,%s)''' % (hhid,expendituretype,unit,unitcost,kcalperunit,units,self.pid)
+                    else:
+                        query='''UPDATE expenditure SET hhid=%s,exptype='%s',unitofmeasure='%s',priceperunit=%s,kcalperunit=%s,totalunits=%s,pid=%s
+                                WHERE hhid=%s AND exptype='%s' AND pid =%s ''' % (hhid,expendituretype,unit,unitcost,kcalperunit,units,self.pid,hhid,expendituretype,self.pid)
+
+                    database.execUpdateQuery(query)
+
+            empty_cell_count = 0
+                
+        database.close()

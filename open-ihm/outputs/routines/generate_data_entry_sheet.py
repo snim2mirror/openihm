@@ -72,8 +72,10 @@ class DataEntrySheets:
         myrow = 0
         for char in pchars:
             value = char[0]
+            typep = char[1]
             if value!='pid' and value !='hhid':
-                print value
+                print value, "type  ", typep
+                
                 sheet2.write(5, myrow, value, style2) 
                 myrow = myrow + 1
                 
