@@ -42,6 +42,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
         self.displaySelectedChars("person", self.lstPersonalSelectedChars)
         self.listDiets()
         self.getCropTypes()
+        self.displayStandardOfLiving()
         
         # connect relevant signals and slots
         self.connect(self.tblDiets, SIGNAL("clicked(QModelIndex)"), self.showSelectedDiet)
@@ -105,7 +106,9 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
     def displayStandardOfLiving(self):
          ''' List available currencies '''
          # select query to retrieve currencies
-         query = '''SELECT id, fooditem, unitofmeasure, percentage, priceperunit FROM diet '''
+         pid = self.parent.projectid
+         query = '''SELECT summary, scope, gender, agebottom, agetop, item, costperyear 
+                     FROM standardofliving WHERE pid=%s ''' % ( pid )
          
          # retrieve and display members
          db = data.mysql.connector.Connect(**self.config)             
@@ -116,38 +119,45 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
          model = QStandardItemModel(1,2)
          
          # set model headers
-         model.setHorizontalHeaderItem(0,QStandardItem('Id.'))
-         model.setHorizontalHeaderItem(1,QStandardItem('Food Item'))
-         model.setHorizontalHeaderItem(2,QStandardItem('Unit Of Measure'))
-         model.setHorizontalHeaderItem(3,QStandardItem('Percentage'))
-         model.setHorizontalHeaderItem(4,QStandardItem('Price per Unit'))
+         model.setHorizontalHeaderItem(0,QStandardItem('Description'))
+         model.setHorizontalHeaderItem(1,QStandardItem('Scope'))
+         model.setHorizontalHeaderItem(2,QStandardItem('Gender'))
+         model.setHorizontalHeaderItem(3,QStandardItem('Age Bottom'))
+         model.setHorizontalHeaderItem(4,QStandardItem('Age Top'))
+         model.setHorizontalHeaderItem(5, QStandardItem('Item'))
+         model.setHorizontalHeaderItem(6,QStandardItem('Cost/Year'))
          
          # add  data rows
          num = 0
          
          for row in cursor.fetchall():
-             qtID = QStandardItem("%i" % row[0])
-             qtID.setTextAlignment( Qt.AlignCenter )
-             qtFoodItem = QStandardItem( row[1] )	
-             qtUnit = QStandardItem(row[2] )
+             qtSummary = QStandardItem( row[0] )
+             qtScope = QStandardItem( row[1] )	
+             qtGender = QStandardItem( row[2] )
              
-             qtPercentage = QStandardItem( "%.2f" %   row[3] )
-             qtPrice = QStandardItem( "%.2f" %   row[4] )
+             qtAgeBottom = QStandardItem( "%i" %   row[3] )
+             qtAgeTop = QStandardItem( "%i" %   row[4] )
+             qtItem = QStandardItem( row[5] )
+             qtCost = QStandardItem( "%.2f" %   row[6] )
              			
-             model.setItem( num, 0, qtID )
-             model.setItem( num, 1, qtFoodItem )
-             model.setItem( num, 2, qtUnit )
-             model.setItem( num, 3, qtPercentage )
-             model.setItem( num, 4, qtPrice )
+             model.setItem( num, 0, qtSummary )
+             model.setItem( num, 1, qtScope )
+             model.setItem( num, 2, qtGender )
+             model.setItem( num, 3, qtAgeBottom )
+             model.setItem( num, 4, qtAgeTop )
+             model.setItem( num, 5, qtItem )
+             model.setItem( num, 6, qtCost )
              num = num + 1
              
          cursor.close()   
          db.close()
          
-         self.tblDiets.setModel(model)
-         self.tblDiets.resizeColumnsToContents()
-         self.tblDiets.hideColumn(0)
-         self.tblDiets.show()
+         self.tblStandardOfLiving.setModel(model)
+         self.tblStandardOfLiving.resizeColumnsToContents()
+         self.tblStandardOfLiving.hideColumn(3)
+         self.tblStandardOfLiving.hideColumn(4)
+         self.tblStandardOfLiving.hideColumn(5)
+         self.tblStandardOfLiving.show()
          
     def showStandardOfLivingItem(self, index):
          ''' show details of a selected currency for editing '''
