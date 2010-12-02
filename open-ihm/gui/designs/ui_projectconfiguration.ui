@@ -559,7 +559,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QComboBox" name="cmbExpenseItem_2">
+     <widget class="QComboBox" name="cmbAgeBottom">
       <property name="geometry">
        <rect>
         <x>90</x>
@@ -587,7 +587,7 @@
        <string>to</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="cmbExpenseItem_3">
+     <widget class="QComboBox" name="cmbAgeTop">
       <property name="geometry">
        <rect>
         <x>190</x>
