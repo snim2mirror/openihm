@@ -87,7 +87,7 @@ class DatabaseInitialiser:
              return False
              
      def databaseUpToDate(self):
-         # check if the database is already up to date: i.e. there is pid in expenditure or assets or livestockincome ...
+         # check if the database is already up to date: i.e. there is "summary" in standardofliving
          #   checks in assets
          
          config = DbConfig(self.host, 'openihmdb', 'openihm', 'ihm2010')
@@ -95,7 +95,7 @@ class DatabaseInitialiser:
          db = Connect(**dbinfo)             
          cursor = db.cursor()
          
-         query = "SHOW TABLES"
+         query = "SHOW COLUMNS FROM standardofliving"
          
          cursor.execute(query)
          rows = cursor.fetchall()
@@ -106,7 +106,7 @@ class DatabaseInitialiser:
          upToDate = False
          for row in rows:
              for field in row:
-                 if field == "setup_foods_crops":
+                 if field == "summary":
                      upToDate = True
          
          return upToDate
@@ -117,7 +117,7 @@ class DatabaseInitialiser:
              return True
          # else update the database    
          else:
-             sqlfile = file('data/scripts/openihmdb_mysql_update_foods_crops.sql', 'r')
+             sqlfile = file('data/scripts/openihmdb_mysql_update.sql', 'r')
              commands = sqlfile.read()
              commandlist = commands.split(';')
              sqlfile.close()
