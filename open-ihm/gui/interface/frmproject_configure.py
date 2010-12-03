@@ -43,10 +43,14 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
         self.listDiets()
         self.getCropTypes()
         self.displayStandardOfLiving()
+        self.getExpenseItems()
+        self.getAgeRange(self.cmbAgeBottom, 0, 100)
+        self.getAgeRange(self.cmbAgeTop, 1, 101)
         
         # connect relevant signals and slots
         self.connect(self.tblDiets, SIGNAL("clicked(QModelIndex)"), self.showSelectedDiet)
         self.connect(self.cmbFoodItem, SIGNAL("currentIndexChanged(int)"), self.displayUnitOfMeasure)
+        self.connect(self.cmbScope, SIGNAL("currentIndexChanged(int)"), self.getExpenseItems )
         self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
         self.connect(self.cmdHouseholdMoveAll, SIGNAL("clicked()"), self.moveAllHouseholdChars)
         self.connect(self.cmdHouseholdRemoveAll, SIGNAL("clicked()"), self.removeAllHouseholdChars)
@@ -84,24 +88,33 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
          
     def getExpenseItems(self):
          ''' Retrieve Expense Items and display them in a combobox '''
-         # select query to Crop Types
-         query = '''SELECT foodtype, measuringunit FROM setup_crops'''
+         # select query to items
+         itemtype = self.cmbScope.currentText()
+         query = '''SELECT item FROM  setup_standardofliving WHERE type='%s' OR type='Both' ''' % ( itemtype )
 
          db = data.mysql.connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
-
+         
+         self.cmbExpenseItem.clear()
          for row in cursor.fetchall():
-             croptype = row[0]
-             measuringunit = row[1]
-             self.cmbFoodItem.addItem(croptype, QVariant(measuringunit))
-
-         unitofmeasure = self.cmbFoodItem.itemData( self.cmbFoodItem.currentIndex() ).toString()
-         self.txtUnitOfMeasure.setText( unitofmeasure )
+             item = row[0]
+             self.cmbExpenseItem.addItem( item )
 
          cursor.close()   
          db.close()
+         
+         # disable or enable gender and age fields depending on scope         
+         enabled = True if itemtype != 'Household' else False
+         self.cmbGender.setEnabled(  enabled )
+         self.cmbAgeBottom.setEnabled(  enabled )
+         self.cmbAgeTop.setEnabled(  enabled )
+         
+    def getAgeRange(self, obj, min, max):
+         ''' fill an age combobox with ages ranging from min to max '''
+         for age in range( min, max + 1 ):
+             obj.addItem( "%i"  % (age) )
     
     def displayStandardOfLiving(self):
          ''' List available currencies '''
