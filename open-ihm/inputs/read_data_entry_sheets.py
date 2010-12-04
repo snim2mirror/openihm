@@ -14,8 +14,11 @@ class ReadDataEntrySheets:
     def __init__(self,projectid):
         self.database = Database()
         self.pid = projectid
+        self.pcharstable = 'p' + str(projectid) +'personalcharacteristics'
+        self.hcharstable = 'p' + str(projectid) +'householdcharacteristics'
 
     def readdata(self):
+        '''Base method for data importation'''
         filename = QtGui.QFileDialog.getOpenFileName(None, 'Open file','/home')
         book = open_workbook(filename)
         projectsheet = book.sheet_by_index(0)
@@ -33,9 +36,9 @@ class ReadDataEntrySheets:
                 if cellvalue == 'HouseholdMembers':
                     self.readBasicMemberDetails(householdsheet,row_index)
                 elif cellvalue == 'PersonalCharacteristics':
-                    pass
+                    self.readPCharacteristicsData(householdsheet,row_index)
                 elif cellvalue == 'HouseholdCharacteristics':
-                    pass
+                    self.readHCharacteristicsData(householdsheet,row_index)
                 elif cellvalue == 'Assets':
                     self.readAssetData(householdsheet,row_index)
                 elif cellvalue == 'Expenditure':
@@ -52,10 +55,11 @@ class ReadDataEntrySheets:
                     self.readTransferData(householdsheet,row_index,cellvalue)
                 elif cellvalue == 'TransferFromOrganisations':
                     self.readTransferData(householdsheet,row_index,cellvalue)
-            QtGui.QMessageBox.information(None, 'Importing Data', "Data Importation Completed")
+        QtGui.QMessageBox.information(None, 'Importing Data', "Data Importation Completed")
                          
 
     def readProjectHouseholdsData(self,book):
+        '''Import Project Households'''
         sheet1 = book.sheet_by_index(0)
 
         # Start Block of code for importing a project's households
@@ -96,8 +100,8 @@ class ReadDataEntrySheets:
 
 
     def readBasicMemberDetails(self,householdsheet,row_index):
+        '''Import Data on Basic Personal Characteristics: - Sex,Age,year Of Birth, and household headship status'''
         
-        #print book.nsheets
         start_row_index = row_index + 2
         empty_cell_count = 0
         hhid = householdsheet.name
@@ -114,7 +118,7 @@ class ReadDataEntrySheets:
                     exitmain = True
                     break
 
-                if (col_index == 0 or colindex ==1) and cellvalue=='':
+                if (col_index == 0 or col_index ==1) and cellvalue=='':
                     skiprow =True
                     break
                 
@@ -151,11 +155,19 @@ class ReadDataEntrySheets:
                         personid = 'm' + str(age)
                     elif sex.lower() == 'female' or sex.lower() == 'f':
                         personid = 'f' + str(age)
+                    pidvalue = personid + '%'
 
-                    
-                    query ='''INSERT INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,pid)
+                    testquery ='''SELECT * FROM householdmembers WHERE hhid=%s AND personid LIKE '%s' AND pid =%s ''' % (hhid,pidvalue,self.pid)
+                    numrows =self.checkRecordExistence(testquery)
+		    if numrows ==0:
+                        query ='''INSERT INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,pid)
                             VALUES ('%s',%s,'%s',%s,'%s',%s)''' % (personid,hhid,hhead,yearofbirth,sex,self.pid)
-                                           
+                        
+                    else:
+                        personid = personid + '_' + str(numrows+1)
+                        query ='''INSERT INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,pid)
+                            VALUES ('%s',%s,'%s',%s,'%s',%s)''' % (personid,hhid,hhead,yearofbirth,sex,self.pid)
+
                     database.execUpdateQuery(query)
 
             empty_cell_count = 0
@@ -163,8 +175,8 @@ class ReadDataEntrySheets:
         database.close()
             
     def readAssetData(self,householdsheet,row_index):
+        '''Import Asset Data'''
         
-        #print book.nsheets
         start_row_index = row_index + 2
         empty_cell_count = 0
         hhid = householdsheet.name
@@ -214,10 +226,7 @@ class ReadDataEntrySheets:
                     units = values[4]
 
                     testquery ='''SELECT * FROM assets WHERE hhid=%s AND assetcategory='%s' AND assettype='%s' AND pid =%s ''' % (hhid,category,assettype,self.pid)
-                    testrecset = database.execSelectQuery(testquery)
-                    numrows =0
-                    for row in testrecset:
-			numrows = numrows + 1
+                    numrows =self.checkRecordExistence(testquery)
 		    if numrows ==0:
 
                         query ='''INSERT INTO assets (hhid,assetcategory,assettype,unitofmeasure,unitcost,totalunits,pid)
@@ -233,8 +242,8 @@ class ReadDataEntrySheets:
         database.close()
             
     def readExpenditureData(self,householdsheet,row_index):
+        '''Import Expenditure Data'''
         
-        #print book.nsheets
         start_row_index = row_index + 2
         empty_cell_count = 0
         hhid = householdsheet.name
@@ -299,8 +308,8 @@ class ReadDataEntrySheets:
         database.close()
             
     def readCropAndFoodsIncomeData(self,householdsheet,row_index,incometype):
+        '''Import Data for Crop, Livestock, and Wildfood Income'''
         
-        #print book.nsheets
         start_row_index = row_index + 2
         empty_cell_count = 0
         hhid = householdsheet.name
@@ -385,8 +394,8 @@ class ReadDataEntrySheets:
         database.close()
             
     def readEmploymentData(self,householdsheet,row_index):
+        '''Import Employment Data'''
         
-        #print book.nsheets
         start_row_index = row_index + 2
         empty_cell_count = 0
         hhid = householdsheet.name
@@ -454,6 +463,7 @@ class ReadDataEntrySheets:
         database.close()
 
     def readTransferData(self,householdsheet,row_index,incometype):
+        '''Import data on social and Organisational Transfers'''
         
         start_row_index = row_index + 2
         empty_cell_count = 0
@@ -527,8 +537,205 @@ class ReadDataEntrySheets:
                 
         database.close()
     
- 
+    def readPCharacteristicsData(self,householdsheet,row_index):
+        '''Import Data on Extended Personal Characteristics'''
+        
+        field_row_index = row_index + 1
+        datatype_row_index = row_index + 2
+        start_row_index = row_index + 3
+        empty_cell_count = 0
+        hhid = householdsheet.name
+        database = Database()
+        database.open()
+
+        #determine number of columns for pcharacteristics
+        columns = 0
+        datafields=[]
+        fielddatatypes=[]
+        for col_index in range (0,householdsheet.ncols):
+            
+            datafieldvalue = householdsheet.cell(field_row_index,col_index).value
+            fieldtype = householdsheet.cell(datatype_row_index,col_index).value
+            
+            if datafieldvalue!='':
+                datafields.append(datafieldvalue)
+                fielddatatypes.append(fieldtype)
+                columns = columns + 1
+            else:
+                break
+
+        empty_cell_count =0
+
+        for current_row_index in range(start_row_index, householdsheet.nrows):
+            values = []
+            for col_index in range(0,columns):
+                exitmain = False
+                personid =''
+                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                datatype = householdsheet.cell(datatype_row_index,col_index).value
+                if cellvalue == 'HouseholdCharacteristics':
+                    exitmain = True
+                    break
+                if cellvalue == '':
+                    empty_cell_count = empty_cell_count + 1
+                    cellvalue = 'NULL'
+                    if col_index==0:
+                        personid ='NULL'
+                if datatype=='Double':
+                    try:
+                        cellvalue = float(cellvalue)
+                        print cellvalue
+                    except ValueError:
+                        cellvalue = 0
+                        
+                elif datatype=='Integer':
+                    try:
+                        cellvalue = int(cellvalue)
+                    except ValueError:
+                        cellvalue = 0
+                        
+                elif datatype=='Yes/No':
+                    tempvalue = str(cellvalue)
+                    if (tempvalue == '1' or tempvalue.lower() =='yes' or tempvalue.lower() =='y'):
+                        cellvalue = 'Yes'
+                    else:
+                        cellvalue = 'No'
+
+                values.append(cellvalue)
+
+            if exitmain == True or empty_cell_count==columns:
+                break
+            else:
+                if personid=='NULL':
+                    continue
+                else:
+                    testquery='''SELECT * from %s WHERE personid='%s' AND hhid=%s AND pid=%s''' %(self.pcharstable,values[0],hhid,self.pid)
+                    numrows = self.checkRecordExistence(testquery)
+                    if numrows == 0:
+                        query = self.buildCharInsertQuery(values,datafields,fielddatatypes,hhid,self.pcharstable)
+                    else:
+                        query= '''DELETE FROM %s WHERE personid='%s' AND hhid=%s AND pid=%s''' %(self.pcharstable,values[0],hhid,self.pid)
+                        database.execUpdateQuery(query)
+                        query = self.buildCharInsertQuery(values,datafields,fielddatatypes,hhid,self.pcharstable)
+                    database.execUpdateQuery(query)
+                
+            empty_cell_count = 0
+                
+        database.close()
+
+
+    def readHCharacteristicsData(self,householdsheet,row_index):
+        '''Import Data on Household Characteristics'''
+        
+        field_row_index = row_index + 1
+        datatype_row_index = row_index + 2
+        start_row_index = row_index + 3
+        empty_cell_count = 0
+        hhid = householdsheet.name
+        database = Database()
+        database.open()
+
+        #determine number of columns for pcharacteristics
+        columns = 0
+        datafields=[]
+        fielddatatypes=[]
+        for col_index in range (0,householdsheet.ncols):
+            
+            datafieldvalue = householdsheet.cell(field_row_index,col_index).value
+            fieldtype = householdsheet.cell(datatype_row_index,col_index).value
+            
+            if datafieldvalue!='':
+                datafields.append(datafieldvalue)
+                fielddatatypes.append(fieldtype)
+                columns = columns + 1
+            else:
+                break
+
+        empty_cell_count =0
+
+        for current_row_index in range(start_row_index, householdsheet.nrows):
+            values = []
+            for col_index in range(0,columns):
+                exitmain = False
+                personid =''
+                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                datatype = householdsheet.cell(datatype_row_index,col_index).value
+                if cellvalue == 'Assets':
+                    exitmain = True
+                    break
+                if cellvalue == '':
+                    cellvalue ='NULL'
+                    empty_cell_count = empty_cell_count + 1
+
+                if datatype=='Double':
+                    try:
+                        cellvalue = float(cellvalue)
+                        print cellvalue
+                    except ValueError:
+                        cellvalue = 0
+                        
+                elif datatype=='Integer':
+                    try:
+                        cellvalue = int(cellvalue)
+                    except ValueError:
+                        cellvalue = 0
+                        
+                elif datatype=='Yes/No':
+                    tempvalue = str(cellvalue)
+                    tempvalue = tempvalue.strip('')
+                    
+                    print "temp value ",tempvalue
+                    if tempvalue == '1' or tempvalue.lower() =='yes' or tempvalue.lower() =='y':
+                        cellvalue = 'Yes'
+                    else:
+                        cellvalue = 'No'
+                    
+
+                values.append(cellvalue)
+                print values
+                print empty_cell_count
+
+            if exitmain == True or empty_cell_count==columns:
+                break
+            else:
+                testquery='''SELECT * from %s WHERE hhid=%s AND pid=%s''' %(self.hcharstable,hhid,self.pid)
+                numrows = self.checkRecordExistence(testquery)
+                if numrows == 0:
+                    query = self.buildCharInsertQuery(values,datafields,fielddatatypes,hhid,self.hcharstable)
+                    print query
+                else:
+                    
+                    query= '''DELETE FROM %s WHERE hhid=%s AND pid=%s''' %(self.hcharstable,hhid,self.pid)
+                    database.execUpdateQuery(query)
+                    query = self.buildCharInsertQuery(values,datafields,fielddatatypes,hhid,self.hcharstable)
+                    print query
+                database.execUpdateQuery(query)
+                
+            empty_cell_count = 0
+                
+        database.close()
+        
+    def buildCharInsertQuery(self,values,datafields,fielddatatypes,hhid,tablename):
+        '''Dynamic query generation for inserting personal or household characteristics'''
+        
+        query = "INSERT INTO %s (hhid, pid" % tablename
+        parameterlist =' VALUES (' + str(hhid) +', ' + str(self.pid)
+        listlength = len(datafields)
+        
+        for i in range(0,listlength):
+            tempvalue = values[i]
+            if fielddatatypes[i]=='String' or fielddatatypes[i]=='Yes/No':
+                parameterlist= parameterlist + ', ' + "'" +str(tempvalue) + "'"
+            else:
+                parameterlist= parameterlist + ', ' + str(tempvalue)
+            query = query +', '+ datafields[i]
+        parameterlist= parameterlist + ')'
+        query = query + ')'
+        query = query + parameterlist
+        return query
+
     def checkRecordExistence(self,testquery):
+        '''Test if a record with some given primary key already exists'''
         database = Database()
         database.open()
         testrecset = database.execSelectQuery(testquery)
@@ -537,69 +744,3 @@ class ReadDataEntrySheets:
 	    numrows = numrows + 1
         database.open()
 	return numrows
-    
-    def readPCharacteristicsData(self,householdsheet,row_index):
-        
-        #print book.nsheets
-        start_row_index = row_index + 2
-        empty_cell_count = 0
-        hhid = householdsheet.name
-        database = Database()
-        database.open()
-
-        for current_row_index in range(start_row_index, householdsheet.nrows):
-            values = []
-            for col_index in range(0,5):
-                exitmain = False
-                digitvalue = True
-                skiprow = False
-                cellvalue = householdsheet.cell(current_row_index,col_index).value
-                if cellvalue == 'Crops':
-                    exitmain = True
-                    break
-                if  col_index == 0 and cellvalue=='':
-                    skiprow = True
-                    break
-                if col_index!=0 and cellvalue == '':
-                    empty_cell_count = empty_cell_count + 1
-                    cellvalue = 'NULL'
-                if (col_index >=2 and col_index <=4):
-                    
-                    try:
-                        cellvalue = float(cellvalue)
-                        digitvalue = True
-                    except ValueError:
-                        digitvalue = False
-                    if digitvalue == False:
-                        cellvalue = 0
-
-                values.append(cellvalue)
-
-            if exitmain == True:
-                break
-            else:
-                if empty_cell_count >= 3 or skiprow == True:   #check if at least three cell in row or cell for expenditurety are empty
-                    continue
-                else:
-                    
-                    expendituretype = values[0]
-                    unit = values[1]
-                    kcalperunit = values[2]
-                    unitcost = values[3]
-                    units = values[4]
-
-                    testquery ='''SELECT * FROM expenditure WHERE hhid=%s AND exptype='%s' AND pid =%s''' % (hhid,expendituretype,self.pid)
-                    numrows = self.checkRecordExistence(testquery)
-
-		    if numrows ==0:
-                        query ='''INSERT INTO expenditure (hhid,exptype,unitofmeasure,priceperunit,kcalperunit,totalunits,pid)
-                            VALUES (%s,'%s','%s',%s,%s,%s,%s)''' % (hhid,expendituretype,unit,unitcost,kcalperunit,units,self.pid)
-                    else:
-                        query='''UPDATE expenditure SET hhid=%s,exptype='%s',unitofmeasure='%s',priceperunit=%s,kcalperunit=%s,totalunits=%s,pid=%s
-                                WHERE hhid=%s AND exptype='%s' AND pid =%s ''' % (hhid,expendituretype,unit,unitcost,kcalperunit,units,self.pid,hhid,expendituretype,self.pid)
-
-                    database.execUpdateQuery(query)
-
-            empty_cell_count = 0
-                
-        database.close()
