@@ -4,8 +4,7 @@
 from xlwt import Workbook, easyxf
 import data.mysql.connector
 from data.config import Config
-
-
+from PyQt4 import QtGui
 from data.database import Database
 from data.report_settingsmanager import ReportsSettingsManager
 
@@ -38,6 +37,7 @@ class DataEntrySheets:
         #set style for headers
         style1 = easyxf('font: name Arial;''font: bold True;')
         style2 = easyxf('font: name Arial;''font: colour ocean_blue;''font: bold True;''border: left thick, top thick, right thick, bottom thick')
+        style3 = easyxf('font: name Arial;''font: colour green;''font: bold True;''border: left thick, top thick, right thick, bottom thick')
 
         
         
@@ -68,23 +68,52 @@ class DataEntrySheets:
         hchars = self.getHouseholdCharacteristics()
 
         #section for extended personal characteristics
-        sheet2.write(4, 0, "PersonalCharacteristics", style1)
-        myrow = 0
+        sheet2.write(8, 0, "PersonalCharacteristics", style1)
+        col = 0
         for char in pchars:
             value = char[0]
+            typep = char[1]
             if value!='pid' and value !='hhid':
-                print value
-                sheet2.write(5, myrow, value, style2) 
-                myrow = myrow + 1
+                stringvar = 'varchar'
+                boolvar = 'enum'
+                intvar = 'bigint'
+                doublevar ='double'
+                if typep.startswith(tuple(stringvar)):
+                    vartype ='String'
+                elif typep.startswith(tuple(boolvar)):
+                    vartype ='Yes/No'
+                elif typep.startswith(tuple(intvar)):
+                    vartype ='Integer'
+                elif typep.startswith(tuple(doublevar)):
+                    vartype ='Double'
+
+                sheet2.write(9, col, value, style2)
+                sheet2.write(10, col, vartype, style3)
+                col = col + 1
                 
         #section for household characteristics
-        sheet2.write(14, 0, "HouseholdCharacteristics", style1)
-        myrow = 0
+        sheet2.write(17, 0, "HouseholdCharacteristics", style1)
+        col = 0
         for char in hchars:
             value = char[0]
+            typep = char[1]
             if value !='pid' and value !='hhid':
-                sheet2.write(15, myrow, value, style2) 
-                myrow = myrow + 1
+                stringvar = 'varchar'
+                boolvar = 'enum'
+                intvar = 'bigint'
+                doublevar ='double'
+                if typep.startswith(tuple(stringvar)):
+                    vartype ='String'
+                elif typep.startswith(tuple(boolvar)):
+                    vartype ='Yes/No'
+                elif typep.startswith(tuple(intvar)):
+                    vartype ='Integer'
+                elif typep.startswith(tuple(doublevar)):
+                    vartype ='Double'
+
+                sheet2.write(18, col, value, style2)
+                sheet2.write(19, col, vartype, style3)
+                col = col + 1
 
         headerrow = 25
         itemrow = 26
@@ -191,7 +220,9 @@ class DataEntrySheets:
 
         folder = "inputs/"
         filename = folder + "dataEntrySheet-ProjectID-" + str(self.pid) + ".xls"
-        book.save(filename) 
+        book.save(filename)
+        completionmessage = 'Template Saved As open-ihm/' + str(filename)
+        QtGui.QMessageBox.information(None, 'Data Entry Template', completionmessage)
  
         #
 

@@ -23,6 +23,8 @@ class ProjectHouseholdCharacteristic:
             vartype = "BIGINT"
         elif datatype == "3":
             vartype = "VARCHAR(250)"
+        elif datatype == "4":
+            vartype = "DOUBLE"
             
         # check if characteristic already exists
         query = '''SHOW COLUMNS FROM %s ''' % (tbl)
