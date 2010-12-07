@@ -47,13 +47,17 @@
     </property>
     <addaction name="actionAsset_Details"/>
     <addaction name="actionExpenditure_Types"/>
-    <addaction name="actionFood_Types"/>
-    <addaction name="actionHousehold_Characteristics_2"/>
     <addaction name="actionIncome_Source_Details"/>
+    <addaction name="separator"/>
+    <addaction name="actionHousehold_Characteristics_2"/>
     <addaction name="actionPersonal_Characteristics"/>
+    <addaction name="separator"/>
+    <addaction name="actionFood_Types"/>
     <addaction name="actionEnergy_Requirements"/>
-    <addaction name="actionManage_Currencies"/>
     <addaction name="actionInitialise_Food_Energy_Table"/>
+    <addaction name="separator"/>
+    <addaction name="actionManage_Currencies"/>
+    <addaction name="actionManage_Standard_of_Living_Items"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -335,6 +339,11 @@
   <action name="actionGenerate_Data_Entry_Sheets">
    <property name="text">
     <string>Create Data Entry Sheets</string>
+   </property>
+  </action>
+  <action name="actionManage_Standard_of_Living_Items">
+   <property name="text">
+    <string>Manage Standard of Living Items</string>
    </property>
   </action>
  </widget>

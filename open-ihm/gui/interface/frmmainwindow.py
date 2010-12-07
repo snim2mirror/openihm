@@ -39,6 +39,7 @@ from frmfoodenergy_requirements import  FrmFoodEnergyRequirements
 from frm_report_householdsbycharacteristics import RepHouseholdsByCharacteristics
 from frmcurrencymanager import FrmCurrencyManager
 from frm_report_householdincome import HouseholdIncomeReport
+from frmstandardoflivingmanager import FrmStandardOfLivingManager
 from data.setup_crops_startupvalues import FoodValuesStartup
 from outputs.routines.generate_data_entry_sheet import DataEntrySheets
 from inputs.read_data_entry_sheets import ReadDataEntrySheets
@@ -96,12 +97,13 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.connect(self.actionAboutOpenIHM, QtCore.SIGNAL("triggered()"), self.aboutOpenIHM)
 		self.connect(self.actionEnergy_Requirements, QtCore.SIGNAL("triggered()"), self.viewFoodEnergyRequirements)
 		self.connect(self.actionManage_Currencies, QtCore.SIGNAL("triggered()"), self.manageCurrencies)
+		self.connect(self.actionManage_Standard_of_Living_Items, QtCore.SIGNAL("triggered()"), self.manageStandardOfLiving)
 		#signals and slots for repoerts
 		self.connect(self.actionHousehold_by_Characteristics, QtCore.SIGNAL("triggered()"), self.reportHouholdsByCharacteristics)
 		self.connect(self.actionIncome_By_Source, QtCore.SIGNAL("triggered()"), self.reportHouholdsByIncomeSource)
-                self.connect(self.actionInitialise_Food_Energy_Table, QtCore.SIGNAL("triggered()"), self.initialiseFoodEnergyLookupTable)
+		self.connect(self.actionInitialise_Food_Energy_Table, QtCore.SIGNAL("triggered()"), self.initialiseFoodEnergyLookupTable)
 
-                self.connect(self.actionGenerate_Data_Entry_Sheets, QtCore.SIGNAL("triggered()"), self.createDataEntrySheets)
+		self.connect(self.actionGenerate_Data_Entry_Sheets, QtCore.SIGNAL("triggered()"), self.createDataEntrySheets)
 		self.connect(self.actionImport_Project_Data, QtCore.SIGNAL("triggered()"), self.importData)
 		
 
@@ -286,8 +288,15 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    form.show()
 
 	def manageCurrencies(self):
-	    ''' Creates and Shows the Find Project form '''
+	    ''' open the Currency Manager '''
 	    form = FrmCurrencyManager(self)
+	    subWin = self.mdi.addSubWindow(form)
+	    self.centerSubWindow(subWin)
+	    form.show()
+
+	def manageStandardOfLiving(self):
+	    ''' open the Standard Of Living Manager '''
+	    form = FrmStandardOfLivingManager(self)
 	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
 	    form.show()
