@@ -583,7 +583,7 @@
       </item>
       <item>
        <property name="text">
-        <string>Both</string>
+        <string>All</string>
        </property>
       </item>
      </widget>

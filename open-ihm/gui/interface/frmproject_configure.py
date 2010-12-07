@@ -16,62 +16,67 @@ from data.controller import Controller
 from gui.designs.ui_projectconfiguration import Ui_ProjectConfiguration
 
 class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):	
-    ''' Creates the Edit Project form. '''	
-    def __init__(self, parent):
-        ''' Set up the dialog box interface '''
-        QDialog.__init__(self)
-        self.parent = parent
-        self.dietid = 0
-        self.setupUi(self)
+     ''' Creates the Edit Project form. '''	
+     def __init__(self, parent):
+         ''' Set up the dialog box interface '''
+         QDialog.__init__(self)
+         self.parent = parent
+         self.dietid = 0                     # selected diet item
+         self.currentItem = ""           # selected standard of livng item
+         self.setupUi(self)
         
-        self.config = Config.dbinfo().copy()
+         self.config = Config.dbinfo().copy()
         
-        controller = Controller()
-        self.project = controller.getProject( self.parent.projectid )
+         controller = Controller()
+         self.project = controller.getProject( self.parent.projectid )
         
-        # show first tab first
-        self.tabProject.setCurrentIndex(0)
+         # show first tab first
+         self.tabProject.setCurrentIndex(0)
         
-        # display project name
-        self.lblProjectName.setText(self.parent.projectname)
+         # display project name
+         self.lblProjectName.setText(self.parent.projectname)
         
-        # display Available and Selected Household Characteristics
-        self.displayAvailableChars("household", self.lstHouseholdAvailableChars)
-        self.displayAvailableChars("person", self.lstPersonalAvailableChars)
-        self.displaySelectedChars("household", self.lstHouseholdSelectedChars)
-        self.displaySelectedChars("person", self.lstPersonalSelectedChars)
-        self.listDiets()
-        self.getCropTypes()
-        self.displayStandardOfLiving()
-        self.getExpenseItems()
-        self.getAgeRange(self.cmbAgeBottom, 0, 100)
-        self.getAgeRange(self.cmbAgeTop, 1, 101)
+         # display Available and Selected Household Characteristics
+         self.displayAvailableChars("household", self.lstHouseholdAvailableChars)
+         self.displayAvailableChars("person", self.lstPersonalAvailableChars)
+         self.displaySelectedChars("household", self.lstHouseholdSelectedChars)
+         self.displaySelectedChars("person", self.lstPersonalSelectedChars)
+         self.listDiets()
+         self.getCropTypes()
+         self.displayStandardOfLiving()
+         self.getExpenseItems()
+         self.getAgeRange(self.cmbAgeBottom, 0, 100)
+         self.getAgeRange(self.cmbAgeTop, 1, 101)
         
-        # connect relevant signals and slots
-        self.connect(self.tblDiets, SIGNAL("clicked(QModelIndex)"), self.showSelectedDiet)
-        self.connect(self.cmbFoodItem, SIGNAL("currentIndexChanged(int)"), self.displayUnitOfMeasure)
-        self.connect(self.cmbScope, SIGNAL("currentIndexChanged(int)"), self.getExpenseItems )
-        self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-        self.connect(self.cmdHouseholdMoveAll, SIGNAL("clicked()"), self.moveAllHouseholdChars)
-        self.connect(self.cmdHouseholdRemoveAll, SIGNAL("clicked()"), self.removeAllHouseholdChars)
-        self.connect(self.cmdHouseholdMoveSelected, SIGNAL("clicked()"), self.moveSelectedHouseholdChars)
-        self.connect(self.cmdHouseholdRemoveSelected, SIGNAL("clicked()"), self.removeSelectedHouseholdChars)
-        self.connect(self.cmdPersonalMoveAll, SIGNAL("clicked()"), self.moveAllPersonalChars)
-        self.connect(self.cmdPersonalRemoveAll, SIGNAL("clicked()"), self.removeAllPersonalChars)
-        self.connect(self.cmdPersonalMoveSelected, SIGNAL("clicked()"), self.moveSelectedPersonalChars)
-        self.connect(self.cmdPersonalRemoveSelected, SIGNAL("clicked()"), self.removeSelectedPersonalChars)
-        self.connect(self.cmdSaveDiet, SIGNAL("clicked()"), self.saveDiet)
-        self.connect(self.cmdDelDiet, SIGNAL("clicked()"), self.delDiets)
+         # connect relevant signals and slots
+         self.connect(self.tblDiets, SIGNAL("clicked(QModelIndex)"), self.showSelectedDiet)
+         self.connect(self.cmbFoodItem, SIGNAL("currentIndexChanged(int)"), self.displayUnitOfMeasure)
+         self.connect(self.cmbScope, SIGNAL("currentIndexChanged(int)"), self.getExpenseItems )
+         self.connect(self.cmbAgeBottom, SIGNAL("currentIndexChanged(int)"), self.adjustTopList )
+         self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
+         self.connect(self.cmdHouseholdMoveAll, SIGNAL("clicked()"), self.moveAllHouseholdChars)
+         self.connect(self.cmdHouseholdRemoveAll, SIGNAL("clicked()"), self.removeAllHouseholdChars)
+         self.connect(self.cmdHouseholdMoveSelected, SIGNAL("clicked()"), self.moveSelectedHouseholdChars)
+         self.connect(self.cmdHouseholdRemoveSelected, SIGNAL("clicked()"), self.removeSelectedHouseholdChars)
+         self.connect(self.cmdPersonalMoveAll, SIGNAL("clicked()"), self.moveAllPersonalChars)
+         self.connect(self.cmdPersonalRemoveAll, SIGNAL("clicked()"), self.removeAllPersonalChars)
+         self.connect(self.cmdPersonalMoveSelected, SIGNAL("clicked()"), self.moveSelectedPersonalChars)
+         self.connect(self.cmdPersonalRemoveSelected, SIGNAL("clicked()"), self.removeSelectedPersonalChars)
+         self.connect(self.cmdSaveDiet, SIGNAL("clicked()"), self.saveDiet)
+         self.connect(self.cmdDelDiet, SIGNAL("clicked()"), self.delDiets)
+         self.connect(self.tblStandardOfLiving, SIGNAL("clicked(QModelIndex)"), self.showStandardOfLivingItem)
+         self.connect(self.cmdSaveLivingStanItem, SIGNAL("clicked()"), self.saveStandardOfLivingItem)
+         self.connect(self.cmdDelLivingStandardItem, SIGNAL("clicked()"), self.delStandardOfLivingItems)
      
-    def getCurrentRow(self, tblVw):
+     def getCurrentRow(self, tblVw):
          indexVal = tblVw.currentIndex()
          return indexVal.row()
          
-    def countRowsSelected(self, lstVw):
+     def countRowsSelected(self, lstVw):
         selectedRows = self.getSelectedRows(lstVw)
         return len(selectedRows)
         
-    def getSelectedRows(self, lstVw):
+     def getSelectedRows(self, lstVw):
         
         selectedRows = []
         selectedIndexes = lstVw.selectedIndexes()
@@ -82,11 +87,11 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
                 
         return selectedRows
         
-    #--------------------------------------------------------------------------------------------------------------------------
-    #  Standard of Living
-    #-------------------------------------------------------------------------------------------------------------------------
+     #--------------------------------------------------------------------------------------------------------------------------
+     #  Standard of Living
+     #-------------------------------------------------------------------------------------------------------------------------
          
-    def getExpenseItems(self):
+     def getExpenseItems(self):
          ''' Retrieve Expense Items and display them in a combobox '''
          # select query to items
          itemtype = self.cmbScope.currentText()
@@ -111,19 +116,25 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
          self.cmbAgeBottom.setEnabled(  enabled )
          self.cmbAgeTop.setEnabled(  enabled )
          
-    def getAgeRange(self, obj, min, max):
+     def adjustTopList(self):
+         ''' fill an age combobox with ages ranging from min to max '''
+         min = int( self.cmbAgeBottom.currentText() ) + 1
+         self.cmbAgeTop.clear()
+         for age in range( min, 102 ):
+             self.cmbAgeTop.addItem( "%i"  % (age) )
+     
+     def getAgeRange(self, obj, min, max):
          ''' fill an age combobox with ages ranging from min to max '''
          for age in range( min, max + 1 ):
              obj.addItem( "%i"  % (age) )
     
-    def displayStandardOfLiving(self):
-         ''' List available currencies '''
-         # select query to retrieve currencies
+     def displayStandardOfLiving(self):
+         ''' List standard of living items '''
+         # select query to retrieve items
          pid = self.parent.projectid
          query = '''SELECT summary, scope, gender, agebottom, agetop, item, costperyear 
-                     FROM standardofliving WHERE pid=%s ''' % ( pid )
+                     FROM standardofliving WHERE pid=%s ORDER BY scope''' % ( pid )
          
-         # retrieve and display members
          db = data.mysql.connector.Connect(**self.config)             
          cursor = db.cursor()
          
@@ -172,36 +183,51 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
          self.tblStandardOfLiving.hideColumn(5)
          self.tblStandardOfLiving.show()
          
-    def showStandardOfLivingItem(self, index):
-         ''' show details of a selected currency for editing '''
-         self.dietid = self.tblDiets.model().item(index.row(),0).text()
-         fooditem = self.tblDiets.model().item(index.row(),1).text()
-         unitofmeasure = self.tblDiets.model().item(index.row(),2).text()
-         percentage = self.tblDiets.model().item(index.row(),3).text()
-         priceperunit = self.tblDiets.model().item(index.row(),4).text()
+     def showStandardOfLivingItem(self, index):
+         ''' show details of a selected item for editing '''
+         self.currentItem = self.tblStandardOfLiving.model().item(index.row(),0).text()
+         scope = self.tblStandardOfLiving.model().item(index.row(),1).text()
+         gender = self.tblStandardOfLiving.model().item(index.row(),2).text()
+         agebottom = self.tblStandardOfLiving.model().item(index.row(),3).text()
+         agetop = self.tblStandardOfLiving.model().item(index.row(),4).text()
+         item = self.tblStandardOfLiving.model().item(index.row(),5).text()
+         cost = self.tblStandardOfLiving.model().item(index.row(),6).text()
          
-         self.cmbFoodItem.setCurrentIndex(self.cmbFoodItem.findText( fooditem ))
-         self.txtUnitOfMeasure.setText(unitofmeasure)
-         self.txtPercentage.setText(percentage)
-         self.txtUnitPrice.setText(priceperunit)
+         self.cmbScope.setCurrentIndex(self.cmbScope.findText( scope ))
+         self.getExpenseItems()
+         self.cmbGender.setCurrentIndex(self.cmbGender.findText( gender ))
+         self.cmbAgeBottom.setCurrentIndex(self.cmbAgeBottom.findText( agebottom ))
+         self.cmbAgeTop.setCurrentIndex(self.cmbAgeTop.findText( agetop ))
+         self.cmbExpenseItem.setCurrentIndex(self.cmbExpenseItem.findText( item ))
+         self.txtCostPerYear.setText(cost)
          
-    def saveStandardOfLivingItem(self):
+     def saveStandardOfLivingItem(self):
          ''' Save the currency details of a currency being added or edited '''
          pid = self.parent.projectid
-         fooditem = self.cmbFoodItem.currentText()
-         unitofmeasure = self.txtUnitOfMeasure.text()
-         percentage = self.txtPercentage.text()
-         priceperunit = self.txtUnitPrice.text()
+         currentItem = self.currentItem
+         scope = self.cmbScope.currentText()
+         if ( scope == "Person" ):
+             gender = self.cmbGender.currentText()
+             agebottom = self.cmbAgeBottom.currentText()
+             agetop = self.cmbAgeTop.currentText()
+         else:
+             gender = "All"
+             agebottom = 0
+             agetop = 0
+         item = self.cmbExpenseItem.currentText()
+         costperyear = self.txtCostPerYear.text()
+         summary = "%s %s [%s to %s years]" % (gender,  item,  agebottom,  agetop) if scope == "Person" else "%s %s" % (scope, item)
          
          db = data.mysql.connector.Connect(**self.config)
          
          # create INSERT or UPDATE query
-         if (self.dietid == 0):
-             query = '''INSERT INTO diet (pid, fooditem,unitofmeasure,percentage, priceperunit )
-                         VALUES(%s,'%s','%s',%s,%s) ''' % ( pid, fooditem,unitofmeasure,percentage, priceperunit  )
+         if (self.currentItem == ""):
+             query = '''INSERT INTO standardofliving (pid, summary,scope,gender, agebottom,agetop,item,costperyear )
+                         VALUES(%s,'%s','%s','%s',%s,%s,'%s',%s) ''' % ( pid, summary,scope,gender, agebottom,agetop,item,costperyear  )
          else:
-             query = ''' UPDATE diet SET fooditem='%s', unitofmeasure='%s', percentage=%s, priceperunit=%s
-                         WHERE id=%s AND pid=%s ''' % ( fooditem,unitofmeasure,percentage, priceperunit, self.dietid, pid)
+             query = ''' UPDATE standardofliving SET summary='%s', scope='%s', gender='%s', agebottom=%s, agetop=%s, item='%s',
+                            costperyear=%s
+                         WHERE summary='%s' AND pid=%s ''' % ( summary,scope,gender, agebottom,agetop,item,costperyear, currentItem, pid)
          
          # execute query and commit changes
          cursor =  db.cursor()
@@ -213,20 +239,28 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
          db.close()
          
          # clear text boxes and refresh list
-         self.txtPercentage.setText("")
-         self.txtUnitPrice.setText("")
-         self.dietid = 0
-         self.listDiets()
+         self.resetStandardOfLivingFields()
+         self.displayStandardOfLiving()
+     
+     def resetStandardOfLivingFields(self):
+         ''' Resets data entry fields for standard of lving items '''
+         self.txtCostPerYear.setText("")
+         self.currentItem = ""
+         self.cmbScope.setCurrentIndex( self.cmbScope.findText( "Person" ) )
+         self.cmbGender.setCurrentIndex( self.cmbGender.findText( "Female" ) )
+         self.cmbAgeBottom.setCurrentIndex( self.cmbAgeBottom.findText( "0" ) )
+         self.cmbAgeTop.setCurrentIndex( self.cmbAgeTop.findText( "1" ) )
          
-    def delStandardOfLivingItems(self):
-         ''' Delete a selected currencies '''
-         numSelected = self.countRowsSelected(self.tblDiets)
+     def delStandardOfLivingItems(self):
+         ''' Delete a selected Items '''
+         pid = self.parent.projectid
+         numSelected = self.countRowsSelected(self.tblStandardOfLiving)
          if  numSelected != 0:
              # confirm deletion
              if numSelected == 1:
-                 msg = "Are you sure you want to delete the selected diet item?"
+                 msg = "Are you sure you want to delete the selected item?"
              else:
-                 msg = "Are you sure you want to delete the selected diet items?"
+                 msg = "Are you sure you want to delete the selected items?"
              
              ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
              # if deletion is rejected return without deleting
@@ -234,17 +268,18 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
                  return
                  
              # get the member id of the selected currencies
-             selectedRows = self.getSelectedRows(self.tblDiets)
-             selectedIds = []
+             selectedRows = self.getSelectedRows(self.tblStandardOfLiving)
+             selectedItems = []
              for row in selectedRows:
-                 selectedIds.append( self.tblDiets.model().item(row,0).text() )
+                 selectedItems.append( self.tblStandardOfLiving.model().item(row,0).text() )
              # delete selected currencies
              
              db = data.mysql.connector.Connect(**self.config)
              cursor =  db.cursor()
              
-             for dietid in selectedIds:
-                 query = '''DELETE FROM diet WHERE id='%s' ''' % (dietid)	
+             for item in selectedItems:
+                 query = '''DELETE FROM standardofliving WHERE summary='%s' AND pid=%s ''' % (item,  pid)
+                 print query 
                  cursor.execute(query)
                  db.commit()
     
@@ -252,23 +287,23 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
              cursor.close()
              db.close()
              
-             self.dietid = 0
-             self.listDiets()
+             self.resetStandardOfLivingFields()
+             self.displayStandardOfLiving()
 
          else:
-             QMessageBox.information(self,"Delete Diet Items","Please select the rows containing diet items to be deleted.")
+             QMessageBox.information(self,"Delete Standard of Living Items","Please select the rows containing items to be deleted.")
        
         
-    #--------------------------------------------------------------------------------------------------------------------------
-    #  Diets
-    #-------------------------------------------------------------------------------------------------------------------------
+     #--------------------------------------------------------------------------------------------------------------------------
+     #  Diets
+     #-------------------------------------------------------------------------------------------------------------------------
     
-    def displayUnitOfMeasure(self):
+     def displayUnitOfMeasure(self):
          ''' displays the unit of measure of the selected income source '''
          unitofmeasure = self.cmbFoodItem.itemData( self.cmbFoodItem.currentIndex() ).toString()
          self.txtUnitOfMeasure.setText( unitofmeasure )
          
-    def getCropTypes(self):
+     def getCropTypes(self):
          ''' Retrieve Crop Types and display them in a combobox '''
          # select query to Crop Types
          query = '''SELECT foodtype, measuringunit FROM setup_crops'''
@@ -289,7 +324,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
          cursor.close()   
          db.close()
     
-    def listDiets(self):
+     def listDiets(self):
          ''' List available currencies '''
          # select query to retrieve currencies
          query = '''SELECT id, fooditem, unitofmeasure, percentage, priceperunit FROM diet '''
@@ -336,7 +371,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
          self.tblDiets.hideColumn(0)
          self.tblDiets.show()
          
-    def showSelectedDiet(self, index):
+     def showSelectedDiet(self, index):
          ''' show details of a selected currency for editing '''
          self.dietid = self.tblDiets.model().item(index.row(),0).text()
          fooditem = self.tblDiets.model().item(index.row(),1).text()
@@ -349,7 +384,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
          self.txtPercentage.setText(percentage)
          self.txtUnitPrice.setText(priceperunit)
          
-    def saveDiet(self):
+     def saveDiet(self):
          ''' Save the currency details of a currency being added or edited '''
          pid = self.parent.projectid
          fooditem = self.cmbFoodItem.currentText()
@@ -382,7 +417,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
          self.dietid = 0
          self.listDiets()
          
-    def delDiets(self):
+     def delDiets(self):
          ''' Delete a selected currencies '''
          numSelected = self.countRowsSelected(self.tblDiets)
          if  numSelected != 0:
@@ -422,11 +457,11 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
          else:
              QMessageBox.information(self,"Delete Diet Items","Please select the rows containing diet items to be deleted.")
          
-    #--------------------------------------------------------------------------------------------------------------------------
-    #  Characteristics
-    #-------------------------------------------------------------------------------------------------------------------------
+     #--------------------------------------------------------------------------------------------------------------------------
+     #  Characteristics
+     #-------------------------------------------------------------------------------------------------------------------------
         
-    def getProjectCharacteristics(self, lstVw):
+     def getProjectCharacteristics(self, lstVw):
         chars = []
         row = 0
         while (lstVw.model().item(row,0)):
@@ -436,7 +471,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
             
         return chars
         
-    def displayAvailableChars(self, chartype, lstAvailable):
+     def displayAvailableChars(self, chartype, lstAvailable):
         ''' Retrieve and display available Household Characteristics ''' 
         controller = Controller()
         chars = controller.getGlobalHouseholdCharacteristics() if chartype == "household" else controller.getGlobalPersonCharacteristics()
@@ -460,7 +495,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
         lstAvailable.setModel(model)
         lstAvailable.setSelectionMode(QAbstractItemView.ExtendedSelection)
         
-    def displaySelectedChars(self, chartype, lstSelected):
+     def displaySelectedChars(self, chartype, lstSelected):
         ''' Retrieve and display Project Characteristics (Household or Personal)'''
         # select query to retrieve selected characteristics
         if ( chartype == "household" ):
@@ -484,21 +519,21 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
         lstSelected.setModel(model)
         lstSelected.setSelectionMode(QAbstractItemView.ExtendedSelection)
 
-    def removeCharacteristic(self, chartype , characteristic):
+     def removeCharacteristic(self, chartype , characteristic):
         ''' removes a characteristic from a project'''
         if ( chartype == "household" ):
             self.project.removeHouseholdCharacteristic( characteristic )
         else:
             self.project.removePersonCharacteristic( characteristic )
         
-    def addCharacteristic(self, chartype, characteristic, datatype):
+     def addCharacteristic(self, chartype, characteristic, datatype):
         ''' adds a characteristic to a project'''
         if ( chartype == "household" ):
             self.project.addHouseholdCharacteristic( characteristic,  datatype )
         else:
             self.project.addPersonCharacteristic( characteristic,  datatype )
         
-    def moveAllChars(self, chartype, lstAvailable, lstSelected):
+     def moveAllChars(self, chartype, lstAvailable, lstSelected):
         ''' Add all available household or person characteristics to Project'''
         row = 0
         while(lstAvailable.model().item(row,0)):
@@ -512,7 +547,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
                 QMessageBox.information(self,"Project Configuration",msg)
             row = row + 1
         
-    def removeAllChars(self, chartype, lstSelected):
+     def removeAllChars(self, chartype, lstSelected):
         ''' remove all listed household or person characteristics from Project'''
         msg = "Are you sure you want to remove all household characteristics from this project?"
         ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
@@ -526,7 +561,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
             self.removeCharacteristic(chartype,characteristic)
             row = row + 1
         
-    def moveSelectedChars(self, chartype, lstAvailable, lstSelected):
+     def moveSelectedChars(self, chartype, lstAvailable, lstSelected):
         ''' Add selected available household or person characteristics to Project'''
         numSelected = self.countRowsSelected(lstAvailable)
         if  numSelected != 0:
@@ -544,7 +579,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
             msg = "Please select the characteristics you want to add."
             QMessageBox.information(self,"Project Configuration",msg) 
         
-    def removeSelectedChars(self, chartype, lstSelected):
+     def removeSelectedChars(self, chartype, lstSelected):
         ''' remove selected household or person characteristics from Project'''
         numSelected = self.countRowsSelected(lstSelected)
         if  numSelected != 0:
@@ -561,50 +596,50 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
             msg = "Please select the characteristics you want to remove."
             QMessageBox.information(self,"Project Configuration",msg) 
             
-    #-----------------------------------------------------------------------------------------------------------
-    # Household Characteristics methods
-    #-----------------------------------------------------------------------------------------------------------
+     #-----------------------------------------------------------------------------------------------------------
+     # Household Characteristics methods
+     #-----------------------------------------------------------------------------------------------------------
 
-    def moveAllHouseholdChars(self):
+     def moveAllHouseholdChars(self):
         ''' Add all available personal characteristics to Project'''
         self.moveAllChars( "household", self.lstHouseholdAvailableChars, self.lstHouseholdSelectedChars )
         self.displaySelectedChars( "household", self.lstHouseholdSelectedChars )
         
-    def removeAllHouseholdChars(self):
+     def removeAllHouseholdChars(self):
         ''' remove all listed personal characteristics from Project'''
         self.removeAllChars( "household", self.lstHouseholdSelectedChars )
         self.displaySelectedChars( "household", self.lstHouseholdSelectedChars )
         
-    def moveSelectedHouseholdChars(self):
+     def moveSelectedHouseholdChars(self):
         ''' Add selected available household characteristics to Project'''
         self.moveSelectedChars( "household", self.lstHouseholdAvailableChars, self.lstHouseholdSelectedChars )
         self.displaySelectedChars( "household", self.lstHouseholdSelectedChars ) 
         
-    def removeSelectedHouseholdChars(self):
+     def removeSelectedHouseholdChars(self):
         ''' remove selected household characteristics from Project'''
         self.removeSelectedChars( "household", self.lstHouseholdSelectedChars )
         self.displaySelectedChars( "household", self.lstHouseholdSelectedChars )
             
-    #-----------------------------------------------------------------------------------------------------------
-    # Personal Characteristics methods
-    #-----------------------------------------------------------------------------------------------------------
+     #-----------------------------------------------------------------------------------------------------------
+     # Personal Characteristics methods
+     #-----------------------------------------------------------------------------------------------------------
 
-    def moveAllPersonalChars(self):
+     def moveAllPersonalChars(self):
         ''' Add all available personal characteristics to Project'''
         self.moveAllChars("person", self.lstPersonalAvailableChars, self.lstPersonalSelectedChars)
         self.displaySelectedChars( "person", self.lstPersonalSelectedChars )
         
-    def removeAllPersonalChars(self):
+     def removeAllPersonalChars(self):
         ''' remove all listed personal characteristics from Project'''
         self.removeAllChars("person", self.lstPersonalSelectedChars)
         self.displaySelectedChars( "person", self.lstPersonalSelectedChars )
         
-    def moveSelectedPersonalChars(self):
+     def moveSelectedPersonalChars(self):
         ''' Add selected available household characteristics to Project'''
         self.moveSelectedChars("person", self.lstPersonalAvailableChars, self.lstPersonalSelectedChars)
         self.displaySelectedChars( "person", self.lstPersonalSelectedChars ) 
         
-    def removeSelectedPersonalChars(self):
+     def removeSelectedPersonalChars(self):
         ''' remove selected household characteristics from Project'''
         self.removeSelectedChars("person", self.lstPersonalSelectedChars)
         self.displaySelectedChars( "person", self.lstPersonalSelectedChars )

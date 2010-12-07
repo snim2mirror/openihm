@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_projectconfiguration.ui'
 #
-# Created: Thu Dec 02 21:31:53 2010
+# Created: Tue Dec 07 16:46:42 2010
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -156,12 +156,14 @@ class Ui_ProjectConfiguration(object):
         self.cmbScope.addItem("")
         self.cmbGender = QtGui.QComboBox(self.groupBox_2)
         self.cmbGender.setGeometry(QtCore.QRect(90, 50, 151, 22))
+        self.cmbGender.setEditable(False)
         self.cmbGender.setObjectName("cmbGender")
         self.cmbGender.addItem("")
         self.cmbGender.addItem("")
         self.cmbGender.addItem("")
         self.cmbAgeBottom = QtGui.QComboBox(self.groupBox_2)
         self.cmbAgeBottom.setGeometry(QtCore.QRect(90, 80, 61, 22))
+        self.cmbAgeBottom.setEditable(False)
         self.cmbAgeBottom.setObjectName("cmbAgeBottom")
         self.label_15 = QtGui.QLabel(self.groupBox_2)
         self.label_15.setGeometry(QtCore.QRect(160, 80, 21, 21))
@@ -171,6 +173,7 @@ class Ui_ProjectConfiguration(object):
         self.label_15.setObjectName("label_15")
         self.cmbAgeTop = QtGui.QComboBox(self.groupBox_2)
         self.cmbAgeTop.setGeometry(QtCore.QRect(190, 80, 51, 22))
+        self.cmbAgeTop.setEditable(False)
         self.cmbAgeTop.setObjectName("cmbAgeTop")
         self.cmdDelLivingStandardItem = QtGui.QPushButton(self.tab_2)
         self.cmdDelLivingStandardItem.setGeometry(QtCore.QRect(390, 360, 91, 31))
@@ -219,7 +222,7 @@ class Ui_ProjectConfiguration(object):
         self.cmbScope.setItemText(1, QtGui.QApplication.translate("ProjectConfiguration", "Household", None, QtGui.QApplication.UnicodeUTF8))
         self.cmbGender.setItemText(0, QtGui.QApplication.translate("ProjectConfiguration", "Female", None, QtGui.QApplication.UnicodeUTF8))
         self.cmbGender.setItemText(1, QtGui.QApplication.translate("ProjectConfiguration", "Male", None, QtGui.QApplication.UnicodeUTF8))
-        self.cmbGender.setItemText(2, QtGui.QApplication.translate("ProjectConfiguration", "Both", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbGender.setItemText(2, QtGui.QApplication.translate("ProjectConfiguration", "All", None, QtGui.QApplication.UnicodeUTF8))
         self.label_15.setText(QtGui.QApplication.translate("ProjectConfiguration", "to", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdDelLivingStandardItem.setText(QtGui.QApplication.translate("ProjectConfiguration", "Remove", None, QtGui.QApplication.UnicodeUTF8))
         self.tabProject.setTabText(self.tabProject.indexOf(self.tab_2), QtGui.QApplication.translate("ProjectConfiguration", "Standard of Living Threshold", None, QtGui.QApplication.UnicodeUTF8))
