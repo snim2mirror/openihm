@@ -1,6 +1,7 @@
 #-------------------------------------------------------------------	
 #	Filename: generate_data_entry_sheet.py
 #-------------------------------------------------------------------
+import os
 from xlwt import Workbook, easyxf
 import data.mysql.connector
 from data.config import Config
@@ -221,10 +222,10 @@ class DataEntrySheets:
         folder = "inputs/"
         filename = folder + "dataEntrySheet-ProjectID-" + str(self.pid) + ".xls"
         book.save(filename)
-        completionmessage = 'Template Saved As open-ihm/' + str(filename)
+        completionmessage = '''Template Saved As open-ihm/''' + str(filename) +'''\n\nClick OK to open the spreadsheet. This may take a few seconds. '''
         QtGui.QMessageBox.information(None, 'Data Entry Template', completionmessage)
  
         #
-
+        os.system(os.path.curdir + "\\inputs\\dataEntrySheet-ProjectID-" + str(self.pid) + ".xls")
         
         
