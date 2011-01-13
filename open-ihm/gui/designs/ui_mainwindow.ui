@@ -34,6 +34,7 @@
     <addaction name="separator"/>
     <addaction name="actionEdit_Project"/>
     <addaction name="actionConfigure_Project"/>
+    <addaction name="actionConfigure_Project_Income"/>
     <addaction name="separator"/>
     <addaction name="actionGenerate_Data_Entry_Sheets"/>
     <addaction name="actionImport_Project_Data"/>
@@ -344,6 +345,11 @@
   <action name="actionManage_Standard_of_Living_Items">
    <property name="text">
     <string>Manage Standard of Living Items</string>
+   </property>
+  </action>
+  <action name="actionConfigure_Project_Income">
+   <property name="text">
+    <string>Select Project Income</string>
    </property>
   </action>
  </widget>
