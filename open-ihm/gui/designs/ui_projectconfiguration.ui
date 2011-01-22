@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>669</width>
-    <height>515</height>
+    <width>678</width>
+    <height>537</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>669</width>
-    <height>515</height>
+    <width>678</width>
+    <height>537</height>
    </size>
   </property>
   <property name="sizeIncrement">
@@ -56,12 +56,12 @@
     <rect>
      <x>10</x>
      <y>40</y>
-     <width>651</width>
-     <height>431</height>
+     <width>661</width>
+     <height>451</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="tabProjectHouseholdCharacteristics">
     <attribute name="title">
@@ -646,12 +646,548 @@
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="tabIncome">
+    <attribute name="title">
+     <string>Income Sources</string>
+    </attribute>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>0</y>
+       <width>641</width>
+       <height>421</height>
+      </rect>
+     </property>
+     <property name="tabPosition">
+      <enum>QTabWidget::North</enum>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="tabCrops">
+      <attribute name="title">
+       <string>Crops</string>
+      </attribute>
+      <widget class="QLabel" name="label_26">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>171</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Available Crops</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="lstAvailableCropTypes">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>261</width>
+         <height>361</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_27">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>10</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Selected Crops</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdCropsRemoveAll">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>170</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;&lt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdCropsRemoveSelected">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>250</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdCropsMoveSelected">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>210</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&gt;</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="lstSelectedCropTypes">
+       <property name="geometry">
+        <rect>
+         <x>370</x>
+         <y>30</y>
+         <width>261</width>
+         <height>361</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdCropsMoveAll">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>130</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&gt;&gt;</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabEmployment">
+      <attribute name="title">
+       <string>Employment</string>
+      </attribute>
+      <widget class="QLabel" name="label_28">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>10</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Selected Employment Types</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdEmploymentRemoveAll">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>170</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;&lt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdEmploymentMoveSelected">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>210</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&gt;</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="lstAvailableEmployentTypes">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>261</width>
+         <height>361</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QListView" name="lstSelectedEmploymentTypes">
+       <property name="geometry">
+        <rect>
+         <x>370</x>
+         <y>30</y>
+         <width>261</width>
+         <height>361</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdEmploymentMoveAll">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>130</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&gt;&gt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdEmploymentRemoveSelected">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>250</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_29">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>171</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Available Employment Types</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabLivestock">
+      <attribute name="title">
+       <string>Livestock &amp; Livestock Products</string>
+      </attribute>
+      <widget class="QLabel" name="label_30">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>181</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Available Livestock &amp; Livestock Types</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdLivestockRemoveSelected">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>250</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_31">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>10</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Selected Livestock &amp; Livestock Types</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="lstAvailableLivestock">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>261</width>
+         <height>361</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdLivestockRemoveAll">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>170</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;&lt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdLivestockMoveSelected">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>210</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&gt;</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="lstSelectedLivestock">
+       <property name="geometry">
+        <rect>
+         <x>370</x>
+         <y>30</y>
+         <width>261</width>
+         <height>361</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdLivestockMoveAll">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>130</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&gt;&gt;</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabTransfers">
+      <attribute name="title">
+       <string>Transfers</string>
+      </attribute>
+      <widget class="QLabel" name="label_32">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>171</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Available Transfer Types</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="lstAvailableTransfers">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>261</width>
+         <height>361</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdTransfersMoveSelected">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>210</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&gt;</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="lstSelectedTransfers">
+       <property name="geometry">
+        <rect>
+         <x>370</x>
+         <y>30</y>
+         <width>261</width>
+         <height>361</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_33">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>10</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Selected Transfer Types</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdTransfersRemoveAll">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>170</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;&lt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdTransfersMoveAll">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>130</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&gt;&gt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdTransfersRemoveSelected">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>250</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabWildFoods">
+      <attribute name="title">
+       <string>Wild Foods</string>
+      </attribute>
+      <widget class="QLabel" name="label_34">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>10</y>
+         <width>211</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Selected Food Types</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="lstAvailableWildFoods">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>261</width>
+         <height>361</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QListView" name="lstSelectedWildFoods">
+       <property name="geometry">
+        <rect>
+         <x>370</x>
+         <y>30</y>
+         <width>261</width>
+         <height>361</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdWildFoodMoveSelected">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>210</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&gt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdWildFoodRemoveAll">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>170</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;&lt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdWildFoodRemoveSelected">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>250</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&lt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cmdWildFoodMoveAll">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>120</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>&gt;&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_35">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>171</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Available Food Types</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
   </widget>
   <widget class="QPushButton" name="cmdClose">
    <property name="geometry">
     <rect>
      <x>560</x>
-     <y>480</y>
+     <y>500</y>
      <width>91</width>
      <height>31</height>
     </rect>

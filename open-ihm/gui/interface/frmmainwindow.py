@@ -45,6 +45,7 @@ from outputs.routines.generate_data_entry_sheet import DataEntrySheets
 from inputs.read_data_entry_sheets import ReadDataEntrySheets
 
 
+
 class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	''' Creates the Main Window of the application using the main 
 	window design in the gui.designs.ui_mainwindow module '''
