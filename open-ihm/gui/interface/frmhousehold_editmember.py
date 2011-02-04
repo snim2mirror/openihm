@@ -106,9 +106,13 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember):
              headhousehold = "No"
          
          pid = self.parent.parent.projectid
+         periodaway = self.cmbMonthsAbsent.currentText()
+         reason = self.txtReason.text()
+         whereto = self.txtWhere.text()
          # create UPDATE query
-         query = '''UPDATE householdmembers SET personid='%s', headofhousehold='%s', yearofbirth=%s, sex='%s',
-             education='%s' WHERE hhid=%s AND personid='%s' AND pid=%s''' % (memberid, headhousehold, yearofbirth, sex, education, self.hhid, self.currentid, pid)
+         query = '''UPDATE householdmembers SET personid='%s', headofhousehold='%s', yearofbirth=%s, sex='%s', 
+             periodaway=%s, reason='%s', whereto='%s',education='%s' WHERE hhid=%s AND personid='%s' 
+             AND pid=%s''' % (memberid, headhousehold, yearofbirth, sex, periodaway,  reason,  whereto, education, self.hhid, self.currentid, pid)
     
          # execute query and commit changes
          db = data.mysql.connector.Connect(**self.config)

@@ -216,7 +216,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		hhid = temp[0] 
 		pid = self.parent.projectid
 		# select query to retrieve household members
-		query = '''SELECT personid, headofhousehold, yearofbirth, sex 
+		query = '''SELECT personid, headofhousehold, yearofbirth, sex, periodaway 
 		             FROM householdmembers WHERE hhid=%i and pid=%i ORDER BY yearofbirth ''' % (hhid,  pid)
 		
 		# retrieve and display members
@@ -232,6 +232,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		model.setHorizontalHeaderItem(1,QStandardItem('Head of Household'))
 		model.setHorizontalHeaderItem(2,QStandardItem('Age'))
 		model.setHorizontalHeaderItem(3,QStandardItem('Sex'))
+		model.setHorizontalHeaderItem(4,QStandardItem('Months Absent'))        
 		
 		# add  data rows
 		num = 0
@@ -244,12 +245,14 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 			qtAge = QStandardItem( "%i" % age )
 			
 			qtSex = QStandardItem( row[3] )
-			
+			qtMonthsAbsent = QStandardItem( "%i" % row[4] )
+			qtMonthsAbsent.setTextAlignment( Qt.AlignCenter)
 			
 			model.setItem( num, 0, qtMemberID )
 			model.setItem( num, 1, qtHouseholdHead )
 			model.setItem( num, 2, qtAge )
 			model.setItem( num, 3, qtSex )
+			model.setItem( num, 4, qtMonthsAbsent )            
 			num = num + 1
 		
 		cursor.close()   
