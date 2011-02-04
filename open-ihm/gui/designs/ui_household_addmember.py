@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_addmember.ui'
 #
-# Created: Fri Feb 04 18:08:42 2011
+# Created: Fri Feb 04 20:39:20 2011
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -90,9 +90,6 @@ class Ui_AddHouseholdMember(object):
         font.setPointSize(10)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
-        self.txtMonthAbsent = QtGui.QLineEdit(self.groupBox_2)
-        self.txtMonthAbsent.setGeometry(QtCore.QRect(110, 30, 121, 20))
-        self.txtMonthAbsent.setObjectName("txtMonthAbsent")
         self.label_6 = QtGui.QLabel(self.groupBox_2)
         self.label_6.setGeometry(QtCore.QRect(10, 60, 101, 21))
         self.label_6.setObjectName("label_6")
@@ -105,14 +102,29 @@ class Ui_AddHouseholdMember(object):
         self.txtWhere = QtGui.QLineEdit(self.groupBox_2)
         self.txtWhere.setGeometry(QtCore.QRect(110, 90, 251, 20))
         self.txtWhere.setObjectName("txtWhere")
+        self.cmbMonthsAbsent = QtGui.QComboBox(self.groupBox_2)
+        self.cmbMonthsAbsent.setGeometry(QtCore.QRect(110, 30, 61, 22))
+        self.cmbMonthsAbsent.setObjectName("cmbMonthsAbsent")
+        self.cmbMonthsAbsent.addItem("")
+        self.cmbMonthsAbsent.addItem("")
+        self.cmbMonthsAbsent.addItem("")
+        self.cmbMonthsAbsent.addItem("")
+        self.cmbMonthsAbsent.addItem("")
+        self.cmbMonthsAbsent.addItem("")
+        self.cmbMonthsAbsent.addItem("")
+        self.cmbMonthsAbsent.addItem("")
+        self.cmbMonthsAbsent.addItem("")
+        self.cmbMonthsAbsent.addItem("")
+        self.cmbMonthsAbsent.addItem("")
+        self.cmbMonthsAbsent.addItem("")
+        self.cmbMonthsAbsent.addItem("")
 
         self.retranslateUi(AddHouseholdMember)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdMember)
         AddHouseholdMember.setTabOrder(self.cboSex, self.txtAge)
         AddHouseholdMember.setTabOrder(self.txtAge, self.cmbYearOfBirth)
         AddHouseholdMember.setTabOrder(self.cmbYearOfBirth, self.chkHeadHousehold)
-        AddHouseholdMember.setTabOrder(self.chkHeadHousehold, self.txtMonthAbsent)
-        AddHouseholdMember.setTabOrder(self.txtMonthAbsent, self.txtReason)
+        AddHouseholdMember.setTabOrder(self.chkHeadHousehold, self.txtReason)
         AddHouseholdMember.setTabOrder(self.txtReason, self.txtWhere)
         AddHouseholdMember.setTabOrder(self.txtWhere, self.cmdSave)
         AddHouseholdMember.setTabOrder(self.cmdSave, self.cmdCancel)
@@ -134,4 +146,17 @@ class Ui_AddHouseholdMember(object):
         self.label_5.setText(QtGui.QApplication.translate("AddHouseholdMember", "Month Absent:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("AddHouseholdMember", "Reason:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_7.setText(QtGui.QApplication.translate("AddHouseholdMember", "Where To:", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(0, QtGui.QApplication.translate("AddHouseholdMember", "0", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(1, QtGui.QApplication.translate("AddHouseholdMember", "1", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(2, QtGui.QApplication.translate("AddHouseholdMember", "2", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(3, QtGui.QApplication.translate("AddHouseholdMember", "3", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(4, QtGui.QApplication.translate("AddHouseholdMember", "4", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(5, QtGui.QApplication.translate("AddHouseholdMember", "5", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(6, QtGui.QApplication.translate("AddHouseholdMember", "6", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(7, QtGui.QApplication.translate("AddHouseholdMember", "7", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(8, QtGui.QApplication.translate("AddHouseholdMember", "8", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(9, QtGui.QApplication.translate("AddHouseholdMember", "9", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(10, QtGui.QApplication.translate("AddHouseholdMember", "10", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(11, QtGui.QApplication.translate("AddHouseholdMember", "11", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbMonthsAbsent.setItemText(12, QtGui.QApplication.translate("AddHouseholdMember", "12", None, QtGui.QApplication.UnicodeUTF8))
 
