@@ -13,7 +13,7 @@ import data.mysql.connector
 from data.controller import Controller
 
 # import the Create Project Dialog design class
-from gui.designs.ui_projectconfiguration import Ui_ProjectConfiguration
+from gui.designs.ui_projectconfiguration_1 import Ui_ProjectConfiguration
 
 class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):	
      ''' Creates the Edit Project form. '''	
@@ -643,3 +643,79 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
         ''' remove selected household characteristics from Project'''
         self.removeSelectedChars("person", self.lstPersonalSelectedChars)
         self.displaySelectedChars( "person", self.lstPersonalSelectedChars )
+
+     #--------------------------------------------------------------------------------------------------------------------------
+     #  Income Sources
+     #-------------------------------------------------------------------------------------------------------------------------
+        
+     def getProjectIncomeSources(self, lstVw):
+        incomesources = []
+        row = 0
+        while (lstVw.model().item(row,0)):
+            val = lstVw.model().item(row,0).text()
+            incomesources.append(val)
+            row = row + 1
+            
+        return incomesources
+        
+     def displayAvailableIncomeSources(self, incometype, lstAvailable):
+          ''' Retrieve and display available Income Source Types''' 
+          controller = Controller()
+          if incometype == "crops":
+               chars = controller.getGlobalCropTypes()
+          if incometype == "employment":
+               chars = controller.getGlobalEmploymentTypes()
+          if incometype == "livestock":
+               chars = controller.getGlobaLivestockTypes()
+          if incometype == "transfers":
+               chars = controller.getGlobalTransferTypes()
+          if incometype == "wildfoods":
+               chars = controller.getGlobalWildFoodTypes()
+             
+          
+        
+          model = QStandardItemModel(1,3)
+        
+          # set model headers
+          model.setHorizontalHeaderItem(0,QStandardItem('Characteristic'))
+          model.setHorizontalHeaderItem(1,QStandardItem('Measuring Unit'))
+        
+          # add  data rows
+          num = 0
+        
+          for characteristic in chars:
+               qtCharacteristic = QStandardItem( characteristic.getName() )
+               qtDataType = QStandardItem( "%i" % characteristic.getDataType() )		
+               model.setItem( num, 0, qtCharacteristic )
+               model.setItem( num, 1, qtDataType )
+               num = num + 1
+        
+          lstAvailable.setModel(model)
+          lstAvailable.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        
+     def displaySelectedIncomeSources(self, chartype, lstSelected):
+          
+          ''' Retrieve and display Project Characteristics (Household or Personal)'''
+          # select query to retrieve selected characteristics
+          if ( chartype == "household" ):
+               
+               chars = self.project.getHouseholdCharacteristics()
+          else:
+               chars = self.project.getPersonCharacteristics()
+
+          model = QStandardItemModel(1,1)
+
+          # set model headers
+          model.setHorizontalHeaderItem(0,QStandardItem('Characteristic'))
+
+          # add  data rows
+          num = 0
+
+          for characteristic in chars:
+               qtCharacteristic = QStandardItem( characteristic.getName() )	
+               model.setItem( num, 0, qtCharacteristic )
+               num = num + 1
+
+          lstSelected.setModel(model)
+          lstSelected.setSelectionMode(QAbstractItemView.ExtendedSelection)
+        

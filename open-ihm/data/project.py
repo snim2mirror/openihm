@@ -54,6 +54,10 @@ class Project:
         # create project specific tables (e.g. householdcharacteristics & personalcharacteristics)
         HouseholdCharacteristicsTableName 	= '''p%iHouseholdCharacteristics''' % (projectid)
         PersonalCharactericticsTableName	= '''p%iPersonalCharacteristics''' % (projectid)
+        CropsTableName	        = '''p%iCrops''' % (projectid)
+        EmploymentTableName	= '''p%iEmploymentTypes''' % (projectid)
+        LivestockTableName	= '''p%iLivestock''' % (projectid)
+        WildFoosTableName	= '''p%iWildFoods''' % (projectid)
         
         queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` (
 							`hhid` INT(11) NOT NULL ,
@@ -85,6 +89,40 @@ class Project:
 						 DEFAULT CHARACTER SET = latin1;''' % (PersonalCharactericticsTableName, projectid, projectid)
         
         self.database.execDefinitionQuery( queryCreate )
+
+        queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` (
+						  `foodtype` VARCHAR(50) NOT NULL ,
+						  `energyvalueperunit` INT(11) NOT NULL ,
+						  `measuringunit` VARCHAR(20),
+						  PRIMARY KEY (`foodtype`) ,
+						  INDEX (`foodtype` ASC) )
+						 ENGINE = InnoDB
+						 DEFAULT CHARACTER SET = latin1;''' % (CropsTableName)
+        
+        self.database.execDefinitionQuery( queryCreate )
+
+        queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` (
+						  `incomesource` VARCHAR(50) NOT NULL ,
+						  `energyvalueperunit` INT(11) NOT NULL ,
+						  `measuringunit` VARCHAR(20),
+						  PRIMARY KEY (`incomesource`) ,
+						  INDEX (`incomesource` ASC) )
+						 ENGINE = InnoDB
+						 DEFAULT CHARACTER SET = latin1;''' % (LivestockTableName)
+        
+        self.database.execDefinitionQuery( queryCreate )
+
+        queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` (
+						  `incomesource` VARCHAR(50) NOT NULL ,
+						  `energyvalueperunit` INT(11) NOT NULL ,
+						  `measuringunit` VARCHAR(20),
+						  PRIMARY KEY (`incomesource`) ,
+						  INDEX (`incomesource` ASC) )
+						 ENGINE = InnoDB
+						 DEFAULT CHARACTER SET = latin1;''' % (WildFoosTableName)
+        
+        self.database.execDefinitionQuery( queryCreate )
+        
         self.database.close()
         
         # set project attributes to saved values
