@@ -95,7 +95,7 @@ class DatabaseInitialiser:
          db = Connect(**dbinfo)             
          cursor = db.cursor()
          
-         query = "SHOW COLUMNS FROM standardofliving"
+         query = "SHOW COLUMNS FROM householdmembers"
          
          cursor.execute(query)
          rows = cursor.fetchall()
@@ -106,7 +106,7 @@ class DatabaseInitialiser:
          upToDate = False
          for row in rows:
              for field in row:
-                 if field == "summary":
+                 if field == "periodaway":
                      upToDate = True
          
          return upToDate
