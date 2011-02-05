@@ -13,7 +13,7 @@ import data.mysql.connector
 from data.controller import Controller
 
 # import the Create Project Dialog design class
-from gui.designs.ui_projectconfiguration_1 import Ui_ProjectConfiguration
+from gui.designs.ui_projectconfiguration import Ui_ProjectConfiguration
 
 class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):	
      ''' Creates the Edit Project form. '''	

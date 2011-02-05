@@ -73,9 +73,12 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember):
         	headhousehold = "No"
         
         pid = self.parent.parent.projectid
+        periodaway = self.cmbMonthsAbsent.currentText()
+        reason = self.txtReason.text()
+        whereto = self.txtWhere.text()
         # create UPDATE query
         query = '''INSERT INTO householdmembers 
-        	    VALUES('%s',%s,'%s',%s,'%s','%s',%s)''' % (memberid, self.hhid, headhousehold, yearofbirth, sex, education, pid)
+        	    VALUES('%s',%s,'%s',%s,'%s','%s',%s,%s,'%s','%s')''' % (memberid, self.hhid, headhousehold, yearofbirth, sex, education, pid, periodaway, reason, whereto)
     
         # execute query and commit changes
         cursor =  self.db.cursor()
