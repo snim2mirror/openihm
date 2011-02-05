@@ -4,6 +4,7 @@
 import data.mysql.connector
 from data.config import Config
 from data.database import Database
+from datetime import date
 
 class AdultEquivalent:
 
@@ -27,7 +28,7 @@ class AdultEquivalent:
             # adjust member's yearly energy requirement according to absence from household
             adjustedenergyreq = self.adjustMemberEnergyReq(memberid,hid,pid,energyreq)
 
-        householdenergyreq = householdenergyreq + adjustedenergyreq
+            householdenergyreq = householdenergyreq + adjustedenergyreq
         return householdenergyreq
 
     def calculateEnergyReqByAgeSex(self,age,gender):

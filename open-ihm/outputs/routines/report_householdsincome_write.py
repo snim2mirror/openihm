@@ -4,6 +4,8 @@
 
 from xlwt import Workbook, easyxf
 from time import time
+import os
+from PyQt4 import QtGui
 
 class HouseholdsIncomeWrite:
     #def __init__(self):
@@ -16,7 +18,7 @@ class HouseholdsIncomeWrite:
         style1 = easyxf('font: name Arial;''font: bold True;')
 
 
-        #Wrire Table Title
+        #Write Table Title
         reptitle = "%s" % reporttype
         sheet1.write(0, 0, reptitle, style1) 
         sheet1.col(0).width = 1500
@@ -26,6 +28,7 @@ class HouseholdsIncomeWrite:
             row = reporttable[0]
             keylist = row.keys()
             keylist.sort()
+            print keylist
             for key in keylist:
                 if key =='hhid':
                     sheet1.write(2, 0, key, style1)
@@ -52,6 +55,12 @@ class HouseholdsIncomeWrite:
                         mycol = mycol + 1
                 mycol =1
                 myrow = myrow + 1
-        filename = "outputs/spreadsheets/income_sources/" +"openihm_incomesources-" + str(time()) + ".xls"
-        book.save(filename) 
+                
+        folder = "outputs/spreadsheets/income_sources/"
+        filename =  folder + "openihm_incomesources-" + str(time()) + ".xls"
+        book.save(filename)
+       
+        completionmessage = '''Report Table Spreadsheet Saved As open-ihm/''' + str(filename) +'''\n\nClick OK to open the spreadsheet. This may take a few seconds. '''
+        QtGui.QMessageBox.information(None, 'Report Table', completionmessage)
+        #os.system(os.path.curdir + "\\outputs\\spreadsheets\\income_sources\\openihm_incomesources-" + str(time()) + ".xls")
  

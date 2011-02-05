@@ -9,6 +9,7 @@ from data.config import Config
 from data.database import Database
 from data.report_settingsmanager import ReportsSettingsManager
 from report_householdsincome_query import HouseholdIncomeQuery
+from report_adultequivalent import AdultEquivalent
 
 class HouseholdIncome:
     def __init__(self):
@@ -131,6 +132,8 @@ class HouseholdIncome:
                     query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitssold * unitprice,NULL)) AS '%s'" %(myincomesource,myincomesource)
                 query = query + " FROM cropincome WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
                 query = query + " GROUP BY hhid"
+        print query
+
         return query            
 
     def buildEmploymentIncomeQuery(self,projectid,employmentdetails,householdids):
@@ -222,20 +225,20 @@ class HouseholdIncome:
             db = data.mysql.connector.Connect(**self.config)
             cursor = db.cursor()
 	    cursor.execute(query)
-	    
             columns = tuple( [d[0].decode('utf8') for d in cursor.description] )
- 	    
-            for row in cursor.fetchall():
+            rows = cursor.fetchall()
+            for row in rows:
+                print row
                 result.append(dict(zip(columns, row)))
+                
 	    # close database connection
             cursor.close()
             db.close()
-            
         return result
 
 
 
-    #Build Queries for Food Income
+    #Build Queries for Raw Income
     def buildCropFIncomeQuery(self,projectid,cropdetails,householdids):
         houseids = ','.join(householdids)
         incomesources = ','.join("'" + p + "'" for p in cropdetails)
@@ -324,4 +327,29 @@ class HouseholdIncome:
                     query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitsconsumed * ( SELECT energyvalueperunit FROM setup_foods_crops WHERE name ='%s'),NULL)) AS '%s'" %(myincomesource,myincomesource,myincomesource)
                 query = query + " FROM wildfoods WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
                 query = query + " GROUP BY hhid"
+        return query
+
+    #Standardised income - Cash Income
+
+    def buildStandardisedCropIncomeQuery(self,projectid,cropdetails,householdids):
+        houseids = ','.join(householdids)
+        incomesources = ','.join("'" + p + "'" for p in cropdetails)
+        allincomesources = 'All'
+        query =''
+
+        if len(cropdetails)!=0:
+            if allincomesources in cropdetails:
+                query = '''SELECT hhid,SUM(unitssold * unitprice) AS cropincome
+                                FROM cropincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+            else:
+                query = "SELECT hhid"
+                for myincomesource in cropdetails:
+                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitssold * unitprice,NULL)) AS '%s'" %(myincomesource,myincomesource)
+                query = query + " FROM cropincome WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
+                query = query + " GROUP BY hhid"
         return query            
+
+    def getHouseholdAdultEquivalent(self,projectid,householdids):
+        adultEquivalentCalculator = AdultEquivalent()
+        householdAdultEquivalent = adultEquivalentCalculator.calculateHouseholdEnergyReq(householdids,projectid)
+        return householdAdultEquivalent

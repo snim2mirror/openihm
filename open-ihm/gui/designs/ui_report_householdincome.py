@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdincome.ui'
 #
-# Created: Tue Oct 26 19:31:49 2010
+# Created: Wed Feb 02 21:40:41 2011
 #      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -66,6 +66,8 @@ class Ui_HouseholdIncomeReport(object):
         self.cmbReportType = QtGui.QComboBox(HouseholdIncomeReport)
         self.cmbReportType.setGeometry(QtCore.QRect(120, 40, 281, 22))
         self.cmbReportType.setObjectName(_fromUtf8("cmbReportType"))
+        self.cmbReportType.addItem(_fromUtf8(""))
+        self.cmbReportType.addItem(_fromUtf8(""))
         self.cmbReportType.addItem(_fromUtf8(""))
         self.cmbReportType.addItem(_fromUtf8(""))
         self.label_2 = QtGui.QLabel(HouseholdIncomeReport)
@@ -138,7 +140,9 @@ class Ui_HouseholdIncomeReport(object):
         self.label_5.setText(QtGui.QApplication.translate("HouseholdIncomeReport", "Personal Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdSaveDataTable.setText(QtGui.QApplication.translate("HouseholdIncomeReport", "Save Data Table", None, QtGui.QApplication.UnicodeUTF8))
         self.cmbReportType.setItemText(0, QtGui.QApplication.translate("HouseholdIncomeReport", "Cash Income - Raw", None, QtGui.QApplication.UnicodeUTF8))
-        self.cmbReportType.setItemText(1, QtGui.QApplication.translate("HouseholdIncomeReport", "Food Income - Raw", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbReportType.setItemText(1, QtGui.QApplication.translate("HouseholdIncomeReport", "Cash Income - Standardised", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbReportType.setItemText(2, QtGui.QApplication.translate("HouseholdIncomeReport", "Food Income - Raw", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbReportType.setItemText(3, QtGui.QApplication.translate("HouseholdIncomeReport", "Food Income - Standardised", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("HouseholdIncomeReport", "Report Type", None, QtGui.QApplication.UnicodeUTF8))
         self.cmbOrderCriteria1.setItemText(0, QtGui.QApplication.translate("HouseholdIncomeReport", "Household Number", None, QtGui.QApplication.UnicodeUTF8))
         self.cmbOrderCriteria1.setItemText(1, QtGui.QApplication.translate("HouseholdIncomeReport", "Household Name", None, QtGui.QApplication.UnicodeUTF8))

@@ -194,7 +194,17 @@
    </item>
    <item>
     <property name="text">
+     <string>Cash Income - Standardised</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
      <string>Food Income - Raw</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>Food Income - Standardised</string>
     </property>
    </item>
   </widget>
