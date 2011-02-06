@@ -60,7 +60,6 @@ class HouseholdsIncomeWrite:
         filename =  folder + "openihm_incomesources-" + str(time()) + ".xls"
         book.save(filename)
        
-        completionmessage = '''Report Table Spreadsheet Saved As open-ihm/''' + str(filename) +'''\n\nClick OK to open the spreadsheet. This may take a few seconds. '''
+        completionmessage = '''Report Table Spreadsheet Saved As open-ihm/''' + str(filename) 
         QtGui.QMessageBox.information(None, 'Report Table', completionmessage)
         #os.system(os.path.curdir + "\\outputs\\spreadsheets\\income_sources\\openihm_incomesources-" + str(time()) + ".xls")
- 
