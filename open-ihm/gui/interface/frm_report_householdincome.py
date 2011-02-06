@@ -572,10 +572,12 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         return incomeIndexes
 
     def getReportTable (self):
-        
+
+        pid = self.getProjectID()
+        reporttype = self.setReportType()
         reportQuery =self.getFinalReportTableQuery()
         connector = HouseholdIncome()
-        reportTable = connector.getReportTable(reportQuery)
+        reportTable = connector.getReportTable(reportQuery,pid,reporttype)
         return reportTable
 
     def getFinalReportTableQuery(self):

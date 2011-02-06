@@ -94,7 +94,7 @@ class HouseholdIncome:
 
     def getFinalIncomeReportTableQuery(self,reporttype,projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails):
 
-        if reporttype =='Cash Income - Raw':
+        if reporttype =='Cash Income - Raw' or reporttype =='Cash Income - Standardised':
             cropsQuery = self.buildCropIncomeQuery(projectid,cropdetails,householdIDs)
             employmentQuery = self.buildEmploymentIncomeQuery(projectid,employmentdetails,householdIDs)
             livestockQuery = self.buildLivestockIncomeQuery(projectid,livestockdetails,householdIDs)
@@ -103,7 +103,7 @@ class HouseholdIncome:
             transfersQuery = self.buildTransferIncomeQuery(projectid,transferdetails,householdIDs)
             wildfoodsQuery = self.buildWildFoodsIncomeQuery(projectid,wildfoodsdetails,householdIDs)
 
-        elif reporttype =='Food Income - Raw':
+        elif reporttype =='Food Income - Raw' or reporttype =='Food Income - Standardised':
             cropsQuery = self.buildCropFIncomeQuery(projectid,cropdetails,householdIDs)
             employmentQuery = self.buildEmploymentFIncomeQuery(projectid,employmentdetails,householdIDs)
             livestockQuery = self.buildLivestockFIncomeQuery(projectid,livestockdetails,householdIDs)
@@ -132,7 +132,6 @@ class HouseholdIncome:
                     query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitssold * unitprice,NULL)) AS '%s'" %(myincomesource,myincomesource)
                 query = query + " FROM cropincome WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
                 query = query + " GROUP BY hhid"
-        print query
 
         return query            
 
@@ -218,24 +217,45 @@ class HouseholdIncome:
                 query = query + " GROUP BY hhid"
         return query            
 
-    def getReportTable(self,query):
+    def getReportTable(self,query,pid,reporttype):
         result = []
         databaseConnector = Database()
         if query !='':
             db = data.mysql.connector.Connect(**self.config)
             cursor = db.cursor()
 	    cursor.execute(query)
-            columns = tuple( [d[0].decode('utf8') for d in cursor.description] )
+            columns = tuple( [d[0].decode('utf8') for d in cursor.description] ) #get column headers
             rows = cursor.fetchall()
             for row in rows:
-                print row
-                result.append(dict(zip(columns, row)))
+                if reporttype == 'Cash Income - Standardised' or reporttype == 'Food Income - Standardised':
+                    hhid = row[0]
+                    householdAE = self.getAdultEquivalent(hhid,pid)
+                    standardisedList = tuple(self.standardiseIncome(row,householdAE))
+                    result.append(dict(zip(columns, standardisedList)))
+                else:
+                    result.append(dict(zip(columns, row)))
                 
 	    # close database connection
             cursor.close()
             db.close()
         return result
 
+    def getAdultEquivalent(self, hhid,pid):
+        adultEquivalentCalc = AdultEquivalent()
+        householdAE = adultEquivalentCalc.calculateHouseholdEnergyReq(hhid,pid) 
+        return householdAE
+        
+    def standardiseIncome(self,row,householdAE):
+        standardisedList =[]
+        standardisedList.append(row[0])
+        listlength = len(row)
+        houseAE = householdAE
+        for i in range(1,listlength):
+            stardisedincome = row[i]
+            if row[i]:
+                stardisedincome=row[i]/householdAE
+            standardisedList.append(stardisedincome)
+        return standardisedList
 
 
     #Build Queries for Raw Income
@@ -320,7 +340,7 @@ class HouseholdIncome:
         if len(wildfoodsdetails)!=0:
             if allincomesources in wildfoodsdetails:
                 query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=wildfoods.incomesource))
-                            AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) AND GROUP BY hhid''' % (projectid,houseids)
+                            AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
             else:
                 query = "SELECT hhid"
                 for myincomesource in wildfoodsdetails:
