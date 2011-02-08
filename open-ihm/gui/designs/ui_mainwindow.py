@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Tue Feb 08 17:16:29 2011
+# Created: Tue Feb 08 21:43:04 2011
 #      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -142,6 +142,8 @@ class Ui_MainWindow(object):
         self.actionConfigure_Project_Income.setObjectName(_fromUtf8("actionConfigure_Project_Income"))
         self.actionDisposable_Income = QtGui.QAction(MainWindow)
         self.actionDisposable_Income.setObjectName(_fromUtf8("actionDisposable_Income"))
+        self.actionInitialise_Energy_Requirement_Table = QtGui.QAction(MainWindow)
+        self.actionInitialise_Energy_Requirement_Table.setObjectName(_fromUtf8("actionInitialise_Energy_Requirement_Table"))
         self.menuProject.addAction(self.actionCreate_Project)
         self.menuProject.addAction(self.actionOpen_Project)
         self.menuProject.addAction(self.actionFind_Project)
@@ -165,10 +167,12 @@ class Ui_MainWindow(object):
         self.menuData_Management.addSeparator()
         self.menuData_Management.addAction(self.actionFood_Types)
         self.menuData_Management.addAction(self.actionEnergy_Requirements)
-        self.menuData_Management.addAction(self.actionInitialise_Food_Energy_Table)
         self.menuData_Management.addSeparator()
         self.menuData_Management.addAction(self.actionManage_Currencies)
         self.menuData_Management.addAction(self.actionManage_Standard_of_Living_Items)
+        self.menuData_Management.addSeparator()
+        self.menuData_Management.addAction(self.actionInitialise_Energy_Requirement_Table)
+        self.menuData_Management.addAction(self.actionInitialise_Food_Energy_Table)
         self.menuHelp.addAction(self.actionContents)
         self.menuHelp.addAction(self.actionAboutOpenIHM)
         self.menuHousehold.addAction(self.actionAdd_Household)
@@ -211,7 +215,7 @@ class Ui_MainWindow(object):
         self.actionPersonal_Characteristics.setText(QtGui.QApplication.translate("MainWindow", "Personal Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAsset_Details.setText(QtGui.QApplication.translate("MainWindow", "Asset Details", None, QtGui.QApplication.UnicodeUTF8))
         self.actionIncome_Source_Details.setText(QtGui.QApplication.translate("MainWindow", "Income Source Details", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionFood_Types.setText(QtGui.QApplication.translate("MainWindow", "Food Type Details", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionFood_Types.setText(QtGui.QApplication.translate("MainWindow", "View Food Type Details", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLand_Types.setText(QtGui.QApplication.translate("MainWindow", "Land Types", None, QtGui.QApplication.UnicodeUTF8))
         self.actionExpenditure_Types.setText(QtGui.QApplication.translate("MainWindow", "Expenditure Details", None, QtGui.QApplication.UnicodeUTF8))
         self.actionContents.setText(QtGui.QApplication.translate("MainWindow", "Contents", None, QtGui.QApplication.UnicodeUTF8))
@@ -241,7 +245,7 @@ class Ui_MainWindow(object):
         self.actionExit.setText(QtGui.QApplication.translate("MainWindow", "Exit", None, QtGui.QApplication.UnicodeUTF8))
         self.actionFind_Household.setText(QtGui.QApplication.translate("MainWindow", "Find Household", None, QtGui.QApplication.UnicodeUTF8))
         self.actionView_All_Households_2.setText(QtGui.QApplication.translate("MainWindow", "View All Households", None, QtGui.QApplication.UnicodeUTF8))
-        self.actionEnergy_Requirements.setText(QtGui.QApplication.translate("MainWindow", "Food Energy Requirements", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionEnergy_Requirements.setText(QtGui.QApplication.translate("MainWindow", "View Food Energy Requirements", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAdd.setText(QtGui.QApplication.translate("MainWindow", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.actionHousehold_by_Characteristics.setText(QtGui.QApplication.translate("MainWindow", "Households List by Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.actionManage_Currencies.setText(QtGui.QApplication.translate("MainWindow", "Manage Currencies", None, QtGui.QApplication.UnicodeUTF8))
@@ -251,4 +255,5 @@ class Ui_MainWindow(object):
         self.actionManage_Standard_of_Living_Items.setText(QtGui.QApplication.translate("MainWindow", "Manage Standard of Living Items", None, QtGui.QApplication.UnicodeUTF8))
         self.actionConfigure_Project_Income.setText(QtGui.QApplication.translate("MainWindow", "Select Project Income", None, QtGui.QApplication.UnicodeUTF8))
         self.actionDisposable_Income.setText(QtGui.QApplication.translate("MainWindow", "Disposable Income", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionInitialise_Energy_Requirement_Table.setText(QtGui.QApplication.translate("MainWindow", "Initialise Energy Requirements Table", None, QtGui.QApplication.UnicodeUTF8))
 

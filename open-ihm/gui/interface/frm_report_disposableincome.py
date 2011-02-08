@@ -254,16 +254,10 @@ class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
 
         projectid = self.getProjectID()
         householdIDs = self.getReportHouseholdIDs()
-        cropdetails = self.getCropReportDetails()
-        employmentdetails = self.getEmploymentReportDetails()
-        livestockdetails = self.getLivestockReportDetails()
-        loandetails = self.getLoansReportDetails()
-        transferdetails = self.getTransfersDetails()
-        wildfoodsdetails = self.getWildFoodDetails()
         reporttype = self.setReportType()
 
         connector = HouseholdIncome()
-        householdIDsQuery = connector.getFinalIncomeReportTableQuery(reporttype,projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails )
+        householdIDsQuery = connector.getFinalIncomeReportTableQuery(reporttype,projectid,householdIDs)
         return householdIDsQuery
 
     def writeTable(self):

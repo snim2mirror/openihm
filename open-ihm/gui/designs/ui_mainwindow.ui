@@ -55,10 +55,12 @@
     <addaction name="separator"/>
     <addaction name="actionFood_Types"/>
     <addaction name="actionEnergy_Requirements"/>
-    <addaction name="actionInitialise_Food_Energy_Table"/>
     <addaction name="separator"/>
     <addaction name="actionManage_Currencies"/>
     <addaction name="actionManage_Standard_of_Living_Items"/>
+    <addaction name="separator"/>
+    <addaction name="actionInitialise_Energy_Requirement_Table"/>
+    <addaction name="actionInitialise_Food_Energy_Table"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -162,7 +164,7 @@
   </action>
   <action name="actionFood_Types">
    <property name="text">
-    <string>Food Type Details</string>
+    <string>View Food Type Details</string>
    </property>
   </action>
   <action name="actionLand_Types">
@@ -310,7 +312,7 @@
   </action>
   <action name="actionEnergy_Requirements">
    <property name="text">
-    <string>Food Energy Requirements</string>
+    <string>View Food Energy Requirements</string>
    </property>
   </action>
   <action name="actionAdd">
@@ -356,6 +358,11 @@
   <action name="actionDisposable_Income">
    <property name="text">
     <string>Disposable Income</string>
+   </property>
+  </action>
+  <action name="actionInitialise_Energy_Requirement_Table">
+   <property name="text">
+    <string>Initialise Energy Requirements Table</string>
    </property>
   </action>
  </widget>

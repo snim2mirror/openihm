@@ -44,6 +44,8 @@ from data.setup_crops_startupvalues import FoodValuesStartup
 from outputs.routines.generate_data_entry_sheet import DataEntrySheets
 from inputs.read_data_entry_sheets import ReadDataEntrySheets
 from frm_report_disposableincome import HouseholdDisposableIncome
+from data.setup_foodrequirement_startupvalues import FoodRequirementValues
+
 
 
 
@@ -109,6 +111,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.connect(self.actionImport_Project_Data, QtCore.SIGNAL("triggered()"), self.importData)
 
 		self.connect(self.actionDisposable_Income, QtCore.SIGNAL("triggered()"), self.reportHouholdDisposableIncome)
+		self.connect(self.actionInitialise_Energy_Requirement_Table, QtCore.SIGNAL("triggered()"), self.initialiseFoodRequirementTable)
 		
 
 	def centerSubWindow(self, subWin):
@@ -365,3 +368,9 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
 	    form.show()
+
+	def initialiseFoodRequirementTable(self):
+                '''Create Initial Kcal values for certain crops/foods'''
+                initialiser = FoodRequirementValues()
+                initialiser.insertSartUpValues()
+	
