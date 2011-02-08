@@ -4,7 +4,6 @@
 import data.mysql.connector
 from data.config import Config
 from data.database import Database
-#from datetime import date
 import datetime
 
 class AdultEquivalent:

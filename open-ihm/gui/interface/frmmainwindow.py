@@ -43,6 +43,7 @@ from frmstandardoflivingmanager import FrmStandardOfLivingManager
 from data.setup_crops_startupvalues import FoodValuesStartup
 from outputs.routines.generate_data_entry_sheet import DataEntrySheets
 from inputs.read_data_entry_sheets import ReadDataEntrySheets
+from frm_report_disposableincome import HouseholdDisposableIncome
 
 
 
@@ -106,6 +107,8 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
 		self.connect(self.actionGenerate_Data_Entry_Sheets, QtCore.SIGNAL("triggered()"), self.createDataEntrySheets)
 		self.connect(self.actionImport_Project_Data, QtCore.SIGNAL("triggered()"), self.importData)
+
+		self.connect(self.actionDisposable_Income, QtCore.SIGNAL("triggered()"), self.reportHouholdDisposableIncome)
 		
 
 	def centerSubWindow(self, subWin):
@@ -356,3 +359,9 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
                         datasheet = ReadDataEntrySheets(self.projectid)
                         datasheet.readdata()
                 
+        def reportHouholdDisposableIncome(self):
+	    ''' Creates and Shows the Report: Household Disposable Income form '''
+	    form = HouseholdDisposableIncome(self)
+	    subWin = self.mdi.addSubWindow(form)
+	    self.centerSubWindow(subWin)
+	    form.show()

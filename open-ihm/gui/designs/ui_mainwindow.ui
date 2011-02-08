@@ -86,6 +86,7 @@
     </property>
     <addaction name="actionHousehold_by_Characteristics"/>
     <addaction name="actionIncome_By_Source"/>
+    <addaction name="actionDisposable_Income"/>
    </widget>
    <addaction name="menuProject"/>
    <addaction name="menuHousehold"/>
@@ -350,6 +351,11 @@
   <action name="actionConfigure_Project_Income">
    <property name="text">
     <string>Select Project Income</string>
+   </property>
+  </action>
+  <action name="actionDisposable_Income">
+   <property name="text">
+    <string>Disposable Income</string>
    </property>
   </action>
  </widget>
