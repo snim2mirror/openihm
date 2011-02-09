@@ -132,3 +132,5 @@ class ReportsSettingsManager:
             rows = self.database.execSelectQuery( query )
             self.database.close()
         return rows
+
+

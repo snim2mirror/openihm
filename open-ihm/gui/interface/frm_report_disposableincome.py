@@ -10,7 +10,7 @@ from PyQt4.QtGui import *
 # import packages
 from gui.designs.ui_report_householddisposableincome import Ui_HouseholdDisposableIncome
 from data.report_settingsmanager import ReportsSettingsManager
-from outputs.routines.report_householdsincome import HouseholdIncome
+from outputs.routines.report_disposable_income import DisposableHouseholdIncome
 from outputs.routines.report_householdsincome_write import HouseholdsIncomeWrite
 class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
     ''' Creates the Household Disposable Income Report from. Uses the design class
@@ -204,7 +204,7 @@ class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
         
         selectedids = []
         householdIDsQuery =self.getHouseholdIDsQuery()
-        connector = HouseholdIncome()
+        connector = DisposableHouseholdIncome()
         householdIDs = connector.getReportHouseholdIDs(householdIDsQuery)
         for hid in householdIDs:
             selectedids.append(str(hid[0]))
@@ -217,7 +217,7 @@ class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
         selectedHChars = self.getSelectedHouseholdCharacteristics()
         selectedPChars = self.getSelectedPersonalCharacteristics()
         selectedhouseholds = self.getHouseholdsSelection()
-        connector = HouseholdIncome()
+        connector = DisposableHouseholdIncome()
         householdIDsQuery = connector.buildReportHouseholdIDsQuery(projectid,selectedhouseholds,selectedPChars,selectedHChars)
         return householdIDsQuery
 
@@ -244,10 +244,13 @@ class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
     def getReportTable (self):
 
         pid = self.getProjectID()
+        householdIDs = self.getReportHouseholdIDs()
         reporttype = self.setReportType()
-        reportQuery =self.getFinalReportTableQuery()
-        connector = HouseholdIncome()
-        reportTable = connector.getReportTable(reportQuery,pid,reporttype)
+        #reportQuery =self.getFinalReportTableQuery()
+        connector = DisposableHouseholdIncome()
+        reportTable = connector.householdDisposableIncome(reporttype,pid,householdIDs)
+
+        #reportTable = connector.getReportTable(reportQuery,pid,reporttype)
         return reportTable
 
     def getFinalReportTableQuery(self):
@@ -256,7 +259,7 @@ class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
         householdIDs = self.getReportHouseholdIDs()
         reporttype = self.setReportType()
 
-        connector = HouseholdIncome()
+        connector = DisposableHouseholdIncome()
         householdIDsQuery = connector.getFinalIncomeReportTableQuery(reporttype,projectid,householdIDs)
         return householdIDsQuery
 
@@ -269,3 +272,4 @@ class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
     def setReportType(self):
         reporttype = self.cmbReportType.currentText()
         return reporttype
+
