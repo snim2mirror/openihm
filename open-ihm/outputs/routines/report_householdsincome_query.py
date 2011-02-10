@@ -1,6 +1,7 @@
 #-------------------------------------------------------------------	
 #	Filename: report_householdsincome_query.py
 #-------------------------------------------------------------------
+from PyQt4 import QtGui
 
 class HouseholdIncomeQuery:
     def __init__(self):
@@ -26,6 +27,6 @@ class HouseholdIncomeQuery:
                 if wildfoodsQuery !='':
                     self.query  = '''SELECT * FROM ((%s) table1 LEFT JOIN (%s) table2 USING (hhid) )''' % (self.query,wildfoodsQuery)
             else:
-                QMessageBox.information(self,"Households By Income Source","No Income sources Selected")
-        print self.query 
+                QtGui.QMessageBox.information(None,"Households By Income Source","No Income sources Selected")
+
         return self.query 
