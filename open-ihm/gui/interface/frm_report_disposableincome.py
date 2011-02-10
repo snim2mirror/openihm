@@ -11,7 +11,7 @@ from PyQt4.QtGui import *
 from gui.designs.ui_report_householddisposableincome import Ui_HouseholdDisposableIncome
 from data.report_settingsmanager import ReportsSettingsManager
 from outputs.routines.report_disposable_income import DisposableHouseholdIncome
-from outputs.routines.report_householdsincome_write import HouseholdsIncomeWrite
+from outputs.routines.report_disposableincome_write import HouseholdsIncomeWrite
 class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
     ''' Creates the Household Disposable Income Report from. Uses the design class
 		in gui.designs.ui_report_householddisposableincome. '''	
@@ -242,34 +242,25 @@ class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
         return hholdnames
 
     def getReportTable (self):
+        '''Get report table'''
 
         pid = self.getProjectID()
         householdIDs = self.getReportHouseholdIDs()
         reporttype = self.setReportType()
-        #reportQuery =self.getFinalReportTableQuery()
         connector = DisposableHouseholdIncome()
         reportTable = connector.householdDisposableIncome(reporttype,pid,householdIDs)
-
-        #reportTable = connector.getReportTable(reportQuery,pid,reporttype)
         return reportTable
 
-    def getFinalReportTableQuery(self):
-
-        projectid = self.getProjectID()
-        householdIDs = self.getReportHouseholdIDs()
-        reporttype = self.setReportType()
-
-        connector = DisposableHouseholdIncome()
-        householdIDsQuery = connector.getFinalIncomeReportTableQuery(reporttype,projectid,householdIDs)
-        return householdIDsQuery
-
     def writeTable(self):
+        '''Write report output to a spreadsheet'''
+        
         reporttable= self.getReportTable()
         writer = HouseholdsIncomeWrite()
         reporttype = self.setReportType()
         writer.writeSpreadsheetReport(reporttable,reporttype)
 
     def setReportType(self):
+        '''Set report type'''
         reporttype = self.cmbReportType.currentText()
         return reporttype
 

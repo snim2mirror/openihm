@@ -4,30 +4,56 @@ from data.report_settingsmanager import ReportsSettingsManager
 
 
 class DisposableHouseholdIncome:
-    def getFinalIncomeReportTableQuery(self,projectid,householdIDs):
+
+    def calculateHouseholdCashIncome(self,reporttype,projectid,houseids):
+        '''Calculate total cash income for selected households'''
         
-        #household cash income
-        cropCashIncome = self.getCropCashIncome(projectid,householdIDs)
-        employmentCashIncome = self.getEmploymentCashIncome(projectid,householdIDs)
-        livestockCashIncome = self.getLivestockCashIncome(projectid,householdIDs)
-        transferCashIncome = self.getTransferCashIncome(projectid,householdIDs)
-        wildFoodCashIncome = self.getWildFoodCashIncome(projectid,householdIDs)
-
-        #household cash income
-        cropFIncome = self.getCropFIncome(projectid,householdIDs)
-        employmentFIncome = self.getEmploymentFIncome(projectid,householdIDs)
-        livestockFIncome = self.getLivestockFIncome(projectid,householdIDs)
-        transferFIncome = self.getTransferFIncome(projectid,householdIDs)
-        wildFoodFIncome = self.getWildFoodFIncome(projectid,householdIDs)
-
-    def householdDisposableIncome(self,reporttype,projectid,householdIDs):
-        houseids = ','.join(householdIDs)
-
         cropIncomeCash = self.getCropCashIncome(projectid,houseids)
         employmentIncomeCash = self.getEmploymentCashIncome(projectid,houseids)
         livestockIncomeCash = self.getLivestockCashIncome(projectid,houseids)
         transferIncomeCash = self.getTransferCashIncome(projectid,houseids)
         wildFoodIcomeCash = self.getWildFoodCashIncome(projectid,houseids)
+
+        listlength = len(cropIncomeCash)
+        householdsCash = []
+
+        for i in range(0,listlength):
+            templist = []
+            hhid = cropIncomeCash[i][0]
+            templist.append(hhid)
+            if cropIncomeCash[i][1]:
+                cropsCashIncome = cropIncomeCash[i][1]
+            else:
+                cropsCashIncome = 0
+                
+            if employmentIncomeCash[i][1]:
+                employmentCashIncome = employmentIncomeCash[i][1]
+            else:
+                employmentCashIncome = 0
+                
+            if livestockIncomeCash[i][1]:
+                livestockCashIncome = livestockIncomeCash[i][1]
+            else:
+                livestockCashIncome = 0
+                
+            if transferIncomeCash[i][1] :
+                transfersCashIncome = transferIncomeCash[i][1]
+            else:
+                transfersCashIncome = 0
+                
+            if wildFoodIcomeCash[i][1]:
+                wildfoodCashIncome  = wildFoodIcomeCash[i][1]
+            else:
+                wildfoodCashIncome = 0
+
+            householdCashIncome = cropsCashIncome + employmentCashIncome + livestockCashIncome + transfersCashIncome + wildfoodCashIncome
+            templist.append(householdCashIncome)
+            householdsCash.append(tuple(templist))
+            
+        return householdsCash
+
+    def calculateHouseholdFoodIncome(self,reporttype,projectid,houseids):
+        '''Calculate total food income for selected households'''
 
         cropIncomeFood = self.getCropFIncome(projectid,houseids)
         employmentIncomeFood = self.getEmploymentFIncome(projectid,houseids)
@@ -35,53 +61,108 @@ class DisposableHouseholdIncome:
         transferIncomeFood = self.getTransferFIncome(projectid,houseids)
         wildFoodIcomeFood = self.getWildFoodFIncome(projectid,houseids)
 
-        #calculate total household cash income
-        listlength = len(cropIncomeCash)
-        print cropIncomeCash, '          ', employmentIncomeCash, '  ',livestockIncomeCash
-        householdsCash = []
-        for i in range(0,listlength):
-            templist = []
-            hhid = cropIncomeCash[i][0]
-            templist.append(hhid)
-            householdCashIncome = cropIncomeCash[i][1] + employmentIncomeCash[i][1] + livestockIncomeCash[i][1] + transferIncomeCash[i][1] + wildFoodIcomeCash[i][1]
-            templist.append(householdCashIncome)
-            householdsCash.append(tuple(templist))
-            #householdsCash.append(hhid,householdCashIncome)
-        print householdsCash
-
         listlength = len(cropIncomeFood)
-        householdsFood = []
+        householdsFoodIncome = []
+        
         for i in range(0,listlength):
             templist = []
             hhid = cropIncomeFood[i][0]
-            householdFoodIncome = cropIncomeFood[i][1] + employmentIncomeFood[i][1] + livestockIncomeFood[i][1] + transferIncomeFood[i][1] + wildFoodIcomeFood[i][1]
-            templist.append(hhid,householdFoodIncome)
-            householdsFood.append(tuple(templist))
-        print householdsFood
+            templist.append(hhid)
+            if cropIncomeFood[i][1]:
+                cropsFoodIncome = cropIncomeFood[i][1]
+            else:
+                cropsFoodIncome = 0
+                
+            if employmentIncomeFood[i][1]:
+                employmentFoodIncome = employmentIncomeFood[i][1]
+            else:
+                employmentFoodIncome = 0
+                
+            if livestockIncomeFood[i][1]:
+                livestockFoodIncome = livestockIncomeFood[i][1]
+            else:
+                livestockFoodIncome = 0
+                
+            if transferIncomeFood[i][1] :
+                transfersFoodIncome = transferIncomeFood[i][1]
+            else:
+                transfersFoodIncome = 0
+                
+            if wildFoodIcomeFood[i][1]:
+                wildfoodFIncome  = wildFoodIcomeFood[i][1]
+            else:
+                wildfoodFIncome = 0
+
+            householdFoodIncome = cropsFoodIncome + employmentFoodIncome + livestockFoodIncome + transfersFoodIncome + wildfoodFIncome
+            templist.append(householdFoodIncome)
+            householdsFoodIncome.append(tuple(templist))
+            
+        return householdsFoodIncome
+            
+
+    def householdDisposableIncome(self,reporttype,projectid,householdIDs):
+        '''Calculate household disposable income'''
+        
+        houseids = ','.join(householdIDs)
+        householdCashIncome = self.calculateHouseholdCashIncome(reporttype,projectid,houseids)
+        householdFoodIncome = self.calculateHouseholdFoodIncome(reporttype,projectid,houseids)
+        householdAE = self.getHouseholdAE(householdIDs,projectid)
+        #householdFoodPrice = self.checkHouseholdFoodNeeds(householdAE,householdFoodIncome)
+        householdFoodPrice = 0
+        reporttable = []
+        listlen = len(householdIDs)
+        for i in range(0,listlen):
+            templist = []
+            templist.append(householdIDs[i])
+            householdFoodPrice = 0
+            householdFoodNeed = householdAE [i][1] - householdFoodIncome[i][1]
+            
+            if householdFoodNeed > 0:
+                householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,pid)
+                hhDisposableIncome = householdCashIncome[i][1] -(((householdFoodNeed)/1000)  * (householdFoodPrice * 1000))
+            else:
+                hhDisposableIncome = householdCashIncome[i][1] + (((householdFoodNeed)/1000)  * (householdFoodPrice * 1000))
+                
+            #Standardise DI if reportype is DI/AE
+            if reporttype =='':
+                hhDisposableIncome = hhDisposableIncome/ householdAE [i][1]
+
+            templist.append(hhDisposableIncome)
+            reporttable.append(tuple(templist))
+
+        return reporttable
 
     def getHouseholdAE(self, householdids,pid):
+        ''' get household food energy needs'''
+        
         householdsAE =[]
         for hhid in householdids:
+            templist = []
+            templist.append(hhid)
             connector = AdultEquivalent()
             houseAE = connector.calculateHouseholdEnergyReq(hhid,pid)
-            householdsAE.append(hhid,houseAE)
+            templist.append(houseAE)
+            householdsAE.append(tuple(templist))
         return householdsAE
 
-    def calculateHouseholdFoodNeeds(self,householdsAE,householdsFood):
+    def checkHouseholdFoodNeeds(self,householdsAE,householdsFood):
 
         houseFoodPrice = []
         for i in range (len(householdsAE)):
+            templist = []
             foodPrice = 0
-            hid = householdsAE[0]
+            hhid = householdsAE[0]
+            templist.append(hhid)
             housefoodNeed = householdsAE[i] - householdsFood[i]
             if housefoodNeed < 0:
                 foodPrice = self.calculateHouseholdFoodPrice(housefoodNeed,pid)
-            houseFoodPrice.append(hid,foodPrice)
-        print houseFoodPrice
+            templist.append(foodPrice)
+            houseFoodPrice.append(tuple(templist))
         return houseFoodPrice
-            
 
     def calculateHouseholdFoodPrice(self,housefoodNeed,pid):
+        ''' calculate the cost of food a houshold has to buy, to meet household food energy needs'''
+        
         dietquery = '''SELECT pid, fooditem, unitofmeasure,percentage, priceperunit FROM diet WHERE pid=%s''' % pid
         householdDiet = self.executeQuery(dietquery)
         
@@ -94,71 +175,109 @@ class DisposableHouseholdIncome:
             foodprice = foodprice + ((foodProportion/foodKcal[0]) * household[4])
         return foodprice
         
-
     def executeQuery(self,query):
+        '''run various select queries'''
+        
         dbconnector = Database()
         dbconnector.open()
         recordset = dbconnector.execSelectQuery(query)
         dbconnector.close()
         return recordset
-        
 
     #get household cash income
     def getCropCashIncome(self,projectid,householdIDs):
-        query = self.totalCropCashIncomeQuery(projectid,householdIDs)
-        recordset = self.executeQuery(query)
+        '''get total houshold crop cash income'''
+        
+        basicQuery = self.totalCropCashIncomeQuery(projectid,householdIDs)
+        finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        recordset = self.executeQuery(finalQuery)
         return recordset
     
     def getEmploymentCashIncome(self,projectid,householdIDs):
-        query = self.totalEmploymentCashIncomeQuery(projectid,householdIDs)
-        recordset = self.executeQuery(query)
+        '''get total houshold employment cash income'''
+        
+        basicQuery = self.totalEmploymentCashIncomeQuery(projectid,householdIDs)
+        finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        recordset = self.executeQuery(finalQuery)
         return recordset
     
     def getLivestockCashIncome(self,projectid,householdIDs):
-        query = self.totalLivestockCashIncomeQuery(projectid,householdIDs)
-        recordset = self.executeQuery(query)
+        '''get total houshold livestock cash income'''
+        
+        basicQuery = self.totalLivestockCashIncomeQuery(projectid,householdIDs)
+        finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        recordset = self.executeQuery(finalQuery)
         return recordset
 
     def getTransferCashIncome(self,projectid,householdIDs):
-        query = self.totalTransferCashIncomeQuery(projectid,householdIDs)
-        recordset = self.executeQuery(query)
+        '''get total houshold transfer cash income'''
+        
+        basicQuery = self.totalTransferCashIncomeQuery(projectid,householdIDs)
+        finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        recordset = self.executeQuery(finalQuery)
         return recordset
     
     def getWildFoodCashIncome(self,projectid,householdIDs):
-        query = self.totalWildFoodCashIncomeQuery(projectid,householdIDs)
-        recordset = self.executeQuery(query)
+        '''get total houshold wildfood cash income'''
+        
+        basicQuery = self.totalWildFoodCashIncomeQuery(projectid,householdIDs)
+        finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        recordset = self.executeQuery(finalQuery)
         return recordset
 
     #get household food income
     def getCropFIncome(self,projectid,householdIDs):
-        query = self.totalCropFIncomeQuery(projectid,householdIDs)
-        recordset = self.executeQuery(query)
+        '''get total houshold crop food income'''
+        
+        basicQuery = self.totalCropFIncomeQuery(projectid,householdIDs)
+        finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        recordset = self.executeQuery(finalQuery)
         return recordset
     
     def getEmploymentFIncome(self,projectid,householdIDs):
-        query = self.totalEmploymentCashIncomeQuery(projectid,householdIDs)
-        recordset = self.executeQuery(query)
+        '''get total houshold employment food income'''
+        
+        basicQuery = self.totalEmploymentCashIncomeQuery(projectid,householdIDs)
+        finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        recordset = self.executeQuery(finalQuery)
         return recordset
     
     def getLivestockFIncome(self,projectid,householdIDs):
-        query = self.totalLivestockCashIncomeQuery(projectid,householdIDs)
-        recordset = self.executeQuery(query)
+        '''get total houshold livestock food income'''
+        
+        basicQuery = self.totalLivestockCashIncomeQuery(projectid,householdIDs)
+        finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        recordset = self.executeQuery(finalQuery)
         return recordset
 
     def getTransferFIncome(self,projectid,householdIDs):
-        query = self.totalTransferCashIncomeQuery(projectid,householdIDs)
-        recordset = self.executeQuery(query)
+        '''get total houshold transfer food income'''
+        
+        basicQuery = self.totalTransferCashIncomeQuery(projectid,householdIDs)
+        finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        recordset = self.executeQuery(finalQuery)
         return recordset
     
     def getWildFoodFIncome(self,projectid,householdIDs):
-        query = self.totalWildFoodCashIncomeQuery(projectid,householdIDs)
-        recordset = self.executeQuery(query)
+        '''get total houshold food income from wildfoods'''
+        
+        basicQuery = self.totalWildFoodCashIncomeQuery(projectid,householdIDs)
+        finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        recordset = self.executeQuery(finalQuery)
         return recordset
+
+    def buildFinalIncomeCategoryQuery(self,query,projectid,householdids):
+        ''' build a final query for getting total household incomes'''
+        
+        baseQuery  = '''SELECT hhid from households WHERE hhid IN (%s) and pid =%s''' % (householdids,projectid)
+        baseQuery = '''SELECT * FROM ((%s) table1 LEFT JOIN (%s) table2 USING (hhid) )''' % (baseQuery,query)
+        return baseQuery
 
     #build queries for household total cash income
     def totalCropCashIncomeQuery(self,projectid,houseids):
         query = '''SELECT hhid,SUM(unitssold * unitprice) AS cropincome FROM cropincome
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+        
         return query
     
     def totalEmploymentCashIncomeQuery(self,projectid,houseids):
@@ -205,31 +324,6 @@ class DisposableHouseholdIncome:
     def totalWildFoodFIncomeQuery(self,projectid,houseids):
         query = '''SELECT hhid,SUM(unitssold * unitprice) AS wildfoodsincome FROM wildfoods
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
-        return query
-    
-    def getFinalIncomeReportTableQuery(self,reporttype,projectid,householdIDs):
-
-        if reporttype =='Cash Income - Raw' or reporttype =='Cash Income - Standardised':
-            cropsQuery = self.buildCropIncomeQuery(projectid,cropdetails,householdIDs)
-            employmentQuery = self.buildEmploymentIncomeQuery(projectid,employmentdetails,householdIDs)
-            livestockQuery = self.buildLivestockIncomeQuery(projectid,livestockdetails,householdIDs)
-            loansQuery =''
-            #loansQuery = self.buildLoanIncomeQuery(projectid,loandetails,householdIDs)
-            transfersQuery = self.buildTransferIncomeQuery(projectid,transferdetails,householdIDs)
-            wildfoodsQuery = self.buildWildFoodsIncomeQuery(projectid,wildfoodsdetails,householdIDs)
-
-        elif reporttype =='Food Income - Raw' or reporttype =='Food Income - Standardised':
-            cropsQuery = self.buildCropFIncomeQuery(projectid,cropdetails,householdIDs)
-            employmentQuery = self.buildEmploymentFIncomeQuery(projectid,employmentdetails,householdIDs)
-            livestockQuery = self.buildLivestockFIncomeQuery(projectid,livestockdetails,householdIDs)
-            transfersQuery = self.buildTransferFIncomeQuery(projectid,transferdetails,householdIDs)
-            wildfoodsQuery = self.buildWildFoodsFIncomeQuery(projectid,wildfoodsdetails,householdIDs)
-            loansQuery =''
-
-
-        queryconnector = HouseholdIncomeQuery()
-        query = queryconnector.buildFinalReportQuery (projectid,householdIDs)
-
         return query
 
     def buildReportHouseholdIDsQuery(self,projectid,selectedhouseholds,pcharselected,hcharselected):

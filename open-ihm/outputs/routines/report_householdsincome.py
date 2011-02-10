@@ -132,7 +132,6 @@ class HouseholdIncome:
                     query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitssold * unitprice,NULL)) AS '%s'" %(myincomesource,myincomesource)
                 query = query + " FROM cropincome WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
                 query = query + " GROUP BY hhid"
-
         return query            
 
     def buildEmploymentIncomeQuery(self,projectid,employmentdetails,householdids):
