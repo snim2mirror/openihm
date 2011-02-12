@@ -118,7 +118,7 @@ class DisposableHouseholdIncome:
             householdFoodNeed = householdAE [i][1] - householdFoodIncome[i][1]
             
             if householdFoodNeed > 0:
-                householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,pid)
+                householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
                 hhDisposableIncome = householdCashIncome[i][1] -(((householdFoodNeed)/1000)  * (householdFoodPrice * 1000))
             else:
                 hhDisposableIncome = householdCashIncome[i][1] + (((householdFoodNeed)/1000)  * (householdFoodPrice * 1000))
@@ -169,10 +169,15 @@ class DisposableHouseholdIncome:
         householdFoodPrices = []
         foodprice = 0
         for row in householdDiet:
-            foodProportion = housefoodNeed * (household[3]/100)
+            foodProportion = housefoodNeed * (row[3]/100)
             foodKcalQuery = '''SELECT  energyvalueperunit from setup_foods_crops WHERE name='%s' ''' % row[1]
             foodKcal = self.executeQuery(foodKcalQuery)
-            foodprice = foodprice + ((foodProportion/foodKcal[0]) * household[4])
+
+            for item in foodKcal:
+                kCal=item[0]
+
+            if kCal!=0:
+                foodprice = foodprice + ((foodProportion/kCal) * row[4])
         return foodprice
         
     def executeQuery(self,query):
@@ -302,28 +307,27 @@ class DisposableHouseholdIncome:
 
     #build queries for household total food income
     def totalCropFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM(unitssold * unitprice) AS cropincome FROM cropincome
-                        WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+        query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=cropincome.incomesource)) AS cropincome
+                            FROM cropincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
     
     def totalEmploymentFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM(cashincome) AS employmentcashincome FROM employmentincome
-                        WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+        query = '''SELECT hhid,SUM(incomekcal) AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalLivestockFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM(unitssold * unitprice) AS livestockincome FROM livestockincome
-                        WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+        query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=livestockincome.incomesource))
+                            AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalTransferFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM(cashperyear) AS transferincome FROM transfers
-                        WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+        query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=transfers.foodtype)) AS transferincome
+                            FROM transfers WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalWildFoodFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM(unitssold * unitprice) AS wildfoodsincome FROM wildfoods
-                        WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+        query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=wildfoods.incomesource))
+                            AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def buildReportHouseholdIDsQuery(self,projectid,selectedhouseholds,pcharselected,hcharselected):
