@@ -114,14 +114,19 @@ class DisposableHouseholdIncome:
         for i in range(0,listlen):
             templist = []
             templist.append(householdIDs[i])
-            householdFoodPrice = 0
+            
+            print householdAE
+            print householdFoodIncome
             householdFoodNeed = householdAE [i][1] - householdFoodIncome[i][1]
+            householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
+            print householdCashIncome
             
             if householdFoodNeed > 0:
-                householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] -(((householdFoodNeed)/1000)  * (householdFoodPrice * 1000))
+                #householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
+                hhDisposableIncome = householdCashIncome[i][1] -(((householdFoodNeed))  * (householdFoodPrice))
             else:
-                hhDisposableIncome = householdCashIncome[i][1] + (((householdFoodNeed)/1000)  * (householdFoodPrice * 1000))
+                #householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
+                hhDisposableIncome = householdCashIncome[i][1] + (((householdFoodNeed))  * (householdFoodPrice))
                 
             #Standardise DI if reportype is DI/AE
             if reporttype =='Disposable Income - Standardised' and householdAE [i][1]!=0:
@@ -172,12 +177,13 @@ class DisposableHouseholdIncome:
             foodProportion = housefoodNeed * (row[3]/100)
             foodKcalQuery = '''SELECT  energyvalueperunit from setup_foods_crops WHERE name='%s' ''' % row[1]
             foodKcal = self.executeQuery(foodKcalQuery)
-
+            kCal = 0
             for item in foodKcal:
                 kCal=item[0]
-
+            print foodProportion,  " ",  kCal
             if kCal!=0:
                 foodprice = foodprice + ((foodProportion/kCal) * row[4])
+        print housefoodNeed, " ",  foodprice         
         return foodprice
         
     def executeQuery(self,query):
