@@ -102,9 +102,4 @@ class Controller:
          settingsmgr = SettingsManager()
          currencies = settingsmgr.getCurrencies()
          return currencies
-    def getGlobalCropTypes(self):
-        settingsmgr = SettingsManager()
-        crops = settingsmgr.getCroptypes()
-        return crops
-         
 
