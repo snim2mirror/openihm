@@ -6,8 +6,9 @@ from database import Database
 from household import Household
 from projecthouseholdcharacteristic import ProjectHouseholdCharacteristic
 from projectpersoncharacteristic import ProjectPersonCharacteristic
+from incomesourcemanager import IncomeSourceManager
 
-class Project:
+class Project(IncomeSourceManager):
     def __init__(self, pid=0, projectname="", startdate="", enddate="", description="", currency=""):
         self.database = Database() 
         if ( pid != 0 ):
