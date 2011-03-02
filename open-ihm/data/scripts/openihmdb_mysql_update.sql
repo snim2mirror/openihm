@@ -3,12 +3,20 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`householdmembers`
+-- Table `openihmdb`.`projectincomesources`
 -- -----------------------------------------------------
-
-ALTER TABLE `openihmdb`.`householdmembers` ADD COLUMN `periodaway` INT(11) NULL DEFAULT 0  AFTER `pid` , 
-ADD COLUMN `reason` VARCHAR(200) NULL DEFAULT NULL  AFTER `periodaway` , 
-ADD COLUMN `whereto` VARCHAR(200) NULL DEFAULT NULL  AFTER `reason` ;
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectincomesources` (
+  `pid` INT(11) NOT NULL ,
+  `incomesource` VARCHAR(255) NOT NULL ,
+  `incometype` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`incomesource`, `pid`) ,
+  INDEX `fk_projectincomesources_projects` (`pid` ASC) ,
+  CONSTRAINT `fk_projectincomesources_projects`
+    FOREIGN KEY (`pid` )
+    REFERENCES `openihmdb`.`projects` (`pid` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
