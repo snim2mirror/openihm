@@ -14,15 +14,20 @@ from data.controller import Controller
 
 # import the Create Project Dialog design class
 from gui.designs.ui_projectconfiguration import Ui_ProjectConfiguration
+from cropincomemanager import CropIncomeManager
+from livestockincomemanager import LivestockIncomeManager
+from wildfoodincomemanager import WildfoodIncomeManager
+from employmentincomemanager import EmploymentIncomeManager
+from transferincomemanager import TransferIncomeManager
 
-class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):	
+class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, LivestockIncomeManager, WildfoodIncomeManager, EmploymentIncomeManager, TransferIncomeManager):	
      ''' Creates the Edit Project form. '''	
      def __init__(self, parent):
          ''' Set up the dialog box interface '''
          QDialog.__init__(self)
          self.parent = parent
          self.dietid = 0                     # selected diet item
-         self.currentItem = ""           # selected standard of livng item
+         self.currentItem = ""           # selected standard of living item
          self.setupUi(self)
         
          self.config = Config.dbinfo().copy()
@@ -47,6 +52,21 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
          self.getExpenseItems()
          self.getAgeRange(self.cmbAgeBottom, 0, 100)
          self.getAgeRange(self.cmbAgeTop, 1, 101)
+         
+         self.displayAvailableCrops()
+         self.displaySelectedCrops()
+         
+         self.displayAvailableLivestock()
+         self.displaySelectedLivestock()
+         
+         self.displayAvailableWildfoods()
+         self.displaySelectedWildfoods()
+         
+         self.displayAvailableEmployment()
+         self.displaySelectedEmployment()
+         
+         self.displayAvailableTransfers()
+         self.displaySelectedTransfers()
         
          # connect relevant signals and slots
          self.connect(self.tblDiets, SIGNAL("clicked(QModelIndex)"), self.showSelectedDiet)
@@ -67,6 +87,31 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
          self.connect(self.tblStandardOfLiving, SIGNAL("clicked(QModelIndex)"), self.showStandardOfLivingItem)
          self.connect(self.cmdSaveLivingStanItem, SIGNAL("clicked()"), self.saveStandardOfLivingItem)
          self.connect(self.cmdDelLivingStandardItem, SIGNAL("clicked()"), self.delStandardOfLivingItems)
+         
+         self.connect(self.cmdCropsMoveAll, SIGNAL("clicked()"), self.moveAllCrops)
+         self.connect(self.cmdCropsRemoveAll, SIGNAL("clicked()"), self.removeAllCrops)
+         self.connect(self.cmdCropsMoveSelected, SIGNAL("clicked()"), self.moveSelectedCrops)
+         self.connect(self.cmdCropsRemoveSelected, SIGNAL("clicked()"), self.removeSelectedCrops)
+         
+         self.connect(self.cmdLivestockMoveAll, SIGNAL("clicked()"), self.moveAllLivestock)
+         self.connect(self.cmdLivestockRemoveAll, SIGNAL("clicked()"), self.removeAllLivestock)
+         self.connect(self.cmdLivestockMoveSelected, SIGNAL("clicked()"), self.moveSelectedLivestock)
+         self.connect(self.cmdLivestockRemoveSelected, SIGNAL("clicked()"), self.removeSelectedLivestock)
+         
+         self.connect(self.cmdWildfoodMoveAll, SIGNAL("clicked()"), self.moveAllWildfoods)
+         self.connect(self.cmdWildfoodRemoveAll, SIGNAL("clicked()"), self.removeAllWildfoods)
+         self.connect(self.cmdWildfoodMoveSelected, SIGNAL("clicked()"), self.moveSelectedWildfoods)
+         self.connect(self.cmdWildfoodRemoveSelected, SIGNAL("clicked()"), self.removeSelectedWildfoods)
+         
+         self.connect(self.cmdEmploymentMoveAll, SIGNAL("clicked()"), self.moveAllEmployment)
+         self.connect(self.cmdEmploymentRemoveAll, SIGNAL("clicked()"), self.removeAllEmployment)
+         self.connect(self.cmdEmploymentMoveSelected, SIGNAL("clicked()"), self.moveSelectedEmployment)
+         self.connect(self.cmdEmploymentRemoveSelected, SIGNAL("clicked()"), self.removeSelectedEmployment)
+         
+         self.connect(self.cmdTransfersMoveAll, SIGNAL("clicked()"), self.moveAllTransfers)
+         self.connect(self.cmdTransfersRemoveAll, SIGNAL("clicked()"), self.removeAllTransfers)
+         self.connect(self.cmdTransfersMoveSelected, SIGNAL("clicked()"), self.moveSelectedTransfers)
+         self.connect(self.cmdTransfersRemoveSelected, SIGNAL("clicked()"), self.removeSelectedTransfers)
      
      def getCurrentRow(self, tblVw):
          indexVal = tblVw.currentIndex()
@@ -643,79 +688,4 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration):
         ''' remove selected household characteristics from Project'''
         self.removeSelectedChars("person", self.lstPersonalSelectedChars)
         self.displaySelectedChars( "person", self.lstPersonalSelectedChars )
-
-     #--------------------------------------------------------------------------------------------------------------------------
-     #  Income Sources
-     #-------------------------------------------------------------------------------------------------------------------------
-        
-     def getProjectIncomeSources(self, lstVw):
-        incomesources = []
-        row = 0
-        while (lstVw.model().item(row,0)):
-            val = lstVw.model().item(row,0).text()
-            incomesources.append(val)
-            row = row + 1
-            
-        return incomesources
-        
-     def displayAvailableIncomeSources(self, incometype, lstAvailable):
-          ''' Retrieve and display available Income Source Types''' 
-          controller = Controller()
-          if incometype == "crops":
-               chars = controller.getGlobalCropTypes()
-          if incometype == "employment":
-               chars = controller.getGlobalEmploymentTypes()
-          if incometype == "livestock":
-               chars = controller.getGlobaLivestockTypes()
-          if incometype == "transfers":
-               chars = controller.getGlobalTransferTypes()
-          if incometype == "wildfoods":
-               chars = controller.getGlobalWildFoodTypes()
-             
-          
-        
-          model = QStandardItemModel(1,3)
-        
-          # set model headers
-          model.setHorizontalHeaderItem(0,QStandardItem('Characteristic'))
-          model.setHorizontalHeaderItem(1,QStandardItem('Measuring Unit'))
-        
-          # add  data rows
-          num = 0
-        
-          for characteristic in chars:
-               qtCharacteristic = QStandardItem( characteristic.getName() )
-               qtDataType = QStandardItem( "%i" % characteristic.getDataType() )		
-               model.setItem( num, 0, qtCharacteristic )
-               model.setItem( num, 1, qtDataType )
-               num = num + 1
-        
-          lstAvailable.setModel(model)
-          lstAvailable.setSelectionMode(QAbstractItemView.ExtendedSelection)
-        
-     def displaySelectedIncomeSources(self, chartype, lstSelected):
-          
-          ''' Retrieve and display Project Characteristics (Household or Personal)'''
-          # select query to retrieve selected characteristics
-          if ( chartype == "household" ):
-               
-               chars = self.project.getHouseholdCharacteristics()
-          else:
-               chars = self.project.getPersonCharacteristics()
-
-          model = QStandardItemModel(1,1)
-
-          # set model headers
-          model.setHorizontalHeaderItem(0,QStandardItem('Characteristic'))
-
-          # add  data rows
-          num = 0
-
-          for characteristic in chars:
-               qtCharacteristic = QStandardItem( characteristic.getName() )	
-               model.setItem( num, 0, qtCharacteristic )
-               num = num + 1
-
-          lstSelected.setModel(model)
-          lstSelected.setSelectionMode(QAbstractItemView.ExtendedSelection)
         

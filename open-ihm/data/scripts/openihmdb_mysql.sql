@@ -20,6 +20,22 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
 
+-- -----------------------------------------------------
+-- Table `openihmdb`.`projectincomesources`
+-- -----------------------------------------------------
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectincomesources` (
+  `pid` INT(11) NOT NULL ,
+  `incomesource` VARCHAR(255) NOT NULL ,
+  `incometype` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`incomesource`, `pid`) ,
+  INDEX `fk_projectincomesources_projects` (`pid` ASC) ,
+  CONSTRAINT `fk_projectincomesources_projects`
+    FOREIGN KEY (`pid` )
+    REFERENCES `openihmdb`.`projects` (`pid` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `openihmdb`.`households`
