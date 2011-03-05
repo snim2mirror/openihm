@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householddisposableincome.ui'
 #
-# Created: Tue Feb 08 19:36:55 2011
+# Created: Thu Feb 17 14:28:09 2011
 #      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -62,6 +62,7 @@ class Ui_HouseholdDisposableIncome(object):
         self.cmbReportType = QtGui.QComboBox(HouseholdDisposableIncome)
         self.cmbReportType.setGeometry(QtCore.QRect(120, 40, 281, 22))
         self.cmbReportType.setObjectName(_fromUtf8("cmbReportType"))
+        self.cmbReportType.addItem(_fromUtf8(""))
         self.cmbReportType.addItem(_fromUtf8(""))
         self.cmbReportType.addItem(_fromUtf8(""))
         self.label_2 = QtGui.QLabel(HouseholdDisposableIncome)
@@ -135,6 +136,7 @@ class Ui_HouseholdDisposableIncome(object):
         self.cmdSaveDataTable.setText(QtGui.QApplication.translate("HouseholdDisposableIncome", "Save Data Table", None, QtGui.QApplication.UnicodeUTF8))
         self.cmbReportType.setItemText(0, QtGui.QApplication.translate("HouseholdDisposableIncome", "Disposable Income - Raw", None, QtGui.QApplication.UnicodeUTF8))
         self.cmbReportType.setItemText(1, QtGui.QApplication.translate("HouseholdDisposableIncome", "Disposable Income - Standardised", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmbReportType.setItemText(2, QtGui.QApplication.translate("HouseholdDisposableIncome", "Living Threshold", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("HouseholdDisposableIncome", "Report Type", None, QtGui.QApplication.UnicodeUTF8))
         self.cmbOrderCriteria1.setItemText(0, QtGui.QApplication.translate("HouseholdDisposableIncome", "Household Number", None, QtGui.QApplication.UnicodeUTF8))
         self.cmbOrderCriteria1.setItemText(1, QtGui.QApplication.translate("HouseholdDisposableIncome", "Household Name", None, QtGui.QApplication.UnicodeUTF8))

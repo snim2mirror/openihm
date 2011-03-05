@@ -12,6 +12,7 @@ from gui.designs.ui_report_householddisposableincome import Ui_HouseholdDisposab
 from data.report_settingsmanager import ReportsSettingsManager
 from outputs.routines.report_disposable_income import DisposableHouseholdIncome
 from outputs.routines.report_disposableincome_write import HouseholdsIncomeWrite
+
 class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
     ''' Creates the Household Disposable Income Report from. Uses the design class
 		in gui.designs.ui_report_householddisposableincome. '''	

@@ -45,7 +45,7 @@ from outputs.routines.generate_data_entry_sheet import DataEntrySheets
 from inputs.read_data_entry_sheets import ReadDataEntrySheets
 from frm_report_disposableincome import HouseholdDisposableIncome
 from data.setup_foodrequirement_startupvalues import FoodRequirementValues
-
+from frm_report_livingthreshold import LivingThreshold
 
 
 
@@ -112,6 +112,8 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
 		self.connect(self.actionDisposable_Income, QtCore.SIGNAL("triggered()"), self.reportHouholdDisposableIncome)
 		self.connect(self.actionInitialise_Energy_Requirement_Table, QtCore.SIGNAL("triggered()"), self.initialiseFoodRequirementTable)
+
+		self.connect(self.actionLiving_Threshold, QtCore.SIGNAL("triggered()"), self.reportLivingThreshold)
 		
 
 	def centerSubWindow(self, subWin):
@@ -373,4 +375,11 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 '''Create Initial Kcal values for certain crops/foods'''
                 initialiser = FoodRequirementValues()
                 initialiser.insertSartUpValues()
-	
+                
+	def reportLivingThreshold(self):
+                ''' Creates and Shows the Report: Living Threshold Income form '''
+                form = LivingThreshold(self)
+                subWin = self.mdi.addSubWindow(form)
+                self.centerSubWindow(subWin)
+                form.show()
+
