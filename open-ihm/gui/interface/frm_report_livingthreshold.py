@@ -21,7 +21,7 @@ class LivingThreshold(QDialog, Ui_HouseholdDisposableIncome):
        	self.setupUi(self)
         self.parent = parent
         self.reporttype = self.cmbReportType.currentText()
-        self.connector = HouseholdDisposableIncome(self.parent)
+        self.connector = HouseholdDisposableIncome(self.parent.parent)
 
         self.setReportInterface()
         	

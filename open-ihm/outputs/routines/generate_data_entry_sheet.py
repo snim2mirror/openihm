@@ -31,6 +31,49 @@ class DataEntrySheets:
         hchars = self.database.execSelectQuery(query)
         self.database.close()
         return hchars
+
+        # Income sources
+    def buildQueries(self,incometype):
+        query = '''SELECT incomesource FROM projectincomesources WHERE incometype='%s' AND pid=%s''' % (incometype,self.pid)
+        return query
+
+    def getincomeSources(self,query):
+        '''run various select queries'''
+        
+        dbconnector = Database()
+        dbconnector.open()
+        recordset = dbconnector.execSelectQuery(query)
+        dbconnector.close()
+        return recordset
+    
+    def populateIncomeSourcesSheet(self,book,style2):
+        ''' Populate Sheet 3 with income sources for a selected project'''
+        
+        #Basic Details for Household Members
+        sheet3 = book.add_sheet("Income Sources")
+        sheet3.write(1, 0, "Crop Types", style2)
+        sheet3.write(1, 2, "Employment Types", style2)
+        sheet3.write(1, 4, "Livestock Types", style2)
+        sheet3.write(1, 6, "Transfer Types", style2)
+        sheet3.write(1, 8, "Wild Food Types", style2)
+
+        #set column width for sheet3
+        for i in range(0,10,2):
+            sheet3.col(i).width = 6000
+
+        incometypes = ['crops','employment','livestock','transfers','wildfoods']
+        col = 0
+
+        for incometype in incometypes:
+            row = 2
+            query = self.buildQueries(incometype)
+            recordset = self.getincomeSources(query)
+
+            for rec in recordset:
+                cellvalue = rec[0]
+                sheet3.write(row, col, cellvalue)
+                row = row + 1
+            col = col + 2
     
     def writeDataSheets(self):
         book = Workbook(encoding="utf-8")
@@ -40,17 +83,18 @@ class DataEntrySheets:
         style2 = easyxf('font: name Arial;''font: colour ocean_blue;''font: bold True;''border: left thick, top thick, right thick, bottom thick')
         style3 = easyxf('font: name Arial;''font: colour green;''font: bold True;''border: left thick, top thick, right thick, bottom thick')
 
-        
-        
         #create sheet for entering project households
         #projectid = self.pid
         sheettitle = "%s" % self.pid
-        print self.pid
         sheet1 = book.add_sheet(sheettitle)
         sheet1.write(0, 0, "Project Households", style1)
         sheet1.write(1, 0, "HouseholdNumber", style2)
         sheet1.write(1, 1, "HouseholdName", style2)
         sheet1.write(1, 2, "DateVisited", style2)
+
+        #set column width for sheet1
+        for i in range(0,3):
+            sheet1.col(i).width = 6000
 
         #Basic Details for Household Members
         sheet2 = book.add_sheet("Template")
@@ -59,10 +103,6 @@ class DataEntrySheets:
         sheet2.write(2, 1, "Age", style2)
         sheet2.write(2, 2, "YearofBirth", style2)
         sheet2.write(2, 3, "HouseholdHead", style2)
-
-        #set column width for sheet1
-        for i in range(0,3):
-            sheet1.col(i).width = 6000
 
         #get personal and household characteristics, configured for current project
         pchars = self.getPersonalCharacteristics()
@@ -218,6 +258,9 @@ class DataEntrySheets:
         #set column width for sheet2
         for i in range(0,7):
             sheet2.col(i).width = 6000
+            
+        self.populateIncomeSourcesSheet(book,style1)
+       
 
         folder = "inputs/"
         filename = folder + "dataEntrySheet-ProjectID-" + str(self.pid) + ".xls"

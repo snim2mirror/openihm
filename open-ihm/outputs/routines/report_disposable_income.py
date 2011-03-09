@@ -124,7 +124,7 @@ class DisposableHouseholdIncome:
                 hhDisposableIncome = householdCashIncome[i][1] + (((householdFoodNeed)/1000)  * (householdFoodPrice * 1000))
                 
             #Standardise DI if reportype is DI/AE
-            if (reporttype =='Disposable Income - Standardised' or reporteype == 'Living Threshold')and householdAE [i][1]!=0:
+            if (reporttype =='Disposable Income - Standardised' or reporttype == 'Living Threshold')and householdAE [i][1]!=0:
                 hhDisposableIncome = hhDisposableIncome/ householdAE [i][1]
 
             templist.append(round(hhDisposableIncome,2))
