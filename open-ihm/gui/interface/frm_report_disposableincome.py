@@ -12,23 +12,26 @@ from gui.designs.ui_report_householddisposableincome import Ui_HouseholdDisposab
 from data.report_settingsmanager import ReportsSettingsManager
 from outputs.routines.report_disposable_income import DisposableHouseholdIncome
 from outputs.routines.report_disposableincome_write import HouseholdsIncomeWrite
+from outputs.routines.report_livingthreshold import LivingThreshhold
 
 class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
     ''' Creates the Household Disposable Income Report from. Uses the design class
 		in gui.designs.ui_report_householddisposableincome. '''	
 	
-    def __init__(self, parent):
+    def __init__(self, parent,reporttype):
         
 	''' Set up the dialog box interface '''
 	self.parent = parent
         QDialog.__init__(self)
        	self.setupUi(self)
         self.parent = parent
-        self.reporttype = self.cmbReportType.currentText()
+        self.reporttype = reporttype
+        #self.cmbReportType.currentText()
 
         self.getProjectNames()
         self.insertHouseholdsHeader()
         self.insertPCharsHeader()
+        self.setInterfaceReportType()
         	
         self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
         self.connect(self.cmbProjects, SIGNAL("currentIndexChanged(int)"), self.updateDialogData)
@@ -41,6 +44,13 @@ class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
         self.getHouseholdCharacteristics()
         self.getPersonalCharacteristics()
         self.putHouseholdNames()
+
+    def setInterfaceReportType(self):
+        if self.reporttype == 'LivingThreshold':
+            self.cmbReportType.setCurrentIndex(2)
+        else:
+            self.cmbReportType.setCurrentIndex(1)
+            
 
     def getProjectNames(self):
         ''' populate projects combobox with available projects'''
@@ -248,8 +258,12 @@ class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
         pid = self.getProjectID()
         householdIDs = self.getReportHouseholdIDs()
         reporttype = self.setReportType()
-        connector = DisposableHouseholdIncome()
-        reportTable = connector.householdDisposableIncome(reporttype,pid,householdIDs)
+        if reporttype=='Living Threshold':
+            connector = LivingThreshhold()
+            reportTable = connector.determineLThresholdPosition(reporttype,pid,householdIDs)
+        else:
+            connector = DisposableHouseholdIncome()
+            reportTable = connector.householdDisposableIncome(reporttype,pid,householdIDs)
         return reportTable
 
     def writeTable(self):

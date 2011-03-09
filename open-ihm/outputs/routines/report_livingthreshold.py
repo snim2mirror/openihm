@@ -9,20 +9,23 @@ class LivingThreshhold:
     def getDisposableIncome(self,reporttype,projectid,houseids):
         '''Get Disposable income for selected households'''
         connector = DisposableHouseholdIncome()
-        householdDI =householdDisposableIncome(reporttype,projectid,householdIDs)
+        householdDI = connector.householdDisposableIncome(reporttype,projectid,houseids)
         return householdDI
     
     def getHouseholdExpenditure(self,projectid,hhid):
         '''Calculate total household expenditure'''
         
-        query = '''SELECT SUM(priceperunit * totalunits) AS houseexpenditure FROM expenditure WHERE pid=%s AND hhid=%s'''
+        query = '''SELECT SUM(priceperunit * totalunits) AS houseexpenditure FROM expenditure WHERE pid=%s AND hhid=%s''' %(projectid,hhid)
         dbconnector = Database()
         dbconnector.open()
         recordset = dbconnector.execSelectQuery(query)
         dbconnector.close()
         hhExpenditure = 0
         for row in recordset:
-            hhExpenditure = row[0]
+            if row[0]:
+                hhExpenditure = row[0]
+            else:
+                hhExpenditure = 0
 
         return hhExpenditure
     
@@ -35,7 +38,7 @@ class LivingThreshhold:
             hhid = household[0]
             templist.append(hhid)
             hhExpenditure = self.getHouseholdExpenditure(projectid,hhid)
-            livingThreshold = household[0] - hhExpenditure
+            livingThreshold = float(household[1]) - hhExpenditure
             templist.append(livingThreshold)
             reporttable.append(tuple(templist))
         return reporttable
