@@ -52,6 +52,7 @@ class DatabaseInitialiser:
              
          if ( dbinstalled ):
                  dbuptodate = self.updateDatabase()
+                 self.fixStandardOfLiving()
 
          dbstatus = dict()
          dbstatus['mysqlstarted'] = mysqlstarted
@@ -117,6 +118,64 @@ class DatabaseInitialiser:
          # else update the database    
          else:
              sqlfile = file('data/scripts/openihmdb_mysql_update.sql', 'r')
+             commands = sqlfile.read()
+             commandlist = commands.split(';')
+             sqlfile.close()
+             try:
+                 config = DbConfig(self.host, '', 'root', self.rootpwd)
+                 dbinfo = config.dbinfo().copy()
+                 db = Connect(**dbinfo)             
+                 cursor = db.cursor()
+
+                 for command in commandlist:
+                     if ( not command.isspace() ):
+                         cursor.execute(command)
+             
+                 cursor.close()
+                 db.close()
+         
+                 return True
+         
+             except errors.InterfaceError,  e:
+                 print e
+                 return False
+         
+             except ( errors.OperationalError,  errors.ProgrammingError) as e:
+                 print e
+                 return False
+                 
+     def standardOfLivingOK(self):
+         # check if the database is already up to date: i.e. there is "summary" in standardofliving
+         #   checks in assets
+         
+         config = DbConfig(self.host, 'openihmdb', 'openihm', 'ihm2010')
+         dbinfo = config.dbinfo().copy()
+         db = Connect(**dbinfo)             
+         cursor = db.cursor()
+         
+         query = "SHOW COLUMNS FROM transfers"
+         
+         cursor.execute(query)
+         rows = cursor.fetchall()
+         
+         cursor.close()
+         db.close()
+         
+         upToDate = False
+         for row in rows:
+             for field in row:
+                 if field == "summary":
+                     upToDate = True
+         
+         return upToDate
+                 
+     def fixStandardOfLiving(self):
+         # if database is already up to date return
+         if self.standardOfLivingOK():
+             return True
+         # else update the database    
+         else:
+             sqlfile = file('data/scripts/openihmdb_mysql_fix59.sql', 'r')
              commands = sqlfile.read()
              commandlist = commands.split(';')
              sqlfile.close()
