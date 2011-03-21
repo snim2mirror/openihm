@@ -153,8 +153,10 @@ class ReadDataEntrySheets:
                     hhead = values[3]
                     if sex.lower() == 'male' or sex.lower() == 'm':
                         personid = 'm' + str(age)
+                        sex = 'Male'
                     elif sex.lower() == 'female' or sex.lower() == 'f':
                         personid = 'f' + str(age)
+                        sex='Female'
                     pidvalue = personid + '%'
 
                     testquery ='''SELECT * FROM householdmembers WHERE hhid=%s AND personid LIKE '%s' AND pid =%s ''' % (hhid,pidvalue,self.pid)
@@ -554,7 +556,7 @@ class ReadDataEntrySheets:
         fielddatatypes=[]
         for col_index in range (0,householdsheet.ncols):
             
-            datafieldvalue = str(householdsheet.cell(field_row_index,col_index).value)
+            datafieldvalue = "'" + str(householdsheet.cell(field_row_index,col_index).value) +"'"
             fieldtype = str(householdsheet.cell(datatype_row_index,col_index).value)
             
             if datafieldvalue!='':
@@ -641,7 +643,7 @@ class ReadDataEntrySheets:
         fielddatatypes=[]
         for col_index in range (0,householdsheet.ncols):
             
-            datafieldvalue = str(householdsheet.cell(field_row_index,col_index).value)
+            datafieldvalue = "'" + str(householdsheet.cell(field_row_index,col_index).value) + "'"
             fieldtype = str(householdsheet.cell(datatype_row_index,col_index).value)
             
             if datafieldvalue!='':
@@ -732,6 +734,7 @@ class ReadDataEntrySheets:
         parameterlist= parameterlist + ')'
         query = query + ')'
         query = query + parameterlist
+        print query
         return query
 
     def checkRecordExistence(self,testquery):
