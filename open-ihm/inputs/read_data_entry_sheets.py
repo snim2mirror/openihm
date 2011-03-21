@@ -283,7 +283,7 @@ class ReadDataEntrySheets:
             if exitmain == True:
                 break
             else:
-                if empty_cell_count >= 3 or skiprow == True:   #check if at least three cell in row or cell for expenditurety are empty
+                if skiprow == True:   #check if at least three cell in row or cell for expenditurety are empty
                     continue
                 else:
                     
@@ -360,7 +360,7 @@ class ReadDataEntrySheets:
             if exitmain == True:
                 break
             else:
-                if empty_cell_count >= 5 or skiprow==True:   #check if four cell in row or cell for expenditurety are empty
+                if skiprow==True:   #check if four cell in row or cell for expenditurety are empty
                     continue
                 else:
                     
@@ -436,7 +436,7 @@ class ReadDataEntrySheets:
             if exitmain == True:
                 break
             else:
-                if empty_cell_count > 4 or skiprow == True:   #check if at least three cell in row or cell for expenditurety are empty
+                if skiprow == True:   #check if at least three cell in row or cell for expenditurety are empty
                     continue
                 else:
                     
@@ -507,7 +507,7 @@ class ReadDataEntrySheets:
             if exitmain == True:
                 break
             else:
-                if empty_cell_count > 5 or skiprow==True:   #check if four cell in row or cell for expenditurety are empty
+                if skiprow==True:   #check if four cell in row or cell for expenditurety are empty
                     continue
                 else:
                     
@@ -556,10 +556,12 @@ class ReadDataEntrySheets:
         fielddatatypes=[]
         for col_index in range (0,householdsheet.ncols):
             
-            datafieldvalue = "'" + str(householdsheet.cell(field_row_index,col_index).value) +"'"
+            datafieldvalue = str(householdsheet.cell(field_row_index,col_index).value) 
             fieldtype = str(householdsheet.cell(datatype_row_index,col_index).value)
             
             if datafieldvalue!='':
+                datafieldvalue ="`"+ datafieldvalue +"`"
+                print datafieldvalue
                 datafields.append(datafieldvalue)
                 fielddatatypes.append(fieldtype)
                 columns = columns + 1
@@ -643,10 +645,11 @@ class ReadDataEntrySheets:
         fielddatatypes=[]
         for col_index in range (0,householdsheet.ncols):
             
-            datafieldvalue = "'" + str(householdsheet.cell(field_row_index,col_index).value) + "'"
+            datafieldvalue = str(householdsheet.cell(field_row_index,col_index).value) 
             fieldtype = str(householdsheet.cell(datatype_row_index,col_index).value)
             
             if datafieldvalue!='':
+                datafieldvalue ="`"+ datafieldvalue +"`"
                 datafields.append(datafieldvalue)
                 fielddatatypes.append(fieldtype)
                 columns = columns + 1
