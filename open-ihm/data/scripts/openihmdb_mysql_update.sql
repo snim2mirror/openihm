@@ -5,6 +5,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 -- -----------------------------------------------------
 -- Table `openihmdb`.`projectincomesources`
 -- -----------------------------------------------------
+USE `openihmdb`;
+
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectincomesources` (
   `pid` INT(11) NOT NULL ,
   `incomesource` VARCHAR(255) NOT NULL ,
