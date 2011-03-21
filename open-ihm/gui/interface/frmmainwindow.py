@@ -45,7 +45,7 @@ from outputs.routines.generate_data_entry_sheet import DataEntrySheets
 from inputs.read_data_entry_sheets import ReadDataEntrySheets
 from frm_report_disposableincome import HouseholdDisposableIncome
 from data.setup_foodrequirement_startupvalues import FoodRequirementValues
-
+#from frm_report_livingthreshold import LivingThreshold
 
 
 
@@ -110,9 +110,10 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.connect(self.actionGenerate_Data_Entry_Sheets, QtCore.SIGNAL("triggered()"), self.createDataEntrySheets)
 		self.connect(self.actionImport_Project_Data, QtCore.SIGNAL("triggered()"), self.importData)
 
-		self.connect(self.actionDisposable_Income, QtCore.SIGNAL("triggered()"), self.reportHouholdDisposableIncome)
+		self.connect(self.actionDisposable_Income, QtCore.SIGNAL("triggered()"), self.setReporttypeDI)
 		self.connect(self.actionInitialise_Energy_Requirement_Table, QtCore.SIGNAL("triggered()"), self.initialiseFoodRequirementTable)
-		
+
+		self.connect(self.actionLiving_Threshold, QtCore.SIGNAL("triggered()"), self.setReporttypeAsLivingThreshold)
 
 	def centerSubWindow(self, subWin):
 	    ''' Moves a subwindow to the center of the Mdi Area'''
@@ -362,9 +363,9 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
                         datasheet = ReadDataEntrySheets(self.projectid)
                         datasheet.readdata()
                 
-        def reportHouholdDisposableIncome(self):
+        def reportHouholdDisposableIncome(self,reporttype):
 	    ''' Creates and Shows the Report: Household Disposable Income form '''
-	    form = HouseholdDisposableIncome(self)
+	    form = HouseholdDisposableIncome(self,reporttype)
 	    subWin = self.mdi.addSubWindow(form)
 	    self.centerSubWindow(subWin)
 	    form.show()
@@ -373,4 +374,20 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 '''Create Initial Kcal values for certain crops/foods'''
                 initialiser = FoodRequirementValues()
                 initialiser.insertSartUpValues()
-	
+                
+        def setReporttypeAsLivingThreshold(self):
+                '''set report type for Living Threshold report'''
+                reporttype = 'LivingThreshold'
+                self.reportHouholdDisposableIncome(reporttype)
+                
+        def setReporttypeDI(self):
+                '''set report type for Household Disposable Income report'''
+                reporttype = 'DI'
+                self.reportHouholdDisposableIncome(reporttype)
+                
+	'''def reportLivingThreshold(self):
+                form = LivingThreshold(self)
+                subWin = self.mdi.addSubWindow(form)
+                self.centerSubWindow(subWin)
+                form.show()'''
+

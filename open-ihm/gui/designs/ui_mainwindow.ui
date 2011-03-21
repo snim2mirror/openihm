@@ -86,9 +86,10 @@
     <property name="title">
      <string>Reports</string>
     </property>
+    <addaction name="actionDisposable_Income"/>
     <addaction name="actionHousehold_by_Characteristics"/>
     <addaction name="actionIncome_By_Source"/>
-    <addaction name="actionDisposable_Income"/>
+    <addaction name="actionLiving_Threshold"/>
    </widget>
    <addaction name="menuProject"/>
    <addaction name="menuHousehold"/>
@@ -363,6 +364,11 @@
   <action name="actionInitialise_Energy_Requirement_Table">
    <property name="text">
     <string>Initialise Energy Requirements Table</string>
+   </property>
+  </action>
+  <action name="actionLiving_Threshold">
+   <property name="text">
+    <string>Living Threshold</string>
    </property>
   </action>
  </widget>

@@ -184,6 +184,11 @@
      <string>Disposable Income - Standardised</string>
     </property>
    </item>
+   <item>
+    <property name="text">
+     <string>Living Threshold</string>
+    </property>
+   </item>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">

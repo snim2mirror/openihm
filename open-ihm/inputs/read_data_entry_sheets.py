@@ -25,7 +25,7 @@ class ReadDataEntrySheets:
         self.readProjectHouseholdsData(book)
         
         projectid = projectsheet.name
-        for sheet_index in range(2,book.nsheets):
+        for sheet_index in range(3,book.nsheets):
             householdsheet = book.sheet_by_index(sheet_index)
             houseid = householdsheet.name
             
@@ -153,8 +153,10 @@ class ReadDataEntrySheets:
                     hhead = values[3]
                     if sex.lower() == 'male' or sex.lower() == 'm':
                         personid = 'm' + str(age)
+                        sex = 'Male'
                     elif sex.lower() == 'female' or sex.lower() == 'f':
                         personid = 'f' + str(age)
+                        sex='Female'
                     pidvalue = personid + '%'
 
                     testquery ='''SELECT * FROM householdmembers WHERE hhid=%s AND personid LIKE '%s' AND pid =%s ''' % (hhid,pidvalue,self.pid)
@@ -189,7 +191,7 @@ class ReadDataEntrySheets:
                 digitvalue = True
                 skiprow = False
                 exitmain = False
-                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                cellvalue = str(householdsheet.cell(current_row_index,col_index).value)
                 if cellvalue == 'Expenditure':
                     exitmain = True
                     break
@@ -256,7 +258,7 @@ class ReadDataEntrySheets:
                 exitmain = False
                 digitvalue = True
                 skiprow = False
-                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                cellvalue = str(householdsheet.cell(current_row_index,col_index).value)
                 if cellvalue == 'Crops':
                     exitmain = True
                     break
@@ -322,7 +324,7 @@ class ReadDataEntrySheets:
                 exitmain = False
                 digitvalue = True
                 skiprow = False
-                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                cellvalue = str(householdsheet.cell(current_row_index,col_index).value)
                 if incometype== 'Crops':
                     if cellvalue == 'Livestock':
                         exitmain = True
@@ -408,7 +410,7 @@ class ReadDataEntrySheets:
                 exitmain = False
                 digitvalue = True
                 skiprow = False
-                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                cellvalue = str(householdsheet.cell(current_row_index,col_index).value)
 
                 if cellvalue == 'SocialTransfer':
                     exitmain = True
@@ -477,7 +479,7 @@ class ReadDataEntrySheets:
                 exitmain = False
                 digitvalue = True
                 skiprow = False
-                cellvalue = householdsheet.cell(current_row_index,col_index).value
+                cellvalue = str(householdsheet.cell(current_row_index,col_index).value)
                 if incometype== 'SocialTransfer':
                     if cellvalue == 'TransferFromOrganisations':
                         exitmain = True
@@ -554,8 +556,8 @@ class ReadDataEntrySheets:
         fielddatatypes=[]
         for col_index in range (0,householdsheet.ncols):
             
-            datafieldvalue = householdsheet.cell(field_row_index,col_index).value
-            fieldtype = householdsheet.cell(datatype_row_index,col_index).value
+            datafieldvalue = "'" + str(householdsheet.cell(field_row_index,col_index).value) +"'"
+            fieldtype = str(householdsheet.cell(datatype_row_index,col_index).value)
             
             if datafieldvalue!='':
                 datafields.append(datafieldvalue)
@@ -571,8 +573,8 @@ class ReadDataEntrySheets:
             for col_index in range(0,columns):
                 exitmain = False
                 personid =''
-                cellvalue = householdsheet.cell(current_row_index,col_index).value
-                datatype = householdsheet.cell(datatype_row_index,col_index).value
+                cellvalue = str(householdsheet.cell(current_row_index,col_index).value)
+                datatype = str(householdsheet.cell(datatype_row_index,col_index).value)
                 if cellvalue == 'HouseholdCharacteristics':
                     exitmain = True
                     break
@@ -641,8 +643,8 @@ class ReadDataEntrySheets:
         fielddatatypes=[]
         for col_index in range (0,householdsheet.ncols):
             
-            datafieldvalue = householdsheet.cell(field_row_index,col_index).value
-            fieldtype = householdsheet.cell(datatype_row_index,col_index).value
+            datafieldvalue = "'" + str(householdsheet.cell(field_row_index,col_index).value) + "'"
+            fieldtype = str(householdsheet.cell(datatype_row_index,col_index).value)
             
             if datafieldvalue!='':
                 datafields.append(datafieldvalue)
@@ -658,8 +660,8 @@ class ReadDataEntrySheets:
             for col_index in range(0,columns):
                 exitmain = False
                 personid =''
-                cellvalue = householdsheet.cell(current_row_index,col_index).value
-                datatype = householdsheet.cell(datatype_row_index,col_index).value
+                cellvalue = str(householdsheet.cell(current_row_index,col_index).value)
+                datatype = str(householdsheet.cell(datatype_row_index,col_index).value)
                 if cellvalue == 'Assets':
                     exitmain = True
                     break
@@ -732,6 +734,7 @@ class ReadDataEntrySheets:
         parameterlist= parameterlist + ')'
         query = query + ')'
         query = query + parameterlist
+        print query
         return query
 
     def checkRecordExistence(self,testquery):

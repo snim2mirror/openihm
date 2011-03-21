@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Tue Feb 08 21:43:04 2011
+# Created: Thu Feb 17 14:32:30 2011
 #      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -144,6 +144,8 @@ class Ui_MainWindow(object):
         self.actionDisposable_Income.setObjectName(_fromUtf8("actionDisposable_Income"))
         self.actionInitialise_Energy_Requirement_Table = QtGui.QAction(MainWindow)
         self.actionInitialise_Energy_Requirement_Table.setObjectName(_fromUtf8("actionInitialise_Energy_Requirement_Table"))
+        self.actionLiving_Threshold = QtGui.QAction(MainWindow)
+        self.actionLiving_Threshold.setObjectName(_fromUtf8("actionLiving_Threshold"))
         self.menuProject.addAction(self.actionCreate_Project)
         self.menuProject.addAction(self.actionOpen_Project)
         self.menuProject.addAction(self.actionFind_Project)
@@ -183,9 +185,10 @@ class Ui_MainWindow(object):
         self.menuHousehold.addSeparator()
         self.menuHousehold.addAction(self.actionFind_Household)
         self.menuHousehold.addAction(self.actionView_All_Households_2)
+        self.menuOutputs.addAction(self.actionDisposable_Income)
         self.menuOutputs.addAction(self.actionHousehold_by_Characteristics)
         self.menuOutputs.addAction(self.actionIncome_By_Source)
-        self.menuOutputs.addAction(self.actionDisposable_Income)
+        self.menuOutputs.addAction(self.actionLiving_Threshold)
         self.menubar.addAction(self.menuProject.menuAction())
         self.menubar.addAction(self.menuHousehold.menuAction())
         self.menubar.addAction(self.menuData_Management.menuAction())
@@ -256,4 +259,5 @@ class Ui_MainWindow(object):
         self.actionConfigure_Project_Income.setText(QtGui.QApplication.translate("MainWindow", "Select Project Income", None, QtGui.QApplication.UnicodeUTF8))
         self.actionDisposable_Income.setText(QtGui.QApplication.translate("MainWindow", "Disposable Income", None, QtGui.QApplication.UnicodeUTF8))
         self.actionInitialise_Energy_Requirement_Table.setText(QtGui.QApplication.translate("MainWindow", "Initialise Energy Requirements Table", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionLiving_Threshold.setText(QtGui.QApplication.translate("MainWindow", "Living Threshold", None, QtGui.QApplication.UnicodeUTF8))
 
