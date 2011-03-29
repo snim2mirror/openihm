@@ -149,7 +149,11 @@ class ReadDataEntrySheets:
                     
                     sex = str(values[0])
                     age = values[1]
-                    yearofbirth = values[2]
+                    if values[2] ==0 and age !=0:
+                        yearofbirth = date.today().year - values[1]
+                    else:
+                        yearofbirth = values[2]
+                        
                     hhead = values[3]
                     if sex.lower() == 'male' or sex.lower() == 'm':
                         personid = 'm' + str(age)
