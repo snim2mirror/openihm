@@ -195,6 +195,7 @@ class DisposableHouseholdIncome:
         
         basicQuery = self.totalCropCashIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        print finalQuery
         recordset = self.executeQuery(finalQuery)
         return recordset
     
@@ -392,6 +393,7 @@ class DisposableHouseholdIncome:
             for coulumnname in pcharacteristics:
                 currentcolumn =  tablename + '.' + coulumnname
                 basequery = basequery + " and '%s' IS NOT NULL" % (currentcolumn)
+        print basequery
         return basequery
         
     def buildHCharacteristicsQuery(self,hcharacteristics, tablename):

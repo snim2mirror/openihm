@@ -565,12 +565,13 @@ class ReadDataEntrySheets:
             
             if datafieldvalue!='':
                 datafieldvalue ="`"+ datafieldvalue +"`"
-                print datafieldvalue
+                
                 datafields.append(datafieldvalue)
                 fielddatatypes.append(fieldtype)
                 columns = columns + 1
             else:
                 break
+        print datafields
 
         empty_cell_count =0
 
@@ -592,7 +593,7 @@ class ReadDataEntrySheets:
                 if datatype=='Double':
                     try:
                         cellvalue = float(cellvalue)
-                        print cellvalue
+                        
                     except ValueError:
                         cellvalue = 0
                         
@@ -679,7 +680,7 @@ class ReadDataEntrySheets:
                 if datatype=='Double':
                     try:
                         cellvalue = float(cellvalue)
-                        print cellvalue
+                        
                     except ValueError:
                         cellvalue = 0
                         
@@ -693,7 +694,7 @@ class ReadDataEntrySheets:
                     tempvalue = str(cellvalue)
                     tempvalue = tempvalue.strip('')
                     
-                    print "temp value ",tempvalue
+                    
                     if tempvalue == '1' or tempvalue.lower() =='yes' or tempvalue.lower() =='y':
                         cellvalue = 'Yes'
                     else:
@@ -701,8 +702,7 @@ class ReadDataEntrySheets:
                     
 
                 values.append(cellvalue)
-                print values
-                print empty_cell_count
+                
 
             if exitmain == True or empty_cell_count==columns:
                 break
@@ -711,13 +711,13 @@ class ReadDataEntrySheets:
                 numrows = self.checkRecordExistence(testquery)
                 if numrows == 0:
                     query = self.buildCharInsertQuery(values,datafields,fielddatatypes,hhid,self.hcharstable)
-                    print query
+                    
                 else:
                     
                     query= '''DELETE FROM %s WHERE hhid=%s AND pid=%s''' %(self.hcharstable,hhid,self.pid)
                     database.execUpdateQuery(query)
                     query = self.buildCharInsertQuery(values,datafields,fielddatatypes,hhid,self.hcharstable)
-                    print query
+                    
                 database.execUpdateQuery(query)
                 
             empty_cell_count = 0
@@ -741,7 +741,7 @@ class ReadDataEntrySheets:
         parameterlist= parameterlist + ')'
         query = query + ')'
         query = query + parameterlist
-        print query
+        
         return query
 
     def checkRecordExistence(self,testquery):
