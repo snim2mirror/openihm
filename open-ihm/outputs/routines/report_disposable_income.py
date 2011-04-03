@@ -49,7 +49,6 @@ class DisposableHouseholdIncome:
             householdCashIncome = cropsCashIncome + employmentCashIncome + livestockCashIncome + transfersCashIncome + wildfoodCashIncome
             templist.append(householdCashIncome)
             householdsCash.append(tuple(templist))
-            
         return householdsCash
 
     def calculateHouseholdFoodIncome(self,reporttype,projectid,houseids):
@@ -116,12 +115,13 @@ class DisposableHouseholdIncome:
             templist.append(householdIDs[i])
             householdFoodPrice = 0
             householdFoodNeed = householdAE [i][1] - householdFoodIncome[i][1]
-            
+
             if householdFoodNeed > 0:
                 householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
                 hhDisposableIncome = householdCashIncome[i][1] -(((householdFoodNeed)/1000)  * (householdFoodPrice * 1000))
             else:
-                hhDisposableIncome = householdCashIncome[i][1] + (((householdFoodNeed)/1000)  * (householdFoodPrice * 1000))
+                excessFoodSales= self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
+                hhDisposableIncome = householdCashIncome[i][1] + (((householdFoodNeed)/1000)  * (excessFoodSales * 1000))
                 
             #Standardise DI if reportype is DI/AE
             if (reporttype =='Disposable Income - Standardised' or reporttype == 'Living Threshold')and householdAE [i][1]!=0:
@@ -169,7 +169,7 @@ class DisposableHouseholdIncome:
         householdFoodPrices = []
         foodprice = 0
         for row in householdDiet:
-            foodProportion = housefoodNeed * (row[3]/100)
+            foodProportion = abs(housefoodNeed) * (row[3]/100)
             foodKcalQuery = '''SELECT  energyvalueperunit from setup_foods_crops WHERE name='%s' ''' % row[1]
             foodKcal = self.executeQuery(foodKcalQuery)
 
@@ -195,7 +195,6 @@ class DisposableHouseholdIncome:
         
         basicQuery = self.totalCropCashIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
-        print finalQuery
         recordset = self.executeQuery(finalQuery)
         return recordset
     
@@ -229,6 +228,7 @@ class DisposableHouseholdIncome:
         basicQuery = self.totalWildFoodCashIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
+        
         return recordset
 
     #get household food income
@@ -243,7 +243,7 @@ class DisposableHouseholdIncome:
     def getEmploymentFIncome(self,projectid,householdIDs):
         '''get total houshold employment food income'''
         
-        basicQuery = self.totalEmploymentCashIncomeQuery(projectid,householdIDs)
+        basicQuery = self.totalEmploymentFIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
         return recordset
@@ -251,7 +251,7 @@ class DisposableHouseholdIncome:
     def getLivestockFIncome(self,projectid,householdIDs):
         '''get total houshold livestock food income'''
         
-        basicQuery = self.totalLivestockCashIncomeQuery(projectid,householdIDs)
+        basicQuery = self.totalLivestockFIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
         return recordset
@@ -259,7 +259,7 @@ class DisposableHouseholdIncome:
     def getTransferFIncome(self,projectid,householdIDs):
         '''get total houshold transfer food income'''
         
-        basicQuery = self.totalTransferCashIncomeQuery(projectid,householdIDs)
+        basicQuery = self.totalTransferFIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
         return recordset
@@ -267,7 +267,7 @@ class DisposableHouseholdIncome:
     def getWildFoodFIncome(self,projectid,householdIDs):
         '''get total houshold food income from wildfoods'''
         
-        basicQuery = self.totalWildFoodCashIncomeQuery(projectid,householdIDs)
+        basicQuery = self.totalWildFoodFIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
         return recordset
