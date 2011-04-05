@@ -118,10 +118,10 @@ class DisposableHouseholdIncome:
 
             if householdFoodNeed > 0:
                 householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] -(((householdFoodNeed)/1000)  * (householdFoodPrice * 1000))
+                hhDisposableIncome = householdCashIncome[i][1] -((abs(householdFoodNeed)/1000)  * (householdFoodPrice * 1000))
             else:
                 excessFoodSales= self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] + (((householdFoodNeed)/1000)  * (excessFoodSales * 1000))
+                hhDisposableIncome = householdCashIncome[i][1] + ((abs(householdFoodNeed)/1000)  * (excessFoodSales * 1000))
                 
             #Standardise DI if reportype is DI/AE
             if (reporttype =='Disposable Income - Standardised' or reporttype == 'Living Threshold')and householdAE [i][1]!=0:
