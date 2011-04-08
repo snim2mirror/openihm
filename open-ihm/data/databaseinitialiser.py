@@ -153,7 +153,7 @@ class DatabaseInitialiser:
          db = Connect(**dbinfo)             
          cursor = db.cursor()
          
-         query = "SHOW COLUMNS FROM transfers"
+         query = "SHOW COLUMNS FROM standardofliving"
          
          cursor.execute(query)
          rows = cursor.fetchall()
