@@ -40,13 +40,13 @@ class AdultEquivalent:
             query = '''SELECT kCalNeedM FROM lookup_energy_needs WHERE age =%s''' %(age)
             resulttable = self.executeQuery(query)
             for row in resulttable:
-		energyreq = row[0]
+		energyreq = row[0] *365
 		
         elif gender=='Female':
             query = '''SELECT kCalNeedF FROM lookup_energy_needs WHERE age =%s''' %(age)
             resulttable = self.executeQuery(query)
             for row in resulttable:
-		energyreq = row[0]
+		energyreq = row[0] * 365
 
         return energyreq
 
