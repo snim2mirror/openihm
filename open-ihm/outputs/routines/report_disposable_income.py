@@ -1,6 +1,8 @@
 from data.database import Database
 from report_adultequivalent import AdultEquivalent
 from data.report_settingsmanager import ReportsSettingsManager
+from PyQt4 import QtGui
+
 
 
 class DisposableHouseholdIncome:
@@ -115,17 +117,22 @@ class DisposableHouseholdIncome:
             templist.append(householdIDs[i])
             householdFoodPrice = 0
             householdFoodNeed = householdAE [i][1] - householdFoodIncome[i][1]
+            print ' household AE ', householdAE [i][1]
 
             if householdFoodNeed > 0:
                 householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
                 hhDisposableIncome = householdCashIncome[i][1] - householdFoodPrice
+                print ' disposable income raw ', hhDisposableIncome
             else:
                 excessFoodSales= self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
                 hhDisposableIncome = householdCashIncome[i][1] + excessFoodSales
+                print ' disposable income raw ', hhDisposableIncome
                     
                 #hhDisposableIncome = householdCashIncome[i][1] + ((abs(householdFoodNeed)/1000)  * (excessFoodSales * 1000))
                 
             print 'cash income ', householdCashIncome[i][1], '  food need ',householdFoodNeed, ' food income ', householdFoodIncome[i][1], '  food price ', householdFoodPrice
+            DIcompletionmessage =  'House ID: ' + str(householdIDs[i]) + ', cash income: ' + str(householdCashIncome[i][1]) + ',  household food need: ' + str(householdFoodNeed) + ' food income: '+ str(householdFoodIncome[i][1]) + ',  food price: ' + str(householdFoodPrice)
+            QtGui.QMessageBox.information(None, 'RAW - DI Calculation Report', DIcompletionmessage)
                 
             #Standardise DI if reportype is DI/AE
             if (reporttype =='Disposable Income - Standardised' or reporttype == 'Living Threshold')and householdAE [i][1]!=0:
@@ -183,6 +190,8 @@ class DisposableHouseholdIncome:
 
             if kCal!=0:
                 foodprice = foodprice + ((foodProportion/kCal) * row[4])
+                
+            foodprice = round(foodprice,2)
 
         return foodprice
         
