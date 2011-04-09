@@ -733,15 +733,20 @@ class ReadDataEntrySheets:
         
         for i in range(0,listlength):
             tempvalue = values[i]
+            
             if fielddatatypes[i]=='String' or fielddatatypes[i]=='Yes/No':
                 parameterlist= parameterlist + ', ' + "'" +str(tempvalue) + "'"
             else:
                 parameterlist= parameterlist + ', ' + str(tempvalue)
-            query = query +', '+ datafields[i]
+
+            if datafields[i]!='': # addressing error where a null fieldname was being appended to the query, when importing field names
+                query = query +', '+ datafields[i]
+                
         parameterlist= parameterlist + ')'
         query = query + ')'
         query = query + parameterlist
-        
+
+        QtGui.QMessageBox.information(None, 'Importing Data', query)
         return query
 
     def checkRecordExistence(self,testquery):
