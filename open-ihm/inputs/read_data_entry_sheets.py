@@ -14,8 +14,8 @@ class ReadDataEntrySheets:
     def __init__(self,projectid):
         self.database = Database()
         self.pid = projectid
-        self.pcharstable = 'p' + str(projectid) +'personalcharacteristics'
-        self.hcharstable = 'p' + str(projectid) +'householdcharacteristics'
+        self.pcharstable = 'p' + str(projectid) +'PersonalCharacteristics'
+        self.hcharstable = 'p' + str(projectid) +'HouseholdCharacteristics'
 
     def readdata(self):
         '''Base method for data importation'''

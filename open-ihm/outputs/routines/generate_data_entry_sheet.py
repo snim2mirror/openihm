@@ -12,8 +12,8 @@ from data.report_settingsmanager import ReportsSettingsManager
 class DataEntrySheets:
     def __init__(self,projectid):
         self.database = Database()
-        self.pcharstable = 'p' + str(projectid) +'personalcharacteristics'
-        self.hcharstable = 'p' + str(projectid) +'householdcharacteristics'
+        self.pcharstable = 'p' + str(projectid) +'PersonalCharacteristics'
+        self.hcharstable = 'p' + str(projectid) +'HouseholdCharacteristics'
         self.pid = projectid
         self.config = Config.dbinfo().copy()
 
