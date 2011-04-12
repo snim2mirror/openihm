@@ -428,7 +428,7 @@ class ReadDataEntrySheets:
                 if (col_index >=3 and col_index <=5):
                     
                     try:
-                        cellvalue = float(cellvalue)
+                        cellvalue = round(float(cellvalue),2)
                         digitvalue = True
                     except ValueError:
                         digitvalue = False
