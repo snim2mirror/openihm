@@ -372,7 +372,8 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
      def listDiets(self):
          ''' List available currencies '''
          # select query to retrieve currencies
-         query = '''SELECT id, fooditem, unitofmeasure, percentage, priceperunit FROM diet '''
+         pid = self.parent.projectid
+         query = '''SELECT id, fooditem, unitofmeasure, percentage, priceperunit FROM diet WHERE pid=%s ''' % pid
          
          # retrieve and display members
          db = data.mysql.connector.Connect(**self.config)             
