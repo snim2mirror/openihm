@@ -107,7 +107,7 @@ class DisposableHouseholdIncome:
         houseids = ','.join(householdIDs)
         householdCashIncome = self.calculateHouseholdCashIncome(reporttype,projectid,houseids)
         householdFoodIncome = self.calculateHouseholdFoodIncome(reporttype,projectid,houseids)
-        householdAE = self.getHouseholdAE(householdIDs,projectid)
+        householdEnergyNeed = self.getHouseholdEnergyNeeds(householdIDs,projectid)
         #householdFoodPrice = self.checkHouseholdFoodNeeds(householdAE,householdFoodIncome)
         householdFoodPrice = 0
         reporttable = []
@@ -116,8 +116,8 @@ class DisposableHouseholdIncome:
             templist = []
             templist.append(householdIDs[i])
             householdFoodPrice = 0
-            householdFoodNeed = householdAE [i][1] - householdFoodIncome[i][1]
-            print ' household AE ', householdAE [i][1]
+            householdFoodNeed = householdEnergyNeed [i][1] - householdFoodIncome[i][1]
+            print ' household AE ', householdEnergyNeed [i][1]
 
             if householdFoodNeed > 0:
                 householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
@@ -130,32 +130,39 @@ class DisposableHouseholdIncome:
                     
                 #hhDisposableIncome = householdCashIncome[i][1] + ((abs(householdFoodNeed)/1000)  * (excessFoodSales * 1000))
                 
-            print 'cash income ', householdCashIncome[i][1], '  food need ',householdFoodNeed, ' food income ', householdFoodIncome[i][1], '  food price ', householdFoodPrice
+            #print 'cash income ', householdCashIncome[i][1], '  food need ',householdFoodNeed, ' food income ', householdFoodIncome[i][1], '  food price ', householdFoodPrice
             DIcompletionmessage =  'House ID: ' + str(householdIDs[i]) + ', cash income: ' + str(householdCashIncome[i][1]) + ',  household food need: ' + str(householdFoodNeed) + ' food income: '+ str(householdFoodIncome[i][1]) + ',  food price: ' + str(householdFoodPrice)
             QtGui.QMessageBox.information(None, 'RAW - DI Calculation Report', DIcompletionmessage)
                 
             #Standardise DI if reportype is DI/AE
-            if (reporttype =='Disposable Income - Standardised' or reporttype == 'Living Threshold')and householdAE [i][1]!=0:
-                hhDisposableIncome = hhDisposableIncome/ householdAE [i][1]
-                print ' standardized income ', hhDisposableIncome
+            if (reporttype =='Disposable Income - Standardised' or reporttype == 'Living Threshold')and householdEnergyNeed [i][1]!=0:
+                houseAE = self.getHouseAE(householdEnergyNeed[i][1])
+                hhDisposableIncome = hhDisposableIncome / houseAE
+                print ' standardized income ', hhDisposableIncome, ' houseAE  ',houseAE
 
             templist.append(round(hhDisposableIncome,2))
             reporttable.append(tuple(templist))
 
         return reporttable
 
-    def getHouseholdAE(self, householdids,pid):
+    def getHouseholdEnergyNeeds(self, householdids,pid):
         ''' get household food energy needs'''
         
-        householdsAE =[]
+        householdsENeed =[]
         for hhid in householdids:
             templist = []
             templist.append(hhid)
             connector = AdultEquivalent()
-            houseAE = connector.calculateHouseholdEnergyReq(hhid,pid)
-            templist.append(houseAE)
-            householdsAE.append(tuple(templist))
-        return householdsAE
+            houseENeed = connector.calculateHouseholdEnergyReq(hhid,pid)
+            templist.append(houseENeed)
+            householdsENeed.append(tuple(templist))
+        return householdsENeed
+
+    def getHouseAE(self,houseEnergyNeed):
+        connector = AdultEquivalent()
+        hholdAE = connector.caclulateHouseholdAE(houseEnergyNeed)
+        return hholdAE
+        
 
     def checkHouseholdFoodNeeds(self,householdsAE,householdsFood):
 

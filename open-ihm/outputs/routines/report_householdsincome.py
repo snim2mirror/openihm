@@ -240,9 +240,10 @@ class HouseholdIncome:
         return result
 
     def getAdultEquivalent(self, hhid,pid):
-        adultEquivalentCalc = AdultEquivalent()
-        householdAE = adultEquivalentCalc.calculateHouseholdEnergyReq(hhid,pid) 
-        return householdAE
+        connector = AdultEquivalent()
+        householdEnergyNeed = connector.calculateHouseholdEnergyReq(hhid,pid)
+        houseAE = connector.caclulateHouseholdAE(householdEnergyNeed)
+        return houseAE
         
     def standardiseIncome(self,row,householdAE):
         standardisedList =[]
