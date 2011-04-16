@@ -199,7 +199,7 @@ class DisposableHouseholdIncome:
                 foodprice = foodprice + ((foodProportion/kCal) * row[4])
                 
             foodprice = round(foodprice,2)
-
+        print 'cost ', foodprice
         return foodprice
         
     def executeQuery(self,query):

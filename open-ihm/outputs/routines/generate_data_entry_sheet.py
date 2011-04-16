@@ -195,7 +195,7 @@ class DataEntrySheets:
         headerrow = headerrow + 11
         itemrow = itemrow + 11
         
-        sheet2.write(headerrow, 0, "Livestock", style1)
+        sheet2.write(headerrow, 0, "Livestock-C", style1)
         sheet2.write(itemrow, 0, "Name", style2)
         sheet2.write(itemrow, 1, "Unit", style2)
         sheet2.write(itemrow, 2, "UnitsProduced", style2)

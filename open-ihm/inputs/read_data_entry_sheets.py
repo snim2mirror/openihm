@@ -45,7 +45,7 @@ class ReadDataEntrySheets:
                     self.readExpenditureData(householdsheet,row_index)
                 elif cellvalue == 'Crops':
                     self.readCropAndFoodsIncomeData(householdsheet,row_index,cellvalue)
-                elif cellvalue == 'Livestock':
+                elif cellvalue == 'Livestock-C':
                     self.readCropAndFoodsIncomeData(householdsheet,row_index,cellvalue)
                 elif cellvalue == 'WildFoods':
                     self.readCropAndFoodsIncomeData(householdsheet,row_index,cellvalue)
@@ -173,6 +173,7 @@ class ReadDataEntrySheets:
                         personid = personid + '_' + str(numrows+1)
                         query ='''INSERT INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,pid)
                             VALUES ('%s',%s,'%s',%s,'%s',%s)''' % (personid,hhid,hhead,yearofbirth,sex,self.pid)
+                    print query
 
                     database.execUpdateQuery(query)
 
@@ -746,7 +747,7 @@ class ReadDataEntrySheets:
         query = query + ')'
         query = query + parameterlist
 
-        QtGui.QMessageBox.information(None, 'Importing Data', query)
+        #QtGui.QMessageBox.information(None, 'Importing Data', query)
         return query
 
     def checkRecordExistence(self,testquery):
