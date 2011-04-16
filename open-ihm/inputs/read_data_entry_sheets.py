@@ -93,7 +93,15 @@ class ReadDataEntrySheets:
                 datevisited = values[2]
                 pid= sheet1.name
 
-                query ='''REPLACE INTO households (hhid,householdname,dateofcollection,pid) VALUES (%s,'%s','%s',%s)''' % (hhid,hholdname,datevisited,pid)
+                testquery ='''SELECT hhid,pid FROM households WHERE hhid=%s AND pid =%s ''' % (hhid,self.pid)
+                numrows =self.checkRecordExistence(testquery)
+		if numrows ==0:
+                    query ='''INSERT INTO households (hhid,householdname,dateofcollection,pid) VALUES (%s,'%s','%s',%s)''' % (hhid,hholdname,datevisited,pid)
+                        
+                else:
+                    query ='''UPDATE households SET hhid=%s,householdname='%s',dateofcollection='%s',pid=%s
+                                WHERE hhid=%s AND pid =%s ''' % (hhid,hholdname,datevisited,pid,hhid,pid)
+
                 database.execUpdateQuery(query)
 
         database.close()
@@ -110,7 +118,7 @@ class ReadDataEntrySheets:
 
         for current_row_index in range(start_row_index, householdsheet.nrows):
             values = []
-            for col_index in range(0,4):
+            for col_index in range(0,5):
                 exitmain = False
                 skiprow =False
                 cellvalue = householdsheet.cell(current_row_index,col_index).value
@@ -131,7 +139,7 @@ class ReadDataEntrySheets:
                 if cellvalue == '':
                     empty_cell_count = empty_cell_count + 1
                     cellvalue = 'NULL'
-                if (col_index ==1 or col_index ==2) and digitvalue == False:
+                if (col_index ==1 or col_index ==2 or col_index ==4) and digitvalue == False:
                     cellvalue = 0
                 if col_index == 3 and (cellvalue == 1 or cellvalue.lower() =='yes' or cellvalue.lower() =='y'):
                     cellvalue = 'Yes'
@@ -149,8 +157,13 @@ class ReadDataEntrySheets:
                     
                     sex = str(values[0])
                     age = values[1]
+                    
                     if values[2] ==0 and age !=0:
                         yearofbirth = date.today().year - values[1]
+                        
+                    elif values[2] ==0 and age ==0:
+                        
+                        yearofbirth = date.today().year
                     else:
                         yearofbirth = values[2]
                         
@@ -163,16 +176,19 @@ class ReadDataEntrySheets:
                         sex='Female'
                     pidvalue = personid + '%'
 
+                    periodaway = values[4]
+
                     testquery ='''SELECT * FROM householdmembers WHERE hhid=%s AND personid LIKE '%s' AND pid =%s ''' % (hhid,pidvalue,self.pid)
                     numrows =self.checkRecordExistence(testquery)
 		    if numrows ==0:
-                        query ='''INSERT INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,pid)
-                            VALUES ('%s',%s,'%s',%s,'%s',%s)''' % (personid,hhid,hhead,yearofbirth,sex,self.pid)
+                        query ='''INSERT INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,periodaway,pid)
+                            VALUES ('%s',%s,'%s',%s,'%s',%s,%s)''' % (personid,hhid,hhead,yearofbirth,sex,periodaway,self.pid)
                         
                     else:
-                        personid = personid + '_' + str(numrows+1)
-                        query ='''INSERT INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,pid)
-                            VALUES ('%s',%s,'%s',%s,'%s',%s)''' % (personid,hhid,hhead,yearofbirth,sex,self.pid)
+                        #personid = personid + '_' + str(numrows+1)
+                        query = ''' UPDATE householdmembers SET personid='%s',hhid=%s,headofhousehold='%s',yearofbirth=%s,sex='%s',periodaway=%s,pid=%s
+                                    WHERE personid='%s' AND hhid=%s AND pid=%s''' % (personid,hhid,hhead,yearofbirth,sex,periodaway,self.pid,personid,hhid,self.pid)
+                        
                     print query
 
                     database.execUpdateQuery(query)
@@ -331,10 +347,10 @@ class ReadDataEntrySheets:
                 skiprow = False
                 cellvalue = str(householdsheet.cell(current_row_index,col_index).value)
                 if incometype== 'Crops':
-                    if cellvalue == 'Livestock':
+                    if cellvalue == 'Livestock-C':
                         exitmain = True
                         break
-                elif incometype== 'Livestock':
+                elif incometype== 'Livestock-C':
                     if cellvalue == 'WildFoods':
                         exitmain = True
                         break
@@ -378,7 +394,7 @@ class ReadDataEntrySheets:
                     unitsconsumed = values[6]
                     if incometype=='Crops':
                         tablename='cropincome'
-                    elif incometype=='Livestock':
+                    elif incometype=='Livestock-C':
                         tablename='livestockincome'
                     elif incometype=='WildFoods':
                         tablename='wildfoods'

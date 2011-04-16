@@ -103,6 +103,7 @@ class DataEntrySheets:
         sheet2.write(2, 1, "Age", style2)
         sheet2.write(2, 2, "YearofBirth", style2)
         sheet2.write(2, 3, "HouseholdHead", style2)
+        sheet2.write(2, 4, "PeriodAway", style2)
 
         #get personal and household characteristics, configured for current project
         pchars = self.getPersonalCharacteristics()
