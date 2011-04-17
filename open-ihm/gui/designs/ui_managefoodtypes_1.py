@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_managefoodtypes_1.ui'
 #
-# Created: Sat Nov 06 18:17:04 2010
+# Created: Fri Apr 15 16:13:44 2011
 #      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
@@ -58,7 +58,7 @@ class Ui_FoodTypes(object):
         QtCore.QMetaObject.connectSlotsByName(FoodTypes)
 
     def retranslateUi(self, FoodTypes):
-        FoodTypes.setWindowTitle(QtGui.QApplication.translate("FoodTypes", "Food Energy Requirements", None, QtGui.QApplication.UnicodeUTF8))
+        FoodTypes.setWindowTitle(QtGui.QApplication.translate("FoodTypes", "Food Energy Values", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdClose.setText(QtGui.QApplication.translate("FoodTypes", "Close", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdAddRow.setText(QtGui.QApplication.translate("FoodTypes", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdEditRow.setText(QtGui.QApplication.translate("FoodTypes", "Edit", None, QtGui.QApplication.UnicodeUTF8))

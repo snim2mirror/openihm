@@ -65,3 +65,32 @@ class AdultEquivalent:
         if absence <> 0:
             adjustedenergyreq = adjustedenergyreq - (adjustedenergyreq *(absence/12))
         return adjustedenergyreq
+
+    def calculateAdultEnergyEquivalent(self):
+        '''Calculate avarage daily food need for adults'''
+        energyreqAdultMale = self.getEnergyReqAdultMale()
+        energyreqAdultFemale = self.getEnergyReqAdultFemale()
+        averageAdultRequirement = (energyreqAdultMale + energyreqAdultFemale)/2
+        adultRequirement = averageAdultRequirement * 365
+        return adultRequirement
+        
+    def getEnergyReqAdultMale(self):
+        query = '''SELECT kCalNeedM FROM lookup_energy_needs WHERE age =25 ''' 
+        resulttable = self.executeQuery(query)
+        for row in resulttable:
+	    energyreq = row[0]
+	return energyreq
+
+    def getEnergyReqAdultFemale(self):
+        query = '''SELECT kCalNeedF FROM lookup_energy_needs WHERE age =25 ''' 
+        resulttable = self.executeQuery(query)
+        for row in resulttable:
+	    energyreq = row[0]
+	return energyreq
+    
+    def caclulateHouseholdAE(self,householdenergyreq):
+        adultRequirement = self.calculateAdultEnergyEquivalent()
+        adultEquivalent = round((float(householdenergyreq) / adultRequirement ),2)
+        return adultEquivalent
+
+	    
