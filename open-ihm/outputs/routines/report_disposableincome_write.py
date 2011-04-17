@@ -24,8 +24,12 @@ class HouseholdsIncomeWrite:
         sheet1.col(0).width = 2500
         sheet1.col(1).width = 4500
         #write Headers
+        
+            
         sheet1.write(2, 0, 'hhid', style1)
         sheet1.write(2, 1, 'Disposable Income', style1)
+        if reporttype=='Living Threshold':
+            sheet1.write(2, 2, 'Above STOL', style1)
 
         #write Data 
         myrow = 3
@@ -35,6 +39,11 @@ class HouseholdsIncomeWrite:
 
             sheet1.write(myrow, 0, int(hhid))
             sheet1.write(myrow, 1, float(householdDI))
+            
+            if reporttype=='Living Threshold':
+                incomeLessExpenses = row[2]
+                if incomeLessExpenses > 0:
+                    sheet1.write(myrow, 2, float(incomeLessExpenses))
             
             myrow = myrow + 1
                 
