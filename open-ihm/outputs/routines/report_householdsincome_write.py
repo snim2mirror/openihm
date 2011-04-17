@@ -35,7 +35,7 @@ class HouseholdsIncomeWrite:
                     #sheet1.col(0).width = 1500
                 else:
                     sheet1.write(2, i, key,style1)
-                    sheet1.col(i).width = 4000
+                    sheet1.col(i).width = 5500
                     i = i + 1
 
             #write Data 

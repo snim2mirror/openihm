@@ -13,6 +13,7 @@ class FoodRequirementValues:
         database.execUpdateQuery(deleteQuery)
         
         insertQuery = '''INSERT INTO lookup_energy_needs (age,kCalNeedM,kCalNeedF) VALUES
+                            (0,820,820),
                             (1,820,820),
                             (2,1150,1150),
                             (3,1350,1350),

@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Food Energy Requirements</string>
+   <string>Food Energy Values</string>
   </property>
   <widget class="QPushButton" name="cmdClose">
    <property name="geometry">

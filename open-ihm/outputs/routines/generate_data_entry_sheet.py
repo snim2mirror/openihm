@@ -103,6 +103,7 @@ class DataEntrySheets:
         sheet2.write(2, 1, "Age", style2)
         sheet2.write(2, 2, "YearofBirth", style2)
         sheet2.write(2, 3, "HouseholdHead", style2)
+        sheet2.write(2, 4, "PeriodAway", style2)
 
         #get personal and household characteristics, configured for current project
         pchars = self.getPersonalCharacteristics()
@@ -195,7 +196,7 @@ class DataEntrySheets:
         headerrow = headerrow + 11
         itemrow = itemrow + 11
         
-        sheet2.write(headerrow, 0, "Livestock", style1)
+        sheet2.write(headerrow, 0, "Livestock-C", style1)
         sheet2.write(itemrow, 0, "Name", style2)
         sheet2.write(itemrow, 1, "Unit", style2)
         sheet2.write(itemrow, 2, "UnitsProduced", style2)
