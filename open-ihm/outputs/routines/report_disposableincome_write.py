@@ -22,14 +22,19 @@ class HouseholdsIncomeWrite:
         reptitle = "%s" % reporttype
         sheet1.write(0, 0, reptitle, style1) 
         sheet1.col(0).width = 2500
-        sheet1.col(1).width = 4500
-        #write Headers
         
-            
+        #write Headers
         sheet1.write(2, 0, 'hhid', style1)
-        sheet1.write(2, 1, 'Disposable Income', style1)
+        
         if reporttype=='Living Threshold':
-            sheet1.write(2, 2, 'Above STOL', style1)
+            
+            sheet1.write(2, 1, 'DIncome - Below STOL', style1)
+            sheet1.write(2, 2, 'DIncome - Above STOL', style1)
+            sheet1.col(1).width = 6000
+            sheet1.col(2).width = 6000
+        else:
+            sheet1.col(1).width = 4500
+            sheet1.write(2, 1, 'Disposable Income', style1)
 
         #write Data 
         myrow = 3
@@ -38,13 +43,19 @@ class HouseholdsIncomeWrite:
             householdDI = row[1]
 
             sheet1.write(myrow, 0, int(hhid))
-            sheet1.write(myrow, 1, float(householdDI))
+            
             
             if reporttype=='Living Threshold':
                 incomeLessExpenses = row[2]
-                if incomeLessExpenses > 0:
-                    sheet1.write(myrow, 2, float(incomeLessExpenses))
-            
+                if incomeLessExpenses < 0:
+                    sheet1.write(myrow, 1, float(householdDI))
+                    sheet1.write(myrow, 2, 0)
+                else:
+                    sheet1.write(myrow, 2, float(householdDI))
+                    sheet1.write(myrow, 1, 0)
+            else:
+                sheet1.write(myrow, 1, float(householdDI))
+                
             myrow = myrow + 1
                 
         folder = "outputs/spreadsheets/income_sources/"

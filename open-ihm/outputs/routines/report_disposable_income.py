@@ -117,28 +117,18 @@ class DisposableHouseholdIncome:
             templist.append(householdIDs[i])
             householdFoodPrice = 0
             householdFoodNeed = householdEnergyNeed [i][1] - householdFoodIncome[i][1]
-            print ' household AE ', householdEnergyNeed [i][1]
 
             if householdFoodNeed > 0:
                 householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
                 hhDisposableIncome = householdCashIncome[i][1] - householdFoodPrice
-                print ' disposable income raw ', hhDisposableIncome
             else:
                 excessFoodSales= self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
                 hhDisposableIncome = householdCashIncome[i][1] + excessFoodSales
-                print ' disposable income raw ', hhDisposableIncome
-                    
-                #hhDisposableIncome = householdCashIncome[i][1] + ((abs(householdFoodNeed)/1000)  * (excessFoodSales * 1000))
-                
-            #print 'cash income ', householdCashIncome[i][1], '  food need ',householdFoodNeed, ' food income ', householdFoodIncome[i][1], '  food price ', householdFoodPrice
-            DIcompletionmessage =  'House ID: ' + str(householdIDs[i]) + ', cash income: ' + str(householdCashIncome[i][1]) + ',  household food need: ' + str(householdFoodNeed) + ' food income: '+ str(householdFoodIncome[i][1]) + ',  food price: ' + str(householdFoodPrice)
-            QtGui.QMessageBox.information(None, 'RAW - DI Calculation Report', DIcompletionmessage)
                 
             #Standardise DI if reportype is DI/AE
-            if (reporttype =='Disposable Income - Standardised' or reporttype == 'Living Threshold')and householdEnergyNeed [i][1]!=0:
+            if (reporttype =='Disposable Income - Standardised')and householdEnergyNeed [i][1]!=0:
                 houseAE = self.getHouseAE(householdEnergyNeed[i][1])
                 hhDisposableIncome = hhDisposableIncome / houseAE
-                print ' standardized income ', hhDisposableIncome, ' houseAE  ',houseAE
 
             templist.append(round(hhDisposableIncome,2))
             reporttable.append(tuple(templist))
@@ -199,7 +189,6 @@ class DisposableHouseholdIncome:
                 foodprice = foodprice + ((foodProportion/kCal) * row[4])
                 
             foodprice = round(foodprice,2)
-        print 'cost ', foodprice
         return foodprice
         
     def executeQuery(self,query):
@@ -415,7 +404,6 @@ class DisposableHouseholdIncome:
             for coulumnname in pcharacteristics:
                 currentcolumn =  tablename + '.' + coulumnname
                 basequery = basequery + " and '%s' IS NOT NULL" % (currentcolumn)
-        print basequery
         return basequery
         
     def buildHCharacteristicsQuery(self,hcharacteristics, tablename):
