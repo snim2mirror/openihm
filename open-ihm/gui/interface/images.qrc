@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="images">
+    <file>images/chanco.jpg</file>
+    <file>images/EfDChancoComposite.jpg</file>
+    <file>images/efdlogo.jpg</file>
+  </qresource>
+</RCC>
