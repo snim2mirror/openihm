@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Thu Feb 17 14:32:30 2011
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Sun Apr 17 13:36:40 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,11 +18,16 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 600)
+        MainWindow.setStyleSheet(_fromUtf8("#centralwidget {\n"
+"    background : white;\n"
+"    background-image : url(:/images/images/EfDChancoComposite.jpg);\n"
+"    background-repeat : no-repeat;\n"
+"}"))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuProject = QtGui.QMenu(self.menubar)
         self.menuProject.setObjectName(_fromUtf8("menuProject"))
@@ -261,3 +266,4 @@ class Ui_MainWindow(object):
         self.actionInitialise_Energy_Requirement_Table.setText(QtGui.QApplication.translate("MainWindow", "Initialise Energy Requirements Table", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLiving_Threshold.setText(QtGui.QApplication.translate("MainWindow", "Living Threshold", None, QtGui.QApplication.UnicodeUTF8))
 
+import images_rc

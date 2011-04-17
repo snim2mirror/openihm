@@ -6,6 +6,8 @@
 #	of the application.
 #-------------------------------------------------------------------
 
+# pylint: disable=W0312
+
 # imports from PyQt4 package
 from PyQt4 import QtGui, QtCore
 
@@ -60,8 +62,15 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		
 		self.projectid = -1
 		self.projectname = ""
+
+		
+		### FIXME: This is intended to style the MDI area, but it doesn't work!
+		### Waiting for a response from the PyQt mailing list about
+		### how best to implement this.
 		
 		self.mdi = QtGui.QMdiArea()
+		self.mdi.setStyleSheet("QMdiArea { background : white; background-image : url(:/images/images/EfDChancoComposite.jpg); background-repeat : no-repeat; }")
+		
 		self.setCentralWidget(self.mdi)
 		
 		# connect relevant signals and slots
