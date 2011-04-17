@@ -52,7 +52,7 @@ class DatabaseInitialiser:
              
          if ( dbinstalled ):
                  dbuptodate = self.updateDatabase()
-                 self.fixStandardOfLiving()
+                 self.fixIssue61()
 
          dbstatus = dict()
          dbstatus['mysqlstarted'] = mysqlstarted
@@ -164,12 +164,12 @@ class DatabaseInitialiser:
          upToDate = False
          for row in rows:
              for field in row:
-                 if field == "summary":
+                 if field == "null":
                      upToDate = True
          
          return upToDate
                  
-     def fixStandardOfLiving(self):
+     def fixIssue61(self):
          # if database is already up to date return
          if self.standardOfLivingOK():
              return True
