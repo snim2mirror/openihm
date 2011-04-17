@@ -7,6 +7,7 @@
 #-------------------------------------------------------------------
 
 # pylint: disable=W0312
+# pylint: disable=W0511
 
 # imports from PyQt4 package
 from PyQt4 import QtGui, QtCore
@@ -63,15 +64,17 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.projectid = -1
 		self.projectname = ""
 
-		
 		### FIXME: This is intended to style the MDI area, but it doesn't work!
 		### Waiting for a response from the PyQt mailing list about
 		### how best to implement this.
+#		self.mdi = QtGui.QMdiArea()
+#		self.setCentralWidget(self.mdi)
+#		self.mdi.setStyleSheet("#centralwidget { background : white; background-image : url(:/images/images/EfDChancoComposite.jpg); background-repeat : no-repeat; }")
 		
-		self.mdi = QtGui.QMdiArea()
-		self.mdi.setStyleSheet("QMdiArea { background : white; background-image : url(:/images/images/EfDChancoComposite.jpg); background-repeat : no-repeat; }")
-		
-		self.setCentralWidget(self.mdi)
+		### Advice from the PyQt mailing list
+		### Results in image being tiled.
+#		self.brush = QtGui.QBrush(QtGui.QPixmap("resources/images/EfDChancoCompositeIcon.jpg"))
+#		self.mdi.setBackground(self.brush)		
 		
 		# connect relevant signals and slots
 		self.connect(self.actionExit, QtCore.SIGNAL("triggered()"), self.close)
@@ -94,7 +97,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.connect(self.actionDelete_Household, QtCore.SIGNAL("triggered()"), self.delHousehold)
 		self.connect(self.actionHousehold_Characteristics_2, QtCore.SIGNAL("triggered()"), self.manageHouseholdCharacteristics)
 		self.connect(self.actionPersonal_Characteristics, QtCore.SIGNAL("triggered()"), self.managePersonalCharacteristics)
-		
+
 		self.actionOpen_Project.setIcon(QtGui.QIcon('resources/images/projectOpen.png'))
 		self.actionCreate_Project.setIcon(QtGui.QIcon('resources/images/projectNew.png'))
 		self.actionFind_Project.setIcon(QtGui.QIcon('resources/images/projectFind.png'))
@@ -107,6 +110,15 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 		self.actionClose_Project.setDisabled(True)
 		self.setWindowIcon(QtGui.QIcon('resources/images/openihm.png'))
 
+
+		### Add a spacer and icon to the toolbar with the logo.
+		### FIXME: decide whether this should be done as a background image.
+		# self.actionDo_Nothing = QtGui.QAction(self)
+		# self.connect(self.actionDo_Nothing, QtCore.SIGNAL("triggered()"), self.doNothing)
+		# self.actionDo_Nothing.setIcon(QtGui.QIcon("resources/images/EfDChancoCompositeIcon.jpg"))
+		# self.toolbar.addAction(self.actionDo_Nothing)
+		
+		
 		self.connect(self.actionAboutOpenIHM, QtCore.SIGNAL("triggered()"), self.aboutOpenIHM)
 		self.connect(self.actionEnergy_Requirements, QtCore.SIGNAL("triggered()"), self.viewFoodEnergyRequirements)
 		self.connect(self.actionManage_Currencies, QtCore.SIGNAL("triggered()"), self.manageCurrencies)
@@ -399,4 +411,9 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 subWin = self.mdi.addSubWindow(form)
                 self.centerSubWindow(subWin)
                 form.show()'''
+
+	def doNothing(self):
+		"""Do nothing -- for the logo on the toolbar.
+		"""
+		return
 
