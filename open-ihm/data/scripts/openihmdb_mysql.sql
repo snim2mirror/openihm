@@ -27,7 +27,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectincomesources` (
   `pid` INT(11) NOT NULL ,
   `incomesource` VARCHAR(255) NOT NULL ,
   `incometype` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`incomesource`, `pid`) ,
+  PRIMARY KEY (`incomesource`, `pid`, `incometype`) ,
   INDEX `fk_projectincomesources_projects` (`pid` ASC) ,
   CONSTRAINT `fk_projectincomesources_projects`
     FOREIGN KEY (`pid` )
