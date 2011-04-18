@@ -164,6 +164,69 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>tblCurrencies</tabstop>
+  <tabstop>txtCurrencyName</tabstop>
+  <tabstop>txtAbbreviation</tabstop>
+  <tabstop>txtSymbol</tabstop>
+  <tabstop>cmdSave</tabstop>
+  <tabstop>cmdDelete</tabstop>
+  <tabstop>cmdClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>CurrencyManager</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>652</x>
+     <y>301</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>528</x>
+     <y>248</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>CurrencyManager</receiver>
+   <slot>saveCurrency()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>606</x>
+     <y>182</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>425</x>
+     <y>212</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>CurrencyManager</receiver>
+   <slot>delCurrencies()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>447</x>
+     <y>294</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>544</x>
+     <y>290</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveCurrency()</slot>
+  <slot>delCurrencies()</slot>
+  <slot>showSelectedCurrency()</slot>
+ </slots>
 </ui>
