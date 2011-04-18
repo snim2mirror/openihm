@@ -52,6 +52,48 @@ from data.setup_foodrequirement_startupvalues import FoodRequirementValues
 
 
 
+# FIXME: Make the background of the painter white not black.
+class PicturedMDIArea(QtGui.QMdiArea):
+    """This class creates an MDI area with a background image.
+
+    Code is adapted from here:
+    
+    http://www.diotavelli.net/PyQtWiki/Adding%20a%20background%20image%20to%20an%20MDI%20area
+
+    Thanks to David Boddie on the PyQt mailing list.
+    """
+    
+    def __init__(self, background_pixmap, parent = None):
+        QtGui.QMdiArea.__init__(self, parent)
+        self.background_pixmap = background_pixmap
+        self.centered = False
+        self.display_pixmap = None
+    
+    def paintEvent(self, event):
+        painter = QtGui.QPainter()
+        painter.begin(self.viewport())
+        if not self.centered:
+            painter.drawPixmap(0,
+                               0,
+                               self.background_pixmap.width(),
+                               self.background_pixmap.height(),
+                               self.background_pixmap)
+        else:
+            painter.fillRect(event.rect(), self.palette().color(QtGui.QPalette.Window))
+            x = (self.width() - self.display_pixmap.width())/2
+            y = (self.height() - self.display_pixmap.height())/2
+            painter.drawPixmap(x, y, self.display_pixmap)
+        painter.end()
+    
+    def resizeEvent(self, event):
+        # If we had a background which filled the whole screen we would want
+        # to override resizeEvent thus:
+        #
+        # self.display_pixmap = self.background_pixmap.scaled(event.size(), QtCore.Qt.KeepAspectRatio)
+        #
+        pass
+
+
 class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     ''' Creates the Main Window of the application using the main 
     window design in the gui.designs.ui_mainwindow module '''
@@ -61,13 +103,13 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         QtGui.QMainWindow.__init__(self)
 	self.setupUi(self)
 
-#        self.ui = Ui_MainWindow()
-#        self.ui.setupUi(self)
-
         self.projectid = -1
         self.projectname = ""
 
-        self.mdi = QtGui.QMdiArea()
+        pixmap = QtGui.QPixmap('resources/images/EfDChancoComposite.jpg')
+        self.mdi = PicturedMDIArea(pixmap)
+        print 'pixmap is: ', pixmap.isNull()
+        
         self.setCentralWidget(self.mdi)
 
         self.actionClose_Project.setDisabled(True)
@@ -80,26 +122,6 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.actionCreate_Project.setIcon(QtGui.QIcon('resources/images/projectNew.png'))
         self.actionFind_Project.setIcon(QtGui.QIcon('resources/images/projectFind.png'))
         self.actionClose_Project.setIcon(QtGui.QIcon('resources/images/projectClose.png'))
-
-        ### FIXME: This is intended to style the MDI area, but it doesn't work!
-
-	### ATTEMPT 1: Style sheets.
-	#        self.mdi.setStyleSheet("#centralwidget { background : white; background-image : url(:/images/images/EfDChancoComposite.jpg); background-repeat : no-repeat; }")
-
-	### ATTEMPT 2: Brushes.
-        ### Advice from the PyQt mailing list
-        ### Results in image being tiled.
-#        self.brush = QtGui.QBrush(QtGui.QPixmap("resources/images/EfDChancoCompositeIcon.jpg"))
-#        self.mdi.setBackground(self.brush)        
-
-	### ATTEMPT 3: Toolbar hack.
-        ### Add a spacer and icon to the toolbar with the logo.
-        ### FIXME: decide whether this should be done as a background image.
-        # self.actionDo_Nothing = QtGui.QAction(self)
-        # self.connect(self.actionDo_Nothing, QtCore.SIGNAL("triggered()"), self.doNothing)
-        # self.actionDo_Nothing.setIcon(QtGui.QIcon("resources/images/EfDChancoCompositeIcon.jpg"))
-        # self.toolbar.addAction(self.actionDo_Nothing)
-
         
     def centerSubWindow(self, subWin):
         ''' Moves a subwindow to the center of the Mdi Area'''
@@ -377,9 +399,3 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     #     subWin = self.mdi.addSubWindow(form)
     #     self.centerSubWindow(subWin)
     #     form.show()
-
-    # def doNothing(self):
-    #     """Do nothing -- for the logo on the toolbar.
-    #     """
-    #     return
-
