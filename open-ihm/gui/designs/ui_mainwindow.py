@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Mon Apr 18 08:08:06 2011
+# Created: Mon Apr 18 10:28:24 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -239,6 +239,7 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.actionDisposable_Income, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.setReporttypeDI)
         QtCore.QObject.connect(self.actionInitialise_Energy_Requirement_Table, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.initialiseFoodRequirementTable)
         QtCore.QObject.connect(self.actionLiving_Threshold, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.setReporttypeAsLivingThreshold)
+        QtCore.QObject.connect(self.actionContents, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.openHelpContents)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -252,7 +253,9 @@ class Ui_MainWindow(object):
         self.actionDelete_Project.setText(QtGui.QApplication.translate("MainWindow", "Delete Project", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEdit_Project.setText(QtGui.QApplication.translate("MainWindow", "Edit Project", None, QtGui.QApplication.UnicodeUTF8))
         self.actionOpen_Household.setText(QtGui.QApplication.translate("MainWindow", "Edit Household", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionOpen_Household.setShortcut(QtGui.QApplication.translate("MainWindow", "Alt+O", None, QtGui.QApplication.UnicodeUTF8))
         self.actionConfigure_Project.setText(QtGui.QApplication.translate("MainWindow", "Configure Project", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionConfigure_Project.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+C", None, QtGui.QApplication.UnicodeUTF8))
         self.actionMembers.setText(QtGui.QApplication.translate("MainWindow", "Members", None, QtGui.QApplication.UnicodeUTF8))
         self.actionExpenditure.setText(QtGui.QApplication.translate("MainWindow", "Expenditure", None, QtGui.QApplication.UnicodeUTF8))
         self.actionIncome.setText(QtGui.QApplication.translate("MainWindow", "Income", None, QtGui.QApplication.UnicodeUTF8))
@@ -280,18 +283,28 @@ class Ui_MainWindow(object):
         self.actionView_All_Households.setText(QtGui.QApplication.translate("MainWindow", "View All Households", None, QtGui.QApplication.UnicodeUTF8))
         self.actionHousehold_Data.setText(QtGui.QApplication.translate("MainWindow", "Household Data", None, QtGui.QApplication.UnicodeUTF8))
         self.actionFind_Project.setText(QtGui.QApplication.translate("MainWindow", "Find Project", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionFind_Project.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+F", None, QtGui.QApplication.UnicodeUTF8))
         self.actionCreate_Project.setText(QtGui.QApplication.translate("MainWindow", "Create Project", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionCreate_Project.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+N", None, QtGui.QApplication.UnicodeUTF8))
         self.actionOpen_Project.setText(QtGui.QApplication.translate("MainWindow", "Open Project", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionOpen_Project.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+O", None, QtGui.QApplication.UnicodeUTF8))
         self.actionClose_Project.setText(QtGui.QApplication.translate("MainWindow", "Close Project", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionClose_Project.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+W", None, QtGui.QApplication.UnicodeUTF8))
         self.actionImport_Project_Data.setText(QtGui.QApplication.translate("MainWindow", "Import Project Data", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionImport_Project_Data.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+I", None, QtGui.QApplication.UnicodeUTF8))
         self.actionExport_Project_Data.setText(QtGui.QApplication.translate("MainWindow", "Export Project Data", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionExport_Project_Data.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+E", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAdd_Household.setText(QtGui.QApplication.translate("MainWindow", "Add Household", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionAdd_Household.setShortcut(QtGui.QApplication.translate("MainWindow", "Alt+N", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEdit_Household.setText(QtGui.QApplication.translate("MainWindow", "Edit Household", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionEdit_Household.setShortcut(QtGui.QApplication.translate("MainWindow", "Alt+E", None, QtGui.QApplication.UnicodeUTF8))
         self.actionDelete_Household.setText(QtGui.QApplication.translate("MainWindow", "Delete Household", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEnter_Household_Data.setText(QtGui.QApplication.translate("MainWindow", "Enter Household Data", None, QtGui.QApplication.UnicodeUTF8))
         self.actionExit.setText(QtGui.QApplication.translate("MainWindow", "Exit", None, QtGui.QApplication.UnicodeUTF8))
         self.actionFind_Household.setText(QtGui.QApplication.translate("MainWindow", "Find Household", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionFind_Household.setShortcut(QtGui.QApplication.translate("MainWindow", "Alt+F", None, QtGui.QApplication.UnicodeUTF8))
         self.actionView_All_Households_2.setText(QtGui.QApplication.translate("MainWindow", "View All Households", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionView_All_Households_2.setShortcut(QtGui.QApplication.translate("MainWindow", "Ctrl+A", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEnergy_Requirements.setText(QtGui.QApplication.translate("MainWindow", "View Food Energy Requirements", None, QtGui.QApplication.UnicodeUTF8))
         self.actionAdd.setText(QtGui.QApplication.translate("MainWindow", "Add", None, QtGui.QApplication.UnicodeUTF8))
         self.actionHousehold_by_Characteristics.setText(QtGui.QApplication.translate("MainWindow", "Households List by Characteristics", None, QtGui.QApplication.UnicodeUTF8))

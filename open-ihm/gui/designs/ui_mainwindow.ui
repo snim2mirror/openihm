@@ -134,10 +134,16 @@
    <property name="text">
     <string>Edit Household</string>
    </property>
+   <property name="shortcut">
+    <string>Alt+O</string>
+   </property>
   </action>
   <action name="actionConfigure_Project">
    <property name="text">
     <string>Configure Project</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
    </property>
   </action>
   <action name="actionMembers">
@@ -272,40 +278,64 @@
    <property name="text">
     <string>Find Project</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
   </action>
   <action name="actionCreate_Project">
    <property name="text">
     <string>Create Project</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
   <action name="actionOpen_Project">
    <property name="text">
     <string>Open Project</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actionClose_Project">
    <property name="text">
     <string>Close Project</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
    </property>
   </action>
   <action name="actionImport_Project_Data">
    <property name="text">
     <string>Import Project Data</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
+   </property>
   </action>
   <action name="actionExport_Project_Data">
    <property name="text">
     <string>Export Project Data</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
    </property>
   </action>
   <action name="actionAdd_Household">
    <property name="text">
     <string>Add Household</string>
    </property>
+   <property name="shortcut">
+    <string>Alt+N</string>
+   </property>
   </action>
   <action name="actionEdit_Household">
    <property name="text">
     <string>Edit Household</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+E</string>
    </property>
   </action>
   <action name="actionDelete_Household">
@@ -327,10 +357,16 @@
    <property name="text">
     <string>Find Household</string>
    </property>
+   <property name="shortcut">
+    <string>Alt+F</string>
+   </property>
   </action>
   <action name="actionView_All_Households_2">
    <property name="text">
     <string>View All Households</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
    </property>
   </action>
   <action name="actionEnergy_Requirements">
@@ -894,6 +930,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionContents</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>openHelpContents()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>newProject()</slot>
@@ -926,5 +978,6 @@
   <slot>setReporttypeDI()</slot>
   <slot>initialiseFoodRequirementTable()</slot>
   <slot>setReporttypeAsLivingThreshold()</slot>
+  <slot>openHelpContents()</slot>
  </slots>
 </ui>
