@@ -37,6 +37,9 @@ class FrmAddHousehold(QDialog, Ui_AddHousehold):
         self.connect(self.cmdCancel, SIGNAL("clicked()"), parent.mdi.closeActiveSubWindow)
         self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveHousehold)
         
+    def reject(self):
+	self.parent.closeActiveSubWindow()
+
     def saveHousehold(self):
         ''' Saves newly created household data to database '''
     
