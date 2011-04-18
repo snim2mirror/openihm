@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Thu Feb 17 14:32:30 2011
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Mon Apr 18 08:08:06 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -18,11 +18,16 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 600)
+        MainWindow.setStyleSheet(_fromUtf8("#centralwidget {\n"
+"    background : white;\n"
+"    background-image : url(:/images/images/EfDChancoComposite.jpg);\n"
+"    background-repeat : no-repeat;\n"
+"}"))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuProject = QtGui.QMenu(self.menubar)
         self.menuProject.setObjectName(_fromUtf8("menuProject"))
@@ -38,6 +43,9 @@ class Ui_MainWindow(object):
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
         MainWindow.setStatusBar(self.statusbar)
+        self.toolBar = QtGui.QToolBar(MainWindow)
+        self.toolBar.setObjectName(_fromUtf8("toolBar"))
+        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
         self.actionDelete_Project = QtGui.QAction(MainWindow)
         self.actionDelete_Project.setObjectName(_fromUtf8("actionDelete_Project"))
         self.actionEdit_Project = QtGui.QAction(MainWindow)
@@ -194,8 +202,43 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuData_Management.menuAction())
         self.menubar.addAction(self.menuOutputs.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
+        self.toolBar.addAction(self.actionCreate_Project)
+        self.toolBar.addAction(self.actionOpen_Project)
+        self.toolBar.addAction(self.actionFind_Project)
+        self.toolBar.addAction(self.actionClose_Project)
 
         self.retranslateUi(MainWindow)
+        QtCore.QObject.connect(self.actionCreate_Project, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.newProject)
+        QtCore.QObject.connect(self.actionOpen_Project, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.openProject)
+        QtCore.QObject.connect(self.actionFind_Project, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.findProject)
+        QtCore.QObject.connect(self.actionClose_Project, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.closeProject)
+        QtCore.QObject.connect(self.actionExit, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.close)
+        QtCore.QObject.connect(self.actionAsset_Details, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.manageAssetDetails)
+        QtCore.QObject.connect(self.actionIncome_Source_Details, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.manageIncomeDetails)
+        QtCore.QObject.connect(self.actionExpenditure_Types, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.manageBaseExpenditureDetails)
+        QtCore.QObject.connect(self.actionEdit_Project, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.editProject)
+        QtCore.QObject.connect(self.actionConfigure_Project, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.configureProject)
+        QtCore.QObject.connect(self.actionEdit_Household, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.editProjectHousehold)
+        QtCore.QObject.connect(self.actionEnter_Household_Data, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.viewHouseholdData)
+        QtCore.QObject.connect(self.actionFind_Household, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.findHousehold)
+        QtCore.QObject.connect(self.actionView_All_Households_2, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.viewAllHouseholds)
+        QtCore.QObject.connect(self.actionFood_Types, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.manageFoodTypes)
+        QtCore.QObject.connect(self.actionAdd_Household, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.addHousehold)
+        QtCore.QObject.connect(self.actionDelete_Household, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.delHousehold)
+        QtCore.QObject.connect(self.actionHousehold_Characteristics_2, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.manageHouseholdCharacteristics)
+        QtCore.QObject.connect(self.actionPersonal_Characteristics, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.managePersonalCharacteristics)
+        QtCore.QObject.connect(self.actionAboutOpenIHM, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.aboutOpenIHM)
+        QtCore.QObject.connect(self.actionEnergy_Requirements, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.viewFoodEnergyRequirements)
+        QtCore.QObject.connect(self.actionManage_Currencies, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.manageCurrencies)
+        QtCore.QObject.connect(self.actionManage_Standard_of_Living_Items, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.manageStandardOfLiving)
+        QtCore.QObject.connect(self.actionHousehold_by_Characteristics, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.reportHouseholdsByCharacteristics)
+        QtCore.QObject.connect(self.actionIncome_By_Source, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.reportHouseholdsByIncomeSource)
+        QtCore.QObject.connect(self.actionInitialise_Food_Energy_Table, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.initialiseFoodEnergyLookupTable)
+        QtCore.QObject.connect(self.actionGenerate_Data_Entry_Sheets, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.createDataEntrySheets)
+        QtCore.QObject.connect(self.actionImport_Project_Data, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.importData)
+        QtCore.QObject.connect(self.actionDisposable_Income, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.setReporttypeDI)
+        QtCore.QObject.connect(self.actionInitialise_Energy_Requirement_Table, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.initialiseFoodRequirementTable)
+        QtCore.QObject.connect(self.actionLiving_Threshold, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.setReporttypeAsLivingThreshold)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -205,6 +248,7 @@ class Ui_MainWindow(object):
         self.menuHelp.setTitle(QtGui.QApplication.translate("MainWindow", "&Help", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHousehold.setTitle(QtGui.QApplication.translate("MainWindow", "Household", None, QtGui.QApplication.UnicodeUTF8))
         self.menuOutputs.setTitle(QtGui.QApplication.translate("MainWindow", "Reports", None, QtGui.QApplication.UnicodeUTF8))
+        self.toolBar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar", None, QtGui.QApplication.UnicodeUTF8))
         self.actionDelete_Project.setText(QtGui.QApplication.translate("MainWindow", "Delete Project", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEdit_Project.setText(QtGui.QApplication.translate("MainWindow", "Edit Project", None, QtGui.QApplication.UnicodeUTF8))
         self.actionOpen_Household.setText(QtGui.QApplication.translate("MainWindow", "Edit Household", None, QtGui.QApplication.UnicodeUTF8))
@@ -261,3 +305,4 @@ class Ui_MainWindow(object):
         self.actionInitialise_Energy_Requirement_Table.setText(QtGui.QApplication.translate("MainWindow", "Initialise Energy Requirements Table", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLiving_Threshold.setText(QtGui.QApplication.translate("MainWindow", "Living Threshold", None, QtGui.QApplication.UnicodeUTF8))
 
+import images_rc

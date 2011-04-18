@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_about_openihm.ui'
 #
-# Created: Sun Apr 17 11:09:33 2011
+# Created: Sun Apr 17 15:28:02 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -44,7 +44,7 @@ class Ui_AboutOpenIHM(object):
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">open-ihm is based on <a href=\"http://www.evidencefordevelopment.com\"><span style=\" text-decoration: underline; color:#0000ff;\">Evidence for Development</span></a>\'s analytical software, written by John Seaman.</p>\n"
 "<p align=\"justify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">In using Open-ihm software, IHM data collection protocols must be</p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">In using open-ihm software, IHM data collection protocols must be</p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">followed. For information on training, contact <a href=\"mailto:info@evidencefordevelopment.com\"><span style=\" text-decoration: underline; color:#0000ff;\">info@evidencefordevelopment.com</span></a></p></body></html>", None, QtGui.QApplication.UnicodeUTF8))
 
 import images_rc
