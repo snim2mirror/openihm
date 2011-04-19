@@ -59,6 +59,31 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = latin1;
 
+-- -----------------------------------------------------
+-- Table `openihmdb`.`wildfoods`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`wildfoods`;
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`wildfoods` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `hhid` INT(11) NOT NULL ,
+  `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
+  `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
+  `unitsproduced` DOUBLE NULL DEFAULT '0' ,
+  `unitssold` DOUBLE NULL DEFAULT NULL ,
+  `unitprice` DOUBLE NULL DEFAULT NULL ,
+  `otheruses` DOUBLE NULL DEFAULT '0' ,
+  `unitsconsumed` DOUBLE NULL DEFAULT '0' ,
+  `pid` INT(11) NOT NULL ,
+  PRIMARY KEY (`id`, `hhid`, `pid`) ,
+  INDEX `fk_wildfoods_households1` (`hhid` ASC, `pid` ASC) ,
+  CONSTRAINT `fk_wildfoods_households1`
+    FOREIGN KEY (`hhid` , `pid` )
+    REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
