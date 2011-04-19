@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_about_openihm.ui'
 #
-# Created: Tue Apr 19 03:45:23 2011
+# Created: Tue Apr 19 07:27:37 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
