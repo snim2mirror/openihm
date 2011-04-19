@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Tue Apr 19 08:13:16 2011
+# Created: Tue Apr 19 21:46:27 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -18,11 +18,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 600)
-        MainWindow.setStyleSheet(_fromUtf8("#centralwidget {\n"
-"    background : white;\n"
-"    background-image : url(:/images/images/EfDChancoComposite.jpg);\n"
-"    background-repeat : no-repeat;\n"
-"}"))
+        MainWindow.setStyleSheet(_fromUtf8(""))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         MainWindow.setCentralWidget(self.centralwidget)

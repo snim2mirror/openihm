@@ -14,11 +14,7 @@
    <string>Open IHM</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#centralwidget {
-	background : white;
-	background-image : url(:/images/images/EfDChancoComposite.jpg);
-	background-repeat : no-repeat;
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
