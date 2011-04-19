@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_addasset.ui'
 #
-# Created: Tue Apr 19 08:13:15 2011
+# Created: Tue Apr 19 14:32:11 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -64,7 +64,7 @@ class Ui_AddHouseholdAsset(object):
         self.cboAssetCategory.setObjectName(_fromUtf8("cboAssetCategory"))
 
         self.retranslateUi(AddHouseholdAsset)
-        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdAsset.mdiClose)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdAsset.close)
         QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdAsset.saveAsset)
         QtCore.QObject.connect(self.cboAssetCategory, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), AddHouseholdAsset.getAssetTypes)
         QtCore.QObject.connect(self.cboAssetType, QtCore.SIGNAL(_fromUtf8("activated(int)")), AddHouseholdAsset.displayUnitOfMeasure)

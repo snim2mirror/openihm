@@ -212,7 +212,7 @@
    <sender>cmdCancel</sender>
    <signal>clicked()</signal>
    <receiver>AddHouseholdExpense</receiver>
-   <slot>mdiClose()</slot>
+   <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>320</x>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_data.ui'
 #
-# Created: Tue Apr 19 10:36:39 2011
+# Created: Tue Apr 19 14:35:32 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -263,7 +263,7 @@ class Ui_HouseholdData(object):
         self.label.setObjectName(_fromUtf8("label"))
 
         self.retranslateUi(HouseholdData)
-        self.tabHouseHold.setCurrentIndex(4)
+        self.tabHouseHold.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(5)
         QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdData.mdiClose)
         QtCore.QObject.connect(self.cmdAddMember, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdData.addHouseholdMember)

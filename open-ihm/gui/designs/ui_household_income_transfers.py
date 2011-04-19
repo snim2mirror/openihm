@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_transfers.ui'
 #
-# Created: Tue Apr 19 08:13:16 2011
+# Created: Tue Apr 19 14:35:32 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -80,7 +80,7 @@ class Ui_AddHouseholdIncomeTransfers(object):
         self.label_8.setObjectName(_fromUtf8("label_8"))
 
         self.retranslateUi(AddHouseholdIncomeTransfers)
-        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeTransfers.mdiClose)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeTransfers.close)
         QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeTransfers.saveIncome)
         QtCore.QObject.connect(self.cmbFoodType, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), AddHouseholdIncomeTransfers.displayUnitOfMeasure)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdIncomeTransfers)

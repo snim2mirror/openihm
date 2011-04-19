@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_addexpense.ui'
 #
-# Created: Tue Apr 19 08:13:15 2011
+# Created: Tue Apr 19 14:35:32 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -66,7 +66,7 @@ class Ui_AddHouseholdExpense(object):
         self.label_7.setObjectName(_fromUtf8("label_7"))
 
         self.retranslateUi(AddHouseholdExpense)
-        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdExpense.mdiClose)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdExpense.close)
         QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdExpense.saveExpenditure)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdExpense)
         AddHouseholdExpense.setTabOrder(self.cboExpenditure, self.txtUnitOfMeasure)

@@ -266,7 +266,7 @@
    <sender>cmdCancel</sender>
    <signal>clicked()</signal>
    <receiver>AddHouseholdIncomeTransfers</receiver>
-   <slot>mdiClose()</slot>
+   <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>387</x>
