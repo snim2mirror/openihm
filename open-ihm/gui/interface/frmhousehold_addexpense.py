@@ -106,7 +106,7 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense):
 						totalunits=%s WHERE hhid=%s AND pid=%s 
 						AND expid=%s ''' % ( exptype, unitofmeasure, costperunit, kcalperunit, numunits, hhid, self.pid,  expid )
                         
-		QMessageBox.information(self,"Edit Member",query)
+#		QMessageBox.information(self,"Edit Member",query)
 		
 		# execute query and commit changes
 		cursor =  db.cursor()
