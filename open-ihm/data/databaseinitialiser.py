@@ -52,7 +52,7 @@ class DatabaseInitialiser:
              
          if ( dbinstalled ):
                  dbuptodate = self.updateDatabase()
-                 self.fixIssue61()
+                 self.insertStartupCrops()
 
          dbstatus = dict()
          dbstatus['mysqlstarted'] = mysqlstarted
@@ -144,7 +144,7 @@ class DatabaseInitialiser:
                  print e
                  return False
                  
-     def standardOfLivingOK(self):
+     def cropsExist(self):
          # check if the database is already up to date: i.e. there is "summary" in standardofliving
          #   checks in assets
          
@@ -154,6 +154,9 @@ class DatabaseInitialiser:
          cursor = db.cursor()
          
          query = "SHOW COLUMNS FROM standardofliving"
+         ## will change to:
+         ## query = "SELECT * FROM setup_foods_crops"
+         ## if it returns some rows then returns otherwise returns false
          
          cursor.execute(query)
          rows = cursor.fetchall()
@@ -169,9 +172,9 @@ class DatabaseInitialiser:
          
          return upToDate
                  
-     def fixIssue61(self):
+     def insertStartupCrops(self):
          # if database is already up to date return
-         if self.standardOfLivingOK():
+         if self.cropsExist():
              return True
          # else update the database    
          else:
