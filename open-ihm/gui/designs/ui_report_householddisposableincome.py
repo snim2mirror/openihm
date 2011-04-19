@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householddisposableincome.ui'
 #
-# Created: Tue Apr 19 03:45:26 2011
+# Created: Tue Apr 19 10:36:39 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -33,10 +33,12 @@ class Ui_HouseholdDisposableIncome(object):
         self.cmdShowReport.setObjectName(_fromUtf8("cmdShowReport"))
         self.listViewHCharacteristics = QtGui.QListView(HouseholdDisposableIncome)
         self.listViewHCharacteristics.setGeometry(QtCore.QRect(10, 260, 281, 271))
+        self.listViewHCharacteristics.setAlternatingRowColors(True)
         self.listViewHCharacteristics.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.listViewHCharacteristics.setObjectName(_fromUtf8("listViewHCharacteristics"))
         self.listViewPersonalCharacteristics = QtGui.QListView(HouseholdDisposableIncome)
         self.listViewPersonalCharacteristics.setGeometry(QtCore.QRect(310, 260, 311, 271))
+        self.listViewPersonalCharacteristics.setAlternatingRowColors(True)
         self.listViewPersonalCharacteristics.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.listViewPersonalCharacteristics.setObjectName(_fromUtf8("listViewPersonalCharacteristics"))
         self.label_4 = QtGui.QLabel(HouseholdDisposableIncome)
@@ -53,8 +55,10 @@ class Ui_HouseholdDisposableIncome(object):
         self.treeViewHouseholds = QtGui.QTreeView(HouseholdDisposableIncome)
         self.treeViewHouseholds.setGeometry(QtCore.QRect(10, 80, 611, 151))
         self.treeViewHouseholds.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+        self.treeViewHouseholds.setAlternatingRowColors(True)
         self.treeViewHouseholds.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.treeViewHouseholds.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
+        self.treeViewHouseholds.setSortingEnabled(True)
         self.treeViewHouseholds.setObjectName(_fromUtf8("treeViewHouseholds"))
         self.cmdSaveDataTable = QtGui.QPushButton(HouseholdDisposableIncome)
         self.cmdSaveDataTable.setGeometry(QtCore.QRect(294, 630, 91, 23))

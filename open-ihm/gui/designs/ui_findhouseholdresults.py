@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_findhouseholdresults.ui'
 #
-# Created: Tue Apr 19 03:45:24 2011
+# Created: Tue Apr 19 10:36:38 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -46,6 +46,8 @@ class Ui_FindHouseholdResults(object):
         self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
         self.tblResults = QtGui.QTableView(self.groupBox_2)
         self.tblResults.setGeometry(QtCore.QRect(10, 20, 511, 341))
+        self.tblResults.setAlternatingRowColors(True)
+        self.tblResults.setSortingEnabled(True)
         self.tblResults.setObjectName(_fromUtf8("tblResults"))
         self.cmdEdit = QtGui.QPushButton(self.groupBox_2)
         self.cmdEdit.setGeometry(QtCore.QRect(110, 370, 91, 31))

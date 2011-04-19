@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_findprojectresults.ui'
 #
-# Created: Tue Apr 19 03:45:24 2011
+# Created: Tue Apr 19 10:36:38 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -43,6 +43,8 @@ class Ui_FindProjectResults(object):
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.tblResults = QtGui.QTableView(FindProjectResults)
         self.tblResults.setGeometry(QtCore.QRect(10, 170, 531, 201))
+        self.tblResults.setAlternatingRowColors(True)
+        self.tblResults.setSortingEnabled(True)
         self.tblResults.setObjectName(_fromUtf8("tblResults"))
         self.cmdOpen = QtGui.QPushButton(FindProjectResults)
         self.cmdOpen.setGeometry(QtCore.QRect(10, 380, 81, 31))

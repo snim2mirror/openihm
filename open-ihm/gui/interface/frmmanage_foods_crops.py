@@ -164,7 +164,7 @@ class FrmManageTypes(QDialog, Ui_FoodTypes):
 		indexVal = tblVw.currentIndex()
 		return indexVal.row()
 
-        def searchType(self):
+        def searchCropType(self):
                 croptype = self.txtSearchCrop.text()
                 numrows = self.tableView.model().rowCount()
                 counter = 0

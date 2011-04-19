@@ -41,7 +41,6 @@
     <addaction name="separator"/>
     <addaction name="actionEdit_Project"/>
     <addaction name="actionConfigure_Project"/>
-    <addaction name="actionConfigure_Project_Income"/>
     <addaction name="separator"/>
     <addaction name="actionGenerate_Data_Entry_Sheets"/>
     <addaction name="actionImport_Project_Data"/>

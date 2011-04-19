@@ -80,6 +80,12 @@
      <height>451</height>
     </rect>
    </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
+   </property>
+   <property name="sortingEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="Line" name="line">
    <property name="geometry">
@@ -216,6 +222,22 @@
     <hint type="destinationlabel">
      <x>57</x>
      <y>548</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSearch</sender>
+   <signal>clicked()</signal>
+   <receiver>FoodTypes</receiver>
+   <slot>searchCropType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>375</x>
+     <y>36</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>449</x>
+     <y>36</y>
     </hint>
    </hints>
   </connection>

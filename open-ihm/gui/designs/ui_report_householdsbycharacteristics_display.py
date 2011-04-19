@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdsbycharacteristics_display.ui'
 #
-# Created: Tue Apr 19 03:45:27 2011
+# Created: Tue Apr 19 10:36:40 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -22,6 +22,8 @@ class Ui_DisplayHouseholdsByChar(object):
         self.tableView = QtGui.QTableView(DisplayHouseholdsByChar)
         self.tableView.setGeometry(QtCore.QRect(0, 30, 441, 551))
         self.tableView.setMinimumSize(QtCore.QSize(300, 551))
+        self.tableView.setAlternatingRowColors(True)
+        self.tableView.setSortingEnabled(True)
         self.tableView.setObjectName(_fromUtf8("tableView"))
         self.cmdClose = QtGui.QPushButton(DisplayHouseholdsByChar)
         self.cmdClose.setGeometry(QtCore.QRect(160, 600, 91, 23))

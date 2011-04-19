@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>572</width>
-    <height>386</height>
+    <height>424</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="tabCashSavings">
     <attribute name="title">
@@ -124,6 +124,9 @@
        <width>241</width>
        <height>201</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -261,6 +264,9 @@
        <height>201</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tabLand">
@@ -374,6 +380,9 @@
        <height>201</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tabLivestock">
@@ -460,6 +469,9 @@
        <width>241</width>
        <height>201</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QLineEdit" name="txtLivestockPType">
@@ -623,6 +635,9 @@
        <height>201</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tabOtherTradableGoods">
@@ -736,6 +751,9 @@
        <height>192</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
     </widget>
    </widget>
   </widget>
@@ -790,22 +808,6 @@
  </tabstops>
  <resources/>
  <connections>
-  <connection>
-   <sender>btnAssetsClose</sender>
-   <signal>clicked()</signal>
-   <receiver>ManageAssetDetails</receiver>
-   <slot>mdiClose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>535</x>
-     <y>362</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>315</x>
-     <y>351</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>savingsListView</sender>
    <signal>clicked(QModelIndex)</signal>
@@ -1026,7 +1028,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>381</x>
-     <y>385</y>
+     <y>384</y>
     </hint>
    </hints>
   </connection>
@@ -1042,39 +1044,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>398</x>
-     <y>385</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tradableGoodsListView</sender>
-   <signal>activated(QModelIndex)</signal>
-   <receiver>ManageAssetDetails</receiver>
-   <slot>pickSelectedTradableGoodType()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>128</x>
-     <y>178</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>465</x>
-     <y>347</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnTGoodSave</sender>
-   <signal>clicked()</signal>
-   <receiver>ManageAssetDetails</receiver>
-   <slot>saveTreeType()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>397</x>
-     <y>281</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>449</x>
-     <y>385</y>
+     <y>384</y>
     </hint>
    </hints>
   </connection>
@@ -1082,15 +1052,47 @@
    <sender>btnTGoodDelete</sender>
    <signal>clicked()</signal>
    <receiver>ManageAssetDetails</receiver>
-   <slot>deleteTreeType()</slot>
+   <slot>deleteTradableGoodType()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>476</x>
-     <y>290</y>
+     <x>501</x>
+     <y>292</y>
     </hint>
     <hint type="destinationlabel">
-     <x>418</x>
-     <y>385</y>
+     <x>455</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTGoodSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>saveTradableGoodType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>416</x>
+     <y>285</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>427</x>
+     <y>388</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tradableGoodsListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>pickSelectedTradableGoodType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>105</x>
+     <y>187</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>163</x>
+     <y>399</y>
     </hint>
    </hints>
   </connection>

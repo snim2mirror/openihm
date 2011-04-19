@@ -154,6 +154,9 @@
        <height>361</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QListView" name="lstHouseholdSelectedChars">
      <property name="geometry">
@@ -163,6 +166,9 @@
        <width>261</width>
        <height>361</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -257,6 +263,9 @@
        <height>361</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QListView" name="lstPersonalSelectedChars">
      <property name="geometry">
@@ -266,6 +275,9 @@
        <width>261</width>
        <height>361</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -281,6 +293,12 @@
        <width>341</width>
        <height>381</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="cmdDelDiet">
@@ -427,6 +445,12 @@
        <width>361</width>
        <height>381</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QGroupBox" name="groupBox_2">
@@ -756,6 +780,12 @@
          <height>361</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QTableView" name="tblSelectedCrops">
        <property name="geometry">
@@ -765,6 +795,12 @@
          <width>256</width>
          <height>361</height>
         </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -859,6 +895,12 @@
          <height>361</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QTableView" name="tblSelectedEmployment">
        <property name="geometry">
@@ -868,6 +910,12 @@
          <width>256</width>
          <height>361</height>
         </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -962,6 +1010,12 @@
          <height>361</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QTableView" name="tblSelectedLivestock">
        <property name="geometry">
@@ -971,6 +1025,12 @@
          <width>256</width>
          <height>361</height>
         </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -1065,6 +1125,12 @@
          <height>361</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QTableView" name="tblSelectedTransfers">
        <property name="geometry">
@@ -1074,6 +1140,12 @@
          <width>256</width>
          <height>361</height>
         </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -1168,6 +1240,12 @@
          <height>361</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QTableView" name="tblSelectedWildfoods">
        <property name="geometry">
@@ -1177,6 +1255,12 @@
          <width>256</width>
          <height>361</height>
         </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdsbycharacteristics.ui'
 #
-# Created: Tue Apr 19 03:45:27 2011
+# Created: Tue Apr 19 10:36:39 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,6 +26,7 @@ class Ui_HouseHoldReport(object):
         self.cmbHouseholds.addItem(_fromUtf8(""))
         self.listViewHCharacteristics = QtGui.QListView(HouseHoldReport)
         self.listViewHCharacteristics.setGeometry(QtCore.QRect(6, 110, 171, 281))
+        self.listViewHCharacteristics.setAlternatingRowColors(True)
         self.listViewHCharacteristics.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.listViewHCharacteristics.setObjectName(_fromUtf8("listViewHCharacteristics"))
         self.cmbOrderCriteria1 = QtGui.QComboBox(HouseHoldReport)
@@ -99,6 +100,7 @@ class Ui_HouseHoldReport(object):
         self.opt2Descending.setObjectName(_fromUtf8("opt2Descending"))
         self.listViewPersonalCharacteristics = QtGui.QListView(HouseHoldReport)
         self.listViewPersonalCharacteristics.setGeometry(QtCore.QRect(190, 110, 171, 281))
+        self.listViewPersonalCharacteristics.setAlternatingRowColors(True)
         self.listViewPersonalCharacteristics.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.listViewPersonalCharacteristics.setObjectName(_fromUtf8("listViewPersonalCharacteristics"))
         self.label_6 = QtGui.QLabel(HouseHoldReport)

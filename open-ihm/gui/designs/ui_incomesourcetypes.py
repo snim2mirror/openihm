@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_incomesourcetypes.ui'
 #
-# Created: Tue Apr 19 03:45:25 2011
+# Created: Tue Apr 19 10:36:39 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -22,6 +22,7 @@ class Ui_IncomeSourcesTypes(object):
         IncomeSourcesTypes.setMaximumSize(QtCore.QSize(419, 16777215))
         self.listWidget = QtGui.QListWidget(IncomeSourcesTypes)
         self.listWidget.setGeometry(QtCore.QRect(0, 40, 191, 251))
+        self.listWidget.setAlternatingRowColors(True)
         self.listWidget.setObjectName(_fromUtf8("listWidget"))
         self.lineEdit = QtGui.QLineEdit(IncomeSourcesTypes)
         self.lineEdit.setGeometry(QtCore.QRect(210, 40, 201, 28))

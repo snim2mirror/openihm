@@ -77,8 +77,14 @@
      <height>271</height>
     </rect>
    </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
+   </property>
    <property name="selectionMode">
     <enum>QAbstractItemView::MultiSelection</enum>
+   </property>
+   <property name="sortingEnabled">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QListView" name="listViewHCharacteristics">
@@ -89,6 +95,9 @@
      <width>201</width>
      <height>271</height>
     </rect>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
    </property>
    <property name="selectionMode">
     <enum>QAbstractItemView::MultiSelection</enum>
@@ -102,6 +111,9 @@
      <width>191</width>
      <height>271</height>
     </rect>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
    </property>
    <property name="selectionMode">
     <enum>QAbstractItemView::MultiSelection</enum>
@@ -158,11 +170,17 @@
    <property name="editTriggers">
     <set>QAbstractItemView::NoEditTriggers</set>
    </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
+   </property>
    <property name="selectionMode">
     <enum>QAbstractItemView::MultiSelection</enum>
    </property>
    <property name="selectionBehavior">
     <enum>QAbstractItemView::SelectRows</enum>
+   </property>
+   <property name="sortingEnabled">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="cmdSaveDataTable">

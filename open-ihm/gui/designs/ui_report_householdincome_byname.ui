@@ -103,6 +103,12 @@
      <height>291</height>
     </rect>
    </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
+   </property>
+   <property name="sortingEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QListView" name="listViewHCharacteristics">
    <property name="geometry">
@@ -112,6 +118,9 @@
      <width>201</width>
      <height>291</height>
     </rect>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
    </property>
    <property name="selectionMode">
     <enum>QAbstractItemView::MultiSelection</enum>
@@ -125,6 +134,9 @@
      <width>191</width>
      <height>291</height>
     </rect>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
    </property>
    <property name="selectionMode">
     <enum>QAbstractItemView::MultiSelection</enum>
@@ -183,6 +195,9 @@
      <width>0</width>
      <height>0</height>
     </size>
+   </property>
+   <property name="alternatingRowColors">
+    <bool>true</bool>
    </property>
    <property name="selectionMode">
     <enum>QAbstractItemView::MultiSelection</enum>

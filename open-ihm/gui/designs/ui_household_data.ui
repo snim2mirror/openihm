@@ -34,7 +34,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="tabHouseHoldMembers">
     <attribute name="title">
@@ -48,6 +48,12 @@
        <width>371</width>
        <height>431</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="cmdAddMember">
@@ -97,6 +103,12 @@
        <width>371</width>
        <height>431</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="cmdEditPersonalCharacteristic">
@@ -151,6 +163,12 @@
        <width>751</width>
        <height>451</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="cmdAddAsset">
@@ -264,6 +282,12 @@
          <height>401</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QLabel" name="label_2">
        <property name="geometry">
@@ -297,6 +321,12 @@
          <width>701</width>
          <height>401</height>
         </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
       <widget class="QLabel" name="label_3">
@@ -390,6 +420,12 @@
          <height>401</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QPushButton" name="cmdEditEmployment">
        <property name="geometry">
@@ -462,6 +498,12 @@
          <width>701</width>
          <height>401</height>
         </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
       <widget class="QPushButton" name="cmdEditWildfoods">
@@ -536,6 +578,12 @@
          <height>401</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QPushButton" name="cmdEditGifts">
        <property name="geometry">
@@ -609,6 +657,12 @@
          <height>401</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QPushButton" name="cmdEditTransfer">
        <property name="geometry">
@@ -665,6 +719,12 @@
        <height>451</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QPushButton" name="cmdAddExpenditure">
      <property name="geometry">
@@ -718,6 +778,12 @@
        <width>751</width>
        <height>451</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="cmdEditCharacteristic">

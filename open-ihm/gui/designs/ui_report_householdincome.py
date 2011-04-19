@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdincome.ui'
 #
-# Created: Tue Apr 19 03:45:26 2011
+# Created: Tue Apr 19 10:36:39 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -33,14 +33,18 @@ class Ui_HouseholdIncomeReport(object):
         self.cmdShowReport.setObjectName(_fromUtf8("cmdShowReport"))
         self.treeView = QtGui.QTreeView(HouseholdIncomeReport)
         self.treeView.setGeometry(QtCore.QRect(10, 260, 201, 271))
+        self.treeView.setAlternatingRowColors(True)
         self.treeView.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
+        self.treeView.setSortingEnabled(True)
         self.treeView.setObjectName(_fromUtf8("treeView"))
         self.listViewHCharacteristics = QtGui.QListView(HouseholdIncomeReport)
         self.listViewHCharacteristics.setGeometry(QtCore.QRect(220, 260, 201, 271))
+        self.listViewHCharacteristics.setAlternatingRowColors(True)
         self.listViewHCharacteristics.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.listViewHCharacteristics.setObjectName(_fromUtf8("listViewHCharacteristics"))
         self.listViewPersonalCharacteristics = QtGui.QListView(HouseholdIncomeReport)
         self.listViewPersonalCharacteristics.setGeometry(QtCore.QRect(430, 260, 191, 271))
+        self.listViewPersonalCharacteristics.setAlternatingRowColors(True)
         self.listViewPersonalCharacteristics.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.listViewPersonalCharacteristics.setObjectName(_fromUtf8("listViewPersonalCharacteristics"))
         self.label_4 = QtGui.QLabel(HouseholdIncomeReport)
@@ -57,8 +61,10 @@ class Ui_HouseholdIncomeReport(object):
         self.treeViewHouseholds = QtGui.QTreeView(HouseholdIncomeReport)
         self.treeViewHouseholds.setGeometry(QtCore.QRect(10, 80, 611, 151))
         self.treeViewHouseholds.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+        self.treeViewHouseholds.setAlternatingRowColors(True)
         self.treeViewHouseholds.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.treeViewHouseholds.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
+        self.treeViewHouseholds.setSortingEnabled(True)
         self.treeViewHouseholds.setObjectName(_fromUtf8("treeViewHouseholds"))
         self.cmdSaveDataTable = QtGui.QPushButton(HouseholdIncomeReport)
         self.cmdSaveDataTable.setGeometry(QtCore.QRect(294, 630, 91, 23))

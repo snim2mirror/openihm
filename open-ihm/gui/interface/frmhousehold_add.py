@@ -38,7 +38,17 @@ class FrmAddHousehold(QDialog, Ui_AddHousehold):
         self.mdi = mdi
         
     def mdiClose(self):
-	self.mdi.closeActiveSubWindow()
+        # Why am I doing this both ways? I'm not sure. Someone should FIXME
+        try:
+            self.mdi.closeActiveSubWindow()
+            return
+        except Exception, e:
+            pass
+        try:
+            self.parent.closeActiveSubWindow()
+            return
+        except Exception, e:
+            pass
 
     def saveHousehold(self):
         ''' Saves newly created household data to database '''
