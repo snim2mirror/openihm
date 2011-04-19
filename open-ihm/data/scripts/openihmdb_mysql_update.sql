@@ -7,18 +7,31 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 -- -----------------------------------------------------
 USE `openihmdb`;
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectincomesources` (
+-- -----------------------------------------------------
+-- Table `openihmdb`.`cropincome`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`cropincome`;
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`cropincome` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `hhid` INT(11) NOT NULL ,
+  `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
+  `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
+  `unitsproduced` DOUBLE NULL DEFAULT '0' ,
+  `unitssold` DOUBLE NULL DEFAULT NULL ,
+  `unitprice` DOUBLE NULL DEFAULT NULL ,
+  `otheruses` DOUBLE NULL DEFAULT '0' ,
+  `unitsconsumed` DOUBLE NULL DEFAULT '0' ,
   `pid` INT(11) NOT NULL ,
-  `incomesource` VARCHAR(255) NOT NULL ,
-  `incometype` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`incomesource`, `pid`) ,
-  INDEX `fk_projectincomesources_projects` (`pid` ASC) ,
-  CONSTRAINT `fk_projectincomesources_projects`
-    FOREIGN KEY (`pid` )
-    REFERENCES `openihmdb`.`projects` (`pid` )
+  PRIMARY KEY (`id`, `hhid`, `pid`) ,
+  INDEX `fk_cropincome_households1` (`hhid` ASC, `pid` ASC) ,
+  CONSTRAINT `fk_cropincome_households1`
+    FOREIGN KEY (`hhid` , `pid` )
+    REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 12
+DEFAULT CHARACTER SET = latin1;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
