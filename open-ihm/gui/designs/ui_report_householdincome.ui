@@ -503,7 +503,7 @@
    <sender>cmbProjects</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>HouseholdIncomeReport</receiver>
-   <slot>setReportType()</slot>
+   <slot>updateDialogData()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>547</x>

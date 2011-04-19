@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdincome.ui'
 #
-# Created: Tue Apr 19 10:36:39 2011
+# Created: Tue Apr 19 15:36:30 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -138,7 +138,7 @@ class Ui_HouseholdIncomeReport(object):
         QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdIncomeReport.mdiClose)
         QtCore.QObject.connect(self.cmdSaveDataTable, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdIncomeReport.writeTable)
         QtCore.QObject.connect(self.cmdShowReport, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdIncomeReport.writeTable)
-        QtCore.QObject.connect(self.cmbProjects, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), HouseholdIncomeReport.setReportType)
+        QtCore.QObject.connect(self.cmbProjects, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), HouseholdIncomeReport.updateDialogData)
         QtCore.QMetaObject.connectSlotsByName(HouseholdIncomeReport)
         HouseholdIncomeReport.setTabOrder(self.cmbProjects, self.cmbReportType)
         HouseholdIncomeReport.setTabOrder(self.cmbReportType, self.treeViewHouseholds)
