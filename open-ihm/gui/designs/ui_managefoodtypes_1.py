@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_managefoodtypes_1.ui'
 #
-# Created: Tue Apr 19 10:25:46 2011
+# Created: Tue Apr 19 10:36:39 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -33,6 +33,7 @@ class Ui_FoodTypes(object):
         self.cmdDeleteRows.setObjectName(_fromUtf8("cmdDeleteRows"))
         self.tableView = QtGui.QTableView(FoodTypes)
         self.tableView.setGeometry(QtCore.QRect(0, 80, 451, 451))
+        self.tableView.setAlternatingRowColors(True)
         self.tableView.setSortingEnabled(True)
         self.tableView.setObjectName(_fromUtf8("tableView"))
         self.line = QtGui.QFrame(FoodTypes)

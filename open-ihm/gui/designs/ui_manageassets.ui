@@ -125,6 +125,9 @@
        <height>201</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tabFoodStock">
@@ -261,6 +264,9 @@
        <height>201</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tabLand">
@@ -374,6 +380,9 @@
        <height>201</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tabLivestock">
@@ -460,6 +469,9 @@
        <width>241</width>
        <height>201</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QLineEdit" name="txtLivestockPType">
@@ -623,6 +635,9 @@
        <height>201</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tabOtherTradableGoods">
@@ -735,6 +750,9 @@
        <width>251</width>
        <height>192</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_households_all.ui'
 #
-# Created: Tue Apr 19 10:25:46 2011
+# Created: Tue Apr 19 10:36:39 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -24,6 +24,7 @@ class Ui_AllHouseholds(object):
         self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.tableView = QtGui.QTableView(self.groupBox)
         self.tableView.setGeometry(QtCore.QRect(10, 20, 751, 461))
+        self.tableView.setAlternatingRowColors(True)
         self.tableView.setSortingEnabled(True)
         self.tableView.setObjectName(_fromUtf8("tableView"))
         self.cmdAdd = QtGui.QPushButton(self.groupBox)

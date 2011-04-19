@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_currencymanager.ui'
 #
-# Created: Tue Apr 19 10:25:46 2011
+# Created: Tue Apr 19 10:36:38 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -21,6 +21,7 @@ class Ui_CurrencyManager(object):
         CurrencyManager.setMinimumSize(QtCore.QSize(694, 334))
         self.tblCurrencies = QtGui.QTableView(CurrencyManager)
         self.tblCurrencies.setGeometry(QtCore.QRect(10, 30, 381, 291))
+        self.tblCurrencies.setAlternatingRowColors(True)
         self.tblCurrencies.setSortingEnabled(True)
         self.tblCurrencies.setObjectName(_fromUtf8("tblCurrencies"))
         self.cmdDelete = QtGui.QPushButton(CurrencyManager)

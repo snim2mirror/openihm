@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageassets.ui'
 #
-# Created: Tue Apr 19 08:13:16 2011
+# Created: Tue Apr 19 10:36:39 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -45,6 +45,7 @@ class Ui_ManageAssetDetails(object):
         self.btnCashSave.setObjectName(_fromUtf8("btnCashSave"))
         self.savingsListView = QtGui.QListView(self.tabCashSavings)
         self.savingsListView.setGeometry(QtCore.QRect(5, 60, 241, 201))
+        self.savingsListView.setAlternatingRowColors(True)
         self.savingsListView.setObjectName(_fromUtf8("savingsListView"))
         self.tabWidget.addTab(self.tabCashSavings, _fromUtf8(""))
         self.tabFoodStock = QtGui.QWidget()
@@ -81,6 +82,7 @@ class Ui_ManageAssetDetails(object):
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.foodListView = QtGui.QListView(self.tabFoodStock)
         self.foodListView.setGeometry(QtCore.QRect(10, 50, 241, 201))
+        self.foodListView.setAlternatingRowColors(True)
         self.foodListView.setObjectName(_fromUtf8("foodListView"))
         self.tabWidget.addTab(self.tabFoodStock, _fromUtf8(""))
         self.tabLand = QtGui.QWidget()
@@ -111,6 +113,7 @@ class Ui_ManageAssetDetails(object):
         self.label_18.setObjectName(_fromUtf8("label_18"))
         self.landListView = QtGui.QListView(self.tabLand)
         self.landListView.setGeometry(QtCore.QRect(5, 50, 241, 201))
+        self.landListView.setAlternatingRowColors(True)
         self.landListView.setObjectName(_fromUtf8("landListView"))
         self.tabWidget.addTab(self.tabLand, _fromUtf8(""))
         self.tabLivestock = QtGui.QWidget()
@@ -135,6 +138,7 @@ class Ui_ManageAssetDetails(object):
         self.btnLivestockDelete.setObjectName(_fromUtf8("btnLivestockDelete"))
         self.livestockListView = QtGui.QListView(self.tabLivestock)
         self.livestockListView.setGeometry(QtCore.QRect(10, 50, 241, 201))
+        self.livestockListView.setAlternatingRowColors(True)
         self.livestockListView.setObjectName(_fromUtf8("livestockListView"))
         self.txtLivestockPType = QtGui.QLineEdit(self.tabLivestock)
         self.txtLivestockPType.setGeometry(QtCore.QRect(352, 60, 201, 28))
@@ -177,6 +181,7 @@ class Ui_ManageAssetDetails(object):
         self.btnTreeSave.setObjectName(_fromUtf8("btnTreeSave"))
         self.treeListView = QtGui.QListView(self.tabTrees)
         self.treeListView.setGeometry(QtCore.QRect(5, 50, 241, 201))
+        self.treeListView.setAlternatingRowColors(True)
         self.treeListView.setObjectName(_fromUtf8("treeListView"))
         self.tabWidget.addTab(self.tabTrees, _fromUtf8(""))
         self.tabOtherTradableGoods = QtGui.QWidget()
@@ -207,6 +212,7 @@ class Ui_ManageAssetDetails(object):
         self.btnTGoodSave.setObjectName(_fromUtf8("btnTGoodSave"))
         self.tradableGoodsListView = QtGui.QListView(self.tabOtherTradableGoods)
         self.tradableGoodsListView.setGeometry(QtCore.QRect(0, 50, 251, 192))
+        self.tradableGoodsListView.setAlternatingRowColors(True)
         self.tradableGoodsListView.setObjectName(_fromUtf8("tradableGoodsListView"))
         self.tabWidget.addTab(self.tabOtherTradableGoods, _fromUtf8(""))
         self.btnAssetsClose = QtGui.QPushButton(ManageAssetDetails)

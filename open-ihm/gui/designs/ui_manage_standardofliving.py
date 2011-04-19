@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manage_standardofliving.ui'
 #
-# Created: Tue Apr 19 10:15:11 2011
+# Created: Tue Apr 19 10:36:39 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -21,6 +21,7 @@ class Ui_StandardOfLivingManager(object):
         StandardOfLivingManager.setMinimumSize(QtCore.QSize(659, 334))
         self.tblStandardOfLiving = QtGui.QTableView(StandardOfLivingManager)
         self.tblStandardOfLiving.setGeometry(QtCore.QRect(10, 30, 351, 291))
+        self.tblStandardOfLiving.setAlternatingRowColors(True)
         self.tblStandardOfLiving.setSortingEnabled(True)
         self.tblStandardOfLiving.setObjectName(_fromUtf8("tblStandardOfLiving"))
         self.cmdDelete = QtGui.QPushButton(StandardOfLivingManager)

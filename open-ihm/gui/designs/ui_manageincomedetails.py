@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageincomedetails.ui'
 #
-# Created: Tue Apr 19 08:13:17 2011
+# Created: Tue Apr 19 10:36:39 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -57,6 +57,7 @@ class Ui_ManageIncome(object):
         self.txtMeasuringUnit.setObjectName(_fromUtf8("txtMeasuringUnit"))
         self.cropListView = QtGui.QListView(self.tabIncomeCrops)
         self.cropListView.setGeometry(QtCore.QRect(5, 40, 251, 192))
+        self.cropListView.setAlternatingRowColors(True)
         self.cropListView.setObjectName(_fromUtf8("cropListView"))
         self.btnCropsClear = QtGui.QPushButton(self.tabIncomeCrops)
         self.btnCropsClear.setGeometry(QtCore.QRect(410, 210, 81, 28))
@@ -84,6 +85,7 @@ class Ui_ManageIncome(object):
         self.label_34.setObjectName(_fromUtf8("label_34"))
         self.employmentListView = QtGui.QListView(self.tabEmployment)
         self.employmentListView.setGeometry(QtCore.QRect(5, 40, 241, 192))
+        self.employmentListView.setAlternatingRowColors(True)
         self.employmentListView.setObjectName(_fromUtf8("employmentListView"))
         self.tabWidget.addTab(self.tabEmployment, _fromUtf8(""))
         self.tabIncomeLivestock = QtGui.QWidget()
@@ -120,6 +122,7 @@ class Ui_ManageIncome(object):
         self.txtLivestockEnergyValue.setObjectName(_fromUtf8("txtLivestockEnergyValue"))
         self.livestockListView = QtGui.QListView(self.tabIncomeLivestock)
         self.livestockListView.setGeometry(QtCore.QRect(5, 40, 251, 192))
+        self.livestockListView.setAlternatingRowColors(True)
         self.livestockListView.setObjectName(_fromUtf8("livestockListView"))
         self.btnLivestockClear = QtGui.QPushButton(self.tabIncomeLivestock)
         self.btnLivestockClear.setGeometry(QtCore.QRect(400, 240, 81, 28))
@@ -137,6 +140,7 @@ class Ui_ManageIncome(object):
         self.label_32.setObjectName(_fromUtf8("label_32"))
         self.transferTypesListView = QtGui.QListView(self.tab)
         self.transferTypesListView.setGeometry(QtCore.QRect(5, 40, 241, 192))
+        self.transferTypesListView.setAlternatingRowColors(True)
         self.transferTypesListView.setObjectName(_fromUtf8("transferTypesListView"))
         self.btnTransferTypeDelete = QtGui.QPushButton(self.tab)
         self.btnTransferTypeDelete.setGeometry(QtCore.QRect(480, 140, 80, 28))
@@ -167,6 +171,7 @@ class Ui_ManageIncome(object):
         self.label_35.setObjectName(_fromUtf8("label_35"))
         self.transferSourcesListView = QtGui.QListView(self.tab_3)
         self.transferSourcesListView.setGeometry(QtCore.QRect(5, 40, 251, 192))
+        self.transferSourcesListView.setAlternatingRowColors(True)
         self.transferSourcesListView.setObjectName(_fromUtf8("transferSourcesListView"))
         self.btnTransferSourcesDelete = QtGui.QPushButton(self.tab_3)
         self.btnTransferSourcesDelete.setGeometry(QtCore.QRect(480, 120, 80, 28))
@@ -216,6 +221,7 @@ class Ui_ManageIncome(object):
         self.txtWildFoodEnergyValue.setObjectName(_fromUtf8("txtWildFoodEnergyValue"))
         self.wildFoodsListView = QtGui.QListView(self.tab_2)
         self.wildFoodsListView.setGeometry(QtCore.QRect(5, 50, 251, 192))
+        self.wildFoodsListView.setAlternatingRowColors(True)
         self.wildFoodsListView.setObjectName(_fromUtf8("wildFoodsListView"))
         self.btnWildFoodsClear = QtGui.QPushButton(self.tab_2)
         self.btnWildFoodsClear.setGeometry(QtCore.QRect(400, 240, 81, 28))
@@ -226,8 +232,8 @@ class Ui_ManageIncome(object):
         self.btnManageIncomeClose.setObjectName(_fromUtf8("btnManageIncomeClose"))
 
         self.retranslateUi(ManageIncome)
-        self.tabWidget.setCurrentIndex(0)
-        self.tabTransferDetails.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(4)
+        self.tabTransferDetails.setCurrentIndex(0)
         QtCore.QObject.connect(self.btnManageIncomeClose, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.mdiClose)
         QtCore.QObject.connect(self.btnCropSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveCropType)
         QtCore.QObject.connect(self.btnCropsClear, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.clearCropTextboxes)

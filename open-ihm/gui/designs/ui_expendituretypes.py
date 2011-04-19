@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_expendituretypes.ui'
 #
-# Created: Tue Apr 19 08:13:14 2011
+# Created: Tue Apr 19 10:36:38 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -45,12 +45,14 @@ class Ui_ExpenditureTypes(object):
         self.btnExpenseSave.setObjectName(_fromUtf8("btnExpenseSave"))
         self.expenseTypeListView = QtGui.QListView(self.tab)
         self.expenseTypeListView.setGeometry(QtCore.QRect(10, 30, 191, 191))
+        self.expenseTypeListView.setAlternatingRowColors(True)
         self.expenseTypeListView.setObjectName(_fromUtf8("expenseTypeListView"))
         self.expenseCategoryListView.addTab(self.tab, _fromUtf8(""))
         self.tab_2 = QtGui.QWidget()
         self.tab_2.setObjectName(_fromUtf8("tab_2"))
         self.expenditureCategorylistView = QtGui.QListView(self.tab_2)
         self.expenditureCategorylistView.setGeometry(QtCore.QRect(10, 30, 191, 191))
+        self.expenditureCategorylistView.setAlternatingRowColors(True)
         self.expenditureCategorylistView.setObjectName(_fromUtf8("expenditureCategorylistView"))
         self.btnCategorySave = QtGui.QPushButton(self.tab_2)
         self.btnCategorySave.setGeometry(QtCore.QRect(220, 90, 81, 28))

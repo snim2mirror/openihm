@@ -49,6 +49,9 @@
        <height>431</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
      <property name="sortingEnabled">
       <bool>true</bool>
      </property>
@@ -100,6 +103,9 @@
        <width>371</width>
        <height>431</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
      <property name="sortingEnabled">
       <bool>true</bool>
@@ -157,6 +163,9 @@
        <width>751</width>
        <height>451</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
      <property name="sortingEnabled">
       <bool>true</bool>
@@ -273,6 +282,9 @@
          <height>401</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
        <property name="sortingEnabled">
         <bool>true</bool>
        </property>
@@ -309,6 +321,9 @@
          <width>701</width>
          <height>401</height>
         </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
        </property>
        <property name="sortingEnabled">
         <bool>true</bool>
@@ -405,6 +420,9 @@
          <height>401</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
        <property name="sortingEnabled">
         <bool>true</bool>
        </property>
@@ -480,6 +498,9 @@
          <width>701</width>
          <height>401</height>
         </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
        </property>
        <property name="sortingEnabled">
         <bool>true</bool>
@@ -557,6 +578,9 @@
          <height>401</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
        <property name="sortingEnabled">
         <bool>true</bool>
        </property>
@@ -633,6 +657,9 @@
          <height>401</height>
         </rect>
        </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
        <property name="sortingEnabled">
         <bool>true</bool>
        </property>
@@ -692,6 +719,9 @@
        <height>451</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
      <property name="sortingEnabled">
       <bool>true</bool>
      </property>
@@ -748,6 +778,9 @@
        <width>751</width>
        <height>451</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
      <property name="sortingEnabled">
       <bool>true</bool>

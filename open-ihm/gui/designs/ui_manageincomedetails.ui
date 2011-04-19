@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="tabIncomeCrops">
     <attribute name="title">
@@ -171,6 +171,9 @@
        <height>192</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QPushButton" name="btnCropsClear">
      <property name="geometry">
@@ -273,6 +276,9 @@
        <width>241</width>
        <height>192</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>
@@ -410,6 +416,9 @@
        <height>192</height>
       </rect>
      </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QPushButton" name="btnLivestockClear">
      <property name="geometry">
@@ -439,7 +448,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -466,6 +475,9 @@
          <width>241</width>
          <height>192</height>
         </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
        </property>
       </widget>
       <widget class="QPushButton" name="btnTransferTypeDelete">
@@ -579,6 +591,9 @@
          <width>251</width>
          <height>192</height>
         </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
        </property>
       </widget>
       <widget class="QPushButton" name="btnTransferSourcesDelete">
@@ -769,6 +784,9 @@
        <width>251</width>
        <height>192</height>
       </rect>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="btnWildFoodsClear">
