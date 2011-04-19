@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageassets.ui'
 #
-# Created: Tue Apr 19 10:36:39 2011
+# Created: Tue Apr 19 14:28:01 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -239,6 +239,7 @@ class Ui_ManageAssetDetails(object):
         QtCore.QObject.connect(self.btnTGoodDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.deleteTradableGoodType)
         QtCore.QObject.connect(self.btnTGoodSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.saveTradableGoodType)
         QtCore.QObject.connect(self.tradableGoodsListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageAssetDetails.pickSelectedTradableGoodType)
+        QtCore.QObject.connect(self.btnAssetsClose, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.mdiClose)
         QtCore.QMetaObject.connectSlotsByName(ManageAssetDetails)
         ManageAssetDetails.setTabOrder(self.txtSavingCategories, self.btnCashDelete)
         ManageAssetDetails.setTabOrder(self.btnCashDelete, self.tabWidget)

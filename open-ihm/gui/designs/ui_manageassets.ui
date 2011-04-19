@@ -1096,6 +1096,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btnAssetsClose</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>526</x>
+     <y>367</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>572</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>pickSelectedSaving()</slot>
