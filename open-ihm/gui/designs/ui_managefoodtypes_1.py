@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_managefoodtypes_1.ui'
 #
-# Created: Tue Apr 19 08:13:17 2011
+# Created: Tue Apr 19 09:28:15 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -59,6 +59,7 @@ class Ui_FoodTypes(object):
         QtCore.QObject.connect(self.cmdDeleteRows, QtCore.SIGNAL(_fromUtf8("clicked()")), FoodTypes.deleteSelectedCropTypes)
         QtCore.QObject.connect(self.cmdEditRow, QtCore.SIGNAL(_fromUtf8("clicked()")), FoodTypes.editCropType)
         QtCore.QObject.connect(self.cmdAddRow, QtCore.SIGNAL(_fromUtf8("clicked()")), FoodTypes.saveCropType)
+        QtCore.QObject.connect(self.cmdSearch, QtCore.SIGNAL(_fromUtf8("clicked()")), FoodTypes.searchCropType)
         QtCore.QMetaObject.connectSlotsByName(FoodTypes)
         FoodTypes.setTabOrder(self.txtSearchCrop, self.cmdSearch)
         FoodTypes.setTabOrder(self.cmdSearch, self.tableView)
