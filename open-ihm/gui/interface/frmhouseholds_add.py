@@ -36,10 +36,6 @@ class FrmAddHousehold(QDialog, Ui_Households_Add):
         
         # display project name
         self.lblProjectName.setText(projectname)
-        
-        # connect relevant signals and slots
-        self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-        self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveHousehold)
 
     def setMdi(self, mdi):
         self.mdi = mdi
@@ -63,6 +59,7 @@ class FrmAddHousehold(QDialog, Ui_Households_Add):
         # create INSERT INTO query
         query = '''INSERT INTO households(hhid,pid,dateofcollection,householdname) 
                      VALUES(%s,%s, '%s', '%s')''' % (hhid, pid, dateofcollection, householdname)
+                     
     
         # execute query and commit changes
         cursor.execute(query)
