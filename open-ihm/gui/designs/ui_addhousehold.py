@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_addhousehold.ui'
 #
-# Created: Mon Apr 18 15:06:25 2011
+# Created: Tue Apr 19 03:45:23 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -51,7 +51,7 @@ class Ui_AddHousehold(object):
         self.txtHouseholdName.setObjectName(_fromUtf8("txtHouseholdName"))
 
         self.retranslateUi(AddHousehold)
-        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHousehold.close)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHousehold.mdiClose)
         QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHousehold.saveHousehold)
         QtCore.QMetaObject.connectSlotsByName(AddHousehold)
         AddHousehold.setTabOrder(self.txtShortHouseHoldName, self.txtHouseholdName)

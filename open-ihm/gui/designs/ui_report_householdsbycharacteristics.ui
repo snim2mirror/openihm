@@ -333,6 +333,91 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>cmbProjectNames</tabstop>
+  <tabstop>cmbHouseholds</tabstop>
+  <tabstop>listViewHCharacteristics</tabstop>
+  <tabstop>listViewPersonalCharacteristics</tabstop>
+  <tabstop>cmbOrderCriteria1</tabstop>
+  <tabstop>cmbOrderCriteria2</tabstop>
+  <tabstop>opt1Ascending</tabstop>
+  <tabstop>opt2Ascending</tabstop>
+  <tabstop>opt1Descending</tabstop>
+  <tabstop>opt2Descending</tabstop>
+  <tabstop>cmdGenerateReport</tabstop>
+  <tabstop>cmdClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseHoldReport</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>534</x>
+     <y>374</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>543</x>
+     <y>340</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdGenerateReport</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseHoldReport</receiver>
+   <slot>getReportData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>424</x>
+     <y>374</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>450</x>
+     <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbProjectNames</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>HouseHoldReport</receiver>
+   <slot>getHouseholdCharacteristics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>468</x>
+     <y>27</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>415</x>
+     <y>60</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbProjectNames</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>HouseHoldReport</receiver>
+   <slot>getPersonalCharacteristics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>513</x>
+     <y>30</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>512</x>
+     <y>68</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+  <slot>getReportData()</slot>
+  <slot>getHouseholdCharacteristics()</slot>
+  <slot>getPersonalCharacteristics()</slot>
+ </slots>
 </ui>

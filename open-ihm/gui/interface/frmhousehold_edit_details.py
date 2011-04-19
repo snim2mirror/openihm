@@ -31,9 +31,8 @@ class FrmEditHouseholdDetails(QDialog, Ui_EditHousehold):
         # display project name
         self.lblProjectName.setText(self.parent.projectname)
         
-        # connect relevant signals and slots
-        self.connect(self.cmdCancel, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-        self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveHousehold)
+    def mdiClose(self):
+        self.parent.mdi.closeActiveSubWindow()
         
     def showHouseholdDetails(self):
         ''' Retrieve and display household data '''

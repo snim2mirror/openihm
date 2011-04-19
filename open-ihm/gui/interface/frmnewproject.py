@@ -32,16 +32,15 @@ class FrmNewProject(QtGui.QDialog, Ui_NewProject):
         self.dtpStartDate.setCalendarPopup(True)
         self.dtpEndDate.setCalendarPopup(True)
         
-        # connect relevant signals and slots
-        self.connect(self.cmdCancel, QtCore.SIGNAL("clicked()"), parent.mdi.closeActiveSubWindow)
-        self.connect(self.cmdSave, QtCore.SIGNAL("clicked()"), self.saveProject)
-    
+    def mdiClose(self):
+        self.parent.mdi.closeActiveSubWindow()
+        
     def getCurrencies(self):
-         ''' Loads currencies into the currency combo box '''
-         controller      = Controller()
-         currencies = controller.getCurrencies()
-         for currency in currencies:
-             self.cmbCurrency.addItem(currency.name)
+        ''' Loads currencies into the currency combo box '''
+        controller      = Controller()
+        currencies = controller.getCurrencies()
+        for currency in currencies:
+            self.cmbCurrency.addItem(currency.name)
              
     def saveProject(self):
         ''' Saves newly created data to database '''

@@ -25,6 +25,7 @@ class FrmAddHousehold(QDialog, Ui_Households_Add):
         self.parent = parent
         self.projectid = projectid
         self.config = Config.dbinfo().copy()
+        self.mdi = None
         
         # set the dates to the date of today
         now = QDate.currentDate()
@@ -39,6 +40,12 @@ class FrmAddHousehold(QDialog, Ui_Households_Add):
         # connect relevant signals and slots
         self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
         self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveHousehold)
+
+    def setMdi(self, mdi):
+        self.mdi = mdi
+        
+    def mdiClose(self):
+        self.mdi.closeActiveSubWindow()
         
     def saveHousehold(self):
         ''' Saves newly created household data to database '''

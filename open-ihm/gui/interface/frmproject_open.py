@@ -22,9 +22,8 @@ class FrmOpenProject(QtGui.QDialog, Ui_OpenProject):
         # get projects
         self.getProjects()
         
-        # connect relevant signals and slots
-        self.connect(self.cmdCancel, QtCore.SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-        self.connect(self.cmdOk, QtCore.SIGNAL("clicked()"), self.openProject)
+    def mdiclose(self):
+        self.parent.mdi.closeActiveSubWindow()
         
     def getProjects(self):
         # connect to mysql database

@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_managefoodtypes_add.ui'
 #
-# Created: Sat Nov 06 23:08:25 2010
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:26 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -55,7 +55,14 @@ class Ui_AddFoodTypes(object):
         self.cmbCategory.addItem(_fromUtf8(""))
 
         self.retranslateUi(AddFoodTypes)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddFoodTypes.close)
+        QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), AddFoodTypes.saveDetails)
         QtCore.QMetaObject.connectSlotsByName(AddFoodTypes)
+        AddFoodTypes.setTabOrder(self.txtFoodType, self.cmbCategory)
+        AddFoodTypes.setTabOrder(self.cmbCategory, self.txtKCalories)
+        AddFoodTypes.setTabOrder(self.txtKCalories, self.cmbUnitOfMeasure)
+        AddFoodTypes.setTabOrder(self.cmbUnitOfMeasure, self.cmdSave)
+        AddFoodTypes.setTabOrder(self.cmdSave, self.cmdCancel)
 
     def retranslateUi(self, AddFoodTypes):
         AddFoodTypes.setWindowTitle(QtGui.QApplication.translate("AddFoodTypes", "Add Food Types", None, QtGui.QApplication.UnicodeUTF8))

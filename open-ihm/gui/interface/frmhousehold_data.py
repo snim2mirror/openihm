@@ -46,40 +46,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		
 		# retrieve members
 		self.displayHouseholdData()
-		# connect relevant signals and slots
-		self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-		self.connect(self.cmdAddMember, SIGNAL("clicked()"), self.addHouseholdMember)
-		self.connect(self.cmdEditMember, SIGNAL("clicked()"), self.editHouseholdMember)	
-		self.connect(self.cmdDelMember, SIGNAL("clicked()"), self.delHouseholdMembers)
-		self.connect(self.cmdEditPersonalCharacteristic, SIGNAL("clicked()"), self.editPersonalCharacteristic)
-		self.connect(self.tblMembers, SIGNAL("clicked(QModelIndex)"), self.showMemberPersonalCharacteristics)
-		self.connect(self.cmdEditCharacteristic, SIGNAL("clicked()"), self.editCharacteristic)						
-		self.connect(self.cboHouseholdNumber, SIGNAL("currentIndexChanged(int)"), self.displayHouseholdData)
-		self.connect(self.cmdAddAsset, SIGNAL("clicked()"), self.addHouseholdAsset)
-		self.connect(self.cmdEditAsset, SIGNAL("clicked()"), self.editHouseholdAsset)
-		self.connect(self.cmdDelAsset, SIGNAL("clicked()"), self.delHouseholdAssets)
-		self.connect(self.cmdAddExpenditure, SIGNAL("clicked()"), self.addHouseholdExpenditure)
-		self.connect(self.cmdEditExpenditure, SIGNAL("clicked()"), self.editHouseholdExpenditure)
-		self.connect(self.cmdDelExpenditure, SIGNAL("clicked()"), self.delHouseholdExpenses)
-		self.connect(self.cmdAddCrop, SIGNAL("clicked()"), self.addHouseholdCropIncome)
-		self.connect(self.cmdEditCrop, SIGNAL("clicked()"), self.editHouseholdCropIncome)
-		self.connect(self.cmdDelCrop, SIGNAL("clicked()"), self.delHouseholdCropIncome)
-		self.connect(self.cmdAddLivestock, SIGNAL("clicked()"), self.addHouseholdLivestockIncome)
-		self.connect(self.cmdEditLivestock, SIGNAL("clicked()"), self.editHouseholdLivestockIncome)
-		self.connect(self.cmdDelLivestock, SIGNAL("clicked()"), self.delHouseholdLivestockIncome)
-		self.connect(self.cmdAddWildfoods, SIGNAL("clicked()"), self.addHouseholdWildfoodsIncome)
-		self.connect(self.cmdEditWildfoods, SIGNAL("clicked()"), self.editHouseholdWildfoodsIncome)
-		self.connect(self.cmdDelWildfoods, SIGNAL("clicked()"), self.delHouseholdWildfoodsIncome)
-		self.connect(self.cmdAddGifts, SIGNAL("clicked()"), self.addHouseholdGiftsIncome)
-		self.connect(self.cmdEditGifts, SIGNAL("clicked()"), self.editHouseholdGiftsIncome)
-		self.connect(self.cmdDelGifts, SIGNAL("clicked()"), self.delHouseholdGiftsIncome)
-		self.connect(self.cmdAddTransfer, SIGNAL("clicked()"), self.addHouseholdTransferIncome)
-		self.connect(self.cmdEditTransfer, SIGNAL("clicked()"), self.editHouseholdTransferIncome)
-		self.connect(self.cmdDelTransfer, SIGNAL("clicked()"), self.delHouseholdTransferIncome)
-		self.connect(self.cmdAddEmployment, SIGNAL("clicked()"), self.addHouseholdEmploymentIncome)
-		self.connect(self.cmdEditEmployment, SIGNAL("clicked()"), self.editHouseholdEmploymentIncome)
-		self.connect(self.cmdDelEmployment, SIGNAL("clicked()"), self.delHouseholdEmploymentIncome)			
-		
+
+	def mdiClose(self):
+		self.parent.mdi.closeActiveSubWindow()
+
 	def countRowsSelected(self, tblVw):
 		selectedRows = self.getSelectedRows(tblVw)
 		return len(selectedRows)

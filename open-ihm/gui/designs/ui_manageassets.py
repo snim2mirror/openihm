@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_manageassets.ui'
 #
-# Created: Fri Oct 22 14:30:59 2010
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:26 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_ManageAssetDetails(object):
     def setupUi(self, ManageAssetDetails):
         ManageAssetDetails.setObjectName(_fromUtf8("ManageAssetDetails"))
-        ManageAssetDetails.resize(572, 380)
+        ManageAssetDetails.resize(572, 386)
         ManageAssetDetails.setMinimumSize(QtCore.QSize(572, 380))
         self.tabWidget = QtGui.QTabWidget(ManageAssetDetails)
         self.tabWidget.setGeometry(QtCore.QRect(0, 0, 571, 341))
@@ -214,8 +214,59 @@ class Ui_ManageAssetDetails(object):
         self.btnAssetsClose.setObjectName(_fromUtf8("btnAssetsClose"))
 
         self.retranslateUi(ManageAssetDetails)
-        self.tabWidget.setCurrentIndex(5)
+        self.tabWidget.setCurrentIndex(3)
+        QtCore.QObject.connect(self.btnAssetsClose, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.mdiClose)
+        QtCore.QObject.connect(self.savingsListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageAssetDetails.pickSelectedSaving)
+        QtCore.QObject.connect(self.btnCashSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.saveSavingsType)
+        QtCore.QObject.connect(self.btnCashDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.deleteSavingsType)
+        QtCore.QObject.connect(self.foodListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageAssetDetails.pickSelectedFoodItem)
+        QtCore.QObject.connect(self.btnFoodStockSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.saveFoodStockType)
+        QtCore.QObject.connect(self.btnFoodStockDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.deleteFoodStockType)
+        QtCore.QObject.connect(self.landListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageAssetDetails.pickSelectedLandType)
+        QtCore.QObject.connect(self.btnLandSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.saveLandType)
+        QtCore.QObject.connect(self.btnLandDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.deleteLandType)
+        QtCore.QObject.connect(self.livestockListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageAssetDetails.pickSelectedLivestockItem)
+        QtCore.QObject.connect(self.btnLivestockSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.saveLivestockType)
+        QtCore.QObject.connect(self.btnLivestockDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.deleteLivestockType)
+        QtCore.QObject.connect(self.treeListView, QtCore.SIGNAL(_fromUtf8("activated(QModelIndex)")), ManageAssetDetails.pickSelectedTreeType)
+        QtCore.QObject.connect(self.btnTreeSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.pickSelectedTreeType)
+        QtCore.QObject.connect(self.btnTreeDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.deleteTreeType)
+        QtCore.QObject.connect(self.tradableGoodsListView, QtCore.SIGNAL(_fromUtf8("activated(QModelIndex)")), ManageAssetDetails.pickSelectedTradableGoodType)
+        QtCore.QObject.connect(self.btnTGoodSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.saveTreeType)
+        QtCore.QObject.connect(self.btnTGoodDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.deleteTreeType)
         QtCore.QMetaObject.connectSlotsByName(ManageAssetDetails)
+        ManageAssetDetails.setTabOrder(self.txtSavingCategories, self.btnCashDelete)
+        ManageAssetDetails.setTabOrder(self.btnCashDelete, self.tabWidget)
+        ManageAssetDetails.setTabOrder(self.tabWidget, self.savingsListView)
+        ManageAssetDetails.setTabOrder(self.savingsListView, self.btnCashSave)
+        ManageAssetDetails.setTabOrder(self.btnCashSave, self.btnAssetsClose)
+        ManageAssetDetails.setTabOrder(self.btnAssetsClose, self.txtFoodStockType)
+        ManageAssetDetails.setTabOrder(self.txtFoodStockType, self.txtEnergyValue)
+        ManageAssetDetails.setTabOrder(self.txtEnergyValue, self.btnFoodStockSave)
+        ManageAssetDetails.setTabOrder(self.btnFoodStockSave, self.btnFoodStockDelete)
+        ManageAssetDetails.setTabOrder(self.btnFoodStockDelete, self.txtMeasuringUnit)
+        ManageAssetDetails.setTabOrder(self.txtMeasuringUnit, self.foodListView)
+        ManageAssetDetails.setTabOrder(self.foodListView, self.txtLandType)
+        ManageAssetDetails.setTabOrder(self.txtLandType, self.btnLandSave)
+        ManageAssetDetails.setTabOrder(self.btnLandSave, self.txtLandMeasuringUnit)
+        ManageAssetDetails.setTabOrder(self.txtLandMeasuringUnit, self.btnLandDelete)
+        ManageAssetDetails.setTabOrder(self.btnLandDelete, self.landListView)
+        ManageAssetDetails.setTabOrder(self.landListView, self.txtLivestockEnergyValue)
+        ManageAssetDetails.setTabOrder(self.txtLivestockEnergyValue, self.txtLivestockUnit)
+        ManageAssetDetails.setTabOrder(self.txtLivestockUnit, self.btnLivestockDelete)
+        ManageAssetDetails.setTabOrder(self.btnLivestockDelete, self.livestockListView)
+        ManageAssetDetails.setTabOrder(self.livestockListView, self.txtLivestockPType)
+        ManageAssetDetails.setTabOrder(self.txtLivestockPType, self.btnLivestockSave)
+        ManageAssetDetails.setTabOrder(self.btnLivestockSave, self.btnTreeDelete)
+        ManageAssetDetails.setTabOrder(self.btnTreeDelete, self.txtTreeType)
+        ManageAssetDetails.setTabOrder(self.txtTreeType, self.txtTreeMeasuringUnit)
+        ManageAssetDetails.setTabOrder(self.txtTreeMeasuringUnit, self.btnTreeSave)
+        ManageAssetDetails.setTabOrder(self.btnTreeSave, self.treeListView)
+        ManageAssetDetails.setTabOrder(self.treeListView, self.btnTGoodDelete)
+        ManageAssetDetails.setTabOrder(self.btnTGoodDelete, self.txtTradableGoodType)
+        ManageAssetDetails.setTabOrder(self.txtTradableGoodType, self.txtTradableGoodMeasuringUnit)
+        ManageAssetDetails.setTabOrder(self.txtTradableGoodMeasuringUnit, self.btnTGoodSave)
+        ManageAssetDetails.setTabOrder(self.btnTGoodSave, self.tradableGoodsListView)
 
     def retranslateUi(self, ManageAssetDetails):
         ManageAssetDetails.setWindowTitle(QtGui.QApplication.translate("ManageAssetDetails", "Manage Asset Details", None, QtGui.QApplication.UnicodeUTF8))

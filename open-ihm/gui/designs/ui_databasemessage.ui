@@ -57,7 +57,7 @@
    <sender>cmdOk</sender>
    <signal>clicked()</signal>
    <receiver>DatabaseMessage</receiver>
-   <slot>close()</slot>
+   <slot>mdiClose()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>224</x>
@@ -70,4 +70,7 @@
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

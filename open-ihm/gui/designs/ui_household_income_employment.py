@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_employment.ui'
 #
-# Created: Mon Nov 08 18:57:53 2010
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:25 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -74,6 +74,8 @@ class Ui_AddHouseholdIncomeEmployment(object):
         self.cboFoodType.setObjectName(_fromUtf8("cboFoodType"))
 
         self.retranslateUi(AddHouseholdIncomeEmployment)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeEmployment.mdiClose)
+        QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeEmployment.saveIncome)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdIncomeEmployment)
         AddHouseholdIncomeEmployment.setTabOrder(self.cboEmploymentType, self.txtCashPaid)
         AddHouseholdIncomeEmployment.setTabOrder(self.txtCashPaid, self.cboFoodType)

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>678</width>
-    <height>537</height>
+    <height>541</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -663,7 +663,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="tabCrops">
       <attribute name="title">
@@ -1201,5 +1201,654 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>577</x>
+     <y>508</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>667</x>
+     <y>504</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tblDiets</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>showSelectedDiet()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>250</x>
+     <y>266</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>493</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbFoodItem</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>displayUnitOfMeasure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>565</x>
+     <y>109</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>672</x>
+     <y>2</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbScope</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>getExpenseItems()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>595</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>656</x>
+     <y>9</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbAgeBottom</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>adjustTopList()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>513</x>
+     <y>169</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>643</x>
+     <y>18</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdHouseholdMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllHouseholdChars()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>328</x>
+     <y>214</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>330</x>
+     <y>1</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdHouseholdRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllHouseholdChars()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>348</x>
+     <y>246</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>26</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdHouseholdMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedHouseholdChars()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>318</x>
+     <y>288</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>308</x>
+     <y>7</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdHouseholdRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedHouseholdChars()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>356</x>
+     <y>344</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>295</x>
+     <y>30</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdPersonalMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllPersonalChars()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>324</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>314</x>
+     <y>494</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdPersonalRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllPersonalChars()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>333</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>328</x>
+     <y>506</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdPersonalMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedPersonalChars()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>307</x>
+     <y>294</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>291</x>
+     <y>517</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdPersonalRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedPersonalChars()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>345</x>
+     <y>340</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>310</x>
+     <y>525</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSaveDiet</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>saveDiet()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>608</x>
+     <y>268</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>669</x>
+     <y>518</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelDiet</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>delDiets()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>421</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>550</x>
+     <y>507</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tblStandardOfLiving</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>showStandardOfLivingItem()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>48</x>
+     <y>353</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>14</x>
+     <y>497</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSaveLivingStanItem</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>saveStandardOfLivingItem()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>565</x>
+     <y>275</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>26</x>
+     <y>509</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelLivingStandardItem</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>delStandardOfLivingItems()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>409</x>
+     <y>451</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>41</x>
+     <y>516</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCropsMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllCrops()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>321</x>
+     <y>242</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>539</x>
+     <y>10</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCropsRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllCrops()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>344</x>
+     <y>277</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>561</x>
+     <y>24</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCropsMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedCrops()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>352</x>
+     <y>334</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>368</x>
+     <y>502</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCropsRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedCrops()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>368</x>
+     <y>370</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>413</x>
+     <y>521</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdLivestockMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllLivestock()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>323</x>
+     <y>241</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>320</x>
+     <y>0</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdLivestockRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllLivestock()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>338</x>
+     <y>286</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>484</x>
+     <y>0</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdLivestockMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedLivestock()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>358</x>
+     <y>319</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>364</x>
+     <y>493</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdLivestockRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedLivestock()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>361</x>
+     <y>364</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>538</x>
+     <y>5</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEmploymentMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllEmployment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>326</x>
+     <y>240</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>429</x>
+     <y>37</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEmploymentRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllEmployment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>340</x>
+     <y>286</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>56</x>
+     <y>532</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEmploymentMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedEmployment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>325</x>
+     <y>325</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>76</x>
+     <y>540</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEmploymentRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedEmployment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>378</x>
+     <y>364</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>101</x>
+     <y>540</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdTransfersMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllTransfers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>310</x>
+     <y>249</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>658</x>
+     <y>533</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdTransfersRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllTransfers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>338</x>
+     <y>294</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>631</x>
+     <y>540</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdTransfersMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedTransfers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>355</x>
+     <y>336</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>677</x>
+     <y>449</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdTransfersRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedTransfers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>361</x>
+     <y>369</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>677</x>
+     <y>392</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdWildfoodMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllWildfoods()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>362</x>
+     <y>235</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>673</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdWildfoodRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllWildfoods()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>320</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>678</x>
+     <y>169</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdWildfoodMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedWildfoods()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>359</x>
+     <y>321</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>674</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdWildfoodRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedWildfoods()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>327</x>
+     <y>370</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>676</x>
+     <y>334</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+  <slot>showSelectedDiet()</slot>
+  <slot>displayUnitOfMeasure()</slot>
+  <slot>getExpenseItems()</slot>
+  <slot>adjustTopList()</slot>
+  <slot>moveAllHouseholdChars()</slot>
+  <slot>removeAllHouseholdChars()</slot>
+  <slot>moveSelectedHouseholdChars()</slot>
+  <slot>removeSelectedHouseholdChars()</slot>
+  <slot>moveAllPersonalChars()</slot>
+  <slot>removeAllPersonalChars()</slot>
+  <slot>moveSelectedPersonalChars()</slot>
+  <slot>removeSelectedPersonalChars()</slot>
+  <slot>saveDiet()</slot>
+  <slot>delDiets()</slot>
+  <slot>showStandardOfLivingItem()</slot>
+  <slot>saveStandardOfLivingItem()</slot>
+  <slot>delStandardOfLivingItems()</slot>
+  <slot>moveAllCrops()</slot>
+  <slot>removeAllCrops()</slot>
+  <slot>moveSelectedCrops()</slot>
+  <slot>removeSelectedCrops()</slot>
+  <slot>moveAllLivestock()</slot>
+  <slot>removeAllLivestock()</slot>
+  <slot>moveSelectedLivestock()</slot>
+  <slot>removeSelectedLivestock()</slot>
+  <slot>moveAllWildfoods()</slot>
+  <slot>removeAllWildfoods()</slot>
+  <slot>moveSelectedWildfoods()</slot>
+  <slot>removeSelectedWildfoods()</slot>
+  <slot>moveAllEmployment()</slot>
+  <slot>removeAllEmployment()</slot>
+  <slot>moveSelectedEmployment()</slot>
+  <slot>removeSelectedEmployment()</slot>
+  <slot>moveAllTransfers()</slot>
+  <slot>removeAllTransfers()</slot>
+  <slot>moveSelectedTransfers()</slot>
+  <slot>removeSelectedTransfers()</slot>
+ </slots>
 </ui>

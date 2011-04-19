@@ -153,6 +153,51 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>txtFoodType</tabstop>
+  <tabstop>cmbCategory</tabstop>
+  <tabstop>txtKCalories</tabstop>
+  <tabstop>txtMeasuringUnit</tabstop>
+  <tabstop>cmdSave</tabstop>
+  <tabstop>cmdCancel</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>EditFoodTypes</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>300</x>
+     <y>227</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>214</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>EditFoodTypes</receiver>
+   <slot>saveDetails()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>94</x>
+     <y>222</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>25</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveDetails()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

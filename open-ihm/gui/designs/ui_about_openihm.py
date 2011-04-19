@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'gui/designs/ui_about_openihm.ui'
+# Form implementation generated from reading ui file 'ui_about_openihm.ui'
 #
-# Created: Mon Apr 18 14:57:13 2011
+# Created: Tue Apr 19 03:45:23 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -27,7 +27,7 @@ class Ui_AboutOpenIHM(object):
         self.textEdit.setObjectName(_fromUtf8("textEdit"))
 
         self.retranslateUi(AboutOpenIHM)
-        QtCore.QObject.connect(self.cmdOk, QtCore.SIGNAL(_fromUtf8("clicked()")), AboutOpenIHM.close)
+        QtCore.QObject.connect(self.cmdOk, QtCore.SIGNAL(_fromUtf8("clicked()")), AboutOpenIHM.mdiClose)
         QtCore.QMetaObject.connectSlotsByName(AboutOpenIHM)
 
     def retranslateUi(self, AboutOpenIHM):

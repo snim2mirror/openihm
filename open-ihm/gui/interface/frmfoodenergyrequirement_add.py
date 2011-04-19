@@ -39,8 +39,8 @@ class FrmAddEnergyRequirement(QDialog, Ui_AddFoodEnergyRequirement):
         self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveFoodEnergyRequirementDetails)
 
         
-    def reject(self):
-	self.parent.closeActiveSubWindow()
+    def mdiClose(self):
+	self.parent.mdi.closeActiveSubWindow()
 
         
     def saveFoodEnergyRequirementDetails(self):

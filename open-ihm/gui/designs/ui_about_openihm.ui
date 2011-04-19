@@ -67,7 +67,7 @@ p, li { white-space: pre-wrap; }
    <sender>cmdOk</sender>
    <signal>clicked()</signal>
    <receiver>AboutOpenIHM</receiver>
-   <slot>close()</slot>
+   <slot>mdiClose()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>327</x>
@@ -80,4 +80,7 @@ p, li { white-space: pre-wrap; }
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

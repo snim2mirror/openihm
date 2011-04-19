@@ -14,5 +14,5 @@ class FrmDatabaseMessage(QDialog, Ui_DatabaseMessage):
          self.lblMessage.setText( message )
          self.setWindowIcon( QIcon('resources/images/openihm.png') )
 
-     def reject(self):
-          self.parent.closeActiveSubWindow()
+     def mdiClose(self):
+          self.parent.mdi.closeActiveSubWindow()

@@ -377,11 +377,83 @@
   <tabstop>txtAge</tabstop>
   <tabstop>cmbYearOfBirth</tabstop>
   <tabstop>chkHeadHousehold</tabstop>
+  <tabstop>cmbMonthsAbsent</tabstop>
   <tabstop>txtReason</tabstop>
   <tabstop>txtWhere</tabstop>
   <tabstop>cmdSave</tabstop>
   <tabstop>cmdCancel</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdMember</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>342</x>
+     <y>369</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdMember</receiver>
+   <slot>saveMember()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>70</x>
+     <y>358</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>146</x>
+     <y>366</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbYearOfBirth</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>AddHouseholdMember</receiver>
+   <slot>updateYearOfBirth()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>273</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>351</x>
+     <y>189</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>txtAge</sender>
+   <signal>editingFinished()</signal>
+   <receiver>AddHouseholdMember</receiver>
+   <slot>updateYearOfBirth()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>300</x>
+     <y>110</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>362</x>
+     <y>38</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>updateAge()</slot>
+  <slot>updateYearOfBirth()</slot>
+  <slot>saveMember()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

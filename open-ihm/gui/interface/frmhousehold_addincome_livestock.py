@@ -37,11 +37,9 @@ class FrmHouseholdLivestockIncome(QDialog, Ui_AddHouseholdIncomeLivestock):
          self.cboIncomeType.setEditable( False )
          self.txtUnitOfMeasure.setReadOnly( True )
          
-         # connect relevant signals and slots
-         self.connect(self.cboIncomeType, SIGNAL("currentIndexChanged(int)"), self.displayUnitOfMeasure)
-         self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-         self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveIncome)
-         
+     def mdiClose(self):
+          self.parent.mdi.closeActiveSubWindow()
+
      def displayUnitOfMeasure(self):
          ''' displays the unit of measure of the selected income source '''
          unitofmeasure = self.cboIncomeType.itemData( self.cboIncomeType.currentIndex() ).toString()

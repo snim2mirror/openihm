@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_add_foodenergyrequirement.ui'
 #
-# Created: Mon Apr 18 15:04:19 2011
+# Created: Tue Apr 19 03:45:23 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!

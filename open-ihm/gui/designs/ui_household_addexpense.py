@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_household_addexpense.ui'
 #
-# Created: Mon Nov 08 18:55:12 2010
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:24 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -66,7 +66,15 @@ class Ui_AddHouseholdExpense(object):
         self.label_7.setObjectName(_fromUtf8("label_7"))
 
         self.retranslateUi(AddHouseholdExpense)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdExpense.mdiClose)
+        QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdExpense.saveExpenditure)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdExpense)
+        AddHouseholdExpense.setTabOrder(self.cboExpenditure, self.txtUnitOfMeasure)
+        AddHouseholdExpense.setTabOrder(self.txtUnitOfMeasure, self.txtKCalPerUnit)
+        AddHouseholdExpense.setTabOrder(self.txtKCalPerUnit, self.txtCostPerUnit)
+        AddHouseholdExpense.setTabOrder(self.txtCostPerUnit, self.txtNumberOfUnits)
+        AddHouseholdExpense.setTabOrder(self.txtNumberOfUnits, self.cmdSave)
+        AddHouseholdExpense.setTabOrder(self.cmdSave, self.cmdCancel)
 
     def retranslateUi(self, AddHouseholdExpense):
         AddHouseholdExpense.setWindowTitle(QtGui.QApplication.translate("AddHouseholdExpense", "Add Household Expenditure", None, QtGui.QApplication.UnicodeUTF8))

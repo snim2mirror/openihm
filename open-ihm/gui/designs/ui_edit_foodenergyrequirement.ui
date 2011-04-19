@@ -115,6 +115,50 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>txtAge</tabstop>
+  <tabstop>txtEnergyRequirementMales</tabstop>
+  <tabstop>txtEnergyRequirementFemales</tabstop>
+  <tabstop>cmdSave</tabstop>
+  <tabstop>cmdCancel</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>EditFoodEnergyRequirement</receiver>
+   <slot>saveFoodEnergyRequirementDetails()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>62</x>
+     <y>145</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>185</x>
+     <y>139</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>EditFoodEnergyRequirement</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>306</x>
+     <y>153</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>261</x>
+     <y>153</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveFoodEnergyRequirementDetails()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

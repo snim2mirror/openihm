@@ -31,14 +31,11 @@ class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
         self.getProjectNames()
         self.insertHouseholdsHeader()
         self.insertPCharsHeader()
-        self.setInterfaceReportType()
-        	
-        self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-        self.connect(self.cmbProjects, SIGNAL("currentIndexChanged(int)"), self.updateDialogData)
-        self.connect(self.cmdShowReport, SIGNAL("clicked()"), self.writeTable)
-        self.connect(self.cmdSaveDataTable, SIGNAL("clicked()"), self.writeTable)
-        self.connect(self.cmbReportType, SIGNAL("currentIndexChanged(int)"), self.setReportType)
+        self.setInterfaceReportType()        	
 
+    def mdiClose(self):
+        self.parent.mdi.closeActiveSubWindow()
+        
     def updateDialogData(self):
         '''Update Income Sources list to those relevant for the current project'''
         self.getHouseholdCharacteristics()

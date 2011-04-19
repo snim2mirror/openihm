@@ -20,5 +20,5 @@ class FrmAboutOpenIHM(QDialog, Ui_AboutOpenIHM):
         	QDialog.__init__(self)
        		self.setupUi(self)
 
-	def reject(self):
+	def mdiClose(self):
 		self.parent.closeActiveSubWindow()

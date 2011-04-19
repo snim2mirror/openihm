@@ -2,55 +2,68 @@
 
 # Form implementation generated from reading ui file 'ui_findprojectresults.ui'
 #
-# Created: Wed Jun 09 11:07:15 2010
-#      by: PyQt4 UI code generator 4.7
+# Created: Tue Apr 19 03:45:24 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
 
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    _fromUtf8 = lambda s: s
+
 class Ui_FindProjectResults(object):
     def setupUi(self, FindProjectResults):
-        FindProjectResults.setObjectName("FindProjectResults")
+        FindProjectResults.setObjectName(_fromUtf8("FindProjectResults"))
         FindProjectResults.resize(548, 424)
         FindProjectResults.setMinimumSize(QtCore.QSize(548, 424))
         self.groupBox = QtGui.QGroupBox(FindProjectResults)
         self.groupBox.setGeometry(QtCore.QRect(10, 10, 531, 121))
-        self.groupBox.setObjectName("groupBox")
+        self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.label = QtGui.QLabel(self.groupBox)
         self.label.setGeometry(QtCore.QRect(20, 50, 71, 18))
-        self.label.setObjectName("label")
+        self.label.setObjectName(_fromUtf8("label"))
         self.txtProjectID = QtGui.QLineEdit(self.groupBox)
         self.txtProjectID.setGeometry(QtCore.QRect(100, 50, 151, 21))
-        self.txtProjectID.setObjectName("txtProjectID")
+        self.txtProjectID.setObjectName(_fromUtf8("txtProjectID"))
         self.label_2 = QtGui.QLabel(self.groupBox)
         self.label_2.setGeometry(QtCore.QRect(20, 80, 71, 20))
-        self.label_2.setObjectName("label_2")
+        self.label_2.setObjectName(_fromUtf8("label_2"))
         self.txtProjectTitle = QtGui.QLineEdit(self.groupBox)
         self.txtProjectTitle.setGeometry(QtCore.QRect(100, 80, 301, 21))
-        self.txtProjectTitle.setObjectName("txtProjectTitle")
+        self.txtProjectTitle.setObjectName(_fromUtf8("txtProjectTitle"))
         self.cmdSearch = QtGui.QPushButton(self.groupBox)
         self.cmdSearch.setGeometry(QtCore.QRect(430, 70, 75, 31))
-        self.cmdSearch.setObjectName("cmdSearch")
+        self.cmdSearch.setObjectName(_fromUtf8("cmdSearch"))
         self.label_4 = QtGui.QLabel(self.groupBox)
         self.label_4.setGeometry(QtCore.QRect(20, 10, 341, 31))
         self.label_4.setWordWrap(True)
-        self.label_4.setObjectName("label_4")
+        self.label_4.setObjectName(_fromUtf8("label_4"))
         self.tblResults = QtGui.QTableView(FindProjectResults)
         self.tblResults.setGeometry(QtCore.QRect(10, 170, 531, 201))
-        self.tblResults.setObjectName("tblResults")
+        self.tblResults.setObjectName(_fromUtf8("tblResults"))
         self.cmdOpen = QtGui.QPushButton(FindProjectResults)
         self.cmdOpen.setGeometry(QtCore.QRect(10, 380, 81, 31))
-        self.cmdOpen.setObjectName("cmdOpen")
+        self.cmdOpen.setObjectName(_fromUtf8("cmdOpen"))
         self.cmdClose = QtGui.QPushButton(FindProjectResults)
         self.cmdClose.setGeometry(QtCore.QRect(454, 380, 81, 31))
-        self.cmdClose.setObjectName("cmdClose")
+        self.cmdClose.setObjectName(_fromUtf8("cmdClose"))
         self.label_3 = QtGui.QLabel(FindProjectResults)
         self.label_3.setGeometry(QtCore.QRect(20, 140, 111, 21))
-        self.label_3.setObjectName("label_3")
+        self.label_3.setObjectName(_fromUtf8("label_3"))
 
         self.retranslateUi(FindProjectResults)
+        QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), FindProjectResults.mdiClose)
+        QtCore.QObject.connect(self.cmdOpen, QtCore.SIGNAL(_fromUtf8("clicked()")), FindProjectResults.openProject)
+        QtCore.QObject.connect(self.cmdSearch, QtCore.SIGNAL(_fromUtf8("clicked()")), FindProjectResults.showResults)
         QtCore.QMetaObject.connectSlotsByName(FindProjectResults)
+        FindProjectResults.setTabOrder(self.txtProjectID, self.txtProjectTitle)
+        FindProjectResults.setTabOrder(self.txtProjectTitle, self.cmdSearch)
+        FindProjectResults.setTabOrder(self.cmdSearch, self.tblResults)
+        FindProjectResults.setTabOrder(self.tblResults, self.cmdOpen)
+        FindProjectResults.setTabOrder(self.cmdOpen, self.cmdClose)
 
     def retranslateUi(self, FindProjectResults):
         FindProjectResults.setWindowTitle(QtGui.QApplication.translate("FindProjectResults", "Project Search Results", None, QtGui.QApplication.UnicodeUTF8))

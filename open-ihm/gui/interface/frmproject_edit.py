@@ -31,9 +31,9 @@ class FrmEditProject(QtGui.QDialog, Ui_EditProject):
         self.dtpStartDate.setCalendarPopup(True)
         self.dtpEndDate.setCalendarPopup(True)
         
-        # connect relevant signals and slots
-        self.connect(self.cmdCancel, QtCore.SIGNAL("clicked()"), parent.mdi.closeActiveSubWindow)
-        self.connect(self.cmdSave, QtCore.SIGNAL("clicked()"), self.saveProject)
+    def mdiClose(self):
+        self.parent.mdi.closeActiveSubWindow()
+
         
     def getCurrencies(self):
          ''' Loads currencies into the currency combo box '''

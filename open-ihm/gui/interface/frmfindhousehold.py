@@ -22,10 +22,9 @@ class FrmFindHousehold(QDialog, Ui_FindHousehold):
 		self.parent = parent
 		self.config = Config.dbinfo().copy()
 		
-		# connect relevant signals and slots
-		self.connect(self.cmdCancel, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-		self.connect(self.cmdOk, SIGNAL("clicked()"), self.findHousehold)
-
+	def mdiClose(self):
+		self.parent.mdi.closeActiveSubWindow()
+		
 	def findHousehold(self):
 		''' Find a household matching the criteria entered by user '''
 		hhid 			= self.txtHouseholdNo.text()

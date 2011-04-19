@@ -24,11 +24,9 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics):
         	self.getPersonalCharacteristics()
         	self.setDatatypes()
 		
-		self.connect(self.btnCharacteristicSave, SIGNAL("clicked()"), self.savePersonalCharacteristic)
-		self.connect(self.btnCharacteristicDelete, SIGNAL("clicked()"), self.deletePersonalCharacteristic)
-		self.connect(self.cmbCharacteristic, SIGNAL("currentIndexChanged(int)"), self.populateForm)
-		self.connect(self.btnPCharsClose, SIGNAL("clicked()"), parent.closeActiveSubWindow)
-	
+	def mdiClose(self):
+		self.parent.closeActiveSubWindow()
+
 	def getPersonalCharacteristics(self):
                	# select query to retrieve Food Types and related information
         	query = '''SELECT characteristic FROM globalpersonalcharacteristics'''

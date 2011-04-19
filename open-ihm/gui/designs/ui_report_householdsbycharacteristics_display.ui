@@ -75,6 +75,48 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>tableView</tabstop>
+  <tabstop>cmdSaveAsSpreadsheet</tabstop>
+  <tabstop>cmdClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>DisplayHouseholdsByChar</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>239</x>
+     <y>605</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>409</x>
+     <y>599</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSaveAsSpreadsheet</sender>
+   <signal>clicked()</signal>
+   <receiver>DisplayHouseholdsByChar</receiver>
+   <slot>saveReportAsSpreadtsheet()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>90</x>
+     <y>600</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>146</x>
+     <y>586</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+  <slot>saveReportAsSpreadtsheet()</slot>
+ </slots>
 </ui>

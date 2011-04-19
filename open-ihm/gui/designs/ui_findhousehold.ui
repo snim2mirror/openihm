@@ -108,6 +108,49 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>txtHouseholdNo</tabstop>
+  <tabstop>txtHouseholdName</tabstop>
+  <tabstop>cmdOk</tabstop>
+  <tabstop>cmdCancel</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>FindHousehold</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>347</x>
+     <y>135</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>271</x>
+     <y>129</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdOk</sender>
+   <signal>clicked()</signal>
+   <receiver>FindHousehold</receiver>
+   <slot>findHousehold()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>59</x>
+     <y>124</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>151</x>
+     <y>121</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>findHousehold()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

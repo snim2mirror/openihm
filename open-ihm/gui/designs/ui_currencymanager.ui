@@ -179,7 +179,7 @@
    <sender>cmdClose</sender>
    <signal>clicked()</signal>
    <receiver>CurrencyManager</receiver>
-   <slot>close()</slot>
+   <slot>mdiClose()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>652</x>
@@ -228,5 +228,6 @@
   <slot>saveCurrency()</slot>
   <slot>delCurrencies()</slot>
   <slot>showSelectedCurrency()</slot>
+  <slot>mdiClose()</slot>
  </slots>
 </ui>

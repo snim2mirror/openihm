@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>CropTypes</class>
- <widget class="QDialog" name="CropTypes" >
-  <property name="geometry" >
+ <widget class="QDialog" name="CropTypes">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,17 +10,17 @@
     <height>270</height>
    </rect>
   </property>
-  <property name="minimumSize" >
+  <property name="minimumSize">
    <size>
     <width>389</width>
     <height>261</height>
    </size>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Manage Crop Types</string>
   </property>
-  <widget class="QPushButton" name="btnManageCropsClose" >
-   <property name="geometry" >
+  <widget class="QPushButton" name="btnManageCropsClose">
+   <property name="geometry">
     <rect>
      <x>270</x>
      <y>220</y>
@@ -27,12 +28,12 @@
      <height>28</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Close</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_3" >
-   <property name="geometry" >
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
     <rect>
      <x>40</x>
      <y>220</y>
@@ -40,12 +41,12 @@
      <height>28</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Save</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox" >
-   <property name="geometry" >
+  <widget class="QComboBox" name="comboBox">
+   <property name="geometry">
     <rect>
      <x>120</x>
      <y>10</y>
@@ -54,8 +55,8 @@
     </rect>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_2" >
-   <property name="geometry" >
+  <widget class="QComboBox" name="comboBox_2">
+   <property name="geometry">
     <rect>
      <x>120</x>
      <y>50</y>
@@ -64,8 +65,8 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
@@ -73,12 +74,12 @@
      <height>18</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Name</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>60</y>
@@ -86,12 +87,12 @@
      <height>18</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Data Type</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_3" >
-   <property name="geometry" >
+  <widget class="QComboBox" name="comboBox_3">
+   <property name="geometry">
     <rect>
      <x>120</x>
      <y>90</y>
@@ -100,8 +101,8 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>100</y>
@@ -109,12 +110,12 @@
      <height>18</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Unit of Measure</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox_4" >
-   <property name="geometry" >
+  <widget class="QComboBox" name="comboBox_4">
+   <property name="geometry">
     <rect>
      <x>120</x>
      <y>130</y>
@@ -123,8 +124,8 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>130</y>
@@ -132,12 +133,12 @@
      <height>18</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Kcals per unit</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit" >
-   <property name="geometry" >
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
     <rect>
      <x>120</x>
      <y>170</y>
@@ -146,8 +147,8 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
     <rect>
      <x>10</x>
      <y>180</y>
@@ -155,12 +156,12 @@
      <height>18</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Price per Unit</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton" >
-   <property name="geometry" >
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
     <rect>
      <x>160</x>
      <y>220</y>
@@ -168,11 +169,41 @@
      <height>28</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Delete</string>
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>comboBox</tabstop>
+  <tabstop>comboBox_2</tabstop>
+  <tabstop>comboBox_3</tabstop>
+  <tabstop>comboBox_4</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>pushButton_3</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>btnManageCropsClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btnManageCropsClose</sender>
+   <signal>clicked()</signal>
+   <receiver>CropTypes</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>328</x>
+     <y>225</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>178</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

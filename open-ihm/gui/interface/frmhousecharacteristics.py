@@ -27,12 +27,10 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics):
 		# get personal type
         	self.getHouseholdCharacteristics()
         	self.setDataTypes()
+
+	def mdiClose(self):
+		self.parent.closeActiveSubWindow()
 		
-		self.connect(self.btnCharacteristicSave, SIGNAL("clicked()"), self.saveHouseholdCharacteristic)
-		self.connect(self.btnCharacteristicDelete, SIGNAL("clicked()"), self.deleteHouseholdCharacteristic)
-		self.connect(self.cmbCharacteristic, SIGNAL("currentIndexChanged(int)"), self.populateForm)
-		self.connect(self.btnHouseClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
-	
 	def getHouseholdCharacteristics(self):
                	# select query to retrieve Food Types and related information
         	query = '''SELECT characteristic FROM globalhouseholdcharacteristics'''

@@ -14,22 +14,22 @@ from gui.designs.ui_managefoodtypes_add import Ui_AddFoodTypes
 class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes):	
     ''' Creates the add food/crop energy requirement form '''	
 
-    def __init__(self,parent):
+    def __init__(self, parent, mdi):
         ''' Set up the dialog box interface '''
         self.parent = parent
         QDialog.__init__(self)
         
         self.setupUi(self)
         self.parent = parent
-
+        self.mdi = mdi
+        
         #set input validator and restrict input to numeric values,
         myIntVal = QIntValidator(0, 10000, self.txtKCalories)
         self.txtKCalories.setValidator(myIntVal);
-        
  
-        # connect relevant signals and slots   
-        self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-        self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveDetails)
+    def mdiClose(self):
+        self.close()
+
         
     def saveDetails(self):
         ''' Saves newly created food/crop energy requirement data to database '''

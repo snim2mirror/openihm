@@ -36,13 +36,9 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember):
          # get and display member details
          self.getMemberDetails()
         
-         # connect relevant signals and slots
-         self.connect(self.txtAge, SIGNAL("textChanged()"), self.updateYearOfBirth)
-         self.connect(self.txtAge, SIGNAL("editingFinished()"), self.updateYearOfBirth)
-         self.connect(self.cmbYearOfBirth, SIGNAL("currentIndexChanged(int)"), self.updateAge)
-         self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-         self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveMember)
-        
+     def mdiClose(self):
+          self.parent.mdi.closeActiveSubWindow()
+
      def updateYearOfBirth(self):
          ''' updates year of birth when the value of age is modified '''
          thisyear = date.today().year

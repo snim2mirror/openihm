@@ -27,18 +27,8 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes):
         	self.getExpenditureCategories()
         	self.getExpenditureTypes()
 	
-		# connect relevant signals and slots for managing expenditure categories
-		self.connect(self.btnExpenditureClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
-		self.connect(self.expenditureCategorylistView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedCategory)
-		self.connect(self.btnCategorySave, SIGNAL("clicked()"), self.saveCategoryType)
-		self.connect(self.btnCategoryDelete, SIGNAL("clicked()"), self.deleteCategoryType)
-
-		# connect relevant signals and slots for managing expenditure types
-		self.connect(self.btnExpenditureClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
-		self.connect(self.expenseTypeListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedExpenditure)
-		self.connect(self.btnExpenseSave, SIGNAL("clicked()"), self.saveExpenditureType)
-		self.connect(self.btnExpenseDelete, SIGNAL("clicked()"), self.deleteExpenditureType)
-		
+	def mdiClose(self):
+		self.parent.closeActiveSubWindow()		
 
 	#Begin block of methods for managing Expenditure Categories 	
 	def getExpenditureCategories(self):

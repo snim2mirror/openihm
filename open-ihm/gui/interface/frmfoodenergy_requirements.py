@@ -26,13 +26,9 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements):
 	    
 	    # get food energy requirement details by sex and age
 	    self.getFoodEnergyRequirements()
-	    
-	    # connect relevant signals and slots
-	    self.connect(self.cmdFERequirementsClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-	    self.connect(self.cmdAddRow, SIGNAL("clicked()"), self.addFoodEnergyRequirement)
-	    self.connect(self.DeleteRow, SIGNAL("clicked()"), self.deleteSelectedEnergyRequirements)
-	    self.connect(self.cmdEditRow, SIGNAL("clicked()"), self.editFoodEnergyRequirement)
-	
+
+	def mdiClose(self):
+		self.parent.mdi.closeActiveSubWindow()
 
 	def getFoodEnergyRequirements(self):
 		# connect to mysql database

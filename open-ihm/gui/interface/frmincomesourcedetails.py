@@ -38,43 +38,8 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
                 self.txtLivestockEnergyValue.setValidator(myIntVal)
                 self.txtWildFoodEnergyValue.setValidator(myIntVal)
 
-
-		# connect relevant signals and slots
-		self.connect(self.btnManageIncomeClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
-
-		#signals for managing crop types
-		self.connect(self.cropListView, SIGNAL("clicked(QModelIndex)"), self.pickselectedCropItem)
-		self.connect(self.btnCropSave, SIGNAL("clicked()"), self.saveCropType)
-		self.connect(self.btnCropDelete, SIGNAL("clicked()"), self.deleteCropType)
-		self.connect(self.btnCropsClear, SIGNAL("clicked()"), self.clearCropTextboxes)
-
-		#signals for managing employment types
-		self.connect(self.employmentListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedEmployment)
-		self.connect(self.btnEmplomentTypeSave, SIGNAL("clicked()"), self.saveEmploymentType)
-		self.connect(self.btnEmplomentTypeDelete, SIGNAL("clicked()"), self.deleteEmploymentType)
-
-		#signals for managing wild foods
-		self.connect(self.wildFoodsListView, SIGNAL("clicked(QModelIndex)"), self.pickselectedWildFoodItem)
-		self.connect(self.btnWildFoodSave, SIGNAL("clicked()"), self.saveWildFoodType)
-		self.connect(self.btnWildFoodDelete, SIGNAL("clicked()"), self.deleteWildFoodType)
-		self.connect(self.btnWildFoodsClear, SIGNAL("clicked()"), self.clearWildFoodTextboxes)
-
-		#signals for managing Livestock
-		self.connect(self.livestockListView, SIGNAL("clicked(QModelIndex)"), self.pickselectedLivestockItem)
-		self.connect(self.btnLivestockSave, SIGNAL("clicked()"), self.saveLivestockType)
-		self.connect(self.btnLivestockDelete, SIGNAL("clicked()"), self.deleteLivestockType)
-		self.connect(self.btnLivestockClear, SIGNAL("clicked()"), self.clearLivestockTextboxes)
-
-		#signals for managing trasfer Sources
-		self.connect(self.transferSourcesListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedTransferSource)
-		self.connect(self.btnTransferSourcesSave, SIGNAL("clicked()"), self.saveTransferSourceType)
-		self.connect(self.btnTransferSourcesDelete, SIGNAL("clicked()"), self.deleteTransferSourceType)
-
-		#signals for managing assistance types
-		self.connect(self.transferTypesListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedTransfer)
-		self.connect(self.btnTransferTypeSave, SIGNAL("clicked()"), self.saveTransferType)
-		self.connect(self.btnTransferTypeDelete, SIGNAL("clicked()"), self.deleteTransferType)
-
+	def mdiClose(self):
+		self.parent.closeActiveSubWindow()
 
         #Begin block of methods for managing Foodstock details
 	def clearCropTextboxes(self):

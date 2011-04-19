@@ -30,8 +30,8 @@ class FrmCurrencyManager(QDialog, Ui_CurrencyManager):
          self.listCurrencies()
 
 
-    def reject(self):
-	self.parent.closeActiveSubWindow()
+     def mdiClose(self):
+	self.parent.mdi.closeActiveSubWindow()
          
      def countRowsSelected(self, tblVw):
          selectedRows = self.getSelectedRows(tblVw)

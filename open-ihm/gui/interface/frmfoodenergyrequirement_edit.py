@@ -40,9 +40,8 @@ class FrmEditEnergyRequirement(QDialog, Ui_EditFoodEnergyRequirement):
         #display energy requirements data
         self.showEnergyRequirementDetails()
  
-        # connect relevant signals and slots   
-        self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-        self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveFoodEnergyRequirementDetails)
+    def mdiClose(self):
+        self.parent.mdi.closeActiveSubWindow()
         
     def showEnergyRequirementDetails(self):
         ''' Display energy requirements data '''

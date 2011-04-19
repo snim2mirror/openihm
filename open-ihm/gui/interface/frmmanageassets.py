@@ -38,38 +38,9 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
                 self.txtEnergyValue.setValidator(myIntVal);
                 self.txtLivestockEnergyValue.setValidator(myIntVal)
 
-		self.connect(self.btnAssetsClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
-		#self.connect(self.listView.selectionModel(), SIGNAL("currentChanged(QModelIndex,QModelIndex)"), self.manageCategories)
 
-		#signals for managing savings types
-		self.connect(self.savingsListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedSaving)
-		self.connect(self.btnCashSave, SIGNAL("clicked()"), self.saveSavingsType)
-		self.connect(self.btnCashDelete, SIGNAL("clicked()"), self.deleteSavingsType)
-
-		#signals for managing food types
-		self.connect(self.foodListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedFoodItem)
-		self.connect(self.btnFoodStockSave, SIGNAL("clicked()"), self.saveFoodStockType)
-		self.connect(self.btnFoodStockDelete, SIGNAL("clicked()"), self.deleteFoodStockType)
-
-		#signals for managing Land types
-		self.connect(self.landListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedLandType)
-		self.connect(self.btnLandSave, SIGNAL("clicked()"), self.saveLandType)
-		self.connect(self.btnLandDelete, SIGNAL("clicked()"), self.deleteLandType)
-
-		#signals for managing Land types
-		self.connect(self.treeListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedTreeType)
-		self.connect(self.btnTreeSave, SIGNAL("clicked()"), self.saveTreeType)
-		self.connect(self.btnTreeDelete, SIGNAL("clicked()"), self.deleteTreeType)
-
-		#signals for managing Tradable Goods types
-		self.connect(self.tradableGoodsListView, SIGNAL("clicked(QModelIndex)"), self.pickSelectedTradableGoodType)
-		self.connect(self.btnTGoodSave, SIGNAL("clicked()"), self.saveTradableGoodType)
-		self.connect(self.btnTGoodDelete, SIGNAL("clicked()"), self.deleteTradableGoodType)
-		
-		#signals for managing Livestock
-		self.connect(self.livestockListView, SIGNAL("clicked(QModelIndex)"), self.pickselectedLivestockItem)
-		self.connect(self.btnLivestockSave, SIGNAL("clicked()"), self.saveLivestockType)
-		self.connect(self.btnLivestockDelete, SIGNAL("clicked()"), self.deleteLivestockType)
+	def mdiClose(self):
+		self.parent.closeActiveSubWindow()
 
 	#Begin block of methods for managing Savings Categories 
 	def getSavingsCategories(self):
@@ -603,7 +574,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
         	self.livestockListView.setModel(model)
 		self.livestockListView.show()	
 
-        def pickselectedLivestockItem(self,index):
+        def pickSelectedLivestockItem(self,index):
                 '''get selected item and populate categories textbox'''
                 
                 selectedLivestockItem = self.livestockListView.model().item(index.row(),0).text()

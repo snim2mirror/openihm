@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>402</width>
-    <height>137</height>
+    <width>455</width>
+    <height>163</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -115,6 +115,49 @@
    </item>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>txtValue</tabstop>
+  <tabstop>cboYesNoVal</tabstop>
+  <tabstop>cmdOk</tabstop>
+  <tabstop>cmdCancel</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>EditMemberCharacteristic</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>331</x>
+     <y>104</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>232</x>
+     <y>98</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdOk</sender>
+   <signal>clicked()</signal>
+   <receiver>EditMemberCharacteristic</receiver>
+   <slot>saveCharacteristic()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>65</x>
+     <y>99</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>118</x>
+     <y>113</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveCharacteristic()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

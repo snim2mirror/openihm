@@ -1,7 +1,8 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>IncomeSourcesTypes</class>
- <widget class="QDialog" name="IncomeSourcesTypes" >
-  <property name="geometry" >
+ <widget class="QDialog" name="IncomeSourcesTypes">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -9,23 +10,23 @@
     <height>297</height>
    </rect>
   </property>
-  <property name="minimumSize" >
+  <property name="minimumSize">
    <size>
     <width>419</width>
     <height>297</height>
    </size>
   </property>
-  <property name="maximumSize" >
+  <property name="maximumSize">
    <size>
     <width>419</width>
     <height>16777215</height>
    </size>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Manage Income Source Types</string>
   </property>
-  <widget class="QListWidget" name="listWidget" >
-   <property name="geometry" >
+  <widget class="QListWidget" name="listWidget">
+   <property name="geometry">
     <rect>
      <x>0</x>
      <y>40</y>
@@ -34,8 +35,8 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit" >
-   <property name="geometry" >
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
     <rect>
      <x>210</x>
      <y>40</y>
@@ -44,8 +45,8 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton" >
-   <property name="geometry" >
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
     <rect>
      <x>320</x>
      <y>90</y>
@@ -53,12 +54,12 @@
      <height>28</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Add</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2" >
-   <property name="geometry" >
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
     <rect>
      <x>210</x>
      <y>90</y>
@@ -66,12 +67,12 @@
      <height>28</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Delete</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btnIncomeSourcesClose" >
-   <property name="geometry" >
+  <widget class="QPushButton" name="btnIncomeSourcesClose">
+   <property name="geometry">
     <rect>
      <x>330</x>
      <y>260</y>
@@ -79,12 +80,12 @@
      <height>28</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Close</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label">
+   <property name="geometry">
     <rect>
      <x>0</x>
      <y>10</y>
@@ -92,12 +93,12 @@
      <height>18</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>List of Existing Income Types</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2" >
-   <property name="geometry" >
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
     <rect>
      <x>210</x>
      <y>10</y>
@@ -105,11 +106,31 @@
      <height>18</height>
     </rect>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Income Type</string>
    </property>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btnIncomeSourcesClose</sender>
+   <signal>clicked()</signal>
+   <receiver>IncomeSourcesTypes</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>384</x>
+     <y>273</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>222</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

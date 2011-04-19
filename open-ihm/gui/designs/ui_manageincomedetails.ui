@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>612</width>
-    <height>380</height>
+    <height>427</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="tabIncomeCrops">
     <attribute name="title">
@@ -439,7 +439,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -801,5 +801,382 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btnManageIncomeClose</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>548</x>
+     <y>355</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>514</x>
+     <y>358</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCropSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>saveCropType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>345</x>
+     <y>269</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>485</x>
+     <y>370</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCropsClear</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>clearCropTextboxes()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>451</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>357</x>
+     <y>347</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCropDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>deleteCropType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>376</x>
+     <y>358</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cropListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>clearCropTextboxes()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>105</x>
+     <y>136</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>406</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>employmentListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>pickSelectedEmployment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>118</x>
+     <y>102</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>347</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnEmplomentTypeSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>saveEmploymentType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>400</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnEmplomentTypeDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>deleteEmploymentType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>512</x>
+     <y>248</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>34</x>
+     <y>358</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>livestockListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>pickselectedLivestockItem()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>39</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>60</x>
+     <y>362</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnLivestockSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>saveLivestockType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>334</x>
+     <y>282</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>448</x>
+     <y>363</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnLivestockClear</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>clearLivestockTextboxes()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>441</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>424</x>
+     <y>378</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnLivestockDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>deleteLivestockType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>538</x>
+     <y>283</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>473</x>
+     <y>376</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>transferTypesListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>pickSelectedTransfer()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>141</x>
+     <y>241</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>197</x>
+     <y>375</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTransferTypeSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>saveTransferType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>337</x>
+     <y>241</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>262</x>
+     <y>389</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTransferTypeDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>deleteTransferType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>496</x>
+     <y>241</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>282</x>
+     <y>396</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>transferSourcesListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>pickSelectedTransferSource()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>217</x>
+     <y>243</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>449</x>
+     <y>389</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTransferSourcesSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>saveTransferSourceType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>333</x>
+     <y>221</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>480</x>
+     <y>413</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTransferSourcesDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>deleteTransferSourceType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>525</x>
+     <y>221</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>424</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>wildFoodsListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>pickselectedWildFoodItem()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>97</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>79</x>
+     <y>394</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnWildFoodSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>saveWildFoodType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>292</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>102</x>
+     <y>395</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnWildFoodDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>deleteWildFoodType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>518</x>
+     <y>293</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>130</x>
+     <y>406</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnWildFoodsClear</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>clearWildFoodTextboxes()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>423</x>
+     <y>287</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>112</x>
+     <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>pickselectedCropItem()</slot>
+  <slot>saveCropType()</slot>
+  <slot>deleteCropType()</slot>
+  <slot>clearCropTextboxes()</slot>
+  <slot>pickSelectedEmployment()</slot>
+  <slot>saveEmploymentType()</slot>
+  <slot>deleteEmploymentType()</slot>
+  <slot>pickselectedWildFoodItem()</slot>
+  <slot>saveWildFoodType()</slot>
+  <slot>deleteWildFoodType()</slot>
+  <slot>clearWildFoodTextboxes()</slot>
+  <slot>pickselectedLivestockItem()</slot>
+  <slot>saveLivestockType()</slot>
+  <slot>deleteLivestockType()</slot>
+  <slot>clearLivestockTextboxes()</slot>
+  <slot>pickSelectedTransferSource()</slot>
+  <slot>saveTransferSourceType()</slot>
+  <slot>deleteTransferSourceType()</slot>
+  <slot>pickSelectedTransfer()</slot>
+  <slot>saveTransferType()</slot>
+  <slot>deleteTransferType()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

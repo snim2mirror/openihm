@@ -25,12 +25,10 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
         	self.parent = parent
 
         	self.getProjectNames()
-        	
-        	self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-        	self.connect(self.cmbProjectNames, SIGNAL("currentIndexChanged(int)"), self.getHouseholdCharacteristics)
-        	self.connect(self.cmbProjectNames, SIGNAL("currentIndexChanged(int)"), self.getPersonalCharacteristics)
-        	self.connect(self.cmdGenerateReport, SIGNAL("clicked()"), self.getReportData)
 
+	def mdiClose(self):
+		self.parent.mdi.closeActiveSubWindow()
+		
         def getProjectNames(self):
                 ''' populate projects combobox with available projects'''
                 

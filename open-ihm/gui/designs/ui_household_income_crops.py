@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_crops.ui'
 #
-# Created: Mon Nov 08 18:45:53 2010
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:25 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -76,6 +76,9 @@ class Ui_AddHouseholdIncomeCrops(object):
         self.label_8.setObjectName(_fromUtf8("label_8"))
 
         self.retranslateUi(AddHouseholdIncomeCrops)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeCrops.mdiClose)
+        QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeCrops.saveIncome)
+        QtCore.QObject.connect(self.cboIncomeType, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), AddHouseholdIncomeCrops.displayUnitOfMeasure)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdIncomeCrops)
         AddHouseholdIncomeCrops.setTabOrder(self.cboIncomeType, self.txtUnitOfMeasure)
         AddHouseholdIncomeCrops.setTabOrder(self.txtUnitOfMeasure, self.txtUnitsProduced)

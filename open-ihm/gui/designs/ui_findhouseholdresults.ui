@@ -222,6 +222,122 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>txtHouseholdNo</tabstop>
+  <tabstop>txtHouseholdName</tabstop>
+  <tabstop>cmdSearch</tabstop>
+  <tabstop>tblResults</tabstop>
+  <tabstop>cmdAdd</tabstop>
+  <tabstop>cmdEdit</tabstop>
+  <tabstop>cmdDel</tabstop>
+  <tabstop>cmdData</tabstop>
+  <tabstop>cmdClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>FindHouseholdResults</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>443</x>
+     <y>586</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>353</x>
+     <y>578</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSearch</sender>
+   <signal>clicked()</signal>
+   <receiver>FindHouseholdResults</receiver>
+   <slot>getHouseholds()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>480</x>
+     <y>125</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>372</x>
+     <y>157</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAdd</sender>
+   <signal>clicked()</signal>
+   <receiver>FindHouseholdResults</receiver>
+   <slot>addHousehold()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>60</x>
+     <y>550</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>22</x>
+     <y>575</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEdit</sender>
+   <signal>clicked()</signal>
+   <receiver>FindHouseholdResults</receiver>
+   <slot>editHousehold()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>163</x>
+     <y>546</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>124</x>
+     <y>581</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDel</sender>
+   <signal>clicked()</signal>
+   <receiver>FindHouseholdResults</receiver>
+   <slot>delHouseholds()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>547</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>578</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdData</sender>
+   <signal>clicked()</signal>
+   <receiver>FindHouseholdResults</receiver>
+   <slot>viewHouseholdData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>369</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>266</x>
+     <y>583</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>addHousehold()</slot>
+  <slot>editHousehold()</slot>
+  <slot>delHouseholds()</slot>
+  <slot>viewHouseholdData()</slot>
+  <slot>getHouseholds()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>
