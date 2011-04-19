@@ -315,9 +315,11 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`livestockincome` (
   `hhid` INT(11) NOT NULL ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
   `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
-  `unitsconsumed` DOUBLE NULL DEFAULT NULL ,
+  `unitsproduced` DOUBLE NULL DEFAULT '0' ,
   `unitssold` DOUBLE NULL DEFAULT NULL ,
   `unitprice` DOUBLE NULL DEFAULT NULL ,
+  `otheruses` DOUBLE NULL DEFAULT '0' ,
+  `unitsconsumed` DOUBLE NULL DEFAULT '0' ,
   `pid` INT(11) NOT NULL ,
   PRIMARY KEY (`id`, `hhid`, `pid`) ,
   INDEX `fk_livestockincome_households1` (`hhid` ASC, `pid` ASC) ,
@@ -327,6 +329,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`livestockincome` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = latin1;
 
 -- -----------------------------------------------------
