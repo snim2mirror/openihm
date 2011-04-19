@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageincomedetails.ui'
 #
-# Created: Tue Apr 19 08:09:04 2011
+# Created: Tue Apr 19 08:13:17 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -226,13 +226,13 @@ class Ui_ManageIncome(object):
         self.btnManageIncomeClose.setObjectName(_fromUtf8("btnManageIncomeClose"))
 
         self.retranslateUi(ManageIncome)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         self.tabTransferDetails.setCurrentIndex(1)
         QtCore.QObject.connect(self.btnManageIncomeClose, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.mdiClose)
         QtCore.QObject.connect(self.btnCropSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveCropType)
         QtCore.QObject.connect(self.btnCropsClear, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.clearCropTextboxes)
         QtCore.QObject.connect(self.btnCropDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.deleteCropType)
-        QtCore.QObject.connect(self.cropListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.clearCropTextboxes)
+        QtCore.QObject.connect(self.cropListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.pickselectedCropItem)
         QtCore.QObject.connect(self.employmentListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.pickSelectedEmployment)
         QtCore.QObject.connect(self.btnEmplomentTypeSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveEmploymentType)
         QtCore.QObject.connect(self.btnEmplomentTypeDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.deleteEmploymentType)

@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tabIncomeCrops">
     <attribute name="title">
@@ -870,7 +870,7 @@
    <sender>cropListView</sender>
    <signal>clicked(QModelIndex)</signal>
    <receiver>ManageIncome</receiver>
-   <slot>clearCropTextboxes()</slot>
+   <slot>pickselectedCropItem()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>105</x>
@@ -1017,8 +1017,8 @@
    <slot>saveTransferType()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>337</x>
-     <y>241</y>
+     <x>339</x>
+     <y>209</y>
     </hint>
     <hint type="destinationlabel">
      <x>262</x>
@@ -1033,8 +1033,8 @@
    <slot>deleteTransferType()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>496</x>
-     <y>241</y>
+     <x>498</x>
+     <y>209</y>
     </hint>
     <hint type="destinationlabel">
      <x>282</x>
@@ -1065,8 +1065,8 @@
    <slot>saveTransferSourceType()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>333</x>
-     <y>221</y>
+     <x>335</x>
+     <y>189</y>
     </hint>
     <hint type="destinationlabel">
      <x>480</x>
@@ -1081,8 +1081,8 @@
    <slot>deleteTransferSourceType()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>525</x>
-     <y>221</y>
+     <x>527</x>
+     <y>189</y>
     </hint>
     <hint type="destinationlabel">
      <x>424</x>

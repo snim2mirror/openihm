@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householddisposableincome.ui'
 #
-# Created: Tue Apr 19 08:09:04 2011
+# Created: Tue Apr 19 08:13:17 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
