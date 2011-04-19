@@ -68,12 +68,14 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <addaction name="actionUpdate_open_ihm"/>
+    <addaction name="separator"/>
     <addaction name="actionContents"/>
     <addaction name="actionAboutOpenIHM"/>
    </widget>
    <widget class="QMenu" name="menuHousehold">
     <property name="title">
-     <string>Household</string>
+     <string>H&amp;ousehold</string>
     </property>
     <addaction name="actionAdd_Household"/>
     <addaction name="actionEdit_Household"/>
@@ -86,7 +88,7 @@
    </widget>
    <widget class="QMenu" name="menuOutputs">
     <property name="title">
-     <string>Reports</string>
+     <string>&amp;Reports</string>
     </property>
     <addaction name="actionDisposable_Income"/>
     <addaction name="actionHousehold_by_Characteristics"/>
@@ -422,6 +424,17 @@
   <action name="actionLiving_Threshold">
    <property name="text">
     <string>Living Threshold</string>
+   </property>
+  </action>
+  <action name="actionUpdate_open_ihm">
+   <property name="text">
+    <string>Update open-ihm</string>
+   </property>
+   <property name="iconText">
+    <string>Update open-ihm</string>
+   </property>
+   <property name="toolTip">
+    <string>Automatically update the open-ihm software</string>
    </property>
   </action>
  </widget>
@@ -941,6 +954,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionUpdate_open_ihm</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>updateOpenIhm()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>newProject()</slot>
@@ -974,5 +1003,6 @@
   <slot>initialiseFoodRequirementTable()</slot>
   <slot>setReporttypeAsLivingThreshold()</slot>
   <slot>openHelpContents()</slot>
+  <slot>updateOpenIhm()</slot>
  </slots>
 </ui>
