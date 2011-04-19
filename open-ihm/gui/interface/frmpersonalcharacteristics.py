@@ -67,7 +67,7 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics):
 		for row in recordset:
 			formdatatype = row[1]
 			description = str(row[2])
-		print formdatatype
+#		print formdatatype
 			
 		#populate datatype combobox
 		if formdatatype == 1:
@@ -125,6 +125,7 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics):
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
 		#populate Food Types Combobox
+		self.cmbCharacteristic.clear()
 		self.getPersonalCharacteristics()
 		self.cmbDataType.setCurrentIndex(-1)
 
