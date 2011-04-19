@@ -13,7 +13,7 @@ import os
 import subprocess
 
 # imports from PyQt4 package
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui, QtCore, Qt
 
 # import the main window design class
 from gui.designs.ui_mainwindow import Ui_MainWindow
@@ -57,7 +57,7 @@ from data.setup_foodrequirement_startupvalues import FoodRequirementValues
 
 # FIXME: Make the background of the painter white not black.
 class PicturedMDIArea(QtGui.QMdiArea):
-    """This class creates an MDI area with a background image.
+    """This class creates an MDI area with a centred background image.
 
     Code is adapted from here:
     
@@ -69,32 +69,23 @@ class PicturedMDIArea(QtGui.QMdiArea):
     def __init__(self, background_pixmap, parent = None):
         QtGui.QMdiArea.__init__(self, parent)
         self.background_pixmap = background_pixmap
-        self.centered = False
         self.display_pixmap = None
     
     def paintEvent(self, event):
         painter = QtGui.QPainter()
         painter.begin(self.viewport())
-        if not self.centered:
-            painter.drawPixmap(0,
-                               0,
-                               self.background_pixmap.width(),
-                               self.background_pixmap.height(),
-                               self.background_pixmap)
-        else:
-            painter.fillRect(event.rect(), self.palette().color(QtGui.QPalette.Window))
-            x = (self.width() - self.display_pixmap.width())/2
-            y = (self.height() - self.display_pixmap.height())/2
-            painter.drawPixmap(x, y, self.display_pixmap)
+        painter.setBrush(QtGui.QColor(220, 220, 220))
+        painter.drawRect(0, 0, self.width(), self.height())
+        x = (self.width() - self.background_pixmap.width())/2
+        y = (self.height() - self.background_pixmap.height())/2
+        painter.drawPixmap(x, y, self.background_pixmap)
         painter.end()
     
     def resizeEvent(self, event):
-        # If we had a background which filled the whole screen we would want
-        # to override resizeEvent thus:
-        #
-        # self.display_pixmap = self.background_pixmap.scaled(event.size(), QtCore.Qt.KeepAspectRatio)
-        #
-        pass
+        """
+        Ensure that the logo stays in the centre of the screen on resize.
+        """
+        self.display_pixmap = self.background_pixmap.scaled(event.size(), QtCore.Qt.KeepAspectRatio)
 
 
 class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
@@ -110,9 +101,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.projectname = ""
 
         pixmap = QtGui.QPixmap('resources/images/EfDUnimaChancoComposite.jpg')
-#        pixmap = QtGui.QPixmap('resources/images/EfDChancoComposite.jpg')
-#        self.mdi = PicturedMDIArea(pixmap)
-        self.mdi = QtGui.QMdiArea()
+        self.mdi = PicturedMDIArea(pixmap)
         
         self.setCentralWidget(self.mdi)
 
