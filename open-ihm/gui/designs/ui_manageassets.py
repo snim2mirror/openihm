@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageassets.ui'
 #
-# Created: Tue Apr 19 07:27:40 2011
+# Created: Tue Apr 19 08:09:03 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_ManageAssetDetails(object):
     def setupUi(self, ManageAssetDetails):
         ManageAssetDetails.setObjectName(_fromUtf8("ManageAssetDetails"))
-        ManageAssetDetails.resize(572, 386)
+        ManageAssetDetails.resize(572, 424)
         ManageAssetDetails.setMinimumSize(QtCore.QSize(572, 380))
         self.tabWidget = QtGui.QTabWidget(ManageAssetDetails)
         self.tabWidget.setGeometry(QtCore.QRect(0, 0, 571, 341))
@@ -214,8 +214,7 @@ class Ui_ManageAssetDetails(object):
         self.btnAssetsClose.setObjectName(_fromUtf8("btnAssetsClose"))
 
         self.retranslateUi(ManageAssetDetails)
-        self.tabWidget.setCurrentIndex(3)
-        QtCore.QObject.connect(self.btnAssetsClose, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.mdiClose)
+        self.tabWidget.setCurrentIndex(5)
         QtCore.QObject.connect(self.savingsListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageAssetDetails.pickSelectedSaving)
         QtCore.QObject.connect(self.btnCashSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.saveSavingsType)
         QtCore.QObject.connect(self.btnCashDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.deleteSavingsType)
@@ -231,9 +230,9 @@ class Ui_ManageAssetDetails(object):
         QtCore.QObject.connect(self.treeListView, QtCore.SIGNAL(_fromUtf8("activated(QModelIndex)")), ManageAssetDetails.pickSelectedTreeType)
         QtCore.QObject.connect(self.btnTreeSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.pickSelectedTreeType)
         QtCore.QObject.connect(self.btnTreeDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.deleteTreeType)
-        QtCore.QObject.connect(self.tradableGoodsListView, QtCore.SIGNAL(_fromUtf8("activated(QModelIndex)")), ManageAssetDetails.pickSelectedTradableGoodType)
-        QtCore.QObject.connect(self.btnTGoodSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.saveTreeType)
-        QtCore.QObject.connect(self.btnTGoodDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.deleteTreeType)
+        QtCore.QObject.connect(self.btnTGoodDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.deleteTradableGoodType)
+        QtCore.QObject.connect(self.btnTGoodSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.saveTradableGoodType)
+        QtCore.QObject.connect(self.tradableGoodsListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageAssetDetails.pickSelectedTradableGoodType)
         QtCore.QMetaObject.connectSlotsByName(ManageAssetDetails)
         ManageAssetDetails.setTabOrder(self.txtSavingCategories, self.btnCashDelete)
         ManageAssetDetails.setTabOrder(self.btnCashDelete, self.tabWidget)
