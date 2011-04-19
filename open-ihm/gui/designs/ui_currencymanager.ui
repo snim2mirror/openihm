@@ -229,6 +229,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>tblCurrencies</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>CurrencyManager</receiver>
+   <slot>showSelectedCurrency()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>220</x>
+     <y>91</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>403</x>
+     <y>231</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>saveCurrency()</slot>

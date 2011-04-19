@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_currencymanager.ui'
 #
-# Created: Tue Apr 19 10:36:38 2011
+# Created: Tue Apr 19 14:16:21 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -63,6 +63,7 @@ class Ui_CurrencyManager(object):
         QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), CurrencyManager.mdiClose)
         QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), CurrencyManager.saveCurrency)
         QtCore.QObject.connect(self.cmdDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), CurrencyManager.delCurrencies)
+        QtCore.QObject.connect(self.tblCurrencies, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), CurrencyManager.showSelectedCurrency)
         QtCore.QMetaObject.connectSlotsByName(CurrencyManager)
         CurrencyManager.setTabOrder(self.tblCurrencies, self.txtCurrencyName)
         CurrencyManager.setTabOrder(self.txtCurrencyName, self.txtAbbreviation)
