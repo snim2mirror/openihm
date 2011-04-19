@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_data.ui'
 #
-# Created: Tue Apr 19 08:13:15 2011
+# Created: Tue Apr 19 10:25:46 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -29,6 +29,7 @@ class Ui_HouseholdData(object):
         self.tabHouseHoldMembers.setObjectName(_fromUtf8("tabHouseHoldMembers"))
         self.tblMembers = QtGui.QTableView(self.tabHouseHoldMembers)
         self.tblMembers.setGeometry(QtCore.QRect(10, 30, 371, 431))
+        self.tblMembers.setSortingEnabled(True)
         self.tblMembers.setObjectName(_fromUtf8("tblMembers"))
         self.cmdAddMember = QtGui.QPushButton(self.tabHouseHoldMembers)
         self.cmdAddMember.setGeometry(QtCore.QRect(10, 470, 91, 31))
@@ -41,6 +42,7 @@ class Ui_HouseholdData(object):
         self.cmdDelMember.setObjectName(_fromUtf8("cmdDelMember"))
         self.tblPersonalCharacteristics = QtGui.QTableView(self.tabHouseHoldMembers)
         self.tblPersonalCharacteristics.setGeometry(QtCore.QRect(390, 30, 371, 431))
+        self.tblPersonalCharacteristics.setSortingEnabled(True)
         self.tblPersonalCharacteristics.setObjectName(_fromUtf8("tblPersonalCharacteristics"))
         self.cmdEditPersonalCharacteristic = QtGui.QPushButton(self.tabHouseHoldMembers)
         self.cmdEditPersonalCharacteristic.setGeometry(QtCore.QRect(390, 470, 141, 31))
@@ -56,6 +58,7 @@ class Ui_HouseholdData(object):
         self.tabHouseholdAssets.setObjectName(_fromUtf8("tabHouseholdAssets"))
         self.tblAssets = QtGui.QTableView(self.tabHouseholdAssets)
         self.tblAssets.setGeometry(QtCore.QRect(10, 10, 751, 451))
+        self.tblAssets.setSortingEnabled(True)
         self.tblAssets.setObjectName(_fromUtf8("tblAssets"))
         self.cmdAddAsset = QtGui.QPushButton(self.tabHouseholdAssets)
         self.cmdAddAsset.setGeometry(QtCore.QRect(10, 470, 91, 31))
@@ -86,6 +89,7 @@ class Ui_HouseholdData(object):
         self.cmdDelCrop.setObjectName(_fromUtf8("cmdDelCrop"))
         self.tblCropIncome = QtGui.QTableView(self.tab)
         self.tblCropIncome.setGeometry(QtCore.QRect(10, 40, 701, 401))
+        self.tblCropIncome.setSortingEnabled(True)
         self.tblCropIncome.setObjectName(_fromUtf8("tblCropIncome"))
         self.label_2 = QtGui.QLabel(self.tab)
         self.label_2.setGeometry(QtCore.QRect(20, 10, 161, 21))
@@ -99,6 +103,7 @@ class Ui_HouseholdData(object):
         self.tab_2.setObjectName(_fromUtf8("tab_2"))
         self.tblLivestockIncome = QtGui.QTableView(self.tab_2)
         self.tblLivestockIncome.setGeometry(QtCore.QRect(10, 40, 701, 401))
+        self.tblLivestockIncome.setSortingEnabled(True)
         self.tblLivestockIncome.setObjectName(_fromUtf8("tblLivestockIncome"))
         self.label_3 = QtGui.QLabel(self.tab_2)
         self.label_3.setGeometry(QtCore.QRect(20, 10, 121, 21))
@@ -128,6 +133,7 @@ class Ui_HouseholdData(object):
         self.label_4.setObjectName(_fromUtf8("label_4"))
         self.tblEmploymentIncome = QtGui.QTableView(self.tab_3)
         self.tblEmploymentIncome.setGeometry(QtCore.QRect(10, 40, 701, 401))
+        self.tblEmploymentIncome.setSortingEnabled(True)
         self.tblEmploymentIncome.setObjectName(_fromUtf8("tblEmploymentIncome"))
         self.cmdEditEmployment = QtGui.QPushButton(self.tab_3)
         self.cmdEditEmployment.setGeometry(QtCore.QRect(120, 450, 91, 31))
@@ -150,6 +156,7 @@ class Ui_HouseholdData(object):
         self.label_5.setObjectName(_fromUtf8("label_5"))
         self.tblWildfoodsIncome = QtGui.QTableView(self.tab_4)
         self.tblWildfoodsIncome.setGeometry(QtCore.QRect(10, 40, 701, 401))
+        self.tblWildfoodsIncome.setSortingEnabled(True)
         self.tblWildfoodsIncome.setObjectName(_fromUtf8("tblWildfoodsIncome"))
         self.cmdEditWildfoods = QtGui.QPushButton(self.tab_4)
         self.cmdEditWildfoods.setGeometry(QtCore.QRect(120, 450, 91, 31))
@@ -172,6 +179,7 @@ class Ui_HouseholdData(object):
         self.label_6.setObjectName(_fromUtf8("label_6"))
         self.tblGiftsIncome = QtGui.QTableView(self.tab_5)
         self.tblGiftsIncome.setGeometry(QtCore.QRect(10, 40, 701, 401))
+        self.tblGiftsIncome.setSortingEnabled(True)
         self.tblGiftsIncome.setObjectName(_fromUtf8("tblGiftsIncome"))
         self.cmdEditGifts = QtGui.QPushButton(self.tab_5)
         self.cmdEditGifts.setGeometry(QtCore.QRect(120, 450, 91, 31))
@@ -194,6 +202,7 @@ class Ui_HouseholdData(object):
         self.label_7.setObjectName(_fromUtf8("label_7"))
         self.tblTransferIncome = QtGui.QTableView(self.tab_6)
         self.tblTransferIncome.setGeometry(QtCore.QRect(10, 40, 701, 401))
+        self.tblTransferIncome.setSortingEnabled(True)
         self.tblTransferIncome.setObjectName(_fromUtf8("tblTransferIncome"))
         self.cmdEditTransfer = QtGui.QPushButton(self.tab_6)
         self.cmdEditTransfer.setGeometry(QtCore.QRect(120, 450, 91, 31))
@@ -210,6 +219,7 @@ class Ui_HouseholdData(object):
         self.tabHouseholdExpenditure.setObjectName(_fromUtf8("tabHouseholdExpenditure"))
         self.tblExpenditure = QtGui.QTableView(self.tabHouseholdExpenditure)
         self.tblExpenditure.setGeometry(QtCore.QRect(10, 10, 751, 451))
+        self.tblExpenditure.setSortingEnabled(True)
         self.tblExpenditure.setObjectName(_fromUtf8("tblExpenditure"))
         self.cmdAddExpenditure = QtGui.QPushButton(self.tabHouseholdExpenditure)
         self.cmdAddExpenditure.setGeometry(QtCore.QRect(10, 470, 91, 31))
@@ -225,6 +235,7 @@ class Ui_HouseholdData(object):
         self.tabHouseholdCharacteristics.setObjectName(_fromUtf8("tabHouseholdCharacteristics"))
         self.tblCharacteristics = QtGui.QTableView(self.tabHouseholdCharacteristics)
         self.tblCharacteristics.setGeometry(QtCore.QRect(10, 10, 751, 451))
+        self.tblCharacteristics.setSortingEnabled(True)
         self.tblCharacteristics.setObjectName(_fromUtf8("tblCharacteristics"))
         self.cmdEditCharacteristic = QtGui.QPushButton(self.tabHouseholdCharacteristics)
         self.cmdEditCharacteristic.setGeometry(QtCore.QRect(10, 470, 91, 31))
@@ -241,7 +252,7 @@ class Ui_HouseholdData(object):
         self.label.setObjectName(_fromUtf8("label"))
 
         self.retranslateUi(HouseholdData)
-        self.tabHouseHold.setCurrentIndex(0)
+        self.tabHouseHold.setCurrentIndex(4)
         self.tabWidget.setCurrentIndex(5)
         QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdData.mdiClose)
         QtCore.QObject.connect(self.cmdAddMember, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdData.addHouseholdMember)

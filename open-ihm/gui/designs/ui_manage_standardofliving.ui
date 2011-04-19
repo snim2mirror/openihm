@@ -28,6 +28,9 @@
      <height>291</height>
     </rect>
    </property>
+   <property name="sortingEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QPushButton" name="cmdDelete">
    <property name="geometry">

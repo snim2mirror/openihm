@@ -61,7 +61,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tabProjectHouseholdCharacteristics">
     <attribute name="title">
@@ -282,6 +282,9 @@
        <height>381</height>
       </rect>
      </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QPushButton" name="cmdDelDiet">
      <property name="geometry">
@@ -427,6 +430,9 @@
        <width>361</width>
        <height>381</height>
       </rect>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QGroupBox" name="groupBox_2">
@@ -663,7 +669,7 @@
       <enum>QTabWidget::North</enum>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabCrops">
       <attribute name="title">
@@ -756,6 +762,9 @@
          <height>361</height>
         </rect>
        </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QTableView" name="tblSelectedCrops">
        <property name="geometry">
@@ -765,6 +774,9 @@
          <width>256</width>
          <height>361</height>
         </rect>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -859,6 +871,9 @@
          <height>361</height>
         </rect>
        </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QTableView" name="tblSelectedEmployment">
        <property name="geometry">
@@ -868,6 +883,9 @@
          <width>256</width>
          <height>361</height>
         </rect>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -962,6 +980,9 @@
          <height>361</height>
         </rect>
        </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QTableView" name="tblSelectedLivestock">
        <property name="geometry">
@@ -971,6 +992,9 @@
          <width>256</width>
          <height>361</height>
         </rect>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -1065,6 +1089,9 @@
          <height>361</height>
         </rect>
        </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QTableView" name="tblSelectedTransfers">
        <property name="geometry">
@@ -1074,6 +1101,9 @@
          <width>256</width>
          <height>361</height>
         </rect>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -1168,6 +1198,9 @@
          <height>361</height>
         </rect>
        </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QTableView" name="tblSelectedWildfoods">
        <property name="geometry">
@@ -1177,6 +1210,9 @@
          <width>256</width>
          <height>361</height>
         </rect>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>

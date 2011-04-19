@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householddisposableincome.ui'
 #
-# Created: Tue Apr 19 08:13:17 2011
+# Created: Tue Apr 19 10:25:47 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -55,6 +55,7 @@ class Ui_HouseholdDisposableIncome(object):
         self.treeViewHouseholds.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.treeViewHouseholds.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
         self.treeViewHouseholds.setSelectionBehavior(QtGui.QAbstractItemView.SelectRows)
+        self.treeViewHouseholds.setSortingEnabled(True)
         self.treeViewHouseholds.setObjectName(_fromUtf8("treeViewHouseholds"))
         self.cmdSaveDataTable = QtGui.QPushButton(HouseholdDisposableIncome)
         self.cmdSaveDataTable.setGeometry(QtCore.QRect(294, 630, 91, 23))

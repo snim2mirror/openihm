@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_foodenergy_requirements.ui'
 #
-# Created: Tue Apr 19 08:13:15 2011
+# Created: Tue Apr 19 10:25:46 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -33,6 +33,7 @@ class Ui_FoodEnergyRequirements(object):
         self.DeleteRow.setObjectName(_fromUtf8("DeleteRow"))
         self.tableView = QtGui.QTableView(FoodEnergyRequirements)
         self.tableView.setGeometry(QtCore.QRect(0, 10, 471, 531))
+        self.tableView.setSortingEnabled(True)
         self.tableView.setObjectName(_fromUtf8("tableView"))
 
         self.retranslateUi(FoodEnergyRequirements)

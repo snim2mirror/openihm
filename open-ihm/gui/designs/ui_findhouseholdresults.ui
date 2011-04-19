@@ -128,6 +128,9 @@
       <height>341</height>
      </rect>
     </property>
+    <property name="sortingEnabled">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QPushButton" name="cmdEdit">
     <property name="geometry">

@@ -80,6 +80,9 @@
      <height>451</height>
     </rect>
    </property>
+   <property name="sortingEnabled">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="Line" name="line">
    <property name="geometry">
