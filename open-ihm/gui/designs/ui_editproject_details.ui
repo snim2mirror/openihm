@@ -187,6 +187,52 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>txtProjectName</tabstop>
+  <tabstop>dtpStartDate</tabstop>
+  <tabstop>dtpEndDate</tabstop>
+  <tabstop>cmbCurrency</tabstop>
+  <tabstop>txtDescription</tabstop>
+  <tabstop>cmdSave</tabstop>
+  <tabstop>cmdCancel</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>EditProject</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>319</x>
+     <y>296</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>258</x>
+     <y>298</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>EditProject</receiver>
+   <slot>saveProject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>284</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>129</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveProject()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

@@ -70,5 +70,42 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>OpenProject</receiver>
+   <slot>mdiclose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>324</x>
+     <y>74</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>217</x>
+     <y>64</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdOk</sender>
+   <signal>clicked()</signal>
+   <receiver>OpenProject</receiver>
+   <slot>openProject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>43</x>
+     <y>64</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>113</x>
+     <y>84</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+  <slot>openProject()</slot>
+ </slots>
 </ui>

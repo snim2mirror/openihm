@@ -414,6 +414,94 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>cmbProjects</tabstop>
+  <tabstop>cmbReportType</tabstop>
+  <tabstop>treeViewHouseholds</tabstop>
+  <tabstop>treeView</tabstop>
+  <tabstop>listViewHCharacteristics</tabstop>
+  <tabstop>listViewPersonalCharacteristics</tabstop>
+  <tabstop>cmbOrderCriteria1</tabstop>
+  <tabstop>opt1Ascending_2</tabstop>
+  <tabstop>opt1Descending_2</tabstop>
+  <tabstop>cmbOrderCriteria2</tabstop>
+  <tabstop>opt2Ascending_2</tabstop>
+  <tabstop>opt2Descending_2</tabstop>
+  <tabstop>cmdSaveDataTable</tabstop>
+  <tabstop>cmdShowReport</tabstop>
+  <tabstop>cmdClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdIncomeReport</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>569</x>
+     <y>633</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>589</x>
+     <y>620</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSaveDataTable</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdIncomeReport</receiver>
+   <slot>writeTable()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>308</x>
+     <y>646</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>85</x>
+     <y>630</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdShowReport</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdIncomeReport</receiver>
+   <slot>writeTable()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>445</x>
+     <y>641</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>195</x>
+     <y>635</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbProjects</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>HouseholdIncomeReport</receiver>
+   <slot>setReportType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>547</x>
+     <y>28</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>548</x>
+     <y>48</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+  <slot>updateDialogData()</slot>
+  <slot>writeTable()</slot>
+  <slot>setReportType()</slot>
+ </slots>
 </ui>

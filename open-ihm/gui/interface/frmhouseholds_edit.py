@@ -21,6 +21,7 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit):
         self.projectid = projectid
         self.hhid = hhid
         self.config = Config.dbinfo().copy()
+        self.mdi = None
         
         # get current project details
         self.getHouseholdData()
@@ -31,10 +32,12 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit):
         # display project name
         self.lblProjectName.setText(projectname)
         
-        # connect relevant signals and slots
-        self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-        self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveHousehold)
+    def setMdi(self, mdi):
+        self.mdi = mdi
         
+    def mdiClose(self):
+	self.mdi.closeActiveSubWindow()
+
     def getHouseholdData(self):
         ''' Retrieve and display household data '''
         # connect to mysql database

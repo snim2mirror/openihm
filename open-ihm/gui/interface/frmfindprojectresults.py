@@ -27,10 +27,8 @@ class FrmFindProjectResults(QDialog, Ui_FindProjectResults):
         
         self.showResults()
         
-        # connect relevant signals and slots
-        self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-        self.connect(self.cmdSearch, SIGNAL("clicked()"), self.showResults)
-        self.connect(self.cmdOpen, SIGNAL("clicked()"), self.openProject)
+    def mdiClose(self):
+        self.parent.mdi.closeActiveSubWindow()
 
     def showResults(self):
         ''' Find a project matching the criteria entered by user '''

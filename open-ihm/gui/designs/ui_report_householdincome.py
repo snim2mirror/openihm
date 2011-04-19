@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdincome.ui'
 #
-# Created: Wed Feb 02 21:40:41 2011
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:26 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -129,7 +129,25 @@ class Ui_HouseholdIncomeReport(object):
         self.label_6.setObjectName(_fromUtf8("label_6"))
 
         self.retranslateUi(HouseholdIncomeReport)
+        QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdIncomeReport.mdiClose)
+        QtCore.QObject.connect(self.cmdSaveDataTable, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdIncomeReport.writeTable)
+        QtCore.QObject.connect(self.cmdShowReport, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdIncomeReport.writeTable)
+        QtCore.QObject.connect(self.cmbProjects, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), HouseholdIncomeReport.setReportType)
         QtCore.QMetaObject.connectSlotsByName(HouseholdIncomeReport)
+        HouseholdIncomeReport.setTabOrder(self.cmbProjects, self.cmbReportType)
+        HouseholdIncomeReport.setTabOrder(self.cmbReportType, self.treeViewHouseholds)
+        HouseholdIncomeReport.setTabOrder(self.treeViewHouseholds, self.treeView)
+        HouseholdIncomeReport.setTabOrder(self.treeView, self.listViewHCharacteristics)
+        HouseholdIncomeReport.setTabOrder(self.listViewHCharacteristics, self.listViewPersonalCharacteristics)
+        HouseholdIncomeReport.setTabOrder(self.listViewPersonalCharacteristics, self.cmbOrderCriteria1)
+        HouseholdIncomeReport.setTabOrder(self.cmbOrderCriteria1, self.opt1Ascending_2)
+        HouseholdIncomeReport.setTabOrder(self.opt1Ascending_2, self.opt1Descending_2)
+        HouseholdIncomeReport.setTabOrder(self.opt1Descending_2, self.cmbOrderCriteria2)
+        HouseholdIncomeReport.setTabOrder(self.cmbOrderCriteria2, self.opt2Ascending_2)
+        HouseholdIncomeReport.setTabOrder(self.opt2Ascending_2, self.opt2Descending_2)
+        HouseholdIncomeReport.setTabOrder(self.opt2Descending_2, self.cmdSaveDataTable)
+        HouseholdIncomeReport.setTabOrder(self.cmdSaveDataTable, self.cmdShowReport)
+        HouseholdIncomeReport.setTabOrder(self.cmdShowReport, self.cmdClose)
 
     def retranslateUi(self, HouseholdIncomeReport):
         HouseholdIncomeReport.setWindowTitle(QtGui.QApplication.translate("HouseholdIncomeReport", "Report: Households by Income Source", None, QtGui.QApplication.UnicodeUTF8))

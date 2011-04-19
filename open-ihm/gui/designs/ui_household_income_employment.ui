@@ -237,5 +237,42 @@
   <tabstop>cmdCancel</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdIncomeEmployment</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>404</x>
+     <y>314</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>257</x>
+     <y>305</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdIncomeEmployment</receiver>
+   <slot>saveIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>78</x>
+     <y>305</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>149</x>
+     <y>302</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveIncome()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

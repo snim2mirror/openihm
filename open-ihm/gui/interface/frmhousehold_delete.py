@@ -16,19 +16,18 @@ class FrmDelHousehold(QDialog, Ui_DeleteHousehold):
     ''' Creates the Edit Project form. '''	
     def __init__(self, parent):
         ''' Set up the dialog box interface '''
-        self.parent = parent
         QDialog.__init__(self)
         self.setupUi(self)
+        self.parent = parent
         
         self.config = Config.dbinfo().copy()
         
         # get projects
         self.getHouseholds()
-        
-        # connect relevant signals and slots
-        self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-        self.connect(self.cmdDel, SIGNAL("clicked()"), self.delHousehold)
-        
+
+    def mdiClose(self):
+        self.parent.mdi.closeActiveSubWindow()
+
     def getHouseholds(self):
         # connect to mysql database
         db = data.mysql.connector.Connect(**self.config)

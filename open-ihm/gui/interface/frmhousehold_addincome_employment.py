@@ -33,10 +33,9 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment):
 		  
 		# display household name
 		self.lblHouseholdName.setText(hhname)
-		
-		# connect relevant signals and slots
-		self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-		self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveIncome)
+
+	def mdiClose(self):
+		self.parent.mdi.closeActiveSubWindow()
 	    
 	def getEmploymentTypes(self):
 		''' Retrieve Employment Types and display them in a combobox '''

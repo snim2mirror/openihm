@@ -206,6 +206,140 @@
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>expenseCategoryListView</tabstop>
+  <tabstop>expenseTypeListView</tabstop>
+  <tabstop>txtExpenseType</tabstop>
+  <tabstop>btnExpenseSave</tabstop>
+  <tabstop>expenditureCategorylistView</tabstop>
+  <tabstop>txtCategory</tabstop>
+  <tabstop>btnExpenseDelete</tabstop>
+  <tabstop>btnCategorySave</tabstop>
+  <tabstop>btnCategoryDelete</tabstop>
+  <tabstop>btnExpenditureClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btnExpenditureClose</sender>
+   <signal>clicked()</signal>
+   <receiver>ExpenditureTypes</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>353</x>
+     <y>266</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>265</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnExpenseSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ExpenditureTypes</receiver>
+   <slot>saveExpenditureType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>285</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>256</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnExpenseDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ExpenditureTypes</receiver>
+   <slot>deleteExpenditureType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>374</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>expenseTypeListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ExpenditureTypes</receiver>
+   <slot>pickSelectedExpenditure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>73</x>
+     <y>149</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>36</x>
+     <y>268</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCategorySave</sender>
+   <signal>clicked()</signal>
+   <receiver>ExpenditureTypes</receiver>
+   <slot>saveCategoryType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>255</x>
+     <y>144</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>272</x>
+     <y>261</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCategoryDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ExpenditureTypes</receiver>
+   <slot>deleteCategoryType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>350</x>
+     <y>136</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>103</x>
+     <y>259</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>expenditureCategorylistView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ExpenditureTypes</receiver>
+   <slot>pickSelectedCategory()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>82</x>
+     <y>181</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>62</x>
+     <y>276</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveExpenditureType()</slot>
+  <slot>deleteExpenditureType()</slot>
+  <slot>pickSelectedExpenditure()</slot>
+  <slot>saveCategoryType()</slot>
+  <slot>deleteCategoryType()</slot>
+  <slot>pickSelectedCategory()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

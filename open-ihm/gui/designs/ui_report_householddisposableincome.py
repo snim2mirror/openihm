@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_report_householddisposableincome.ui'
 #
-# Created: Thu Feb 17 14:28:09 2011
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:26 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -124,7 +124,25 @@ class Ui_HouseholdDisposableIncome(object):
         self.label_6.setObjectName(_fromUtf8("label_6"))
 
         self.retranslateUi(HouseholdDisposableIncome)
+        QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdDisposableIncome.mdiClose)
+        QtCore.QObject.connect(self.cmbProjects, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), HouseholdDisposableIncome.updateDialogData)
+        QtCore.QObject.connect(self.cmdShowReport, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdDisposableIncome.writeTable)
+        QtCore.QObject.connect(self.cmdSaveDataTable, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdDisposableIncome.writeTable)
+        QtCore.QObject.connect(self.cmbReportType, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), HouseholdDisposableIncome.setReportType)
         QtCore.QMetaObject.connectSlotsByName(HouseholdDisposableIncome)
+        HouseholdDisposableIncome.setTabOrder(self.cmbProjects, self.cmbReportType)
+        HouseholdDisposableIncome.setTabOrder(self.cmbReportType, self.treeViewHouseholds)
+        HouseholdDisposableIncome.setTabOrder(self.treeViewHouseholds, self.listViewHCharacteristics)
+        HouseholdDisposableIncome.setTabOrder(self.listViewHCharacteristics, self.listViewPersonalCharacteristics)
+        HouseholdDisposableIncome.setTabOrder(self.listViewPersonalCharacteristics, self.cmbOrderCriteria1)
+        HouseholdDisposableIncome.setTabOrder(self.cmbOrderCriteria1, self.opt1Ascending_2)
+        HouseholdDisposableIncome.setTabOrder(self.opt1Ascending_2, self.opt1Descending_2)
+        HouseholdDisposableIncome.setTabOrder(self.opt1Descending_2, self.cmbOrderCriteria2)
+        HouseholdDisposableIncome.setTabOrder(self.cmbOrderCriteria2, self.opt2Ascending_2)
+        HouseholdDisposableIncome.setTabOrder(self.opt2Ascending_2, self.opt2Descending_2)
+        HouseholdDisposableIncome.setTabOrder(self.opt2Descending_2, self.cmdSaveDataTable)
+        HouseholdDisposableIncome.setTabOrder(self.cmdSaveDataTable, self.cmdShowReport)
+        HouseholdDisposableIncome.setTabOrder(self.cmdShowReport, self.cmdClose)
 
     def retranslateUi(self, HouseholdDisposableIncome):
         HouseholdDisposableIncome.setWindowTitle(QtGui.QApplication.translate("HouseholdDisposableIncome", "Report: Households by Income Source", None, QtGui.QApplication.UnicodeUTF8))

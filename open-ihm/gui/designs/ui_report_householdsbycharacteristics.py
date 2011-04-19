@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdsbycharacteristics.ui'
 #
-# Created: Mon Oct 04 18:02:07 2010
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:27 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -106,7 +106,22 @@ class Ui_HouseHoldReport(object):
         self.label_6.setObjectName(_fromUtf8("label_6"))
 
         self.retranslateUi(HouseHoldReport)
+        QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseHoldReport.mdiClose)
+        QtCore.QObject.connect(self.cmdGenerateReport, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseHoldReport.getReportData)
+        QtCore.QObject.connect(self.cmbProjectNames, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), HouseHoldReport.getHouseholdCharacteristics)
+        QtCore.QObject.connect(self.cmbProjectNames, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), HouseHoldReport.getPersonalCharacteristics)
         QtCore.QMetaObject.connectSlotsByName(HouseHoldReport)
+        HouseHoldReport.setTabOrder(self.cmbProjectNames, self.cmbHouseholds)
+        HouseHoldReport.setTabOrder(self.cmbHouseholds, self.listViewHCharacteristics)
+        HouseHoldReport.setTabOrder(self.listViewHCharacteristics, self.listViewPersonalCharacteristics)
+        HouseHoldReport.setTabOrder(self.listViewPersonalCharacteristics, self.cmbOrderCriteria1)
+        HouseHoldReport.setTabOrder(self.cmbOrderCriteria1, self.cmbOrderCriteria2)
+        HouseHoldReport.setTabOrder(self.cmbOrderCriteria2, self.opt1Ascending)
+        HouseHoldReport.setTabOrder(self.opt1Ascending, self.opt2Ascending)
+        HouseHoldReport.setTabOrder(self.opt2Ascending, self.opt1Descending)
+        HouseHoldReport.setTabOrder(self.opt1Descending, self.opt2Descending)
+        HouseHoldReport.setTabOrder(self.opt2Descending, self.cmdGenerateReport)
+        HouseHoldReport.setTabOrder(self.cmdGenerateReport, self.cmdClose)
 
     def retranslateUi(self, HouseHoldReport):
         HouseHoldReport.setWindowTitle(QtGui.QApplication.translate("HouseHoldReport", "Report Households by Characteristics", None, QtGui.QApplication.UnicodeUTF8))

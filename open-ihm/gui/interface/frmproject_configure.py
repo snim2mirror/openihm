@@ -68,51 +68,9 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          self.displayAvailableTransfers()
          self.displaySelectedTransfers()
         
-         # connect relevant signals and slots
-         self.connect(self.tblDiets, SIGNAL("clicked(QModelIndex)"), self.showSelectedDiet)
-         self.connect(self.cmbFoodItem, SIGNAL("currentIndexChanged(int)"), self.displayUnitOfMeasure)
-         self.connect(self.cmbScope, SIGNAL("currentIndexChanged(int)"), self.getExpenseItems )
-         self.connect(self.cmbAgeBottom, SIGNAL("currentIndexChanged(int)"), self.adjustTopList )
-         self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-         self.connect(self.cmdHouseholdMoveAll, SIGNAL("clicked()"), self.moveAllHouseholdChars)
-         self.connect(self.cmdHouseholdRemoveAll, SIGNAL("clicked()"), self.removeAllHouseholdChars)
-         self.connect(self.cmdHouseholdMoveSelected, SIGNAL("clicked()"), self.moveSelectedHouseholdChars)
-         self.connect(self.cmdHouseholdRemoveSelected, SIGNAL("clicked()"), self.removeSelectedHouseholdChars)
-         self.connect(self.cmdPersonalMoveAll, SIGNAL("clicked()"), self.moveAllPersonalChars)
-         self.connect(self.cmdPersonalRemoveAll, SIGNAL("clicked()"), self.removeAllPersonalChars)
-         self.connect(self.cmdPersonalMoveSelected, SIGNAL("clicked()"), self.moveSelectedPersonalChars)
-         self.connect(self.cmdPersonalRemoveSelected, SIGNAL("clicked()"), self.removeSelectedPersonalChars)
-         self.connect(self.cmdSaveDiet, SIGNAL("clicked()"), self.saveDiet)
-         self.connect(self.cmdDelDiet, SIGNAL("clicked()"), self.delDiets)
-         self.connect(self.tblStandardOfLiving, SIGNAL("clicked(QModelIndex)"), self.showStandardOfLivingItem)
-         self.connect(self.cmdSaveLivingStanItem, SIGNAL("clicked()"), self.saveStandardOfLivingItem)
-         self.connect(self.cmdDelLivingStandardItem, SIGNAL("clicked()"), self.delStandardOfLivingItems)
+     def mdiClose(self):
+        self.parent.mdi.closeActiveSubWindow()
          
-         self.connect(self.cmdCropsMoveAll, SIGNAL("clicked()"), self.moveAllCrops)
-         self.connect(self.cmdCropsRemoveAll, SIGNAL("clicked()"), self.removeAllCrops)
-         self.connect(self.cmdCropsMoveSelected, SIGNAL("clicked()"), self.moveSelectedCrops)
-         self.connect(self.cmdCropsRemoveSelected, SIGNAL("clicked()"), self.removeSelectedCrops)
-         
-         self.connect(self.cmdLivestockMoveAll, SIGNAL("clicked()"), self.moveAllLivestock)
-         self.connect(self.cmdLivestockRemoveAll, SIGNAL("clicked()"), self.removeAllLivestock)
-         self.connect(self.cmdLivestockMoveSelected, SIGNAL("clicked()"), self.moveSelectedLivestock)
-         self.connect(self.cmdLivestockRemoveSelected, SIGNAL("clicked()"), self.removeSelectedLivestock)
-         
-         self.connect(self.cmdWildfoodMoveAll, SIGNAL("clicked()"), self.moveAllWildfoods)
-         self.connect(self.cmdWildfoodRemoveAll, SIGNAL("clicked()"), self.removeAllWildfoods)
-         self.connect(self.cmdWildfoodMoveSelected, SIGNAL("clicked()"), self.moveSelectedWildfoods)
-         self.connect(self.cmdWildfoodRemoveSelected, SIGNAL("clicked()"), self.removeSelectedWildfoods)
-         
-         self.connect(self.cmdEmploymentMoveAll, SIGNAL("clicked()"), self.moveAllEmployment)
-         self.connect(self.cmdEmploymentRemoveAll, SIGNAL("clicked()"), self.removeAllEmployment)
-         self.connect(self.cmdEmploymentMoveSelected, SIGNAL("clicked()"), self.moveSelectedEmployment)
-         self.connect(self.cmdEmploymentRemoveSelected, SIGNAL("clicked()"), self.removeSelectedEmployment)
-         
-         self.connect(self.cmdTransfersMoveAll, SIGNAL("clicked()"), self.moveAllTransfers)
-         self.connect(self.cmdTransfersRemoveAll, SIGNAL("clicked()"), self.removeAllTransfers)
-         self.connect(self.cmdTransfersMoveSelected, SIGNAL("clicked()"), self.moveSelectedTransfers)
-         self.connect(self.cmdTransfersRemoveSelected, SIGNAL("clicked()"), self.removeSelectedTransfers)
-     
      def getCurrentRow(self, tblVw):
          indexVal = tblVw.currentIndex()
          return indexVal.row()

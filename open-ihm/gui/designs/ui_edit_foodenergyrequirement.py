@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_edit_foodenergyrequirement.ui'
 #
-# Created: Tue Sep 21 15:04:03 2010
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:23 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -45,7 +45,13 @@ class Ui_EditFoodEnergyRequirement(object):
         self.txtEnergyRequirementFemales.setObjectName(_fromUtf8("txtEnergyRequirementFemales"))
 
         self.retranslateUi(EditFoodEnergyRequirement)
+        QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), EditFoodEnergyRequirement.saveFoodEnergyRequirementDetails)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), EditFoodEnergyRequirement.close)
         QtCore.QMetaObject.connectSlotsByName(EditFoodEnergyRequirement)
+        EditFoodEnergyRequirement.setTabOrder(self.txtAge, self.txtEnergyRequirementMales)
+        EditFoodEnergyRequirement.setTabOrder(self.txtEnergyRequirementMales, self.txtEnergyRequirementFemales)
+        EditFoodEnergyRequirement.setTabOrder(self.txtEnergyRequirementFemales, self.cmdSave)
+        EditFoodEnergyRequirement.setTabOrder(self.cmdSave, self.cmdCancel)
 
     def retranslateUi(self, EditFoodEnergyRequirement):
         EditFoodEnergyRequirement.setWindowTitle(QtGui.QApplication.translate("EditFoodEnergyRequirement", "Edit Food Energy Requirement", None, QtGui.QApplication.UnicodeUTF8))

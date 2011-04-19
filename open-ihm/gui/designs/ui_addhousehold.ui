@@ -141,6 +141,50 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>txtShortHouseHoldName</tabstop>
+  <tabstop>txtHouseholdName</tabstop>
+  <tabstop>dtpDateVisted</tabstop>
+  <tabstop>cmdSave</tabstop>
+  <tabstop>cmdCancel</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHousehold</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>337</x>
+     <y>147</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>189</x>
+     <y>87</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHousehold</receiver>
+   <slot>saveHousehold()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>82</x>
+     <y>149</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>226</x>
+     <y>141</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveHousehold()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

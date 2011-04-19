@@ -16,6 +16,11 @@ class FrmIncomeSourcesTypes(Ui_IncomeSourcesTypes):
 	def setupUi(self, Form, Mdi):
 		''' Set up the dialog box interface '''
 		Ui_IncomeSourcesTypes.setupUi(self, Form)
+		self.Mdi = Mdi
 		
 		# connect relevant signals and slots
 		QtCore.QObject.connect(self.btnIncomeSourcesClose, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
+
+	def reject(self):
+		self.Mdi.closeActiveSubWindow()
+

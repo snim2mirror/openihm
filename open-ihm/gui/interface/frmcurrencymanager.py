@@ -28,11 +28,10 @@ class FrmCurrencyManager(QDialog, Ui_CurrencyManager):
          self.config = Config.dbinfo().copy()
          
          self.listCurrencies()
-         
-         self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-         self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveCurrency)
-         self.connect(self.cmdDelete, SIGNAL("clicked()"), self.delCurrencies)
-         self.connect(self.tblCurrencies, SIGNAL("clicked(QModelIndex)"), self.showSelectedCurrency)
+
+
+     def mdiClose(self):
+	self.parent.mdi.closeActiveSubWindow()
          
      def countRowsSelected(self, tblVw):
          selectedRows = self.getSelectedRows(tblVw)

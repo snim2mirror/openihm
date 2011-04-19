@@ -34,10 +34,13 @@ class FrmManageFoodTypes(QDialog, Ui_FoodTypes):
 		'''
 		self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
 		self.connect(self.cmdDeleteRows, SIGNAL("clicked()"), self.deleteSelectedCropTypes)
-		self.connect(self.cmdAddRow, SIGNAL("clicked()"), self.saveCropType)
 		self.connect(self.cmdEditRow, SIGNAL("clicked()"), self.editCropType)
+		self.connect(self.cmdAddRow, SIGNAL("clicked()"), self.saveCropType)
 		self.connect(self.cmdSearch, SIGNAL("clicked()"), self.searchCropType)
 	
+	def mdiClose(self):
+		self.parent.mdi.closeActiveSubWindow()
+
 	def getFoodTypes(self):
                	# select query to retrieve Food Types and related information
         	query = '''SELECT foodtype,measuringunit,energyvalueperunit FROM setup_crops'''
@@ -81,7 +84,7 @@ class FrmManageFoodTypes(QDialog, Ui_FoodTypes):
 	def saveCropType(self):
 		''' Show the Add Food Types form '''
 		
-		form = FrmAddCropType(self)
+		form = FrmAddCropType(self, self.parent.mdi)
 		form.setWindowIcon(QIcon('resources/images/openihm.png'))
                 form.exec_()
 		self.getFoodTypes()
@@ -97,7 +100,7 @@ class FrmManageFoodTypes(QDialog, Ui_FoodTypes):
 			energyvalue = self.tableView.model().item(selectedRow,2).text()
 
 			# show edit food energy requirement form
-			form = FrmEditCropType(self.parent,selectedcrop,measuringunit,energyvalue)
+			form = FrmEditCropType(self.parent,self.parent.mdi,selectedcrop,measuringunit,energyvalue)
 			form.setWindowIcon(QIcon('resources/images/openihm.png'))
 			form.exec_()
 			self.getFoodTypes()

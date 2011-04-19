@@ -33,10 +33,10 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense):
 		# display household name
 		self.lblHouseholdName.setText(hhname)
 		
-		# connect relevant signals and slots
-		self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-		self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveExpenditure)
-        
+    def mdiClose(self):
+        self.parent.mdi.closeActiveSubWindow()
+
+                
     def getExpenditureTypes(self):
 		''' Retrieve Expenditure Types and display them in a combobox '''
 		# select query to Asset Types

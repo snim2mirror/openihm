@@ -62,5 +62,25 @@ p, li { white-space: pre-wrap; }
  <resources>
   <include location="images.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdOk</sender>
+   <signal>clicked()</signal>
+   <receiver>AboutOpenIHM</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>327</x>
+     <y>265</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>199</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

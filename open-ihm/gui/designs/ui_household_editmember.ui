@@ -417,5 +417,92 @@
   <tabstop>cmdCancel</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>EditHouseholdMember</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>336</x>
+     <y>393</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>206</x>
+     <y>384</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>EditHouseholdMember</receiver>
+   <slot>saveMember()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>392</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>124</x>
+     <y>394</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>txtAge</sender>
+   <signal>editingFinished()</signal>
+   <receiver>EditHouseholdMember</receiver>
+   <slot>updateYearOfBirth()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>289</x>
+     <y>137</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>366</x>
+     <y>89</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbYearOfBirth</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>EditHouseholdMember</receiver>
+   <slot>updateAge()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>354</x>
+     <y>223</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>txtAge</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>EditHouseholdMember</receiver>
+   <slot>updateYearOfBirth()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>309</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>333</x>
+     <y>48</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>updateYearOfBirth()</slot>
+  <slot>updateAge()</slot>
+  <slot>saveMember()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

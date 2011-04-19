@@ -38,9 +38,8 @@ class FrmEditHouseholdCharacteristic(QDialog, Ui_EditHouseholdCharacteristic):
         	if ( charVal != "Not Set" ):
         		self.txtValue.setText( charVal )
         	
-        # connect relevant signals and slots
-        self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-        self.connect(self.cmdOk, SIGNAL("clicked()"), self.saveCharacteristic)
+    def mdiClose(self):
+        self.parent.mdi.closeActiveSubWindow()
         
     def saveCharacteristic(self):
 		''' Saves characteristic '''

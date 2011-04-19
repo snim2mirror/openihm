@@ -28,13 +28,9 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds):
 	    # get current project details
 	    self.getHouseholds()
 	    
-	    # connect relevant signals and slots
-	    self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-	    self.connect(self.cmdAdd, SIGNAL("clicked()"), self.addHousehold)
-	    self.connect(self.cmdEdit, SIGNAL("clicked()"), self.editHousehold)
-	    self.connect(self.cmdDel, SIGNAL("clicked()"), self.delHouseholds)
-	    self.connect(self.cmdData, SIGNAL("clicked()"), self.viewHouseholdData)
-	    
+	def mdiClose(self):
+		self.parent.mdi.closeActiveSubWindow()
+
 	def getHouseholds(self):
 		# connect to mysql database
 		db = data.mysql.connector.Connect(**self.config)
@@ -99,6 +95,7 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds):
 		
 		# show the add household  form
 		form = FrmAddHousehold(self, projectid, projectname)
+		form.setMdi(self.parent.mdi)
 		form.setWindowIcon(QIcon('resources/images/openihm.png'))
 		form.exec_()
 		
@@ -112,6 +109,7 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds):
 			projectname = self.parent.projectname
 			# show edit household member form
 			form = FrmEditHousehold(self, projectid, projectname, hhid)
+			form.setMdi(self.parent.mdi)
 			form.setWindowIcon(QIcon('resources/images/openihm.png'))
 			form.exec_()
 			

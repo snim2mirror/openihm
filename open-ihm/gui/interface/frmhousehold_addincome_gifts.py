@@ -34,11 +34,9 @@ class FrmHouseholdGiftsIncome(QDialog, Ui_AddHouseholdIncomeGifts):
          # display household name
          self.lblHouseholdName.setText(hhname)
 
-         # connect relevant signals and slots
-         self.connect(self.cmbFoodType, SIGNAL("currentIndexChanged(int)"), self.displayUnitOfMeasure)
-         self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-         self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveIncome)
-        
+     def mdiClose(self):
+          self.parent.mdi.closeActiveSubWindow()
+
      def getGiftsTypes(self):
          ''' Retrieve Gifts Types and display them in a combobox '''
          # select query to Gifts Types

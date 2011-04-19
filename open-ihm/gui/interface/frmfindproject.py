@@ -23,10 +23,9 @@ class FrmFindProject(QDialog, Ui_FindProject):
         self.setupUi(self)
         self.parent = parent
         
-        # connect relevant signals and slots
-        self.connect(self.cmdCancel, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-        self.connect(self.cmdOk, SIGNAL("clicked()"), self.findProject)
-
+    def mdiClose(self):
+        self.parent.mdi.closeActiveSubWindow()
+        
     def findProject(self):
         ''' Find a project matching the criteria entered by user '''
         pid 			= self.txtProjectID.text()

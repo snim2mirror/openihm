@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>572</width>
-    <height>380</height>
+    <height>386</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="tabCashSavings">
     <attribute name="title">
@@ -753,6 +753,367 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>txtSavingCategories</tabstop>
+  <tabstop>btnCashDelete</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>savingsListView</tabstop>
+  <tabstop>btnCashSave</tabstop>
+  <tabstop>btnAssetsClose</tabstop>
+  <tabstop>txtFoodStockType</tabstop>
+  <tabstop>txtEnergyValue</tabstop>
+  <tabstop>btnFoodStockSave</tabstop>
+  <tabstop>btnFoodStockDelete</tabstop>
+  <tabstop>txtMeasuringUnit</tabstop>
+  <tabstop>foodListView</tabstop>
+  <tabstop>txtLandType</tabstop>
+  <tabstop>btnLandSave</tabstop>
+  <tabstop>txtLandMeasuringUnit</tabstop>
+  <tabstop>btnLandDelete</tabstop>
+  <tabstop>landListView</tabstop>
+  <tabstop>txtLivestockEnergyValue</tabstop>
+  <tabstop>txtLivestockUnit</tabstop>
+  <tabstop>btnLivestockDelete</tabstop>
+  <tabstop>livestockListView</tabstop>
+  <tabstop>txtLivestockPType</tabstop>
+  <tabstop>btnLivestockSave</tabstop>
+  <tabstop>btnTreeDelete</tabstop>
+  <tabstop>txtTreeType</tabstop>
+  <tabstop>txtTreeMeasuringUnit</tabstop>
+  <tabstop>btnTreeSave</tabstop>
+  <tabstop>treeListView</tabstop>
+  <tabstop>btnTGoodDelete</tabstop>
+  <tabstop>txtTradableGoodType</tabstop>
+  <tabstop>txtTradableGoodMeasuringUnit</tabstop>
+  <tabstop>btnTGoodSave</tabstop>
+  <tabstop>tradableGoodsListView</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>btnAssetsClose</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>535</x>
+     <y>362</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>315</x>
+     <y>351</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>savingsListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>pickSelectedSaving()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>176</x>
+     <y>138</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>17</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCashSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>saveSavingsType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>401</x>
+     <y>201</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>40</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCashDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>deleteSavingsType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>505</x>
+     <y>191</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>65</x>
+     <y>342</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>foodListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>pickSelectedFoodItem()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>109</x>
+     <y>96</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>50</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnFoodStockSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>saveFoodStockType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>384</x>
+     <y>293</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>75</x>
+     <y>367</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnFoodStockDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>deleteFoodStockType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>471</x>
+     <y>288</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>90</x>
+     <y>371</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>landListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>pickSelectedLandType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>139</x>
+     <y>146</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>114</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnLandSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>saveLandType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>371</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>143</x>
+     <y>361</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnLandDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>deleteLandType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>477</x>
+     <y>293</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>165</x>
+     <y>356</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>livestockListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>pickSelectedLivestockItem()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>129</x>
+     <y>108</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnLivestockSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>saveLivestockType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>373</x>
+     <y>291</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>475</x>
+     <y>360</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnLivestockDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>deleteLivestockType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>491</x>
+     <y>287</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>455</x>
+     <y>365</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>treeListView</sender>
+   <signal>activated(QModelIndex)</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>pickSelectedTreeType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>175</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>340</x>
+     <y>375</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTreeSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>pickSelectedTreeType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>385</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>381</x>
+     <y>385</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTreeDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>deleteTreeType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>480</x>
+     <y>287</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>398</x>
+     <y>385</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tradableGoodsListView</sender>
+   <signal>activated(QModelIndex)</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>pickSelectedTradableGoodType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>128</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>465</x>
+     <y>347</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTGoodSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>saveTreeType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>397</x>
+     <y>281</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>449</x>
+     <y>385</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTGoodDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>deleteTreeType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>476</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>418</x>
+     <y>385</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>pickSelectedSaving()</slot>
+  <slot>saveSavingsType()</slot>
+  <slot>deleteSavingsType()</slot>
+  <slot>pickSelectedFoodItem()</slot>
+  <slot>saveFoodStockType()</slot>
+  <slot>deleteFoodStockType()</slot>
+  <slot>pickSelectedLandType()</slot>
+  <slot>saveLandType()</slot>
+  <slot>deleteLandType()</slot>
+  <slot>pickSelectedTreeType()</slot>
+  <slot>saveTreeType()</slot>
+  <slot>deleteTreeType()</slot>
+  <slot>pickSelectedTradableGoodType()</slot>
+  <slot>saveTradableGoodType()</slot>
+  <slot>deleteTradableGoodType()</slot>
+  <slot>pickSelectedLivestockItem()</slot>
+  <slot>saveLivestockType()</slot>
+  <slot>deleteLivestockType()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

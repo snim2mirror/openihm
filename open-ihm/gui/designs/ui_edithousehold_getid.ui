@@ -69,6 +69,48 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>cboHouseholdName</tabstop>
+  <tabstop>cmdOk</tabstop>
+  <tabstop>cmdCancel</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdOk</sender>
+   <signal>clicked()</signal>
+   <receiver>EditHouseholdGetID</receiver>
+   <slot>showDetails()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>60</x>
+     <y>76</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>121</x>
+     <y>76</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>EditHouseholdGetID</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>333</x>
+     <y>65</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>269</x>
+     <y>56</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>showDetails()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

@@ -9,6 +9,9 @@
 # pylint: disable=W0312
 # pylint: disable=W0511
 
+import os
+import subprocess
+
 # imports from PyQt4 package
 from PyQt4 import QtGui, QtCore
 
@@ -107,13 +110,16 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.projectname = ""
 
         pixmap = QtGui.QPixmap('resources/images/EfDUnimaChancoComposite.jpg')
-        self.mdi = PicturedMDIArea(pixmap)
-        print 'pixmap is: ', pixmap.isNull()
+#        pixmap = QtGui.QPixmap('resources/images/EfDChancoComposite.jpg')
+#        self.mdi = PicturedMDIArea(pixmap)
+        self.mdi = QtGui.QMdiArea()
         
         self.setCentralWidget(self.mdi)
 
         self.actionClose_Project.setDisabled(True)
 
+        self.assistant = None # Help assistant
+        
 	### FIXME: Replace absolute paths to images with Qt resources
         self.setWindowIcon(QtGui.QIcon('resources/images/openihm.png'))
 
@@ -144,7 +150,6 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
     def openProject(self):
         ''' Creates and Shows the Open Project form '''
-	print "flibble"
         if ( self.projectid != -1 ):
             msg = "Opening another project will close the current project. Are you sure you want to open another project?"
             ret = QtGui.QMessageBox.question(self,"Confirm Opening", msg, QtGui.QMessageBox.Yes|QtGui.QMessageBox.No)
@@ -393,6 +398,20 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         '''set report type for Household Disposable Income report'''
         reporttype = 'DI'
         self.reportHouseholdDisposableIncome(reporttype)
+
+    def openHelpContents(self):
+        """Open online help.
+        Triggered when the user presses F1 or selects Contents from
+        the Help menu.
+        """
+        return
+#        if not self.assistant or not self.assistant.poll()==None:
+#            helpcoll = 'help/collection.qhc'        
+#            cmd = "assistant-qt4 -enableRemoteControl -collectionFile %s" % helpcoll
+#            self.assistant = subprocess.Popen(cmd,
+#                                              shell = True,
+#                                              stdin = subprocess.PIPE)
+#            self.assistant.stdin.write("SetSource qthelp://urssus/doc/handbook.html\n")
                 
     # def reportLivingThreshold(self):
     #     form = LivingThreshold(self)

@@ -34,12 +34,10 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset):
          # display household name
          self.lblHouseholdName.setText(hhname)
 
-         # connect relevant signals and slots
-         self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-         self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveAsset)
-         self.connect(self.cboAssetCategory, SIGNAL("currentIndexChanged(int)"), self.getAssetTypes)
-         self.connect(self.cboAssetType, SIGNAL("currentIndexChanged(int)"), self.displayUnitOfMeasure)
-    
+     def mdiClose(self):
+          self.parent.mdi.closeActiveSubWindow()
+
+         
      def getAssetCategories(self):
          ''' Retrieve Asset Categories and display them in a combobox '''
          # for now categories are hard coded (later will be moved to database)

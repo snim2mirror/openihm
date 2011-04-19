@@ -134,6 +134,85 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>cmbCharacteristic</tabstop>
+  <tabstop>cmbDataType</tabstop>
+  <tabstop>txtDescription</tabstop>
+  <tabstop>btnCharacteristicSave</tabstop>
+  <tabstop>btnCharacteristicDelete</tabstop>
+  <tabstop>btnHouseClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmbCharacteristic</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>HouseCharacteristics</receiver>
+   <slot>populateForm()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>164</x>
+     <y>33</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>21</x>
+     <y>150</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCharacteristicSave</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseCharacteristics</receiver>
+   <slot>saveHouseholdCharacteristic()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>98</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>27</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCharacteristicDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseCharacteristics</receiver>
+   <slot>deleteHouseholdCharacteristic()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>160</x>
+     <y>162</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>144</x>
+     <y>162</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnHouseClose</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseCharacteristics</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>284</x>
+     <y>168</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>331</x>
+     <y>145</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>populateForm()</slot>
+  <slot>saveHouseholdCharacteristic()</slot>
+  <slot>deleteHouseholdCharacteristic()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

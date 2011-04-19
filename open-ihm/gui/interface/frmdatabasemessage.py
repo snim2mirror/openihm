@@ -8,9 +8,11 @@ class FrmDatabaseMessage(QDialog, Ui_DatabaseMessage):
      def __init__(self, message,  parent = None):
          ''' Set up the dialog box interface '''
          QDialog.__init__(self)
-        
+
+         self.parent = parent
          self.setupUi(self)
          self.lblMessage.setText( message )
          self.setWindowIcon( QIcon('resources/images/openihm.png') )
-        
-         self.connect(self.cmdOk, SIGNAL("clicked()"), self.close)
+
+     def mdiClose(self):
+          self.parent.mdi.closeActiveSubWindow()

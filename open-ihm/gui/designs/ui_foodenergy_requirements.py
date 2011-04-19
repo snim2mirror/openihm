@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_foodenergy_requirements.ui'
 #
-# Created: Thu Feb 17 11:18:16 2011
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:24 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_FoodEnergyRequirements(object):
     def setupUi(self, FoodEnergyRequirements):
         FoodEnergyRequirements.setObjectName(_fromUtf8("FoodEnergyRequirements"))
-        FoodEnergyRequirements.resize(481, 582)
+        FoodEnergyRequirements.resize(491, 582)
         FoodEnergyRequirements.setMinimumSize(QtCore.QSize(481, 582))
         self.cmdFERequirementsClose = QtGui.QPushButton(FoodEnergyRequirements)
         self.cmdFERequirementsClose.setGeometry(QtCore.QRect(390, 550, 75, 23))
@@ -36,7 +36,15 @@ class Ui_FoodEnergyRequirements(object):
         self.tableView.setObjectName(_fromUtf8("tableView"))
 
         self.retranslateUi(FoodEnergyRequirements)
+        QtCore.QObject.connect(self.cmdFERequirementsClose, QtCore.SIGNAL(_fromUtf8("clicked()")), FoodEnergyRequirements.mdiClose)
+        QtCore.QObject.connect(self.cmdAddRow, QtCore.SIGNAL(_fromUtf8("clicked()")), FoodEnergyRequirements.addFoodEnergyRequirement)
+        QtCore.QObject.connect(self.cmdEditRow, QtCore.SIGNAL(_fromUtf8("clicked()")), FoodEnergyRequirements.editFoodEnergyRequirement)
+        QtCore.QObject.connect(self.DeleteRow, QtCore.SIGNAL(_fromUtf8("clicked()")), FoodEnergyRequirements.deleteSelectedEnergyRequirements)
         QtCore.QMetaObject.connectSlotsByName(FoodEnergyRequirements)
+        FoodEnergyRequirements.setTabOrder(self.tableView, self.cmdAddRow)
+        FoodEnergyRequirements.setTabOrder(self.cmdAddRow, self.cmdEditRow)
+        FoodEnergyRequirements.setTabOrder(self.cmdEditRow, self.DeleteRow)
+        FoodEnergyRequirements.setTabOrder(self.DeleteRow, self.cmdFERequirementsClose)
 
     def retranslateUi(self, FoodEnergyRequirements):
         FoodEnergyRequirements.setWindowTitle(QtGui.QApplication.translate("FoodEnergyRequirements", "Food Energy Requirements", None, QtGui.QApplication.UnicodeUTF8))

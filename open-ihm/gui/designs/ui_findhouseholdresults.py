@@ -2,70 +2,89 @@
 
 # Form implementation generated from reading ui file 'ui_findhouseholdresults.ui'
 #
-# Created: Thu Jun 10 09:56:22 2010
-#      by: PyQt4 UI code generator 4.7
+# Created: Tue Apr 19 03:45:24 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
 
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    _fromUtf8 = lambda s: s
+
 class Ui_FindHouseholdResults(object):
     def setupUi(self, FindHouseholdResults):
-        FindHouseholdResults.setObjectName("FindHouseholdResults")
+        FindHouseholdResults.setObjectName(_fromUtf8("FindHouseholdResults"))
         FindHouseholdResults.resize(551, 620)
         FindHouseholdResults.setMinimumSize(QtCore.QSize(548, 620))
         self.groupBox = QtGui.QGroupBox(FindHouseholdResults)
         self.groupBox.setGeometry(QtCore.QRect(10, 40, 531, 111))
-        self.groupBox.setObjectName("groupBox")
+        self.groupBox.setObjectName(_fromUtf8("groupBox"))
         self.label = QtGui.QLabel(self.groupBox)
         self.label.setGeometry(QtCore.QRect(20, 50, 81, 18))
-        self.label.setObjectName("label")
+        self.label.setObjectName(_fromUtf8("label"))
         self.txtHouseholdNo = QtGui.QLineEdit(self.groupBox)
         self.txtHouseholdNo.setGeometry(QtCore.QRect(120, 50, 161, 21))
-        self.txtHouseholdNo.setObjectName("txtHouseholdNo")
+        self.txtHouseholdNo.setObjectName(_fromUtf8("txtHouseholdNo"))
         self.label_2 = QtGui.QLabel(self.groupBox)
         self.label_2.setGeometry(QtCore.QRect(20, 80, 91, 20))
-        self.label_2.setObjectName("label_2")
+        self.label_2.setObjectName(_fromUtf8("label_2"))
         self.txtHouseholdName = QtGui.QLineEdit(self.groupBox)
         self.txtHouseholdName.setGeometry(QtCore.QRect(120, 80, 281, 21))
-        self.txtHouseholdName.setObjectName("txtHouseholdName")
+        self.txtHouseholdName.setObjectName(_fromUtf8("txtHouseholdName"))
         self.cmdSearch = QtGui.QPushButton(self.groupBox)
         self.cmdSearch.setGeometry(QtCore.QRect(440, 70, 75, 31))
-        self.cmdSearch.setObjectName("cmdSearch")
+        self.cmdSearch.setObjectName(_fromUtf8("cmdSearch"))
         self.label_4 = QtGui.QLabel(self.groupBox)
         self.label_4.setGeometry(QtCore.QRect(20, 10, 511, 31))
         self.label_4.setWordWrap(True)
-        self.label_4.setObjectName("label_4")
+        self.label_4.setObjectName(_fromUtf8("label_4"))
         self.groupBox_2 = QtGui.QGroupBox(FindHouseholdResults)
         self.groupBox_2.setGeometry(QtCore.QRect(10, 160, 531, 411))
-        self.groupBox_2.setObjectName("groupBox_2")
+        self.groupBox_2.setObjectName(_fromUtf8("groupBox_2"))
         self.tblResults = QtGui.QTableView(self.groupBox_2)
         self.tblResults.setGeometry(QtCore.QRect(10, 20, 511, 341))
-        self.tblResults.setObjectName("tblResults")
+        self.tblResults.setObjectName(_fromUtf8("tblResults"))
         self.cmdEdit = QtGui.QPushButton(self.groupBox_2)
         self.cmdEdit.setGeometry(QtCore.QRect(110, 370, 91, 31))
-        self.cmdEdit.setObjectName("cmdEdit")
+        self.cmdEdit.setObjectName(_fromUtf8("cmdEdit"))
         self.cmdDel = QtGui.QPushButton(self.groupBox_2)
         self.cmdDel.setGeometry(QtCore.QRect(210, 370, 91, 31))
-        self.cmdDel.setObjectName("cmdDel")
+        self.cmdDel.setObjectName(_fromUtf8("cmdDel"))
         self.cmdAdd = QtGui.QPushButton(self.groupBox_2)
         self.cmdAdd.setGeometry(QtCore.QRect(10, 370, 91, 31))
-        self.cmdAdd.setObjectName("cmdAdd")
+        self.cmdAdd.setObjectName(_fromUtf8("cmdAdd"))
         self.cmdData = QtGui.QPushButton(self.groupBox_2)
         self.cmdData.setGeometry(QtCore.QRect(310, 370, 151, 31))
-        self.cmdData.setObjectName("cmdData")
+        self.cmdData.setObjectName(_fromUtf8("cmdData"))
         self.label_3 = QtGui.QLabel(FindHouseholdResults)
         self.label_3.setGeometry(QtCore.QRect(20, 10, 81, 21))
-        self.label_3.setObjectName("label_3")
+        self.label_3.setObjectName(_fromUtf8("label_3"))
         self.lblProjectName = QtGui.QLabel(FindHouseholdResults)
         self.lblProjectName.setGeometry(QtCore.QRect(110, 10, 431, 21))
-        self.lblProjectName.setObjectName("lblProjectName")
+        self.lblProjectName.setObjectName(_fromUtf8("lblProjectName"))
         self.cmdClose = QtGui.QPushButton(FindHouseholdResults)
         self.cmdClose.setGeometry(QtCore.QRect(440, 580, 81, 31))
-        self.cmdClose.setObjectName("cmdClose")
+        self.cmdClose.setObjectName(_fromUtf8("cmdClose"))
 
         self.retranslateUi(FindHouseholdResults)
+        QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), FindHouseholdResults.mdiClose)
+        QtCore.QObject.connect(self.cmdSearch, QtCore.SIGNAL(_fromUtf8("clicked()")), FindHouseholdResults.getHouseholds)
+        QtCore.QObject.connect(self.cmdAdd, QtCore.SIGNAL(_fromUtf8("clicked()")), FindHouseholdResults.addHousehold)
+        QtCore.QObject.connect(self.cmdEdit, QtCore.SIGNAL(_fromUtf8("clicked()")), FindHouseholdResults.editHousehold)
+        QtCore.QObject.connect(self.cmdDel, QtCore.SIGNAL(_fromUtf8("clicked()")), FindHouseholdResults.delHouseholds)
+        QtCore.QObject.connect(self.cmdData, QtCore.SIGNAL(_fromUtf8("clicked()")), FindHouseholdResults.viewHouseholdData)
         QtCore.QMetaObject.connectSlotsByName(FindHouseholdResults)
+        FindHouseholdResults.setTabOrder(self.txtHouseholdNo, self.txtHouseholdName)
+        FindHouseholdResults.setTabOrder(self.txtHouseholdName, self.cmdSearch)
+        FindHouseholdResults.setTabOrder(self.cmdSearch, self.tblResults)
+        FindHouseholdResults.setTabOrder(self.tblResults, self.cmdAdd)
+        FindHouseholdResults.setTabOrder(self.cmdAdd, self.cmdEdit)
+        FindHouseholdResults.setTabOrder(self.cmdEdit, self.cmdDel)
+        FindHouseholdResults.setTabOrder(self.cmdDel, self.cmdData)
+        FindHouseholdResults.setTabOrder(self.cmdData, self.cmdClose)
 
     def retranslateUi(self, FindHouseholdResults):
         FindHouseholdResults.setWindowTitle(QtGui.QApplication.translate("FindHouseholdResults", "Household Search Results", None, QtGui.QApplication.UnicodeUTF8))

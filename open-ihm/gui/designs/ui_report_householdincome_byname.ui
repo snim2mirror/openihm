@@ -381,6 +381,76 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>cmbProjects</tabstop>
+  <tabstop>listView</tabstop>
+  <tabstop>treeView</tabstop>
+  <tabstop>listViewHCharacteristics</tabstop>
+  <tabstop>listViewPersonalCharacteristics</tabstop>
+  <tabstop>cmbOrderCriteria1</tabstop>
+  <tabstop>opt1Ascending</tabstop>
+  <tabstop>opt1Descending</tabstop>
+  <tabstop>cmbOrderCriteria2</tabstop>
+  <tabstop>opt2Ascending</tabstop>
+  <tabstop>opt2Descending</tabstop>
+  <tabstop>cmdShowReport</tabstop>
+  <tabstop>cmdClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdIncomeReport</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>609</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>351</x>
+     <y>602</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdShowReport</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdIncomeReport</receiver>
+   <slot>writeTable()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>431</x>
+     <y>608</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>387</x>
+     <y>609</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbProjects</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>HouseholdIncomeReport</receiver>
+   <slot>updateDialogData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>41</x>
+     <y>100</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+  <slot>updateDialogData()</slot>
+  <slot>writeTable()</slot>
+  <slot>setReportType()</slot>
+ </slots>
 </ui>

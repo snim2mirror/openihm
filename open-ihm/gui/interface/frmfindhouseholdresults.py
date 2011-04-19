@@ -30,14 +30,10 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults):
 		
 		self.getHouseholds()
 		
-		# connect relevant signals and slots
-		self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-		self.connect(self.cmdAdd, SIGNAL("clicked()"), self.addHousehold)
-		self.connect(self.cmdEdit, SIGNAL("clicked()"), self.editHousehold)
-		self.connect(self.cmdDel, SIGNAL("clicked()"), self.delHouseholds)
-		self.connect(self.cmdData, SIGNAL("clicked()"), self.viewHouseholdData)
-		self.connect(self.cmdSearch, SIGNAL("clicked()"), self.getHouseholds)
+	def mdiClose(self):
+		self.parent.mdi.closeActiveSubWindow()
 
+		
 	def getHouseholds(self):
 		''' display households matching the criteria entered by user '''
 		hhid 			= self.txtHouseholdNo.text()

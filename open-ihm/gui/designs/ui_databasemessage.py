@@ -2,20 +2,25 @@
 
 # Form implementation generated from reading ui file 'ui_databasemessage.ui'
 #
-# Created: Sat Aug 21 21:55:48 2010
-#      by: PyQt4 UI code generator 4.7
+# Created: Tue Apr 19 03:45:23 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt4 import QtCore, QtGui
 
+try:
+    _fromUtf8 = QtCore.QString.fromUtf8
+except AttributeError:
+    _fromUtf8 = lambda s: s
+
 class Ui_DatabaseMessage(object):
     def setupUi(self, DatabaseMessage):
-        DatabaseMessage.setObjectName("DatabaseMessage")
+        DatabaseMessage.setObjectName(_fromUtf8("DatabaseMessage"))
         DatabaseMessage.resize(424, 153)
         self.cmdOk = QtGui.QPushButton(DatabaseMessage)
         self.cmdOk.setGeometry(QtCore.QRect(160, 110, 101, 31))
-        self.cmdOk.setObjectName("cmdOk")
+        self.cmdOk.setObjectName(_fromUtf8("cmdOk"))
         self.lblMessage = QtGui.QLabel(DatabaseMessage)
         self.lblMessage.setGeometry(QtCore.QRect(10, 10, 401, 81))
         font = QtGui.QFont()
@@ -23,9 +28,10 @@ class Ui_DatabaseMessage(object):
         self.lblMessage.setFont(font)
         self.lblMessage.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.lblMessage.setWordWrap(True)
-        self.lblMessage.setObjectName("lblMessage")
+        self.lblMessage.setObjectName(_fromUtf8("lblMessage"))
 
         self.retranslateUi(DatabaseMessage)
+        QtCore.QObject.connect(self.cmdOk, QtCore.SIGNAL(_fromUtf8("clicked()")), DatabaseMessage.mdiClose)
         QtCore.QMetaObject.connectSlotsByName(DatabaseMessage)
 
     def retranslateUi(self, DatabaseMessage):

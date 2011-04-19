@@ -21,10 +21,9 @@ class HouseholdsByCharDisplay(QDialog, Ui_DisplayHouseholdsByChar):
 
 	self.populateForm()
 	    
-	# connect relevant signals and slots
-	self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-	self.connect(self.cmdSaveAsSpreadsheet, SIGNAL("clicked()"), self.saveReportAsSpreadtsheet)
-
+    def mdiClose(self):
+        self.parent.mdi.closeActiveSubWindow()
+        
     def saveReportAsSpreadtsheet(self):
         
         # write report in a spreadsheet file

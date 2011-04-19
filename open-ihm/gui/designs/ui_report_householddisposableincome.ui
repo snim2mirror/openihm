@@ -396,6 +396,109 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>cmbProjects</tabstop>
+  <tabstop>cmbReportType</tabstop>
+  <tabstop>treeViewHouseholds</tabstop>
+  <tabstop>listViewHCharacteristics</tabstop>
+  <tabstop>listViewPersonalCharacteristics</tabstop>
+  <tabstop>cmbOrderCriteria1</tabstop>
+  <tabstop>opt1Ascending_2</tabstop>
+  <tabstop>opt1Descending_2</tabstop>
+  <tabstop>cmbOrderCriteria2</tabstop>
+  <tabstop>opt2Ascending_2</tabstop>
+  <tabstop>opt2Descending_2</tabstop>
+  <tabstop>cmdSaveDataTable</tabstop>
+  <tabstop>cmdShowReport</tabstop>
+  <tabstop>cmdClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdDisposableIncome</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>581</x>
+     <y>636</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>20</x>
+     <y>626</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbProjects</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>HouseholdDisposableIncome</receiver>
+   <slot>updateDialogData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>512</x>
+     <y>27</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>512</x>
+     <y>50</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdShowReport</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdDisposableIncome</receiver>
+   <slot>writeTable()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>433</x>
+     <y>643</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>82</x>
+     <y>632</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSaveDataTable</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdDisposableIncome</receiver>
+   <slot>writeTable()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>336</x>
+     <y>637</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>133</x>
+     <y>640</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbReportType</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>HouseholdDisposableIncome</receiver>
+   <slot>setReportType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>257</x>
+     <y>49</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>442</x>
+     <y>50</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+  <slot>updateDialogData()</slot>
+  <slot>writeTable()</slot>
+  <slot>setReportType()</slot>
+ </slots>
 </ui>

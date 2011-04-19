@@ -157,6 +157,68 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>txtProjectID</tabstop>
+  <tabstop>txtProjectTitle</tabstop>
+  <tabstop>cmdSearch</tabstop>
+  <tabstop>tblResults</tabstop>
+  <tabstop>cmdOpen</tabstop>
+  <tabstop>cmdClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>FindProjectResults</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>482</x>
+     <y>389</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>370</x>
+     <y>390</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdOpen</sender>
+   <signal>clicked()</signal>
+   <receiver>FindProjectResults</receiver>
+   <slot>openProject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>385</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>161</x>
+     <y>385</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSearch</sender>
+   <signal>clicked()</signal>
+   <receiver>FindProjectResults</receiver>
+   <slot>showResults()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>462</x>
+     <y>104</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>419</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>showResults()</slot>
+  <slot>openProject()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

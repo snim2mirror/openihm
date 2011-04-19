@@ -21,6 +21,7 @@ class FrmEditCropType(QDialog, Ui_EditFoodTypes):
         
         self.setupUi(self)
         self.parent = parent
+
         self.name = selectedtype
         self.categoryname = category
         self.measuringunit = measuringunit
@@ -31,9 +32,9 @@ class FrmEditCropType(QDialog, Ui_EditFoodTypes):
         self.txtKCalories.setValidator(myIntVal)
 
         self.showDetailsToEdit()
-        # connect relevant signals and slots   
-        self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-        self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveDetails)
+
+    def mdiClose(self):
+        self.close()
 
     def showDetailsToEdit(self):
         ''' Display energy requirements data '''

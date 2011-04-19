@@ -252,9 +252,68 @@
  <tabstops>
   <tabstop>cmbSourceOfTransfer</tabstop>
   <tabstop>txtCash</tabstop>
+  <tabstop>cmbFoodType</tabstop>
+  <tabstop>txtUnitOfMeasure</tabstop>
+  <tabstop>txtUnitsConsumed</tabstop>
+  <tabstop>txtUnitsSold</tabstop>
+  <tabstop>txtUnitPrice</tabstop>
   <tabstop>cmdSave</tabstop>
   <tabstop>cmdCancel</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdIncomeGifts</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>369</x>
+     <y>351</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>185</x>
+     <y>336</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdIncomeGifts</receiver>
+   <slot>saveIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>69</x>
+     <y>355</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>239</x>
+     <y>354</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbFoodType</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>AddHouseholdIncomeGifts</receiver>
+   <slot>displayUnitOfMeasure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>269</x>
+     <y>139</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>338</x>
+     <y>94</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveIncome()</slot>
+  <slot>displayUnitOfMeasure()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

@@ -144,6 +144,87 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>txtSearchCrop</tabstop>
+  <tabstop>cmdSearch</tabstop>
+  <tabstop>tableView</tabstop>
+  <tabstop>cmdAddRow</tabstop>
+  <tabstop>cmdEditRow</tabstop>
+  <tabstop>cmdDeleteRows</tabstop>
+  <tabstop>cmdClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>FoodTypes</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>401</x>
+     <y>559</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>13</x>
+     <y>534</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDeleteRows</sender>
+   <signal>clicked()</signal>
+   <receiver>FoodTypes</receiver>
+   <slot>deleteSelectedCropTypes()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>303</x>
+     <y>542</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>43</x>
+     <y>542</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditRow</sender>
+   <signal>clicked()</signal>
+   <receiver>FoodTypes</receiver>
+   <slot>editCropType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>546</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>21</x>
+     <y>555</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddRow</sender>
+   <signal>clicked()</signal>
+   <receiver>FoodTypes</receiver>
+   <slot>saveCropType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>105</x>
+     <y>543</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>57</x>
+     <y>548</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>deleteSelectedCropTypes()</slot>
+  <slot>editCropType()</slot>
+  <slot>saveCropType()</slot>
+  <slot>searchCropType()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

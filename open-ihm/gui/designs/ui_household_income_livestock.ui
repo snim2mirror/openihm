@@ -245,5 +245,59 @@
   <tabstop>cmdCancel</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdIncomeLivestock</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>329</x>
+     <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>219</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdIncomeLivestock</receiver>
+   <slot>saveIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>62</x>
+     <y>288</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>130</x>
+     <y>279</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cboIncomeType</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>AddHouseholdIncomeLivestock</receiver>
+   <slot>displayUnitOfMeasure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>341</x>
+     <y>48</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>346</x>
+     <y>98</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveIncome()</slot>
+  <slot>displayUnitOfMeasure()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

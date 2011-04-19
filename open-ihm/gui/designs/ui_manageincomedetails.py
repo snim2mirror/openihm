@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_manageincomedetails.ui'
 #
-# Created: Sun Nov 07 14:07:54 2010
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:26 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_ManageIncome(object):
     def setupUi(self, ManageIncome):
         ManageIncome.setObjectName(_fromUtf8("ManageIncome"))
-        ManageIncome.resize(612, 380)
+        ManageIncome.resize(612, 427)
         ManageIncome.setMinimumSize(QtCore.QSize(611, 380))
         self.tabWidget = QtGui.QTabWidget(ManageIncome)
         self.tabWidget.setGeometry(QtCore.QRect(0, 0, 611, 341))
@@ -226,8 +226,30 @@ class Ui_ManageIncome(object):
         self.btnManageIncomeClose.setObjectName(_fromUtf8("btnManageIncomeClose"))
 
         self.retranslateUi(ManageIncome)
-        self.tabWidget.setCurrentIndex(0)
-        self.tabTransferDetails.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(2)
+        self.tabTransferDetails.setCurrentIndex(1)
+        QtCore.QObject.connect(self.btnManageIncomeClose, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.mdiClose)
+        QtCore.QObject.connect(self.btnCropSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveCropType)
+        QtCore.QObject.connect(self.btnCropsClear, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.clearCropTextboxes)
+        QtCore.QObject.connect(self.btnCropDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.deleteCropType)
+        QtCore.QObject.connect(self.cropListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.clearCropTextboxes)
+        QtCore.QObject.connect(self.employmentListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.pickSelectedEmployment)
+        QtCore.QObject.connect(self.btnEmplomentTypeSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveEmploymentType)
+        QtCore.QObject.connect(self.btnEmplomentTypeDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.deleteEmploymentType)
+        QtCore.QObject.connect(self.livestockListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.pickselectedLivestockItem)
+        QtCore.QObject.connect(self.btnLivestockSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveLivestockType)
+        QtCore.QObject.connect(self.btnLivestockClear, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.clearLivestockTextboxes)
+        QtCore.QObject.connect(self.btnLivestockDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.deleteLivestockType)
+        QtCore.QObject.connect(self.transferTypesListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.pickSelectedTransfer)
+        QtCore.QObject.connect(self.btnTransferTypeSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveTransferType)
+        QtCore.QObject.connect(self.btnTransferTypeDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.deleteTransferType)
+        QtCore.QObject.connect(self.transferSourcesListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.pickSelectedTransferSource)
+        QtCore.QObject.connect(self.btnTransferSourcesSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveTransferSourceType)
+        QtCore.QObject.connect(self.btnTransferSourcesDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.deleteTransferSourceType)
+        QtCore.QObject.connect(self.wildFoodsListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.pickselectedWildFoodItem)
+        QtCore.QObject.connect(self.btnWildFoodSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveWildFoodType)
+        QtCore.QObject.connect(self.btnWildFoodDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.deleteWildFoodType)
+        QtCore.QObject.connect(self.btnWildFoodsClear, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.clearWildFoodTextboxes)
         QtCore.QMetaObject.connectSlotsByName(ManageIncome)
 
     def retranslateUi(self, ManageIncome):

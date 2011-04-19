@@ -27,17 +27,14 @@ class FrmManageTypes(QDialog, Ui_FoodTypes):
         	# get food type
         	self.getTypes()
 
-                #connect relevant signals
 		'''self.connect(self.cmdManageFoodClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
 		
 		self.connect(self.cmdDelete, SIGNAL("clicked()"), self.deleteFoodType)
 		'''
-		self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
-		self.connect(self.cmdDeleteRows, SIGNAL("clicked()"), self.deleteSelectedTypes)
-		self.connect(self.cmdAddRow, SIGNAL("clicked()"), self.saveType)
-		self.connect(self.cmdEditRow, SIGNAL("clicked()"), self.editType)
-		self.connect(self.cmdSearch, SIGNAL("clicked()"), self.searchType)
-	
+
+	def mdiClose(self):
+		self.parent.closeActiveSubWindow()
+		
 	def getTypes(self):
                	# select query to retrieve Food Types and related information
         	query = '''SELECT name,category,unitofmeasure,energyvalueperunit FROM setup_foods_crops'''
@@ -84,15 +81,15 @@ class FrmManageTypes(QDialog, Ui_FoodTypes):
 		self.tableView.horizontalHeader().setResizeMode(3, QHeaderView.ResizeToContents)
 		self.tableView.show()
             	
-	def saveType(self):
+	def saveCropType(self):
 		''' Show the Add Food Types form '''
 		
-		form = FrmAddFoodCropType(self)
+		form = FrmAddFoodCropType(self, self.parent)
 		form.setWindowIcon(QIcon('resources/images/openihm.png'))
                 form.exec_()
 		self.getTypes()
 
-	def editType(self):
+	def editCropType(self):
                 
                 if self.countRowsSelected(self.tableView) != 0:
                         
@@ -112,7 +109,7 @@ class FrmManageTypes(QDialog, Ui_FoodTypes):
 		else:
 			QMessageBox.information(self,"Edit Food Type","Please select the row containing food type to be edited.")
                 
-	def deleteSelectedTypes(self):
+	def deleteSelectedCropTypes(self):
 
 		numSelected = self.countRowsSelected(self.tableView)
 		if  numSelected != 0:

@@ -68,6 +68,64 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>cboHouseholdName</tabstop>
+  <tabstop>cmdDel</tabstop>
+  <tabstop>cmdCancel</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdDel</sender>
+   <signal>clicked()</signal>
+   <receiver>DeleteHousehold</receiver>
+   <slot>delHousehold()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>70</x>
+     <y>71</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>123</x>
+     <y>70</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>DeleteHousehold</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>313</x>
+     <y>76</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>218</x>
+     <y>65</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>DeleteHousehold</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>338</x>
+     <y>80</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>264</x>
+     <y>81</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>delHousehold()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

@@ -134,6 +134,34 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>cmbFoodType</tabstop>
+  <tabstop>txtKCalories</tabstop>
+  <tabstop>cmbUnitOfMeasure</tabstop>
+  <tabstop>cmdSave</tabstop>
+  <tabstop>cmdDelete</tabstop>
+  <tabstop>cmdManageFoodClose</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdManageFoodClose</sender>
+   <signal>clicked()</signal>
+   <receiver>FoodTypes</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>343</x>
+     <y>179</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>329</x>
+     <y>114</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

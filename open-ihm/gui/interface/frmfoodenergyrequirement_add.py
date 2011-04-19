@@ -32,11 +32,16 @@ class FrmAddEnergyRequirement(QDialog, Ui_AddFoodEnergyRequirement):
         self.txtAge.setValidator(myAgeVal)
         self.txtEnergyRequirementMales.setValidator(myMEnergyVal)
         self.txtEnergyRequirementFemales.setValidator(myFEnergyVal)
-        
+#        
  
         # connect relevant signals and slots   
         self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
         self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveFoodEnergyRequirementDetails)
+
+        
+    def mdiClose(self):
+	self.parent.mdi.closeActiveSubWindow()
+
         
     def saveFoodEnergyRequirementDetails(self):
         ''' Saves newly created food energy requirement data to database '''

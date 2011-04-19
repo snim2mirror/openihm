@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_managefoodtypes_edit.ui'
 #
-# Created: Sat Nov 06 23:58:46 2010
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:26 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -54,7 +54,14 @@ class Ui_EditFoodTypes(object):
         self.label_2.setObjectName(_fromUtf8("label_2"))
 
         self.retranslateUi(EditFoodTypes)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), EditFoodTypes.close)
+        QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), EditFoodTypes.saveDetails)
         QtCore.QMetaObject.connectSlotsByName(EditFoodTypes)
+        EditFoodTypes.setTabOrder(self.txtFoodType, self.cmbCategory)
+        EditFoodTypes.setTabOrder(self.cmbCategory, self.txtKCalories)
+        EditFoodTypes.setTabOrder(self.txtKCalories, self.txtMeasuringUnit)
+        EditFoodTypes.setTabOrder(self.txtMeasuringUnit, self.cmdSave)
+        EditFoodTypes.setTabOrder(self.cmdSave, self.cmdCancel)
 
     def retranslateUi(self, EditFoodTypes):
         EditFoodTypes.setWindowTitle(QtGui.QApplication.translate("EditFoodTypes", "Edit Food Types", None, QtGui.QApplication.UnicodeUTF8))

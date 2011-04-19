@@ -210,7 +210,7 @@
       <enum>QTabWidget::West</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -773,5 +773,552 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>737</x>
+     <y>586</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>591</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddMember</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdMember()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>85</x>
+     <y>564</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>98</x>
+     <y>589</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditMember</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdMember()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>544</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>323</x>
+     <y>587</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelMember</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>delHouseholdMembers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>261</x>
+     <y>552</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>391</x>
+     <y>597</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditPersonalCharacteristic</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editPersonalCharacteristic()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>503</x>
+     <y>547</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>614</x>
+     <y>581</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddAsset</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdAsset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>61</x>
+     <y>561</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>76</x>
+     <y>587</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditAsset</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdAsset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>192</x>
+     <y>560</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>302</x>
+     <y>592</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelAsset</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>delHouseholdAssets()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>291</x>
+     <y>561</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>294</x>
+     <y>579</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddCrop</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdCropIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>132</x>
+     <y>557</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>176</x>
+     <y>573</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditCrop</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdCropIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>205</x>
+     <y>546</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>82</x>
+     <y>614</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelCrop</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>delHouseholdCropIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>315</x>
+     <y>557</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>274</x>
+     <y>601</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddLivestock</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdLivestockIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>132</x>
+     <y>557</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>44</x>
+     <y>579</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditLivestock</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdLivestockIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>204</x>
+     <y>539</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>14</x>
+     <y>594</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelLivestock</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>delHouseholdLivestockIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>313</x>
+     <y>549</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>63</x>
+     <y>601</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddEmployment</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdEmploymentIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>107</x>
+     <y>549</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>7</x>
+     <y>529</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditEmployment</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdEmploymentIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>185</x>
+     <y>557</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>555</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelEmployment</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>delHouseholdEmploymentIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>304</x>
+     <y>542</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1</x>
+     <y>495</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddWildfoods</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdWildfoodsIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>105</x>
+     <y>544</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>475</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditWildfoods</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdWildfoodsIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>206</x>
+     <y>545</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>438</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelWildfoods</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdWildfoodsIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>325</x>
+     <y>540</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>414</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddGifts</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdTransferIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>109</x>
+     <y>546</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>7</x>
+     <y>464</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditGifts</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdTransferIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>213</x>
+     <y>531</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelGifts</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>delHouseholdTransferIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>310</x>
+     <y>540</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>372</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddTransfer</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdTransferIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>102</x>
+     <y>548</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>8</x>
+     <y>355</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditTransfer</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdTransferIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>220</x>
+     <y>534</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>310</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelTransfer</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>delHouseholdTransferIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>302</x>
+     <y>539</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>256</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddExpenditure</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdExpenditure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>77</x>
+     <y>557</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>9</x>
+     <y>295</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditExpenditure</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdExpenditure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>175</x>
+     <y>548</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>8</x>
+     <y>248</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelExpenditure</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>delHouseholdExpenses()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>275</x>
+     <y>548</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>8</x>
+     <y>216</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditCharacteristic</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editCharacteristic()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>82</x>
+     <y>547</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>146</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tblMembers</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>showMemberPersonalCharacteristics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>231</x>
+     <y>214</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>440</x>
+     <y>21</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cboHouseholdNumber</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>displayHouseholdData()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>314</x>
+     <y>21</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>398</x>
+     <y>31</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>addHouseholdMember()</slot>
+  <slot>editHouseholdMember()</slot>
+  <slot>delHouseholdMembers()</slot>
+  <slot>editPersonalCharacteristic()</slot>
+  <slot>showMemberPersonalCharacteristics()</slot>
+  <slot>editCharacteristic()</slot>
+  <slot>displayHouseholdData()</slot>
+  <slot>addHouseholdAsset()</slot>
+  <slot>editHouseholdAsset()</slot>
+  <slot>delHouseholdAssets()</slot>
+  <slot>addHouseholdExpenditure()</slot>
+  <slot>editHouseholdExpenditure()</slot>
+  <slot>delHouseholdExpenses()</slot>
+  <slot>addHouseholdCropIncome()</slot>
+  <slot>editHouseholdCropIncome()</slot>
+  <slot>delHouseholdCropIncome()</slot>
+  <slot>addHouseholdLivestockIncome()</slot>
+  <slot>editHouseholdLivestockIncome()</slot>
+  <slot>delHouseholdLivestockIncome()</slot>
+  <slot>addHouseholdWildfoodsIncome()</slot>
+  <slot>editHouseholdWildfoodsIncome()</slot>
+  <slot>delHouseholdWildfoodsIncome()</slot>
+  <slot>addHouseholdGiftsIncome()</slot>
+  <slot>editHouseholdGiftsIncome()</slot>
+  <slot>delHouseholdGiftsIncome()</slot>
+  <slot>addHouseholdTransferIncome()</slot>
+  <slot>editHouseholdTransferIncome()</slot>
+  <slot>delHouseholdTransferIncome()</slot>
+  <slot>addHouseholdEmploymentIncome()</slot>
+  <slot>editHouseholdEmploymentIncome()</slot>
+  <slot>delHouseholdEmploymentIncome()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

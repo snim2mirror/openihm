@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_transfers.ui'
 #
-# Created: Mon Nov 08 18:52:55 2010
-#      by: PyQt4 UI code generator 4.7.6
+# Created: Tue Apr 19 03:45:25 2011
+#      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -80,9 +80,17 @@ class Ui_AddHouseholdIncomeTransfers(object):
         self.label_8.setObjectName(_fromUtf8("label_8"))
 
         self.retranslateUi(AddHouseholdIncomeTransfers)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeTransfers.mdiClose)
+        QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeTransfers.saveIncome)
+        QtCore.QObject.connect(self.cmbFoodType, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), AddHouseholdIncomeTransfers.displayUnitOfMeasure)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdIncomeTransfers)
         AddHouseholdIncomeTransfers.setTabOrder(self.cmbSourceOfTransfer, self.txtCash)
-        AddHouseholdIncomeTransfers.setTabOrder(self.txtCash, self.cmdSave)
+        AddHouseholdIncomeTransfers.setTabOrder(self.txtCash, self.cmbFoodType)
+        AddHouseholdIncomeTransfers.setTabOrder(self.cmbFoodType, self.txtUnitOfMeasure)
+        AddHouseholdIncomeTransfers.setTabOrder(self.txtUnitOfMeasure, self.txtUnitsConsumed)
+        AddHouseholdIncomeTransfers.setTabOrder(self.txtUnitsConsumed, self.txtUnitsSold)
+        AddHouseholdIncomeTransfers.setTabOrder(self.txtUnitsSold, self.txtUnitPrice)
+        AddHouseholdIncomeTransfers.setTabOrder(self.txtUnitPrice, self.cmdSave)
         AddHouseholdIncomeTransfers.setTabOrder(self.cmdSave, self.cmdCancel)
 
     def retranslateUi(self, AddHouseholdIncomeTransfers):

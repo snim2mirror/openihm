@@ -245,5 +245,59 @@
   <tabstop>cmdCancel</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdIncomeCrops</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>334</x>
+     <y>285</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>282</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdIncomeCrops</receiver>
+   <slot>saveIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>76</x>
+     <y>294</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>126</x>
+     <y>283</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cboIncomeType</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>AddHouseholdIncomeCrops</receiver>
+   <slot>displayUnitOfMeasure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>246</x>
+     <y>54</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>352</x>
+     <y>92</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>displayUnitOfMeasure()</slot>
+  <slot>saveIncome()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>

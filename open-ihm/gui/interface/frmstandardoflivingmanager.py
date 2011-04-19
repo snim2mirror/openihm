@@ -28,12 +28,10 @@ class FrmStandardOfLivingManager(QDialog, Ui_StandardOfLivingManager):
          self.config = Config.dbinfo().copy()
          
          self.listItems()
-         
-         self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.mdi.closeActiveSubWindow)
-         self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveItem)
-         self.connect(self.cmdDelete, SIGNAL("clicked()"), self.delItems)
-         self.connect(self.tblStandardOfLiving, SIGNAL("clicked(QModelIndex)"), self.showSelectedItem)
-         
+                  
+     def mdiClose(self):
+          self.parent.mdi.closeActiveSubWindow()
+
      def countRowsSelected(self, tblVw):
          selectedRows = self.getSelectedRows(tblVw)
          return len(selectedRows)

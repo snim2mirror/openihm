@@ -245,5 +245,59 @@
   <tabstop>cmdCancel</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdIncomeWildfoods</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>335</x>
+     <y>294</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>259</x>
+     <y>283</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdIncomeWildfoods</receiver>
+   <slot>saveIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>61</x>
+     <y>293</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>131</x>
+     <y>287</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cboIncomeType</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>AddHouseholdIncomeWildfoods</receiver>
+   <slot>displayUnitOfMeasure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>326</x>
+     <y>53</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>344</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>saveIncome()</slot>
+  <slot>displayUnitOfMeasure()</slot>
+  <slot>mdiClose()</slot>
+ </slots>
 </ui>
