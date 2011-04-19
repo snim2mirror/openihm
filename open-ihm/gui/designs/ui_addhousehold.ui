@@ -154,7 +154,7 @@
    <sender>cmdCancel</sender>
    <signal>clicked()</signal>
    <receiver>AddHousehold</receiver>
-   <slot>mdiClose()</slot>
+   <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>337</x>
