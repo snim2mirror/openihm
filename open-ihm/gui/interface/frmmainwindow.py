@@ -96,7 +96,7 @@ class OpenIhmUpdator(QtCore.QThread):
                 self.updateFail(''.join(traceback.format_exception(ty, value, tback)))
                 return
         try:
-            self.update()
+            self.pullAndMerge()
         except Exception, e:
             ty, value, tback = sys.exc_info()
             self.updateFail(''.join(traceback.format_exception(ty, value, tback)))
@@ -124,7 +124,7 @@ class OpenIhmUpdator(QtCore.QThread):
             self.repo = hg.repository(self.ui, REPO_DIR)
         return
 
-    def update(self):
+    def pullAndMerge(self):
         """Run an hg pull and update.
         Overwrite all local changes by default.
         If anything goes wrong with the pull or update, clone instead.
