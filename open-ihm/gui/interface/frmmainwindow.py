@@ -62,11 +62,11 @@ import sys
 import traceback
 
 # FIXME: Edit this value in Brown's innosetup script, take it from an .ini file.
-REPO_DIR = os.path.expanduser('~/openihmrepo/')
+REPO_DIR = os.path.expanduser('~' + os.sep + '.openihmrepo')
 
 # FIXME: Can we get INSTALL_DIR from an .ini file or similar?
-INSTALL_DIR = os.path.normpath(os.path.dirname(__file__) + '../../../')
-#INSTALL_DIR = '/home/snim2/site-packages' # Just for testing
+#INSTALL_DIR = os.path.normpath(os.path.dirname(__file__) + '../../../')
+INSTALL_DIR = '/home/snim2/site-packages' # Just for testing
 
 # FIXME: Refactor this out to its own file.
 class OpenIhmUpdator(QtCore.QThread):
@@ -77,51 +77,35 @@ class OpenIhmUpdator(QtCore.QThread):
 
     def __init__(self, parent=None):
         QtCore.QThread.__init__(self, parent)
-        self.exiting = False
-        self.timer = None
         self.ui = ui.ui()
-        self.repo = None
         self.url = 'https://open-ihm.googlecode.com/hg/'
+        try:
+            self.repo = hg.repository(self.ui, REPO_DIR)
+        except Exception:
+            self.repo = hg.repository(self.ui, REPO_DIR, create=True)
         return
 
     def run(self):
         try:
-            self.repo = hg.repository(self.ui, REPO_DIR)
-        except Exception, e:
-            # Repository does not exist, try creating it.
-            try:
-                self.checkCloneExists()
-            except Exception, e:
-                ty, value, tback = sys.exc_info()
-                self.updateFail(''.join(traceback.format_exception(ty, value, tback)))
-                return
-        try:
             self.pullAndMerge()
-        except Exception, e:
+        except Exception:
             ty, value, tback = sys.exc_info()
             self.updateFail(''.join(traceback.format_exception(ty, value, tback)))
             return
         try:
             self.install()
-        except Exception, e:
+        except Exception:
             ty, value, tback = sys.exc_info() 
             self.updateFail(''.join(traceback.format_exception(ty, value, tback)))
             return
         self.emit(QtCore.SIGNAL("updateSuccess()"))
         return
 
-    def checkCloneExists(self):
-        """Check that we have a copy of the open-ihm repository on disk.
-
-        If we don't, clone one now.
+    def clone(self):
+        """If we don't have a copy of the open-ihm repository on disk
+        clone one now.
         """
-        if not os.path.exists(REPO_DIR):
-            os.makedirs(REPO_DIR)
-            commands.clone(self.ui,
-                           self.url,
-                           dest=REPO_DIR,
-                           insecure=True)
-            self.repo = hg.repository(self.ui, REPO_DIR)
+        commands.clone(self.ui, self.url, dest=REPO_DIR, insecure=True)
         return
 
     def pullAndMerge(self):
@@ -130,20 +114,18 @@ class OpenIhmUpdator(QtCore.QThread):
         If anything goes wrong with the pull or update, clone instead.
         """
         try:
-            if not commands.incoming(self.ui, self.repo, source=self.url, bundle=False, force=False) == 0:
-                self.emit(QtCore.SIGNAL("noChanges()"))
             commands.pull(self.ui, self.repo, source=self.url)
             commands.update(self.ui, self.repo, clean=True)
-        except error.RepoError, e:
+        except error.RepoError:
             if os.path.exists(REPO_DIR):
                 shutil.rmtree(REPO_DIR)
-                self.checkCloneExists()
+                self.clone()
         return
     
     def install(self):
         """Copy code to site-packages.
         """
-        copy_tree(REPO_DIR + '/open-ihm/', INSTALL_DIR)
+        copy_tree(REPO_DIR + os.sep + 'open-ihm' + os.sep, INSTALL_DIR)
         # Better to use setuptools if possible.
         # runpy.runpath(PATH_TO_SETUP.PY, )
         return
@@ -153,10 +135,6 @@ class OpenIhmUpdator(QtCore.QThread):
         is no current network connection) then fail silently.
         """
         self.emit(QtCore.SIGNAL("updateFailure(QString)"), QtCore.QString(message))
-        return
-
-    def __del__(self):
-        self.wait()
         return
 
 

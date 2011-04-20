@@ -23,20 +23,6 @@ if __name__ == '__main__':
      log.addHandler(handler)
 
      #
-     # Check for updates to open-ihm.
-     #
-     try:
-          log.info('Checking for updates.')
-          
-     except:
-          log.debug('Exception raised in __main__.')
-          ty, value, tback = sys.exc_info()
-          log.debug('Exception raised on updating software. Debug info follows:')
-          log.debug(''.join(traceback.format_exception(ty, value, tback)))
-
-     
-
-     #
      # Start open-ihm.
      #
      try:
