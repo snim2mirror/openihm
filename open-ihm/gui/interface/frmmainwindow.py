@@ -65,8 +65,8 @@ import traceback
 REPO_DIR = os.path.expanduser('~' + os.sep + '.openihmrepo')
 
 # FIXME: Can we get INSTALL_DIR from an .ini file or similar?
-#INSTALL_DIR = os.path.normpath(os.path.dirname(__file__) + '../../../')
-INSTALL_DIR = '/home/snim2/site-packages' # Just for testing
+INSTALL_DIR = os.path.normpath(os.path.dirname(__file__) + '../../../')
+#INSTALL_DIR = '/home/snim2/site-packages' # Just for testing
 
 # FIXME: Refactor this out to its own file.
 class OpenIhmUpdator(QtCore.QThread):
