@@ -12,6 +12,7 @@ from gui.designs.ui_report_householdsbycharacteristics import Ui_HouseHoldReport
 from data.report_settingsmanager import ReportsSettingsManager
 from outputs.routines.report_households_by_characteristics import HouseholdsByCharacteristics
 from frm_report_householdsbycharacteristics_display import HouseholdsByCharDisplay
+from outputs.routines.report_households_by_characteristics_write import HouseholdsByCharacteristicsWrite
 
 class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
         ''' Creates the Report Households by Characteristics from. Uses the design class
@@ -171,12 +172,10 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
                 reporttable = report.getReportTable(projectid,pcharselected,hcharselected,pquery,hquery)
                 return reporttable
                 
-                #def displayReport(self):
-                ''' Creates and Shows the Report: Households by characteristics form '''
-                '''freporttable = self.getReportData()
-                form = HouseholdsByCharDisplay(self.parent,freporttable)
-                subWin = self.parent.mdi.addSubWindow(form)
-                self.parent.centerSubWindow(subWin)
-                form.show()'''
+        def writeSpreadsheet(self):
+                ''' Creates a Spreadsheet showing hoseholds that fit selected criteria '''
+                reportatble = self.getReportData()
+                connector = HouseholdsByCharacteristicsWrite()
+                connector.writeSpreadsheetReport(reportatble)
         
                 

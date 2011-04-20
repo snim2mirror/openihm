@@ -375,7 +375,7 @@
    <sender>cmdGenerateReport</sender>
    <signal>clicked()</signal>
    <receiver>HouseHoldReport</receiver>
-   <slot>getReportData()</slot>
+   <slot>writeSpreadsheet()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>424</x>
@@ -425,5 +425,6 @@
   <slot>getReportData()</slot>
   <slot>getHouseholdCharacteristics()</slot>
   <slot>getPersonalCharacteristics()</slot>
+  <slot>writeSpreadsheet()</slot>
  </slots>
 </ui>

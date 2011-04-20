@@ -2,8 +2,8 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdsbycharacteristics.ui'
 #
-# Created: Tue Apr 19 10:36:39 2011
-#      by: PyQt4 UI code generator 4.8.3
+# Created: Wed Apr 20 08:03:16 2011
+#      by: PyQt4 UI code generator 4.7.6
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -109,7 +109,7 @@ class Ui_HouseHoldReport(object):
 
         self.retranslateUi(HouseHoldReport)
         QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseHoldReport.mdiClose)
-        QtCore.QObject.connect(self.cmdGenerateReport, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseHoldReport.getReportData)
+        QtCore.QObject.connect(self.cmdGenerateReport, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseHoldReport.writeSpreadsheet)
         QtCore.QObject.connect(self.cmbProjectNames, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), HouseHoldReport.getHouseholdCharacteristics)
         QtCore.QObject.connect(self.cmbProjectNames, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), HouseHoldReport.getPersonalCharacteristics)
         QtCore.QMetaObject.connectSlotsByName(HouseHoldReport)
