@@ -61,12 +61,12 @@ import shutil
 import sys
 import traceback
 
-# FIXME: REPO_DIR needs to be taken from a .ini file for portability.
-# FIXME: Edit this value in Brown's innosetup script.
-REPO_DIR = '/home/snim2/openihmrepo/'
+# FIXME: Edit this value in Brown's innosetup script, take it from an .ini file.
+REPO_DIR = os.path.expanduser('~/openihmrepo/')
 
-# FIXME: Shameful!
-INSTALL_DIR = '/home/snim2/site-packages/'
+# FIXME: Can we get INSTALL_DIR from an .ini file or similar?
+INSTALL_DIR = os.path.normpath(os.path.dirname(__file__) + '../../../')
+#INSTALL_DIR = '/home/snim2/site-packages' # Just for testing
 
 # FIXME: Refactor this out to its own file.
 class OpenIhmUpdator(QtCore.QThread):
@@ -152,12 +152,10 @@ class OpenIhmUpdator(QtCore.QThread):
         """If checking for updates times out (for example, if there
         is no current network connection) then fail silently.
         """
-        self.exiting = True
         self.emit(QtCore.SIGNAL("updateFailure(QString)"), QtCore.QString(message))
         return
 
     def __del__(self):
-        self.exiting = True
         self.wait()
         return
 
