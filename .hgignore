@@ -1,4 +1,6 @@
 # use glob syntax.
+
+open-ihm/openihmlog.txt
 syntax: glob
 *.pyc
 *~
