@@ -55,7 +55,7 @@ class ReportsSettingsManager:
         
         rows =[]
         if projectid != 0:
-            tablename = 'p' + '%s' %(projectid) + 'personalcharacteristics'
+            tablename = 'p' + '%s' %(projectid) + 'PersonalCharacteristics'
             query = '''SELECT column_name FROM information_schema.columns WHERE table_name='%s' ''' % (tablename)
             self.database.open()
             rows = self.database.execSelectQuery( query )
@@ -63,11 +63,11 @@ class ReportsSettingsManager:
         return rows
        
     def setPCharacteristicsTableName(self, projectid):
-        tablename = 'p' + '%s' %(projectid) + 'personalcharacteristics'
+        tablename = 'p' + '%s' %(projectid) + 'PersonalCharacteristics'
         return tablename
          
     def setHCharacteristicsTableName(self, projectid):
-        tablename = 'p' + '%s' %(projectid) + 'householdcharacteristics'
+        tablename = 'p' + '%s' %(projectid) + 'HouseholdCharacteristics'
         return tablename
 
     def getProjectHouseholds(self, projectid):

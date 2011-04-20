@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------	
-#	Filename: openihm.py
+#	Filename: openihm.pyw
 #
 #	The main module of Open IHM. PyQt4 is used to implement the GUI
 #	of the system. Also used is the sys (system) package.
@@ -21,7 +21,24 @@ if __name__ == '__main__':
      log.setLevel(logging.DEBUG)
      handler = logging.handlers.RotatingFileHandler(LOGFILE, backupCount=5)
      log.addHandler(handler)
+
+     #
+     # Check for updates to open-ihm.
+     #
+     try:
+          log.info('Checking for updates.')
+          
+     except:
+          log.debug('Exception raised in __main__.')
+          ty, value, tback = sys.exc_info()
+          log.debug('Exception raised on updating software. Debug info follows:')
+          log.debug(''.join(traceback.format_exception(ty, value, tback)))
+
      
+
+     #
+     # Start open-ihm.
+     #
      try:
 
           # import class that creates Open IHM Main Window
@@ -77,7 +94,7 @@ if __name__ == '__main__':
           sys.exit(app.exec_())
 
      except Exception, e:
-          log.info('Exception raised in __main__.')
+          log.debug('Exception raised in __main__.')
           ty, value, tback = sys.exc_info()
           log.debug('Exception raised in start script. Debug info follows:')
           log.debug(''.join(traceback.format_exception(ty, value, tback)))

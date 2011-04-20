@@ -484,26 +484,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>cmdShowReport</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdIncomeReport</receiver>
-   <slot>writeTable()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>445</x>
-     <y>641</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>195</x>
-     <y>635</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>cmbProjects</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>HouseholdIncomeReport</receiver>
-   <slot>setReportType()</slot>
+   <slot>updateDialogData()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>547</x>
@@ -515,11 +499,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>cmdShowReport</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdIncomeReport</receiver>
+   <slot>getReportTable()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>472</x>
+     <y>633</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>485</x>
+     <y>621</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>mdiClose()</slot>
   <slot>updateDialogData()</slot>
   <slot>writeTable()</slot>
   <slot>setReportType()</slot>
+  <slot>getReportTable()</slot>
  </slots>
 </ui>

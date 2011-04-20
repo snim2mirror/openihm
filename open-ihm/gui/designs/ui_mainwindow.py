@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Tue Apr 19 08:13:16 2011
+# Created: Tue Apr 19 22:37:42 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -18,11 +18,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.resize(800, 600)
-        MainWindow.setStyleSheet(_fromUtf8("#centralwidget {\n"
-"    background : white;\n"
-"    background-image : url(:/images/images/EfDChancoComposite.jpg);\n"
-"    background-repeat : no-repeat;\n"
-"}"))
+        MainWindow.setStyleSheet(_fromUtf8(""))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         MainWindow.setCentralWidget(self.centralwidget)
@@ -154,6 +150,8 @@ class Ui_MainWindow(object):
         self.actionInitialise_Energy_Requirement_Table.setObjectName(_fromUtf8("actionInitialise_Energy_Requirement_Table"))
         self.actionLiving_Threshold = QtGui.QAction(MainWindow)
         self.actionLiving_Threshold.setObjectName(_fromUtf8("actionLiving_Threshold"))
+        self.actionUpdate_open_ihm = QtGui.QAction(MainWindow)
+        self.actionUpdate_open_ihm.setObjectName(_fromUtf8("actionUpdate_open_ihm"))
         self.menuProject.addAction(self.actionCreate_Project)
         self.menuProject.addAction(self.actionOpen_Project)
         self.menuProject.addAction(self.actionFind_Project)
@@ -182,6 +180,8 @@ class Ui_MainWindow(object):
         self.menuData_Management.addSeparator()
         self.menuData_Management.addAction(self.actionInitialise_Energy_Requirement_Table)
         self.menuData_Management.addAction(self.actionInitialise_Food_Energy_Table)
+        self.menuHelp.addAction(self.actionUpdate_open_ihm)
+        self.menuHelp.addSeparator()
         self.menuHelp.addAction(self.actionContents)
         self.menuHelp.addAction(self.actionAboutOpenIHM)
         self.menuHousehold.addAction(self.actionAdd_Household)
@@ -239,6 +239,7 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.actionInitialise_Energy_Requirement_Table, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.initialiseFoodRequirementTable)
         QtCore.QObject.connect(self.actionLiving_Threshold, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.setReporttypeAsLivingThreshold)
         QtCore.QObject.connect(self.actionContents, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.openHelpContents)
+        QtCore.QObject.connect(self.actionUpdate_open_ihm, QtCore.SIGNAL(_fromUtf8("triggered()")), MainWindow.updateOpenIhm)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -246,8 +247,8 @@ class Ui_MainWindow(object):
         self.menuProject.setTitle(QtGui.QApplication.translate("MainWindow", "&Project", None, QtGui.QApplication.UnicodeUTF8))
         self.menuData_Management.setTitle(QtGui.QApplication.translate("MainWindow", "Data &Management", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHelp.setTitle(QtGui.QApplication.translate("MainWindow", "&Help", None, QtGui.QApplication.UnicodeUTF8))
-        self.menuHousehold.setTitle(QtGui.QApplication.translate("MainWindow", "Household", None, QtGui.QApplication.UnicodeUTF8))
-        self.menuOutputs.setTitle(QtGui.QApplication.translate("MainWindow", "Reports", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuHousehold.setTitle(QtGui.QApplication.translate("MainWindow", "H&ousehold", None, QtGui.QApplication.UnicodeUTF8))
+        self.menuOutputs.setTitle(QtGui.QApplication.translate("MainWindow", "&Reports", None, QtGui.QApplication.UnicodeUTF8))
         self.toolBar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar", None, QtGui.QApplication.UnicodeUTF8))
         self.actionDelete_Project.setText(QtGui.QApplication.translate("MainWindow", "Delete Project", None, QtGui.QApplication.UnicodeUTF8))
         self.actionEdit_Project.setText(QtGui.QApplication.translate("MainWindow", "Edit Project", None, QtGui.QApplication.UnicodeUTF8))
@@ -316,5 +317,8 @@ class Ui_MainWindow(object):
         self.actionDisposable_Income.setText(QtGui.QApplication.translate("MainWindow", "Disposable Income", None, QtGui.QApplication.UnicodeUTF8))
         self.actionInitialise_Energy_Requirement_Table.setText(QtGui.QApplication.translate("MainWindow", "Initialise Energy Requirements Table", None, QtGui.QApplication.UnicodeUTF8))
         self.actionLiving_Threshold.setText(QtGui.QApplication.translate("MainWindow", "Living Threshold", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionUpdate_open_ihm.setText(QtGui.QApplication.translate("MainWindow", "Update open-ihm", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionUpdate_open_ihm.setIconText(QtGui.QApplication.translate("MainWindow", "Update open-ihm", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionUpdate_open_ihm.setToolTip(QtGui.QApplication.translate("MainWindow", "Automatically update the open-ihm software", None, QtGui.QApplication.UnicodeUTF8))
 
 import images_rc
