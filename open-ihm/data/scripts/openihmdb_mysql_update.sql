@@ -84,6 +84,31 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`wildfoods` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
+-- -----------------------------------------------------
+-- Table `openihmdb`.`householdmembers`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `openihmdb`.`householdmembers`;
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`householdmembers` (
+  `personid` VARCHAR(20) NOT NULL ,
+  `hhid` INT(11) NOT NULL ,
+  `headofhousehold` ENUM('Yes','No') NOT NULL ,
+  `yearofbirth` INT(11) NOT NULL ,
+  `sex` ENUM('Male','Female') NOT NULL ,
+  `education` VARCHAR(200) NULL DEFAULT NULL ,
+  `pid` INT(11) NOT NULL ,
+  `periodaway` INT(11) NULL DEFAULT '0' ,
+  `reason` VARCHAR(200) NULL DEFAULT NULL ,
+  `whereto` VARCHAR(200) NULL DEFAULT NULL ,
+  PRIMARY KEY (`personid`, `hhid`, `pid`) ,
+  INDEX `fk_householdmembers_households1` (`hhid` ASC, `pid` ASC) ,
+  CONSTRAINT `fk_householdmembers_households1`
+    FOREIGN KEY (`hhid` , `pid` )
+    REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
