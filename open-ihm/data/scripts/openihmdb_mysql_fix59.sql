@@ -4,6 +4,7 @@
 USE `openihmdb`;
 
 /*!40000 ALTER TABLE `setup_foods_crops` DISABLE KEYS */;
+DELETE FROM setup_foods_crops;
 REPLACE INTO `setup_foods_crops` (`name`,`category`,`energyvalueperunit`,`unitofmeasure`) VALUES 
  ('Aubergene','crops',280,'kg'),
  ('Avocado, edible fruit','crops',1650,'kg'),
