@@ -171,7 +171,8 @@ class FrmManageFoodTypes(QDialog, Ui_FoodTypes):
                 for counter in range(0,numrows):
                         currentIndex = self.tableView.model().index(counter,0)
                         currentitem = self.tableView.model().item(currentIndex.row(),0).text()
-                        if croptype == currentitem:
+                        print croptype.lower(), currentitem.lower()
+                        if croptype.lower() == currentitem.lower():
                                 cropfound = 1
                                 desiredIndex = currentIndex
                 if cropfound:

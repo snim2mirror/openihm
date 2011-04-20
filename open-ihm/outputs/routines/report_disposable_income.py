@@ -132,6 +132,9 @@ class DisposableHouseholdIncome:
 
             templist.append(round(hhDisposableIncome,2))
             reporttable.append(tuple(templist))
+            
+        reporttable.sort(key=lambda x: x[1])
+
 
         return reporttable
 

@@ -165,14 +165,15 @@ class FrmManageTypes(QDialog, Ui_FoodTypes):
 		return indexVal.row()
 
         def searchCropType(self):
-                croptype = self.txtSearchCrop.text()
+                croptype = str(self.txtSearchCrop.text())
                 numrows = self.tableView.model().rowCount()
                 counter = 0
                 cropfound = 0
                 for counter in range(0,numrows):
+                        
                         currentIndex = self.tableView.model().index(counter,0)
-                        currentitem = self.tableView.model().item(currentIndex.row(),0).text()
-                        if croptype == currentitem:
+                        currentitem = str(self.tableView.model().item(currentIndex.row(),0).text())
+                        if croptype.lower() == currentitem.lower():
                                 cropfound = 1
                                 desiredIndex = currentIndex
                                 break
