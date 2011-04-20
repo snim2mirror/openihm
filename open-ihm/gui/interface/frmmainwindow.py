@@ -132,6 +132,8 @@ class OpenIhmUpdator(QtCore.QThread):
         If anything goes wrong with the pull or update, clone instead.
         """
         try:
+            if not commands.incoming(self.ui, self.repo, source=self.url) == 0:
+                self.emit(QtCore.SIGNAL("noChanges()"))
             commands.pull(self.ui, self.repo, source=self.url)
             commands.update(self.ui, self.repo, clean=True)
         except error.RepoError, e:
@@ -506,9 +508,17 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.thread = OpenIhmUpdator()
         self.connect(self.thread, QtCore.SIGNAL("updateSuccess()"), self.updateSuccess)
         self.connect(self.thread, QtCore.SIGNAL("updateFailure(QString)"), self.updateFailed)
+        self.connect(self.thread, QtCore.SIGNAL("noChanges()"), self.updateNoChanges)
         self.thread.start()
         return
 
+    def updateNoChanges(self):
+        """No changes to pull.
+        """
+        msg = ("There are no software updates currently available.")
+        QtGui.QMessageBox.information(self, "Software update notice", msg)
+        return
+    
     def updateFailed(self, message):
         """Report to the user that a software update has failed.
         """
