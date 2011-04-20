@@ -79,14 +79,12 @@ class OpenIhmUpdator(QtCore.QThread):
         QtCore.QThread.__init__(self, parent)
         self.exiting = False
         self.timer = None
-        self.ui = None
+        self.ui = ui.ui()
         self.repo = None
         self.url = 'https://open-ihm.googlecode.com/hg/'
         return
 
     def run(self):
-        self.ui = ui.ui()
-
         try:
             self.repo = hg.repository(self.ui, REPO_DIR)
         except Exception, e:
@@ -132,7 +130,7 @@ class OpenIhmUpdator(QtCore.QThread):
         If anything goes wrong with the pull or update, clone instead.
         """
         try:
-            if not commands.incoming(self.ui, self.repo, source=self.url) == 0:
+            if not commands.incoming(self.ui, self.repo, source=self.url, bundle=False, force=False) == 0:
                 self.emit(QtCore.SIGNAL("noChanges()"))
             commands.pull(self.ui, self.repo, source=self.url)
             commands.update(self.ui, self.repo, clean=True)
@@ -215,7 +213,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
         self.assistant = None # Help assistant
 
-        self.thread = None # For updating software
+        self.thread = OpenIhmUpdator() # For updating software
         self.updateSuccessful = True
         
 	### FIXME: Replace absolute paths to images with Qt resources
@@ -505,7 +503,6 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
                "This may take some time.")
         QtGui.QMessageBox.information(self, "Software update notice", msg)
 
-        self.thread = OpenIhmUpdator()
         self.connect(self.thread, QtCore.SIGNAL("updateSuccess()"), self.updateSuccess)
         self.connect(self.thread, QtCore.SIGNAL("updateFailure(QString)"), self.updateFailed)
         self.connect(self.thread, QtCore.SIGNAL("noChanges()"), self.updateNoChanges)
