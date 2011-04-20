@@ -8,12 +8,12 @@
 
 # pylint: disable=W0312
 # pylint: disable=W0511
+# pylint: disable=W0703
 
 import os
-import subprocess
 
-# imports from PyQt4 package
-from PyQt4 import QtGui, QtCore, Qt
+
+from PyQt4 import QtGui, QtCore
 
 # import the main window design class
 from gui.designs.ui_mainwindow import Ui_MainWindow
@@ -54,8 +54,114 @@ from data.setup_foodrequirement_startupvalues import FoodRequirementValues
 #from frm_report_livingthreshold import LivingThreshold
 
 
+# Import modules used by the automatic software updator.
+from mercurial import commands, hg, ui, error
+from distutils.dir_util import copy_tree
+import shutil
+import sys
+import traceback
 
-# FIXME: Make the background of the painter white not black.
+# FIXME: REPO_DIR needs to be taken from a .ini file for portability.
+# FIXME: Edit this value in Brown's innosetup script.
+REPO_DIR = '/home/snim2/openihmrepo/'
+
+# FIXME: Shameful!
+INSTALL_DIR = '/home/snim2/site-packages/'
+
+# FIXME: Refactor this out to its own file.
+class OpenIhmUpdator(QtCore.QThread):
+    """This class automatically updates open-ihm from the Google Code repository.
+
+    Requires Mercurial to be installed.
+    """
+
+    def __init__(self, parent=None):
+        QtCore.QThread.__init__(self, parent)
+        self.exiting = False
+        self.timer = None
+        self.ui = None
+        self.repo = None
+        self.url = 'https://open-ihm.googlecode.com/hg/'
+        return
+
+    def run(self):
+        self.ui = ui.ui()
+
+        try:
+            self.repo = hg.repository(self.ui, REPO_DIR)
+        except Exception, e:
+            # Repository does not exist, try creating it.
+            try:
+                self.checkCloneExists()
+            except Exception, e:
+                ty, value, tback = sys.exc_info()
+                self.updateFail(''.join(traceback.format_exception(ty, value, tback)))
+                return
+        try:
+            self.update()
+        except Exception, e:
+            ty, value, tback = sys.exc_info()
+            self.updateFail(''.join(traceback.format_exception(ty, value, tback)))
+            return
+        try:
+            self.install()
+        except Exception, e:
+            ty, value, tback = sys.exc_info() 
+            self.updateFail(''.join(traceback.format_exception(ty, value, tback)))
+            return
+        self.emit(QtCore.SIGNAL("updateSuccess()"))
+        return
+
+    def checkCloneExists(self):
+        """Check that we have a copy of the open-ihm repository on disk.
+
+        If we don't, clone one now.
+        """
+        if not os.path.exists(REPO_DIR):
+            os.makedirs(REPO_DIR)
+            commands.clone(self.ui,
+                           self.url,
+                           dest=REPO_DIR,
+                           insecure=True)
+            self.repo = hg.repository(self.ui, REPO_DIR)
+        return
+
+    def update(self):
+        """Run an hg pull and update.
+        Overwrite all local changes by default.
+        If anything goes wrong with the pull or update, clone instead.
+        """
+        try:
+            commands.pull(self.ui, self.repo, source=self.url)
+            commands.update(self.ui, self.repo, clean=True)
+        except error.RepoError, e:
+            if os.path.exists(REPO_DIR):
+                shutil.rmtree(REPO_DIR)
+                self.checkCloneExists()
+        return
+    
+    def install(self):
+        """Copy code to site-packages.
+        """
+        copy_tree(REPO_DIR + '/open-ihm/', INSTALL_DIR)
+        # Better to use setuptools if possible.
+        # runpy.runpath(PATH_TO_SETUP.PY, )
+        return
+
+    def updateFail(self, message):
+        """If checking for updates times out (for example, if there
+        is no current network connection) then fail silently.
+        """
+        self.exiting = True
+        self.emit(QtCore.SIGNAL("updateFailure(QString)"), QtCore.QString(message))
+        return
+
+    def __del__(self):
+        self.exiting = True
+        self.wait()
+        return
+
+
 class PicturedMDIArea(QtGui.QMdiArea):
     """This class creates an MDI area with a centred background image.
 
@@ -108,6 +214,9 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.actionClose_Project.setDisabled(True)
 
         self.assistant = None # Help assistant
+
+        self.thread = None # For updating software
+        self.updateSuccessful = True
         
 	### FIXME: Replace absolute paths to images with Qt resources
         self.setWindowIcon(QtGui.QIcon('resources/images/openihm.png'))
@@ -388,6 +497,38 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         reporttype = 'DI'
         self.reportHouseholdDisposableIncome(reporttype)
 
+    def updateOpenIhm(self):
+        """Automatically fetch and install latest software from Google Code repo.
+        """
+        msg = ("Software update starting. \n" +
+               "Please make sure you have a working Internet connection.\n" +
+               "This may take some time.")
+        QtGui.QMessageBox.information(self, "Software update notice", msg)
+
+        self.thread = OpenIhmUpdator()
+        self.connect(self.thread, QtCore.SIGNAL("updateSuccess()"), self.updateSuccess)
+        self.connect(self.thread, QtCore.SIGNAL("updateFailure(QString)"), self.updateFailed)
+        self.thread.start()
+        return
+
+    def updateFailed(self, message):
+        """Report to the user that a software update has failed.
+        """
+        msg = ("Software update failed.\n" +
+               "Please report this error to the mailing list" +
+               str(message))
+        QtGui.QMessageBox.critical(self, "Software update notice", msg)
+        return
+
+    def updateSuccess(self):
+        """Report to the user that a software update has been successful.
+        open-ihm now needs to be restarted.
+        """
+        msg = ("Software update was successful.\n" +
+               "Please close open-ihm and restart for changes to take effect.")
+        QtGui.QMessageBox.information(self, "Software update notice", msg)
+        return
+        
     def openHelpContents(self):
         """Open online help.
         Triggered when the user presses F1 or selects Contents from
@@ -407,3 +548,5 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     #     subWin = self.mdi.addSubWindow(form)
     #     self.centerSubWindow(subWin)
     #     form.show()
+
+
