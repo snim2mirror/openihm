@@ -26,7 +26,7 @@ class HouseholdIncome:
             basequery = '''SELECT households.hhid, households.pid FROM households JOIN %s ON households.hhid = %s''' % (tablename,houseid)
             for coulumnname in pcharacteristics:
                 currentcolumn =  tablename + '.' + coulumnname
-                basequery = basequery + " and '%s' IS NOT NULL" % (currentcolumn)
+                basequery = basequery + " and '%s'='Yes'" % (currentcolumn)
         return basequery
         
     def buildHCharacteristicsQuery(self,hcharacteristics, tablename):
@@ -38,7 +38,7 @@ class HouseholdIncome:
             basequery = '''SELECT households.hhid, households.pid FROM households JOIN %s ON households.hhid = %s''' % (tablename,houseid)
             for coulumnname in hcharacteristics:
                 currentcolumn =  tablename + '.' + coulumnname
-                basequery = basequery + " and '%s' IS NOT NULL" % (currentcolumn)
+                basequery = basequery + " and '%s'='Yes' " % (currentcolumn)
         return basequery
 
     def getReportHouseholdIDs(self,query):

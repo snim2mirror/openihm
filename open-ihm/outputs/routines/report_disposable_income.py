@@ -295,9 +295,10 @@ class DisposableHouseholdIncome:
 
     #build queries for household total cash income
     def totalCropCashIncomeQuery(self,projectid,houseids):
+        print 'houses ', houseids
         query = '''SELECT hhid,SUM(unitssold * unitprice) AS cropincome FROM cropincome
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
-        
+        print query
         return query
     
     def totalEmploymentCashIncomeQuery(self,projectid,houseids):
@@ -406,7 +407,8 @@ class DisposableHouseholdIncome:
             basequery = '''SELECT households.hhid, households.pid FROM households JOIN %s ON households.hhid = %s''' % (tablename,houseid)
             for coulumnname in pcharacteristics:
                 currentcolumn =  tablename + '.' + coulumnname
-                basequery = basequery + " and '%s' IS NOT NULL" % (currentcolumn)
+                basequery = basequery + " and '%s'='Yes'" % (currentcolumn)
+        print 'pchars Query ', basequery
         return basequery
         
     def buildHCharacteristicsQuery(self,hcharacteristics, tablename):
@@ -418,6 +420,6 @@ class DisposableHouseholdIncome:
             basequery = '''SELECT households.hhid, households.pid FROM households JOIN %s ON households.hhid = %s''' % (tablename,houseid)
             for coulumnname in hcharacteristics:
                 currentcolumn =  tablename + '.' + coulumnname
-                basequery = basequery + " and '%s' IS NOT NULL" % (currentcolumn)
+                basequery = basequery + " and '%s'='Yes'" % (currentcolumn)
         return basequery
 
