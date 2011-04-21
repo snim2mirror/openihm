@@ -16,7 +16,6 @@ import traceback
 LOGFILE = 'openihmlog.txt'
 
 if __name__ == '__main__':
-     
      log = logging.getLogger(__name__)
      log.setLevel(logging.DEBUG)
      handler = logging.handlers.RotatingFileHandler(LOGFILE, backupCount=5)
