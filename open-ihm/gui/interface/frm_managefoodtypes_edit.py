@@ -33,9 +33,6 @@ class FrmEditCropType(QDialog, Ui_EditFoodTypes):
 
         self.showDetailsToEdit()
 
-    def mdiClose(self):
-        self.close()
-
     def showDetailsToEdit(self):
         ''' Display energy requirements data '''
         self.txtFoodType.setText(self.name)

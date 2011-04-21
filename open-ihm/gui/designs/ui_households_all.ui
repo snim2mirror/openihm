@@ -7,230 +7,115 @@
     <x>0</x>
     <y>0</y>
     <width>792</width>
-    <height>621</height>
+    <height>550</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>792</width>
-    <height>621</height>
+    <height>550</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Project Households</string>
   </property>
-  <widget class="QGroupBox" name="groupBox">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>771</width>
-     <height>531</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>Households</string>
-   </property>
-   <widget class="QTableView" name="tableView">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>751</width>
-      <height>461</height>
-     </rect>
-    </property>
-    <property name="alternatingRowColors">
-     <bool>true</bool>
-    </property>
-    <property name="sortingEnabled">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="cmdAdd">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>490</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Add</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="cmdEdit">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>490</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Edit</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="cmdData">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>490</y>
-      <width>151</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>View|Edit Household Data</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="cmdDel">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>490</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Delete</string>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QPushButton" name="cmdClose">
-   <property name="geometry">
-    <rect>
-     <x>680</x>
-     <y>580</y>
-     <width>91</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Close</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>10</y>
-     <width>71</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Project Name:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblProjectName">
-   <property name="geometry">
-    <rect>
-     <x>100</x>
-     <y>10</y>
-     <width>391</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>{projectname}</string>
-   </property>
-  </widget>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Project Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="lblProjectName">
+     <property name="text">
+      <string>{projectname}</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Households</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QTableView" name="tableView">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>400</height>
+         </size>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="cmdAdd">
+        <property name="text">
+         <string>Add</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmdEdit">
+        <property name="text">
+         <string>Edit</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmdDel">
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmdData">
+        <property name="text">
+         <string>View|Edit Household Data</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmdClose">
+        <property name="text">
+         <string>Close</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <tabstops>
   <tabstop>tableView</tabstop>
-  <tabstop>cmdAdd</tabstop>
-  <tabstop>cmdEdit</tabstop>
-  <tabstop>cmdDel</tabstop>
-  <tabstop>cmdData</tabstop>
-  <tabstop>cmdClose</tabstop>
  </tabstops>
  <resources/>
- <connections>
-  <connection>
-   <sender>cmdClose</sender>
-   <signal>clicked()</signal>
-   <receiver>AllHouseholds</receiver>
-   <slot>mdiClose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>712</x>
-     <y>587</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>644</x>
-     <y>576</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdAdd</sender>
-   <signal>clicked()</signal>
-   <receiver>AllHouseholds</receiver>
-   <slot>addHousehold()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>84</x>
-     <y>538</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>109</x>
-     <y>576</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdEdit</sender>
-   <signal>clicked()</signal>
-   <receiver>AllHouseholds</receiver>
-   <slot>editHousehold()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>144</x>
-     <y>549</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>262</x>
-     <y>574</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdDel</sender>
-   <signal>clicked()</signal>
-   <receiver>AllHouseholds</receiver>
-   <slot>delHouseholds()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>286</x>
-     <y>540</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>448</x>
-     <y>580</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdData</sender>
-   <signal>clicked()</signal>
-   <receiver>AllHouseholds</receiver>
-   <slot>viewHouseholdData()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>366</x>
-     <y>539</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>580</x>
-     <y>587</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>addHousehold()</slot>
   <slot>editHousehold()</slot>

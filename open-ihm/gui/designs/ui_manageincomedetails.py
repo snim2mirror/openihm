@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageincomedetails.ui'
 #
-# Created: Thu Apr 21 13:08:25 2011
+# Created: Thu Apr 21 19:28:08 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!

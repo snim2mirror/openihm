@@ -40,8 +40,6 @@ class FrmEditEnergyRequirement(QDialog, Ui_EditFoodEnergyRequirement):
         #display energy requirements data
         self.showEnergyRequirementDetails()
  
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
         
     def showEnergyRequirementDetails(self):
         ''' Display energy requirements data '''
@@ -63,4 +61,4 @@ class FrmEditEnergyRequirement(QDialog, Ui_EditFoodEnergyRequirement):
 	controller = FoodEnergyRequirement(myage,  malesenergyrequirement,  femalesenergyrequirement)
         controller.setData()      
         # close add food energy requirement window
-        self.close
+        self.close()

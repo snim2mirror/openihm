@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>380</width>
-    <height>175</height>
+    <width>428</width>
+    <height>214</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -19,153 +19,84 @@
   <property name="windowTitle">
    <string>Add Household</string>
   </property>
-  <widget class="QLineEdit" name="txtShortHouseHoldName">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>40</y>
-     <width>241</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>70</y>
-     <width>91</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Household Name:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>71</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Project Name:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblProjectName">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>10</y>
-     <width>101</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>{projectname}</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>100</y>
-     <width>71</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Date Visited:</string>
-   </property>
-  </widget>
-  <widget class="QDateEdit" name="dtpDateVisted">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>100</y>
-     <width>111</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cmdSave">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>132</y>
-     <width>75</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Save</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cmdCancel">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>132</y>
-     <width>75</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cancel</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_6">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>121</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Household Number:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="txtHouseholdName">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>70</y>
-     <width>241</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Project Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="lblProjectName">
+     <property name="text">
+      <string>{projectname}</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Household Number:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="txtShortHouseHoldName"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Household Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="txtHouseholdName"/>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Date Visited:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QDateEdit" name="dtpDateVisted"/>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="cmdSave">
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmdCancel">
+        <property name="text">
+         <string>Cancel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <tabstops>
   <tabstop>txtShortHouseHoldName</tabstop>
   <tabstop>txtHouseholdName</tabstop>
   <tabstop>dtpDateVisted</tabstop>
   <tabstop>cmdSave</tabstop>
-  <tabstop>cmdCancel</tabstop>
  </tabstops>
  <resources/>
  <connections>
-  <connection>
-   <sender>cmdCancel</sender>
-   <signal>clicked()</signal>
-   <receiver>AddHousehold</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>337</x>
-     <y>147</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>189</x>
-     <y>87</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>cmdSave</sender>
    <signal>clicked()</signal>
@@ -173,12 +104,44 @@
    <slot>saveHousehold()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>82</x>
-     <y>149</y>
+     <x>108</x>
+     <y>187</y>
     </hint>
     <hint type="destinationlabel">
      <x>226</x>
      <y>141</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHousehold</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>337</x>
+     <y>177</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>392</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHousehold</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>275</x>
+     <y>172</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>238</x>
+     <y>200</y>
     </hint>
    </hints>
   </connection>

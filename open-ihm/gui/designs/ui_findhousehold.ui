@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>414</width>
-    <height>160</height>
+    <width>431</width>
+    <height>191</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -19,119 +19,86 @@
   <property name="windowTitle">
    <string>Find Household</string>
   </property>
-  <widget class="QPushButton" name="cmdOk">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>120</y>
-     <width>80</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Ok</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cmdCancel">
-   <property name="geometry">
-    <rect>
-     <x>320</x>
-     <y>120</y>
-     <width>80</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cancel</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="txtHouseholdNo">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>40</y>
-     <width>131</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>81</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Household No.:</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>80</y>
-     <width>91</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Household Name:</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="txtHouseholdName">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>80</y>
-     <width>291</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>0</y>
-     <width>401</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Enter Household No. or Household Name [entering nothing will list all Households]</string>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-  </widget>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Enter Household No. or Household Name [entering nothing will list all Households]</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Household No.:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="txtHouseholdNo"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Household Name:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="txtHouseholdName"/>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="cmdOk">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Ok</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmdCancel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Cancel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <tabstops>
   <tabstop>txtHouseholdNo</tabstop>
   <tabstop>txtHouseholdName</tabstop>
-  <tabstop>cmdOk</tabstop>
-  <tabstop>cmdCancel</tabstop>
  </tabstops>
  <resources/>
  <connections>
-  <connection>
-   <sender>cmdCancel</sender>
-   <signal>clicked()</signal>
-   <receiver>FindHousehold</receiver>
-   <slot>mdiClose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>347</x>
-     <y>135</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>271</x>
-     <y>129</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>cmdOk</sender>
    <signal>clicked()</signal>
@@ -139,12 +106,28 @@
    <slot>findHousehold()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>59</x>
-     <y>124</y>
+     <x>121</x>
+     <y>154</y>
     </hint>
     <hint type="destinationlabel">
-     <x>151</x>
-     <y>121</y>
+     <x>18</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>FindHousehold</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>306</x>
+     <y>155</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>183</y>
     </hint>
    </hints>
   </connection>

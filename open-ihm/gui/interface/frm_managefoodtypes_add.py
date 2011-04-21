@@ -26,10 +26,6 @@ class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes):
         #set input validator and restrict input to numeric values,
         myIntVal = QIntValidator(0, 10000, self.txtKCalories)
         self.txtKCalories.setValidator(myIntVal);
- 
-    def mdiClose(self):
-        self.close()
-
         
     def saveDetails(self):
         ''' Saves newly created food/crop energy requirement data to database '''

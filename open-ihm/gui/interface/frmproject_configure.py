@@ -282,7 +282,6 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
              
              for item in selectedItems:
                  query = '''DELETE FROM standardofliving WHERE summary='%s' AND pid=%s ''' % (item,  pid)
-                 print query 
                  cursor.execute(query)
                  db.commit()
     

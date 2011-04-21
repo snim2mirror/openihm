@@ -47,6 +47,11 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit):
             return
         except Exception, e:
             pass
+        try:
+            self.parent.mdi.closeActiveSubWindow()
+        except Exception, e:
+            pass
+        self.close()
 
 
     def getHouseholdData(self):

@@ -6,209 +6,193 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>632</width>
-    <height>573</height>
+    <width>669</width>
+    <height>574</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>632</width>
-    <height>573</height>
+    <width>580</width>
+    <height>550</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Report: Households by Income Source</string>
   </property>
-  <widget class="QComboBox" name="cmbProjects">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>10</y>
-     <width>511</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>20</y>
-     <width>46</width>
-     <height>13</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Projects</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cmdClose">
-   <property name="geometry">
-    <rect>
-     <x>510</x>
-     <y>530</y>
-     <width>101</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Close</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cmdShowReport">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>530</y>
-     <width>111</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Show Report</string>
-   </property>
-  </widget>
-  <widget class="QListView" name="listViewHCharacteristics">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>260</y>
-     <width>281</width>
-     <height>251</height>
-    </rect>
-   </property>
-   <property name="alternatingRowColors">
-    <bool>true</bool>
-   </property>
-   <property name="selectionMode">
-    <enum>QAbstractItemView::MultiSelection</enum>
-   </property>
-  </widget>
-  <widget class="QListView" name="listViewPersonalCharacteristics">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>260</y>
-     <width>311</width>
-     <height>251</height>
-    </rect>
-   </property>
-   <property name="alternatingRowColors">
-    <bool>true</bool>
-   </property>
-   <property name="selectionMode">
-    <enum>QAbstractItemView::MultiSelection</enum>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>240</y>
-     <width>141</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Household Characteristics</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>310</x>
-     <y>240</y>
-     <width>181</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Personal Characteristics</string>
-   </property>
-  </widget>
-  <widget class="QTreeView" name="treeViewHouseholds">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>80</y>
-     <width>611</width>
-     <height>151</height>
-    </rect>
-   </property>
-   <property name="editTriggers">
-    <set>QAbstractItemView::NoEditTriggers</set>
-   </property>
-   <property name="alternatingRowColors">
-    <bool>true</bool>
-   </property>
-   <property name="selectionMode">
-    <enum>QAbstractItemView::MultiSelection</enum>
-   </property>
-   <property name="selectionBehavior">
-    <enum>QAbstractItemView::SelectRows</enum>
-   </property>
-   <property name="sortingEnabled">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cmdSaveDataTable">
-   <property name="geometry">
-    <rect>
-     <x>280</x>
-     <y>530</y>
-     <width>91</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Save Data Table</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="cmbReportType">
-   <property name="geometry">
-    <rect>
-     <x>120</x>
-     <y>40</y>
-     <width>281</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>Disposable Income - Raw</string>
-    </property>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Projects</string>
+     </property>
+    </widget>
    </item>
-   <item>
-    <property name="text">
-     <string>Disposable Income - Standardised</string>
-    </property>
+   <item row="0" column="1">
+    <widget class="QComboBox" name="cmbProjects"/>
    </item>
-   <item>
-    <property name="text">
-     <string>Living Threshold</string>
-    </property>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Report Type</string>
+     </property>
+    </widget>
    </item>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>81</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Report Type</string>
-   </property>
-  </widget>
+   <item row="1" column="1">
+    <widget class="QComboBox" name="cmbReportType">
+     <item>
+      <property name="text">
+       <string>Disposable Income - Raw</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Disposable Income - Standardised</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Living Threshold</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QTreeView" name="treeViewHouseholds">
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::MultiSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QFrame" name="frame">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>220</height>
+      </size>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>Household Characteristics</string>
+        </property>
+        <widget class="QListView" name="listViewHCharacteristics">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>20</y>
+           <width>256</width>
+           <height>192</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::MultiSelection</enum>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
+         <string>Personal Characteristics</string>
+        </property>
+        <widget class="QListView" name="listViewPersonalCharacteristics">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>20</y>
+           <width>256</width>
+           <height>192</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::MultiSelection</enum>
+         </property>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="cmdSaveDataTable">
+        <property name="text">
+         <string>Save Data Table</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmdClose">
+        <property name="text">
+         <string>Close</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmdShowReport">
+        <property name="text">
+         <string>Show Report</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <tabstops>
   <tabstop>cmbProjects</tabstop>
   <tabstop>cmbReportType</tabstop>
   <tabstop>treeViewHouseholds</tabstop>
-  <tabstop>listViewHCharacteristics</tabstop>
-  <tabstop>listViewPersonalCharacteristics</tabstop>
   <tabstop>cmdSaveDataTable</tabstop>
   <tabstop>cmdShowReport</tabstop>
   <tabstop>cmdClose</tabstop>

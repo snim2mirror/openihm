@@ -49,6 +49,12 @@ class FrmAddHousehold(QDialog, Ui_AddHousehold):
             return
         except Exception, e:
             pass
+        try:
+            self.parent.mdi.closeActiveSubWindow()
+            return
+        except Exception, e:
+            pass
+        self.close()
 
     def saveHousehold(self):
         ''' Saves newly created household data to database '''

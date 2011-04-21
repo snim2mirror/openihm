@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_delete.ui'
 #
-# Created: Tue Apr 19 08:13:15 2011
+# Created: Thu Apr 21 19:28:06 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,22 +17,30 @@ except AttributeError:
 class Ui_DeleteHousehold(object):
     def setupUi(self, DeleteHousehold):
         DeleteHousehold.setObjectName(_fromUtf8("DeleteHousehold"))
-        DeleteHousehold.resize(400, 108)
-        self.cmdDel = QtGui.QPushButton(DeleteHousehold)
-        self.cmdDel.setGeometry(QtCore.QRect(10, 60, 75, 31))
-        self.cmdDel.setObjectName(_fromUtf8("cmdDel"))
+        DeleteHousehold.resize(400, 116)
+        self.formLayout = QtGui.QFormLayout(DeleteHousehold)
+        self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label = QtGui.QLabel(DeleteHousehold)
-        self.label.setGeometry(QtCore.QRect(10, 20, 111, 16))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.label.setFont(font)
         self.label.setObjectName(_fromUtf8("label"))
+        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
         self.cboHouseholdName = QtGui.QComboBox(DeleteHousehold)
-        self.cboHouseholdName.setGeometry(QtCore.QRect(120, 20, 261, 22))
         self.cboHouseholdName.setObjectName(_fromUtf8("cboHouseholdName"))
-        self.cmdCancel = QtGui.QPushButton(DeleteHousehold)
-        self.cmdCancel.setGeometry(QtCore.QRect(300, 60, 81, 31))
+        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.cboHouseholdName)
+        self.groupBox = QtGui.QGroupBox(DeleteHousehold)
+        self.groupBox.setTitle(_fromUtf8(""))
+        self.groupBox.setObjectName(_fromUtf8("groupBox"))
+        self.horizontalLayout = QtGui.QHBoxLayout(self.groupBox)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.cmdDel = QtGui.QPushButton(self.groupBox)
+        self.cmdDel.setObjectName(_fromUtf8("cmdDel"))
+        self.horizontalLayout.addWidget(self.cmdDel)
+        self.cmdCancel = QtGui.QPushButton(self.groupBox)
         self.cmdCancel.setObjectName(_fromUtf8("cmdCancel"))
+        self.horizontalLayout.addWidget(self.cmdCancel)
+        self.formLayout.setWidget(1, QtGui.QFormLayout.SpanningRole, self.groupBox)
 
         self.retranslateUi(DeleteHousehold)
         QtCore.QObject.connect(self.cmdDel, QtCore.SIGNAL(_fromUtf8("clicked()")), DeleteHousehold.delHousehold)
@@ -44,7 +52,7 @@ class Ui_DeleteHousehold(object):
 
     def retranslateUi(self, DeleteHousehold):
         DeleteHousehold.setWindowTitle(QtGui.QApplication.translate("DeleteHousehold", "Delete Household ", None, QtGui.QApplication.UnicodeUTF8))
-        self.cmdDel.setText(QtGui.QApplication.translate("DeleteHousehold", "Delete", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("DeleteHousehold", "Household Name:", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdDel.setText(QtGui.QApplication.translate("DeleteHousehold", "Delete", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdCancel.setText(QtGui.QApplication.translate("DeleteHousehold", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
 
