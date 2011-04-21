@@ -11,7 +11,9 @@
 # pylint: disable=W0703
 
 import os
-
+import logging
+import stat
+import tempfile
 
 from PyQt4 import QtGui, QtCore
 
@@ -62,7 +64,7 @@ import sys
 import traceback
 
 # FIXME: Edit this value in Brown's innosetup script, take it from an .ini file.
-REPO_DIR = os.path.expanduser('~/openihmrepo/')
+REPO_DIR = os.path.expanduser(os.path.join('~', '.openihmrepo'))
 
 # FIXME: Can we get INSTALL_DIR from an .ini file or similar?
 INSTALL_DIR = os.path.normpath(os.path.dirname(__file__) + '../../../')
@@ -77,75 +79,90 @@ class OpenIhmUpdator(QtCore.QThread):
 
     def __init__(self, parent=None):
         QtCore.QThread.__init__(self, parent)
-        self.exiting = False
-        self.timer = None
+        self.logger = logging.getLogger('__main__')
+        self.info = lambda msg : self.logger.info(msg)
+        self.debug = lambda msg : self.logger.debug(msg)        
         self.ui = ui.ui()
-        self.repo = None
         self.url = 'https://open-ihm.googlecode.com/hg/'
+        try:
+            self.repo = hg.repository(self.ui, REPO_DIR)
+        except Exception:
+            self.repo = hg.repository(self.ui, REPO_DIR, create=True)
+        return
+
+    def chmod(self):
+        """Fix a Windows bug which marks files / folders in REPO_DIR read-only.
+        """
+        if not (sys.platform == 'win32' or sys.platform == 'cygwin'):
+            return
+        for root, dirs, files in os.walk(REPO_DIR):
+            for name in files:
+                os.chmod(os.path.join(root, name), stat.S_IWRITE)
+            for name in dirs:
+                os.chmod(os.path.join(root, name), stat.S_IWRITE)                
+
+    def fail(self):
+        """Called if an error occurs.
+
+        Take the traceback, log it and notify the MainWindow.
+        """
+        ty, value, tback = sys.exc_info()
+        msg = ''.join(traceback.format_exception(ty, value, tback))
+        self.debug(msg)
+        self.updateFail(msg)
         return
 
     def run(self):
+        # Redirect stdin and stdout to tempfiles. 
+        # This fixes a Windows bug which causes a Bad File Descriptor error.
+        sys.stdout = tempfile.TemporaryFile()
+        sys.stderr = tempfile.TemporaryFile()
         try:
-            self.repo = hg.repository(self.ui, REPO_DIR)
-        except Exception, e:
-            # Repository does not exist, try creating it.
-            try:
-                self.checkCloneExists()
-            except Exception, e:
-                ty, value, tback = sys.exc_info()
-                self.updateFail(''.join(traceback.format_exception(ty, value, tback)))
-                return
-        try:
-            self.update()
-        except Exception, e:
-            ty, value, tback = sys.exc_info()
-            self.updateFail(''.join(traceback.format_exception(ty, value, tback)))
+            self.pullAndMerge()
+        except Exception:
+            self.fail()
             return
         try:
             self.install()
-        except Exception, e:
-            ty, value, tback = sys.exc_info() 
-            self.updateFail(''.join(traceback.format_exception(ty, value, tback)))
+        except Exception:
+            self.fail()
             return
         self.emit(QtCore.SIGNAL("updateSuccess()"))
         return
 
-    def checkCloneExists(self):
-        """Check that we have a copy of the open-ihm repository on disk.
-
-        If we don't, clone one now.
+    def clone(self):
+        """If we don't have a copy of the open-ihm repository on disk
+        clone one now.
         """
-        if not os.path.exists(REPO_DIR):
-            os.makedirs(REPO_DIR)
-            commands.clone(self.ui,
-                           self.url,
-                           dest=REPO_DIR,
-                           insecure=True)
-            self.repo = hg.repository(self.ui, REPO_DIR)
+        try:
+            self.chmod()
+            commands.clone(self.ui, self.url, dest=REPO_DIR, insecure=True)
+        except Exception:
+            self.fail()
         return
 
-    def update(self):
+    def pullAndMerge(self):
         """Run an hg pull and update.
         Overwrite all local changes by default.
         If anything goes wrong with the pull or update, clone instead.
         """
         try:
-            if not commands.incoming(self.ui, self.repo, source=self.url, bundle=False, force=False) == 0:
-                self.emit(QtCore.SIGNAL("noChanges()"))
+            self.chmod()
             commands.pull(self.ui, self.repo, source=self.url)
+            self.chmod()
             commands.update(self.ui, self.repo, clean=True)
-        except error.RepoError, e:
+        except error.RepoError:
             if os.path.exists(REPO_DIR):
                 shutil.rmtree(REPO_DIR)
-                self.checkCloneExists()
+                self.clone()
         return
     
     def install(self):
         """Copy code to site-packages.
+
+        FIXME: Do this with setuptools or distutils or similar. May need runpy.
         """
-        copy_tree(REPO_DIR + '/open-ihm/', INSTALL_DIR)
-        # Better to use setuptools if possible.
-        # runpy.runpath(PATH_TO_SETUP.PY, )
+        copy_tree(os.path.join(REPO_DIR, 'open-ihm'), INSTALL_DIR)
         return
 
     def updateFail(self, message):
@@ -153,10 +170,6 @@ class OpenIhmUpdator(QtCore.QThread):
         is no current network connection) then fail silently.
         """
         self.emit(QtCore.SIGNAL("updateFailure(QString)"), QtCore.QString(message))
-        return
-
-    def __del__(self):
-        self.wait()
         return
 
 
@@ -499,8 +512,10 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         """Automatically fetch and install latest software from Google Code repo.
         """
         msg = ("Software update starting. \n" +
-               "Please make sure you have a working Internet connection.\n" +
-               "This may take some time.")
+               "This may take some time.\n" +
+               "Please make sure you have a working Internet connection" +
+               "and do not close open-ihm until you see a message " +
+               "saying that the update has finished.")
         QtGui.QMessageBox.information(self, "Software update notice", msg)
 
         self.connect(self.thread, QtCore.SIGNAL("updateSuccess()"), self.updateSuccess)
@@ -511,6 +526,8 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
     def updateNoChanges(self):
         """No changes to pull.
+
+        FIXME: Could remove this if it the updator never signals.
         """
         msg = ("There are no software updates currently available.")
         QtGui.QMessageBox.information(self, "Software update notice", msg)
