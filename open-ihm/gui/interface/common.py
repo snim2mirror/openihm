@@ -33,13 +33,10 @@ def getViewString(strSeed):
 def getStringMonth(month):
      months = {"1" : "January","2" : "February", "3" : "March","4" : "April","5" : "May","6" : "June",
                     "7" : "July","8" : "August","9" : "September","10" : "October","11" : "November","12" : "December"}
-     for key, val in months.items():
-         if str(month) == key:
-             return val
+     return months[month]
      
 def getIntMonth(month):
      months = {"1" : "January","2" : "February", "3" : "March","4" : "April","5" : "May","6" : "June",
                     "7" : "July","8" : "August","9" : "September","10" : "October","11" : "November","12" : "December"}
-     for key, val in months.items():
-         if month == val:
-             return key
+     return months[month]
+
