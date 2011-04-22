@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_gifts.ui'
 #
-# Created: Thu Apr 21 19:28:07 2011
+# Created: Fri Apr 22 15:33:38 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -91,6 +91,8 @@ class Ui_AddHouseholdIncomeGifts(object):
 
         self.retranslateUi(AddHouseholdIncomeGifts)
         QtCore.QObject.connect(self.cmbFoodType, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), AddHouseholdIncomeGifts.displayUnitOfMeasure)
+        QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeGifts.saveIncome)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeGifts.mdiClose)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdIncomeGifts)
         AddHouseholdIncomeGifts.setTabOrder(self.cmbSourceOfTransfer, self.txtCash)
         AddHouseholdIncomeGifts.setTabOrder(self.txtCash, self.cmbFoodType)

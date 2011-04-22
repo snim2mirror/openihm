@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_project_open.ui'
 #
-# Created: Thu Apr 21 19:28:08 2011
+# Created: Fri Apr 22 15:23:22 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -41,7 +41,7 @@ class Ui_OpenProject(object):
         self.formLayout.setWidget(1, QtGui.QFormLayout.SpanningRole, self.groupBox)
 
         self.retranslateUi(OpenProject)
-        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), OpenProject.mdiclose)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), OpenProject.mdiClose)
         QtCore.QObject.connect(self.cmdOk, QtCore.SIGNAL(_fromUtf8("clicked()")), OpenProject.openProject)
         QtCore.QMetaObject.connectSlotsByName(OpenProject)
 

@@ -14,7 +14,9 @@ from outputs.routines.report_households_by_characteristics import HouseholdsByCh
 from frm_report_householdsbycharacteristics_display import HouseholdsByCharDisplay
 from outputs.routines.report_households_by_characteristics_write import HouseholdsByCharacteristicsWrite
 
-class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
+from mixins import MDIDialogMixin
+
+class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport, MDIDialogMixin):
         ''' Creates the Report Households by Characteristics from. Uses the design class
 		in gui.designs.ui_report_householdsbycharacteristics. '''	
 	
@@ -27,9 +29,6 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport):
 
         	self.getProjectNames()
 
-	def mdiClose(self):
-		self.parent.mdi.closeActiveSubWindow()
-		
         def getProjectNames(self):
                 ''' populate projects combobox with available projects'''
                 

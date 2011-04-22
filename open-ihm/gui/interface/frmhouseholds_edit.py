@@ -11,7 +11,9 @@ import data.mysql.connector
 
 from gui.designs.ui_households_edit import Ui_Households_Edit
 
-class FrmEditHousehold(QDialog, Ui_Households_Edit):	
+from mixins import MDIDialogMixin
+
+class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):	
     ''' Creates the Edit Household form. '''	
     def __init__(self, parent, projectid, projectname, hhid):
         ''' Set up the dialog box interface '''
@@ -31,28 +33,6 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit):
         
         # display project name
         self.lblProjectName.setText(projectname)
-        
-    def setMdi(self, mdi):
-        self.mdi = mdi
-        
-    def mdiClose(self):
-        # Why am I doing this both ways? I'm not sure. Someone should FIXME
-        try:
-            self.mdi.closeActiveSubWindow()
-            return
-        except Exception, e:
-            pass
-        try:
-            self.parent.closeActiveSubWindow()
-            return
-        except Exception, e:
-            pass
-        try:
-            self.parent.mdi.closeActiveSubWindow()
-        except Exception, e:
-            pass
-        self.close()
-
 
     def getHouseholdData(self):
         ''' Retrieve and display household data '''
@@ -106,4 +86,4 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit):
         
         # close new project window
         self.parent.getHouseholds()
-        self.close()
+        self.mdiClose()

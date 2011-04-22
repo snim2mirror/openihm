@@ -170,6 +170,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdIncomeGifts</receiver>
+   <slot>saveIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>66</x>
+     <y>349</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>8</x>
+     <y>360</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>AddHouseholdIncomeGifts</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>401</x>
+     <y>342</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>426</x>
+     <y>337</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>saveIncome()</slot>

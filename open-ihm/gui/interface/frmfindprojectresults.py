@@ -11,7 +11,9 @@ from data.controller import Controller
 # import the Create Project Dialog design class
 from gui.designs.ui_findprojectresults import Ui_FindProjectResults
 
-class FrmFindProjectResults(QDialog, Ui_FindProjectResults):	
+from mixins import MDIDialogMixin
+
+class FrmFindProjectResults(QDialog, Ui_FindProjectResults, MDIDialogMixin):	
     ''' Creates the Find Project from, under the Project menu. Uses the design class
         in gui.designs.ui_findproject. '''	
     def __init__(self, parent, pid, ptitle):
@@ -27,9 +29,6 @@ class FrmFindProjectResults(QDialog, Ui_FindProjectResults):
         
         self.showResults()
         
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
-
     def showResults(self):
         ''' Find a project matching the criteria entered by user '''
         pid 			= self.txtProjectID.text()

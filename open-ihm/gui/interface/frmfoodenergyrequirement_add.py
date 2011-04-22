@@ -13,7 +13,9 @@ from data.foodenergyrequirement import FoodEnergyRequirement
 # import the Create Add Food Energy Requirement Dialog design class
 from gui.designs.ui_add_foodenergyrequirement import Ui_AddFoodEnergyRequirement
 
-class FrmAddEnergyRequirement(QDialog, Ui_AddFoodEnergyRequirement):	
+from mixins import MDIDialogMixin
+
+class FrmAddEnergyRequirement(QDialog, Ui_AddFoodEnergyRequirement, MDIDialogMixin):	
     ''' Creates the add food energy requirement form '''	
 
     def __init__(self,parent):
@@ -48,4 +50,4 @@ class FrmAddEnergyRequirement(QDialog, Ui_AddFoodEnergyRequirement):
 	controller = FoodEnergyRequirement(myage,  malesenergyrequirement,  femalesenergyrequirement)
         controller.setData()      
         # close add food energy requirement window
-	self.close()
+	self.mdiClose()

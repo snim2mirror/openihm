@@ -11,7 +11,9 @@ import data.mysql.connector
 
 from gui.designs.ui_household_income_employment import Ui_AddHouseholdIncomeEmployment
 
-class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment):	
+from mixins import MDIDialogMixin
+
+class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment, MDIDialogMixin):	
 	''' Form to add or edit a Household Employment Income  '''	
 	def __init__(self, parent,  hhid, hhname, incomeid = 0 ):
 		''' Set up the dialog box interface '''
@@ -34,9 +36,6 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment):
 		# display household name
 		self.lblHouseholdName.setText(hhname)
 
-	def mdiClose(self):
-		self.parent.mdi.closeActiveSubWindow()
-	    
 	def getEmploymentTypes(self):
 		''' Retrieve Employment Types and display them in a combobox '''
 		# select query to Employment Types
@@ -141,4 +140,4 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment):
 		
 		# close new project window
 		self.parent.retrieveHouseholdEmploymentIncome()
-		self.close()
+		self.mdiClose()

@@ -14,7 +14,9 @@ import data.mysql.connector
 # import the Create Project Dialog design class
 from gui.designs.ui_households_add import Ui_Households_Add
 
-class FrmAddHousehold(QDialog, Ui_Households_Add):	
+from mixins import MDIDialogMixin
+
+class FrmAddHousehold(QDialog, Ui_Households_Add, MDIDialogMixin):	
     ''' Creates the add household form '''	
 
     def __init__(self, parent, projectid, projectname):
@@ -37,27 +39,6 @@ class FrmAddHousehold(QDialog, Ui_Households_Add):
         # display project name
         self.lblProjectName.setText(projectname)
 
-    def setMdi(self, mdi):
-        self.mdi = mdi
-        
-    def mdiClose(self):
-        # Why am I doing this both ways? I'm not sure. Someone should FIXME
-        try:
-            self.mdi.closeActiveSubWindow()
-            return
-        except Exception, e:
-            pass
-        try:
-            self.parent.closeActiveSubWindow()
-            return
-        except Exception, e:
-            pass
-        try:
-            self.parent.mdi.closeActiveSubWindow()
-        except Exception, e:
-            pass
-        self.close()
-        
     def saveHousehold(self):
         ''' Saves newly created household data to database '''
         
@@ -86,4 +67,4 @@ class FrmAddHousehold(QDialog, Ui_Households_Add):
         
         # close new project window
         self.parent.getHouseholds()
-        self.close()
+        self.mdiClose()

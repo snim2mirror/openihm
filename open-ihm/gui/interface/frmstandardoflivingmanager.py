@@ -13,7 +13,9 @@ import data.mysql.connector
 # import the Standard of Living  Manager design class
 from gui.designs.ui_manage_standardofliving import Ui_StandardOfLivingManager
 
-class FrmStandardOfLivingManager(QDialog, Ui_StandardOfLivingManager):	
+from mixins import MDIDialogMixin
+
+class FrmStandardOfLivingManager(QDialog, Ui_StandardOfLivingManager, MDIDialogMixin):	
      ''' Creates the Standard of Living Manager form. '''	
 
      def __init__(self, parent):
@@ -28,9 +30,6 @@ class FrmStandardOfLivingManager(QDialog, Ui_StandardOfLivingManager):
          self.config = Config.dbinfo().copy()
          
          self.listItems()
-                  
-     def mdiClose(self):
-          self.parent.mdi.closeActiveSubWindow()
 
      def countRowsSelected(self, tblVw):
          selectedRows = self.getSelectedRows(tblVw)

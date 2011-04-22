@@ -4,7 +4,9 @@ from PyQt4.QtCore import *
 # import interface design
 from gui.designs.ui_databasemessage import Ui_DatabaseMessage
 
-class FrmDatabaseMessage(QDialog, Ui_DatabaseMessage):
+from mixins import MDIDialogMixin
+
+class FrmDatabaseMessage(QDialog, Ui_DatabaseMessage, MDIDialogMixin):
      def __init__(self, message,  parent = None):
          ''' Set up the dialog box interface '''
          QDialog.__init__(self)
@@ -13,6 +15,3 @@ class FrmDatabaseMessage(QDialog, Ui_DatabaseMessage):
          self.setupUi(self)
          self.lblMessage.setText( message )
          self.setWindowIcon( QIcon('resources/images/openihm.png') )
-
-     def mdiClose(self):
-          self.parent.mdi.closeActiveSubWindow()

@@ -15,7 +15,9 @@ from data.database import Database
 from frm_managefoodtypes_add import FrmAddFoodCropType
 from frm_managefoodtypes_edit import FrmEditCropType
 
-class FrmManageTypes(QDialog, Ui_FoodTypes):		
+from mixins import MDIDialogMixin
+
+class FrmManageTypes(QDialog, Ui_FoodTypes, MDIDialogMixin):		
         ''' Creates the Edit Project form. '''	
         def __init__(self, parent):
                 
@@ -32,9 +34,6 @@ class FrmManageTypes(QDialog, Ui_FoodTypes):
 		self.connect(self.cmdDelete, SIGNAL("clicked()"), self.deleteFoodType)
 		'''
 
-	def mdiClose(self):
-		self.parent.closeActiveSubWindow()
-		
 	def getTypes(self):
                	# select query to retrieve Food Types and related information
         	query = '''SELECT name,category,unitofmeasure,energyvalueperunit FROM setup_foods_crops'''

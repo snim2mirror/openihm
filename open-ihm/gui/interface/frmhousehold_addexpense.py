@@ -11,7 +11,9 @@ import data.mysql.connector
 
 from gui.designs.ui_household_addexpense import Ui_AddHouseholdExpense
 
-class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense):	
+from mixins import MDIDialogMixin
+
+class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin):	
     ''' Form to add or edit Household Expenditure  '''	
     def __init__(self, parent,  hhid, hhname, expid = 0 ):
 		''' Set up the dialog box interface '''
@@ -33,10 +35,6 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense):
 		# display household name
 		self.lblHouseholdName.setText(hhname)
 		
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
-
-                
     def getExpenditureTypes(self):
 		''' Retrieve Expenditure Types and display them in a combobox '''
 		# select query to Asset Types
@@ -119,4 +117,4 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense):
 		
 		# close new project window
 		self.parent.retrieveHouseholdExpenses()
-		self.close()
+		self.mdiClose()

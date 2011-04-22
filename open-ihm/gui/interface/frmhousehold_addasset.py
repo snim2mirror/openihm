@@ -11,7 +11,9 @@ import data.mysql.connector
 
 from gui.designs.ui_household_addasset import Ui_AddHouseholdAsset
 
-class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset):	
+from mixins import MDIDialogMixin
+
+class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset, MDIDialogMixin):	
      ''' Form to add or edit a Household Asset  '''	
      def __init__(self, parent,  hhid, hhname, assetid = 0 ):
          ''' Set up the dialog box interface '''
@@ -34,10 +36,6 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset):
          # display household name
          self.lblHouseholdName.setText(hhname)
 
-     def mdiClose(self):
-          self.parent.mdi.closeActiveSubWindow()
-
-         
      def getAssetCategories(self):
          ''' Retrieve Asset Categories and display them in a combobox '''
          # for now categories are hard coded (later will be moved to database)
@@ -156,4 +154,4 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset):
 
          # close new project window
          self.parent.retrieveHouseholdAssets()
-         self.close()
+         self.mdiClose()

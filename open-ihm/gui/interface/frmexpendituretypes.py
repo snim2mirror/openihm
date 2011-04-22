@@ -14,7 +14,9 @@ from gui.designs.ui_expendituretypes import Ui_ExpenditureTypes
 #import GenericDBOP which has methods for managing database operations
 from data.GenericDBOP import GenericDBOP
 
-class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes):	
+from mixins import MDIDialogMixin
+
+class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):	
 	''' Creates the Manage Expenditure Types from. Uses the design class
 		in gui.designs.ui_expendituretypes. '''	
 	def __init__(self, parent):
@@ -26,9 +28,6 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes):
 
         	self.getExpenditureCategories()
         	self.getExpenditureTypes()
-	
-	def mdiClose(self):
-		self.parent.closeActiveSubWindow()		
 
 	#Begin block of methods for managing Expenditure Categories 	
 	def getExpenditureCategories(self):

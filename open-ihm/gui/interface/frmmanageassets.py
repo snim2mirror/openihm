@@ -14,7 +14,9 @@ from gui.designs.ui_manageassets import Ui_ManageAssetDetails
 #import GenericDBOP which has methods for managing database operations
 from data.GenericDBOP import GenericDBOP
 
-class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):	
+from mixins import MDIDialogMixin
+
+class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):	
 	''' Creates the Manage Asset Details from. Uses the design class
 		in gui.designs.ui_manageassets. '''	
 	
@@ -37,10 +39,6 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails):
                 myIntVal = QIntValidator(0, 10000, self.txtEnergyValue)
                 self.txtEnergyValue.setValidator(myIntVal);
                 self.txtLivestockEnergyValue.setValidator(myIntVal)
-
-
-	def mdiClose(self):
-		self.parent.closeActiveSubWindow()
 
 	#Begin block of methods for managing Savings Categories 
 	def getSavingsCategories(self):

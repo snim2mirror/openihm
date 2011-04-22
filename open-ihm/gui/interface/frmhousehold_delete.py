@@ -12,7 +12,9 @@ import data.mysql.connector
 # import form design
 from gui.designs.ui_household_delete import Ui_DeleteHousehold
 
-class FrmDelHousehold(QDialog, Ui_DeleteHousehold):	
+from mixins import MDIDialogMixin
+
+class FrmDelHousehold(QDialog, Ui_DeleteHousehold, MDIDialogMixin):	
     ''' Creates the Edit Project form. '''	
     def __init__(self, parent):
         ''' Set up the dialog box interface '''
@@ -24,9 +26,6 @@ class FrmDelHousehold(QDialog, Ui_DeleteHousehold):
         
         # get projects
         self.getHouseholds()
-
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
 
     def getHouseholds(self):
         # connect to mysql database
@@ -77,7 +76,7 @@ class FrmDelHousehold(QDialog, Ui_DeleteHousehold):
         cursor.close()
         db.close()
         
-        self.close()
+        self.mdiClose()
         
         
         

@@ -14,7 +14,9 @@ from gui.designs.ui_manageincomedetails import Ui_ManageIncome
 #import GenericDBOP which has methods for managing database operations
 from data.GenericDBOP import GenericDBOP
 
-class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):	
+from mixins import MDIDialogMixin
+
+class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):	
 	''' Creates the Manage Income Source Details from. Uses the design class
 		in gui.designs.ui_manageincomedetails. '''	
 	def __init__(self, parent):
@@ -37,9 +39,6 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
                 self.txtEnergyValue.setValidator(myIntVal)
                 self.txtLivestockEnergyValue.setValidator(myIntVal)
                 self.txtWildFoodEnergyValue.setValidator(myIntVal)
-
-	def mdiClose(self):
-		self.parent.closeActiveSubWindow()
 
         #Begin block of methods for managing Foodstock details
 	def clearCropTextboxes(self):

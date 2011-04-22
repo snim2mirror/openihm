@@ -10,7 +10,9 @@ from data.controller import Controller
 
 from gui.designs.ui_edithousehold_details import Ui_EditHousehold
 
-class FrmEditHouseholdDetails(QDialog, Ui_EditHousehold):	
+from mixins import MDIDialogMixin
+
+class FrmEditHouseholdDetails(QDialog, Ui_EditHousehold, MDIDialogMixin):	
     ''' Creates the Edit Household form. '''	
     def __init__(self, parent,  hhid):
         ''' Set up the dialog box interface '''
@@ -31,9 +33,6 @@ class FrmEditHouseholdDetails(QDialog, Ui_EditHousehold):
         # display project name
         self.lblProjectName.setText(self.parent.projectname)
         
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
-        
     def showHouseholdDetails(self):
         ''' Retrieve and display household data '''
         self.txtShortHouseHoldName.setText(str( self.household.getHouseholdID() ))
@@ -52,4 +51,4 @@ class FrmEditHouseholdDetails(QDialog, Ui_EditHousehold):
         self.household.setData( householdname,  dateofcollection,  newhhid )
         
         # close new project window
-        self.parent.mdi.closeActiveSubWindow()
+        self.mdiClose()

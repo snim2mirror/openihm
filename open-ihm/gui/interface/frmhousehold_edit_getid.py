@@ -14,7 +14,9 @@ from data.controller import Controller
 from gui.designs.ui_edithousehold_getid import Ui_EditHouseholdGetID
 from frmhousehold_edit_details import FrmEditHouseholdDetails
 
-class FrmEditHouseholdGetID(QDialog, Ui_EditHouseholdGetID):	
+from mixins import MDIDialogMixin
+
+class FrmEditHouseholdGetID(QDialog, Ui_EditHouseholdGetID, MDIDialogMixin):	
     ''' Creates the Edit Project form. '''	
     def __init__(self, parent):
         ''' Set up the dialog box interface '''
@@ -24,9 +26,6 @@ class FrmEditHouseholdGetID(QDialog, Ui_EditHouseholdGetID):
         
         # get projects
         self.getHouseholds()
-        
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
         
     def getHouseholds(self):
         controller = Controller()

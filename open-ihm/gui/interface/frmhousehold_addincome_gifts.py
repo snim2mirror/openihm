@@ -11,7 +11,9 @@ import data.mysql.connector
 
 from gui.designs.ui_household_income_gifts import Ui_AddHouseholdIncomeGifts
 
-class FrmHouseholdGiftsIncome(QDialog, Ui_AddHouseholdIncomeGifts):	
+from mixins import MDIDialogMixin
+
+class FrmHouseholdGiftsIncome(QDialog, Ui_AddHouseholdIncomeGifts, MDIDialogMixin):	
      ''' Form to add or edit a Household Gifts Income  '''	
      def __init__(self, parent,  hhid, hhname, incomeid = 0 ):
          ''' Set up the dialog box interface '''
@@ -33,9 +35,6 @@ class FrmHouseholdGiftsIncome(QDialog, Ui_AddHouseholdIncomeGifts):
 
          # display household name
          self.lblHouseholdName.setText(hhname)
-
-     def mdiClose(self):
-          self.parent.mdi.closeActiveSubWindow()
 
      def getGiftsTypes(self):
          ''' Retrieve Gifts Types and display them in a combobox '''
@@ -145,4 +144,4 @@ class FrmHouseholdGiftsIncome(QDialog, Ui_AddHouseholdIncomeGifts):
          
          # close new project window
          self.parent.retrieveHouseholdGiftsIncome()
-         self.close()
+         self.mdiClose()

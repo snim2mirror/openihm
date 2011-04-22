@@ -61,7 +61,7 @@
    <sender>cmdCancel</sender>
    <signal>clicked()</signal>
    <receiver>OpenProject</receiver>
-   <slot>mdiclose()</slot>
+   <slot>mdiClose()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>324</x>
@@ -80,8 +80,8 @@
    <slot>openProject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>43</x>
-     <y>64</y>
+     <x>69</x>
+     <y>93</y>
     </hint>
     <hint type="destinationlabel">
      <x>113</x>

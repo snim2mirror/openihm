@@ -12,7 +12,9 @@ from data.controller import Controller
 # import the Edit Project Dialog design class
 from gui.designs.ui_editproject_details import Ui_EditProject
 
-class FrmEditProject(QtGui.QDialog, Ui_EditProject):	
+from mixins import MDIDialogMixin
+
+class FrmEditProject(QtGui.QDialog, Ui_EditProject, MDIDialogMixin):	
     ''' Creates the Edit Project form. '''	
     def __init__(self, parent):
         ''' Set up the dialog box interface '''
@@ -30,10 +32,6 @@ class FrmEditProject(QtGui.QDialog, Ui_EditProject):
         # allow the calendar widget to pop up
         self.dtpStartDate.setCalendarPopup(True)
         self.dtpEndDate.setCalendarPopup(True)
-        
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
-
         
     def getCurrencies(self):
          ''' Loads currencies into the currency combo box '''
@@ -70,4 +68,4 @@ class FrmEditProject(QtGui.QDialog, Ui_EditProject):
         self.parent.setWindowTitle("Open IHM - " + projectname)
         
         # close new project window
-        self.parent.mdi.closeActiveSubWindow()
+        self.mdiClose()

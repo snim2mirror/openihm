@@ -10,7 +10,9 @@ from PyQt4 import QtGui, QtCore
 # import the Manage Other Tradable Goods Dialog design class
 from gui.designs.ui_managetrees import Ui_Trees
 
-class FrmManageAssetTrees(Ui_Trees):	
+from mixins import MDIDialogMixin
+
+class FrmManageAssetTrees(Ui_Trees, MDIDialogMixin):	
 	''' Creates the Manage Asset Trees from. Uses the design class
 		in gui.designs.ui_manageassettrees. '''	
 	def setupUi(self, Form, Mdi):

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householddisposableincome.ui'
 #
-# Created: Thu Apr 21 19:28:08 2011
+# Created: Fri Apr 22 15:47:24 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -91,12 +91,12 @@ class Ui_HouseholdDisposableIncome(object):
         self.cmdSaveDataTable = QtGui.QPushButton(self.groupBox_3)
         self.cmdSaveDataTable.setObjectName(_fromUtf8("cmdSaveDataTable"))
         self.horizontalLayout.addWidget(self.cmdSaveDataTable)
-        self.cmdClose = QtGui.QPushButton(self.groupBox_3)
-        self.cmdClose.setObjectName(_fromUtf8("cmdClose"))
-        self.horizontalLayout.addWidget(self.cmdClose)
         self.cmdShowReport = QtGui.QPushButton(self.groupBox_3)
         self.cmdShowReport.setObjectName(_fromUtf8("cmdShowReport"))
         self.horizontalLayout.addWidget(self.cmdShowReport)
+        self.cmdClose = QtGui.QPushButton(self.groupBox_3)
+        self.cmdClose.setObjectName(_fromUtf8("cmdClose"))
+        self.horizontalLayout.addWidget(self.cmdClose)
         self.formLayout.setWidget(4, QtGui.QFormLayout.SpanningRole, self.groupBox_3)
 
         self.retranslateUi(HouseholdDisposableIncome)
@@ -109,8 +109,7 @@ class Ui_HouseholdDisposableIncome(object):
         HouseholdDisposableIncome.setTabOrder(self.cmbProjects, self.cmbReportType)
         HouseholdDisposableIncome.setTabOrder(self.cmbReportType, self.treeViewHouseholds)
         HouseholdDisposableIncome.setTabOrder(self.treeViewHouseholds, self.cmdSaveDataTable)
-        HouseholdDisposableIncome.setTabOrder(self.cmdSaveDataTable, self.cmdShowReport)
-        HouseholdDisposableIncome.setTabOrder(self.cmdShowReport, self.cmdClose)
+        HouseholdDisposableIncome.setTabOrder(self.cmdSaveDataTable, self.cmdClose)
 
     def retranslateUi(self, HouseholdDisposableIncome):
         HouseholdDisposableIncome.setWindowTitle(QtGui.QApplication.translate("HouseholdDisposableIncome", "Report: Households by Income Source", None, QtGui.QApplication.UnicodeUTF8))
@@ -122,6 +121,6 @@ class Ui_HouseholdDisposableIncome(object):
         self.groupBox.setTitle(QtGui.QApplication.translate("HouseholdDisposableIncome", "Household Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_2.setTitle(QtGui.QApplication.translate("HouseholdDisposableIncome", "Personal Characteristics", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdSaveDataTable.setText(QtGui.QApplication.translate("HouseholdDisposableIncome", "Save Data Table", None, QtGui.QApplication.UnicodeUTF8))
-        self.cmdClose.setText(QtGui.QApplication.translate("HouseholdDisposableIncome", "Close", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdShowReport.setText(QtGui.QApplication.translate("HouseholdDisposableIncome", "Show Report", None, QtGui.QApplication.UnicodeUTF8))
+        self.cmdClose.setText(QtGui.QApplication.translate("HouseholdDisposableIncome", "Close", None, QtGui.QApplication.UnicodeUTF8))
 

@@ -14,7 +14,9 @@ from outputs.routines.report_disposable_income import DisposableHouseholdIncome
 from outputs.routines.report_disposableincome_write import HouseholdsIncomeWrite
 from outputs.routines.report_livingthreshold import LivingThreshhold
 
-class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
+from mixins import MDIDialogMixin
+
+class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome, MDIDialogMixin):
     ''' Creates the Household Disposable Income Report from. Uses the design class
 		in gui.designs.ui_report_householddisposableincome. '''	
 	
@@ -33,9 +35,6 @@ class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome):
         self.insertPCharsHeader()
         self.setInterfaceReportType()        	
 
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
-        
     def updateDialogData(self):
         '''Update Income Sources list to those relevant for the current project'''
         self.getHouseholdCharacteristics()

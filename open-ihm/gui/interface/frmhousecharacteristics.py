@@ -14,7 +14,9 @@ from gui.designs.ui_housecharacteristics import Ui_HouseCharacteristics
 #Import class with persistence management methods
 from data.GenericDBOP import GenericDBOP
 
-class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics):		
+from mixins import MDIDialogMixin
+
+class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics, MDIDialogMixin):
         ''' Creates the Edit Project form. '''	
         def __init__(self, parent):
                 
@@ -28,9 +30,6 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics):
         	self.getHouseholdCharacteristics()
         	self.setDataTypes()
 
-	def mdiClose(self):
-		self.parent.closeActiveSubWindow()
-		
 	def getHouseholdCharacteristics(self):
                	# select query to retrieve Food Types and related information
         	query = '''SELECT characteristic FROM globalhouseholdcharacteristics'''

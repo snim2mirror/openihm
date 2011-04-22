@@ -171,16 +171,16 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="cmdClose">
+       <widget class="QPushButton" name="cmdShowReport">
         <property name="text">
-         <string>Close</string>
+         <string>Show Report</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="cmdShowReport">
+       <widget class="QPushButton" name="cmdClose">
         <property name="text">
-         <string>Show Report</string>
+         <string>Close</string>
         </property>
        </widget>
       </item>
@@ -194,7 +194,6 @@
   <tabstop>cmbReportType</tabstop>
   <tabstop>treeViewHouseholds</tabstop>
   <tabstop>cmdSaveDataTable</tabstop>
-  <tabstop>cmdShowReport</tabstop>
   <tabstop>cmdClose</tabstop>
  </tabstops>
  <resources/>

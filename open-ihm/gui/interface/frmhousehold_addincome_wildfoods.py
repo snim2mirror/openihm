@@ -11,7 +11,9 @@ import data.mysql.connector
 
 from gui.designs.ui_household_income_wildfoods import Ui_AddHouseholdIncomeWildfoods
 
-class FrmHouseholdWildfoodsIncome(QDialog, Ui_AddHouseholdIncomeWildfoods):	
+from mixins import MDIDialogMixin
+
+class FrmHouseholdWildfoodsIncome(QDialog, Ui_AddHouseholdIncomeWildfoods, MDIDialogMixin):	
      ''' Form to add or edit a Household Crop Income  '''	
      def __init__(self, parent,  hhid, hhname, incomeid = 0 ):
          ''' Set up the dialog box interface '''
@@ -37,9 +39,6 @@ class FrmHouseholdWildfoodsIncome(QDialog, Ui_AddHouseholdIncomeWildfoods):
          self.cboIncomeType.setEditable( False )
          self.txtUnitOfMeasure.setReadOnly( True )
          
-     def mdiClose(self):
-          self.parent.mdi.closeActiveSubWindow()
-
      def displayUnitOfMeasure(self):
          ''' displays the unit of measure of the selected income source '''
          unitofmeasure = self.cboIncomeType.itemData( self.cboIncomeType.currentIndex() ).toString()
@@ -130,4 +129,4 @@ class FrmHouseholdWildfoodsIncome(QDialog, Ui_AddHouseholdIncomeWildfoods):
 
          # close new project window
          self.parent.retrieveHouseholdWildfoodsIncome()
-         self.close()
+         self.mdiClose()

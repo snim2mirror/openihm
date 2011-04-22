@@ -12,7 +12,9 @@ from gui.designs.ui_newproject import Ui_NewProject
 
 from data.controller import Controller
 
-class FrmNewProject(QtGui.QDialog, Ui_NewProject):	
+from mixins import MDIDialogMixin
+
+class FrmNewProject(QtGui.QDialog, Ui_NewProject, MDIDialogMixin):	
     ''' Creates the Create Project from. Uses the design class
         in gui.designs.ui_newproject. '''	
     def __init__(self, parent):
@@ -31,9 +33,6 @@ class FrmNewProject(QtGui.QDialog, Ui_NewProject):
         # allow the calendar widget to pop up
         self.dtpStartDate.setCalendarPopup(True)
         self.dtpEndDate.setCalendarPopup(True)
-        
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
         
     def getCurrencies(self):
         ''' Loads currencies into the currency combo box '''
@@ -61,4 +60,4 @@ class FrmNewProject(QtGui.QDialog, Ui_NewProject):
         self.parent.actionClose_Project.setDisabled(False)
         
         # close new project window
-        self.parent.mdi.closeActiveSubWindow()
+        self.mdiClose()
