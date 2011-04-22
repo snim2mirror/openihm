@@ -4,9 +4,10 @@ from PyQt4.QtGui import *
 from data.config import Config
 import data.mysql.connector 
 from data.controller import Controller
-import common
 
-class TransferIncomeManager:
+from mixins import TableViewMixin
+
+class TransferIncomeManager(TableViewMixin):
      def getProjectTransfers(self):
          incomes = []
          row = 0
@@ -91,9 +92,9 @@ class TransferIncomeManager:
         
      def moveSelectedTransfers(self):
         ''' Add selected available transfers to Project'''
-        numSelected = common.countRowsSelected(self.tblAvailableTransfers)
+        numSelected = self.countRowsSelected(self.tblAvailableTransfers)
         if  numSelected != 0:
-             selectedRows = common.getSelectedRows(self.tblAvailableTransfers)
+             selectedRows = self.getSelectedRows(self.tblAvailableTransfers)
              for row in selectedRows:
                  income 		= self.tblAvailableTransfers.model().item(row,0).text()
                 
@@ -110,14 +111,14 @@ class TransferIncomeManager:
         
      def removeSelectedTransfers(self):
          ''' remove selected transfers from Project'''
-         numSelected = common.countRowsSelected(self.tblSelectedTransfers)
+         numSelected = self.countRowsSelected(self.tblSelectedTransfers)
          if  numSelected != 0:
              msg = "Are you sure you want to remove the selected transfer(s) from this project?"
              ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
              # if deletion is rejected return without deleting
              if ret == QMessageBox.No:
                  return
-             selectedRows = common.getSelectedRows(self.tblSelectedTransfers)
+             selectedRows = self.getSelectedRows(self.tblSelectedTransfers)
              incomes = []
              for row in selectedRows:
                  income = self.tblSelectedTransfers.model().item(row,0).text()

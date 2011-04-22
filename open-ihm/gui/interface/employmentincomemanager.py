@@ -4,9 +4,10 @@ from PyQt4.QtGui import *
 from data.config import Config
 import data.mysql.connector 
 from data.controller import Controller
-import common
 
-class EmploymentIncomeManager:
+from mixins import TableViewMixin
+
+class EmploymentIncomeManager(TableViewMixin):
      def getProjectEmployment(self):
          incomes = []
          row = 0
@@ -91,9 +92,9 @@ class EmploymentIncomeManager:
         
      def moveSelectedEmployment(self):
         ''' Add selected available employment to Project'''
-        numSelected = common.countRowsSelected(self.tblAvailableEmployment)
+        numSelected = self.countRowsSelected(self.tblAvailableEmployment)
         if  numSelected != 0:
-             selectedRows = common.getSelectedRows(self.tblAvailableEmployment)
+             selectedRows = self.getSelectedRows(self.tblAvailableEmployment)
              for row in selectedRows:
                  income 		= self.tblAvailableEmployment.model().item(row,0).text()
                 
@@ -110,14 +111,14 @@ class EmploymentIncomeManager:
         
      def removeSelectedEmployment(self):
          ''' remove selected employment from Project'''
-         numSelected = common.countRowsSelected(self.tblSelectedEmployment)
+         numSelected = self.countRowsSelected(self.tblSelectedEmployment)
          if  numSelected != 0:
              msg = "Are you sure you want to remove the selected employment(s) from this project?"
              ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
              # if deletion is rejected return without deleting
              if ret == QMessageBox.No:
                  return
-             selectedRows = common.getSelectedRows(self.tblSelectedEmployment)
+             selectedRows = self.getSelectedRows(self.tblSelectedEmployment)
              incomes = []
              for row in selectedRows:
                  income = self.tblSelectedEmployment.model().item(row,0).text()
