@@ -95,11 +95,11 @@
    <sender>cmdCancel</sender>
    <signal>clicked()</signal>
    <receiver>EditHouseholdCharacteristic</receiver>
-   <slot>open()</slot>
+   <slot>mdiClose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>367</x>
-     <y>104</y>
+     <x>381</x>
+     <y>153</y>
     </hint>
     <hint type="destinationlabel">
      <x>228</x>
@@ -114,8 +114,8 @@
    <slot>saveCharacteristic()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>56</x>
-     <y>100</y>
+     <x>82</x>
+     <y>153</y>
     </hint>
     <hint type="destinationlabel">
      <x>137</x>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_editmember.ui'
 #
-# Created: Thu Apr 21 19:28:06 2011
+# Created: Fri Apr 22 16:24:02 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -151,6 +151,8 @@ class Ui_EditHouseholdMember(object):
         QtCore.QObject.connect(self.txtAge, QtCore.SIGNAL(_fromUtf8("editingFinished()")), EditHouseholdMember.updateYearOfBirth)
         QtCore.QObject.connect(self.cmbYearOfBirth, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), EditHouseholdMember.updateAge)
         QtCore.QObject.connect(self.txtAge, QtCore.SIGNAL(_fromUtf8("textChanged(QString)")), EditHouseholdMember.updateYearOfBirth)
+        QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), EditHouseholdMember.saveMember)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), EditHouseholdMember.mdiClose)
         QtCore.QMetaObject.connectSlotsByName(EditHouseholdMember)
         EditHouseholdMember.setTabOrder(self.cboSex, self.txtAge)
         EditHouseholdMember.setTabOrder(self.txtAge, self.cmbYearOfBirth)
