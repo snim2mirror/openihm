@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_wildfoods.ui'
 #
-# Created: Thu Apr 21 19:28:07 2011
+# Created: Fri Apr 22 16:31:22 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_AddHouseholdIncomeWildfoods(object):
     def setupUi(self, AddHouseholdIncomeWildfoods):
         AddHouseholdIncomeWildfoods.setObjectName(_fromUtf8("AddHouseholdIncomeWildfoods"))
-        AddHouseholdIncomeWildfoods.resize(405, 349)
+        AddHouseholdIncomeWildfoods.resize(405, 350)
         self.formLayout = QtGui.QFormLayout(AddHouseholdIncomeWildfoods)
         self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label = QtGui.QLabel(AddHouseholdIncomeWildfoods)
@@ -85,6 +85,8 @@ class Ui_AddHouseholdIncomeWildfoods(object):
 
         self.retranslateUi(AddHouseholdIncomeWildfoods)
         QtCore.QObject.connect(self.cboIncomeType, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), AddHouseholdIncomeWildfoods.displayUnitOfMeasure)
+        QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeWildfoods.saveIncome)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeWildfoods.mdiClose)
         QtCore.QMetaObject.connectSlotsByName(AddHouseholdIncomeWildfoods)
         AddHouseholdIncomeWildfoods.setTabOrder(self.cboIncomeType, self.txtUnitOfMeasure)
         AddHouseholdIncomeWildfoods.setTabOrder(self.txtUnitOfMeasure, self.txtUnitsProduced)

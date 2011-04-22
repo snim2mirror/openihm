@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_editcharacteristic.ui'
 #
-# Created: Thu Apr 21 19:28:06 2011
+# Created: Fri Apr 22 16:31:22 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -53,7 +53,7 @@ class Ui_EditHouseholdCharacteristic(object):
         self.formLayout.setWidget(3, QtGui.QFormLayout.SpanningRole, self.groupBox)
 
         self.retranslateUi(EditHouseholdCharacteristic)
-        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), EditHouseholdCharacteristic.open)
+        QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), EditHouseholdCharacteristic.mdiClose)
         QtCore.QObject.connect(self.cmdOk, QtCore.SIGNAL(_fromUtf8("clicked()")), EditHouseholdCharacteristic.saveCharacteristic)
         QtCore.QMetaObject.connectSlotsByName(EditHouseholdCharacteristic)
         EditHouseholdCharacteristic.setTabOrder(self.cboYesNoVal, self.txtValue)
