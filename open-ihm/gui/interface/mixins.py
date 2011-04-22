@@ -42,29 +42,15 @@ class MDIDialogMixin(object):
         
         The dialog may be the active sub-window of an MDI area, or not.
         """
-        print 'MDIDialogMixin'
         if hasattr(self, 'mdi') and self.mdi is not None:
             self.mdi.closeActiveSubWindow()
-            print 'self.mdi.closeActiveSubWindow()'
         elif hasattr(self, 'parent') and hasattr(self.parent, 'closeActiveSubWindow'):
             self.parent.closeActiveSubWindow()
-            print 'self.parent.closeActiveSubWindow()'
         elif hasattr(self, 'parent') and hasattr(self.parent, 'mdi'):
             self.parent.mdi.closeActiveSubWindow()
-            print 'self.parent.mdi.closeActiveSubWindow()'
-#        elif (hasattr(self, 'parent') and hasattr(self.parent, 'parent') and
-#              hasattr(self.parent.parent, 'mdi')):
-#            self.parent.parent.mdi.closeActiveSubWindow()
-#            print 'self.parent.parent.mdi.closeActiveSubWindow()'        
         else:
             self.close()
-            print 'self.close()'
-        # This code *should* be unreachable
-#        print 'UNREACHABLE'
-#        self.close()
-#        print 'REJECT'
-#        self.reject()
-#        return
+        return
 
 class DataEntryMixin(object):
     
