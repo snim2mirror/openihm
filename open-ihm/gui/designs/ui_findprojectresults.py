@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_findprojectresults.ui'
 #
-# Created: Thu Apr 21 19:28:06 2011
+# Created: Fri Apr 22 21:52:27 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -83,6 +83,8 @@ class Ui_FindProjectResults(object):
         self.cmdClose.setObjectName(_fromUtf8("cmdClose"))
         self.horizontalLayout.addWidget(self.cmdClose)
         self.verticalLayout_2.addWidget(self.groupBox_2)
+        self.label.setBuddy(self.txtProjectID)
+        self.label_2.setBuddy(self.txtProjectTitle)
 
         self.retranslateUi(FindProjectResults)
         QtCore.QObject.connect(self.cmdSearch, QtCore.SIGNAL(_fromUtf8("clicked()")), FindProjectResults.showResults)

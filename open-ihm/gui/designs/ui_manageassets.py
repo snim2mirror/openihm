@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageassets.ui'
 #
-# Created: Tue Apr 19 14:28:01 2011
+# Created: Fri Apr 22 21:52:28 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -218,9 +218,19 @@ class Ui_ManageAssetDetails(object):
         self.btnAssetsClose = QtGui.QPushButton(ManageAssetDetails)
         self.btnAssetsClose.setGeometry(QtCore.QRect(490, 350, 80, 28))
         self.btnAssetsClose.setObjectName(_fromUtf8("btnAssetsClose"))
+        self.label_9.setBuddy(self.txtLivestockUnit)
+        self.label_11.setBuddy(self.txtLivestockEnergyValue)
+        self.label_14.setBuddy(self.livestockListView)
+        self.label_27.setBuddy(self.txtLivestockPType)
+        self.label_10.setBuddy(self.txtTreeType)
+        self.label_20.setBuddy(self.treeListView)
+        self.label_12.setBuddy(self.txtTreeMeasuringUnit)
+        self.label_13.setBuddy(self.txtTradableGoodType)
+        self.label_22.setBuddy(self.tradableGoodsListView)
+        self.label_15.setBuddy(self.txtTradableGoodMeasuringUnit)
 
         self.retranslateUi(ManageAssetDetails)
-        self.tabWidget.setCurrentIndex(5)
+        self.tabWidget.setCurrentIndex(3)
         QtCore.QObject.connect(self.savingsListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageAssetDetails.pickSelectedSaving)
         QtCore.QObject.connect(self.btnCashSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.saveSavingsType)
         QtCore.QObject.connect(self.btnCashDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageAssetDetails.deleteSavingsType)

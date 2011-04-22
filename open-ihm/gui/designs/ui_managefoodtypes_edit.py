@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_managefoodtypes_edit.ui'
 #
-# Created: Thu Apr 21 20:27:57 2011
+# Created: Fri Apr 22 21:52:29 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -60,6 +60,10 @@ class Ui_EditFoodTypes(object):
         self.cmdCancel.setObjectName(_fromUtf8("cmdCancel"))
         self.horizontalLayout.addWidget(self.cmdCancel)
         self.formLayout.setWidget(4, QtGui.QFormLayout.SpanningRole, self.groupBox)
+        self.label.setBuddy(self.txtFoodType)
+        self.label_2.setBuddy(self.cmbCategory)
+        self.label_4.setBuddy(self.txtKCalories)
+        self.label_3.setBuddy(self.txtMeasuringUnit)
 
         self.retranslateUi(EditFoodTypes)
         QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), EditFoodTypes.close)

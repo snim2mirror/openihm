@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_addexpense.ui'
 #
-# Created: Thu Apr 21 19:28:06 2011
+# Created: Fri Apr 22 21:52:27 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -72,6 +72,11 @@ class Ui_AddHouseholdExpense(object):
         self.cmdCancel.setObjectName(_fromUtf8("cmdCancel"))
         self.horizontalLayout.addWidget(self.cmdCancel)
         self.formLayout.setWidget(7, QtGui.QFormLayout.SpanningRole, self.groupBox)
+        self.label_2.setBuddy(self.cboExpenditure)
+        self.label_4.setBuddy(self.txtUnitOfMeasure)
+        self.label_3.setBuddy(self.txtKCalPerUnit)
+        self.label_5.setBuddy(self.txtCostPerUnit)
+        self.label_6.setBuddy(self.txtNumberOfUnits)
 
         self.retranslateUi(AddHouseholdExpense)
         QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdExpense.close)

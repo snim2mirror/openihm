@@ -25,6 +25,9 @@
      <property name="text">
       <string>Project Name</string>
      </property>
+     <property name="buddy">
+      <cstring>txtProjectName</cstring>
+     </property>
     </widget>
    </item>
    <item row="0" column="1">
@@ -34,6 +37,9 @@
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>Start Date</string>
+     </property>
+     <property name="buddy">
+      <cstring>dtpStartDate</cstring>
      </property>
     </widget>
    </item>
@@ -45,6 +51,9 @@
      <property name="text">
       <string>End Date</string>
      </property>
+     <property name="buddy">
+      <cstring>dtpEndDate</cstring>
+     </property>
     </widget>
    </item>
    <item row="2" column="1">
@@ -55,6 +64,9 @@
      <property name="text">
       <string>Currency</string>
      </property>
+     <property name="buddy">
+      <cstring>cmbCurrency</cstring>
+     </property>
     </widget>
    </item>
    <item row="3" column="1">
@@ -64,6 +76,9 @@
     <widget class="QLabel" name="label_5">
      <property name="text">
       <string>Description</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtDescription</cstring>
      </property>
     </widget>
    </item>

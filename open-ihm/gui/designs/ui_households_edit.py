@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_households_edit.ui'
 #
-# Created: Thu Apr 21 20:00:23 2011
+# Created: Fri Apr 22 21:52:28 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -71,6 +71,9 @@ class Ui_Households_Edit(object):
         self.cmdCancel.setObjectName(_fromUtf8("cmdCancel"))
         self.horizontalLayout.addWidget(self.cmdCancel)
         self.formLayout.setWidget(4, QtGui.QFormLayout.SpanningRole, self.groupBox)
+        self.label_6.setBuddy(self.txtShortHouseHoldName)
+        self.label_2.setBuddy(self.txtHouseholdName)
+        self.label_5.setBuddy(self.dtpDateVisted)
 
         self.retranslateUi(Households_Edit)
         QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), Households_Edit.mdiClose)

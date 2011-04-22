@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manage_standardofliving.ui'
 #
-# Created: Thu Apr 21 19:28:07 2011
+# Created: Fri Apr 22 21:52:28 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -67,6 +67,8 @@ class Ui_StandardOfLivingManager(object):
         self.cmdClose.setObjectName(_fromUtf8("cmdClose"))
         self.horizontalLayout.addWidget(self.cmdClose)
         self.gridLayout.addWidget(self.groupBox_2, 1, 1, 1, 1)
+        self.label.setBuddy(self.txtItem)
+        self.label_2.setBuddy(self.cmbItemType)
 
         self.retranslateUi(StandardOfLivingManager)
         QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), StandardOfLivingManager.mdiClose)

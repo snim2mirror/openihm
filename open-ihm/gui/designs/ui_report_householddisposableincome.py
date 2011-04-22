@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householddisposableincome.ui'
 #
-# Created: Fri Apr 22 21:39:25 2011
+# Created: Fri Apr 22 21:52:29 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -98,6 +98,8 @@ class Ui_HouseholdDisposableIncome(object):
         self.cmdClose.setObjectName(_fromUtf8("cmdClose"))
         self.horizontalLayout.addWidget(self.cmdClose)
         self.formLayout.setWidget(4, QtGui.QFormLayout.SpanningRole, self.groupBox_3)
+        self.label.setBuddy(self.cmbProjects)
+        self.label_2.setBuddy(self.cmbReportType)
 
         self.retranslateUi(HouseholdDisposableIncome)
         QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), HouseholdDisposableIncome.mdiClose)

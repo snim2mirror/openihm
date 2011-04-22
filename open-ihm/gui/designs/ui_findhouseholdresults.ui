@@ -70,6 +70,9 @@
         <property name="text">
          <string>Household No:</string>
         </property>
+        <property name="buddy">
+         <cstring>txtHouseholdNo</cstring>
+        </property>
        </widget>
       </item>
       <item row="1" column="1">
@@ -79,6 +82,9 @@
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Household Name:</string>
+        </property>
+        <property name="buddy">
+         <cstring>txtHouseholdName</cstring>
         </property>
        </widget>
       </item>

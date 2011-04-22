@@ -33,6 +33,9 @@
      <property name="text">
       <string>Expenditure:</string>
      </property>
+     <property name="buddy">
+      <cstring>cboExpenditure</cstring>
+     </property>
     </widget>
    </item>
    <item row="1" column="1">
@@ -47,6 +50,9 @@
      <property name="text">
       <string>Unit:</string>
      </property>
+     <property name="buddy">
+      <cstring>txtUnitOfMeasure</cstring>
+     </property>
     </widget>
    </item>
    <item row="2" column="1">
@@ -56,6 +62,9 @@
     <widget class="QLabel" name="label_3">
      <property name="text">
       <string>KCal per Unit:</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtKCalPerUnit</cstring>
      </property>
     </widget>
    </item>
@@ -74,6 +83,9 @@
      <property name="text">
       <string>Cost per Unit:</string>
      </property>
+     <property name="buddy">
+      <cstring>txtCostPerUnit</cstring>
+     </property>
     </widget>
    </item>
    <item row="5" column="1">
@@ -83,6 +95,9 @@
     <widget class="QLabel" name="label_6">
      <property name="text">
       <string>Number of Units:</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtNumberOfUnits</cstring>
      </property>
     </widget>
    </item>

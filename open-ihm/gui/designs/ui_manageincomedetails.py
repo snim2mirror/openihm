@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageincomedetails.ui'
 #
-# Created: Fri Apr 22 08:51:16 2011
+# Created: Fri Apr 22 21:52:29 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -230,6 +230,10 @@ class Ui_ManageIncome(object):
         self.btnManageIncomeClose = QtGui.QPushButton(ManageIncome)
         self.btnManageIncomeClose.setGeometry(QtCore.QRect(530, 350, 80, 28))
         self.btnManageIncomeClose.setObjectName(_fromUtf8("btnManageIncomeClose"))
+        self.label_26.setBuddy(self.cropListView)
+        self.label_3.setBuddy(self.txtMeasuringUnit)
+        self.label_4.setBuddy(self.txtCropTypeName)
+        self.label_6.setBuddy(self.txtEnergyValue)
 
         self.retranslateUi(ManageIncome)
         self.tabWidget.setCurrentIndex(0)

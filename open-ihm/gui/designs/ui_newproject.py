@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_newproject.ui'
 #
-# Created: Thu Apr 21 19:28:08 2011
+# Created: Fri Apr 22 21:52:29 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -63,6 +63,11 @@ class Ui_NewProject(object):
         self.cmdCancel.setObjectName(_fromUtf8("cmdCancel"))
         self.horizontalLayout.addWidget(self.cmdCancel)
         self.formLayout.setWidget(5, QtGui.QFormLayout.SpanningRole, self.groupBox)
+        self.label_2.setBuddy(self.txtProjectName)
+        self.label_3.setBuddy(self.dtpStartDate)
+        self.label_4.setBuddy(self.dtpEndDate)
+        self.label_6.setBuddy(self.cmbCurrency)
+        self.label_5.setBuddy(self.txtDescription)
 
         self.retranslateUi(NewProject)
         QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), NewProject.saveProject)

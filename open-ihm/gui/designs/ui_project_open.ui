@@ -25,6 +25,9 @@
      <property name="text">
       <string>Project Name:</string>
      </property>
+     <property name="buddy">
+      <cstring>cboProjectName</cstring>
+     </property>
     </widget>
    </item>
    <item row="0" column="1">

@@ -48,6 +48,9 @@
      <property name="text">
       <string>Household Number:</string>
      </property>
+     <property name="buddy">
+      <cstring>txtShortHouseHoldName</cstring>
+     </property>
     </widget>
    </item>
    <item row="1" column="1">
@@ -63,6 +66,9 @@
      <property name="text">
       <string>Household Name:</string>
      </property>
+     <property name="buddy">
+      <cstring>txtHouseholdName</cstring>
+     </property>
     </widget>
    </item>
    <item row="2" column="1">
@@ -77,6 +83,9 @@
      </property>
      <property name="text">
       <string>Date Visited:</string>
+     </property>
+     <property name="buddy">
+      <cstring>dtpDateVisted</cstring>
      </property>
     </widget>
    </item>

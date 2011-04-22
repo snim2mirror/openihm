@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_addmember.ui'
 #
-# Created: Thu Apr 21 19:28:06 2011
+# Created: Fri Apr 22 21:52:27 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -18,7 +18,7 @@ class Ui_AddHouseholdMember(object):
     def setupUi(self, AddHouseholdMember):
         AddHouseholdMember.setObjectName(_fromUtf8("AddHouseholdMember"))
         AddHouseholdMember.setWindowModality(QtCore.Qt.NonModal)
-        AddHouseholdMember.resize(392, 393)
+        AddHouseholdMember.resize(392, 404)
         self.formLayout_3 = QtGui.QFormLayout(AddHouseholdMember)
         self.formLayout_3.setObjectName(_fromUtf8("formLayout_3"))
         self.label = QtGui.QLabel(AddHouseholdMember)
@@ -135,6 +135,12 @@ class Ui_AddHouseholdMember(object):
         self.cmdCancel.setObjectName(_fromUtf8("cmdCancel"))
         self.horizontalLayout.addWidget(self.cmdCancel)
         self.formLayout_3.setWidget(5, QtGui.QFormLayout.SpanningRole, self.groupBox_3)
+        self.label_4.setBuddy(self.cboSex)
+        self.label_2.setBuddy(self.txtAge)
+        self.label_3.setBuddy(self.cmbYearOfBirth)
+        self.label_5.setBuddy(self.cmbMonthsAbsent)
+        self.label_6.setBuddy(self.txtReason)
+        self.label_7.setBuddy(self.txtWhere)
 
         self.retranslateUi(AddHouseholdMember)
         QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdMember.mdiClose)

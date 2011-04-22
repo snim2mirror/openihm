@@ -25,6 +25,9 @@
      <property name="text">
       <string>Age</string>
      </property>
+     <property name="buddy">
+      <cstring>txtAge</cstring>
+     </property>
     </widget>
    </item>
    <item row="0" column="1">
@@ -35,6 +38,9 @@
      <property name="text">
       <string>Energy Requirements - Males</string>
      </property>
+     <property name="buddy">
+      <cstring>txtEnergyRequirementMales</cstring>
+     </property>
     </widget>
    </item>
    <item row="1" column="1">
@@ -44,6 +50,9 @@
     <widget class="QLabel" name="label_5">
      <property name="text">
       <string>Energy Requirements - Females</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtEnergyRequirementFemales</cstring>
      </property>
     </widget>
    </item>

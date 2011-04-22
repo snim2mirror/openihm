@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_currencymanager.ui'
 #
-# Created: Fri Apr 22 21:39:25 2011
+# Created: Fri Apr 22 21:52:26 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -76,6 +76,10 @@ class Ui_CurrencyManager(object):
         self.cmdClose = QtGui.QPushButton(self.groupBox_2)
         self.cmdClose.setObjectName(_fromUtf8("cmdClose"))
         self.horizontalLayout.addWidget(self.cmdClose)
+        self.label.setBuddy(self.txtCurrencyName)
+        self.label_2.setBuddy(self.txtAbbreviation)
+        self.label_3.setBuddy(self.txtSymbol)
+        self.label_4.setBuddy(self.tblCurrencies)
 
         self.retranslateUi(CurrencyManager)
         QtCore.QObject.connect(self.tblCurrencies, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), CurrencyManager.showSelectedCurrency)

@@ -40,6 +40,9 @@
       <property name="text">
        <string>Currency Name:</string>
       </property>
+      <property name="buddy">
+       <cstring>txtCurrencyName</cstring>
+      </property>
      </widget>
     </item>
     <item row="0" column="1">
@@ -50,6 +53,9 @@
       <property name="text">
        <string>Abbreviation:</string>
       </property>
+      <property name="buddy">
+       <cstring>txtAbbreviation</cstring>
+      </property>
      </widget>
     </item>
     <item row="1" column="1">
@@ -59,6 +65,9 @@
      <widget class="QLabel" name="label_3">
       <property name="text">
        <string>Symbol:</string>
+      </property>
+      <property name="buddy">
+       <cstring>txtSymbol</cstring>
       </property>
      </widget>
     </item>
@@ -84,6 +93,9 @@
    </property>
    <property name="text">
     <string>Available Currencies</string>
+   </property>
+   <property name="buddy">
+    <cstring>tblCurrencies</cstring>
    </property>
   </widget>
   <widget class="QTableView" name="tblCurrencies">

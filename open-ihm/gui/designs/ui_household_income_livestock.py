@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_income_livestock.ui'
 #
-# Created: Thu Apr 21 19:28:07 2011
+# Created: Fri Apr 22 21:52:28 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -82,6 +82,13 @@ class Ui_AddHouseholdIncomeLivestock(object):
         self.label_6 = QtGui.QLabel(AddHouseholdIncomeLivestock)
         self.label_6.setObjectName(_fromUtf8("label_6"))
         self.formLayout.setWidget(6, QtGui.QFormLayout.LabelRole, self.label_6)
+        self.label_2.setBuddy(self.cboIncomeType)
+        self.label_7.setBuddy(self.txtUnitOfMeasure)
+        self.label_4.setBuddy(self.txtUnitsProduced)
+        self.label_3.setBuddy(self.txtUnitsSold)
+        self.label_8.setBuddy(self.txtUnitsOtherUses)
+        self.label_5.setBuddy(self.txtUnitsConsumed)
+        self.label_6.setBuddy(self.txtUnitPrice)
 
         self.retranslateUi(AddHouseholdIncomeLivestock)
         QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), AddHouseholdIncomeLivestock.mdiClose)

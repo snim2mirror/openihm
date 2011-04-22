@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_managecroptypes.ui'
 #
-# Created: Thu Apr 21 19:28:07 2011
+# Created: Fri Apr 22 21:52:28 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -66,6 +66,11 @@ class Ui_CropTypes(object):
         self.btnManageCropsClose.setObjectName(_fromUtf8("btnManageCropsClose"))
         self.horizontalLayout.addWidget(self.btnManageCropsClose)
         self.formLayout.setWidget(5, QtGui.QFormLayout.SpanningRole, self.groupBox)
+        self.label.setBuddy(self.comboBox)
+        self.label_2.setBuddy(self.comboBox_2)
+        self.label_3.setBuddy(self.comboBox_3)
+        self.label_4.setBuddy(self.comboBox_4)
+        self.label_5.setBuddy(self.lineEdit)
 
         self.retranslateUi(CropTypes)
         QtCore.QObject.connect(self.btnManageCropsClose, QtCore.SIGNAL(_fromUtf8("clicked()")), CropTypes.mdiClose)

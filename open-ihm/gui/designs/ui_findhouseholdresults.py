@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_findhouseholdresults.ui'
 #
-# Created: Fri Apr 22 21:39:25 2011
+# Created: Fri Apr 22 21:52:27 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -97,6 +97,8 @@ class Ui_FindHouseholdResults(object):
         self.cmdClose = QtGui.QPushButton(FindHouseholdResults)
         self.cmdClose.setObjectName(_fromUtf8("cmdClose"))
         self.verticalLayout.addWidget(self.cmdClose)
+        self.label.setBuddy(self.txtHouseholdNo)
+        self.label_2.setBuddy(self.txtHouseholdName)
 
         self.retranslateUi(FindHouseholdResults)
         QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), FindHouseholdResults.mdiClose)

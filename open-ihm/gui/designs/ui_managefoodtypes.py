@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_managefoodtypes.ui'
 #
-# Created: Thu Apr 21 19:28:08 2011
+# Created: Fri Apr 22 21:52:28 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -56,6 +56,9 @@ class Ui_FoodTypes(object):
         self.cmdManageFoodClose.setObjectName(_fromUtf8("cmdManageFoodClose"))
         self.horizontalLayout.addWidget(self.cmdManageFoodClose)
         self.formLayout.setWidget(3, QtGui.QFormLayout.SpanningRole, self.groupBox)
+        self.label.setBuddy(self.cmbFoodType)
+        self.label_4.setBuddy(self.txtKCalories)
+        self.label_3.setBuddy(self.cmbUnitOfMeasure)
 
         self.retranslateUi(FoodTypes)
         QtCore.QObject.connect(self.cmdManageFoodClose, QtCore.SIGNAL(_fromUtf8("clicked()")), FoodTypes.close)

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_expendituretypes.ui'
 #
-# Created: Fri Apr 22 21:39:25 2011
+# Created: Fri Apr 22 21:52:27 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -44,6 +44,8 @@ class Ui_ExpenditureTypes(object):
         self.btnExpenditureClose = QtGui.QPushButton(ExpenditureTypes)
         self.btnExpenditureClose.setObjectName(_fromUtf8("btnExpenditureClose"))
         self.formLayout_2.setWidget(4, QtGui.QFormLayout.FieldRole, self.btnExpenditureClose)
+        self.label_3.setBuddy(self.expenseTypeListView)
+        self.label_4.setBuddy(self.txtExpenseType)
 
         self.retranslateUi(ExpenditureTypes)
         QtCore.QObject.connect(self.btnExpenditureClose, QtCore.SIGNAL(_fromUtf8("clicked()")), ExpenditureTypes.mdiClose)

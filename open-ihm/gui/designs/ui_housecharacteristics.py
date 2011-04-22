@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_housecharacteristics.ui'
 #
-# Created: Thu Apr 21 20:34:06 2011
+# Created: Fri Apr 22 21:52:27 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -61,6 +61,9 @@ class Ui_HouseCharacteristics(object):
         self.btnHouseClose.setObjectName(_fromUtf8("btnHouseClose"))
         self.horizontalLayout.addWidget(self.btnHouseClose)
         self.formLayout.setWidget(3, QtGui.QFormLayout.SpanningRole, self.groupBox)
+        self.label.setBuddy(self.cmbCharacteristic)
+        self.label_2.setBuddy(self.cmbDataType)
+        self.label_3.setBuddy(self.txtDescription)
 
         self.retranslateUi(HouseCharacteristics)
         QtCore.QObject.connect(self.cmbCharacteristic, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), HouseCharacteristics.populateForm)

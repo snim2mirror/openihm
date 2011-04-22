@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_findproject.ui'
 #
-# Created: Thu Apr 21 19:32:46 2011
+# Created: Fri Apr 22 21:52:27 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -59,6 +59,8 @@ class Ui_FindProject(object):
         self.cmdCancel.setObjectName(_fromUtf8("cmdCancel"))
         self.horizontalLayout.addWidget(self.cmdCancel)
         self.formLayout.setWidget(3, QtGui.QFormLayout.SpanningRole, self.groupBox)
+        self.label.setBuddy(self.txtProjectID)
+        self.label_2.setBuddy(self.txtProjectTitle)
 
         self.retranslateUi(FindProject)
         QtCore.QObject.connect(self.cmdOk, QtCore.SIGNAL(_fromUtf8("clicked()")), FindProject.findProject)

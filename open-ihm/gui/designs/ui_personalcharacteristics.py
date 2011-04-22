@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_personalcharacteristics.ui'
 #
-# Created: Thu Apr 21 20:32:13 2011
+# Created: Fri Apr 22 21:52:29 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -55,6 +55,9 @@ class Ui_PersonalCharacteristics(object):
         self.btnPCharsClose.setObjectName(_fromUtf8("btnPCharsClose"))
         self.horizontalLayout.addWidget(self.btnPCharsClose)
         self.formLayout.setWidget(3, QtGui.QFormLayout.SpanningRole, self.groupBox)
+        self.label.setBuddy(self.cmbCharacteristic)
+        self.label_2.setBuddy(self.cmbDataType)
+        self.label_3.setBuddy(self.txtDescription)
 
         self.retranslateUi(PersonalCharacteristics)
         QtCore.QObject.connect(self.cmbCharacteristic, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), PersonalCharacteristics.populateForm)
