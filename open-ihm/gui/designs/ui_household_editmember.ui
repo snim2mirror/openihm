@@ -292,12 +292,14 @@
  </widget>
  <tabstops>
   <tabstop>cboSex</tabstop>
+  <tabstop>chkHeadHousehold</tabstop>
   <tabstop>txtAge</tabstop>
   <tabstop>cmbYearOfBirth</tabstop>
-  <tabstop>chkHeadHousehold</tabstop>
   <tabstop>cmbMonthsAbsent</tabstop>
   <tabstop>txtReason</tabstop>
   <tabstop>txtWhere</tabstop>
+  <tabstop>cmdSave</tabstop>
+  <tabstop>cmdCancel</tabstop>
  </tabstops>
  <resources/>
  <connections>

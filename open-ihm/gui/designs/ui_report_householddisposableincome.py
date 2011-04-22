@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householddisposableincome.ui'
 #
-# Created: Fri Apr 22 15:47:24 2011
+# Created: Fri Apr 22 21:39:25 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -108,8 +108,11 @@ class Ui_HouseholdDisposableIncome(object):
         QtCore.QMetaObject.connectSlotsByName(HouseholdDisposableIncome)
         HouseholdDisposableIncome.setTabOrder(self.cmbProjects, self.cmbReportType)
         HouseholdDisposableIncome.setTabOrder(self.cmbReportType, self.treeViewHouseholds)
-        HouseholdDisposableIncome.setTabOrder(self.treeViewHouseholds, self.cmdSaveDataTable)
-        HouseholdDisposableIncome.setTabOrder(self.cmdSaveDataTable, self.cmdClose)
+        HouseholdDisposableIncome.setTabOrder(self.treeViewHouseholds, self.listViewHCharacteristics)
+        HouseholdDisposableIncome.setTabOrder(self.listViewHCharacteristics, self.listViewPersonalCharacteristics)
+        HouseholdDisposableIncome.setTabOrder(self.listViewPersonalCharacteristics, self.cmdSaveDataTable)
+        HouseholdDisposableIncome.setTabOrder(self.cmdSaveDataTable, self.cmdShowReport)
+        HouseholdDisposableIncome.setTabOrder(self.cmdShowReport, self.cmdClose)
 
     def retranslateUi(self, HouseholdDisposableIncome):
         HouseholdDisposableIncome.setWindowTitle(QtGui.QApplication.translate("HouseholdDisposableIncome", "Report: Households by Income Source", None, QtGui.QApplication.UnicodeUTF8))

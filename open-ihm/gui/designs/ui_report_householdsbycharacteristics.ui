@@ -201,10 +201,13 @@
  <tabstops>
   <tabstop>cmbProjectNames</tabstop>
   <tabstop>cmbHouseholds</tabstop>
+  <tabstop>listViewHCharacteristics</tabstop>
   <tabstop>listViewPersonalCharacteristics</tabstop>
+  <tabstop>cmbOrderCriteria1</tabstop>
   <tabstop>opt1Ascending</tabstop>
-  <tabstop>opt2Ascending</tabstop>
   <tabstop>opt1Descending</tabstop>
+  <tabstop>cmbOrderCriteria2</tabstop>
+  <tabstop>opt2Ascending</tabstop>
   <tabstop>opt2Descending</tabstop>
   <tabstop>cmdGenerateReport</tabstop>
   <tabstop>cmdClose</tabstop>

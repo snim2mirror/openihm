@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_editmember.ui'
 #
-# Created: Fri Apr 22 16:24:02 2011
+# Created: Fri Apr 22 21:39:25 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -154,12 +154,14 @@ class Ui_EditHouseholdMember(object):
         QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), EditHouseholdMember.saveMember)
         QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), EditHouseholdMember.mdiClose)
         QtCore.QMetaObject.connectSlotsByName(EditHouseholdMember)
-        EditHouseholdMember.setTabOrder(self.cboSex, self.txtAge)
+        EditHouseholdMember.setTabOrder(self.cboSex, self.chkHeadHousehold)
+        EditHouseholdMember.setTabOrder(self.chkHeadHousehold, self.txtAge)
         EditHouseholdMember.setTabOrder(self.txtAge, self.cmbYearOfBirth)
-        EditHouseholdMember.setTabOrder(self.cmbYearOfBirth, self.chkHeadHousehold)
-        EditHouseholdMember.setTabOrder(self.chkHeadHousehold, self.cmbMonthsAbsent)
+        EditHouseholdMember.setTabOrder(self.cmbYearOfBirth, self.cmbMonthsAbsent)
         EditHouseholdMember.setTabOrder(self.cmbMonthsAbsent, self.txtReason)
         EditHouseholdMember.setTabOrder(self.txtReason, self.txtWhere)
+        EditHouseholdMember.setTabOrder(self.txtWhere, self.cmdSave)
+        EditHouseholdMember.setTabOrder(self.cmdSave, self.cmdCancel)
 
     def retranslateUi(self, EditHouseholdMember):
         EditHouseholdMember.setWindowTitle(QtGui.QApplication.translate("EditHouseholdMember", "Edit Household Member", None, QtGui.QApplication.UnicodeUTF8))

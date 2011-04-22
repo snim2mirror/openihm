@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_findhouseholdresults.ui'
 #
-# Created: Thu Apr 21 20:00:22 2011
+# Created: Fri Apr 22 21:39:25 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -108,7 +108,12 @@ class Ui_FindHouseholdResults(object):
         QtCore.QMetaObject.connectSlotsByName(FindHouseholdResults)
         FindHouseholdResults.setTabOrder(self.txtHouseholdNo, self.txtHouseholdName)
         FindHouseholdResults.setTabOrder(self.txtHouseholdName, self.cmdSearch)
-        FindHouseholdResults.setTabOrder(self.cmdSearch, self.cmdClose)
+        FindHouseholdResults.setTabOrder(self.cmdSearch, self.tblResults)
+        FindHouseholdResults.setTabOrder(self.tblResults, self.cmdEdit)
+        FindHouseholdResults.setTabOrder(self.cmdEdit, self.cmdDel)
+        FindHouseholdResults.setTabOrder(self.cmdDel, self.cmdData)
+        FindHouseholdResults.setTabOrder(self.cmdData, self.cmdAdd)
+        FindHouseholdResults.setTabOrder(self.cmdAdd, self.cmdClose)
 
     def retranslateUi(self, FindHouseholdResults):
         FindHouseholdResults.setWindowTitle(QtGui.QApplication.translate("FindHouseholdResults", "Household Search Results", None, QtGui.QApplication.UnicodeUTF8))

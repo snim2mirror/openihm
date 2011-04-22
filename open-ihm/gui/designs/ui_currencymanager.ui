@@ -146,9 +146,13 @@
   </widget>
  </widget>
  <tabstops>
+  <tabstop>tblCurrencies</tabstop>
   <tabstop>txtCurrencyName</tabstop>
   <tabstop>txtAbbreviation</tabstop>
   <tabstop>txtSymbol</tabstop>
+  <tabstop>cmdSave</tabstop>
+  <tabstop>cmdDelete</tabstop>
+  <tabstop>cmdClose</tabstop>
  </tabstops>
  <resources/>
  <connections>

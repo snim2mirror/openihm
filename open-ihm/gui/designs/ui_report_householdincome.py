@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdincome.ui'
 #
-# Created: Thu Apr 21 20:06:25 2011
+# Created: Fri Apr 22 21:39:25 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -128,6 +128,12 @@ class Ui_HouseholdIncomeReport(object):
         QtCore.QMetaObject.connectSlotsByName(HouseholdIncomeReport)
         HouseholdIncomeReport.setTabOrder(self.cmbProjects, self.cmbReportType)
         HouseholdIncomeReport.setTabOrder(self.cmbReportType, self.treeViewHouseholds)
+        HouseholdIncomeReport.setTabOrder(self.treeViewHouseholds, self.treeView)
+        HouseholdIncomeReport.setTabOrder(self.treeView, self.listViewHCharacteristics)
+        HouseholdIncomeReport.setTabOrder(self.listViewHCharacteristics, self.listViewPersonalCharacteristics)
+        HouseholdIncomeReport.setTabOrder(self.listViewPersonalCharacteristics, self.cmdSaveDataTable)
+        HouseholdIncomeReport.setTabOrder(self.cmdSaveDataTable, self.cmdShowReport)
+        HouseholdIncomeReport.setTabOrder(self.cmdShowReport, self.cmdClose)
 
     def retranslateUi(self, HouseholdIncomeReport):
         HouseholdIncomeReport.setWindowTitle(QtGui.QApplication.translate("HouseholdIncomeReport", "Report: Households by Income Source", None, QtGui.QApplication.UnicodeUTF8))

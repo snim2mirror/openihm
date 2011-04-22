@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdsbycharacteristics_display.ui'
 #
-# Created: Thu Apr 21 19:28:08 2011
+# Created: Fri Apr 22 21:39:25 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -52,7 +52,8 @@ class Ui_DisplayHouseholdsByChar(object):
         QtCore.QObject.connect(self.cmdClose, QtCore.SIGNAL(_fromUtf8("clicked()")), DisplayHouseholdsByChar.mdiClose)
         QtCore.QObject.connect(self.cmdSaveAsSpreadsheet, QtCore.SIGNAL(_fromUtf8("clicked()")), DisplayHouseholdsByChar.saveReportAsSpreadtsheet)
         QtCore.QMetaObject.connectSlotsByName(DisplayHouseholdsByChar)
-        DisplayHouseholdsByChar.setTabOrder(self.tableView, self.cmdClose)
+        DisplayHouseholdsByChar.setTabOrder(self.tableView, self.cmdSaveAsSpreadsheet)
+        DisplayHouseholdsByChar.setTabOrder(self.cmdSaveAsSpreadsheet, self.cmdClose)
 
     def retranslateUi(self, DisplayHouseholdsByChar):
         DisplayHouseholdsByChar.setWindowTitle(QtGui.QApplication.translate("DisplayHouseholdsByChar", "Report: Households By Characteristics", None, QtGui.QApplication.UnicodeUTF8))

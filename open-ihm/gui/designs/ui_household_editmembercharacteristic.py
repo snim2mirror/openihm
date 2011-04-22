@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_household_editmembercharacteristic.ui'
 #
-# Created: Thu Apr 21 19:28:06 2011
+# Created: Fri Apr 22 21:39:25 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -56,8 +56,8 @@ class Ui_EditMemberCharacteristic(object):
         QtCore.QObject.connect(self.cmdCancel, QtCore.SIGNAL(_fromUtf8("clicked()")), EditMemberCharacteristic.mdiClose)
         QtCore.QObject.connect(self.cmdOk, QtCore.SIGNAL(_fromUtf8("clicked()")), EditMemberCharacteristic.saveCharacteristic)
         QtCore.QMetaObject.connectSlotsByName(EditMemberCharacteristic)
-        EditMemberCharacteristic.setTabOrder(self.txtValue, self.cboYesNoVal)
-        EditMemberCharacteristic.setTabOrder(self.cboYesNoVal, self.cmdOk)
+        EditMemberCharacteristic.setTabOrder(self.cboYesNoVal, self.txtValue)
+        EditMemberCharacteristic.setTabOrder(self.txtValue, self.cmdOk)
         EditMemberCharacteristic.setTabOrder(self.cmdOk, self.cmdCancel)
 
     def retranslateUi(self, EditMemberCharacteristic):

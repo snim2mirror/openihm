@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_currencymanager.ui'
 #
-# Created: Thu Apr 21 20:06:25 2011
+# Created: Fri Apr 22 21:39:25 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -83,8 +83,12 @@ class Ui_CurrencyManager(object):
         QtCore.QObject.connect(self.cmdDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), CurrencyManager.delCurrencies)
         QtCore.QObject.connect(self.cmdSave, QtCore.SIGNAL(_fromUtf8("clicked()")), CurrencyManager.saveCurrency)
         QtCore.QMetaObject.connectSlotsByName(CurrencyManager)
+        CurrencyManager.setTabOrder(self.tblCurrencies, self.txtCurrencyName)
         CurrencyManager.setTabOrder(self.txtCurrencyName, self.txtAbbreviation)
         CurrencyManager.setTabOrder(self.txtAbbreviation, self.txtSymbol)
+        CurrencyManager.setTabOrder(self.txtSymbol, self.cmdSave)
+        CurrencyManager.setTabOrder(self.cmdSave, self.cmdDelete)
+        CurrencyManager.setTabOrder(self.cmdDelete, self.cmdClose)
 
     def retranslateUi(self, CurrencyManager):
         CurrencyManager.setWindowTitle(QtGui.QApplication.translate("CurrencyManager", "Manage Currencies", None, QtGui.QApplication.UnicodeUTF8))

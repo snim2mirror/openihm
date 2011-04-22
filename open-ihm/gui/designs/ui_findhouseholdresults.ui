@@ -170,6 +170,11 @@
   <tabstop>txtHouseholdNo</tabstop>
   <tabstop>txtHouseholdName</tabstop>
   <tabstop>cmdSearch</tabstop>
+  <tabstop>tblResults</tabstop>
+  <tabstop>cmdEdit</tabstop>
+  <tabstop>cmdDel</tabstop>
+  <tabstop>cmdData</tabstop>
+  <tabstop>cmdAdd</tabstop>
   <tabstop>cmdClose</tabstop>
  </tabstops>
  <resources/>

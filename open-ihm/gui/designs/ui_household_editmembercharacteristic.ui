@@ -84,8 +84,8 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>txtValue</tabstop>
   <tabstop>cboYesNoVal</tabstop>
+  <tabstop>txtValue</tabstop>
   <tabstop>cmdOk</tabstop>
   <tabstop>cmdCancel</tabstop>
  </tabstops>

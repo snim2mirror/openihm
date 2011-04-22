@@ -209,6 +209,12 @@
   <tabstop>cmbProjects</tabstop>
   <tabstop>cmbReportType</tabstop>
   <tabstop>treeViewHouseholds</tabstop>
+  <tabstop>treeView</tabstop>
+  <tabstop>listViewHCharacteristics</tabstop>
+  <tabstop>listViewPersonalCharacteristics</tabstop>
+  <tabstop>cmdSaveDataTable</tabstop>
+  <tabstop>cmdShowReport</tabstop>
+  <tabstop>cmdClose</tabstop>
  </tabstops>
  <resources/>
  <connections>

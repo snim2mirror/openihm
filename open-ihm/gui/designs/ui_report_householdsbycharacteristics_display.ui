@@ -76,6 +76,7 @@
  </widget>
  <tabstops>
   <tabstop>tableView</tabstop>
+  <tabstop>cmdSaveAsSpreadsheet</tabstop>
   <tabstop>cmdClose</tabstop>
  </tabstops>
  <resources/>

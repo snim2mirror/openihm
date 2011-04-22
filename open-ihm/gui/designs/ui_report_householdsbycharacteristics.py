@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdsbycharacteristics.ui'
 #
-# Created: Fri Apr 22 08:51:16 2011
+# Created: Fri Apr 22 21:39:25 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -114,11 +114,14 @@ class Ui_HouseHoldReport(object):
         QtCore.QObject.connect(self.cmbProjectNames, QtCore.SIGNAL(_fromUtf8("currentIndexChanged(int)")), HouseHoldReport.getPersonalCharacteristics)
         QtCore.QMetaObject.connectSlotsByName(HouseHoldReport)
         HouseHoldReport.setTabOrder(self.cmbProjectNames, self.cmbHouseholds)
-        HouseHoldReport.setTabOrder(self.cmbHouseholds, self.listViewPersonalCharacteristics)
-        HouseHoldReport.setTabOrder(self.listViewPersonalCharacteristics, self.opt1Ascending)
-        HouseHoldReport.setTabOrder(self.opt1Ascending, self.opt2Ascending)
-        HouseHoldReport.setTabOrder(self.opt2Ascending, self.opt1Descending)
-        HouseHoldReport.setTabOrder(self.opt1Descending, self.opt2Descending)
+        HouseHoldReport.setTabOrder(self.cmbHouseholds, self.listViewHCharacteristics)
+        HouseHoldReport.setTabOrder(self.listViewHCharacteristics, self.listViewPersonalCharacteristics)
+        HouseHoldReport.setTabOrder(self.listViewPersonalCharacteristics, self.cmbOrderCriteria1)
+        HouseHoldReport.setTabOrder(self.cmbOrderCriteria1, self.opt1Ascending)
+        HouseHoldReport.setTabOrder(self.opt1Ascending, self.opt1Descending)
+        HouseHoldReport.setTabOrder(self.opt1Descending, self.cmbOrderCriteria2)
+        HouseHoldReport.setTabOrder(self.cmbOrderCriteria2, self.opt2Ascending)
+        HouseHoldReport.setTabOrder(self.opt2Ascending, self.opt2Descending)
         HouseHoldReport.setTabOrder(self.opt2Descending, self.cmdGenerateReport)
         HouseHoldReport.setTabOrder(self.cmdGenerateReport, self.cmdClose)
 

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_expendituretypes.ui'
 #
-# Created: Fri Apr 22 16:06:03 2011
+# Created: Fri Apr 22 21:39:25 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -51,6 +51,10 @@ class Ui_ExpenditureTypes(object):
         QtCore.QObject.connect(self.btnExpenseSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ExpenditureTypes.saveExpenditureType)
         QtCore.QObject.connect(self.expenseTypeListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ExpenditureTypes.pickSelectedExpenditure)
         QtCore.QMetaObject.connectSlotsByName(ExpenditureTypes)
+        ExpenditureTypes.setTabOrder(self.expenseTypeListView, self.txtExpenseType)
+        ExpenditureTypes.setTabOrder(self.txtExpenseType, self.btnExpenseSave)
+        ExpenditureTypes.setTabOrder(self.btnExpenseSave, self.btnExpenseDelete)
+        ExpenditureTypes.setTabOrder(self.btnExpenseDelete, self.btnExpenditureClose)
 
     def retranslateUi(self, ExpenditureTypes):
         ExpenditureTypes.setWindowTitle(QtGui.QApplication.translate("ExpenditureTypes", "Manage Expenditure Types", None, QtGui.QApplication.UnicodeUTF8))

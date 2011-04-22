@@ -74,6 +74,10 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>expenseTypeListView</tabstop>
+  <tabstop>txtExpenseType</tabstop>
+  <tabstop>btnExpenseSave</tabstop>
+  <tabstop>btnExpenseDelete</tabstop>
   <tabstop>btnExpenditureClose</tabstop>
  </tabstops>
  <resources/>

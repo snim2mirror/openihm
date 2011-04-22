@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_about_openihm.ui'
 #
-# Created: Fri Apr 22 14:55:49 2011
+# Created: Fri Apr 22 21:39:25 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,6 +31,7 @@ class Ui_AboutOpenIHM(object):
         self.retranslateUi(AboutOpenIHM)
         QtCore.QObject.connect(self.cmdOk, QtCore.SIGNAL(_fromUtf8("clicked()")), AboutOpenIHM.mdiClose)
         QtCore.QMetaObject.connectSlotsByName(AboutOpenIHM)
+        AboutOpenIHM.setTabOrder(self.cmdOk, self.textEdit)
 
     def retranslateUi(self, AboutOpenIHM):
         AboutOpenIHM.setWindowTitle(QtGui.QApplication.translate("AboutOpenIHM", "About Open-IHM", None, QtGui.QApplication.UnicodeUTF8))
