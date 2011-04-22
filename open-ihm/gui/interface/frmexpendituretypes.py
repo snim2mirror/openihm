@@ -26,97 +26,97 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):
        		self.setupUi(self)
         	self.parent = parent
 
-        	self.getExpenditureCategories()
+#        	self.getExpenditureCategories()
         	self.getExpenditureTypes()
 
 	#Begin block of methods for managing Expenditure Categories 	
-	def getExpenditureCategories(self):
-                '''Get pre-existing assets categories from database and populate categories list'''
-               	# select query to retrieve Asset Categories
-        	query = '''SELECT expenditurecategory FROM setup_expenditurecategories'''
+ 	# def getExpenditureCategories(self):
+        #         '''Get pre-existing assets categories from database and populate categories list'''
+        #        	# select query to retrieve Asset Categories
+        # 	query = '''SELECT expenditurecategory FROM setup_expenditurecategories'''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+        #         p = GenericDBOP(query)
+        #         recordset = p.runSelectQuery()
 				
-		model = QStandardItemModel()
-		num = 0
+	# 	model = QStandardItemModel()
+	# 	num = 0
 
-       		for row in recordset:
-			qtExpenditureType = QStandardItem( "%s" % row[0])
-            		qtExpenditureType.setTextAlignment( Qt.AlignLeft )
-            		model.setItem( num, 0, qtExpenditureType )
-            		num = num + 1
+       	# 	for row in recordset:
+	# 		qtExpenditureType = QStandardItem( "%s" % row[0])
+        #     		qtExpenditureType.setTextAlignment( Qt.AlignLeft )
+        #     		model.setItem( num, 0, qtExpenditureType )
+        #     		num = num + 1
                         		
-        	self.expenditureCategorylistView.setModel(model)
-		self.expenditureCategorylistView.show()
+        # 	self.expenditureCategorylistView.setModel(model)
+	# 	self.expenditureCategorylistView.show()
 
-        def pickSelectedCategory(self,index):
-                '''get selected item and populate categories textbox'''
-                selectedItem = self.expenditureCategorylistView.model().item(index.row(),0).text()
-                self.txtCategory.setText(selectedItem)
+        # def pickSelectedCategory(self,index):
+        #         '''get selected item and populate categories textbox'''
+        #         selectedItem = self.expenditureCategorylistView.model().item(index.row(),0).text()
+        #         self.txtCategory.setText(selectedItem)
                 
-        def saveCategoryType(self):
-        	''' Saves newly created data to database '''
+        # def saveCategoryType(self):
+        # 	''' Saves newly created data to database '''
 
-        	# get the data entered by user
-        	categorytype = self.txtCategory.text()		
+        # 	# get the data entered by user
+        # 	categorytype = self.txtCategory.text()		
         	
-		# check if record exists
-		query = '''SELECT expenditurecategory FROM setup_expenditurecategories WHERE expenditurecategory='%s' ''' % (categorytype)    
+	# 	# check if record exists
+	# 	query = '''SELECT expenditurecategory FROM setup_expenditurecategories WHERE expenditurecategory='%s' ''' % (categorytype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+	# 	p = GenericDBOP(query)
+        #         recordset = p.runSelectQuery()
 
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
+	# 	numrows = 0		
+	# 	for row in recordset:
+	# 		numrows = numrows + 1
 				      	
-		if numrows == 0:
+	# 	if numrows == 0:
 			
-			query = '''INSERT INTO setup_expenditurecategories(expenditurecategory) 
-                     		VALUES('%s')''' % (categorytype)
-		else:
-			query = '''UPDATE setup_expenditurecategories SET expenditurecategory='%s'	WHERE expenditurecategory='%s' ''' % (categorytype, categorytype)
+	# 		query = '''INSERT INTO setup_expenditurecategories(expenditurecategory) 
+        #              		VALUES('%s')''' % (categorytype)
+	# 	else:
+	# 		query = '''UPDATE setup_expenditurecategories SET expenditurecategory='%s'	WHERE expenditurecategory='%s' ''' % (categorytype, categorytype)
     
-        	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
-		#refresh categories list
-		self.getExpenditureCategories()                
+        # 	# execute query and commit changes
+        # 	temp = GenericDBOP(query)
+        #         recordset = temp.runUpdateQuery()
+	# 	#refresh categories list
+	# 	self.getExpenditureCategories()                
                 
-	def deleteCategoryType(self):
-		''' Deletes record from database '''
+	# def deleteCategoryType(self):
+	# 	''' Deletes record from database '''
 
-        	# get the data entered by user
-        	categorytype = self.txtCategory.text()		
+        # 	# get the data entered by user
+        # 	categorytype = self.txtCategory.text()		
         	
-		# check if record exists
-		query = '''SELECT expenditurecategory FROM setup_expenditurecategories WHERE expenditurecategory='%s' ''' % (categorytype)    
+	# 	# check if record exists
+	# 	query = '''SELECT expenditurecategory FROM setup_expenditurecategories WHERE expenditurecategory='%s' ''' % (categorytype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
+	# 	p = GenericDBOP(query)
+        #         recordset = p.runSelectQuery()
+	# 	numrows = 0		
+	# 	for row in recordset:
+	# 		numrows = numrows + 1
 
-		if numrows <> 0:
-                        msg = "Are sure sure you want to delete this Expenditure Category Type?"
-                        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
-                        if ret == QMessageBox.Yes:
+	# 	if numrows <> 0:
+        #                 msg = "Are sure sure you want to delete this Expenditure Category Type?"
+        #                 ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+        #                 if ret == QMessageBox.Yes:
 			
-                                query = '''DELETE FROM setup_expenditurecategories WHERE expenditurecategory='%s' ''' % (categorytype)
+        #                         query = '''DELETE FROM setup_expenditurecategories WHERE expenditurecategory='%s' ''' % (categorytype)
 
-                                # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+        #                         # execute query and commit changes
+        #                         temp = GenericDBOP(query)
+        #                         recordset = temp.runUpdateQuery()
 
-                                self.txtCategory.clear()
-                                #refresh categories list
-                                self.getExpenditureCategories()			
+        #                         self.txtCategory.clear()
+        #                         #refresh categories list
+        #                         self.getExpenditureCategories()			
 			
-		else:
-			QMessageBox.information(self, 'Delete Food Type', "Record not found")
-        #End block of methods for managing Expenditure Categories
+	# 	else:
+	# 		QMessageBox.information(self, 'Delete Food Type', "Record not found")
+        # #End block of methods for managing Expenditure Categories
 
 	#Begin block of methods for managing Expenditure Types	
 	def getExpenditureTypes(self):
