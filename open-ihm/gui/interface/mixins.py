@@ -49,7 +49,7 @@ class MDIDialogMixin(object):
         elif hasattr(self, 'parent') and hasattr(self.parent, 'closeActiveSubWindow'):
             self.parent.closeActiveSubWindow()
             print 'self.parent.closeActiveSubWindow()'
-        elif hasattr(self, 'mdi'):
+        elif hasattr(self, 'mdi') and self.mdi is not None:
             self.mdi.closeActiveSubWindow()
             print 'self.mdi.closeActiveSubWindow()'
         else:
@@ -71,11 +71,13 @@ class DataEntryMixin(object):
          return strSeed.replace("xxx", "'")
 
     def getStringMonth(month):
-         months = {"1" : "January","2" : "February", "3" : "March","4" : "April","5" : "May","6" : "June",
-                        "7" : "July","8" : "August","9" : "September","10" : "October","11" : "November","12" : "December"}
-         return months[month]
+        return {"1" : "January","2" : "February", "3" : "March", "4" : "April",
+                "5" : "May","6" : "June", "7" : "July","8" : "August",
+                "9" : "September","10" : "October","11" : "November",
+                "12" : "December"}[month]
 
     def getIntMonth(month):
-         months = {"1" : "January","2" : "February", "3" : "March","4" : "April","5" : "May","6" : "June",
-                        "7" : "July","8" : "August","9" : "September","10" : "October","11" : "November","12" : "December"}
-         return months[month]
+        return {"1" : "January","2" : "February", "3" : "March", "4" : "April",
+                "5" : "May","6" : "June", "7" : "July","8" : "August",
+                "9" : "September","10" : "October","11" : "November",
+                "12" : "December"}[month]
