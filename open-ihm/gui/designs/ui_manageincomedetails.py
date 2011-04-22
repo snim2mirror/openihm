@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageincomedetails.ui'
 #
-# Created: Thu Apr 21 19:28:08 2011
+# Created: Fri Apr 22 08:51:16 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -232,7 +232,7 @@ class Ui_ManageIncome(object):
         self.btnManageIncomeClose.setObjectName(_fromUtf8("btnManageIncomeClose"))
 
         self.retranslateUi(ManageIncome)
-        self.tabWidget.setCurrentIndex(3)
+        self.tabWidget.setCurrentIndex(0)
         self.tabTransferDetails.setCurrentIndex(1)
         QtCore.QObject.connect(self.btnManageIncomeClose, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.mdiClose)
         QtCore.QObject.connect(self.btnCropSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveCropType)
