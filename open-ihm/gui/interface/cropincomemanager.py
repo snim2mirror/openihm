@@ -1,6 +1,7 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
+# FIXME: Can we remove these imports?
 from data.config import Config
 import data.mysql.connector 
 from data.controller import Controller

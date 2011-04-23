@@ -8,7 +8,8 @@ Mixin classes for the open-ihm GUI.
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-
+import data.mysql.connector
+    
 class TableViewMixin(object):
 
     def countRowsSelected(tblVw):
@@ -52,6 +53,53 @@ class MDIDialogMixin(object):
             self.close()
         return
 
+
+class MySQLMixin(object):
+    """Methods for dealing with the MySQL database.
+
+    TODO: move this class to a model (as in MVC) package
+    FIXME: this should be four different methods.
+    """
+
+    def executeQuery(self, query):
+        results = None
+        
+        db = data.mysql.connector.Connect(**self.config)             
+        cursor = db.cursor()
+        cursor.execute(query)
+        try:
+            results = cursor.fetchall()
+        except Exception, e:
+            pass
+        try:
+            cursor.commit()
+        except Exception, e:
+            pass
+        cursor.close()
+        db.close()
+        return results
+
+    def executeMultipleQueries(self, queries):
+        results = []
+        
+        db = data.mysql.connector.Connect(**self.config)             
+        cursor = db.cursor()
+        for query in queries:
+            cursor.execute(query)
+            try:
+                result = cursor.fetchall()
+                results.append(result)
+            except Exception, e:
+                results.append(None)
+            try:
+                cursor.commit()
+            except Exception, e:
+                pass
+        cursor.close()
+        db.close()
+        return results
+        
+    
 class DataEntryMixin(object):
     
     def getDbString(strSeed):
