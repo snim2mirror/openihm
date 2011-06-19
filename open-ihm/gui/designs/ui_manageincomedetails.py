@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_manageincomedetails.ui'
 #
-# Created: Tue Apr 19 10:36:39 2011
+# Created: Fri Apr 22 21:52:29 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -17,7 +17,7 @@ except AttributeError:
 class Ui_ManageIncome(object):
     def setupUi(self, ManageIncome):
         ManageIncome.setObjectName(_fromUtf8("ManageIncome"))
-        ManageIncome.resize(612, 427)
+        ManageIncome.resize(623, 394)
         ManageIncome.setMinimumSize(QtCore.QSize(611, 380))
         self.tabWidget = QtGui.QTabWidget(ManageIncome)
         self.tabWidget.setGeometry(QtCore.QRect(0, 0, 611, 341))
@@ -230,10 +230,14 @@ class Ui_ManageIncome(object):
         self.btnManageIncomeClose = QtGui.QPushButton(ManageIncome)
         self.btnManageIncomeClose.setGeometry(QtCore.QRect(530, 350, 80, 28))
         self.btnManageIncomeClose.setObjectName(_fromUtf8("btnManageIncomeClose"))
+        self.label_26.setBuddy(self.cropListView)
+        self.label_3.setBuddy(self.txtMeasuringUnit)
+        self.label_4.setBuddy(self.txtCropTypeName)
+        self.label_6.setBuddy(self.txtEnergyValue)
 
         self.retranslateUi(ManageIncome)
-        self.tabWidget.setCurrentIndex(4)
-        self.tabTransferDetails.setCurrentIndex(0)
+        self.tabWidget.setCurrentIndex(0)
+        self.tabTransferDetails.setCurrentIndex(1)
         QtCore.QObject.connect(self.btnManageIncomeClose, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.mdiClose)
         QtCore.QObject.connect(self.btnCropSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveCropType)
         QtCore.QObject.connect(self.btnCropsClear, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.clearCropTextboxes)
@@ -249,13 +253,13 @@ class Ui_ManageIncome(object):
         QtCore.QObject.connect(self.transferTypesListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.pickSelectedTransfer)
         QtCore.QObject.connect(self.btnTransferTypeSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveTransferType)
         QtCore.QObject.connect(self.btnTransferTypeDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.deleteTransferType)
-        QtCore.QObject.connect(self.transferSourcesListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.pickSelectedTransferSource)
-        QtCore.QObject.connect(self.btnTransferSourcesSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveTransferSourceType)
-        QtCore.QObject.connect(self.btnTransferSourcesDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.deleteTransferSourceType)
         QtCore.QObject.connect(self.wildFoodsListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.pickselectedWildFoodItem)
         QtCore.QObject.connect(self.btnWildFoodSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveWildFoodType)
         QtCore.QObject.connect(self.btnWildFoodDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.deleteWildFoodType)
         QtCore.QObject.connect(self.btnWildFoodsClear, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.clearWildFoodTextboxes)
+        QtCore.QObject.connect(self.transferSourcesListView, QtCore.SIGNAL(_fromUtf8("clicked(QModelIndex)")), ManageIncome.pickSelectedTransferSource)
+        QtCore.QObject.connect(self.btnTransferSourcesSave, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.saveTransferSourceType)
+        QtCore.QObject.connect(self.btnTransferSourcesDelete, QtCore.SIGNAL(_fromUtf8("clicked()")), ManageIncome.deleteTransferSourceType)
         QtCore.QMetaObject.connectSlotsByName(ManageIncome)
 
     def retranslateUi(self, ManageIncome):

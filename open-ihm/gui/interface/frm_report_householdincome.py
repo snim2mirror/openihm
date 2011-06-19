@@ -12,7 +12,10 @@ from gui.designs.ui_report_householdincome import Ui_HouseholdIncomeReport
 from data.report_settingsmanager import ReportsSettingsManager
 from outputs.routines.report_householdsincome import HouseholdIncome
 from outputs.routines.report_householdsincome_write import HouseholdsIncomeWrite
-class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
+
+from mixins import MDIDialogMixin
+
+class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport, MDIDialogMixin):
     ''' Creates the Household Income Report by Source from. Uses the design class
 		in gui.designs.ui_report_householdincome. '''	
 	
@@ -29,10 +32,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport):
         self.putMainIncomeCategories()
         self.insertHouseholdsHeader()
         self.insertPCharsHeader()
-        	
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
-
+        
     def updateDialogData(self):
         '''Update Income Sources list to those relevant for the current project'''
         self.putCropIncomeSources()

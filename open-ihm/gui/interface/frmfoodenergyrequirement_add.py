@@ -13,7 +13,9 @@ from data.foodenergyrequirement import FoodEnergyRequirement
 # import the Create Add Food Energy Requirement Dialog design class
 from gui.designs.ui_add_foodenergyrequirement import Ui_AddFoodEnergyRequirement
 
-class FrmAddEnergyRequirement(QDialog, Ui_AddFoodEnergyRequirement):	
+from mixins import MDIDialogMixin
+
+class FrmAddEnergyRequirement(QDialog, Ui_AddFoodEnergyRequirement, MDIDialogMixin):	
     ''' Creates the add food energy requirement form '''	
 
     def __init__(self,parent):
@@ -32,16 +34,8 @@ class FrmAddEnergyRequirement(QDialog, Ui_AddFoodEnergyRequirement):
         self.txtAge.setValidator(myAgeVal)
         self.txtEnergyRequirementMales.setValidator(myMEnergyVal)
         self.txtEnergyRequirementFemales.setValidator(myFEnergyVal)
-#        
+       
  
-        # connect relevant signals and slots   
-        self.connect(self.cmdCancel, SIGNAL("clicked()"), self.close)
-        self.connect(self.cmdSave, SIGNAL("clicked()"), self.saveFoodEnergyRequirementDetails)
-
-        
-    def mdiClose(self):
-	self.parent.mdi.closeActiveSubWindow()
-
         
     def saveFoodEnergyRequirementDetails(self):
         ''' Saves newly created food energy requirement data to database '''
@@ -56,4 +50,4 @@ class FrmAddEnergyRequirement(QDialog, Ui_AddFoodEnergyRequirement):
 	controller = FoodEnergyRequirement(myage,  malesenergyrequirement,  femalesenergyrequirement)
         controller.setData()      
         # close add food energy requirement window
-        self.close
+	self.mdiClose()

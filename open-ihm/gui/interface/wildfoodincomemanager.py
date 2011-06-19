@@ -4,9 +4,10 @@ from PyQt4.QtGui import *
 from data.config import Config
 import data.mysql.connector 
 from data.controller import Controller
-import common
 
-class WildfoodIncomeManager:
+from mixins import TableViewMixin
+
+class WildfoodIncomeManager(TableViewMixin):
      def getProjectWildfoods(self):
          incomes = []
          row = 0
@@ -91,9 +92,9 @@ class WildfoodIncomeManager:
         
      def moveSelectedWildfoods(self):
         ''' Add selected available wildfoods to Project'''
-        numSelected = common.countRowsSelected(self.tblAvailableWildfoods)
+        numSelected = self.countRowsSelected(self.tblAvailableWildfoods)
         if  numSelected != 0:
-             selectedRows = common.getSelectedRows(self.tblAvailableWildfoods)
+             selectedRows = self.getSelectedRows(self.tblAvailableWildfoods)
              for row in selectedRows:
                  income 		= self.tblAvailableWildfoods.model().item(row,0).text()
                 
@@ -110,14 +111,14 @@ class WildfoodIncomeManager:
         
      def removeSelectedWildfoods(self):
          ''' remove selected wildfoods from Project'''
-         numSelected = common.countRowsSelected(self.tblSelectedWildfoods)
+         numSelected = self.countRowsSelected(self.tblSelectedWildfoods)
          if  numSelected != 0:
              msg = "Are you sure you want to remove the selected wildfood(s) from this project?"
              ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
              # if deletion is rejected return without deleting
              if ret == QMessageBox.No:
                  return
-             selectedRows = common.getSelectedRows(self.tblSelectedWildfoods)
+             selectedRows = self.getSelectedRows(self.tblSelectedWildfoods)
              incomes = []
              for row in selectedRows:
                  income = self.tblSelectedWildfoods.model().item(row,0).text()

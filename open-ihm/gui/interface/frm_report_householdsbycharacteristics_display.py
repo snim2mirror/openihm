@@ -9,7 +9,9 @@ from PyQt4.QtGui import *
 from gui.designs.ui_report_householdsbycharacteristics_display import Ui_DisplayHouseholdsByChar
 from outputs.routines.report_households_by_characteristics_write import HouseholdsByCharacteristicsWrite
 
-class HouseholdsByCharDisplay(QDialog, Ui_DisplayHouseholdsByChar):
+from mixins import MDIDialogMixin
+
+class HouseholdsByCharDisplay(QDialog, Ui_DisplayHouseholdsByChar, MDIDialogMixin):
     ''' Creates the view households form '''	
     def __init__(self, parent,freporttable):
         ''' Set up the dialog box interface '''
@@ -21,9 +23,6 @@ class HouseholdsByCharDisplay(QDialog, Ui_DisplayHouseholdsByChar):
 
 	self.populateForm()
 	    
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
-        
     def saveReportAsSpreadtsheet(self):
         
         # write report in a spreadsheet file

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>548</width>
-    <height>424</height>
+    <height>468</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -19,173 +19,144 @@
   <property name="windowTitle">
    <string>Project Search Results</string>
   </property>
-  <widget class="QGroupBox" name="groupBox">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>531</width>
-     <height>121</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>Search Criteria</string>
-   </property>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>50</y>
-      <width>71</width>
-      <height>18</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Project ID:</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="txtProjectID">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>50</y>
-      <width>151</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>80</y>
-      <width>71</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Project Title:</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="txtProjectTitle">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>80</y>
-      <width>301</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="cmdSearch">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>70</y>
-      <width>75</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Search</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>341</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Enter Project ID or Project Title [entering nothing will list all projects]</string>
-    </property>
-    <property name="wordWrap">
-     <bool>true</bool>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QTableView" name="tblResults">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>170</y>
-     <width>531</width>
-     <height>201</height>
-    </rect>
-   </property>
-   <property name="alternatingRowColors">
-    <bool>true</bool>
-   </property>
-   <property name="sortingEnabled">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cmdOpen">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>380</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Open</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cmdClose">
-   <property name="geometry">
-    <rect>
-     <x>454</x>
-     <y>380</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Close</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>140</y>
-     <width>111</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Found Projects</string>
-   </property>
-  </widget>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Search Criteria</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
+      <item row="0" column="0" colspan="2">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Enter Project ID or Project Title [entering nothing will list all projects]</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Project ID:</string>
+        </property>
+        <property name="buddy">
+         <cstring>txtProjectID</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="txtProjectID"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Project Title:</string>
+        </property>
+        <property name="buddy">
+         <cstring>txtProjectTitle</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="txtProjectTitle"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="cmdSearch">
+        <property name="text">
+         <string>Search</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Found Projects</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QTableView" name="tblResults">
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="cmdOpen">
+        <property name="text">
+         <string>Open</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmdClose">
+        <property name="text">
+         <string>Close</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <tabstops>
   <tabstop>txtProjectID</tabstop>
   <tabstop>txtProjectTitle</tabstop>
   <tabstop>cmdSearch</tabstop>
-  <tabstop>tblResults</tabstop>
-  <tabstop>cmdOpen</tabstop>
-  <tabstop>cmdClose</tabstop>
  </tabstops>
  <resources/>
  <connections>
   <connection>
-   <sender>cmdClose</sender>
+   <sender>cmdSearch</sender>
    <signal>clicked()</signal>
    <receiver>FindProjectResults</receiver>
-   <slot>mdiClose()</slot>
+   <slot>showResults()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>482</x>
-     <y>389</y>
+     <x>529</x>
+     <y>170</y>
     </hint>
     <hint type="destinationlabel">
-     <x>370</x>
-     <y>390</y>
+     <x>419</x>
+     <y>143</y>
     </hint>
    </hints>
   </connection>
@@ -196,28 +167,28 @@
    <slot>openProject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>77</x>
-     <y>385</y>
+     <x>47</x>
+     <y>427</y>
     </hint>
     <hint type="destinationlabel">
-     <x>161</x>
-     <y>385</y>
+     <x>4</x>
+     <y>445</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>cmdSearch</sender>
+   <sender>cmdClose</sender>
    <signal>clicked()</signal>
    <receiver>FindProjectResults</receiver>
-   <slot>showResults()</slot>
+   <slot>mdiClose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>462</x>
-     <y>104</y>
+     <x>489</x>
+     <y>428</y>
     </hint>
     <hint type="destinationlabel">
-     <x>419</x>
-     <y>143</y>
+     <x>539</x>
+     <y>380</y>
     </hint>
    </hints>
   </connection>

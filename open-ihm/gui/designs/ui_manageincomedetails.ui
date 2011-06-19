@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>612</width>
-    <height>427</height>
+    <width>623</width>
+    <height>394</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tabIncomeCrops">
     <attribute name="title">
@@ -53,6 +53,9 @@
      <property name="text">
       <string>Select Crop Type</string>
      </property>
+     <property name="buddy">
+      <cstring>cropListView</cstring>
+     </property>
     </widget>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
@@ -65,6 +68,9 @@
      </property>
      <property name="text">
       <string>Unit of Measure</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtMeasuringUnit</cstring>
      </property>
     </widget>
     <widget class="QPushButton" name="btnCropDelete">
@@ -105,6 +111,9 @@
      <property name="text">
       <string>Name</string>
      </property>
+     <property name="buddy">
+      <cstring>txtCropTypeName</cstring>
+     </property>
     </widget>
     <widget class="QLabel" name="label_6">
      <property name="geometry">
@@ -117,6 +126,9 @@
      </property>
      <property name="text">
       <string>Kcals per unit</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtEnergyValue</cstring>
      </property>
     </widget>
     <widget class="QLabel" name="label_25">
@@ -448,7 +460,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -1035,8 +1047,8 @@
    <slot>saveTransferType()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>339</x>
-     <y>209</y>
+     <x>343</x>
+     <y>241</y>
     </hint>
     <hint type="destinationlabel">
      <x>262</x>
@@ -1051,60 +1063,12 @@
    <slot>deleteTransferType()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>498</x>
-     <y>209</y>
+     <x>502</x>
+     <y>241</y>
     </hint>
     <hint type="destinationlabel">
      <x>282</x>
-     <y>396</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>transferSourcesListView</sender>
-   <signal>clicked(QModelIndex)</signal>
-   <receiver>ManageIncome</receiver>
-   <slot>pickSelectedTransferSource()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>217</x>
-     <y>243</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>449</x>
-     <y>389</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnTransferSourcesSave</sender>
-   <signal>clicked()</signal>
-   <receiver>ManageIncome</receiver>
-   <slot>saveTransferSourceType()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>335</x>
-     <y>189</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>480</x>
-     <y>413</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnTransferSourcesDelete</sender>
-   <signal>clicked()</signal>
-   <receiver>ManageIncome</receiver>
-   <slot>deleteTransferSourceType()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>527</x>
-     <y>189</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>424</x>
-     <y>407</y>
+     <y>391</y>
     </hint>
    </hints>
   </connection>
@@ -1120,7 +1084,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>79</x>
-     <y>394</y>
+     <y>391</y>
     </hint>
    </hints>
   </connection>
@@ -1136,7 +1100,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>102</x>
-     <y>395</y>
+     <y>391</y>
     </hint>
    </hints>
   </connection>
@@ -1152,7 +1116,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>130</x>
-     <y>406</y>
+     <y>391</y>
     </hint>
    </hints>
   </connection>
@@ -1169,6 +1133,54 @@
     <hint type="destinationlabel">
      <x>112</x>
      <y>380</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>transferSourcesListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>pickSelectedTransferSource()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>179</x>
+     <y>192</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>23</x>
+     <y>391</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTransferSourcesSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>saveTransferSourceType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>303</x>
+     <y>216</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>133</x>
+     <y>391</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnTransferSourcesDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageIncome</receiver>
+   <slot>deleteTransferSourceType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>508</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>198</x>
+     <y>391</y>
     </hint>
    </hints>
   </connection>

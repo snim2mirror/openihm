@@ -34,7 +34,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="tabHouseHoldMembers">
     <attribute name="title">
@@ -835,6 +835,9 @@
    </property>
    <property name="text">
     <string>Household Name:</string>
+   </property>
+   <property name="buddy">
+    <cstring>cboHouseholdNumber</cstring>
    </property>
   </widget>
  </widget>

@@ -7,7 +7,9 @@
 from PyQt4 import QtGui, QtCore
 from gui.designs.ui_managecroptypes import Ui_CropTypes
 
-class FrmManageCropTypes(Ui_CropTypes):
+from mixins import MDIDialogMixin
+
+class FrmManageCropTypes(Ui_CropTypes, MDIDialogMixin):
     
     def setupUi(self,Form,Mdi):
         Ui_CropTypes.setupUi(self,Form)
@@ -15,7 +17,3 @@ class FrmManageCropTypes(Ui_CropTypes):
         self.parent = Mdi
         
 #        QtCore.QObject.connect(self.btnManageCropsClose, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
-
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
-

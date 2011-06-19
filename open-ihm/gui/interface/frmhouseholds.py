@@ -14,7 +14,9 @@ from frmhouseholds_add import FrmAddHousehold
 from frmhouseholds_edit import FrmEditHousehold
 from frmhousehold_data import FrmHouseholdData
 
-class FrmHouseholds(QDialog, Ui_AllHouseholds):	
+from mixins import MDIDialogMixin
+
+class FrmHouseholds(QDialog, Ui_AllHouseholds, MDIDialogMixin):	
 	''' Creates the view households form '''	
 	def __init__(self, parent):
 	    ''' Set up the dialog box interface '''
@@ -28,9 +30,6 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds):
 	    # get current project details
 	    self.getHouseholds()
 	    
-	def mdiClose(self):
-		self.parent.mdi.closeActiveSubWindow()
-
 	def getHouseholds(self):
 		# connect to mysql database
 		db = data.mysql.connector.Connect(**self.config)

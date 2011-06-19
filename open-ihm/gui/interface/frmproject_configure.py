@@ -20,7 +20,9 @@ from wildfoodincomemanager import WildfoodIncomeManager
 from employmentincomemanager import EmploymentIncomeManager
 from transferincomemanager import TransferIncomeManager
 
-class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, LivestockIncomeManager, WildfoodIncomeManager, EmploymentIncomeManager, TransferIncomeManager):	
+from mixins import MDIDialogMixin
+
+class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, LivestockIncomeManager, WildfoodIncomeManager, EmploymentIncomeManager, TransferIncomeManager, MDIDialogMixin):	
      ''' Creates the Edit Project form. '''	
      def __init__(self, parent):
          ''' Set up the dialog box interface '''
@@ -68,9 +70,6 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          self.displayAvailableTransfers()
          self.displaySelectedTransfers()
         
-     def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
-         
      def getCurrentRow(self, tblVw):
          indexVal = tblVw.currentIndex()
          return indexVal.row()
@@ -282,7 +281,6 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
              
              for item in selectedItems:
                  query = '''DELETE FROM standardofliving WHERE summary='%s' AND pid=%s ''' % (item,  pid)
-                 print query 
                  cursor.execute(query)
                  db.commit()
     

@@ -13,7 +13,9 @@ from data.foodenergyrequirement import FoodEnergyRequirement
 # import the Create Add Food Energy Requirement Dialog design class
 from gui.designs.ui_edit_foodenergyrequirement import Ui_EditFoodEnergyRequirement
 
-class FrmEditEnergyRequirement(QDialog, Ui_EditFoodEnergyRequirement):
+from mixins import MDIDialogMixin
+
+class FrmEditEnergyRequirement(QDialog, Ui_EditFoodEnergyRequirement, MDIDialogMixin):
     
     ''' Creates the edit food energy requirement form '''	
 
@@ -40,8 +42,6 @@ class FrmEditEnergyRequirement(QDialog, Ui_EditFoodEnergyRequirement):
         #display energy requirements data
         self.showEnergyRequirementDetails()
  
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
         
     def showEnergyRequirementDetails(self):
         ''' Display energy requirements data '''
@@ -63,4 +63,4 @@ class FrmEditEnergyRequirement(QDialog, Ui_EditFoodEnergyRequirement):
 	controller = FoodEnergyRequirement(myage,  malesenergyrequirement,  femalesenergyrequirement)
         controller.setData()      
         # close add food energy requirement window
-        self.close
+        self.mdiClose()

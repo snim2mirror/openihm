@@ -1,12 +1,14 @@
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
+# FIXME: Can we remove these imports?
 from data.config import Config
 import data.mysql.connector 
 from data.controller import Controller
-import common
 
-class CropIncomeManager:
+from mixins import TableViewMixin
+
+class CropIncomeManager(TableViewMixin):
      def getProjectCrops(self):
          incomes = []
          row = 0
@@ -91,9 +93,9 @@ class CropIncomeManager:
         
      def moveSelectedCrops(self):
         ''' Add selected available crops to Project'''
-        numSelected = common.countRowsSelected(self.tblAvailableCrops)
+        numSelected = self.countRowsSelected(self.tblAvailableCrops)
         if  numSelected != 0:
-             selectedRows = common.getSelectedRows(self.tblAvailableCrops)
+             selectedRows = self.getSelectedRows(self.tblAvailableCrops)
              for row in selectedRows:
                  income 		= self.tblAvailableCrops.model().item(row,0).text()
                 
@@ -110,14 +112,14 @@ class CropIncomeManager:
         
      def removeSelectedCrops(self):
          ''' remove selected crops from Project'''
-         numSelected = common.countRowsSelected(self.tblSelectedCrops)
+         numSelected = self.countRowsSelected(self.tblSelectedCrops)
          if  numSelected != 0:
              msg = "Are you sure you want to remove the selected crop(s) from this project?"
              ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
              # if deletion is rejected return without deleting
              if ret == QMessageBox.No:
                  return
-             selectedRows = common.getSelectedRows(self.tblSelectedCrops)
+             selectedRows = self.getSelectedRows(self.tblSelectedCrops)
              incomes = []
              for row in selectedRows:
                  income = self.tblSelectedCrops.model().item(row,0).text()

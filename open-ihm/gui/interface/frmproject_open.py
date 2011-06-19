@@ -11,7 +11,9 @@ from data.controller import Controller
 # import forms required to edit household
 from gui.designs.ui_project_open import Ui_OpenProject
 
-class FrmOpenProject(QtGui.QDialog, Ui_OpenProject):	
+from mixins import MDIDialogMixin
+
+class FrmOpenProject(QtGui.QDialog, Ui_OpenProject, MDIDialogMixin):	
     ''' Creates the Edit Project form. '''	
     def __init__(self, parent):
         ''' Set up the dialog box interface '''
@@ -21,9 +23,6 @@ class FrmOpenProject(QtGui.QDialog, Ui_OpenProject):
         
         # get projects
         self.getProjects()
-        
-    def mdiclose(self):
-        self.parent.mdi.closeActiveSubWindow()
         
     def getProjects(self):
         # connect to mysql database
@@ -41,4 +40,4 @@ class FrmOpenProject(QtGui.QDialog, Ui_OpenProject):
         self.parent.projectname = self.cboProjectName.currentText()
         self.parent.setWindowTitle("Open IHM - " + self.cboProjectName.currentText())
         self.parent.actionClose_Project.setDisabled(False)
-        self.parent.mdi.closeActiveSubWindow()
+        self.mdiClose()

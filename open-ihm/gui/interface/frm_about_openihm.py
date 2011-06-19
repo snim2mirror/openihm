@@ -9,8 +9,9 @@ from PyQt4.QtGui import *
 
 # import the About OpenIHM design class
 from gui.designs.ui_about_openihm import Ui_AboutOpenIHM
+from mixins import MDIDialogMixin
 
-class FrmAboutOpenIHM(QDialog, Ui_AboutOpenIHM):	
+class FrmAboutOpenIHM(QDialog, Ui_AboutOpenIHM, MDIDialogMixin):
 	''' Creates the About Open-IHM from. Uses the design class
 		in gui.designs.ui_manageassets. '''	
 	
@@ -19,6 +20,3 @@ class FrmAboutOpenIHM(QDialog, Ui_AboutOpenIHM):
 		self.parent = parent
         	QDialog.__init__(self)
        		self.setupUi(self)
-
-	def mdiClose(self):
-		self.parent.closeActiveSubWindow()

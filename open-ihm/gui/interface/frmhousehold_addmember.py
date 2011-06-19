@@ -12,7 +12,9 @@ import data.mysql.connector
 
 from gui.designs.ui_household_addmember import Ui_AddHouseholdMember
 
-class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember):	
+from mixins import MDIDialogMixin
+
+class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):	
     ''' Creates the Add Household Member form. '''	
     def __init__(self, parent,  hhid, hhname):
         ''' Set up the dialog box interface '''
@@ -33,9 +35,6 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember):
         # display household name
         self.lblHouseholdName.setText(hhname)
         
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
-
     def updateYearOfBirth(self):
         ''' updates year of birth when the value of age is modified '''
         thisyear = date.today().year
@@ -89,4 +88,4 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember):
         
         # close new project window
         self.parent.retrieveHouseholdMembers()
-        self.close()
+        self.mdiClose()

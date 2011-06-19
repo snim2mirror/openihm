@@ -11,7 +11,9 @@ import data.mysql.connector
 
 from gui.designs.ui_household_editcharacteristic import Ui_EditHouseholdCharacteristic
 
-class FrmEditHouseholdCharacteristic(QDialog, Ui_EditHouseholdCharacteristic):	
+from mixins import MDIDialogMixin
+
+class FrmEditHouseholdCharacteristic(QDialog, Ui_EditHouseholdCharacteristic, MDIDialogMixin):	
     ''' Creates the Edit Household Characteristic form. '''	
     def __init__(self, parent, pid, hhid, charName, charVal):
         ''' Set up the dialog box interface '''
@@ -38,9 +40,6 @@ class FrmEditHouseholdCharacteristic(QDialog, Ui_EditHouseholdCharacteristic):
         	if ( charVal != "Not Set" ):
         		self.txtValue.setText( charVal )
         	
-    def mdiClose(self):
-        self.parent.mdi.closeActiveSubWindow()
-        
     def saveCharacteristic(self):
 		''' Saves characteristic '''
 		
@@ -73,4 +72,4 @@ class FrmEditHouseholdCharacteristic(QDialog, Ui_EditHouseholdCharacteristic):
 			
 		# close window and refresh characteristics
 		self.parent.retrieveHouseholdCharacteristics()
-		self.close()
+		self.mdiClose()

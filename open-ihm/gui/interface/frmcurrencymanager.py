@@ -13,7 +13,9 @@ import data.mysql.connector
 # import the Currency Manager design class
 from gui.designs.ui_currencymanager import Ui_CurrencyManager
 
-class FrmCurrencyManager(QDialog, Ui_CurrencyManager):	
+from mixins import MDIDialogMixin
+
+class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin):	
      ''' Creates the Currency Manager from. '''	
 
      def __init__(self, parent):
@@ -28,10 +30,6 @@ class FrmCurrencyManager(QDialog, Ui_CurrencyManager):
          self.config = Config.dbinfo().copy()
          
          self.listCurrencies()
-
-
-     def mdiClose(self):
-	self.parent.mdi.closeActiveSubWindow()
          
      def countRowsSelected(self, tblVw):
          selectedRows = self.getSelectedRows(tblVw)

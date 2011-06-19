@@ -15,7 +15,9 @@ from frmhouseholds_add import FrmAddHousehold
 from frmhouseholds_edit import FrmEditHousehold
 from frmhousehold_data import FrmHouseholdData
 
-class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults):	
+from mixins import MDIDialogMixin
+
+class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, MDIDialogMixin):
 	''' Creates the Find Household Results form. '''	
 	def __init__(self, parent, hhid = "", hhname = ""):
 		''' Set up the dialog box interface '''
@@ -29,10 +31,6 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults):
 		self.txtHouseholdName.setText ( hhname )
 		
 		self.getHouseholds()
-		
-	def mdiClose(self):
-		self.parent.mdi.closeActiveSubWindow()
-
 		
 	def getHouseholds(self):
 		''' display households matching the criteria entered by user '''

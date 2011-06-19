@@ -15,7 +15,9 @@ from data.database import Database
 from frm_managefoodtypes_add import FrmAddCropType
 from frm_managefoodtypes_edit import FrmEditCropType
 
-class FrmManageFoodTypes(QDialog, Ui_FoodTypes):		
+from mixins import MDIDialogMixin
+
+class FrmManageFoodTypes(QDialog, Ui_FoodTypes, MDIDialogMixin):
         ''' Creates the Edit Project form. '''	
         def __init__(self, parent):
                 
@@ -38,9 +40,6 @@ class FrmManageFoodTypes(QDialog, Ui_FoodTypes):
 		self.connect(self.cmdAddRow, SIGNAL("clicked()"), self.saveCropType)
 		self.connect(self.cmdSearch, SIGNAL("clicked()"), self.searchCropType)
 	
-	def mdiClose(self):
-		self.parent.mdi.closeActiveSubWindow()
-
 	def getFoodTypes(self):
                	# select query to retrieve Food Types and related information
         	query = '''SELECT foodtype,measuringunit,energyvalueperunit FROM setup_crops'''
@@ -171,7 +170,6 @@ class FrmManageFoodTypes(QDialog, Ui_FoodTypes):
                 for counter in range(0,numrows):
                         currentIndex = self.tableView.model().index(counter,0)
                         currentitem = self.tableView.model().item(currentIndex.row(),0).text()
-                        print croptype.lower(), currentitem.lower()
                         if croptype.lower() == currentitem.lower():
                                 cropfound = 1
                                 desiredIndex = currentIndex

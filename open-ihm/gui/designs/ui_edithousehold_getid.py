@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_edithousehold_getid.ui'
 #
-# Created: Tue Apr 19 08:13:14 2011
+# Created: Fri Apr 22 21:52:27 2011
 #      by: PyQt4 UI code generator 4.8.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -19,18 +19,27 @@ class Ui_EditHouseholdGetID(object):
         EditHouseholdGetID.setObjectName(_fromUtf8("EditHouseholdGetID"))
         EditHouseholdGetID.resize(393, 114)
         EditHouseholdGetID.setMinimumSize(QtCore.QSize(393, 114))
-        self.cmdOk = QtGui.QPushButton(EditHouseholdGetID)
-        self.cmdOk.setGeometry(QtCore.QRect(10, 60, 75, 31))
-        self.cmdOk.setObjectName(_fromUtf8("cmdOk"))
-        self.cmdCancel = QtGui.QPushButton(EditHouseholdGetID)
-        self.cmdCancel.setGeometry(QtCore.QRect(300, 60, 81, 31))
-        self.cmdCancel.setObjectName(_fromUtf8("cmdCancel"))
+        self.formLayout = QtGui.QFormLayout(EditHouseholdGetID)
+        self.formLayout.setObjectName(_fromUtf8("formLayout"))
         self.label = QtGui.QLabel(EditHouseholdGetID)
-        self.label.setGeometry(QtCore.QRect(10, 20, 91, 16))
         self.label.setObjectName(_fromUtf8("label"))
+        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.label)
         self.cboHouseholdName = QtGui.QComboBox(EditHouseholdGetID)
-        self.cboHouseholdName.setGeometry(QtCore.QRect(100, 20, 281, 22))
         self.cboHouseholdName.setObjectName(_fromUtf8("cboHouseholdName"))
+        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.cboHouseholdName)
+        self.groupBox = QtGui.QGroupBox(EditHouseholdGetID)
+        self.groupBox.setTitle(_fromUtf8(""))
+        self.groupBox.setObjectName(_fromUtf8("groupBox"))
+        self.horizontalLayout = QtGui.QHBoxLayout(self.groupBox)
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.cmdOk = QtGui.QPushButton(self.groupBox)
+        self.cmdOk.setObjectName(_fromUtf8("cmdOk"))
+        self.horizontalLayout.addWidget(self.cmdOk)
+        self.cmdCancel = QtGui.QPushButton(self.groupBox)
+        self.cmdCancel.setObjectName(_fromUtf8("cmdCancel"))
+        self.horizontalLayout.addWidget(self.cmdCancel)
+        self.formLayout.setWidget(1, QtGui.QFormLayout.SpanningRole, self.groupBox)
+        self.label.setBuddy(self.cboHouseholdName)
 
         self.retranslateUi(EditHouseholdGetID)
         QtCore.QObject.connect(self.cmdOk, QtCore.SIGNAL(_fromUtf8("clicked()")), EditHouseholdGetID.showDetails)
@@ -41,7 +50,7 @@ class Ui_EditHouseholdGetID(object):
 
     def retranslateUi(self, EditHouseholdGetID):
         EditHouseholdGetID.setWindowTitle(QtGui.QApplication.translate("EditHouseholdGetID", "Edit Household - Select Household", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("EditHouseholdGetID", "Household Name:", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdOk.setText(QtGui.QApplication.translate("EditHouseholdGetID", "Ok", None, QtGui.QApplication.UnicodeUTF8))
         self.cmdCancel.setText(QtGui.QApplication.translate("EditHouseholdGetID", "Cancel", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("EditHouseholdGetID", "Household Name:", None, QtGui.QApplication.UnicodeUTF8))
 

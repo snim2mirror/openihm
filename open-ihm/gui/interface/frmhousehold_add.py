@@ -13,7 +13,9 @@ from data.controller import Controller
 # import the Create Project Dialog design class
 from gui.designs.ui_addhousehold import Ui_AddHousehold
 
-class FrmAddHousehold(QDialog, Ui_AddHousehold):	
+from mixins import MDIDialogMixin
+
+class FrmAddHousehold(QDialog, Ui_AddHousehold, MDIDialogMixin):	
     ''' Creates the add household form '''	
 
     def __init__(self, parent):
@@ -34,21 +36,6 @@ class FrmAddHousehold(QDialog, Ui_AddHousehold):
         # display project name
         self.lblProjectName.setText(self.parent.projectname)
 
-    def setMdi(self, mdi):
-        self.mdi = mdi
-        
-    def mdiClose(self):
-        # Why am I doing this both ways? I'm not sure. Someone should FIXME
-        try:
-            self.mdi.closeActiveSubWindow()
-            return
-        except Exception, e:
-            pass
-        try:
-            self.parent.closeActiveSubWindow()
-            return
-        except Exception, e:
-            pass
 
     def saveHousehold(self):
         ''' Saves newly created household data to database '''

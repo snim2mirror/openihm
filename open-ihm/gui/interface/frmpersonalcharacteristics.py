@@ -13,7 +13,9 @@ from data.GenericDBOP import GenericDBOP
 # import the Create House Characteristics Dialog design class
 from gui.designs.ui_personalcharacteristics import Ui_PersonalCharacteristics
 
-class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics):
+from mixins import MDIDialogMixin
+
+class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics, MDIDialogMixin):
         def __init__(self, parent):
                 ''' Set up the dialog box interface '''
                 self.parent = parent
@@ -24,9 +26,6 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics):
         	self.getPersonalCharacteristics()
         	self.setDatatypes()
 		
-	def mdiClose(self):
-		self.parent.closeActiveSubWindow()
-
 	def getPersonalCharacteristics(self):
                	# select query to retrieve Food Types and related information
         	query = '''SELECT characteristic FROM globalpersonalcharacteristics'''

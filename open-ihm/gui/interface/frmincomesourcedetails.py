@@ -14,7 +14,9 @@ from gui.designs.ui_manageincomedetails import Ui_ManageIncome
 #import GenericDBOP which has methods for managing database operations
 from data.GenericDBOP import GenericDBOP
 
-class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):	
+from mixins import MDIDialogMixin
+
+class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):	
 	''' Creates the Manage Income Source Details from. Uses the design class
 		in gui.designs.ui_manageincomedetails. '''	
 	def __init__(self, parent):
@@ -37,9 +39,6 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
                 self.txtEnergyValue.setValidator(myIntVal)
                 self.txtLivestockEnergyValue.setValidator(myIntVal)
                 self.txtWildFoodEnergyValue.setValidator(myIntVal)
-
-	def mdiClose(self):
-		self.parent.closeActiveSubWindow()
 
         #Begin block of methods for managing Foodstock details
 	def clearCropTextboxes(self):
@@ -99,10 +98,8 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
 
-		numrows = 0
+		numrows = len(recordset)
 		category='crops'
-		for row in recordset:
-			numrows = numrows + 1
 				      	
 		if numrows == 0:
                         query = '''INSERT INTO setup_foods_crops(name, category,energyvalueperunit, unitofmeasure) 
@@ -129,9 +126,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
+		numrows = len(recordset)
 
 		if numrows <> 0:
                         			
@@ -193,9 +188,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
 
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
+		numrows = len(recordset)
 				      	
 		if numrows == 0:
 			
@@ -221,9 +214,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
+		numrows = len(recordset)	
 
 		if numrows <> 0:
 			
@@ -302,10 +293,8 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
 
-		numrows = 0
+		numrows = len(recordset)
 		category ='wildfoods'
-		for row in recordset:
-			numrows = numrows + 1
 				      	
 		if numrows == 0:
                         query = '''INSERT INTO setup_foods_crops(name, category,energyvalueperunit, unitofmeasure) 
@@ -333,9 +322,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
+		numrows = len(recordset)
 
 		if numrows <> 0:
 			
@@ -416,10 +403,8 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
 
-		numrows = 0
+		numrows = len(recordset)
 		category = 'livestock'
-		for row in recordset:
-			numrows = numrows + 1
 				      	
 		if numrows == 0:
 			
@@ -448,9 +433,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
+		numrows = len(recordset)
 
 		if numrows <> 0:
 			
@@ -485,7 +468,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		num = 0
 
        		for row in recordset:
-			qtTransferSourceType = QStandardItem( "%s" % row[0])
+			qtTransferSourceType = QStandardItem(row[0])
             		qtTransferSourceType.setTextAlignment( Qt.AlignLeft )
             		model.setItem( num, 0, qtTransferSourceType )
             		num = num + 1
@@ -502,7 +485,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
         	''' Saves newly created data to database '''
 
         	# get the data entered by user
-        	mytransfersource = self.txtTransferSources.text()		
+        	mytransfersource = unicode(self.txtTransferSources.text())
         	
 		# check if record exists
 		query = '''SELECT sourcetype FROM setup_transfersources WHERE sourcetype='%s' ''' % (mytransfersource)    
@@ -510,9 +493,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
 
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
+		numrows = len(recordset)
 				      	
 		if numrows == 0:
 			
@@ -539,9 +520,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
+		numrows = len(recordset)
 
 		if numrows <> 0:
 			
@@ -553,9 +532,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 
                                 # execute query and commit changes
                                 temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
-
-			
+                                recordset = temp.runUpdateQuery()			
                                 self.txtTransferSources.clear()
 			
                                 #refresh categories list
@@ -578,7 +555,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		num = 0
 
        		for row in recordset:
-			qtTransferType = QStandardItem( "%s" % row[0])
+			qtTransferType = QStandardItem( "%s" % str(row[0]))
             		qtTransferType.setTextAlignment( Qt.AlignLeft )
             		model.setItem( num, 0, qtTransferType )
             		num = num + 1
@@ -609,16 +586,13 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
         	# get the data entered by user
         	mytransfertype = self.txtTransferType.text()
         	mymeasuringUnit = self.txtTransferUnitofMeasure.text()
-        	
 		# check if record exists
 		query = '''SELECT assistancetype FROM setup_transfers WHERE assistancetype='%s' ''' % (mytransfertype)    
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
 
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
+		numrows = len(recordset)
 				      	
 		if numrows == 0:
 			
@@ -631,8 +605,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
         	temp = GenericDBOP(query)
                 recordset = temp.runUpdateQuery()
                 self.txtTransferType.clear()
-        	self.txtTransferUnitofMeasure.clear()
-                        
+        	self.txtTransferUnitofMeasure.clear()                        
 		#refresh categories list
 		self.getTransferTypes()               
                 
@@ -647,9 +620,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome):
 		
 		p = GenericDBOP(query)
                 recordset = p.runSelectQuery()
-		numrows = 0		
-		for row in recordset:
-			numrows = numrows + 1
+		numrows = len(recordset)
 
 		if numrows <> 0:
 			

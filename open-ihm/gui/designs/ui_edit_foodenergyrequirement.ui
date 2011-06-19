@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>380</width>
-    <height>175</height>
+    <height>187</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -19,101 +19,70 @@
   <property name="windowTitle">
    <string>Edit Food Energy Requirement</string>
   </property>
-  <widget class="QLineEdit" name="txtAge">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>40</y>
-     <width>201</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>70</y>
-     <width>141</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Energy Requirements - Males</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>100</y>
-     <width>151</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Energy Requirements - Females</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cmdSave">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>132</y>
-     <width>75</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Save</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cmdCancel">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>132</y>
-     <width>75</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cancel</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_6">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>121</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Age</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="txtEnergyRequirementMales">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>70</y>
-     <width>201</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="txtEnergyRequirementFemales">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>100</y>
-     <width>201</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
+  <layout class="QFormLayout" name="formLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Age</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtAge</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLineEdit" name="txtAge"/>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Energy Requirements - Males</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtEnergyRequirementMales</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="txtEnergyRequirementMales"/>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Energy Requirements - Females</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtEnergyRequirementFemales</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="txtEnergyRequirementFemales"/>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="cmdSave">
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmdCancel">
+        <property name="text">
+         <string>Cancel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <tabstops>
   <tabstop>txtAge</tabstop>
@@ -124,22 +93,6 @@
  </tabstops>
  <resources/>
  <connections>
-  <connection>
-   <sender>cmdSave</sender>
-   <signal>clicked()</signal>
-   <receiver>EditFoodEnergyRequirement</receiver>
-   <slot>saveFoodEnergyRequirementDetails()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>62</x>
-     <y>145</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>185</x>
-     <y>139</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>cmdCancel</sender>
    <signal>clicked()</signal>
@@ -153,6 +106,38 @@
     <hint type="destinationlabel">
      <x>261</x>
      <y>153</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>EditFoodEnergyRequirement</receiver>
+   <slot>saveFoodEnergyRequirementDetails()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>148</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>10</x>
+     <y>176</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>EditFoodEnergyRequirement</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>160</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>180</x>
+     <y>177</y>
     </hint>
    </hints>
   </connection>

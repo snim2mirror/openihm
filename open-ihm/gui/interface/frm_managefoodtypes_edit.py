@@ -11,7 +11,9 @@ from data.foodenergyrequirement import FoodEnergyRequirement
 from data.database import Database
 from gui.designs.ui_managefoodtypes_edit import Ui_EditFoodTypes
 
-class FrmEditCropType(QDialog, Ui_EditFoodTypes):
+from mixins import MDIDialogMixin
+
+class FrmEditCropType(QDialog, Ui_EditFoodTypes, MDIDialogMixin):
     ''' Creates the edit food type form '''	
 
     def __init__(self, parent, selectedtype,category, measuringunit, energyvalue):
@@ -32,9 +34,6 @@ class FrmEditCropType(QDialog, Ui_EditFoodTypes):
         self.txtKCalories.setValidator(myIntVal)
 
         self.showDetailsToEdit()
-
-    def mdiClose(self):
-        self.close()
 
     def showDetailsToEdit(self):
         ''' Display energy requirements data '''

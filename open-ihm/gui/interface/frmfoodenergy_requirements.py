@@ -14,7 +14,9 @@ from frmfoodenergyrequirement_add import FrmAddEnergyRequirement
 from frmfoodenergyrequirement_edit import FrmEditEnergyRequirement
 from data.foodenergyrequirement import FoodEnergyRequirement
 
-class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements):	
+from mixins import MDIDialogMixin
+
+class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements, MDIDialogMixin):	
 	''' Creates the view food energy requirements form '''	
 	def __init__(self, parent):
 	    ''' Set up the dialog box interface '''
@@ -26,9 +28,6 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements):
 	    
 	    # get food energy requirement details by sex and age
 	    self.getFoodEnergyRequirements()
-
-	def mdiClose(self):
-		self.parent.mdi.closeActiveSubWindow()
 
 	def getFoodEnergyRequirements(self):
 		# connect to mysql database

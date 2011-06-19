@@ -11,7 +11,9 @@ import data.mysql.connector
 
 from gui.designs.ui_household_income_crops import Ui_AddHouseholdIncomeCrops
 
-class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops):	
+from mixins import MDIDialogMixin
+
+class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops, MDIDialogMixin):	
      ''' Form to add or edit a Household Crop Income  '''	
      def __init__(self, parent,  hhid, hhname, incomeid = 0 ):
          ''' Set up the dialog box interface '''
@@ -36,9 +38,6 @@ class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops):
          # lock editing of income source and unit of measure
          self.cboIncomeType.setEditable( False )
          self.txtUnitOfMeasure.setReadOnly( True )
-         
-     def mdiClose(self):
-          self.parent.mdi.closeActiveSubWindow()
          
      def displayUnitOfMeasure(self):
          ''' displays the unit of measure of the selected income source '''
@@ -130,4 +129,4 @@ class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops):
 
          # close new project window
          self.parent.retrieveHouseholdCropIncome()
-         self.close()
+         self.mdiClose()

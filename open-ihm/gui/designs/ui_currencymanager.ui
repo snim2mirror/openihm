@@ -6,172 +6,129 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>694</width>
-    <height>334</height>
+    <width>640</width>
+    <height>250</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>694</width>
-    <height>334</height>
+    <width>640</width>
+    <height>250</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Manage Currencies</string>
   </property>
-  <widget class="QTableView" name="tblCurrencies">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>30</y>
-     <width>381</width>
-     <height>291</height>
-    </rect>
-   </property>
-   <property name="alternatingRowColors">
-    <bool>true</bool>
-   </property>
-   <property name="sortingEnabled">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cmdDelete">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>290</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Delete</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cmdClose">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>290</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Close</string>
-   </property>
-  </widget>
-  <widget class="QGroupBox" name="groupBox">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>30</y>
-     <width>281</width>
-     <height>181</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string/>
-   </property>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>70</y>
-      <width>81</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Abbreviation:</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="txtCurrencyName">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>30</y>
-      <width>171</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>110</y>
-      <width>46</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Symbol:</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="txtSymbol">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>110</y>
-      <width>171</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="txtAbbreviation">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>70</y>
-      <width>171</width>
-      <height>20</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>30</y>
-      <width>81</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Currency Name:</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="cmdSave">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>140</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Save</string>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>10</y>
-     <width>111</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Available Currencies</string>
-   </property>
-  </widget>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="1" rowspan="3">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Currency Name:</string>
+        </property>
+        <property name="buddy">
+         <cstring>txtCurrencyName</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="txtCurrencyName"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Abbreviation:</string>
+        </property>
+        <property name="buddy">
+         <cstring>txtAbbreviation</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="txtAbbreviation"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Symbol:</string>
+        </property>
+        <property name="buddy">
+         <cstring>txtSymbol</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="txtSymbol"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="cmdSave">
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmdDelete">
+        <property name="text">
+         <string>Delete</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="cmdClose">
+        <property name="text">
+         <string>Close</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0" rowspan="4">
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string>Available Currencies</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QTableView" name="tblCurrencies">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <tabstops>
-  <tabstop>tblCurrencies</tabstop>
   <tabstop>txtCurrencyName</tabstop>
   <tabstop>txtAbbreviation</tabstop>
   <tabstop>txtSymbol</tabstop>
@@ -181,54 +138,6 @@
  </tabstops>
  <resources/>
  <connections>
-  <connection>
-   <sender>cmdClose</sender>
-   <signal>clicked()</signal>
-   <receiver>CurrencyManager</receiver>
-   <slot>mdiClose()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>652</x>
-     <y>301</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>528</x>
-     <y>248</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdSave</sender>
-   <signal>clicked()</signal>
-   <receiver>CurrencyManager</receiver>
-   <slot>saveCurrency()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>606</x>
-     <y>182</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>425</x>
-     <y>212</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdDelete</sender>
-   <signal>clicked()</signal>
-   <receiver>CurrencyManager</receiver>
-   <slot>delCurrencies()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>447</x>
-     <y>294</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>544</x>
-     <y>290</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>tblCurrencies</sender>
    <signal>clicked(QModelIndex)</signal>
@@ -242,6 +151,54 @@
     <hint type="destinationlabel">
      <x>403</x>
      <y>231</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>CurrencyManager</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>560</x>
+     <y>200</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>598</x>
+     <y>234</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>CurrencyManager</receiver>
+   <slot>delCurrencies()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>470</x>
+     <y>204</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>503</x>
+     <y>234</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSave</sender>
+   <signal>clicked()</signal>
+   <receiver>CurrencyManager</receiver>
+   <slot>saveCurrency()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>329</x>
+     <y>199</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>301</x>
+     <y>233</y>
     </hint>
    </hints>
   </connection>

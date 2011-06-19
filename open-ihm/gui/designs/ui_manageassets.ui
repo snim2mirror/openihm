@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="tabCashSavings">
     <attribute name="title">
@@ -411,6 +411,9 @@
      <property name="text">
       <string>Unit of Measure</string>
      </property>
+     <property name="buddy">
+      <cstring>txtLivestockUnit</cstring>
+     </property>
     </widget>
     <widget class="QLabel" name="label_11">
      <property name="geometry">
@@ -423,6 +426,9 @@
      </property>
      <property name="text">
       <string>KCalories</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtLivestockEnergyValue</cstring>
      </property>
     </widget>
     <widget class="QLineEdit" name="txtLivestockUnit">
@@ -509,6 +515,9 @@
      <property name="text">
       <string>Select Livetock Type</string>
      </property>
+     <property name="buddy">
+      <cstring>livestockListView</cstring>
+     </property>
     </widget>
     <widget class="QLabel" name="label_27">
      <property name="geometry">
@@ -521,6 +530,9 @@
      </property>
      <property name="text">
       <string>Type</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtLivestockPType</cstring>
      </property>
     </widget>
    </widget>
@@ -539,6 +551,9 @@
      </property>
      <property name="text">
       <string>Type</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtTreeType</cstring>
      </property>
     </widget>
     <widget class="QPushButton" name="btnTreeDelete">
@@ -599,6 +614,9 @@
      <property name="text">
       <string>Select Tree Type</string>
      </property>
+     <property name="buddy">
+      <cstring>treeListView</cstring>
+     </property>
     </widget>
     <widget class="QLabel" name="label_12">
      <property name="geometry">
@@ -611,6 +629,9 @@
      </property>
      <property name="text">
       <string>Unit of Measure</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtTreeMeasuringUnit</cstring>
      </property>
     </widget>
     <widget class="QPushButton" name="btnTreeSave">
@@ -655,6 +676,9 @@
      </property>
      <property name="text">
       <string>Type</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtTradableGoodType</cstring>
      </property>
     </widget>
     <widget class="QPushButton" name="btnTGoodDelete">
@@ -715,6 +739,9 @@
      <property name="text">
       <string>Select Good</string>
      </property>
+     <property name="buddy">
+      <cstring>tradableGoodsListView</cstring>
+     </property>
     </widget>
     <widget class="QLabel" name="label_15">
      <property name="geometry">
@@ -727,6 +754,9 @@
      </property>
      <property name="text">
       <string>Unit of Measure</string>
+     </property>
+     <property name="buddy">
+      <cstring>txtTradableGoodMeasuringUnit</cstring>
      </property>
     </widget>
     <widget class="QPushButton" name="btnTGoodSave">

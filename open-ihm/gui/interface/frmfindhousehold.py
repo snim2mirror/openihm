@@ -13,7 +13,9 @@ import data.mysql.connector
 from gui.designs.ui_findhousehold import Ui_FindHousehold
 from frmfindhouseholdresults import FrmFindHouseholdResults
 
-class FrmFindHousehold(QDialog, Ui_FindHousehold):	
+from mixins import MDIDialogMixin
+
+class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin):
 	''' Creates the Find Household form'''	
 	def __init__(self, parent):
 		''' Set up the dialog box interface '''
@@ -21,10 +23,7 @@ class FrmFindHousehold(QDialog, Ui_FindHousehold):
 		self.setupUi(self)
 		self.parent = parent
 		self.config = Config.dbinfo().copy()
-		
-	def mdiClose(self):
-		self.parent.mdi.closeActiveSubWindow()
-		
+
 	def findHousehold(self):
 		''' Find a household matching the criteria entered by user '''
 		hhid 			= self.txtHouseholdNo.text()

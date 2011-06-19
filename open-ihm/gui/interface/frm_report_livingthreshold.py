@@ -9,7 +9,14 @@ from outputs.routines.report_livingthreshold import LivingThreshhold
 from outputs.routines.report_disposableincome_write import HouseholdsIncomeWrite
 from frm_report_disposableincome import HouseholdDisposableIncome
 
-class LivingThreshold(QDialog, Ui_HouseholdDisposableIncome):
+from mixins import MDIDialogMixin
+
+#
+# FIXME: Are we using this file?
+#
+
+
+class LivingThreshold(QDialog, Ui_HouseholdDisposableIncome, MDIDialogMixin):
     ''' Creates the Household Disposable Income/Living Threshold Report form. Uses the design class
 		in gui.designs.ui_report_householddisposableincome. '''	
 	

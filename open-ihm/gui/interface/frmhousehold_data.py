@@ -24,7 +24,9 @@ from frmhousehold_addincome_gifts import FrmHouseholdGiftsIncome
 from frmhousehold_addincome_transfers import FrmHouseholdTransferIncome
 from frmhousehold_addincome_employment import FrmHouseholdEmploymentIncome
 
-class FrmHouseholdData(QDialog, Ui_HouseholdData):	
+from mixins import MDIDialogMixin
+
+class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):	
 	''' Creates the household data (income, assets, expenditure, etc) form '''	
 	def __init__(self, parent, hhid=0):
 		''' Set up the dialog box interface '''
@@ -46,9 +48,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData):
 		
 		# retrieve members
 		self.displayHouseholdData()
-
-	def mdiClose(self):
-		self.parent.mdi.closeActiveSubWindow()
 
 	def countRowsSelected(self, tblVw):
 		selectedRows = self.getSelectedRows(tblVw)

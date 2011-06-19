@@ -11,7 +11,9 @@ from data.foodenergyrequirement import FoodEnergyRequirement
 from data.database import Database
 from gui.designs.ui_managefoodtypes_add import Ui_AddFoodTypes
 
-class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes):	
+from mixins import MDIDialogMixin
+
+class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes, MDIDialogMixin):	
     ''' Creates the add food/crop energy requirement form '''	
 
     def __init__(self, parent, mdi):
@@ -26,10 +28,6 @@ class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes):
         #set input validator and restrict input to numeric values,
         myIntVal = QIntValidator(0, 10000, self.txtKCalories)
         self.txtKCalories.setValidator(myIntVal);
- 
-    def mdiClose(self):
-        self.close()
-
         
     def saveDetails(self):
         ''' Saves newly created food/crop energy requirement data to database '''
@@ -39,7 +37,6 @@ class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes):
         mycategory = self.cmbCategory.currentText()
 	mymeasuringunit = self.cmbUnitOfMeasure.currentText()
         myenergyvalue  = self.txtKCalories.text()
-        print mycategory
         	
 	# check if record exists
 	query = '''SELECT name, energyvalueperunit, unitofmeasure

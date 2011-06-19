@@ -4,9 +4,10 @@ from PyQt4.QtGui import *
 from data.config import Config
 import data.mysql.connector 
 from data.controller import Controller
-import common
 
-class LivestockIncomeManager:
+from mixins import TableViewMixin
+
+class LivestockIncomeManager(TableViewMixin):
      def getProjectLivestock(self):
          incomes = []
          row = 0
@@ -91,9 +92,9 @@ class LivestockIncomeManager:
         
      def moveSelectedLivestock(self):
         ''' Add selected available livestocks to Project'''
-        numSelected = common.countRowsSelected(self.tblAvailableLivestock)
+        numSelected = self.countRowsSelected(self.tblAvailableLivestock)
         if  numSelected != 0:
-             selectedRows = common.getSelectedRows(self.tblAvailableLivestock)
+             selectedRows = self.getSelectedRows(self.tblAvailableLivestock)
              for row in selectedRows:
                  income 		= self.tblAvailableLivestock.model().item(row,0).text()
                 
@@ -110,14 +111,14 @@ class LivestockIncomeManager:
         
      def removeSelectedLivestock(self):
          ''' remove selected livestocks from Project'''
-         numSelected = common.countRowsSelected(self.tblSelectedLivestock)
+         numSelected = self.countRowsSelected(self.tblSelectedLivestock)
          if  numSelected != 0:
              msg = "Are you sure you want to remove the selected livestock(s) from this project?"
              ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
              # if deletion is rejected return without deleting
              if ret == QMessageBox.No:
                  return
-             selectedRows = common.getSelectedRows(self.tblSelectedLivestock)
+             selectedRows = self.getSelectedRows(self.tblSelectedLivestock)
              incomes = []
              for row in selectedRows:
                  income = self.tblSelectedLivestock.model().item(row,0).text()
