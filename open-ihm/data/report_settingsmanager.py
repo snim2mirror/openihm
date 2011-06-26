@@ -134,3 +134,23 @@ class ReportsSettingsManager:
         return rows
 
 
+    def getHouseholdNumbers(self,projectid):
+        rows =[]
+        if projectid != 0:
+            
+            query = '''SELECT hhid,householdname FROM households WHERE pid=%s' ''' % (projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
+    def getHouseholds(self,projectid):
+        
+        rows =[]
+        if projectid != 0:
+            
+            query = '''SELECT hhid,householdname FROM households WHERE pid=%s ''' % (projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows

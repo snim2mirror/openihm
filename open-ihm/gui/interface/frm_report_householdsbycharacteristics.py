@@ -1,6 +1,6 @@
 #	Filename: frm_report_householdsbycharacteristics.py
 #
-#	Display dialog for Report households by characteristics.
+#	Display dialog for Income Budget.
 #-------------------------------------------------------------------
 
 # imports from PyQt4 package

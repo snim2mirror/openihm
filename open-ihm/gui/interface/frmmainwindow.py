@@ -54,6 +54,7 @@ from inputs.read_data_entry_sheets import ReadDataEntrySheets
 from frm_report_disposableincome import HouseholdDisposableIncome
 from data.setup_foodrequirement_startupvalues import FoodRequirementValues
 #from frm_report_livingthreshold import LivingThreshold
+from frm_report_householdbudgets import RepHouseholdBudget
 
 
 # Import modules used by the automatic software updator.
@@ -449,7 +450,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         form.show()
 
     def reportHouseholdsByCharacteristics(self):
-        ''' Creates and Shows the View Food Energy Requirements form '''
+        ''' Creates and Shows the dialog for listing households that match selected personal and houshold characteristics'''
         form = RepHouseholdsByCharacteristics(self)
         subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
@@ -557,6 +558,14 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         the Help menu.
         """
         return
+
+    def reportHouseholdbudget(self):
+        ''' Creates and Shows the dialog for Household Budget Reports'''
+        form = RepHouseholdBudget(self)
+        subWin = self.mdi.addSubWindow(form)
+        self.centerSubWindow(subWin)
+        form.show()
+
 #        if not self.assistant or not self.assistant.poll()==None:
 #            helpcoll = 'help/collection.qhc'        
 #            cmd = "assistant-qt4 -enableRemoteControl -collectionFile %s" % helpcoll
