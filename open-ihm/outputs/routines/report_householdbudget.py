@@ -14,78 +14,111 @@ class HouseholdBudget:
 
         for hid in selectedHouseholds:
             currentHouseMembership =[]
+            housememberlist = []
             query = ''' SELECT hhid,sex,yearofbirth FROM householdmembers WHERE hhid =%s AND pid =%s''' %(hid,projectid)
             currentHouseMembership = self.executeQuery(query)
-            currentHouseMembership[2]= currentYear - currentHouseMembership[2]
-            householdMembership.append(tuple(currentHouseMembership))
+            members = len(currentHouseMembership)
+            for row in currentHouseMembership:
+                
+                templist = list(row)
+                templist[2]= currentYear - templist[2]
+                housememberlist.append(tuple(templist))
+            householdMembership.append(tuple(housememberlist))
         return householdMembership
 
     def getAssets(self,projectid,selectedHouseholds):
         householdAssets =[]
         for hid in selectedHouseholds:
             currentHouseholdAssets =[]
-            query = ''' SELECT  hhid,assetcategory,assettype,unitofmeasure,(unitcost * totalunitshhid) AS assetvalue FROM assets WHERE hhid =%s AND pid =%s
+            query = ''' SELECT  hhid,assetcategory,assettype,unitofmeasure,(unitcost * totalunits) AS assetvalue FROM assets WHERE hhid =%s AND pid =%s
                             ORDER BY assetcategory,assettype''' %(hid,projectid)
             currentHouseholdAssets = self.executeQuery(query)
             householdAssets.append(tuple(currentHouseholdAssets))
+            
+        print householdAssets
         return householdAssets
 
     def getCashIncome(self,projectid,selectedHouseholds):
-        householdCashIncome =[]
-        incomesources = ['cropincome','employmentincome','livestockincome','transfers','wildfoods']
+        allHouseholdsCashIncome =[]
+        incomeSourceCategories = ['cropincome','employmentincome','livestockincome','transfers','wildfoods']
         for hid in selectedHouseholds:
             currentHouseholdIncome = []
             categoriesIncome = []
             householdCashIncome = 0
             currentHouseholdIncome.append(hid)
             
-            for incomesource in incomesources:
+            for incomeSourceCategory in incomeSourceCategories:
                 categoryIncome =[]
-                sourcename = incomesource + 'income'
-                query = '''SELECT SUM(unitssold * unitprice) AS '%s' FROM '%s'
-                        WHERE pid = %s AND hhid = %s ''' % (incomesource,sourcename,projectid,hid)
-                categoryIncome = self.executeQuery(query)
-                categoriesIncome.append(categoryIncome[0])
-                householdCashIncome = householdCashIncome + categoryIncome[0]
+                sourcename = incomeSourceCategory + 'income'
+                if incomeSourceCategory=='employmentincome':
+                    query = '''SELECT SUM(cashincome) AS '%s' FROM %s
+                            WHERE pid = %s AND hhid = %s ''' % (sourcename,incomeSourceCategory,projectid,hid)
                 
+                elif incomeSourceCategory=='transfers':
+                    query = '''SELECT SUM(cashperyear) AS '%s' FROM %s
+                            WHERE pid = %s AND hhid = %s ''' % (sourcename,incomeSourceCategory,projectid,hid)
+                else:
+                    query = '''SELECT SUM(unitssold * unitprice) AS '%s' FROM %s
+                            WHERE pid = %s AND hhid = %s ''' % (sourcename,incomeSourceCategory,projectid,hid)
+
+                categoryIncome = self.executeQuery(query)
+                for row in categoryIncome:
+                    if row[0]:
+                        categoriesIncome.append(row[0])
+                        householdCashIncome = householdCashIncome + row[0]
+                    else:
+                        categoriesIncome.append(0)
+
             currentHouseholdIncome.extend(categoriesIncome)
             currentHouseholdIncome.append(householdCashIncome)
-            householdCashIncome.append(tuple(currentHouseholdIncome))
-        return householdCashIncome
+            allHouseholdsCashIncome.append(tuple(currentHouseholdIncome))
+        return allHouseholdsCashIncome
 
     def getFoodIncome(self,projectid,selectedHouseholds):
-        allHouseholds =[]
-        incomesources = ['cropincome','employmentincome','livestockincome','transfers','wildfoods']
+        allHouseholdsFoodIncome =[]
+        incomeSourceCategories = ['cropincome','employmentincome','livestockincome','transfers','wildfoods']
         for hid in selectedHouseholds:
             currentHouseholdIncome = []
             categoriesIncome = []
             householdFoodIncome = 0
             currentHouseholdIncome.append(hid)
 
-            for incomesource in incomesources:
+            for incomeSourceCategory in incomeSourceCategories:
                 categoryIncome =[]
-                sourcename = incomesource + 'income'
-                fieldname = incomesource + '.incomesource'
-                if incomesource == 'employmentincome':
-                    query = '''SELECT hhid,SUM(incomekcal) AS employmentfoodincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,hid)
+                sourcename = incomeSourceCategory + 'income'
+                if incomeSourceCategory == 'transfers':
+                    fieldname = incomeSourceCategory + '.foodtype'
                 else:
-                    query = '''SELECT hhid,SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name='%s'))
-                            AS '%s' FROM '%s' WHERE pid = %s AND hhid = %s''' % (fieldname,sourcename,incomesource,projectid,hid)
+                    fieldname = incomeSourceCategory + '.incomesource'
+                    
+                if incomeSourceCategory == 'employmentincome':
+                    query = '''SELECT SUM(incomekcal) AS employmentfoodincome FROM employmentincome WHERE pid = %s AND hhid=%s ''' % (projectid,hid)
+                else:
+                    query = '''SELECT SUM(unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=%s))
+                            AS '%s' FROM %s WHERE pid = %s AND hhid = %s''' % (fieldname,sourcename,incomeSourceCategory,projectid,hid)
+                    
                 categoryIncome = self.executeQuery(query)
-                categoriesIncome.append(categoryIncome[0])
-                householdFoodIncome = householdFoodIncome + categoryIncome[0]
+                for row in categoryIncome:
+                    if row[0]:
+                        categoriesIncome.append(row[0])
+                        householdFoodIncome = householdFoodIncome + row[0]
+                    else:
+                        categoriesIncome.append(0)
+                #print categoriesIncome
 
             currentHouseholdIncome.extend(categoriesIncome)    
             currentHouseholdIncome.append(householdFoodIncome)
-            allHouseholds.append(tuple(currentHouseholdIncome))
-        return allHouseholds
+            allHouseholdsFoodIncome.append(tuple(currentHouseholdIncome))
+        return allHouseholdsFoodIncome
         
             
     def executeQuery(self,query):
         '''run various select queries'''
         
         dbconnector = Database()
+        dbconnector.open()
         recordset = dbconnector.execSelectQuery(query)
+        dbconnector.close()
         return recordset
 
     def getHouseholdEnergyNeeds(self, householdids,pid):

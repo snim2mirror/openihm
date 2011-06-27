@@ -21,7 +21,7 @@ class HouseholdBudgetWrite:
         sheetName.col(0).width = 15000
         #set column width for cols 1 to 3
         for i in range(1,4):
-            sheet1.col(i).width = 5000
+            sheetName.col(i).width = 5000
         
     def writeHouseholdMembership(self,HouseholdMembership,sheetName,sectionrow,style1,style2):
         
@@ -34,7 +34,7 @@ class HouseholdBudgetWrite:
         sheetName.write(5, 2, 'Age - years', style1)
 
         #write details of Household members
-        sectionrow = 5
+        sectionrow = 6
         for row in HouseholdMembership:
             if row[1]=='Male':
                 sheetName.write(sectionrow, 1, row[2], style2)
@@ -50,19 +50,20 @@ class HouseholdBudgetWrite:
         headerrow = sectionrow + 5
         itemrow = headerrow + 1
         
-        sheet1.write(headerrow, 0, "Assets", style1)
+        sheetName.write(headerrow, 0, "Assets", style1)
         assetHeaders = ['Category','Type','Unit','Value']
         itemcolumn = 0
         for assetHeader in assetHeaders:
-            print assetHeader
-            sheet1.write(itemrow, itemcolumn, assetHeader, style2) 
+            sheetName.write(itemrow, itemcolumn, assetHeader, style2) 
             itemcolumn = itemcolumn + 1
 
         #write Asset Details
         itemrow = itemrow + 1
         for row in householdAssets:
-            for i in (0,4):
-                sheetName.write(itemrow, i, row[i], style3)
+            rowindex = 0
+            for i in range(0,4):
+                rowindex = i +1
+                sheetName.write(itemrow, i, row[rowindex], style1)
             itemrow = itemrow + 1
             
         return itemrow
@@ -84,18 +85,19 @@ class HouseholdBudgetWrite:
         IncomeSourceTitles = ['Crop production','Livestock & livestock products','Employment','Gifts','Wild foods & hunting','Total']
         for incomecat in IncomeSourceTitles:
             itemrow = itemrow + 1
-            sheetName.write(itemrow, 0, incomecat, style3)
+            sheetName.write(itemrow, 0, incomecat, style2)
 
         #Income Sources - Category Values - Food
-        itemrow = headerrow + 1
-        for i in (0,4):
-            sheetName.write(itemrow,1, row[i], style3)
+        itemrow = headerrow + 2
+        for i in range(1,7):
+            sheetName.write(itemrow,1, householdFoodIncome[i], style1)
             itemrow = itemrow + 1
             
         #Income Sources - Category Values - Cash
-        itemrow = headerrow + 1
-        for i in (0,4):
-            sheetName.write(itemrow,2, row[i], style3)
+        itemrow = headerrow + 2
+        for i in range(1,7):
+            print householdCashIncome[i]
+            sheetName.write(itemrow,2, householdCashIncome[i], style1)
             itemrow = itemrow + 1
             
         return itemrow
@@ -109,7 +111,7 @@ class HouseholdBudgetWrite:
                               'Cash remaining after non-food expenses','Kcals/resident person/day']
         
         for incomecat in budgetTitles:
-            sheet1.write(itemrow, 0, incomecat, style2)
+            sheetName.write(itemrow, 0, incomecat, style2)
             itemrow = itemrow + 1
 
     def saveReport(self,book):
@@ -133,12 +135,20 @@ class HouseholdBudgetWrite:
 
         sheetNumber = 1
         listIndex = 0
-
+        '''print 'membership ', householdMembership
+        print 'assets ',householdAssets
+        print 'cash ', householdCashIncome'''
+        
         for hid in selectedHouseholds:
             sheetName = 'sheet' + '%s' % sheetNumber
             sheetNumber = sheetNumber + 1
             sheetTitle = 'Household Number ' + '%s' % hid
             sheetName = book.add_sheet(sheetTitle)
+
+            #print 'membership ', householdMembership[listIndex]
+            #print 'assets ',householdAssets[listIndex]
+            #print 'cash ', householdCashIncome[listIndex]
+            #print 'cash ', householdFoodIncome[listIndex]
             
             sectionrow = self.writePageTitleSection(sheetName,style1)
             sectionrow = self.writeHouseholdMembership(householdMembership[listIndex],sheetName,sectionrow,style1,style2)
