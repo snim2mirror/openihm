@@ -8,9 +8,6 @@ import os
 from PyQt4 import QtGui
 
 class HouseholdBudgetWrite:
-    #def __init__(self):
-        #self.database = Database()
-
     def drawBudgetTemplate(self):
         pass
         
@@ -96,7 +93,6 @@ class HouseholdBudgetWrite:
         #Income Sources - Category Values - Cash
         itemrow = headerrow + 2
         for i in range(1,7):
-            print householdCashIncome[i]
             sheetName.write(itemrow,2, householdCashIncome[i], style3)
             itemrow = itemrow + 1
             

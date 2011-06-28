@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_report_householdbudget.ui'
 #
-# Created: Sun Jun 19 11:40:09 2011
+# Created: Tue Jun 28 23:34:58 2011
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -46,7 +46,7 @@ class Ui_HouseholdBudget(object):
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.listViewHNames = QtGui.QListView(self.groupBox_2)
         self.listViewHNames.setAlternatingRowColors(True)
-        self.listViewHNames.setSelectionMode(QtGui.QAbstractItemView.MultiSelection)
+        self.listViewHNames.setSelectionMode(QtGui.QAbstractItemView.NoSelection)
         self.listViewHNames.setObjectName("listViewHNames")
         self.verticalLayout_5.addWidget(self.listViewHNames)
         self.gridLayout.addWidget(self.groupBox_2, 2, 2, 2, 2)

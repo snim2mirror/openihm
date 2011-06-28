@@ -118,29 +118,30 @@ class RepHouseholdBudget(QDialog, Ui_HouseholdBudget, MDIDialogMixin):
                 ''' get households that meet the combined criteria of household and personal characteristics'''
                 
                 projectid = self.getProjectID()
-                selectedHNumbers = self.getSelectedHouseholdNumbers()
+                if self.cmbHouseholds.currentText() =='All Households':
+                        allhid = []
+                        row = 0
+                        while (self.listViewHNumbers.model().item(row,0)):
+                            val = self.listViewHNumbers.model().item(row,0).text()
+                            allhid.append(str(val))
+                            row = row + 1
+                        selectedHNumbers = allhid
+                else:
+                        selectedHNumbers = self.getSelectedHouseholdNumbers()
+                        
                 connector = HouseholdBudget()
-                
                 householdMembership  = connector.getHouseholdMembership(projectid,selectedHNumbers)
                 householdAssets     = connector.getAssets(projectid,selectedHNumbers)
                 householdFoodIncome = connector.getFoodIncome(projectid,selectedHNumbers)
                 householdCashIncome = connector.getCashIncome(projectid,selectedHNumbers)
                 householdBudgetSummary = connector.householdBudgetSummaries(projectid,selectedHNumbers)
                 
-                
-                #reporttable = []
-                #report = HouseholdBudget()
-                #reporttable = report.getReportTable(projectid,hcharselected,hquery)
                 return (selectedHNumbers,householdMembership,householdAssets,householdCashIncome,householdFoodIncome,householdBudgetSummary)
                 
         def writeSpreadsheet(self):
                 ''' Creates a Spreadsheet showing hoseholds that fit selected criteria '''
-                #reportatble = self.getReportData()
-                #householdMembership = self.getHouseholdMembership()
                 connector = HouseholdBudgetWrite()
-                #connector.drawBudgetTemplate()
                 selectedHouseholds,householdMembership,householdAssets,householdCashIncome,householdFoodIncome,householdBudgetSummary = self.getReportData()
                 connector.writeSpreadsheetReport(selectedHouseholds,householdMembership,householdAssets,householdCashIncome,householdFoodIncome,householdBudgetSummary)
-                #connector.writeSpreadsheetReport(reportatble)
         
                 

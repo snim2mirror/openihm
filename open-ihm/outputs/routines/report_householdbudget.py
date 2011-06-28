@@ -4,8 +4,6 @@ from data.report_settingsmanager import ReportsSettingsManager
 from PyQt4 import QtGui
 import datetime
 
-
-
 class HouseholdBudget:
     def getHouseholdMembership(self,projectid,selectedHouseholds):
         householdMembership =[]
@@ -209,7 +207,6 @@ class HouseholdBudget:
             reporttable.append(tuple(templist))
             
         reporttable.sort(key=lambda x: x[1])
-
 
         return reporttable
 
