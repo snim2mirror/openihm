@@ -93,7 +93,6 @@ class RepHouseholdBudget(QDialog, Ui_HouseholdBudget, MDIDialogMixin):
                         currentitem = self.listViewHNumbers.model().item(indexVal.row(),0).text()
 			if currentitem not in selectedHNumbers:
 				selectedHNumbers.append(str(currentitem))
-		print selectedHNumbers
 		return selectedHNumbers
 
         def getSelectedHIndexes(self):
@@ -126,13 +125,13 @@ class RepHouseholdBudget(QDialog, Ui_HouseholdBudget, MDIDialogMixin):
                 householdAssets     = connector.getAssets(projectid,selectedHNumbers)
                 householdFoodIncome = connector.getFoodIncome(projectid,selectedHNumbers)
                 householdCashIncome = connector.getCashIncome(projectid,selectedHNumbers)
-                #householdBudgetSummary = connector.(projectid,selectedHNumbers)
+                householdBudgetSummary = connector.householdBudgetSummaries(projectid,selectedHNumbers)
                 
                 
                 #reporttable = []
                 #report = HouseholdBudget()
                 #reporttable = report.getReportTable(projectid,hcharselected,hquery)
-                return (selectedHNumbers,householdMembership,householdAssets,householdCashIncome,householdFoodIncome)
+                return (selectedHNumbers,householdMembership,householdAssets,householdCashIncome,householdFoodIncome,householdBudgetSummary)
                 
         def writeSpreadsheet(self):
                 ''' Creates a Spreadsheet showing hoseholds that fit selected criteria '''
@@ -140,8 +139,8 @@ class RepHouseholdBudget(QDialog, Ui_HouseholdBudget, MDIDialogMixin):
                 #householdMembership = self.getHouseholdMembership()
                 connector = HouseholdBudgetWrite()
                 #connector.drawBudgetTemplate()
-                selectedHouseholds,householdMembership,householdAssets,householdCashIncome,householdFoodIncome = self.getReportData()
-                connector.writeSpreadsheetReport(selectedHouseholds,householdMembership,householdAssets,householdCashIncome,householdFoodIncome)
+                selectedHouseholds,householdMembership,householdAssets,householdCashIncome,householdFoodIncome,householdBudgetSummary = self.getReportData()
+                connector.writeSpreadsheetReport(selectedHouseholds,householdMembership,householdAssets,householdCashIncome,householdFoodIncome,householdBudgetSummary)
                 #connector.writeSpreadsheetReport(reportatble)
         
                 

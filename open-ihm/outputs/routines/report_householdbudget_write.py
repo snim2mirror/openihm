@@ -23,7 +23,7 @@ class HouseholdBudgetWrite:
         for i in range(1,4):
             sheetName.col(i).width = 5000
         
-    def writeHouseholdMembership(self,HouseholdMembership,sheetName,sectionrow,style1,style2):
+    def writeHouseholdMembership(self,HouseholdMembership,sheetName,sectionrow,style1,style2,style3):
         
         #write Headers
         sheetName.write(2, 0, 'Household Number:', style1)
@@ -37,15 +37,15 @@ class HouseholdBudgetWrite:
         sectionrow = 6
         for row in HouseholdMembership:
             if row[1]=='Male':
-                sheetName.write(sectionrow, 1, row[2], style2)
+                sheetName.write(sectionrow, 1, row[2], style3)
             else:
-                sheetName.write(sectionrow, 2, row[2], style2)
+                sheetName.write(sectionrow, 2, row[2], style3)
             
             sectionrow = sectionrow + 1
 
         return sectionrow
     
-    def writeAssetDetails(self,householdAssets,sheetName,sectionrow,style1,style2):
+    def writeAssetDetails(self,householdAssets,sheetName,sectionrow,style1,style2,style3):
         #Assets
         headerrow = sectionrow + 5
         itemrow = headerrow + 1
@@ -63,12 +63,12 @@ class HouseholdBudgetWrite:
             rowindex = 0
             for i in range(0,4):
                 rowindex = i +1
-                sheetName.write(itemrow, i, row[rowindex], style1)
+                sheetName.write(itemrow, i, row[rowindex], style3)
             itemrow = itemrow + 1
             
         return itemrow
 
-    def writeHouseholdIncome(self,householdCashIncome,householdFoodIncome,sheetName,sectionrow,style1,style2):
+    def writeHouseholdIncome(self,householdCashIncome,householdFoodIncome,sheetName,sectionrow,style1,style2,style3):
         #Income Sources - Headers
         headerrow = sectionrow + 5
         itemrow = headerrow + 1
@@ -90,21 +90,23 @@ class HouseholdBudgetWrite:
         #Income Sources - Category Values - Food
         itemrow = headerrow + 2
         for i in range(1,7):
-            sheetName.write(itemrow,1, householdFoodIncome[i], style1)
+            sheetName.write(itemrow,1, householdFoodIncome[i], style3)
             itemrow = itemrow + 1
             
         #Income Sources - Category Values - Cash
         itemrow = headerrow + 2
         for i in range(1,7):
             print householdCashIncome[i]
-            sheetName.write(itemrow,2, householdCashIncome[i], style1)
+            sheetName.write(itemrow,2, householdCashIncome[i], style3)
             itemrow = itemrow + 1
             
         return itemrow
 
-    def writeFinalSummary(self,householdBudgetSummary,sheetName,sectionrow,style1,style2):
+    def writeFinalSummary(self,householdBudgetSummary,sheetName,sectionrow,style1,style2,style3):
         #The Household Budget
-        itemrow = sectionrow + 5
+        headerrow = sectionrow + 5
+        itemrow = headerrow + 2
+        sheetName.write(headerrow, 0, "The Household Budget", style1)
         budgetTitles = ['Household food energy requirement','% household food requirement met from own production',
                               'Cost of food purchase to meet household requirement','% of food deficit which can be afforded',
                               'Cash remaining after food purchase','Cost of non-food expenses','% of non-food expenses which can be met',
@@ -113,6 +115,12 @@ class HouseholdBudgetWrite:
         for incomecat in budgetTitles:
             sheetName.write(itemrow, 0, incomecat, style2)
             itemrow = itemrow + 1
+            
+        itemrow = sectionrow + 7
+        for i in range (1,9):
+            sheetName.write(itemrow, 1, householdBudgetSummary[i], style3)
+            itemrow = itemrow + 1
+            
 
     def saveReport(self,book):
         folder = "outputs/spreadsheets/income_sources/"
@@ -125,36 +133,27 @@ class HouseholdBudgetWrite:
         
         os.system(filepath)
 
-    def writeSpreadsheetReport(self,selectedHouseholds,householdMembership,householdAssets,householdCashIncome,householdFoodIncome):
+    def writeSpreadsheetReport(self,selectedHouseholds,householdMembership,householdAssets,householdCashIncome,householdFoodIncome,householdBudgetSummary):
         book = Workbook(encoding="utf-8")
-        style1 = easyxf('font: name Arial;''font: bold True;')
         style1 = easyxf('font: name Arial;''font: bold True;' 'border: left thick, top thick, right thick, bottom thick')
-        style2 = easyxf('font: name Arial;''font: colour ocean_blue;''font: bold True;''border: left thick, top thick, right thick, bottom thick')
+        style2 = easyxf('font: name Arial;''font: colour ocean_blue;''font: bold True;''border: left thin, top thin, right thin, bottom thin')
         style3 = easyxf('font: name Arial;''border: left thin, top thin, right thin, bottom thin')
         style4 = easyxf('font: name Arial;''font: colour green;''font: bold True;''border: left thick, top thick, right thick, bottom thick')
 
         sheetNumber = 1
         listIndex = 0
-        '''print 'membership ', householdMembership
-        print 'assets ',householdAssets
-        print 'cash ', householdCashIncome'''
         
         for hid in selectedHouseholds:
             sheetName = 'sheet' + '%s' % sheetNumber
             sheetNumber = sheetNumber + 1
             sheetTitle = 'Household Number ' + '%s' % hid
             sheetName = book.add_sheet(sheetTitle)
-
-            #print 'membership ', householdMembership[listIndex]
-            #print 'assets ',householdAssets[listIndex]
-            #print 'cash ', householdCashIncome[listIndex]
-            #print 'cash ', householdFoodIncome[listIndex]
             
             sectionrow = self.writePageTitleSection(sheetName,style1)
-            sectionrow = self.writeHouseholdMembership(householdMembership[listIndex],sheetName,sectionrow,style1,style2)
-            sectionrow = self.writeAssetDetails(householdAssets[listIndex],sheetName,sectionrow,style1,style2)
-            sectionrow = self.writeHouseholdIncome(householdCashIncome[listIndex],householdFoodIncome[listIndex],sheetName,sectionrow,style1,style2)
-            #sectionrow = self.writeFinalSummary(self,householdBudgetSummary,sheetName,sectionrow,style1,style2)
+            sectionrow = self.writeHouseholdMembership(householdMembership[listIndex],sheetName,sectionrow,style1,style2,style3)
+            sectionrow = self.writeAssetDetails(householdAssets[listIndex],sheetName,sectionrow,style1,style2,style3)
+            sectionrow = self.writeHouseholdIncome(householdCashIncome[listIndex],householdFoodIncome[listIndex],sheetName,sectionrow,style1,style2,style3)
+            self.writeFinalSummary(householdBudgetSummary[listIndex],sheetName,sectionrow,style1,style2,style3)
             listIndex = listIndex + 1
             
         self.saveReport(book)
