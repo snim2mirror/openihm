@@ -257,23 +257,27 @@ class HouseholdBudget:
                 householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
                 hhDisposableIncome = householdCashIncome[i][1] - householdFoodPrice
                 
-                if householdFoodPrice!=0:
+                if householdFoodPrice!=0 and hhDisposableIncome > 0:
                     percentageFoodCostMet = (hhDisposableIncome/householdFoodPrice)* 100
                     if percentageFoodCostMet > 100:
+                        percentageFoodCostMet =100
+                else:
+                    if hhDisposableIncome > 0:
                         percentageFoodCostMet =100
             else:
                 excessFoodSales= self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
                 hhDisposableIncome = householdCashIncome[i][1] + excessFoodSales
-                percentageFoodCostMet =100
+                #percentageFoodCostMet =100
                 
             templist.append(householdFoodPrice)          
             hhDisposableIncome = round(hhDisposableIncome,2)
             templist.append(round(percentageFoodCostMet,2))
             templist.append(hhDisposableIncome)
             
-            if householdExpenses!=0:
-                
+            if householdExpenses!=0 and hhDisposableIncome > 0:
                 nonFoodPercentageMet = (hhDisposableIncome/householdExpenses)*100
+                if nonFoodPercentageMet > 100:
+                    nonFoodPercentageMet = 100
             else:
                 if hhDisposableIncome > 0:
                     nonFoodPercentageMet = 100
