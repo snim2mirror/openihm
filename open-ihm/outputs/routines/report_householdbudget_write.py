@@ -79,7 +79,7 @@ class HouseholdBudgetWrite:
 
 
         #Income Sources - Category Titles
-        IncomeSourceTitles = ['Crop production','Livestock & livestock products','Employment','Gifts','Wild foods & hunting','Total']
+        IncomeSourceTitles = ['Crop production','Employment','Livestock & livestock products','Gifts','Wild foods & hunting','Total']
         for incomecat in IncomeSourceTitles:
             itemrow = itemrow + 1
             sheetName.write(itemrow, 0, incomecat, style2)
