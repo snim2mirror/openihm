@@ -272,9 +272,12 @@ class HouseholdBudget:
             templist.append(hhDisposableIncome)
             
             if householdExpenses!=0:
+                
                 nonFoodPercentageMet = (hhDisposableIncome/householdExpenses)*100
             else:
-                nonFoodPercentageMet = 100
+                if hhDisposableIncome > 0:
+                    nonFoodPercentageMet = 100
+                
 
             templist.append(householdExpenses)
             templist.append(round(nonFoodPercentageMet,2))
