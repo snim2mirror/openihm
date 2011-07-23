@@ -3,7 +3,7 @@
 #-------------------------------------------------------------------
 
 from xlrd import open_workbook,cellname,xldate_as_tuple
-from datetime import date
+from datetime import date,datetime
 from data.database import Database
 import sys
 from PyQt4 import QtGui
@@ -72,18 +72,22 @@ class ReadDataEntrySheets:
             values = []
             for col in range(sheet1.ncols):
                 skiprow =False
-                cellvalue = sheet1.cell(row,col).value
                 cell = sheet1.cell(row,col)
-                if cellvalue =='' or (col ==3 and cell.ctype!=3):
+                cellvalue = cell.value
+                #cellvalue = sheet1.cell(row,col).value
+                
+                if cellvalue =='':
+                    #if cellvalue =='' or (col ==3 and cell.ctype!=3):
                     skiprow =True
                     break
-                
+
                 else:
-                    if cell.ctype == 3: #date
-                        date_value = xldate_as_tuple(cell.value,book.datemode)
-                        cellvalue = date(*date_value[:3])
-                    else:
-                        cellvalue = cell.value
+                    if col == 2:
+                        if cell.ctype == 3: #date
+                            date_value = xldate_as_tuple(cell.value,book.datemode)
+                            cellvalue = date(*date_value[:3])
+                        else:
+                            cellvalue = datetime.strptime(cellvalue, "%d-%m-%Y").strftime('%Y-%m-%d')
 
                 values.append(cellvalue)
 
@@ -176,7 +180,7 @@ class ReadDataEntrySheets:
                     elif sex.lower() == 'female' or sex.lower() == 'f':
                         personid = 'f' + str(age)
                         sex='Female'
-                    pidvalue = personid + '%'
+                    pidvalue = personid 
 
                     periodaway = values[4]
 
@@ -188,9 +192,8 @@ class ReadDataEntrySheets:
                         
                     else:
                         #personid = personid + '_' + str(numrows+1)
-                        query = ''' UPDATE householdmembers SET personid='%s',hhid=%s,headofhousehold='%s',yearofbirth=%s,sex='%s',periodaway=%s,pid=%s
-                                    WHERE personid='%s' AND hhid=%s AND pid=%s''' % (personid,hhid,hhead,yearofbirth,sex,periodaway,self.pid,personid,hhid,self.pid)
-                        
+                        query = ''' UPDATE householdmembers SET headofhousehold='%s',yearofbirth=%s,sex='%s',periodaway=%s
+                                    WHERE personid='%s' AND hhid=%s AND pid=%s''' % (hhead,yearofbirth,sex,periodaway,personid,hhid,self.pid)
                     database.execUpdateQuery(query)
 
             empty_cell_count = 0
