@@ -25,6 +25,7 @@ class ReadDataEntrySheets:
         self.readProjectHouseholdsData(book)
         
         projectid = projectsheet.name
+            
         for sheet_index in range(3,book.nsheets):
             householdsheet = book.sheet_by_index(sheet_index)
             houseid = householdsheet.name
@@ -56,6 +57,7 @@ class ReadDataEntrySheets:
                 elif cellvalue == 'TransferFromOrganisations':
                     self.readTransferData(householdsheet,row_index,cellvalue)
         QtGui.QMessageBox.information(None, 'Importing Data', "Data Importation Completed")
+        #QtGui.QMessageBox.information(None, 'Importing Data Error', "Data Importation Failed")
                          
 
     def readProjectHouseholdsData(self,book):
@@ -101,8 +103,8 @@ class ReadDataEntrySheets:
                 else:
                     query ='''UPDATE households SET hhid=%s,householdname='%s',dateofcollection='%s',pid=%s
                                 WHERE hhid=%s AND pid =%s ''' % (hhid,hholdname,datevisited,pid,hhid,pid)
-
                 database.execUpdateQuery(query)
+                
 
         database.close()
 
@@ -178,7 +180,7 @@ class ReadDataEntrySheets:
 
                     periodaway = values[4]
 
-                    testquery ='''SELECT * FROM householdmembers WHERE hhid=%s AND personid LIKE '%s' AND pid =%s ''' % (hhid,pidvalue,self.pid)
+                    testquery ='''SELECT * FROM householdmembers WHERE hhid=%s AND personid ='%s' AND pid =%s ''' % (hhid,pidvalue,self.pid)
                     numrows =self.checkRecordExistence(testquery)
 		    if numrows ==0:
                         query ='''INSERT INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,periodaway,pid)
@@ -189,8 +191,6 @@ class ReadDataEntrySheets:
                         query = ''' UPDATE householdmembers SET personid='%s',hhid=%s,headofhousehold='%s',yearofbirth=%s,sex='%s',periodaway=%s,pid=%s
                                     WHERE personid='%s' AND hhid=%s AND pid=%s''' % (personid,hhid,hhead,yearofbirth,sex,periodaway,self.pid,personid,hhid,self.pid)
                         
-                    print query
-
                     database.execUpdateQuery(query)
 
             empty_cell_count = 0
@@ -501,19 +501,19 @@ class ReadDataEntrySheets:
                 digitvalue = True
                 skiprow = False
                 cellvalue = str(householdsheet.cell(current_row_index,col_index).value)
-                if incometype== 'SocialTransfer':
-                    if cellvalue == 'TransferFromOrganisations':
-                        exitmain = True
-                        break
+                if incometype== 'SocialTransfer' and cellvalue == 'TransferFromOrganisations':
+                    #if cellvalue == 'TransferFromOrganisations':
+                    exitmain = True
+                    break
 
                 if col_index == 0 and cellvalue=='':
                     skiprow = True
                     break
                 if col_index!=0 and cellvalue == '':
                     empty_cell_count = empty_cell_count + 1
-                    cellvalue='NULL'
+                    cellvalue='NotSet'
 
-                if col_index ==2 or(col_index >=4 and col_index <=7):
+                if col_index ==1 or(col_index >=4 and col_index <=7):
                     
                     try:
                         cellvalue = float(cellvalue)
@@ -552,7 +552,7 @@ class ReadDataEntrySheets:
                         query ='''INSERT INTO transfers (hhid,sourcetype,sourceoftransfer,cashperyear,foodtype,unitofmeasure,unitsconsumed,unitssold,priceperunit,pid) 
                             VALUES (%s,'%s','%s',%s,'%s','%s',%s,%s,%s,%s)''' % (hhid,sourcetype,transfersource,cash,foodtype,unit,unitsconsumed,unitssold,unitprice,self.pid)
                     else:
-                        query ='''UPDATE transfers SET hhid =%s,sourcetype='%s',sourceoftransfer='%s',cashperyear=%s,foodtype=%s,unitofmeasure='%s',unitsconsumed=%s,unitssold=%s,priceperunit=%s,pid=%s
+                        query ='''UPDATE transfers SET hhid =%s,sourcetype='%s',sourceoftransfer='%s',cashperyear=%s,foodtype='%s',unitofmeasure='%s',unitsconsumed=%s,unitssold=%s,priceperunit=%s,pid=%s
                                 WHERE hhid =%s AND pid=%s AND sourcetype='%s' AND sourceoftransfer='%s' ''' % (hhid,sourcetype,transfersource,cash,foodtype,unit,unitsconsumed,unitssold,unitprice,self.pid,hhid,self.pid,sourcetype,transfersource)
                     database.execUpdateQuery(query)
 
@@ -588,7 +588,6 @@ class ReadDataEntrySheets:
                 columns = columns + 1
             else:
                 break
-        print datafields
 
         empty_cell_count =0
 
