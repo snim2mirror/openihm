@@ -17,12 +17,23 @@ class FrmImportFromAccessDB (QDialog, Ui_ImportFromAccessDB):
          
          self.cmdGetDB.setIcon(QIcon('resources/images/getdb.png'))
          self.cmdGetDB.setIconSize(QSize(32, 32))
+         
+         self.initProjectList()
 
      def __del__ (self):
          self.ui = None
          
      def closeForm(self):
          self.close()
+         
+     def initProjectList(self):
+         model = QStandardItemModel(1,1)
+         
+         # set model headers
+         model.setHorizontalHeaderItem(0,QStandardItem('Project ID'))
+         model.setHorizontalHeaderItem(1,QStandardItem('Project Name'))
+         
+         self.tblProjects.setModel(model)
          
      def getDB(self):
          self.filename = QFileDialog.getOpenFileName(self, 'Open file','/home', 'Access Database (*.mdb)')
