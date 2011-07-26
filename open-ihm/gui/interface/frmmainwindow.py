@@ -56,6 +56,9 @@ from data.setup_foodrequirement_startupvalues import FoodRequirementValues
 #from frm_report_livingthreshold import LivingThreshold
 from frm_report_householdbudgets import RepHouseholdBudget
 
+#import dialog for transfering data from access db
+from frmimportfromaccessdb import FrmImportFromAccessDB
+
 
 # Import modules used by the automatic software updator.
 from mercurial import commands, hg, ui, error
@@ -486,6 +489,11 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         else:
             datasheet = ReadDataEntrySheets(self.projectid)
             datasheet.readdata()
+            
+    def importFromAccessDB(self):
+         ''' Imports projects from the old access based IHM software '''
+         form = FrmImportFromAccessDB()
+         form.exec_()
                 
     def reportHouseholdDisposableIncome(self,reporttype):
         ''' Creates and Shows the Report: Household Disposable Income form '''

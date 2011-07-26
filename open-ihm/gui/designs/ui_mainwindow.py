@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui_mainwindow.ui'
 #
-# Created: Sun Jun 19 10:58:49 2011
+# Created: Tue Jul 26 13:15:28 2011
 #      by: PyQt4 UI code generator 4.7
 #
 # WARNING! All changes made in this file will be lost!
@@ -148,10 +148,13 @@ class Ui_MainWindow(object):
         self.actionUpdate_open_ihm.setObjectName("actionUpdate_open_ihm")
         self.actionHousehold_Budget = QtGui.QAction(MainWindow)
         self.actionHousehold_Budget.setObjectName("actionHousehold_Budget")
+        self.actionImport_Projects_from_Access_DB = QtGui.QAction(MainWindow)
+        self.actionImport_Projects_from_Access_DB.setObjectName("actionImport_Projects_from_Access_DB")
         self.menuProject.addAction(self.actionCreate_Project)
         self.menuProject.addAction(self.actionOpen_Project)
         self.menuProject.addAction(self.actionFind_Project)
         self.menuProject.addAction(self.actionClose_Project)
+        self.menuProject.addAction(self.actionImport_Projects_from_Access_DB)
         self.menuProject.addSeparator()
         self.menuProject.addAction(self.actionEdit_Project)
         self.menuProject.addAction(self.actionConfigure_Project)
@@ -238,6 +241,7 @@ class Ui_MainWindow(object):
         QtCore.QObject.connect(self.actionContents, QtCore.SIGNAL("triggered()"), MainWindow.openHelpContents)
         QtCore.QObject.connect(self.actionUpdate_open_ihm, QtCore.SIGNAL("triggered()"), MainWindow.updateOpenIhm)
         QtCore.QObject.connect(self.actionHousehold_Budget, QtCore.SIGNAL("triggered()"), MainWindow.reportHouseholdbudget)
+        QtCore.QObject.connect(self.actionImport_Projects_from_Access_DB, QtCore.SIGNAL("triggered()"), MainWindow.importFromAccessDB)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -319,5 +323,6 @@ class Ui_MainWindow(object):
         self.actionUpdate_open_ihm.setIconText(QtGui.QApplication.translate("MainWindow", "Update open-ihm", None, QtGui.QApplication.UnicodeUTF8))
         self.actionUpdate_open_ihm.setToolTip(QtGui.QApplication.translate("MainWindow", "Automatically update the open-ihm software", None, QtGui.QApplication.UnicodeUTF8))
         self.actionHousehold_Budget.setText(QtGui.QApplication.translate("MainWindow", "Household Budget", None, QtGui.QApplication.UnicodeUTF8))
+        self.actionImport_Projects_from_Access_DB.setText(QtGui.QApplication.translate("MainWindow", "Import Projects from Access DB", None, QtGui.QApplication.UnicodeUTF8))
 
 import images_rc

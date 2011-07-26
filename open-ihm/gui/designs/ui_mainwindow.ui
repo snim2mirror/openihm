@@ -34,6 +34,7 @@
     <addaction name="actionOpen_Project"/>
     <addaction name="actionFind_Project"/>
     <addaction name="actionClose_Project"/>
+    <addaction name="actionImport_Projects_from_Access_DB"/>
     <addaction name="separator"/>
     <addaction name="actionEdit_Project"/>
     <addaction name="actionConfigure_Project"/>
@@ -441,6 +442,11 @@
   <action name="actionHousehold_Budget">
    <property name="text">
     <string>Household Budget</string>
+   </property>
+  </action>
+  <action name="actionImport_Projects_from_Access_DB">
+   <property name="text">
+    <string>Import Projects from Access DB</string>
    </property>
   </action>
  </widget>
@@ -992,6 +998,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionImport_Projects_from_Access_DB</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>importFromAccessDB()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>newProject()</slot>
@@ -1027,5 +1049,6 @@
   <slot>openHelpContents()</slot>
   <slot>updateOpenIhm()</slot>
   <slot>reportHouseholdbudget()</slot>
+  <slot>importFromAccessDB()</slot>
  </slots>
 </ui>

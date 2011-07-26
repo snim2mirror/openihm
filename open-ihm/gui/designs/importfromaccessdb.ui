@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ImportFromAccessDB</class>
+ <widget class="QDialog" name="ImportFromAccessDB">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>511</width>
+    <height>409</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Import Projects from Access Database</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Database File:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="txtFilename">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QPushButton" name="cmdGetDB">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>C:/Users/Brown/.designer/resources/images/addreport.png</normaloff>C:/Users/Brown/.designer/resources/images/addreport.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>32</width>
+          <height>32</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frame_2">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Available Projects</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QTableView" name="tblProjects"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frame_3">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="cmdImportAll">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Import All</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="cmdImportSelected">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Import Selected</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="cmdClose">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>41</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Close</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>cmdGetDB</sender>
+   <signal>clicked()</signal>
+   <receiver>ImportFromAccessDB</receiver>
+   <slot>getDB()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>462</x>
+     <y>39</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>510</x>
+     <y>65</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdImportAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ImportFromAccessDB</receiver>
+   <slot>importAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>59</x>
+     <y>368</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>88</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdImportSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ImportFromAccessDB</receiver>
+   <slot>importSelected()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>158</x>
+     <y>365</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>223</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>ImportFromAccessDB</receiver>
+   <slot>closeForm()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>423</x>
+     <y>371</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>432</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>getDB()</slot>
+  <slot>importAll()</slot>
+  <slot>importSelected()</slot>
+  <slot>closeForm()</slot>
+ </slots>
+</ui>
