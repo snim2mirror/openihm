@@ -11,6 +11,11 @@ python scripts/generate_modules.py -f -s rst -d rst/  gui $root/gui/interface/im
 python scripts/generate_modules.py -f -s rst -d rst/  inputs
 python scripts/generate_modules.py -f -s rst -d rst/  outputs 
 
+# Modules we have imported from elsewhere
+
+python scripts/generate_modules.py -f -s rst -d rst/  xlrd 
+python scripts/generate_modules.py -f -s rst -d rst/  xlwt
+
 echo "Finished generating documention."
 echo "Please re-create the documention in HTML."
 echo "If you are using a UNIX system please run 'make clean && make html' from the command line."

@@ -3,24 +3,27 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+====================================
 Welcome to open-ihm's documentation!
 ====================================
 
 Contents:
-
+---------
 .. toctree::
    :maxdepth: 3
 
-   data.mysql.connector.rst
-   data.mysql.rst
-   data.rst
-   gui.designs.rst
-   gui.interface.rst
+   connector.rst
    gui.rst
    inputs.rst
-   modules.rst
-   outputs.routines.rst
    outputs.rst
+
+External modules packaged with open-ihm (used for reading / writing Excel spreadsheets) :
+-----------------------------------------------------------------------------------------
+.. toctree::
+   :maxdepth: 3
+
+   xlrd.rst
+   xlwt.rst
 
 
 Indices and tables
