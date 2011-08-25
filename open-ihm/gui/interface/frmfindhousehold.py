@@ -7,13 +7,13 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector
+#import data.mysql.connector
 
 # import the Create Project Dialog design class
 from gui.designs.ui_findhousehold import Ui_FindHousehold
 from frmfindhouseholdresults import FrmFindHouseholdResults
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
 class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin):
 	''' Creates the Find Household form'''	

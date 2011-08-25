@@ -8,14 +8,14 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+#import data.mysql.connector 
 
 # import the Currency Manager design class
 from gui.designs.ui_currencymanager import Ui_CurrencyManager
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin):	
+class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin, MySQLMixin):	
      ''' Creates the Currency Manager from. '''	
 
      def __init__(self, parent):
@@ -54,9 +54,7 @@ class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin):
          currencyName = self.txtCurrencyName.text()
          abbreviation = self.txtAbbreviation.text()
          symbol = self.txtSymbol.text()
-         
-         db = data.mysql.connector.Connect(**self.config)
-         
+                  
          # create INSERT or UPDATE query
          if (self.currencyid == 0):
              query = '''INSERT INTO currencies (currencyname,abbreviation,symbol )
@@ -64,15 +62,9 @@ class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin):
          else:
              query = ''' UPDATE currencies SET currencyname='%s', abbreviation='%s', symbol='%s'
                          WHERE id=%s ''' % ( currencyName, abbreviation, symbol, self.currencyid)
-         
-         # execute query and commit changes
-         cursor =  db.cursor()
-         cursor.execute(query)
-         db.commit()
-         
-         # close database connection
-         cursor.close()
-         db.close()
+
+
+         self.executeUpdateQuery(query)
          
          # clear text boxes and refresh list
          self.txtCurrencyName.setText("")
@@ -96,12 +88,6 @@ class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin):
          # select query to retrieve currencies
          query = '''SELECT * FROM currencies '''
          
-         # retrieve and display members
-         db = data.mysql.connector.Connect(**self.config)             
-         cursor = db.cursor()
-         
-         cursor.execute(query)
-         
          model = QStandardItemModel(1,2)
          
          # set model headers
@@ -113,8 +99,10 @@ class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin):
          
          # add  data rows
          num = 0
+
+         results = self.executeResultsQuery(query)
          
-         for row in cursor.fetchall():
+         for row in results: # cursor.fetchall():
              qtNo = QStandardItem("%i" % (num + 1) )
              qtNo.setTextAlignment( Qt.AlignCenter )
              qtID = QStandardItem("%i" % row[0])
@@ -131,9 +119,6 @@ class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin):
              model.setItem( num, 3, qtAbbreviation )
              model.setItem( num, 4, qtSymbol )
              num = num + 1
-             
-         cursor.close()   
-         db.close()
          
          self.tblCurrencies.setModel(model)
          self.tblCurrencies.resizeColumnsToContents()
@@ -160,19 +145,10 @@ class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin):
              selectedIds = []
              for row in selectedRows:
                  selectedIds.append( self.tblCurrencies.model().item(row,1).text() )
-             # delete selected currencies
+
+             queries = ["DELETE FROM currencies WHERE id='%s'" % (currencyid)	for currencyid in selectedIds]
              
-             db = data.mysql.connector.Connect(**self.config)
-             cursor =  db.cursor()
-             
-             for currencyid in selectedIds:
-                 query = '''DELETE FROM currencies WHERE id='%s' ''' % (currencyid)	
-                 cursor.execute(query)
-                 db.commit()
-    
-             # close database connection
-             cursor.close()
-             db.close()
+             self.executeMultipleUpdateQueries(queries)
              
              self.currencyid = 0
              self.listCurrencies()

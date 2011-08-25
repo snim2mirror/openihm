@@ -57,48 +57,63 @@ class MDIDialogMixin(object):
 class MySQLMixin(object):
     """Methods for dealing with the MySQL database.
 
-    TODO: move this class to a model (as in MVC) package
-    FIXME: this should be four different methods.
+    TODO: move this from the gui package to a model (as in MVC) package.
     """
 
-    def executeQuery(self, query):
-        results = None
-        
+    def executeUpdateQuery(self, query):
+        """Execute a query that needs to be committed to the database.
+        For example, an INSERT or UPDATE query.
+        """
         db = data.mysql.connector.Connect(**self.config)             
         cursor = db.cursor()
         cursor.execute(query)
-        try:
-            results = cursor.fetchall()
-        except Exception, e:
-            pass
-        try:
-            cursor.commit()
-        except Exception, e:
-            pass
+        db.commit()
+        cursor.close()
+        db.close()
+        return
+    
+    def executeResultsQuery(self, query):
+        """Execute a query for which the database will return results.
+        For example a SELECT query.
+        """
+        db = data.mysql.connector.Connect(**self.config)             
+        cursor = db.cursor()
+        cursor.execute(query)
+        results = cursor.fetchall()
         cursor.close()
         db.close()
         return results
 
-    def executeMultipleQueries(self, queries):
-        results = []
-        
+    
+    def executeMultipleUpdateQueries(self, queries):
+        """This method is idential to self.executeUpdateQuery
+        except that it takes a list of query strings and executes each in turn
+        """
         db = data.mysql.connector.Connect(**self.config)             
         cursor = db.cursor()
         for query in queries:
             cursor.execute(query)
-            try:
-                result = cursor.fetchall()
-                results.append(result)
-            except Exception, e:
-                results.append(None)
-            try:
-                cursor.commit()
-            except Exception, e:
-                pass
+            db.commit()
+        cursor.close()
+        db.close()
+        return
+
+    def executeMultipleResultsQueries(self, queries):
+        """This method is idential to self.executeResultsQuery
+        except that it takes a list of query strings, executes each in turn
+        and returns a corresponding list of results.
+        """
+        results = []        
+        db = data.mysql.connector.Connect(**self.config)             
+        cursor = db.cursor()
+        for query in queries:
+            cursor.execute(query)
+            result = cursor.fetchall()
+            results.append(result)
         cursor.close()
         db.close()
         return results
-        
+    
     
 class DataEntryMixin(object):
     

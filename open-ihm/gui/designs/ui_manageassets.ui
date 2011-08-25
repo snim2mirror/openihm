@@ -19,801 +19,716 @@
   <property name="windowTitle">
    <string>Manage Asset Details</string>
   </property>
-  <widget class="QTabWidget" name="tabWidget">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>571</width>
-     <height>341</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>0</height>
-    </size>
-   </property>
-   <property name="currentIndex">
-    <number>3</number>
-   </property>
-   <widget class="QWidget" name="tabCashSavings">
-    <attribute name="title">
-     <string>Cash Savings</string>
-    </attribute>
-    <widget class="QLabel" name="label_23">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>60</y>
-       <width>121</width>
-       <height>18</height>
-      </rect>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
      </property>
+     <property name="currentIndex">
+      <number>2</number>
+     </property>
+     <widget class="QWidget" name="tabCashSavings">
+      <attribute name="title">
+       <string>Cash Savings</string>
+      </attribute>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>541</width>
+         <height>331</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Select Cash Saving Type</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QListView" name="savingsListView">
+             <property name="alternatingRowColors">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>Add / Edit Cash Saving Details</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_23">
+             <property name="text">
+              <string>Cash Saving Type</string>
+             </property>
+             <property name="buddy">
+              <cstring>txtSavingCategories</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="txtSavingCategories"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="btnCashSave">
+             <property name="text">
+              <string>Save</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="btnCashDelete">
+             <property name="text">
+              <string>Delete</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabFoodStock">
+      <attribute name="title">
+       <string>Food Stock</string>
+      </attribute>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>551</width>
+         <height>341</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>Select Food Stock Type</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QListView" name="foodListView">
+             <property name="alternatingRowColors">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string>Add/Edit Food Stock Details</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout_2">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Type</string>
+             </property>
+             <property name="buddy">
+              <cstring>txtFoodStockType</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="txtFoodStockType"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>KCalories</string>
+             </property>
+             <property name="buddy">
+              <cstring>txtEnergyValue</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="txtEnergyValue"/>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Unit of Measure</string>
+             </property>
+             <property name="buddy">
+              <cstring>txtMeasuringUnit</cstring>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLineEdit" name="txtMeasuringUnit"/>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="btnFoodStockSave">
+             <property name="text">
+              <string>Save</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="btnFoodStockDelete">
+             <property name="text">
+              <string>Delete</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabLand">
+      <attribute name="title">
+       <string>Land</string>
+      </attribute>
+      <widget class="QLineEdit" name="txtLandType">
+       <property name="geometry">
+        <rect>
+         <x>352</x>
+         <y>60</y>
+         <width>201</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnLandSave">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>240</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>60</y>
+         <width>54</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Type</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>120</y>
+         <width>91</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Unit of Measure</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtLandMeasuringUnit">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>110</y>
+         <width>201</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_17">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>10</y>
+         <width>241</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add/ Edit Land Details</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnLandDelete">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>240</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_18">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>221</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Select Land Type</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="landListView">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>50</y>
+         <width>241</width>
+         <height>201</height>
+        </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabLivestock">
+      <attribute name="title">
+       <string>Livestock</string>
+      </attribute>
+      <widget class="QLineEdit" name="txtLivestockEnergyValue">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>110</y>
+         <width>201</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>170</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Unit of Measure</string>
+       </property>
+       <property name="buddy">
+        <cstring>txtLivestockUnit</cstring>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>120</y>
+         <width>54</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>KCalories</string>
+       </property>
+       <property name="buddy">
+        <cstring>txtLivestockEnergyValue</cstring>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtLivestockUnit">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>160</y>
+         <width>201</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_24">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>10</y>
+         <width>241</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add/ Edit Livestocktock Details</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnLivestockDelete">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>240</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="livestockListView">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>241</width>
+         <height>201</height>
+        </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtLivestockPType">
+       <property name="geometry">
+        <rect>
+         <x>352</x>
+         <y>60</y>
+         <width>201</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnLivestockSave">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>240</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_14">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>221</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Select Livetock Type</string>
+       </property>
+       <property name="buddy">
+        <cstring>livestockListView</cstring>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_27">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>60</y>
+         <width>54</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Type</string>
+       </property>
+       <property name="buddy">
+        <cstring>txtLivestockPType</cstring>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabTrees">
+      <attribute name="title">
+       <string>Trees</string>
+      </attribute>
+      <widget class="QLabel" name="label_10">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>60</y>
+         <width>54</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Type</string>
+       </property>
+       <property name="buddy">
+        <cstring>txtTreeType</cstring>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnTreeDelete">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>240</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtTreeType">
+       <property name="geometry">
+        <rect>
+         <x>352</x>
+         <y>60</y>
+         <width>201</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_19">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>10</y>
+         <width>241</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add/ Edit Tree Details</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtTreeMeasuringUnit">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>110</y>
+         <width>201</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_20">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>221</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Select Tree Type</string>
+       </property>
+       <property name="buddy">
+        <cstring>treeListView</cstring>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_12">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>120</y>
+         <width>91</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Unit of Measure</string>
+       </property>
+       <property name="buddy">
+        <cstring>txtTreeMeasuringUnit</cstring>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnTreeSave">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>240</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="treeListView">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>50</y>
+         <width>241</width>
+         <height>201</height>
+        </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabOtherTradableGoods">
+      <attribute name="title">
+       <string>Tradable Goods</string>
+      </attribute>
+      <widget class="QLabel" name="label_13">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>60</y>
+         <width>54</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Type</string>
+       </property>
+       <property name="buddy">
+        <cstring>txtTradableGoodType</cstring>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnTGoodDelete">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>240</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Delete</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtTradableGoodType">
+       <property name="geometry">
+        <rect>
+         <x>352</x>
+         <y>60</y>
+         <width>201</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_21">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>10</y>
+         <width>241</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add/ Edit Good Details</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtTradableGoodMeasuringUnit">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>110</y>
+         <width>201</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_22">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>221</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Select Good</string>
+       </property>
+       <property name="buddy">
+        <cstring>tradableGoodsListView</cstring>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_15">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>120</y>
+         <width>91</width>
+         <height>18</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Unit of Measure</string>
+       </property>
+       <property name="buddy">
+        <cstring>txtTradableGoodMeasuringUnit</cstring>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnTGoodSave">
+       <property name="geometry">
+        <rect>
+         <x>350</x>
+         <y>240</y>
+         <width>80</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+      <widget class="QListView" name="tradableGoodsListView">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>50</y>
+         <width>251</width>
+         <height>192</height>
+        </rect>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnAssetsClose">
      <property name="text">
-      <string>Cash Saving Type</string>
+      <string>Close</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="btnCashDelete">
-     <property name="geometry">
-      <rect>
-       <x>480</x>
-       <y>150</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtSavingCategories">
-     <property name="geometry">
-      <rect>
-       <x>372</x>
-       <y>60</y>
-       <width>181</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_25">
-     <property name="geometry">
-      <rect>
-       <x>290</x>
-       <y>10</y>
-       <width>241</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add/ Edit Cash Saving Details</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_26">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>221</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Select Cash Saving Type</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnCashSave">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>150</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Save</string>
-     </property>
-    </widget>
-    <widget class="QListView" name="savingsListView">
-     <property name="geometry">
-      <rect>
-       <x>5</x>
-       <y>60</y>
-       <width>241</width>
-       <height>201</height>
-      </rect>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tabFoodStock">
-    <attribute name="title">
-     <string>Food Stock</string>
-    </attribute>
-    <widget class="QLineEdit" name="txtFoodStockType">
-     <property name="geometry">
-      <rect>
-       <x>352</x>
-       <y>60</y>
-       <width>201</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtEnergyValue">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>110</y>
-       <width>201</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnFoodStockSave">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>240</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Save</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnFoodStockDelete">
-     <property name="geometry">
-      <rect>
-       <x>460</x>
-       <y>240</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>60</y>
-       <width>54</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Type</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>120</y>
-       <width>54</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>KCalories</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_6">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>221</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Select Food Stock Type</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_16">
-     <property name="geometry">
-      <rect>
-       <x>290</x>
-       <y>10</y>
-       <width>241</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add/ Edit Food Stock Details</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtMeasuringUnit">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>160</y>
-       <width>201</width>
-       <height>31</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_4">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>170</y>
-       <width>81</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Unit of Measure</string>
-     </property>
-    </widget>
-    <widget class="QListView" name="foodListView">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>241</width>
-       <height>201</height>
-      </rect>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tabLand">
-    <attribute name="title">
-     <string>Land</string>
-    </attribute>
-    <widget class="QLineEdit" name="txtLandType">
-     <property name="geometry">
-      <rect>
-       <x>352</x>
-       <y>60</y>
-       <width>201</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnLandSave">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>240</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Save</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_7">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>60</y>
-       <width>54</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Type</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_8">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>120</y>
-       <width>91</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Unit of Measure</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtLandMeasuringUnit">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>110</y>
-       <width>201</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_17">
-     <property name="geometry">
-      <rect>
-       <x>290</x>
-       <y>10</y>
-       <width>241</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add/ Edit Land Details</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnLandDelete">
-     <property name="geometry">
-      <rect>
-       <x>460</x>
-       <y>240</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_18">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>221</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Select Land Type</string>
-     </property>
-    </widget>
-    <widget class="QListView" name="landListView">
-     <property name="geometry">
-      <rect>
-       <x>5</x>
-       <y>50</y>
-       <width>241</width>
-       <height>201</height>
-      </rect>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tabLivestock">
-    <attribute name="title">
-     <string>Livestock</string>
-    </attribute>
-    <widget class="QLineEdit" name="txtLivestockEnergyValue">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>110</y>
-       <width>201</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_9">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>170</y>
-       <width>81</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Unit of Measure</string>
-     </property>
-     <property name="buddy">
-      <cstring>txtLivestockUnit</cstring>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_11">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>120</y>
-       <width>54</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>KCalories</string>
-     </property>
-     <property name="buddy">
-      <cstring>txtLivestockEnergyValue</cstring>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtLivestockUnit">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>160</y>
-       <width>201</width>
-       <height>31</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_24">
-     <property name="geometry">
-      <rect>
-       <x>290</x>
-       <y>10</y>
-       <width>241</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add/ Edit Livestocktock Details</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnLivestockDelete">
-     <property name="geometry">
-      <rect>
-       <x>460</x>
-       <y>240</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-    <widget class="QListView" name="livestockListView">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>241</width>
-       <height>201</height>
-      </rect>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtLivestockPType">
-     <property name="geometry">
-      <rect>
-       <x>352</x>
-       <y>60</y>
-       <width>201</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnLivestockSave">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>240</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Save</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_14">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>221</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Select Livetock Type</string>
-     </property>
-     <property name="buddy">
-      <cstring>livestockListView</cstring>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_27">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>60</y>
-       <width>54</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Type</string>
-     </property>
-     <property name="buddy">
-      <cstring>txtLivestockPType</cstring>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tabTrees">
-    <attribute name="title">
-     <string>Trees</string>
-    </attribute>
-    <widget class="QLabel" name="label_10">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>60</y>
-       <width>54</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Type</string>
-     </property>
-     <property name="buddy">
-      <cstring>txtTreeType</cstring>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnTreeDelete">
-     <property name="geometry">
-      <rect>
-       <x>460</x>
-       <y>240</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtTreeType">
-     <property name="geometry">
-      <rect>
-       <x>352</x>
-       <y>60</y>
-       <width>201</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_19">
-     <property name="geometry">
-      <rect>
-       <x>290</x>
-       <y>10</y>
-       <width>241</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add/ Edit Tree Details</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtTreeMeasuringUnit">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>110</y>
-       <width>201</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_20">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>221</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Select Tree Type</string>
-     </property>
-     <property name="buddy">
-      <cstring>treeListView</cstring>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_12">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>120</y>
-       <width>91</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Unit of Measure</string>
-     </property>
-     <property name="buddy">
-      <cstring>txtTreeMeasuringUnit</cstring>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnTreeSave">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>240</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Save</string>
-     </property>
-    </widget>
-    <widget class="QListView" name="treeListView">
-     <property name="geometry">
-      <rect>
-       <x>5</x>
-       <y>50</y>
-       <width>241</width>
-       <height>201</height>
-      </rect>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tabOtherTradableGoods">
-    <attribute name="title">
-     <string>Tradable Goods</string>
-    </attribute>
-    <widget class="QLabel" name="label_13">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>60</y>
-       <width>54</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Type</string>
-     </property>
-     <property name="buddy">
-      <cstring>txtTradableGoodType</cstring>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnTGoodDelete">
-     <property name="geometry">
-      <rect>
-       <x>460</x>
-       <y>240</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtTradableGoodType">
-     <property name="geometry">
-      <rect>
-       <x>352</x>
-       <y>60</y>
-       <width>201</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_21">
-     <property name="geometry">
-      <rect>
-       <x>290</x>
-       <y>10</y>
-       <width>241</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add/ Edit Good Details</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="txtTradableGoodMeasuringUnit">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>110</y>
-       <width>201</width>
-       <height>28</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_22">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>221</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Select Good</string>
-     </property>
-     <property name="buddy">
-      <cstring>tradableGoodsListView</cstring>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_15">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>120</y>
-       <width>91</width>
-       <height>18</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Unit of Measure</string>
-     </property>
-     <property name="buddy">
-      <cstring>txtTradableGoodMeasuringUnit</cstring>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnTGoodSave">
-     <property name="geometry">
-      <rect>
-       <x>350</x>
-       <y>240</y>
-       <width>80</width>
-       <height>28</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Save</string>
-     </property>
-    </widget>
-    <widget class="QListView" name="tradableGoodsListView">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>50</y>
-       <width>251</width>
-       <height>192</height>
-      </rect>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </widget>
-  </widget>
-  <widget class="QPushButton" name="btnAssetsClose">
-   <property name="geometry">
-    <rect>
-     <x>490</x>
-     <y>350</y>
-     <width>80</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Close</string>
-   </property>
-  </widget>
+   </item>
+  </layout>
  </widget>
  <tabstops>
-  <tabstop>txtSavingCategories</tabstop>
-  <tabstop>btnCashDelete</tabstop>
   <tabstop>tabWidget</tabstop>
-  <tabstop>savingsListView</tabstop>
-  <tabstop>btnCashSave</tabstop>
   <tabstop>btnAssetsClose</tabstop>
-  <tabstop>txtFoodStockType</tabstop>
-  <tabstop>txtEnergyValue</tabstop>
-  <tabstop>btnFoodStockSave</tabstop>
-  <tabstop>btnFoodStockDelete</tabstop>
-  <tabstop>txtMeasuringUnit</tabstop>
-  <tabstop>foodListView</tabstop>
   <tabstop>txtLandType</tabstop>
   <tabstop>btnLandSave</tabstop>
   <tabstop>txtLandMeasuringUnit</tabstop>
@@ -851,86 +766,6 @@
     <hint type="destinationlabel">
      <x>17</x>
      <y>348</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnCashSave</sender>
-   <signal>clicked()</signal>
-   <receiver>ManageAssetDetails</receiver>
-   <slot>saveSavingsType()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>401</x>
-     <y>201</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>40</x>
-     <y>352</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnCashDelete</sender>
-   <signal>clicked()</signal>
-   <receiver>ManageAssetDetails</receiver>
-   <slot>deleteSavingsType()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>505</x>
-     <y>191</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>65</x>
-     <y>342</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>foodListView</sender>
-   <signal>clicked(QModelIndex)</signal>
-   <receiver>ManageAssetDetails</receiver>
-   <slot>pickSelectedFoodItem()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>109</x>
-     <y>96</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>50</x>
-     <y>361</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnFoodStockSave</sender>
-   <signal>clicked()</signal>
-   <receiver>ManageAssetDetails</receiver>
-   <slot>saveFoodStockType()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>384</x>
-     <y>293</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>75</x>
-     <y>367</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>btnFoodStockDelete</sender>
-   <signal>clicked()</signal>
-   <receiver>ManageAssetDetails</receiver>
-   <slot>deleteFoodStockType()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>471</x>
-     <y>288</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>90</x>
-     <y>371</y>
     </hint>
    </hints>
   </connection>
