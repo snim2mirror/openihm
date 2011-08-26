@@ -7,7 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 from gui.designs.ui_household_editmembercharacteristic import Ui_EditMemberCharacteristic
 
@@ -44,7 +44,7 @@ class FrmEditPersonalCharacteristic(QDialog, Ui_EditMemberCharacteristic, MDIDia
     def saveCharacteristic(self):
 		''' Saves characteristic '''
 		
-		db 		= data.mysql.connector.Connect(**self.config)
+		db 		= connector.Connect(**self.config)
 		cursor 	=  db.cursor()
 		
 		tbl = self.psCharacteristicsTable

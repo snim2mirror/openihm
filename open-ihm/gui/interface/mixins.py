@@ -8,7 +8,7 @@ Mixin classes for the open-ihm GUI.
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-import data.mysql.connector
+import includes.mysql.connector as connector
     
 class TableViewMixin(object):
 
@@ -64,7 +64,7 @@ class MySQLMixin(object):
         """Execute a query that needs to be committed to the database.
         For example, an INSERT or UPDATE query.
         """
-        db = data.mysql.connector.Connect(**self.config)             
+        db = connector.Connect(**self.config)             
         cursor = db.cursor()
         cursor.execute(query)
         db.commit()
@@ -76,7 +76,7 @@ class MySQLMixin(object):
         """Execute a query for which the database will return results.
         For example a SELECT query.
         """
-        db = data.mysql.connector.Connect(**self.config)             
+        db = connector.Connect(**self.config)             
         cursor = db.cursor()
         cursor.execute(query)
         results = cursor.fetchall()
@@ -89,7 +89,7 @@ class MySQLMixin(object):
         """This method is idential to self.executeUpdateQuery
         except that it takes a list of query strings and executes each in turn
         """
-        db = data.mysql.connector.Connect(**self.config)             
+        db = connector.Connect(**self.config)             
         cursor = db.cursor()
         for query in queries:
             cursor.execute(query)
@@ -104,7 +104,7 @@ class MySQLMixin(object):
         and returns a corresponding list of results.
         """
         results = []        
-        db = data.mysql.connector.Connect(**self.config)             
+        db = connector.Connect(**self.config)             
         cursor = db.cursor()
         for query in queries:
             cursor.execute(query)

@@ -1,5 +1,5 @@
-from mysql.connector import Connect
-from mysql.connector import errors
+from includes.mysql.connector import Connect
+from includes.mysql.connector import errors
 
 class DbConfig(object):
      """ Configures the mysql database connector which is then called as below:

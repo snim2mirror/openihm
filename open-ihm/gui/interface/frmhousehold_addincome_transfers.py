@@ -7,7 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 from gui.designs.ui_household_income_transfers import Ui_AddHouseholdIncomeTransfers
 
@@ -41,7 +41,7 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers, MDIDia
          # select query to Gifts Types
          query = '''SELECT assistancetype FROM setup_transfers'''
 
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
@@ -63,7 +63,7 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers, MDIDia
          # select query to Crop Types
          query = '''SELECT name, unitofmeasure FROM setup_foods_crops'''
 
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
@@ -84,7 +84,7 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers, MDIDia
          query = '''SELECT sourceoftransfer, cashperyear, foodtype, unitofmeasure, unitsconsumed , unitssold, priceperunit  
                   FROM transfers WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
 
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
@@ -121,7 +121,7 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers, MDIDia
          unitssold           = self.txtUnitsSold.text()
          unitprice           = self.txtUnitPrice.text()
 
-         db = data.mysql.connector.Connect(**self.config)
+         db = connector.Connect(**self.config)
 
          # create UPDATE query
          if (self.incomeid == 0):

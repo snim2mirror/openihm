@@ -7,7 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 from gui.designs.ui_households_edit import Ui_Households_Edit
 
@@ -37,7 +37,7 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
     def getHouseholdData(self):
         ''' Retrieve and display household data '''
         # connect to mysql database
-        db = data.mysql.connector.Connect(**self.config)
+        db = connector.Connect(**self.config)
         cursor = db.cursor()
         
         # select query to retrieve project data
@@ -63,7 +63,7 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
         ''' Saves changes to household to database '''
         
         # connect to mysql database
-        db = data.mysql.connector.Connect(**self.config)
+        db = connector.Connect(**self.config)
         cursor = db.cursor()
         
         # get the data entered by user

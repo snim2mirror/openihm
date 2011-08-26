@@ -9,7 +9,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 from data.controller import Controller
 
 # import the Create Project Dialog design class
@@ -99,7 +99,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          itemtype = self.cmbScope.currentText()
          query = '''SELECT item FROM  setup_standardofliving WHERE type='%s' OR type='Both' ''' % ( itemtype )
 
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
@@ -137,7 +137,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          query = '''SELECT summary, scope, gender, agebottom, agetop, item, costperyear 
                      FROM standardofliving WHERE pid=%s ORDER BY scope''' % ( pid )
          
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
          
          cursor.execute(query)
@@ -220,7 +220,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          costperyear = self.txtCostPerYear.text()
          summary = "%s %s [%s to %s years]" % (gender,  item,  agebottom,  agetop) if scope == "Person" else "%s %s" % (scope, item)
          
-         db = data.mysql.connector.Connect(**self.config)
+         db = connector.Connect(**self.config)
          
          # create INSERT or UPDATE query
          if (self.currentItem == ""):
@@ -276,7 +276,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
                  selectedItems.append( self.tblStandardOfLiving.model().item(row,0).text() )
              # delete selected currencies
              
-             db = data.mysql.connector.Connect(**self.config)
+             db = connector.Connect(**self.config)
              cursor =  db.cursor()
              
              for item in selectedItems:
@@ -309,7 +309,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          # select query to Crop Types
          query = '''SELECT name, unitofmeasure FROM setup_foods_crops'''
 
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
@@ -332,7 +332,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          query = '''SELECT id, fooditem, unitofmeasure, percentage, priceperunit FROM diet WHERE pid=%s ''' % pid
          
          # retrieve and display members
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
          
          cursor.execute(query)
@@ -394,7 +394,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          percentage = self.txtPercentage.text()
          priceperunit = self.txtUnitPrice.text()
          
-         db = data.mysql.connector.Connect(**self.config)
+         db = connector.Connect(**self.config)
          
          # create INSERT or UPDATE query
          if (self.dietid == 0):
@@ -441,7 +441,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
                  selectedIds.append( self.tblDiets.model().item(row,0).text() )
              # delete selected currencies
              
-             db = data.mysql.connector.Connect(**self.config)
+             db = connector.Connect(**self.config)
              cursor =  db.cursor()
              
              for dietid in selectedIds:

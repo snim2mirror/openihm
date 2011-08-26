@@ -6,7 +6,7 @@ echo "Generating RST files in directory rst/"
 
 root=`pwd`
 
-python scripts/generate_modules.py -f -s rst -d rst/  $root/data/mysql/connector $root/data/scripts
+python scripts/generate_modules.py -f -s rst -d rst/  $root/includes/mysql/connector $root/data/scripts
 python scripts/generate_modules.py -f -s rst -d rst/  gui $root/gui/interface/images_rc $root/gui/designs/images_rc
 python scripts/generate_modules.py -f -s rst -d rst/  inputs
 python scripts/generate_modules.py -f -s rst -d rst/  outputs 

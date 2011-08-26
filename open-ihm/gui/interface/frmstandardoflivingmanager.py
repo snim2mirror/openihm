@@ -8,7 +8,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 # import the Standard of Living  Manager design class
 from gui.designs.ui_manage_standardofliving import Ui_StandardOfLivingManager
@@ -54,7 +54,7 @@ class FrmStandardOfLivingManager(QDialog, Ui_StandardOfLivingManager, MDIDialogM
          itemname = self.txtItem.text()
          itemtype = self.cmbItemType.currentText()
          
-         db = data.mysql.connector.Connect(**self.config)
+         db = connector.Connect(**self.config)
          
          # create INSERT or UPDATE query
          if (self.currentitem == ""):
@@ -91,7 +91,7 @@ class FrmStandardOfLivingManager(QDialog, Ui_StandardOfLivingManager, MDIDialogM
          query = '''SELECT * FROM setup_standardofliving '''
          
          # retrieve and display members
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
          
          cursor.execute(query)
@@ -143,7 +143,7 @@ class FrmStandardOfLivingManager(QDialog, Ui_StandardOfLivingManager, MDIDialogM
                  selectedItems.append( self.tblStandardOfLiving.model().item(row,0).text() )
              # delete selected items
              
-             db = data.mysql.connector.Connect(**self.config)
+             db = connector.Connect(**self.config)
              cursor =  db.cursor()
              
              for itemname in selectedItems:

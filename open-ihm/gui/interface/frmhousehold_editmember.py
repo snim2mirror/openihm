@@ -8,7 +8,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 from gui.designs.ui_household_editmember import Ui_EditHouseholdMember
 
@@ -60,7 +60,7 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember, MDIDialogMixin):
                    FROM householdmembers WHERE hhid=%s AND personid='%s' AND pid=%s ''' % (self.hhid, self.currentid, pid)
          
          # execute query and commit changes
-         db = data.mysql.connector.Connect(**self.config)
+         db = connector.Connect(**self.config)
          cursor =  db.cursor()
          cursor.execute(query)
          
@@ -110,7 +110,7 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember, MDIDialogMixin):
              AND pid=%s''' % (memberid, headhousehold, yearofbirth, sex, periodaway,  reason,  whereto, education, self.hhid, self.currentid, pid)
     
          # execute query and commit changes
-         db = data.mysql.connector.Connect(**self.config)
+         db = connector.Connect(**self.config)
          cursor =  db.cursor()
          cursor.execute(query)
          db.commit()

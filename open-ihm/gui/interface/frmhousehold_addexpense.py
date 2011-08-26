@@ -7,7 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 from gui.designs.ui_household_addexpense import Ui_AddHouseholdExpense
 
@@ -40,7 +40,7 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin):
 		# select query to Asset Types
 		query = '''SELECT expendituretype FROM setup_expendituretypes'''
 		
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -56,7 +56,7 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin):
 		''' Retrieve and display Household Expenditure details '''
 		query = '''SELECT * FROM expenditure WHERE hhid=%s AND pid=%s AND expid=%s ''' % ( self.hhid, self.pid, self.expid )
 		
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -88,7 +88,7 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin):
 		kcalperunit	  = self.txtKCalPerUnit.text()
 		numunits      = self.txtNumberOfUnits.text()
 			
-		db = data.mysql.connector.Connect(**self.config)
+		db = connector.Connect(**self.config)
 		
 		# create UPDATE query
 		expid 	= self.expid

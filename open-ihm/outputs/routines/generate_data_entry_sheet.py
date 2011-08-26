@@ -3,7 +3,7 @@
 #-------------------------------------------------------------------
 import os
 from includes.xlwt import Workbook, easyxf
-import data.mysql.connector
+import includes.mysql.connector as connector # FIXME: DO we need this?
 from data.config import Config
 from PyQt4 import QtGui
 from data.database import Database

@@ -8,7 +8,6 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-#import data.mysql.connector 
 
 # import the Currency Manager design class
 from gui.designs.ui_currencymanager import Ui_CurrencyManager

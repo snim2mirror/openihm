@@ -9,7 +9,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 # import the Create Project Dialog design class
 from gui.designs.ui_households_add import Ui_Households_Add
@@ -43,7 +43,7 @@ class FrmAddHousehold(QDialog, Ui_Households_Add, MDIDialogMixin):
         ''' Saves newly created household data to database '''
         
         # connect to mysql database
-        db = data.mysql.connector.Connect(**self.config)
+        db = connector.Connect(**self.config)
         cursor = db.cursor()
         
         # get the data entered by user

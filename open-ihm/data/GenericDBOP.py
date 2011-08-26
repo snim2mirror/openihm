@@ -1,11 +1,11 @@
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 class GenericDBOP:
 	def __init__(self,query):
 		# connect to mysql database
 		self.config = Config.dbinfo().copy()        	
-		self.db = data.mysql.connector.Connect(**self.config)
+		self.db = connector.Connect(**self.config)
         	self.cursor = self.db.cursor()		
 		self.sqlquery = query
 	
@@ -15,7 +15,7 @@ class GenericDBOP:
 
         def runSelectQuery(self):	
         	#connect to mysql database
-        	db = data.mysql.connector.Connect(**self.config)
+        	db = connector.Connect(**self.config)
         	cursor = db.cursor()
 		
 		cursor.execute(self.sqlquery)
@@ -29,7 +29,7 @@ class GenericDBOP:
 	
 	def runUpdateQuery(self):	
         	#connect to mysql database
-        	db = data.mysql.connector.Connect(**self.config)
+        	db = connector.Connect(**self.config)
         	cursor = db.cursor()
         	
 		# execute query and commit changes
