@@ -13,8 +13,7 @@ python scripts/generate_modules.py -f -s rst -d rst/  outputs
 
 # Modules we have imported from elsewhere
 
-python scripts/generate_modules.py -f -s rst -d rst/  xlrd 
-python scripts/generate_modules.py -f -s rst -d rst/  xlwt
+python scripts/generate_modules.py -f -s rst -d rst/  includes
 
 echo "Finished generating documention."
 echo "Please re-create the documention in HTML."

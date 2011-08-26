@@ -2,7 +2,7 @@
 #	Filename: generate_data_entry_sheet.py
 #-------------------------------------------------------------------
 import os
-from xlwt import Workbook, easyxf
+from includes.xlwt import Workbook, easyxf
 import data.mysql.connector
 from data.config import Config
 from PyQt4 import QtGui

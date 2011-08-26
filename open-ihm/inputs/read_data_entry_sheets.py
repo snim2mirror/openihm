@@ -2,7 +2,7 @@
 #	Filename: read_data_entry_sheets.py
 #-------------------------------------------------------------------
 
-from xlrd import open_workbook,cellname,xldate_as_tuple
+from includes.xlrd import open_workbook,cellname,xldate_as_tuple
 from datetime import date,datetime
 from data.database import Database
 import sys

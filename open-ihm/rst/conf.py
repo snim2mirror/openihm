@@ -20,8 +20,7 @@ sys.path.append(os.path.abspath('../data'))
 sys.path.append(os.path.abspath('../gui'))
 sys.path.append(os.path.abspath('../inputs'))
 sys.path.append(os.path.abspath('../outputs'))
-sys.path.append(os.path.abspath('../xlrd'))
-sys.path.append(os.path.abspath('../xlwt'))
+sys.path.append(os.path.abspath('../includes'))
 
 
 # -- General configuration -----------------------------------------------------
