@@ -60,7 +60,8 @@ class FrmFindProjectResults(QDialog, Ui_FindProjectResults, MDIDialogMixin):
             qtStartDate = QStandardItem( QDate( project.getStartDate() ).toString("dd/MM/yyyy") )
             qtStartDate.setTextAlignment( Qt.AlignCenter )
             
-            qtEndDate = QStandardItem( QDate( project.getEndDate() ).toString("dd/MM/yyyy") )
+            
+            qtEndDate = QStandardItem( QDate( project.getEndDate() ).toString("dd/MM/yyyy") ) if project.getEndDate() != None else QStandardItem( "")
             qtEndDate.setTextAlignment( Qt.AlignCenter )
             
             model.setItem( num, 0, qtProjectID )
