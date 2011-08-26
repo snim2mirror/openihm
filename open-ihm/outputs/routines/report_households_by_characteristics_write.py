@@ -2,7 +2,7 @@
 #	Filename: report_households_by_characteristics_write.py
 #-------------------------------------------------------------------
 
-import xlwt
+import includes.xlwt
 from time import time
 import os
 from PyQt4 import QtGui

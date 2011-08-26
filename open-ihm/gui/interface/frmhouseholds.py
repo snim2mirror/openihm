@@ -7,7 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 from gui.designs.ui_households_all import Ui_AllHouseholds
 from frmhouseholds_add import FrmAddHousehold
@@ -32,7 +32,7 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds, MDIDialogMixin):
 	    
 	def getHouseholds(self):
 		# connect to mysql database
-		db = data.mysql.connector.Connect(**self.config)
+		db = connector.Connect(**self.config)
 		cursor = db.cursor()
 		
 		# select query to retrieve project households
@@ -136,7 +136,7 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds, MDIDialogMixin):
 			 
 			# delete selected households
 			
-			db = data.mysql.connector.Connect(**self.config)
+			db = connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for hhid in selectedIds:

@@ -7,7 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector
+import includes.mysql.connector as connector
 
 # import the Create Project Dialog design class
 from gui.designs.ui_findhouseholdresults import Ui_FindHouseholdResults
@@ -54,7 +54,7 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, MDIDialogMixin):
 			query = ''' SELECT hhid, householdname, dateofcollection 
 					FROM households WHERE pid=%i ''' % ( self.parent.projectid )
 		
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		cursor.execute(query)
 		rows = cursor.fetchall()

@@ -7,7 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 from gui.designs.ui_household_income_wildfoods import Ui_AddHouseholdIncomeWildfoods
 
@@ -49,7 +49,7 @@ class FrmHouseholdWildfoodsIncome(QDialog, Ui_AddHouseholdIncomeWildfoods, MDIDi
          # select query to wildfood Types
          query = '''SELECT name, unitofmeasure FROM setup_foods_crops WHERE category='wildfoods' '''
 
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
@@ -70,7 +70,7 @@ class FrmHouseholdWildfoodsIncome(QDialog, Ui_AddHouseholdIncomeWildfoods, MDIDi
          query = '''SELECT incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed  
              FROM wildfoods WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
          
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
@@ -106,7 +106,7 @@ class FrmHouseholdWildfoodsIncome(QDialog, Ui_AddHouseholdIncomeWildfoods, MDIDi
          unitprice		= self.txtUnitPrice.text() if self.txtUnitPrice.text() != "" else "0"
          otheruses       = self.txtUnitsOtherUses.text() if self.txtUnitsOtherUses.text() != "" else "0"
 
-         db = data.mysql.connector.Connect(**self.config)
+         db = connector.Connect(**self.config)
 
          # create UPDATE query
          if (self.incomeid == 0):

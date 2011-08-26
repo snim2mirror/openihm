@@ -7,7 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 from gui.designs.ui_household_addasset import Ui_AddHouseholdAsset
 
@@ -70,7 +70,7 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset, MDIDialogMixin):
              
          query = '''SELECT %s, %s FROM %s''' % (assetfld, unitfld, tblname)
 
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
@@ -96,7 +96,7 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset, MDIDialogMixin):
          query = '''SELECT assetid, assetcategory, assettype, unitofmeasure, unitcost, totalunits 
                        FROM assets WHERE hhid=%s AND pid=%s AND assetid=%s ''' % ( self.hhid, self.pid,  self.assetid )
          
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
@@ -132,7 +132,7 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset, MDIDialogMixin):
          costperunit     = self.txtCostPerUnit.text()
          numunits        = self.txtNumberOfUnits.text()
 
-         db = data.mysql.connector.Connect(**self.config)
+         db = connector.Connect(**self.config)
          
          # create UPDATE query
          if (self.assetid == 0):

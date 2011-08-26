@@ -8,7 +8,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 from gui.designs.ui_household_data import Ui_HouseholdData
 from frmhousehold_addmember import FrmAddHouseholdMember
@@ -88,7 +88,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		query = '''SELECT hhid, householdname 
 		             FROM households WHERE pid=%i''' % (self.parent.projectid)
 		
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -162,7 +162,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			hhid = temp[0]
 			# delete selected members
 			
-			db = data.mysql.connector.Connect(**self.config)
+			db = connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for memberid in selectedIds:
@@ -189,7 +189,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		             FROM householdmembers WHERE hhid=%i and pid=%i ORDER BY yearofbirth ''' % (hhid,  pid)
 		
 		# retrieve and display members
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -259,7 +259,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		tbl = "globalpersonalcharacteristics"
 		query = '''SELECT datatype FROM %s WHERE characteristic='%s' ''' % (tbl, charName)
 		
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -274,7 +274,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		# select query to retrieve project household characteristics
 		query = '''SHOW COLUMNS FROM %s''' % (tbl)
 		
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -358,7 +358,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		tbl = "globalhouseholdcharacteristics"
 		query = '''SELECT datatype FROM %s WHERE characteristic='%s' ''' % (tbl, charName)
 		
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -373,7 +373,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		# select query to retrieve project household characteristics
 		query = '''SHOW COLUMNS FROM %s''' % (tbl)
 		
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -493,7 +493,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			pid = self.parent.projectid
 			# delete selected assets
 			
-			db = data.mysql.connector.Connect(**self.config)
+			db = connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for assetid in selectedIds:
@@ -520,7 +520,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
              FROM assets WHERE hhid=%i AND pid=%s''' % (hhid, pid)
          
          # retrieve and display assets
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
          
          cursor.execute(query)
@@ -621,7 +621,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			pid = self.parent.projectid
 			# delete selected crops
 			
-			db = data.mysql.connector.Connect(**self.config)
+			db = connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for incomeid in selectedIds:
@@ -649,7 +649,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
                  FROM cropincome WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
 
          # run query
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
@@ -756,7 +756,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			pid = self.parent.projectid
 			# delete selected livestock items
 			
-			db = data.mysql.connector.Connect(**self.config)
+			db = connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for incomeid in selectedIds:
@@ -784,7 +784,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
                  FROM livestockincome WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
 
          # run query
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
@@ -892,7 +892,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			pid = self.parent.projectid
 			# delete selected gifts items
 			
-			db = data.mysql.connector.Connect(**self.config)
+			db = connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for incomeid in selectedIds:
@@ -920,7 +920,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 				   FROM transfers WHERE hhid=%i AND pid=%s AND sourcetype='Internal' ''' % (hhid,  pid)
 		
 		# retrieve and display items
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -1028,7 +1028,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			pid = self.parent.projectid
 			# delete selected employment items
 			
-			db = data.mysql.connector.Connect(**self.config)
+			db = connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for incomeid in selectedIds:
@@ -1056,7 +1056,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 				   FROM employmentincome WHERE hhid=%i AND pid=%s ''' % (hhid,  pid)
 		
 		# retrieve and display items
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -1160,7 +1160,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			pid = self.parent.projectid
 			# delete selected transfer items
 			
-			db = data.mysql.connector.Connect(**self.config)
+			db = connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for incomeid in selectedIds:
@@ -1188,7 +1188,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 				   FROM transfers WHERE hhid=%i AND pid=%s AND sourcetype='External' ''' % (hhid, pid)
 		
 		# retrieve and display items
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -1296,7 +1296,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			pid = self.parent.projectid
 			# delete selected wildfoods items
 			
-			db = data.mysql.connector.Connect(**self.config)
+			db = connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for incomeid in selectedIds:
@@ -1324,7 +1324,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
                  FROM wildfoods WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
 
          # run query
-         db = data.mysql.connector.Connect(**self.config)             
+         db = connector.Connect(**self.config)             
          cursor = db.cursor()
 
          cursor.execute(query)
@@ -1431,7 +1431,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			pid = self.parent.projectid
 			# delete selected expenses
 			
-			db = data.mysql.connector.Connect(**self.config)
+			db = connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for expid in selectedIds:
@@ -1458,7 +1458,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		query = '''SELECT * FROM expenditure WHERE hhid=%i AND pid=%s''' % (hhid,  pid)
 		
 		# retrieve and display assets
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)

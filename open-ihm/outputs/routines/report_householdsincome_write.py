@@ -2,7 +2,7 @@
 #	Filename: report_householdsincome_write.py
 #-------------------------------------------------------------------
 
-from xlwt import Workbook, easyxf
+from includes.xlwt import Workbook, easyxf
 from time import time
 import os
 from PyQt4 import QtGui

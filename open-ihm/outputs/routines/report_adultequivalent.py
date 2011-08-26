@@ -1,7 +1,7 @@
 #-------------------------------------------------------------------	
 #	Filename: report_adultequivalent.py
 #-------------------------------------------------------------------
-import data.mysql.connector
+import includes.mysql.connector as connector # FIXME: Do we need this?
 from data.config import Config
 from data.database import Database
 import datetime

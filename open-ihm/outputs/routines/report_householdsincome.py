@@ -2,7 +2,7 @@
 #-------------------------------------------------------------------	
 #	Filename: report_householdsincome.py
 #-------------------------------------------------------------------
-import data.mysql.connector
+import includes.mysql.connector as connector
 from data.config import Config
 
 
@@ -220,7 +220,7 @@ class HouseholdIncome:
         result = []
         databaseConnector = Database()
         if query !='':
-            db = data.mysql.connector.Connect(**self.config)
+            db = connector.Connect(**self.config)
             cursor = db.cursor()
 	    cursor.execute(query)
             columns = tuple( [d[0].decode('utf8') for d in cursor.description] ) #get column headers

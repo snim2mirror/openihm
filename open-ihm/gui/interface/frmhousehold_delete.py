@@ -7,7 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 # import form design
 from gui.designs.ui_household_delete import Ui_DeleteHousehold
@@ -29,7 +29,7 @@ class FrmDelHousehold(QDialog, Ui_DeleteHousehold, MDIDialogMixin):
 
     def getHouseholds(self):
         # connect to mysql database
-        db = data.mysql.connector.Connect(**self.config)
+        db = connector.Connect(**self.config)
         cursor = db.cursor()
         
         # select query to retrieve project data
@@ -52,7 +52,7 @@ class FrmDelHousehold(QDialog, Ui_DeleteHousehold, MDIDialogMixin):
         hhid = temp[0]
         
         # connect to mysql database
-        db = data.mysql.connector.Connect(**self.config)
+        db = connector.Connect(**self.config)
         cursor = db.cursor()
         
         # select query to retrieve project data

@@ -7,7 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 from gui.designs.ui_household_income_employment import Ui_AddHouseholdIncomeEmployment
 
@@ -41,7 +41,7 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment, MDI
 		# select query to Employment Types
 		query = '''SELECT incomesource FROM setup_employment'''
 		
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -59,7 +59,7 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment, MDI
 		# select query to Food Types
 		query = '''SELECT name FROM setup_foods_crops '''
 		
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -76,7 +76,7 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment, MDI
 		query = '''SELECT *
 				   FROM employmentincome WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
 		
-		db = data.mysql.connector.Connect(**self.config)             
+		db = connector.Connect(**self.config)             
 		cursor = db.cursor()
 		
 		cursor.execute(query)
@@ -115,7 +115,7 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment, MDI
 		cashpaid		= self.txtCashPaid.text() if self.txtCashPaid.text() != "" else "0"
 		
 			
-		db = data.mysql.connector.Connect(**self.config)
+		db = connector.Connect(**self.config)
 		
 		# create UPDATE query
 		if (self.incomeid == 0):

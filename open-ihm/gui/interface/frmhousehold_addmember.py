@@ -8,7 +8,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 from gui.designs.ui_household_addmember import Ui_AddHouseholdMember
 
@@ -25,7 +25,7 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):
         
         # connect to database
         config = Config.dbinfo().copy()
-        self.db = data.mysql.connector.Connect(**config)
+        self.db = connector.Connect(**config)
         
         # add years to the year of birth combo box: current year to 150 years ago
         thisyear = date.today().year

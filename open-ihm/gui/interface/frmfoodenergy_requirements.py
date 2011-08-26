@@ -7,7 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import data.mysql.connector 
+import includes.mysql.connector as connector
 
 from gui.designs.ui_foodenergy_requirements import Ui_FoodEnergyRequirements
 from frmfoodenergyrequirement_add import FrmAddEnergyRequirement
@@ -31,7 +31,7 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements, MDIDialogMix
 
 	def getFoodEnergyRequirements(self):
 		# connect to mysql database
-		db = data.mysql.connector.Connect(**self.config)
+		db = connector.Connect(**self.config)
 		cursor = db.cursor()
 		
 		# select query to retrieve project households
@@ -124,7 +124,7 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements, MDIDialogMix
 			 
 			# delete record with selected age
 			
-			db = data.mysql.connector.Connect(**self.config)
+			db = connector.Connect(**self.config)
 			cursor =  db.cursor()
 			
 			for myage in selectedIds:

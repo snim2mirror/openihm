@@ -3,7 +3,7 @@
 #-------------------------------------------------------------------
 
 from config import Config
-import mysql.connector 
+import includes.mysql.connector as connector
 
 class Database:
     def __init__(self):
@@ -26,7 +26,7 @@ class Database:
         
     def open(self):
         ''' Open a connection to the database'''
-        self.db = mysql.connector.Connect(**self.config)             
+        self.db = connector.Connect(**self.config)             
         self.cursor = self.db.cursor()
         
     def close(self):

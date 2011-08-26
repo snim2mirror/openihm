@@ -3,7 +3,7 @@
 class Config(object):
     """ Configures the mysql database connector which is then called as below:
     
-        mysql.connector.Connect(**Config.dbinfo())
+        includes.mysql.connector.Connect(**Config.dbinfo())
     """
     
     HOST = 'localhost'
