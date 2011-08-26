@@ -6,14 +6,15 @@ echo "Generating RST files in directory rst/"
 
 root=`pwd`
 
-python scripts/generate_modules.py -f -s rst -d rst/  $root/includes/mysql/connector $root/data/scripts
+python scripts/generate_modules.py -f -s rst -d rst/  data $root/data/scripts
 python scripts/generate_modules.py -f -s rst -d rst/  gui $root/gui/interface/images_rc $root/gui/designs/images_rc
 python scripts/generate_modules.py -f -s rst -d rst/  inputs
 python scripts/generate_modules.py -f -s rst -d rst/  outputs 
+python scripts/generate_modules.py -f -s rst -d rst/  tests 
 
 # Modules we have imported from elsewhere
 
-python scripts/generate_modules.py -f -s rst -d rst/  includes
+python scripts/generate_modules.py -f -s rst -d rst/  includes $root/includes/mysql/ $root/includes/mysql/connector
 
 echo "Finished generating documention."
 echo "Please re-create the documention in HTML."
