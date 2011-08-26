@@ -3,7 +3,9 @@
 # IDE configurations.
 open-ihm/.ropeproject/
 open-ihm/.eric4project/
-opem-ihm/open-ihm.e4p
+open-ihm/open-ihm.e4p
+open-ihm/.aliases
+.aliases
 
 open-ihm/openihmlog.txt
 syntax: glob
