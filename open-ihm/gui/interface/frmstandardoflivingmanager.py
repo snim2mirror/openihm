@@ -79,7 +79,7 @@ class FrmStandardOfLivingManager(QDialog, Ui_StandardOfLivingManager, MDIDialogM
          self.listItems()
          
      def showSelectedItem(self, index):
-         ''' show details of a selected currency for editing '''
+         ''' show details of a selected standard of living item for editing '''
          self.currentitem = self.tblStandardOfLiving.model().item(index.row(),0).text()
          itemtype = self.tblStandardOfLiving.model().item(index.row(),1).text()
          self.txtItem.setText(self.currentitem)

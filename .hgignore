@@ -13,3 +13,5 @@ syntax: glob
 *~
 *.orig
 *.xls
+glob:__init__.py
+glob:OpenIHM.e4p

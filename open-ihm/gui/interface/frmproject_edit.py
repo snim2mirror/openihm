@@ -45,7 +45,8 @@ class FrmEditProject(QtGui.QDialog, Ui_EditProject, MDIDialogMixin):
         self.lblProjectID.setText(str( self.project.getProjectID() ))
         self.txtProjectName.setText( self.project.getProjectName() )
         self.dtpStartDate.setDate( self.project.getStartDate() )
-        self.dtpEndDate.setDate( self.project.getEndDate() )
+        if self.project.getEndDate() != None:
+             self.dtpEndDate.setDate( self.project.getEndDate() )
         self.txtDescription.setText( self.project.getDescription() )
         self.cmbCurrency.setCurrentIndex(self.cmbCurrency.findText( self.project.getCurrency() ))
         
