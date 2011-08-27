@@ -5,7 +5,7 @@
 from model.database import Database
 from model.currency import Currency
 
-class SettingsManager:
+class CurrencyManager:
      '''
          Manages currencies. Allows adding, editing, deleting and retrieval of currencies.
      '''   

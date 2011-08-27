@@ -9,9 +9,10 @@ from model.database import Database
 from model.project import Project
 from currencymanager import CurrencyManager
 from globalhouseholdcharacteristicsmanager import GlobalHouseholdCharacteristicsManager
-from globalpersonalcharacteristicsmanager import GlobalPersonalCharacteristicsmanager
+from globalpersoncharacteristicsmanager import GlobalPersonCharacteristicsManager
+from transfermanager import TransferManager
 
-class Controller(CurrencyManager, GlobalHouseholdCharacteristicsManager, GlobalPersonalCharacteristicsmanager):
+class Controller(CurrencyManager, GlobalHouseholdCharacteristicsManager, GlobalPersonCharacteristicsManager, TransferManager):
     def __init__(self):
         self.database = Database()
         

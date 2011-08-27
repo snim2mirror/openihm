@@ -4,7 +4,7 @@ from PyQt4.QtGui import *
 import pyodbc
 
 # import controller
-from data.controller import Controller
+from control.controller import Controller
 
 (Ui_ImportFromAccessDB, QDialog) = uic.loadUiType('./gui/designs/importfromaccessdb.ui')
 
@@ -63,12 +63,6 @@ class FrmImportFromAccessDB (QDialog, Ui_ImportFromAccessDB):
          self.loadProjects()
          
      def loadProjects(self):
-         DBfile = str(self.txtFilename.text())
-         conn = pyodbc.connect('DRIVER={Microsoft Access Driver (*.mdb)};DBQ='+DBfile)
-         cursor = conn.cursor()
- 
-         SQL = 'SELECT ProjectID, ProjectName, DateOfDataCollection FROM TblProject'
-         cursor.execute(SQL)
          
          model = QStandardItemModel(1,1)
          
@@ -77,8 +71,11 @@ class FrmImportFromAccessDB (QDialog, Ui_ImportFromAccessDB):
          model.setHorizontalHeaderItem(1,QStandardItem('Project Name'))
          model.setHorizontalHeaderItem(2,QStandardItem('Date of Data Collection'))
          
+         controller = Controller()
+         rows = controller.getProjectsFromAccess( str(self.txtFilename.text()) )
+         
          num = 0
-         for row in cursor.fetchall():
+         for row in rows:
              qtID = QStandardItem( str (row.ProjectID) )
              qtName = QStandardItem( row.ProjectName )
              qtDateCollected = QStandardItem( str( row.DateOfDataCollection ) )
@@ -88,9 +85,6 @@ class FrmImportFromAccessDB (QDialog, Ui_ImportFromAccessDB):
              model.setItem( num, 2, qtDateCollected)
         
              num = num + 1
-             
-         cursor.close()
-         conn.close()
 
          self.tblProjects.setModel(model)
          self.tblProjects.resizeColumnsToContents()
@@ -104,25 +98,12 @@ class FrmImportFromAccessDB (QDialog, Ui_ImportFromAccessDB):
          if ret == QMessageBox.No:
              return
 
-         DBfile = str(self.txtFilename.text())
-         conn = pyodbc.connect('DRIVER={Microsoft Access Driver (*.mdb)};DBQ='+DBfile)
-         cursor = conn.cursor()
+         selectedItems = []
+         for row in range(0, self.tblProjects.model().rowCount()) :
+             selectedItems.append( self.tblProjects.model().item(row,0).text() )
              
-         # need projectid, projectname, startdate, enddate, description and currency
-         SQL = 'SELECT ProjectID, ProjectName, DateOfDataCollection, Currency FROM TblProject'
-         cursor.execute(SQL)
-             
-         # old IHM does not have these
-         description = ""
-         enddate = "0000-00-00"
-             
-         # transfer retrieved projects
-         controller      = Controller()
-         for row in cursor.fetchall():
-             projectname = row.ProjectName
-             startdate = row.DateOfDataCollection
-             currency = row.Currency
-             project         = controller.addProject(projectname, startdate, enddate, description, currency)
+         controller = Controller()
+         controller.importProjects( str(self.txtFilename.text()),  selectedItems )    
          
      def importSelected(self):
          ''' Import selected projects '''
@@ -146,30 +127,8 @@ class FrmImportFromAccessDB (QDialog, Ui_ImportFromAccessDB):
                  selectedItems.append( self.tblProjects.model().item(row,0).text() )
              # import selected projects
              
-             DBfile = str(self.txtFilename.text())
-             conn = pyodbc.connect('DRIVER={Microsoft Access Driver (*.mdb)};DBQ='+DBfile)
-             cursor = conn.cursor()
+             controller = Controller()
+             controller.importProjects( str(self.txtFilename.text()),  selectedItems )
              
-             projectIDs = ""
-             for item in selectedItems:
-                 projectIDs = item if projectIDs == "" else projectIDs + ",%s" % item
-            
-             # need projectid, projectname, startdate, enddate, description and currency
-             SQL = '''SELECT ProjectID, ProjectName, DateOfDataCollection, Currency FROM TblProject 
-                        WHERE ProjectID IN (%s) ''' % (projectIDs) 
-             print SQL
-             cursor.execute(SQL)
-             
-             # old IHM does not have these
-             description = ""
-             enddate = "0000-00-00"
-             
-             # transfer retrieved projects
-             controller      = Controller()
-             for row in cursor.fetchall():
-                 projectname = row.ProjectName
-                 startdate = row.DateOfDataCollection
-                 currency = row.Currency
-                 project         = controller.addProject(projectname, startdate, enddate, description, currency)
          else:
              QMessageBox.information(self,"Import Data from Access","Please select the rows containing projects to be imported.") 

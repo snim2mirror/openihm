@@ -5,7 +5,7 @@
 from model.database import Database
 from model.globalpersoncharacteristic import GlobalPersonCharacteristic
 
-class GlobalPersonCharacteristicManager:
+class GlobalPersonCharacteristicsManager:
      ''' 
         Manages global Person Characteristics from which project person characteristics can be chosen.
         Allows adding, editing, deleting and retrieval of global person characteristic.
