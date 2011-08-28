@@ -98,12 +98,19 @@ class FrmImportFromAccessDB (QDialog, Ui_ImportFromAccessDB):
          if ret == QMessageBox.No:
              return
 
-         selectedItems = []
+         selectedProjects = []
+         # get all project ids as selected items
          for row in range(0, self.tblProjects.model().rowCount()) :
-             selectedItems.append( self.tblProjects.model().item(row,0).text() )
-             
+             selectedProjects.append( self.tblProjects.model().item(row,0).text() )
+         
+         # import projects    
          controller = Controller()
-         controller.importProjects( str(self.txtFilename.text()),  selectedItems )    
+         controller.importProjects( str(self.txtFilename.text()),  selectedProjects )  
+       
+         # import message
+         QMessageBox.information(self,"Importing Data from Access","All projects in the database have been imported.") 
+             
+         self.close()  
          
      def importSelected(self):
          ''' Import selected projects '''
@@ -122,13 +129,17 @@ class FrmImportFromAccessDB (QDialog, Ui_ImportFromAccessDB):
                  
              # get project id of the selected projects
              selectedRows = self.getSelectedRows(self.tblProjects)
-             selectedItems = []
+             selectedProjects = []
              for row in selectedRows:
-                 selectedItems.append( self.tblProjects.model().item(row,0).text() )
+                 selectedProjects.append( self.tblProjects.model().item(row,0).text() )
+             
              # import selected projects
-             
              controller = Controller()
-             controller.importProjects( str(self.txtFilename.text()),  selectedItems )
+             controller.importProjects( str(self.txtFilename.text()),  selectedProjects )
              
+             # import message
+             QMessageBox.information(self,"Importing Data from Access","The selected projects have been imported.") 
+             
+             self.close()
          else:
              QMessageBox.information(self,"Import Data from Access","Please select the rows containing projects to be imported.") 

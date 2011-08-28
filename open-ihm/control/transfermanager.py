@@ -35,17 +35,26 @@ class TransferManager:
          db.close()
          return exists
          
+     def delCorrespondingProject(self, projectid, projectname, dateofcollection,  currency):
+         ''' Checks if the project was transfered before '''
+         
+         query = '''SELECT projects.pid FROM projects, transferlog WHERE projects.pid=transferlog.pid AND transferlog.pid_access=%s 
+                      AND transferlog.projectname='%s' AND transferlog.datecollected='%s' 
+                      AND transferlog.currency='%s' ''' % (projectid,  projectname,  dateofcollection, currency)
+                      
+         db = Database()
+         db.open() 
+         records = db.execSelectQuery( query )
+         for record in records:
+             pid = record[0]
+             query = '''DELETE FROM projects WHERE pid=%s''' % pid
+             db.execUpdateQuery( query )
+        
+         db.close()
+         
+         
      def importProjects(self, filename, selectedProjects=""):
          ''' Imports all or selected projects from Access DB to OpenIHM '''
-#         if selectedProjects != "":
-#             projectIDs = ""
-#             for projectid in selectedProjects:
-#                 projectIDs = item if projectid == "" else projectIDs + ",%s" % projectid
-#            
-#             # need projectid, projectname, startdate, enddate, description and currency
-#             query = '''SELECT ProjectID FROM TblProject WHERE ProjectID IN (%s) ''' % (projectIDs) 
-#         else:
-#             query = '''SELECT ProjectID FROM TblProject'''
          for projectid in selectedProjects:
              self.importProject(filename, projectid)
          
@@ -57,23 +66,25 @@ class TransferManager:
          db.open()
          row = db.execSelectOneQuery( query )
          
-         if not self.existsCorrespondingProject(row.ProjectID, row.ProjectName, row.DateOfDataCollection,  row.Currency):
-             projectname = row.ProjectName
-             startdate = row.DateOfDataCollection
-             currency = row.Currency
+         if self.existsCorrespondingProject(row.ProjectID, row.ProjectName, row.DateOfDataCollection,  row.Currency):
+             self.delCorrespondingProject(row.ProjectID, row.ProjectName, row.DateOfDataCollection,  row.Currency)
              
-             # old IHM does not have these
-             description = ""
-             enddate = "0000-00-00"
+         projectname = row.ProjectName
+         startdate = row.DateOfDataCollection
+         currency = row.Currency
              
-             project = self.addProject(projectname, startdate, enddate, description, currency)
+         # old IHM does not have these
+         description = ""
+         enddate = "0000-00-00"
              
-             query = '''INSERT INTO transferlog(pid,pid_access,projectname,datecollected,currency) 
-                          VALUES(%s,%s,'%s','%s','%s')''' % (project.pid, row.ProjectID, projectname, startdate, currency)
+         project = self.addProject(projectname, startdate, enddate, description, currency)
+             
+         query = '''INSERT INTO transferlog(pid,pid_access,projectname,datecollected,currency) 
+                      VALUES(%s,%s,'%s','%s','%s')''' % (project.pid, row.ProjectID, projectname, startdate, currency)
                           
-             database = Database()
-             database.open()
-             database.execUpdateQuery( query )
-             database.close()
+         database = Database()
+         database.open()
+         database.execUpdateQuery( query )
+         database.close()
          
     
