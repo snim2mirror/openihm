@@ -251,10 +251,12 @@ class Project(IncomeSourceManager):
         
     def addHousehold(self, hhid, householdname, dateofcollection):
         household = Household( self.pid,  hhid,  householdname, dateofcollection )
+        return household
             
     def editHousehold(self, hhid, newhhid,  householdname, dateofcollection):
         household = Household( self.pid,  hhid )
         household.setData( householdname, dateofcollection,  newhhid )
+        return household
         
     def delHousehold(self,  hhid):
         query = "DELETE FROM households WHERE pid=%s AND hhid=%s " % ( self.pid, hhid )

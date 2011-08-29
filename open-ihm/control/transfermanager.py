@@ -3,8 +3,7 @@
 #
 # this module controls the transferring of data from Access DB to Open-IHM
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-import pyodbc
+from datetime import date
 from model.database import Database
 from model.accessdb import AccessDB
 
@@ -105,7 +104,31 @@ class TransferManager:
          project = self.getProject( targetpid )
          
          for row in rows:
-             project.addHousehold(row.HHID, row.HHRealName, startdate)
+             household = project.addHousehold(row.HHID, row.HHRealName, startdate)
+             self.transferHouseholdMembers( accessfilename, sourcepid,  row.HHID,  household )
+             
+         db.close()
+         
+     def transferHouseholdMembers(self, accessfilename, sourcepid,  sourcehhid,  household ):
+         query = "SELECT PersonID, Sex, Age FROM TblDemog WHERE ProjectID=%s AND HHID=%s " % (sourcepid, sourcehhid)
+         
+         db = AccessDB(accessfilename)
+         db.open()
+         rows = db.execSelectQuery( query )
+         
+         # old IHM does not have these fields
+         headhousehold = "No"
+         education = "" 
+         periodaway = 0
+         reason = ""
+         whereto = ""
+         
+         # this year
+         thisyear = date.today().year
+         for row in rows:
+             yearofbirth = thisyear - int(row.Age)
+             sex = "Male" if row.Sex == "M" else "Female"
+             household.addMember(row.PersonID, yearofbirth, headhousehold,  sex, education, periodaway, reason, whereto)
              
          db.close()
          

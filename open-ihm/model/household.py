@@ -3,8 +3,9 @@
 #-------------------------------------------------------------------
 
 from database import Database
+from householdmember_manager import HouseholdMemberManager
 
-class Household:
+class Household(HouseholdMemberManager):
     def __init__(self, pid, hhid=0, householdname="", dateofcollection=""):
         self.database = Database() 
         self.pid = pid
@@ -59,23 +60,4 @@ class Household:
         
     def getDateOfCollection(self):
         return self.dateofcollection
-        
-    #-------------------------------------------------------------------------------------------------------
-    #  Household Members
-    #-------------------------------------------------------------------------------------------------------
-        
-    def addMember(self):
-        pass
-            
-    def editMember(self):
-        pass
-        
-    def delMember(self):
-        pass
-        
-    def getMember(self):
-        pass
-        
-    def getMembers(self):
-        pass
 
