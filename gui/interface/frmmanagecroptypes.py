@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui, QtCore, uic
 
 Ui_CropTypes, base_class = uic.loadUiType("gui/designs/ui_managecroptypes.ui")
 

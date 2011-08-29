@@ -901,11 +901,170 @@ in gui.designs.ui_report_householdincome.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="frm-report-householdsbycharacteristics-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">frm_report_householdsbycharacteristics</span></tt> Module<a class="headerlink" href="#frm-report-householdsbycharacteristics-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.frm_report_householdsbycharacteristics">
+<span id="frm-report-householdsbycharacteristics-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frm_report_householdsbycharacteristics</span></tt> Module<a class="headerlink" href="#module-gui.interface.frm_report_householdsbycharacteristics" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics">
+<em class="property">class </em><tt class="descclassname">gui.interface.frm_report_householdsbycharacteristics.</tt><tt class="descname">RepHouseholdsByCharacteristics</tt><big>(</big><em>parent</em><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QDialog</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">Ui_HouseHoldReport</span></tt>, <a class="reference internal" href="#gui.interface.mixins.MDIDialogMixin" title="gui.interface.mixins.MDIDialogMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.MDIDialogMixin</span></tt></a></p>
+<p>Creates the Report Households by Characteristics from. Uses the design class
+in gui.designs.ui_report_householdsbycharacteristics.</p>
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getHouseholdCharacteristics">
+<tt class="descname">getHouseholdCharacteristics</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getHouseholdCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>get household characteristics relevant to selected project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getHouseholdCharacteristicsQuery">
+<tt class="descname">getHouseholdCharacteristicsQuery</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getHouseholdCharacteristicsQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>build query for selecting household that match the selected household characteristics</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getPersonalCharacteristics">
+<tt class="descname">getPersonalCharacteristics</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getPersonalCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>get personal characteristics relevant to the selected project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getPersonalCharacteristicsQuery">
+<tt class="descname">getPersonalCharacteristicsQuery</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getPersonalCharacteristicsQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>build query for selecting household that match the selected personal characteristics</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getProjectID">
+<tt class="descname">getProjectID</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getProjectID" title="Permalink to this definition">¶</a></dt>
+<dd><p>get ID for the selected project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getProjectNames">
+<tt class="descname">getProjectNames</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getProjectNames" title="Permalink to this definition">¶</a></dt>
+<dd><p>populate projects combobox with available projects</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getReportData">
+<tt class="descname">getReportData</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getReportData" title="Permalink to this definition">¶</a></dt>
+<dd><p>get households that meet the combined criteria of household and personal characteristics</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getSelectedHIndexes">
+<tt class="descname">getSelectedHIndexes</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getSelectedHIndexes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getSelectedHouseholdCharacteristics">
+<tt class="descname">getSelectedHouseholdCharacteristics</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getSelectedHouseholdCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>get list of user selected household characteristics as part of the criteria for report generation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getSelectedPIndexes">
+<tt class="descname">getSelectedPIndexes</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getSelectedPIndexes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getSelectedPersonalCharacteristics">
+<tt class="descname">getSelectedPersonalCharacteristics</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getSelectedPersonalCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd><p>get list of user selected househpersonal characteristics as part of the criteria for report generation</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getselectedProject">
+<tt class="descname">getselectedProject</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.getselectedProject" title="Permalink to this definition">¶</a></dt>
+<dd><p>get name of project selected by user</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.writeSpreadsheet">
+<tt class="descname">writeSpreadsheet</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.RepHouseholdsByCharacteristics.writeSpreadsheet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a Spreadsheet showing hoseholds that fit selected criteria</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.bin">
+<tt class="descclassname">gui.interface.frm_report_householdsbycharacteristics.</tt><tt class="descname">bin</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>bin(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.hex">
+<tt class="descclassname">gui.interface.frm_report_householdsbycharacteristics.</tt><tt class="descname">hex</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>hex(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frm_report_householdsbycharacteristics.oct">
+<tt class="descclassname">gui.interface.frm_report_householdsbycharacteristics.</tt><tt class="descname">oct</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>oct(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
 </div>
-<div class="section" id="frm-report-householdsbycharacteristics-display-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">frm_report_householdsbycharacteristics_display</span></tt> Module<a class="headerlink" href="#frm-report-householdsbycharacteristics-display-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.frm_report_householdsbycharacteristics_display">
+<span id="frm-report-householdsbycharacteristics-display-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frm_report_householdsbycharacteristics_display</span></tt> Module<a class="headerlink" href="#module-gui.interface.frm_report_householdsbycharacteristics_display" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.frm_report_householdsbycharacteristics_display.HouseholdsByCharDisplay">
+<em class="property">class </em><tt class="descclassname">gui.interface.frm_report_householdsbycharacteristics_display.</tt><tt class="descname">HouseholdsByCharDisplay</tt><big>(</big><em>parent</em>, <em>freporttable</em><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics_display.HouseholdsByCharDisplay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QDialog</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">Ui_DisplayHouseholdsByChar</span></tt>, <a class="reference internal" href="#gui.interface.mixins.MDIDialogMixin" title="gui.interface.mixins.MDIDialogMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.MDIDialogMixin</span></tt></a></p>
+<p>Creates the view households form</p>
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics_display.HouseholdsByCharDisplay.populateForm">
+<tt class="descname">populateForm</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics_display.HouseholdsByCharDisplay.populateForm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frm_report_householdsbycharacteristics_display.HouseholdsByCharDisplay.saveReportAsSpreadtsheet">
+<tt class="descname">saveReportAsSpreadtsheet</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics_display.HouseholdsByCharDisplay.saveReportAsSpreadtsheet" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frm_report_householdsbycharacteristics_display.bin">
+<tt class="descclassname">gui.interface.frm_report_householdsbycharacteristics_display.</tt><tt class="descname">bin</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics_display.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>bin(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frm_report_householdsbycharacteristics_display.hex">
+<tt class="descclassname">gui.interface.frm_report_householdsbycharacteristics_display.</tt><tt class="descname">hex</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics_display.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>hex(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frm_report_householdsbycharacteristics_display.oct">
+<tt class="descclassname">gui.interface.frm_report_householdsbycharacteristics_display.</tt><tt class="descname">oct</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frm_report_householdsbycharacteristics_display.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>oct(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-gui.interface.frm_report_livingthreshold">
 <span id="frm-report-livingthreshold-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frm_report_livingthreshold</span></tt> Module<a class="headerlink" href="#module-gui.interface.frm_report_livingthreshold" title="Permalink to this headline">¶</a></h2>
@@ -1259,8 +1418,80 @@ in gui.designs.ui_findproject.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="frmfoodenergy-requirements-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">frmfoodenergy_requirements</span></tt> Module<a class="headerlink" href="#frmfoodenergy-requirements-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.frmfoodenergy_requirements">
+<span id="frmfoodenergy-requirements-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frmfoodenergy_requirements</span></tt> Module<a class="headerlink" href="#module-gui.interface.frmfoodenergy_requirements" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements">
+<em class="property">class </em><tt class="descclassname">gui.interface.frmfoodenergy_requirements.</tt><tt class="descname">FrmFoodEnergyRequirements</tt><big>(</big><em>parent</em><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QDialog</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">Ui_FoodEnergyRequirements</span></tt>, <a class="reference internal" href="#gui.interface.mixins.MySQLMixin" title="gui.interface.mixins.MySQLMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.MySQLMixin</span></tt></a>, <a class="reference internal" href="#gui.interface.mixins.MDIDialogMixin" title="gui.interface.mixins.MDIDialogMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.MDIDialogMixin</span></tt></a></p>
+<p>Creates the view food energy requirements form</p>
+<dl class="method">
+<dt id="gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.addFoodEnergyRequirement">
+<tt class="descname">addFoodEnergyRequirement</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.addFoodEnergyRequirement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the Add Food Energy Requirement form</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.countRowsSelected">
+<tt class="descname">countRowsSelected</tt><big>(</big><em>tblVw</em><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.countRowsSelected" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.deleteSelectedEnergyRequirements">
+<tt class="descname">deleteSelectedEnergyRequirements</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.deleteSelectedEnergyRequirements" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.editFoodEnergyRequirement">
+<tt class="descname">editFoodEnergyRequirement</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.editFoodEnergyRequirement" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.getCurrentRow">
+<tt class="descname">getCurrentRow</tt><big>(</big><em>tblVw</em><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.getCurrentRow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.getFoodEnergyRequirements">
+<tt class="descname">getFoodEnergyRequirements</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.getFoodEnergyRequirements" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.getSelectedRows">
+<tt class="descname">getSelectedRows</tt><big>(</big><em>tblVw</em><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergy_requirements.FrmFoodEnergyRequirements.getSelectedRows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frmfoodenergy_requirements.bin">
+<tt class="descclassname">gui.interface.frmfoodenergy_requirements.</tt><tt class="descname">bin</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergy_requirements.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>bin(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frmfoodenergy_requirements.hex">
+<tt class="descclassname">gui.interface.frmfoodenergy_requirements.</tt><tt class="descname">hex</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergy_requirements.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>hex(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frmfoodenergy_requirements.oct">
+<tt class="descclassname">gui.interface.frmfoodenergy_requirements.</tt><tt class="descname">oct</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergy_requirements.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>oct(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-gui.interface.frmfoodenergyrequirement_add">
 <span id="frmfoodenergyrequirement-add-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frmfoodenergyrequirement_add</span></tt> Module<a class="headerlink" href="#module-gui.interface.frmfoodenergyrequirement_add" title="Permalink to this headline">¶</a></h2>
@@ -1307,8 +1538,56 @@ along with open-ihm.  If not, see &lt;<a class="reference external" href="http:/
 </dd></dl>
 
 </div>
-<div class="section" id="frmfoodenergyrequirement-edit-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">frmfoodenergyrequirement_edit</span></tt> Module<a class="headerlink" href="#frmfoodenergyrequirement-edit-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.frmfoodenergyrequirement_edit">
+<span id="frmfoodenergyrequirement-edit-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frmfoodenergyrequirement_edit</span></tt> Module<a class="headerlink" href="#module-gui.interface.frmfoodenergyrequirement_edit" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.frmfoodenergyrequirement_edit.FrmEditEnergyRequirement">
+<em class="property">class </em><tt class="descclassname">gui.interface.frmfoodenergyrequirement_edit.</tt><tt class="descname">FrmEditEnergyRequirement</tt><big>(</big><em>parent</em>, <em>selectedage</em>, <em>energyreqmale</em>, <em>energyreqfemale</em><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergyrequirement_edit.FrmEditEnergyRequirement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QDialog</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">Ui_EditFoodEnergyRequirement</span></tt>, <a class="reference internal" href="#gui.interface.mixins.MDIDialogMixin" title="gui.interface.mixins.MDIDialogMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.MDIDialogMixin</span></tt></a></p>
+<p>Creates the edit food energy requirement form</p>
+<dl class="method">
+<dt id="gui.interface.frmfoodenergyrequirement_edit.FrmEditEnergyRequirement.saveFoodEnergyRequirementDetails">
+<tt class="descname">saveFoodEnergyRequirementDetails</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergyrequirement_edit.FrmEditEnergyRequirement.saveFoodEnergyRequirementDetails" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves newly created food energy requirement data to database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmfoodenergyrequirement_edit.FrmEditEnergyRequirement.showEnergyRequirementDetails">
+<tt class="descname">showEnergyRequirementDetails</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergyrequirement_edit.FrmEditEnergyRequirement.showEnergyRequirementDetails" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display energy requirements data</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frmfoodenergyrequirement_edit.bin">
+<tt class="descclassname">gui.interface.frmfoodenergyrequirement_edit.</tt><tt class="descname">bin</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergyrequirement_edit.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>bin(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frmfoodenergyrequirement_edit.hex">
+<tt class="descclassname">gui.interface.frmfoodenergyrequirement_edit.</tt><tt class="descname">hex</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergyrequirement_edit.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>hex(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frmfoodenergyrequirement_edit.oct">
+<tt class="descclassname">gui.interface.frmfoodenergyrequirement_edit.</tt><tt class="descname">oct</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmfoodenergyrequirement_edit.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>oct(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-gui.interface.frmhousecharacteristics">
 <span id="frmhousecharacteristics-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frmhousecharacteristics</span></tt> Module<a class="headerlink" href="#module-gui.interface.frmhousecharacteristics" title="Permalink to this headline">¶</a></h2>
@@ -2615,14 +2894,294 @@ in gui.designs.ui_incomesourcetypes.</p>
 <div class="section" id="frmmainwindow-module">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">frmmainwindow</span></tt> Module<a class="headerlink" href="#frmmainwindow-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="frmmanage-foods-crops-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">frmmanage_foods_crops</span></tt> Module<a class="headerlink" href="#frmmanage-foods-crops-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.frmmanage_foods_crops">
+<span id="frmmanage-foods-crops-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frmmanage_foods_crops</span></tt> Module<a class="headerlink" href="#module-gui.interface.frmmanage_foods_crops" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.frmmanage_foods_crops.FrmManageTypes">
+<em class="property">class </em><tt class="descclassname">gui.interface.frmmanage_foods_crops.</tt><tt class="descname">FrmManageTypes</tt><big>(</big><em>parent</em><big>)</big><a class="headerlink" href="#gui.interface.frmmanage_foods_crops.FrmManageTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QDialog</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">Ui_FoodTypes</span></tt>, <a class="reference internal" href="#gui.interface.mixins.MySQLMixin" title="gui.interface.mixins.MySQLMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.MySQLMixin</span></tt></a>, <a class="reference internal" href="#gui.interface.mixins.MDIDialogMixin" title="gui.interface.mixins.MDIDialogMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.MDIDialogMixin</span></tt></a></p>
+<p>Creates the Edit Project form.</p>
+<dl class="method">
+<dt id="gui.interface.frmmanage_foods_crops.FrmManageTypes.countRowsSelected">
+<tt class="descname">countRowsSelected</tt><big>(</big><em>tblVw</em><big>)</big><a class="headerlink" href="#gui.interface.frmmanage_foods_crops.FrmManageTypes.countRowsSelected" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanage_foods_crops.FrmManageTypes.deleteSelectedCropTypes">
+<tt class="descname">deleteSelectedCropTypes</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanage_foods_crops.FrmManageTypes.deleteSelectedCropTypes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanage_foods_crops.FrmManageTypes.editCropType">
+<tt class="descname">editCropType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanage_foods_crops.FrmManageTypes.editCropType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanage_foods_crops.FrmManageTypes.getCurrentRow">
+<tt class="descname">getCurrentRow</tt><big>(</big><em>tblVw</em><big>)</big><a class="headerlink" href="#gui.interface.frmmanage_foods_crops.FrmManageTypes.getCurrentRow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanage_foods_crops.FrmManageTypes.getSelectedRows">
+<tt class="descname">getSelectedRows</tt><big>(</big><em>tblVw</em><big>)</big><a class="headerlink" href="#gui.interface.frmmanage_foods_crops.FrmManageTypes.getSelectedRows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanage_foods_crops.FrmManageTypes.getTypes">
+<tt class="descname">getTypes</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanage_foods_crops.FrmManageTypes.getTypes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanage_foods_crops.FrmManageTypes.saveCropType">
+<tt class="descname">saveCropType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanage_foods_crops.FrmManageTypes.saveCropType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the Add Food Types form</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanage_foods_crops.FrmManageTypes.searchCropType">
+<tt class="descname">searchCropType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanage_foods_crops.FrmManageTypes.searchCropType" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frmmanage_foods_crops.bin">
+<tt class="descclassname">gui.interface.frmmanage_foods_crops.</tt><tt class="descname">bin</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanage_foods_crops.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>bin(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frmmanage_foods_crops.hex">
+<tt class="descclassname">gui.interface.frmmanage_foods_crops.</tt><tt class="descname">hex</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanage_foods_crops.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>hex(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frmmanage_foods_crops.oct">
+<tt class="descclassname">gui.interface.frmmanage_foods_crops.</tt><tt class="descname">oct</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanage_foods_crops.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>oct(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
 </div>
-<div class="section" id="frmmanageassets-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">frmmanageassets</span></tt> Module<a class="headerlink" href="#frmmanageassets-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.frmmanageassets">
+<span id="frmmanageassets-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frmmanageassets</span></tt> Module<a class="headerlink" href="#module-gui.interface.frmmanageassets" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails">
+<em class="property">class </em><tt class="descclassname">gui.interface.frmmanageassets.</tt><tt class="descname">FrmManageAssetDetails</tt><big>(</big><em>parent</em><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QDialog</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">Ui_ManageAssetDetails</span></tt>, <a class="reference internal" href="#gui.interface.mixins.MySQLMixin" title="gui.interface.mixins.MySQLMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.MySQLMixin</span></tt></a>, <a class="reference internal" href="#gui.interface.mixins.MDIDialogMixin" title="gui.interface.mixins.MDIDialogMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.MDIDialogMixin</span></tt></a></p>
+<p>Creates the Manage Asset Details from. Uses the design class
+in gui.designs.ui_manageassets.</p>
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.deleteFoodStockType">
+<tt class="descname">deleteFoodStockType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.deleteFoodStockType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes record from database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.deleteLandType">
+<tt class="descname">deleteLandType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.deleteLandType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes record from database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.deleteLivestockType">
+<tt class="descname">deleteLivestockType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.deleteLivestockType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes record from database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.deleteSavingsType">
+<tt class="descname">deleteSavingsType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.deleteSavingsType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes record from database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.deleteTradableGoodType">
+<tt class="descname">deleteTradableGoodType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.deleteTradableGoodType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes record from database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.deleteTreeType">
+<tt class="descname">deleteTreeType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.deleteTreeType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes record from database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.getFoodTypes">
+<tt class="descname">getFoodTypes</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.getFoodTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get pre-existing savings categories from database and populate categories list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.getLandTypes">
+<tt class="descname">getLandTypes</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.getLandTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get pre-existing land types from database and populate categories list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.getLivestockTypes">
+<tt class="descname">getLivestockTypes</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.getLivestockTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get pre-existing savings categories from database and populate categories list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.getSavingsCategories">
+<tt class="descname">getSavingsCategories</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.getSavingsCategories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get pre-existing savings categories from database and populate categories list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.getTradableGoodTypes">
+<tt class="descname">getTradableGoodTypes</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.getTradableGoodTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get pre-existing tree types from database and populate categories list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.getTreeTypes">
+<tt class="descname">getTreeTypes</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.getTreeTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get pre-existing tree types from database and populate categories list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.pickSelectedFoodItem">
+<tt class="descname">pickSelectedFoodItem</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.pickSelectedFoodItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>get selected item and populate categories textbox</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.pickSelectedLandType">
+<tt class="descname">pickSelectedLandType</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.pickSelectedLandType" title="Permalink to this definition">¶</a></dt>
+<dd><p>get selected item and populate categories textbox</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.pickSelectedLivestockItem">
+<tt class="descname">pickSelectedLivestockItem</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.pickSelectedLivestockItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>get selected item and populate categories textbox</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.pickSelectedSaving">
+<tt class="descname">pickSelectedSaving</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.pickSelectedSaving" title="Permalink to this definition">¶</a></dt>
+<dd><p>get selected item and populate categories textbox</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.pickSelectedTradableGoodType">
+<tt class="descname">pickSelectedTradableGoodType</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.pickSelectedTradableGoodType" title="Permalink to this definition">¶</a></dt>
+<dd><p>get selected item and populate categories textbox</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.pickSelectedTreeType">
+<tt class="descname">pickSelectedTreeType</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.pickSelectedTreeType" title="Permalink to this definition">¶</a></dt>
+<dd><p>get selected item and populate categories textbox</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.saveFoodStockType">
+<tt class="descname">saveFoodStockType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.saveFoodStockType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves newly created data to database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.saveLandType">
+<tt class="descname">saveLandType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.saveLandType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves newly created data to database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.saveLivestockType">
+<tt class="descname">saveLivestockType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.saveLivestockType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves newly created data to database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.saveSavingsType">
+<tt class="descname">saveSavingsType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.saveSavingsType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves newly created data to database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.saveTradableGoodType">
+<tt class="descname">saveTradableGoodType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.saveTradableGoodType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves newly created data to database</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmmanageassets.FrmManageAssetDetails.saveTreeType">
+<tt class="descname">saveTreeType</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.FrmManageAssetDetails.saveTreeType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves newly created data to database</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frmmanageassets.bin">
+<tt class="descclassname">gui.interface.frmmanageassets.</tt><tt class="descname">bin</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>bin(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frmmanageassets.hex">
+<tt class="descclassname">gui.interface.frmmanageassets.</tt><tt class="descname">hex</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>hex(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.frmmanageassets.oct">
+<tt class="descclassname">gui.interface.frmmanageassets.</tt><tt class="descname">oct</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmmanageassets.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>oct(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
 </div>
-<div class="section" id="frmmanagecroptypes-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">frmmanagecroptypes</span></tt> Module<a class="headerlink" href="#frmmanagecroptypes-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.frmmanagecroptypes">
+<span id="frmmanagecroptypes-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frmmanagecroptypes</span></tt> Module<a class="headerlink" href="#module-gui.interface.frmmanagecroptypes" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.frmmanagecroptypes.FrmManageCropTypes">
+<em class="property">class </em><tt class="descclassname">gui.interface.frmmanagecroptypes.</tt><tt class="descname">FrmManageCropTypes</tt><a class="headerlink" href="#gui.interface.frmmanagecroptypes.FrmManageCropTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">Ui_CropTypes</span></tt>, <a class="reference internal" href="#gui.interface.mixins.MDIDialogMixin" title="gui.interface.mixins.MDIDialogMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.MDIDialogMixin</span></tt></a></p>
+<dl class="method">
+<dt id="gui.interface.frmmanagecroptypes.FrmManageCropTypes.setupUi">
+<tt class="descname">setupUi</tt><big>(</big><em>Form</em>, <em>Mdi</em><big>)</big><a class="headerlink" href="#gui.interface.frmmanagecroptypes.FrmManageCropTypes.setupUi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-gui.interface.frmmanagefoodtypes">
 <span id="frmmanagefoodtypes-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frmmanagefoodtypes</span></tt> Module<a class="headerlink" href="#module-gui.interface.frmmanagefoodtypes" title="Permalink to this headline">¶</a></h2>
@@ -2704,8 +3263,39 @@ along with open-ihm.  If not, see &lt;<a class="reference external" href="http:/
 </dd></dl>
 
 </div>
-<div class="section" id="frmnewproject-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">frmnewproject</span></tt> Module<a class="headerlink" href="#frmnewproject-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.frmnewproject">
+<span id="frmnewproject-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frmnewproject</span></tt> Module<a class="headerlink" href="#module-gui.interface.frmnewproject" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.frmnewproject.FrmNewProject">
+<em class="property">class </em><tt class="descclassname">gui.interface.frmnewproject.</tt><tt class="descname">FrmNewProject</tt><big>(</big><em>parent</em><big>)</big><a class="headerlink" href="#gui.interface.frmnewproject.FrmNewProject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">PyQt4.QtGui.QDialog</span></tt>, <tt class="xref py py-class docutils literal"><span class="pre">Ui_NewProject</span></tt>, <a class="reference internal" href="#gui.interface.mixins.MDIDialogMixin" title="gui.interface.mixins.MDIDialogMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.MDIDialogMixin</span></tt></a></p>
+<p>Creates the Create Project from. Uses the design class
+in gui.designs.ui_newproject.</p>
+<dl class="method">
+<dt id="gui.interface.frmnewproject.FrmNewProject.getCurrencies">
+<tt class="descname">getCurrencies</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmnewproject.FrmNewProject.getCurrencies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads currencies into the currency combo box</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.frmnewproject.FrmNewProject.saveProject">
+<tt class="descname">saveProject</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.frmnewproject.FrmNewProject.saveProject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves newly created data to database</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-gui.interface.frmpersonalcharacteristics">
 <span id="frmpersonalcharacteristics-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">frmpersonalcharacteristics</span></tt> Module<a class="headerlink" href="#module-gui.interface.frmpersonalcharacteristics" title="Permalink to this headline">¶</a></h2>
@@ -3569,8 +4159,8 @@ along with open-ihm.  If not, see &lt;<a class="reference external" href="http:/
 <li><a class="reference internal" href="#module-gui.interface.frm_report_disposableincome"><tt class="docutils literal"><span class="pre">frm_report_disposableincome</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frm_report_householdbudgets"><tt class="docutils literal"><span class="pre">frm_report_householdbudgets</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frm_report_householdincome"><tt class="docutils literal"><span class="pre">frm_report_householdincome</span></tt> Module</a></li>
-<li><a class="reference internal" href="#frm-report-householdsbycharacteristics-module"><tt class="docutils literal"><span class="pre">frm_report_householdsbycharacteristics</span></tt> Module</a></li>
-<li><a class="reference internal" href="#frm-report-householdsbycharacteristics-display-module"><tt class="docutils literal"><span class="pre">frm_report_householdsbycharacteristics_display</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.frm_report_householdsbycharacteristics"><tt class="docutils literal"><span class="pre">frm_report_householdsbycharacteristics</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.frm_report_householdsbycharacteristics_display"><tt class="docutils literal"><span class="pre">frm_report_householdsbycharacteristics_display</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frm_report_livingthreshold"><tt class="docutils literal"><span class="pre">frm_report_livingthreshold</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmcurrencymanager"><tt class="docutils literal"><span class="pre">frmcurrencymanager</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmdatabasemessage"><tt class="docutils literal"><span class="pre">frmdatabasemessage</span></tt> Module</a></li>
@@ -3579,9 +4169,9 @@ along with open-ihm.  If not, see &lt;<a class="reference external" href="http:/
 <li><a class="reference internal" href="#frmfindhouseholdresults-module"><tt class="docutils literal"><span class="pre">frmfindhouseholdresults</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmfindproject"><tt class="docutils literal"><span class="pre">frmfindproject</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmfindprojectresults"><tt class="docutils literal"><span class="pre">frmfindprojectresults</span></tt> Module</a></li>
-<li><a class="reference internal" href="#frmfoodenergy-requirements-module"><tt class="docutils literal"><span class="pre">frmfoodenergy_requirements</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.frmfoodenergy_requirements"><tt class="docutils literal"><span class="pre">frmfoodenergy_requirements</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmfoodenergyrequirement_add"><tt class="docutils literal"><span class="pre">frmfoodenergyrequirement_add</span></tt> Module</a></li>
-<li><a class="reference internal" href="#frmfoodenergyrequirement-edit-module"><tt class="docutils literal"><span class="pre">frmfoodenergyrequirement_edit</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.frmfoodenergyrequirement_edit"><tt class="docutils literal"><span class="pre">frmfoodenergyrequirement_edit</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmhousecharacteristics"><tt class="docutils literal"><span class="pre">frmhousecharacteristics</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmhousehold_add"><tt class="docutils literal"><span class="pre">frmhousehold_add</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmhousehold_addasset"><tt class="docutils literal"><span class="pre">frmhousehold_addasset</span></tt> Module</a></li>
@@ -3607,11 +4197,11 @@ along with open-ihm.  If not, see &lt;<a class="reference external" href="http:/
 <li><a class="reference internal" href="#module-gui.interface.frmincomesourcedetails"><tt class="docutils literal"><span class="pre">frmincomesourcedetails</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmincomesourcetypes"><tt class="docutils literal"><span class="pre">frmincomesourcetypes</span></tt> Module</a></li>
 <li><a class="reference internal" href="#frmmainwindow-module"><tt class="docutils literal"><span class="pre">frmmainwindow</span></tt> Module</a></li>
-<li><a class="reference internal" href="#frmmanage-foods-crops-module"><tt class="docutils literal"><span class="pre">frmmanage_foods_crops</span></tt> Module</a></li>
-<li><a class="reference internal" href="#frmmanageassets-module"><tt class="docutils literal"><span class="pre">frmmanageassets</span></tt> Module</a></li>
-<li><a class="reference internal" href="#frmmanagecroptypes-module"><tt class="docutils literal"><span class="pre">frmmanagecroptypes</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.frmmanage_foods_crops"><tt class="docutils literal"><span class="pre">frmmanage_foods_crops</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.frmmanageassets"><tt class="docutils literal"><span class="pre">frmmanageassets</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.frmmanagecroptypes"><tt class="docutils literal"><span class="pre">frmmanagecroptypes</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmmanagefoodtypes"><tt class="docutils literal"><span class="pre">frmmanagefoodtypes</span></tt> Module</a></li>
-<li><a class="reference internal" href="#frmnewproject-module"><tt class="docutils literal"><span class="pre">frmnewproject</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.frmnewproject"><tt class="docutils literal"><span class="pre">frmnewproject</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmpersonalcharacteristics"><tt class="docutils literal"><span class="pre">frmpersonalcharacteristics</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmproject_configure"><tt class="docutils literal"><span class="pre">frmproject_configure</span></tt> Module</a></li>
 <li><a class="reference internal" href="#module-gui.interface.frmproject_edit"><tt class="docutils literal"><span class="pre">frmproject_edit</span></tt> Module</a></li>
