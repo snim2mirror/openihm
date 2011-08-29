@@ -20,10 +20,11 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 from data.config import Config
 
-from gui.designs.ui_household_income_crops import Ui_AddHouseholdIncomeCrops
+Ui_AddHouseholdIncomeCrops, base_class = uic.loadUiType("gui/designs/ui_household_income_crops.ui")
 
 from mixins import MDIDialogMixin, MySQLMixin
 

@@ -21,12 +21,14 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 from datetime import date
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 from data.config import Config
 
-from gui.designs.ui_household_addmember import Ui_AddHouseholdMember
+Ui_AddHouseholdMember, base_class = uic.loadUiType("gui/designs/ui_household_addmember.ui")
 
-from mixins import MDIDialogMixin
+
+from mixins import MDIDialogMixin, MySQLMixin
 
 class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MySQLMixin, MDIDialogMixin):	
     ''' Creates the Add Household Member form. '''	

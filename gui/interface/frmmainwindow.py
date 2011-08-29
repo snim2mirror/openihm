@@ -26,10 +26,10 @@ import logging
 import stat
 import tempfile
 
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui, QtCore, uic
 
 # import the main window design class
-from gui.designs.ui_mainwindow import Ui_MainWindow
+Ui_MainWindow, base_class = uic.loadUiType("gui/designs/ui_mainwindow.ui")
 
 # import subwindows
 from frmnewproject import FrmNewProject
@@ -503,8 +503,8 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
     def importFromAccessDB(self):
         """Imports projects from the old access based IHM software"""
-         form = FrmImportFromAccessDB()
-         form.exec_()
+        form = FrmImportFromAccessDB()
+        form.exec_()
                 
     def reportHouseholdDisposableIncome(self,reporttype):
         """Creates and Shows the Report: Household Disposable Income form"""

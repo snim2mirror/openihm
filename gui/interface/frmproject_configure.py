@@ -20,12 +20,15 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 from data.config import Config
 from data.controller import Controller
 
 # import the Create Project Dialog design class
-from gui.designs.ui_projectconfiguration import Ui_ProjectConfiguration
+Ui_ProjectConfiguration, base_class = uic.loadUiType("gui/designs/ui_projectconfiguration.ui")
+
+
 from cropincomemanager import CropIncomeManager
 from livestockincomemanager import LivestockIncomeManager
 from wildfoodincomemanager import WildfoodIncomeManager
@@ -34,7 +37,7 @@ from transferincomemanager import TransferIncomeManager
 
 from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, LivestockIncomeManager, WildfoodIncomeManager, EmploymentIncomeManager, TransferIncomeManager, MySQLMIxin, MDIDialogMixin):	
+class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, LivestockIncomeManager, WildfoodIncomeManager, EmploymentIncomeManager, TransferIncomeManager, MySQLMixin, MDIDialogMixin):	
      ''' Creates the Edit Project form. '''	
      def __init__(self, parent):
          ''' Set up the dialog box interface '''

@@ -21,10 +21,12 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 from data.config import Config
 
-from gui.designs.ui_foodenergy_requirements import Ui_FoodEnergyRequirements
+Ui_FoodEnergyRequirements, base_class = uic.loadUiType("gui/designs/ui_foodenergy_requirements.ui")
+
 from frmfoodenergyrequirement_add import FrmAddEnergyRequirement
 from frmfoodenergyrequirement_edit import FrmEditEnergyRequirement
 from data.foodenergyrequirement import FoodEnergyRequirement

@@ -21,11 +21,12 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 from data.controller import Controller
 
 # import the Create Project Dialog design class
-from gui.designs.ui_findprojectresults import Ui_FindProjectResults
+Ui_FindProjectResults, base_class = uic.loadUiType("gui/designs/ui_findprojectresults.ui")
 
 from mixins import MDIDialogMixin
 

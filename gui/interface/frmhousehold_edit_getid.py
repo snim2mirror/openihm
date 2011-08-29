@@ -20,11 +20,14 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 from data.controller import Controller
 
 # import forms required to edit household
-from gui.designs.ui_edithousehold_getid import Ui_EditHouseholdGetID
+Ui_EditHouseholdGetID, base_class = uic.loadUiType("gui/designs/ui_edithousehold_getid.ui")
+
+
 from frmhousehold_edit_details import FrmEditHouseholdDetails
 
 from mixins import MDIDialogMixin

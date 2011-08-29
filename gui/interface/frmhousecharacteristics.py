@@ -21,9 +21,10 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 #from PyQt4 import QtGui, QtCore
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 # import the Create House Characteristics Dialog design class
-from gui.designs.ui_housecharacteristics import Ui_HouseCharacteristics
+Ui_HouseCharacteristics, base_class = uic.loadUiType("gui/designs/ui_housecharacteristics.ui")
 
 from mixins import MDIDialogMixin, MySQLMixin
 

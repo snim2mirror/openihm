@@ -26,7 +26,7 @@ import pyodbc
 # import controller
 from control.controller import Controller
 
-(Ui_ImportFromAccessDB, QDialog) = uic.loadUiType('./gui/designs/importfromaccessdb.ui')
+Ui_ImportFromAccessDB, QDialog = uic.loadUiType('./gui/designs/importfromaccessdb.ui')
 
 class FrmImportFromAccessDB (QDialog, Ui_ImportFromAccessDB):
      """FrmImportFromAccessDB inherits QDialog"""

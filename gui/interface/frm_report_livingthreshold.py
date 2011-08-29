@@ -20,9 +20,11 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 # import packages
-from gui.designs.ui_report_householddisposableincome import Ui_HouseholdDisposableIncome
+Ui_HouseholdDisposableIncome, base_class = uic.loadUiType("gui/designs/ui_report_householddisposableincome.ui")
+
 from data.report_settingsmanager import ReportsSettingsManager
 from outputs.routines.report_livingthreshold import LivingThreshhold
 from outputs.routines.report_disposableincome_write import HouseholdsIncomeWrite

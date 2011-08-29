@@ -21,9 +21,11 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 # import the About OpenIHM design class
-from gui.designs.ui_about_openihm import Ui_AboutOpenIHM
+Ui_AboutOpenIHM, base_class = uic.loadUiType("gui/designs/ui_about_openihm.ui")
+
 from mixins import MDIDialogMixin
 
 class FrmAboutOpenIHM(QDialog, Ui_AboutOpenIHM, MDIDialogMixin):

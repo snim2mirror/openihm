@@ -19,12 +19,12 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 
 
 # imports from PyQt4 package
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui, QtCore, uic
 
 from data.controller import Controller
 
 # import forms required to edit household
-from gui.designs.ui_project_open import Ui_OpenProject
+Ui_OpenProject, base_class = uic.loadUiType("gui/designs/ui_project_open.ui")
 
 from mixins import MDIDialogMixin
 

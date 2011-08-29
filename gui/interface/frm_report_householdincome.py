@@ -21,9 +21,11 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 # import packages
-from gui.designs.ui_report_householdincome import Ui_HouseholdIncomeReport
+Ui_HouseholdIncomeReport, base_class = uic.loadUiType("gui/designs/ui_report_householdincome.ui")
+
 from data.report_settingsmanager import ReportsSettingsManager
 from outputs.routines.report_householdsincome import HouseholdIncome
 from outputs.routines.report_householdsincome_write import HouseholdsIncomeWrite

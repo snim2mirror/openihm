@@ -21,10 +21,11 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 #from PyQt4 import QtGui, QtCore
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
-#from gui.designs.ui_managefoodtypes import Ui_FoodTypes
-from gui.designs.ui_managefoodtypes_1 import Ui_FoodTypes
-from frm_managefoodtypes_add import FrmAddCropType
+Ui_FoodTypes, base_class = uic.loadUiType("gui/designs/ui_managefoodtypes_1.ui")
+
+from frm_managefoodtypes_add import FrmAddFoodCropType
 from frm_managefoodtypes_edit import FrmEditCropType
 
 from mixins import MDIDialogMixin, MySQLMixin

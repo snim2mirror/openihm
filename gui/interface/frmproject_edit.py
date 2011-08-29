@@ -19,12 +19,12 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 
 
 # imports from PyQt4 package
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui, QtCore, uic
 
 from data.controller import Controller
 
 # import the Edit Project Dialog design class
-from gui.designs.ui_editproject_details import Ui_EditProject
+Ui_EditProject, base_class = uic.loadUiType("gui/designs/ui_editproject_details.ui")
 
 from mixins import MDIDialogMixin
 

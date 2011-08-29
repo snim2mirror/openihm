@@ -20,10 +20,11 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 from data.controller import Controller
 
-from gui.designs.ui_edithousehold_details import Ui_EditHousehold
+Ui_EditHousehold, base_class = uic.loadUiType("gui/designs/ui_edithousehold_details.ui")
 
 from mixins import MDIDialogMixin
 

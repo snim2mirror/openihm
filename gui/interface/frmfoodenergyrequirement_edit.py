@@ -25,7 +25,7 @@ from PyQt4.QtGui import *
 from data.foodenergyrequirement import FoodEnergyRequirement
 
 # import the Create Add Food Energy Requirement Dialog design class
-from gui.designs.ui_edit_foodenergyrequirement import Ui_EditFoodEnergyRequirement
+Ui_EditFoodEnergyRequirement, base_class = uic.loadUiType("gui/designs/ui_edit_foodenergyrequirement.ui")
 
 from mixins import MDIDialogMixin
 

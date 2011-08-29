@@ -22,7 +22,8 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 #from gui.designs.ui_managefoodtypes import Ui_FoodTypes
-from gui.designs.ui_managefoodtypes_1 import Ui_FoodTypes
+Ui_FoodTypes, base_class = uic.loadUiType("gui/designs/ui_managefoodtypes_1.ui")
+
 
 from frm_managefoodtypes_add import FrmAddFoodCropType
 from frm_managefoodtypes_edit import FrmEditCropType

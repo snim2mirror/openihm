@@ -21,11 +21,12 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 from data.foodenergyrequirement import FoodEnergyRequirement
 
 # import the Create Add Food Energy Requirement Dialog design class
-from gui.designs.ui_add_foodenergyrequirement import Ui_AddFoodEnergyRequirement
+Ui_AddFoodEnergyRequirement, base_class = uic.loadUiType("gui/designs/ui_add_foodenergyrequirement.ui")
 
 from mixins import MDIDialogMixin
 

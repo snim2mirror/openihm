@@ -20,9 +20,10 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQ4 import uic
 
 # import the Manage Asset Types Dialog design class
-from gui.designs.ui_manageassets import Ui_ManageAssetDetails
+Ui_ManageAssetDetails, base_class = uic.loadUiType("gui/designs/ui_manageassets.ui")
 
 
 from mixins import MDIDialogMixin, MySQLMixin

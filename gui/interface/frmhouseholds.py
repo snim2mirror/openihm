@@ -20,10 +20,11 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 from data.config import Config
 
-from gui.designs.ui_households_all import Ui_AllHouseholds
+Ui_AllHouseholds, base_class = uic.loadUiType("gui/designs/ui_households_all.ui")
 from frmhouseholds_add import FrmAddHousehold
 from frmhouseholds_edit import FrmEditHousehold
 from frmhousehold_data import FrmHouseholdData

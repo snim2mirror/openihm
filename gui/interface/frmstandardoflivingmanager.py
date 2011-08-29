@@ -20,12 +20,13 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 # imports from PyQt4 package
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 from data.config import Config
 import includes.mysql.connector as connector
 
 # import the Standard of Living  Manager design class
-from gui.designs.ui_manage_standardofliving import Ui_StandardOfLivingManager
+Ui_StandardOfLivingManager, base_class = uic.loadUiType("gui/designs/ui_manage_standardofliving.ui")
 
 from mixins import MDIDialogMixin
 

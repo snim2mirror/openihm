@@ -21,7 +21,7 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 from PyQt4 import QtGui, QtCore
 
 # import the Create Project Dialog design class
-from gui.designs.ui_newproject import Ui_NewProject
+Ui_NewProject, base_class = uic.loadUiType("gui/designs/ui_newproject.ui")
 
 from data.controller import Controller
 

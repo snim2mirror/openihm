@@ -22,10 +22,13 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 from datetime import date
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-
+from PyQt4 import uic
 from data.config import Config
 
-from gui.designs.ui_household_data import Ui_HouseholdData
+
+Ui_HouseholdData, base_class = uic.loadUiType("gui/designs/ui_household_data.ui")
+
+
 from frmhousehold_addmember import FrmAddHouseholdMember
 from frmhousehold_editmember import FrmEditHouseholdMember
 from frmhousehold_editcharacteristic import FrmEditHouseholdCharacteristic
@@ -508,10 +511,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, MDIDialogMixin):
 			model.setItem( num, 4, qtCostPerUnit )
 			model.setItem( num, 5, qtNumUnits )
 			num = num + 1
-    	     self.tblAssets.setModel(model)
-	     self.tblAssets.resizeColumnsToContents()
-	     self.tblAssets.hideColumn(0)
-	     self.tblAssets.show()
+		self.tblAssets.setModel(model)
+		self.tblAssets.resizeColumnsToContents()
+		self.tblAssets.hideColumn(0)
+		self.tblAssets.show()
 
 	#-------------------------------------------------------------------------------------------------------
 	# Income: Crops

@@ -21,10 +21,11 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 from datetime import date
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
+from PyQt4 import uic
 
 from data.config import Config
 
-from gui.designs.ui_household_editmember import Ui_EditHouseholdMember
+Ui_EditHouseholdMember, base_class = uic.loadUiType("gui/designs/ui_household)editmember.ui")
 
 from mixins import MDIDialogMixin, MySQLMixin
 

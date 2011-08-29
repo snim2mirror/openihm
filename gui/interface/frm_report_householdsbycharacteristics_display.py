@@ -22,7 +22,8 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-from gui.designs.ui_report_householdsbycharacteristics_display import Ui_DisplayHouseholdsByChar
+Ui_DisplayHouseholdsByChar, base_class = uic.loadUiType("gui/designs/ui_report_householdsbycharacteristics_display.ui")
+
 from outputs.routines.report_households_by_characteristics_write import HouseholdsByCharacteristicsWrite
 
 from mixins import MDIDialogMixin

@@ -19,9 +19,10 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+from PyQt4 import uic
 
 # import interface design
-from gui.designs.ui_databasemessage import Ui_DatabaseMessage
+Ui_DatabaseMessage, base_class = uic.loadUiType("gui/designs/ui_databasemessage.ui")
 
 from mixins import MDIDialogMixin
 
