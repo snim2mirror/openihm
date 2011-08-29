@@ -1,10 +1,10 @@
 tests Package
 =============
 
-:mod:`testall` Module
----------------------
+:mod:`tests` Package
+--------------------
 
-.. automodule:: tests.testall
+.. automodule:: tests.__init__
     :members:
     :undoc-members:
     :show-inheritance:

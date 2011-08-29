@@ -393,26 +393,10 @@ interface Package
     :undoc-members:
     :show-inheritance:
 
-:mod:`frmmanageassettrees` Module
----------------------------------
-
-.. automodule:: gui.interface.frmmanageassettrees
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 :mod:`frmmanagecroptypes` Module
 --------------------------------
 
 .. automodule:: gui.interface.frmmanagecroptypes
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
-:mod:`frmmanageemployment` Module
----------------------------------
-
-.. automodule:: gui.interface.frmmanageemployment
     :members:
     :undoc-members:
     :show-inheritance:
