@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>inputs Package &mdash; open-ihm v1.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="open-ihm v1.0 documentation" href="index.html" />
+    <link rel="next" title="outputs Package" href="outputs.html" />
+    <link rel="prev" title="interface Package" href="gui.interface.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="outputs.html" title="outputs Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gui.interface.html" title="interface Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">open-ihm v1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="inputs-package">
+<h1>inputs Package<a class="headerlink" href="#inputs-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">inputs</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-inputs.__init__"></span><p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+</div>
+<div class="section" id="module-inputs.read_data_entry_sheets">
+<span id="read-data-entry-sheets-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">read_data_entry_sheets</span></tt> Module<a class="headerlink" href="#module-inputs.read_data_entry_sheets" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets">
+<em class="property">class </em><tt class="descclassname">inputs.read_data_entry_sheets.</tt><tt class="descname">ReadDataEntrySheets</tt><big>(</big><em>projectid</em><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets.buildCharInsertQuery">
+<tt class="descname">buildCharInsertQuery</tt><big>(</big><em>values</em>, <em>datafields</em>, <em>fielddatatypes</em>, <em>hhid</em>, <em>tablename</em><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets.buildCharInsertQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic query generation for inserting personal or household characteristics</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets.checkRecordExistence">
+<tt class="descname">checkRecordExistence</tt><big>(</big><em>testquery</em><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets.checkRecordExistence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test if a record with some given primary key already exists</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets.readAssetData">
+<tt class="descname">readAssetData</tt><big>(</big><em>householdsheet</em>, <em>row_index</em><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets.readAssetData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import Asset Data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets.readBasicMemberDetails">
+<tt class="descname">readBasicMemberDetails</tt><big>(</big><em>householdsheet</em>, <em>row_index</em><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets.readBasicMemberDetails" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import Data on Basic Personal Characteristics: - Sex,Age,year Of Birth, and household headship status</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets.readCropAndFoodsIncomeData">
+<tt class="descname">readCropAndFoodsIncomeData</tt><big>(</big><em>householdsheet</em>, <em>row_index</em>, <em>incometype</em><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets.readCropAndFoodsIncomeData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import Data for Crop, Livestock, and Wildfood Income</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets.readEmploymentData">
+<tt class="descname">readEmploymentData</tt><big>(</big><em>householdsheet</em>, <em>row_index</em><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets.readEmploymentData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import Employment Data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets.readExpenditureData">
+<tt class="descname">readExpenditureData</tt><big>(</big><em>householdsheet</em>, <em>row_index</em><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets.readExpenditureData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import Expenditure Data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets.readHCharacteristicsData">
+<tt class="descname">readHCharacteristicsData</tt><big>(</big><em>householdsheet</em>, <em>row_index</em><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets.readHCharacteristicsData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import Data on Household Characteristics</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets.readPCharacteristicsData">
+<tt class="descname">readPCharacteristicsData</tt><big>(</big><em>householdsheet</em>, <em>row_index</em><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets.readPCharacteristicsData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import Data on Extended Personal Characteristics</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets.readProjectHouseholdsData">
+<tt class="descname">readProjectHouseholdsData</tt><big>(</big><em>book</em><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets.readProjectHouseholdsData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import Project Households</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets.readTransferData">
+<tt class="descname">readTransferData</tt><big>(</big><em>householdsheet</em>, <em>row_index</em>, <em>incometype</em><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets.readTransferData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import data on social and Organisational Transfers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="inputs.read_data_entry_sheets.ReadDataEntrySheets.readdata">
+<tt class="descname">readdata</tt><big>(</big><big>)</big><a class="headerlink" href="#inputs.read_data_entry_sheets.ReadDataEntrySheets.readdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base method for data importation</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/EfDUnimaChancoCompositeSmall.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">inputs Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">inputs</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-inputs.read_data_entry_sheets"><tt class="docutils literal"><span class="pre">read_data_entry_sheets</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gui.interface.html"
+                        title="previous chapter">interface Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="outputs.html"
+                        title="next chapter">outputs Package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/inputs.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="outputs.html" title="outputs Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gui.interface.html" title="interface Package"
+             >previous</a> |</li>
+        <li><a href="index.html">open-ihm v1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, University of Malawi, Evidence for Development, University of Wolverhampton.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
