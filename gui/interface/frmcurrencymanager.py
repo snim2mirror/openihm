@@ -29,9 +29,9 @@ from data.config import Config
 Ui_CurrencyManager, base_class = uic.loadUiType("gui/designs/ui_currencymanager.ui")
 
 
-from mixins import MDIDialogMixin, MySQLMixin
+from mixins import MDIDialogMixin, MySQLMixin, TableViewMixin
 
-class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin, MySQLMixin):	
+class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin, MySQLMixin, TableViewMixin):	
      ''' Creates the Currency Manager from. '''	
 
      def __init__(self, parent):
@@ -46,24 +46,6 @@ class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin, MySQLMixin
          self.config = Config.dbinfo().copy()
          
          self.listCurrencies()
-         
-     def countRowsSelected(self, tblVw):
-         selectedRows = self.getSelectedRows(tblVw)
-         return len(selectedRows)
-         
-     def getSelectedRows(self, tblVw):
-         selectedRows = []
-         selectedIndexes = tblVw.selectedIndexes()
-         
-         for indexVal in selectedIndexes:
-             if indexVal.row() not in selectedRows:
-                 selectedRows.append(indexVal.row())
-                 
-         return selectedRows
-                 
-     def getCurrentRow(self, tblVw):
-         indexVal = tblVw.currentIndex()
-         return indexVal.row()
          
      def saveCurrency(self):
          ''' Save the currency details of a currency being added or edited '''

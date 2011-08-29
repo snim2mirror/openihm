@@ -42,9 +42,9 @@ from frmhousehold_addincome_gifts import FrmHouseholdGiftsIncome
 from frmhousehold_addincome_transfers import FrmHouseholdTransferIncome
 from frmhousehold_addincome_employment import FrmHouseholdEmploymentIncome
 
-from mixins import MDIDialogMixin, MySQLMixin
+from mixins import MDIDialogMixin, MySQLMixin, TableViewMixin
 
-class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, MDIDialogMixin):	
+class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MDIDialogMixin):	
 	''' Creates the household data (income, assets, expenditure, etc) form '''	
 	def __init__(self, parent, hhid=0):
 		''' Set up the dialog box interface '''
@@ -67,25 +67,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, MDIDialogMixin):
 		# retrieve members
 		self.displayHouseholdData()
 
-	def countRowsSelected(self, tblVw):
-		selectedRows = self.getSelectedRows(tblVw)
-		return len(selectedRows)
-		
-	def getSelectedRows(self, tblVw):
-		
-		selectedRows = []
-		selectedIndexes = tblVw.selectedIndexes()
-		
-		for indexVal in selectedIndexes:
-			if indexVal.row() not in selectedRows:
-				selectedRows.append(indexVal.row())
-				
-		return selectedRows
-	
-	def getCurrentRow(self, tblVw):
-		indexVal = tblVw.currentIndex()
-		return indexVal.row()
-	
 	def displayHouseholdData(self):
 		self.setWindowTitle("Household Data - " + self.cboHouseholdNumber.currentText())
 		self.retrieveHouseholdMembers()

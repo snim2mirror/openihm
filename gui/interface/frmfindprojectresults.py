@@ -28,9 +28,9 @@ from data.controller import Controller
 # import the Create Project Dialog design class
 Ui_FindProjectResults, base_class = uic.loadUiType("gui/designs/ui_findprojectresults.ui")
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, TableViewMixin
 
-class FrmFindProjectResults(QDialog, Ui_FindProjectResults, MDIDialogMixin):	
+class FrmFindProjectResults(QDialog, Ui_FindProjectResults, TableViewMixin, MDIDialogMixin):	
     ''' Creates the Find Project from, under the Project menu. Uses the design class
         in gui.designs.ui_findproject. '''	
     def __init__(self, parent, pid, ptitle):
@@ -101,7 +101,7 @@ class FrmFindProjectResults(QDialog, Ui_FindProjectResults, MDIDialogMixin):
         if ( ret == QMessageBox.No ):
             return
         
-        selectedRow = self.tblResults.currentIndex().row()
+        selectedRow = self.getCurrentRow(tblResults)
         pid 		= self.tblResults.model().item(selectedRow,0).text()
         ptitle 		= self.tblResults.model().item(selectedRow,1).text()
         

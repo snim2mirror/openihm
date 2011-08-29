@@ -28,9 +28,9 @@ import includes.mysql.connector as connector
 # import the Standard of Living  Manager design class
 Ui_StandardOfLivingManager, base_class = uic.loadUiType("gui/designs/ui_manage_standardofliving.ui")
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, TableViewMixin
 
-class FrmStandardOfLivingManager(QDialog, Ui_StandardOfLivingManager, MDIDialogMixin):	
+class FrmStandardOfLivingManager(QDialog, Ui_StandardOfLivingManager, TableViewMixin, MDIDialogMixin):	
      ''' Creates the Standard of Living Manager form. '''	
 
      def __init__(self, parent):
@@ -45,24 +45,6 @@ class FrmStandardOfLivingManager(QDialog, Ui_StandardOfLivingManager, MDIDialogM
          self.config = Config.dbinfo().copy()
          
          self.listItems()
-
-     def countRowsSelected(self, tblVw):
-         selectedRows = self.getSelectedRows(tblVw)
-         return len(selectedRows)
-         
-     def getSelectedRows(self, tblVw):
-         selectedRows = []
-         selectedIndexes = tblVw.selectedIndexes()
-         
-         for indexVal in selectedIndexes:
-             if indexVal.row() not in selectedRows:
-                 selectedRows.append(indexVal.row())
-                 
-         return selectedRows
-                 
-     def getCurrentRow(self, tblVw):
-         indexVal = tblVw.currentIndex()
-         return indexVal.row()
          
      def saveItem(self):
          ''' Save the details of an item being added or edited '''

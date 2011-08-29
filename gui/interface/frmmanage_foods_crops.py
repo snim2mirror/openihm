@@ -29,9 +29,9 @@ Ui_FoodTypes, base_class = uic.loadUiType("gui/designs/ui_managefoodtypes_1.ui")
 from frm_managefoodtypes_add import FrmAddFoodCropType
 from frm_managefoodtypes_edit import FrmEditCropType
 
-from mixins import MDIDialogMixin, MySQLMixin
+from mixins import MDIDialogMixin, MySQLMixin, TableViewMixin
 
-class FrmManageTypes(QDialog, Ui_FoodTypes, MySQLMixin, MDIDialogMixin):		
+class FrmManageTypes(QDialog, Ui_FoodTypes, MySQLMixin, TableViewMixin, MDIDialogMixin):		
         ''' Creates the Edit Project form. '''	
         def __init__(self, parent):
                 
@@ -147,25 +147,6 @@ class FrmManageTypes(QDialog, Ui_FoodTypes, MySQLMixin, MDIDialogMixin):
 
 		else:
 			QMessageBox.information(self,"Delete Types","Please select the rows containing food/crop type(s) to be deleted.")
-
-	def countRowsSelected(self, tblVw):
-		selectedRows = self.getSelectedRows(tblVw)
-		return len(selectedRows)
-		
-	def getSelectedRows(self, tblVw):
-		
-		selectedRows = []
-		selectedIndexes = tblVw.selectedIndexes()
-		
-		for indexVal in selectedIndexes:
-			if indexVal.row() not in selectedRows:
-				selectedRows.append(indexVal.row())
-				
-		return selectedRows
-	
-	def getCurrentRow(self, tblVw):
-		indexVal = tblVw.currentIndex()
-		return indexVal.row()
 
         def searchCropType(self):
                 croptype = str(self.txtSearchCrop.text())

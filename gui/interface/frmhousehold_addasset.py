@@ -64,25 +64,15 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset, MDIDialogMixin):
          ''' Retrieve Asset Types and display them in a combobox '''
          category = self.cboAssetCategory.currentText()
          if ( category == "Food Stock" ):
-             tblname = "setup_crops"
-             assetfld = "foodtype"
-             unitfld = "measuringunit"
+              tblname, assetfld, unitfld = "setup_crops", "foodtype", "measuringunit"
          elif ( category == "Live Stock" ):
-             tblname = "setup_livestock"
-             assetfld = "incomesource"
-             unitfld = "unitofmeasure"
+              tblname, assetfld, unitfld = "setup_livestock", "incomesource", "unitofmeasure"
          elif ( category == "Land" ):
-             tblname = "setup_landtypes"
-             assetfld = "landtype"
-             unitfld = "unitofmeasure"
+              tblname, assetfld, unitfld = "setup_landtypes", "landtype", "unitofmeasure"
          elif ( category == "Trees" ):
-             tblname = "setup_treetypes"
-             assetfld = "treetype"
-             unitfld = "measuringunit"
+              tblname, assetfld, unitfld = "setup_treetypes", "treetype", "measuringunit"
          elif ( category == "Tradable Goods" ):
-             tblname = "setup_tradablegoods"
-             assetfld = "tradablegoodtype"
-             unitfld = "unitofmeasure"
+              tblname, assetfld, unitfld = "setup_tradablegoods", "tradablegoodtype", "unitofmeasure"
              
          query = '''SELECT %s, %s FROM %s''' % (assetfld, unitfld, tblname)
 

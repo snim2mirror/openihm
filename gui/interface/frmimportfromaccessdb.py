@@ -28,7 +28,9 @@ from control.controller import Controller
 
 Ui_ImportFromAccessDB, QDialog = uic.loadUiType('./gui/designs/importfromaccessdb.ui')
 
-class FrmImportFromAccessDB (QDialog, Ui_ImportFromAccessDB):
+from mixins import TableViewMixin
+
+class FrmImportFromAccessDB (QDialog, TableViewMixin, Ui_ImportFromAccessDB):
      """FrmImportFromAccessDB inherits QDialog"""
 
      def __init__ (self, parent = None):
@@ -46,27 +48,7 @@ class FrmImportFromAccessDB (QDialog, Ui_ImportFromAccessDB):
          
      def closeForm(self):
          self.close()
-     
-     # START: to be replaced with mixins by Sarah    
-     def countRowsSelected(self, tblVw):
-         selectedRows = self.getSelectedRows(tblVw)
-         return len(selectedRows)
-         
-     def getSelectedRows(self, tblVw):
-         selectedRows = []
-         selectedIndexes = tblVw.selectedIndexes()
-         
-         for indexVal in selectedIndexes:
-             if indexVal.row() not in selectedRows:
-                 selectedRows.append(indexVal.row())
-                 
-         return selectedRows
-                 
-     def getCurrentRow(self, tblVw):
-         indexVal = tblVw.currentIndex()
-         return indexVal.row()
-     # END: to be replaced with mixins by Sarah
-         
+              
      def initProjectList(self):
          model = QStandardItemModel(1,1)
          

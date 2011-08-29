@@ -35,9 +35,9 @@ from wildfoodincomemanager import WildfoodIncomeManager
 from employmentincomemanager import EmploymentIncomeManager
 from transferincomemanager import TransferIncomeManager
 
-from mixins import MDIDialogMixin, MySQLMixin
+from mixins import MDIDialogMixin, MySQLMixin, TableViewMixin
 
-class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, LivestockIncomeManager, WildfoodIncomeManager, EmploymentIncomeManager, TransferIncomeManager, MySQLMixin, MDIDialogMixin):	
+class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, LivestockIncomeManager, WildfoodIncomeManager, EmploymentIncomeManager, TransferIncomeManager, TableViewMixin, MySQLMixin, MDIDialogMixin):	
      ''' Creates the Edit Project form. '''	
      def __init__(self, parent):
          ''' Set up the dialog box interface '''
@@ -85,24 +85,6 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          self.displayAvailableTransfers()
          self.displaySelectedTransfers()
         
-     def getCurrentRow(self, tblVw):
-         indexVal = tblVw.currentIndex()
-         return indexVal.row()
-         
-     def countRowsSelected(self, lstVw):
-        selectedRows = self.getSelectedRows(lstVw)
-        return len(selectedRows)
-        
-     def getSelectedRows(self, lstVw):
-        
-        selectedRows = []
-        selectedIndexes = lstVw.selectedIndexes()
-        
-        for indexVal in selectedIndexes:
-            if indexVal.row() not in selectedRows:
-                selectedRows.append(indexVal.row())
-                
-        return selectedRows
         
      #--------------------------------------------------------------------------------------------------------------------------
      #  Standard of Living

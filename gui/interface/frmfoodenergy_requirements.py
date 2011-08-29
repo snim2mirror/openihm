@@ -31,9 +31,9 @@ from frmfoodenergyrequirement_add import FrmAddEnergyRequirement
 from frmfoodenergyrequirement_edit import FrmEditEnergyRequirement
 from data.foodenergyrequirement import FoodEnergyRequirement
 
-from mixins import MDIDialogMixin, MySQLMixin
+from mixins import MDIDialogMixin, MySQLMixin, TableViewMixin
 
-class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements, MySQLMixin, MDIDialogMixin):	
+class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements, MySQLMixin, TableViewMixin, MDIDialogMixin):	
 	''' Creates the view food energy requirements form '''	
 	def __init__(self, parent):
 	    ''' Set up the dialog box interface '''
@@ -138,23 +138,3 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements, MySQLMixin, 
 
 		else:
 			QMessageBox.information(self,"Delete Food Energy Requirements","Please select the rows containing food energy requirements to be deleted.")
-
-	def countRowsSelected(self, tblVw):
-		selectedRows = self.getSelectedRows(tblVw)
-		return len(selectedRows)
-		
-	def getSelectedRows(self, tblVw):
-		
-		selectedRows = []
-		selectedIndexes = tblVw.selectedIndexes()
-		
-		for indexVal in selectedIndexes:
-			if indexVal.row() not in selectedRows:
-				selectedRows.append(indexVal.row())
-				
-		return selectedRows
-	
-	def getCurrentRow(self, tblVw):
-		indexVal = tblVw.currentIndex()
-		return indexVal.row()
-

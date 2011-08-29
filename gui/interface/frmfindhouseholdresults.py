@@ -31,9 +31,9 @@ from frmhouseholds_add import FrmAddHousehold
 from frmhouseholds_edit import FrmEditHousehold
 from frmhousehold_data import FrmHouseholdData
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, TableViewMixin
 
-class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, MDIDialogMixin):
+class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, MDIDialogMixin):
 	''' Creates the Find Household Results form. '''	
 	def __init__(self, parent, hhid = "", hhname = ""):
 		''' Set up the dialog box interface '''
@@ -178,24 +178,5 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, MDIDialogMixin):
 		else:
 			msg = "Please select the row containing a household whose data you want to view or edit."
 			QMessageBox.information(self,"View|Edit Household Data",msg)
-		
-	def countRowsSelected(self, tblVw):
-		selectedRows = self.getSelectedRows(tblVw)
-		return len(selectedRows)
-		
-	def getSelectedRows(self, tblVw):
-		
-		selectedRows = []
-		selectedIndexes = tblVw.selectedIndexes()
-		
-		for indexVal in selectedIndexes:
-			if indexVal.row() not in selectedRows:
-				selectedRows.append(indexVal.row())
-				
-		return selectedRows
-	
-	def getCurrentRow(self, tblVw):
-		indexVal = tblVw.currentIndex()
-		return indexVal.row()
 		
 			

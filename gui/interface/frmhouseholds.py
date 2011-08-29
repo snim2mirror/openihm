@@ -29,9 +29,9 @@ from frmhouseholds_add import FrmAddHousehold
 from frmhouseholds_edit import FrmEditHousehold
 from frmhousehold_data import FrmHouseholdData
 
-from mixins import MDIDialogMixin, MySQLMixin
+from mixins import MDIDialogMixin, MySQLMixin, TableViewMixin
 
-class FrmHouseholds(QDialog, Ui_AllHouseholds, MySQLMixin, MDIDialogMixin):	
+class FrmHouseholds(QDialog, Ui_AllHouseholds, MySQLMixin, TableViewMixin, MDIDialogMixin):	
 	''' Creates the view households form '''	
 	def __init__(self, parent):
 	    ''' Set up the dialog box interface '''
@@ -172,23 +172,3 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds, MySQLMixin, MDIDialogMixin):
 			msg = "Please select the row containing a household whose data you want to view or edit."
 			QMessageBox.information(self,"View|Edit Household Data",msg)
 		
-	def countRowsSelected(self, tblVw):
-		selectedRows = self.getSelectedRows(tblVw)
-		return len(selectedRows)
-		
-	def getSelectedRows(self, tblVw):
-		
-		selectedRows = []
-		selectedIndexes = tblVw.selectedIndexes()
-		
-		for indexVal in selectedIndexes:
-			if indexVal.row() not in selectedRows:
-				selectedRows.append(indexVal.row())
-				
-		return selectedRows
-	
-	def getCurrentRow(self, tblVw):
-		indexVal = tblVw.currentIndex()
-		return indexVal.row()
-        
-
