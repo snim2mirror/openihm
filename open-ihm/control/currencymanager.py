@@ -9,6 +9,13 @@ class CurrencyManager:
      '''
          Manages currencies. Allows adding, editing, deleting and retrieval of currencies.
      '''   
+     def existsCurrency(self, name):
+         currency = self.getCurrencyByName(name)
+         if currency.name == "":
+             return False
+         else:
+             return True
+             
      def getCurrencyByID(self,  currencyid):
          currency = Currency(currencyid)
          return currency

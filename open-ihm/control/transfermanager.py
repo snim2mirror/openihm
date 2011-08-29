@@ -87,4 +87,7 @@ class TransferManager:
          database.execUpdateQuery( query )
          database.close()
          
+         if not self.existsCurrency(row.Currency):
+             self.addCurrency(row.Currency, row.Currency, row.Currency)
+         
     

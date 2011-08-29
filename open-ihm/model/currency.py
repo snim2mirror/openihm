@@ -9,6 +9,7 @@ class Currency:
         self.database = Database()
         if ( ( ( id != 0 ) or ( currencyname != "" ) )  and ( ( abbreviation == "" ) or ( symbol == "" ) ) ):
             if ( not self.getCurrencyDetails( id ,  currencyname ) ):
+                self.name = ""
                 return None
         else:
             self.setData(currencyname,  abbreviation,  symbol )
