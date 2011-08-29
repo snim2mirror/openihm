@@ -31,7 +31,7 @@ import traceback
 
 LOGFILE = 'openihmlog.txt'
 
-if __name__ == '__main__':
+def main():
      log = logging.getLogger(__name__)
      log.setLevel(logging.DEBUG)
      handler = logging.handlers.RotatingFileHandler(LOGFILE, backupCount=5)
@@ -100,3 +100,6 @@ if __name__ == '__main__':
           log.debug('Exception raised in start script. Debug info follows:')
           log.debug(''.join(traceback.format_exception(ty, value, tback)))
 
+
+if __name__ == '__main__':
+     main()
