@@ -22,16 +22,15 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 from gui.designs.ui_households_all import Ui_AllHouseholds
 from frmhouseholds_add import FrmAddHousehold
 from frmhouseholds_edit import FrmEditHousehold
 from frmhousehold_data import FrmHouseholdData
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmHouseholds(QDialog, Ui_AllHouseholds, MDIDialogMixin):	
+class FrmHouseholds(QDialog, Ui_AllHouseholds, MySQLMixin, MDIDialogMixin):	
 	''' Creates the view households form '''	
 	def __init__(self, parent):
 	    ''' Set up the dialog box interface '''
@@ -54,7 +53,7 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds, MDIDialogMixin):
 		query = '''SELECT hhid, householdname, totalassetvalue, totalincomevalue, totalexpenditure, dateofcollection 
 		             FROM households WHERE pid=%i''' % (self.parent.projectid)
 		
-		cursor.execute(query)
+		rows = self.executeResultsQuery(query)
 		
 		model = QStandardItemModel(1,2)
 		
@@ -69,7 +68,7 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds, MDIDialogMixin):
 		# add  data rows
 		num = 0
 	    
-		for row in cursor.fetchall():
+		for row in rows:
 		    qtHouseholdNo = QStandardItem( "%i" % row[0])
 		    qtHouseholdNo.setTextAlignment( Qt.AlignCenter )
 		    
@@ -97,9 +96,6 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds, MDIDialogMixin):
 	    
 		self.tableView.setModel(model)
 		self.tableView.show()
-		
-		cursor.close()
-		db.close()
 		
 	def addHousehold(self):
 		''' Show the Add Household form '''
@@ -151,18 +147,10 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds, MDIDialogMixin):
 			 
 			# delete selected households
 			
-			db = connector.Connect(**self.config)
-			cursor =  db.cursor()
-			
+			queries = []
 			for hhid in selectedIds:
-				query = '''DELETE FROM households WHERE hhid=%s ''' % (hhid)	
-				cursor.execute(query)
-				db.commit()
-    
-			# close database connection
-			cursor.close()
-			db.close()
-			
+				queries.append('''DELETE FROM households WHERE hhid=%s ''' % (hhid)	)
+			self.executeMultipleUpdateQueries(query)
 			self.getHouseholds()
 
 		else:

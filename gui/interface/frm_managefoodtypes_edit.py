@@ -23,12 +23,11 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.foodenergyrequirement import FoodEnergyRequirement
-from data.database import Database
 from gui.designs.ui_managefoodtypes_edit import Ui_EditFoodTypes
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmEditCropType(QDialog, Ui_EditFoodTypes, MDIDialogMixin):
+class FrmEditCropType(QDialog, Ui_EditFoodTypes, MDIDialogMixin, MySQLMixin):
     ''' Creates the edit food type form '''	
 
     def __init__(self, parent, selectedtype,category, measuringunit, energyvalue):
@@ -70,15 +69,12 @@ class FrmEditCropType(QDialog, Ui_EditFoodTypes, MDIDialogMixin):
 	mymeasuringunit = self.txtMeasuringUnit.text()
         myenergyvalue  = self.txtKCalories.text()
         mycategory = self.cmbCategory.currentText()  
-        database = Database()
 	if mytype!= '' and mycategory!='':
             
             query = '''UPDATE setup_foods_crops SET name='%s', category='%s', energyvalueperunit=%s, unitofmeasure='%s'
                      	    WHERE name='%s' ''' % (mytype, mycategory, myenergyvalue, mymeasuringunit, mytype)
                     
-            database.open()
-            database.execUpdateQuery(query)
-            database.close()
+            self.executeUpdateQuery(query)
             self.txtFoodType.clear()
             self.txtMeasuringUnit.clear()
             self.txtKCalories.clear()

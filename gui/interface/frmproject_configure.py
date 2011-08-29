@@ -22,7 +22,6 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 from data.controller import Controller
 
 # import the Create Project Dialog design class
@@ -33,9 +32,9 @@ from wildfoodincomemanager import WildfoodIncomeManager
 from employmentincomemanager import EmploymentIncomeManager
 from transferincomemanager import TransferIncomeManager
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, LivestockIncomeManager, WildfoodIncomeManager, EmploymentIncomeManager, TransferIncomeManager, MDIDialogMixin):	
+class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, LivestockIncomeManager, WildfoodIncomeManager, EmploymentIncomeManager, TransferIncomeManager, MySQLMIxin, MDIDialogMixin):	
      ''' Creates the Edit Project form. '''	
      def __init__(self, parent):
          ''' Set up the dialog box interface '''
@@ -112,18 +111,12 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          itemtype = self.cmbScope.currentText()
          query = '''SELECT item FROM  setup_standardofliving WHERE type='%s' OR type='Both' ''' % ( itemtype )
 
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-
-         cursor.execute(query)
+         rows = self.executeResultsQuery(query)
          
          self.cmbExpenseItem.clear()
-         for row in cursor.fetchall():
+         for row in rows:
              item = row[0]
              self.cmbExpenseItem.addItem( item )
-
-         cursor.close()   
-         db.close()
          
          # disable or enable gender and age fields depending on scope         
          enabled = True if itemtype != 'Household' else False
@@ -150,10 +143,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          query = '''SELECT summary, scope, gender, agebottom, agetop, item, costperyear 
                      FROM standardofliving WHERE pid=%s ORDER BY scope''' % ( pid )
          
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-         
-         cursor.execute(query)
+         rows = self.executeResultsQuery(query)
          
          model = QStandardItemModel(1,2)
          
@@ -169,7 +159,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          # add  data rows
          num = 0
          
-         for row in cursor.fetchall():
+         for row in rows:
              qtSummary = QStandardItem( row[0] )
              qtScope = QStandardItem( row[1] )	
              qtGender = QStandardItem( row[2] )
@@ -187,9 +177,6 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
              model.setItem( num, 5, qtItem )
              model.setItem( num, 6, qtCost )
              num = num + 1
-             
-         cursor.close()   
-         db.close()
          
          self.tblStandardOfLiving.setModel(model)
          self.tblStandardOfLiving.resizeColumnsToContents()
@@ -233,8 +220,6 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          costperyear = self.txtCostPerYear.text()
          summary = "%s %s [%s to %s years]" % (gender,  item,  agebottom,  agetop) if scope == "Person" else "%s %s" % (scope, item)
          
-         db = connector.Connect(**self.config)
-         
          # create INSERT or UPDATE query
          if (self.currentItem == ""):
              query = '''INSERT INTO standardofliving (pid, summary,scope,gender, agebottom,agetop,item,costperyear )
@@ -244,14 +229,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
                             costperyear=%s
                          WHERE summary='%s' AND pid=%s ''' % ( summary,scope,gender, agebottom,agetop,item,costperyear, currentItem, pid)
          
-         # execute query and commit changes
-         cursor =  db.cursor()
-         cursor.execute(query)
-         db.commit()
-         
-         # close database connection
-         cursor.close()
-         db.close()
+         self.executeUpdateQuery(query)
          
          # clear text boxes and refresh list
          self.resetStandardOfLivingFields()
@@ -288,19 +266,10 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
              for row in selectedRows:
                  selectedItems.append( self.tblStandardOfLiving.model().item(row,0).text() )
              # delete selected currencies
-             
-             db = connector.Connect(**self.config)
-             cursor =  db.cursor()
-             
+             queries = []
              for item in selectedItems:
-                 query = '''DELETE FROM standardofliving WHERE summary='%s' AND pid=%s ''' % (item,  pid)
-                 cursor.execute(query)
-                 db.commit()
-    
-             # close database connection
-             cursor.close()
-             db.close()
-             
+                  queries.append('''DELETE FROM standardofliving WHERE summary='%s' AND pid=%s ''' % (item,  pid))
+             self.executeMultipleUpdateQueries(queries)
              self.resetStandardOfLivingFields()
              self.displayStandardOfLiving()
 
@@ -321,22 +290,14 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          ''' Retrieve Crop Types and display them in a combobox '''
          # select query to Crop Types
          query = '''SELECT name, unitofmeasure FROM setup_foods_crops'''
-
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-
-         cursor.execute(query)
-
-         for row in cursor.fetchall():
+         rows = self.executeResultsQuery(query)
+         for row in rows:
              croptype = row[0]
              measuringunit = row[1]
              self.cmbFoodItem.addItem(croptype, QVariant(measuringunit))
 
          unitofmeasure = self.cmbFoodItem.itemData( self.cmbFoodItem.currentIndex() ).toString()
          self.txtUnitOfMeasure.setText( unitofmeasure )
-
-         cursor.close()   
-         db.close()
     
      def listDiets(self):
          ''' List available currencies '''
@@ -344,12 +305,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          pid = self.parent.projectid
          query = '''SELECT id, fooditem, unitofmeasure, percentage, priceperunit FROM diet WHERE pid=%s ''' % pid
          
-         # retrieve and display members
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-         
-         cursor.execute(query)
-         
+         rows = self.executeResultsQuery(query)
          model = QStandardItemModel(1,2)
          
          # set model headers
@@ -362,7 +318,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          # add  data rows
          num = 0
          
-         for row in cursor.fetchall():
+         for row in rows:
              qtID = QStandardItem("%i" % row[0])
              qtID.setTextAlignment( Qt.AlignCenter )
              qtFoodItem = QStandardItem( row[1] )	
@@ -377,9 +333,6 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
              model.setItem( num, 3, qtPercentage )
              model.setItem( num, 4, qtPrice )
              num = num + 1
-             
-         cursor.close()   
-         db.close()
          
          self.tblDiets.setModel(model)
          self.tblDiets.resizeColumnsToContents()
@@ -407,7 +360,6 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          percentage = self.txtPercentage.text()
          priceperunit = self.txtUnitPrice.text()
          
-         db = connector.Connect(**self.config)
          
          # create INSERT or UPDATE query
          if (self.dietid == 0):
@@ -417,14 +369,7 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
              query = ''' UPDATE diet SET fooditem='%s', unitofmeasure='%s', percentage=%s, priceperunit=%s
                          WHERE id=%s AND pid=%s ''' % ( fooditem,unitofmeasure,percentage, priceperunit, self.dietid, pid)
          
-         # execute query and commit changes
-         cursor =  db.cursor()
-         cursor.execute(query)
-         db.commit()
-         
-         # close database connection
-         cursor.close()
-         db.close()
+         self.executeUpdateQuery(query)
          
          # clear text boxes and refresh list
          self.txtPercentage.setText("")
@@ -453,19 +398,11 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
              for row in selectedRows:
                  selectedIds.append( self.tblDiets.model().item(row,0).text() )
              # delete selected currencies
-             
-             db = connector.Connect(**self.config)
-             cursor =  db.cursor()
-             
+             queries = []
              for dietid in selectedIds:
-                 query = '''DELETE FROM diet WHERE id='%s' ''' % (dietid)	
-                 cursor.execute(query)
-                 db.commit()
-    
-             # close database connection
-             cursor.close()
-             db.close()
-             
+                 queries.append('''DELETE FROM diet WHERE id='%s' ''' % (dietid))
+             self.executeMultipleUpdateQuery(queries)
+
              self.dietid = 0
              self.listDiets()
 

@@ -25,12 +25,9 @@ from PyQt4.QtGui import *
 # import the Create House Characteristics Dialog design class
 from gui.designs.ui_housecharacteristics import Ui_HouseCharacteristics
 
-#Import class with persistence management methods
-from data.GenericDBOP import GenericDBOP
+from mixins import MDIDialogMixin, MySQLMixin
 
-from mixins import MDIDialogMixin
-
-class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics, MDIDialogMixin):
+class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics, MySQLMixin, MDIDialogMixin):
         ''' Creates the Edit Project form. '''	
         def __init__(self, parent):
                 
@@ -48,8 +45,7 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics, MDIDialogMixin):
                	# select query to retrieve Food Types and related information
         	query = '''SELECT characteristic FROM globalhouseholdcharacteristics'''
 
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 	      		
 		for row in recordset:
 			characteristic = row[0]
@@ -75,8 +71,8 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics, MDIDialogMixin):
 
         	# select query to retrieve Food Types and related information
         	query = '''SELECT characteristic, datatype, description FROM globalhouseholdcharacteristics WHERE characteristic ='%s' ''' % (mycharacteristic)
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+
+                recordset = self.executeResultsQuery(query)
                 formdatatype = 0
        		description = ''
 		for row in recordset:
@@ -119,8 +115,7 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics, MDIDialogMixin):
 		query = '''SELECT characteristic, datatype, description
 				FROM globalhouseholdcharacteristics WHERE characteristic='%s' ''' % (mycharacteristic)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 
 		numrows = 0		
 		for row in recordset:
@@ -134,9 +129,8 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics, MDIDialogMixin):
 			query = '''UPDATE globalhouseholdcharacteristics SET characteristic='%s', datatype=%i, description='%s'
                      		WHERE characteristic='%s' ''' % (mycharacteristic, mydatatype, mydescription, mycharacteristic)
     
-        	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+        	# execute query and commit
+		self.executeUpdateQuery(query)
 
                 #refresh interface
                 self.cmbCharacteristic.clear()
@@ -154,8 +148,7 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics, MDIDialogMixin):
 		query = '''SELECT characteristic, datatype, description
 				FROM globalhouseholdcharacteristics WHERE characteristic='%s' ''' % (mycharacteristic)  
 
-      		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 		numrows = 0		
 		for row in recordset:
 			numrows = numrows + 1
@@ -169,8 +162,7 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics, MDIDialogMixin):
                                 query = '''DELETE FROM globalhouseholdcharacteristics WHERE characteristic='%s' ''' % (mycharacteristic)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+                                self.executeUpdateQuery(query)
 
                                 self.cmbCharacteristic.clear()
                                 self.cmbDataType.clear()

@@ -23,13 +23,12 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 from gui.designs.ui_household_editmember import Ui_EditHouseholdMember
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember, MDIDialogMixin):	
+class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember, MySQLMixin, MDIDialogMixin):	
      ''' Creates the Edit Household Member form. '''	
      def __init__(self, parent,  hhid, hhname, memberid):
          ''' Set up the dialog box interface '''
@@ -74,12 +73,9 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember, MDIDialogMixin):
          query = '''SELECT personid, headofhousehold, yearofbirth, sex, periodaway, reason, whereto 
                    FROM householdmembers WHERE hhid=%s AND personid='%s' AND pid=%s ''' % (self.hhid, self.currentid, pid)
          
-         # execute query and commit changes
-         db = connector.Connect(**self.config)
-         cursor =  db.cursor()
-         cursor.execute(query)
+         rows = self.executeResultsQuery(query)
          
-         for row in cursor.fetchall():
+         for row in rows:
              self.lblMemberID.setText( row[0] )			
              if row[1] == "Yes":
                  self.chkHeadHousehold.setChecked(True)	
@@ -91,10 +87,6 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember, MDIDialogMixin):
              self.cmbMonthsAbsent.setCurrentIndex( self.cmbMonthsAbsent.findText( str( row[4]) ) )
              self.txtReason.setText( row[5] )
              self.txtWhere.setText( row[6] )
-         
-         # close database connection
-         cursor.close()
-         db.close()
          
      def saveMember(self):
          ''' Saves changes to household to database '''    	
@@ -124,15 +116,7 @@ class FrmEditHouseholdMember(QDialog, Ui_EditHouseholdMember, MDIDialogMixin):
              periodaway=%s, reason='%s', whereto='%s',education='%s' WHERE hhid=%s AND personid='%s' 
              AND pid=%s''' % (memberid, headhousehold, yearofbirth, sex, periodaway,  reason,  whereto, education, self.hhid, self.currentid, pid)
     
-         # execute query and commit changes
-         db = connector.Connect(**self.config)
-         cursor =  db.cursor()
-         cursor.execute(query)
-         db.commit()
-         
-         # close database connection
-         cursor.close()
-         db.close()
+         self.executeUpdateQuery(query)
          
          # close new project window
          self.parent.retrieveHouseholdMembers()

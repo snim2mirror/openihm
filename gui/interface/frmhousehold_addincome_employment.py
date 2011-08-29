@@ -22,13 +22,12 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 from gui.designs.ui_household_income_employment import Ui_AddHouseholdIncomeEmployment
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment, MDIDialogMixin):	
+class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment, MySQLMixin, MDIDialogMixin):	
 	''' Form to add or edit a Household Employment Income  '''	
 	def __init__(self, parent,  hhid, hhname, incomeid = 0 ):
 		''' Set up the dialog box interface '''
@@ -56,47 +55,30 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment, MDI
 		# select query to Employment Types
 		query = '''SELECT incomesource FROM setup_employment'''
 		
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
+		rows = self.executeResultsQuery(query)
 		
-		cursor.execute(query)
-		
-		for row in cursor.fetchall():
+		for row in rows:
 		    employmenttype = row[0]
 		    self.cboEmploymentType.addItem(employmenttype)
-		 
-		cursor.close()   
-		db.close()
 	
 	def getFoodTypes(self):
 		''' Retrieve Food Types and display them in a combobox listing type of food payments '''
 		self.cboFoodType.addItem("None")
 		# select query to Food Types
 		query = '''SELECT name FROM setup_foods_crops '''
+		rows = self.executeResultsQuery(query)
 		
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
-		
-		for row in cursor.fetchall():
+		for row in rows:
 		    foodtype = row[0]
 		    self.cboFoodType.addItem(foodtype)
-		 
-		cursor.close()   
-		db.close()
-	    
+
 	def displayIncomeDetails(self):
 		''' Retrieve and display Household Income details '''
 		query = '''SELECT *
 				   FROM employmentincome WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
 		
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
-		
-		for row in cursor.fetchall():
+		rows = self.executeResultsQuery(query)
+		for row in rows:
 		    employmenttype = row[2]
 		    self.cboEmploymentType.setCurrentIndex( self.cboEmploymentType.findText( employmenttype ) )
 		    foodtype = row[3]
@@ -110,9 +92,6 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment, MDI
 		    cashincome = row[7]
 		    self.txtCashPaid.setText( str(cashincome) )
 		 
-		cursor.close()   
-		db.close()
-	    
 	def saveIncome(self):
 		''' Saves employment income to database '''    	
 		
@@ -130,8 +109,6 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment, MDI
 		cashpaid		= self.txtCashPaid.text() if self.txtCashPaid.text() != "" else "0"
 		
 			
-		db = connector.Connect(**self.config)
-		
 		# create UPDATE query
 		if (self.incomeid == 0):
 			query = '''INSERT INTO employmentincome (hhid, incomesource, foodtypepaid, unitofmeasure, unitspaid,
@@ -144,14 +121,7 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment, MDI
 						WHERE hhid=%s AND pid=%s AND id=%s 
 					''' % ( employmenttype, foodtype, unitofmeasure, unitspaid, incomekcal, cashpaid, self.hhid, self.pid, self.incomeid)
 		
-		# execute query and commit changes
-		cursor =  db.cursor()
-		cursor.execute(query)
-		db.commit()
-		
-		# close database connection
-		cursor.close()
-		db.close()
+		self.executeUpdate(query)
 		
 		# close new project window
 		self.parent.retrieveHouseholdEmploymentIncome()

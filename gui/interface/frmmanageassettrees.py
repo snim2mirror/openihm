@@ -25,12 +25,12 @@ from gui.designs.ui_managetrees import Ui_Trees
 
 from mixins import MDIDialogMixin
 
-class FrmManageAssetTrees(Ui_Trees, MDIDialogMixin):	
-	''' Creates the Manage Asset Trees from. Uses the design class
-		in gui.designs.ui_manageassettrees. '''	
-	def setupUi(self, Form, Mdi):
-		''' Set up the dialog box interface '''
-		Ui_Trees.setupUi(self, Form)
-		
-		# connect relevant signals and slots
-		QtCore.QObject.connect(self.btnOtherTradableGoodsClose, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
+class FrmManageAssetTrees(Ui_Trees, MDIDialogMixin):    
+    ''' Creates the Manage Asset Trees from. Uses the design class
+        in gui.designs.ui_manageassettrees. '''    
+    def setupUi(self, Form, Mdi):
+        ''' Set up the dialog box interface '''
+        Ui_Trees.setupUi(self, Form)
+        
+        # connect relevant signals and slots
+        QtCore.QObject.connect(self.btnOtherTradableGoodsClose, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)

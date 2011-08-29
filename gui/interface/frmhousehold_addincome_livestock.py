@@ -23,13 +23,12 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 from gui.designs.ui_household_income_livestock import Ui_AddHouseholdIncomeLivestock
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmHouseholdLivestockIncome(QDialog, Ui_AddHouseholdIncomeLivestock, MDIDialogMixin):	
+class FrmHouseholdLivestockIncome(QDialog, Ui_AddHouseholdIncomeLivestock, MySQLMixin, MDIDialogMixin):	
      ''' Form to add or edit a Household Livestock Income  '''	
      def __init__(self, parent,  hhid, hhname, incomeid = 0 ):
          ''' Set up the dialog box interface '''
@@ -64,14 +63,7 @@ class FrmHouseholdLivestockIncome(QDialog, Ui_AddHouseholdIncomeLivestock, MDIDi
          ''' Retrieve Livestock Types and display them in a combobox '''
          # select query to Livestock Types
          query = '''SELECT name, unitofmeasure FROM setup_foods_crops WHERE category='livestock' '''
-
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-
-         cursor.execute(query)
-         
-         rows = cursor.fetchall()
-         
+         row = self.executeResultsQuery(query)
          for row in rows:
              incometype = row[0]
              measuringunit = row[1]
@@ -79,21 +71,15 @@ class FrmHouseholdLivestockIncome(QDialog, Ui_AddHouseholdIncomeLivestock, MDIDi
 
          unitofmeasure = self.cboIncomeType.itemData( self.cboIncomeType.currentIndex() ).toString()
          self.txtUnitOfMeasure.setText( unitofmeasure )
-
-         cursor.close()   
-         db.close()
         
      def displayIncomeDetails(self):
          ''' Retrieve and display Household Income details '''
          query = '''SELECT incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed  
              FROM livestockincome WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
-         
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
 
-         cursor.execute(query)
+         rows = self.executeResultsQuery(query)
 
-         for row in cursor.fetchall():
+         for row in rows:
              croptype = row[0]
              self.cboIncomeType.setCurrentIndex( self.cboIncomeType.findText( croptype ) )
              unitofmeasure = row[1]
@@ -109,9 +95,6 @@ class FrmHouseholdLivestockIncome(QDialog, Ui_AddHouseholdIncomeLivestock, MDIDi
              unitsconsumed = row[6]
              self.txtUnitsConsumed.setText( str(unitsconsumed) )
 
-         cursor.close()   
-         db.close()
-
      def saveIncome(self):
          ''' Saves livestock income to database '''    	
 
@@ -124,8 +107,6 @@ class FrmHouseholdLivestockIncome(QDialog, Ui_AddHouseholdIncomeLivestock, MDIDi
          unitprice		= self.txtUnitPrice.text() if self.txtUnitPrice.text() != "" else "0"
          otheruses       = self.txtUnitsOtherUses.text() if self.txtUnitsOtherUses.text() != "" else "0"
 
-         db = connector.Connect(**self.config)
-
          # create UPDATE query
          if (self.incomeid == 0):
              query = '''INSERT INTO livestockincome (hhid, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, 
@@ -136,15 +117,7 @@ class FrmHouseholdLivestockIncome(QDialog, Ui_AddHouseholdIncomeLivestock, MDIDi
                   unitprice=%s, otheruses=%s, unitsconsumed=%s WHERE hhid=%s AND pid=%s AND  
                   id=%s ''' % ( incometype, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed, self.hhid, self.pid,  self.incomeid)
 
-         # execute query and commit changes
-         cursor =  db.cursor()
-         cursor.execute(query)
-         db.commit()
-
-         # close database connection
-         cursor.close()
-         db.close()
-
+         self.executeUpdateQuery(query)
          # close new project window
          self.parent.retrieveHouseholdLivestockIncome()
          self.mdiClose()

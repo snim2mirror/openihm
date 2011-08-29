@@ -48,11 +48,11 @@ class FrmEditProject(QtGui.QDialog, Ui_EditProject, MDIDialogMixin):
         self.dtpEndDate.setCalendarPopup(True)
         
     def getCurrencies(self):
-         ''' Loads currencies into the currency combo box '''
-         controller      = Controller()
-         currencies = controller.getCurrencies()
-         for currency in currencies:
-             self.cmbCurrency.addItem(currency.name)
+        ''' Loads currencies into the currency combo box '''
+        controller      = Controller()
+        currencies = controller.getCurrencies()
+        for currency in currencies:
+            self.cmbCurrency.addItem(currency.name)
         
     def getProjectData(self):
         ''' Retrieves project data from the database '''
@@ -60,7 +60,7 @@ class FrmEditProject(QtGui.QDialog, Ui_EditProject, MDIDialogMixin):
         self.txtProjectName.setText( self.project.getProjectName() )
         self.dtpStartDate.setDate( self.project.getStartDate() )
         if self.project.getEndDate() != None:
-             self.dtpEndDate.setDate( self.project.getEndDate() )
+            self.dtpEndDate.setDate( self.project.getEndDate() )
         self.txtDescription.setText( self.project.getDescription() )
         self.cmbCurrency.setCurrentIndex(self.cmbCurrency.findText( self.project.getCurrency() ))
         

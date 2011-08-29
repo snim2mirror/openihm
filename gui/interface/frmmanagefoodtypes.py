@@ -24,14 +24,12 @@ from PyQt4.QtGui import *
 
 #from gui.designs.ui_managefoodtypes import Ui_FoodTypes
 from gui.designs.ui_managefoodtypes_1 import Ui_FoodTypes
-from data.GenericDBOP import GenericDBOP
-from data.database import Database
 from frm_managefoodtypes_add import FrmAddCropType
 from frm_managefoodtypes_edit import FrmEditCropType
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmManageFoodTypes(QDialog, Ui_FoodTypes, MDIDialogMixin):
+class FrmManageFoodTypes(QDialog, Ui_FoodTypes, MySQLMixin, MDIDialogMixin):
         ''' Creates the Edit Project form. '''	
         def __init__(self, parent):
                 
@@ -44,10 +42,10 @@ class FrmManageFoodTypes(QDialog, Ui_FoodTypes, MDIDialogMixin):
         	self.getFoodTypes()
 
                 #connect relevant signals
-		'''self.connect(self.cmdManageFoodClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
+#		self.connect(self.cmdManageFoodClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
 		
-		self.connect(self.cmdDelete, SIGNAL("clicked()"), self.deleteFoodType)
-		'''
+#		self.connect(self.cmdDelete, SIGNAL("clicked()"), self.deleteFoodType)
+		
 		self.connect(self.cmdClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
 		self.connect(self.cmdDeleteRows, SIGNAL("clicked()"), self.deleteSelectedCropTypes)
 		self.connect(self.cmdEditRow, SIGNAL("clicked()"), self.editCropType)
@@ -58,10 +56,7 @@ class FrmManageFoodTypes(QDialog, Ui_FoodTypes, MDIDialogMixin):
                	# select query to retrieve Food Types and related information
         	query = '''SELECT foodtype,measuringunit,energyvalueperunit FROM setup_crops'''
 
-        	database = Database()
-        	database.open()
-                recordset = database.execSelectQuery(query)
-                database.close()
+                recordset = self.executeResultsQuery(query)
 
 		model = QStandardItemModel(1,2)
 		# set model headers
@@ -142,16 +137,11 @@ class FrmManageFoodTypes(QDialog, Ui_FoodTypes, MDIDialogMixin):
 				selectedIds.append( self.tableView.model().item(row,0).text() )
 			 
 			# delete record with selected food type
-			database = Database()
-			database.open()
-			
+			queries = []
 			for cropname in selectedIds:
-				query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (cropname)	
-				database.execUpdateQuery(query)
-    
-			# close database connection
-			database.close()
-			
+				queries.append('''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (cropname))
+			self.executeMultipleUpdateQueries(queries)
+
 			self.getFoodTypes()
 
 		else:

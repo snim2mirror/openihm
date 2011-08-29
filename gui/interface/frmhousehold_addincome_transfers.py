@@ -23,13 +23,11 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
-
 from gui.designs.ui_household_income_transfers import Ui_AddHouseholdIncomeTransfers
 
-from mixins import MDIDialogMixin
+from mixins import MySQLMixin, MDIDialogMixin
 
-class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers, MDIDialogMixin):	
+class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers, MySQLMixin, MDIDialogMixin):	
      ''' Form to add or edit a Household Transfers Income  '''	
      def __init__(self, parent,  hhid, hhname, incomeid = 0 ):
          ''' Set up the dialog box interface '''
@@ -56,18 +54,10 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers, MDIDia
          ''' Retrieve Gifts Types and display them in a combobox '''
          # select query to Gifts Types
          query = '''SELECT assistancetype FROM setup_transfers'''
-
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-
-         cursor.execute(query)
-
-         for row in cursor.fetchall():
+         rows = self.executeResultsQuery(query)
+         for row in rows:
              assistancetype = row[0]
              self.cmbSourceOfTransfer.addItem(assistancetype)
-
-         cursor.close()   
-         db.close()
         
      def displayUnitOfMeasure(self):
          ''' displays the unit of measure of the selected income source '''
@@ -78,34 +68,22 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers, MDIDia
          ''' Retrieve Crop Types and display them in a combobox '''
          # select query to Crop Types
          query = '''SELECT name, unitofmeasure FROM setup_foods_crops'''
-
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-
-         cursor.execute(query)
-
-         for row in cursor.fetchall():
+         rows = self.executeResultsQuery(query)
+         for row in rows:
              croptype = row[0]
              measuringunit = row[1]
              self.cmbFoodType.addItem(croptype, QVariant(measuringunit))
 
          unitofmeasure = self.cmbFoodType.itemData( self.cmbFoodType.currentIndex() ).toString()
          self.txtUnitOfMeasure.setText( unitofmeasure )
-
-         cursor.close()   
-         db.close()
         
      def displayIncomeDetails(self):
          ''' Retrieve and display Household Income details '''
          query = '''SELECT sourceoftransfer, cashperyear, foodtype, unitofmeasure, unitsconsumed , unitssold, priceperunit  
                   FROM transfers WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
 
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-
-         cursor.execute(query)
-
-         for row in cursor.fetchall():
+         rows = self.executeResultsQuery(query)
+         for row in rows:
              sourceoftransfer = row[0]
              self.cmbSourceOfTransfer.setCurrentIndex( self.cmbSourceOfTransfer.findText( sourceoftransfer ) )
              cashperyear = row[1]
@@ -121,9 +99,6 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers, MDIDia
              unitprice = row[6]
              self.txtUnitPrice.setText( "%.2f" % unitprice )
 
-         cursor.close()   
-         db.close()
-
      def saveIncome(self):
          ''' Saves transfer from org income to database '''    	
          
@@ -137,7 +112,6 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers, MDIDia
          unitssold           = self.txtUnitsSold.text()
          unitprice           = self.txtUnitPrice.text()
 
-         db = connector.Connect(**self.config)
 
          # create UPDATE query
          if (self.incomeid == 0):
@@ -149,15 +123,7 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers, MDIDia
                          unitssold='%s', priceperunit=%s, sourcetype='%s' WHERE hhid=%s AND pid=%s AND 
                          id=%s ''' % ( sourceoftransfer, cash, foodtype, unitofmeasure,  unitsconsumed,  unitssold,  unitprice, sourcetype, self.hhid, self.pid,  self.incomeid)
 
-         # execute query and commit changes
-         cursor =  db.cursor()
-         cursor.execute(query)
-         db.commit()
-         
-         # close database connection
-         cursor.close()
-         db.close()
-         
+         self.executeUpdateQuery(query)
          # close new project window
          self.parent.retrieveHouseholdTransferIncome()
          self.mdiClose()

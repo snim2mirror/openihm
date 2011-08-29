@@ -25,12 +25,9 @@ from PyQt4.QtGui import *
 # import the Manage Income Dialog design class
 from gui.designs.ui_manageincomedetails import Ui_ManageIncome
 
-#import GenericDBOP which has methods for managing database operations
-from data.GenericDBOP import GenericDBOP
+from mixins import MDIDialogMixin, MySQLMixin
 
-from mixins import MDIDialogMixin
-
-class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):	
+class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixin):	
 	''' Creates the Manage Income Source Details from. Uses the design class
 		in gui.designs.ui_manageincomedetails. '''	
 	def __init__(self, parent):
@@ -65,8 +62,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                	# select query to retrieve Food types
         	query = '''SELECT name FROM setup_foods_crops WHERE category='crops' '''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 				
 		model = QStandardItemModel()
 		num = 0
@@ -88,8 +84,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                 #select query to retrieve food-energy value and measuring unit for selected food item 
         	query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (selectedCropItem)
 
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+		rowset = self.executeResultsQuery(query)
 	      		
 		for row in recordset:
                         kcalValue = row[0]
@@ -109,8 +104,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (myfoodtype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 
 		numrows = len(recordset)
 		category='crops'
@@ -123,8 +117,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                      		WHERE name='%s' ''' % (myfoodtype, category, myenergyvalue, unitofmeasure, myfoodtype)
 			
         	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+		self.executeUpdateQuery(query)
 		#refresh categories list
 		self.getCropTypes()
 		self.clearCropTextboxes()
@@ -138,8 +131,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (myfoodtype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 		numrows = len(recordset)
 
 		if numrows <> 0:
@@ -151,8 +143,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                                 query = '''DELETE FROM setup_foods_crops WHERE name='%s' ''' % (myfoodtype)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+                                self.executeUpdateQuery(query)
 			
                                 #self.cmbKCalories.clear()
 			
@@ -170,8 +161,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                	# select query to retrieve Asset Categories
         	query = '''SELECT incomesource FROM setup_employment'''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 				
 		model = QStandardItemModel()
 		num = 0
@@ -199,8 +189,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT incomesource FROM setup_employment WHERE incomesource='%s' ''' % (employment)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery()
 
 		numrows = len(recordset)
 				      	
@@ -211,9 +200,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		else:
 			query = '''UPDATE setup_employment SET incomesource='%s'	WHERE incomesource='%s' ''' % (employment, employment)
     
-        	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+                self.executeUpdateQuery(query)
 		#refresh categories list
 		self.getEmploymentCategories()               
                 
@@ -226,8 +213,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT incomesource FROM setup_employment WHERE incomesource='%s' ''' % (employment)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 		numrows = len(recordset)	
 
 		if numrows <> 0:
@@ -239,8 +225,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                                 query = '''DELETE FROM setup_employment WHERE incomesource='%s' ''' % (employment)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+                                self.executeUpdateQuery(query)
                                 #refresh categories list
                                 self.getEmploymentCategories()			
 			
@@ -260,8 +245,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                	# select query to retrieve Food types
         	query = '''SELECT name FROM setup_foods_crops WHERE category='wildfoods' '''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 				
 		model = QStandardItemModel()
 		num = 0
@@ -283,8 +267,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                 #select query to retrieve food-energy value and measuring unit for selected food item 
         	query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (selectedWildFoodItem)
 
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 	      		
 		for row in recordset:
                         kcalValue = row[0]
@@ -304,9 +287,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (myincomesource)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-
+		recordset = self.executeResultsQuery(query)
 		numrows = len(recordset)
 		category ='wildfoods'
 				      	
@@ -319,8 +300,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 			
     
         	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+                self.executeUpdateQuery(query)
 		#refresh categories list
 		self.getWildFoodTypes()
 		self.clearWildFoodTextboxes()
@@ -334,8 +314,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (myincomesource)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 		numrows = len(recordset)
 
 		if numrows <> 0:
@@ -347,8 +326,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                                 query = '''DELETE FROM setup_foods_crops WHERE name='%s' ''' % (myincomesource)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+                                self.executeUpdateQuery(query)
                                 #refresh categories list
                                 self.getWildFoodTypes()
                                 self.clearWildFoodTextboxes()
@@ -370,8 +348,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                	# select query to retrieve Food types
         	query = '''SELECT name FROM setup_foods_crops WHERE category='livestock' '''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 				
 		model = QStandardItemModel()
 		num = 0
@@ -393,8 +370,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                 #select query to retrieve food-energy value and measuring unit for selected food item 
         	query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (selectedLivestockItem)
 
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 	      		
 		for row in recordset:
                         kcalValue = row[0]
@@ -414,8 +390,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (myincomesource)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 
 		numrows = len(recordset)
 		category = 'livestock'
@@ -429,8 +404,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                      		WHERE name='%s' ''' % (myincomesource, category, myenergyvalue, unitofmeasure, myincomesource)
     
         	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+                self.executeUpdateQuery(query)
 		#refresh categories list
 		self.getLivestockTypes()
 
@@ -445,8 +419,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_foods_crops WHERE name='%s' ''' % (myincomesource)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 		numrows = len(recordset)
 
 		if numrows <> 0:
@@ -458,8 +431,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                                 query = '''DELETE FROM setup_foods_crops WHERE name='%s' ''' % (myincomesource)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+                                self.executeUpdateQuery(query)
                                 #refresh categories list
                                 self.getLivestockTypes()
 
@@ -474,9 +446,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                 '''Get pre-existing assets categories from database and populate categories list'''
                	# select query to retrieve Asset Categories
         	query = '''SELECT sourcetype FROM setup_transfersources'''
-        	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+        	recordset = self.executeResultsQuery(query)
 				
 		model = QStandardItemModel()
 		num = 0
@@ -504,8 +474,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT sourcetype FROM setup_transfersources WHERE sourcetype='%s' ''' % (mytransfersource)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 
 		numrows = len(recordset)
 				      	
@@ -517,8 +486,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 			query = '''UPDATE setup_transfersources SET sourcetype='%s'	WHERE sourcetype='%s' ''' % (mytransfersource, mytransfersource)
     
         	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+                self.executeUpdateQuery(query)
                 self.txtTransferSources.clear()
 		#refresh categories list
 		self.getTransferSourceCategories()               
@@ -532,8 +500,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT sourcetype FROM setup_transfersources WHERE sourcetype='%s' ''' % (mytransfersource)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 		numrows = len(recordset)
 
 		if numrows <> 0:
@@ -545,8 +512,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                                 query = '''DELETE FROM setup_transfersources WHERE sourcetype='%s' ''' % (mytransfersource)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()			
+                                self.executeUpdateQuery(query)			
                                 self.txtTransferSources.clear()
 			
                                 #refresh categories list
@@ -562,8 +528,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                	# select query to retrieve Asset Categories
         	query = '''SELECT assistancetype FROM setup_transfers'''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 				
 		model = QStandardItemModel()
 		num = 0
@@ -585,8 +550,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                 #select query to retrieve food-energy value and measuring unit for selected food item 
         	query = '''SELECT unitofmeasure FROM setup_transfers WHERE assistancetype='%s' ''' % (selectedItem)
 
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 	      		
 		for row in recordset:
                         unitOfMeasure = row[0]
@@ -603,8 +567,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT assistancetype FROM setup_transfers WHERE assistancetype='%s' ''' % (mytransfertype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 
 		numrows = len(recordset)
 				      	
@@ -616,8 +579,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 			query = '''UPDATE setup_transfers SET assistancetype='%s', unitofmeasure='%s' 	WHERE assistancetype='%s' ''' % (mytransfertype, mymeasuringUnit,mytransfertype)
     
         	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+                self.executeUpdateQuery(query)
                 self.txtTransferType.clear()
         	self.txtTransferUnitofMeasure.clear()                        
 		#refresh categories list
@@ -632,8 +594,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT assistancetype FROM setup_transfers WHERE assistancetype='%s' ''' % (mytransfertype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 		numrows = len(recordset)
 
 		if numrows <> 0:
@@ -645,8 +606,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MDIDialogMixin):
                                 query = '''DELETE FROM setup_transfers WHERE assistancetype='%s' ''' % (mytransfertype)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+                                self.executeUpdateQuery(query)
 
                                 #refresh categories list
                                 self.getTransferTypes()

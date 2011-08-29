@@ -23,14 +23,13 @@ from PyQt4.QtGui import *
 
 #from gui.designs.ui_managefoodtypes import Ui_FoodTypes
 from gui.designs.ui_managefoodtypes_1 import Ui_FoodTypes
-from data.GenericDBOP import GenericDBOP
-from data.database import Database
+
 from frm_managefoodtypes_add import FrmAddFoodCropType
 from frm_managefoodtypes_edit import FrmEditCropType
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmManageTypes(QDialog, Ui_FoodTypes, MDIDialogMixin):		
+class FrmManageTypes(QDialog, Ui_FoodTypes, MySQLMixin, MDIDialogMixin):		
         ''' Creates the Edit Project form. '''	
         def __init__(self, parent):
                 
@@ -42,19 +41,15 @@ class FrmManageTypes(QDialog, Ui_FoodTypes, MDIDialogMixin):
         	# get food type
         	self.getTypes()
 
-		'''self.connect(self.cmdManageFoodClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
+		# self.connect(self.cmdManageFoodClose, SIGNAL("clicked()"), self.parent.closeActiveSubWindow)
 		
-		self.connect(self.cmdDelete, SIGNAL("clicked()"), self.deleteFoodType)
-		'''
+		# self.connect(self.cmdDelete, SIGNAL("clicked()"), self.deleteFoodType)
+		
 
 	def getTypes(self):
                	# select query to retrieve Food Types and related information
         	query = '''SELECT name,category,unitofmeasure,energyvalueperunit FROM setup_foods_crops'''
-
-        	database = Database()
-        	database.open()
-                recordset = database.execSelectQuery(query)
-                database.close()
+                recordset = self.executeResultsQuery(query)
 
 		model = QStandardItemModel(1,2)
 		# set model headers
@@ -140,18 +135,12 @@ class FrmManageTypes(QDialog, Ui_FoodTypes, MDIDialogMixin):
 			selectedIds = []
 			for row in selectedRows:
 				selectedIds.append( self.tableView.model().item(row,0).text() )
-			 
-			# delete record with selected type
-			database = Database()
-			database.open()
-			
+
+			queries = []
 			for name in selectedIds:
-				query = '''DELETE FROM setup_foods_crops WHERE name='%s' ''' % (name)	
-				database.execUpdateQuery(query)
+				queries.append('''DELETE FROM setup_foods_crops WHERE name='%s' ''' % (name))
+			self.executeMultipleUpdateQueries(queries)
     
-			# close database connection
-			database.close()
-			
 			self.getTypes()
 
 		else:

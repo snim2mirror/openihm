@@ -24,7 +24,6 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 from gui.designs.ui_household_data import Ui_HouseholdData
 from frmhousehold_addmember import FrmAddHouseholdMember
@@ -40,9 +39,9 @@ from frmhousehold_addincome_gifts import FrmHouseholdGiftsIncome
 from frmhousehold_addincome_transfers import FrmHouseholdTransferIncome
 from frmhousehold_addincome_employment import FrmHouseholdEmploymentIncome
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):	
+class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, MDIDialogMixin):	
 	''' Creates the household data (income, assets, expenditure, etc) form '''	
 	def __init__(self, parent, hhid=0):
 		''' Set up the dialog box interface '''
@@ -104,18 +103,11 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		query = '''SELECT hhid, householdname 
 		             FROM households WHERE pid=%i''' % (self.parent.projectid)
 		
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
-		
-		for row in cursor.fetchall():
+		rows = self.executeResultsQuery(query)
+		for row in rows:
 		    hhid = row[0]
 		    householdname = row[1]
 		    self.cboHouseholdNumber.addItem(householdname, QVariant(hhid))
-		 
-		cursor.close()   
-		db.close()
 		
 	#-----------------------------------------------------------------------------------
 	#	Household Members
@@ -178,18 +170,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			hhid = temp[0]
 			# delete selected members
 			
-			db = connector.Connect(**self.config)
-			cursor =  db.cursor()
-			
+			queries = []
 			for memberid in selectedIds:
-				query = '''DELETE FROM householdmembers WHERE pid=%i and hhid=%s AND personid='%s' ''' % (self.parent.projectid, hhid, memberid)	
-				cursor.execute(query)
-				db.commit()
-    
-			# close database connection
-			cursor.close()
-			db.close()
-			
+				queries.append('''DELETE FROM householdmembers WHERE pid=%i and hhid=%s AND personid='%s' ''' % (self.parent.projectid, hhid, memberid))
+			self.executeMultipleUpdateQueries(queries)
 			self.retrieveHouseholdMembers()
 
 		else:
@@ -200,16 +184,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 		hhid = temp[0] 
 		pid = self.parent.projectid
-		# select query to retrieve household members
-		query = '''SELECT personid, headofhousehold, yearofbirth, sex, periodaway 
-		             FROM householdmembers WHERE hhid=%i and pid=%i ORDER BY yearofbirth ''' % (hhid,  pid)
-		
-		# retrieve and display members
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
-		
 		model = QStandardItemModel(1,2)
 		
 		# set model headers
@@ -221,8 +195,12 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		
 		# add  data rows
 		num = 0
+		# select query to retrieve household members
+		query = '''SELECT personid, headofhousehold, yearofbirth, sex, periodaway 
+		             FROM householdmembers WHERE hhid=%i and pid=%i ORDER BY yearofbirth ''' % (hhid,  pid)
 		
-		for row in cursor.fetchall():
+		rows = self.executeResultsQuery(query)
+		for row in rows:
 			qtMemberID = QStandardItem(row[0])
 			qtMemberID.setTextAlignment( Qt.AlignCenter )
 			qtHouseholdHead = QStandardItem( row[1] )
@@ -240,8 +218,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			model.setItem( num, 4, qtMonthsAbsent )            
 			num = num + 1
 		
-		cursor.close()   
-		db.close()
 		self.tblMembers.setModel(model)
 		self.tblMembers.resizeColumnsToContents()
 		# display personal characteristics
@@ -274,13 +250,8 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 	def getPersonalCharacteristicDataType(self, charName):
 		tbl = "globalpersonalcharacteristics"
 		query = '''SELECT datatype FROM %s WHERE characteristic='%s' ''' % (tbl, charName)
-		
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
-		
-		for row in cursor.fetchall():
+		rows = self.executeResultsQuery(query)
+		for row in rows:
 			return row[0]
 	
 	def retrievePersonalCharacteristics( self,  personid ):
@@ -289,14 +260,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		tbl = self.psCharacteristicsTable
 		# select query to retrieve project household characteristics
 		query = '''SHOW COLUMNS FROM %s''' % (tbl)
-		
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
+		rows = self.executeResultsQuery(query)
 		
 		fields = []
-		for row in cursor.fetchall():
+		for row in rows:
 			if ( (row[0] != "hhid")  and (row[0]!= "pid" )  and (row[0]!= "personid" ) ):
 				fields.append( row[0] )
 		
@@ -311,9 +278,9 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		
 		for field in fields:
 			query = '''SELECT `%s` FROM %s WHERE hhid=%i AND personid='%s' ''' % ( field, tbl, hhid,  personid )	
-			cursor.execute(query)
+			rows = seld.executeResultsQuery(query)
 			val = "Not Set"
-			for row in cursor.fetchall():
+			for row in rows:
 				if ( row[0] != None ):
 					val = row[0]
 					
@@ -327,9 +294,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			model.setItem( num, 1, qtVal )
 				
 			num = num + 1
-		
-		cursor.close()   
-		db.close()
 		
 		self.tblPersonalCharacteristics.setModel(model)
 		self.tblPersonalCharacteristics.resizeColumnsToContents()
@@ -373,13 +337,8 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 	def getCharacteristicDataType(self, charName):
 		tbl = "globalhouseholdcharacteristics"
 		query = '''SELECT datatype FROM %s WHERE characteristic='%s' ''' % (tbl, charName)
-		
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
-		
-		for row in cursor.fetchall():
+		rows = self.executeResultsQuery(query)		
+		for row in rows:
 			return row[0]
 	
 	def retrieveHouseholdCharacteristics( self ):
@@ -388,14 +347,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		tbl = self.hhCharacteristicsTable
 		# select query to retrieve project household characteristics
 		query = '''SHOW COLUMNS FROM %s''' % (tbl)
-		
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
+		rows = self.executeResultsQuery(query)
 		
 		fields = []
-		for row in cursor.fetchall():
+		for row in rows:
 			if ( (row[0] != "hhid")  and (row[0]!= "pid" ) ):
 				fields.append( row[0] )
 		
@@ -410,9 +365,9 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		
 		for field in fields:
 			query = '''SELECT `%s` FROM %s WHERE hhid=%i ''' % ( field, tbl, hhid )	
-			cursor.execute(query)
+			rows = self.executeResultsQuery(query)
 			val = "Not Set"
-			for row in cursor.fetchall():
+			for row in rows:
 				if ( row[0] != None ):
 					val = row[0]
 					
@@ -426,9 +381,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			model.setItem( num, 1, qtVal )
 				
 			num = num + 1
-		
-		cursor.close()   
-		db.close()
 		
 		self.tblCharacteristics.setModel(model)
 		self.tblCharacteristics.resizeColumnsToContents()
@@ -508,18 +460,11 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			hhid = temp[0]
 			pid = self.parent.projectid
 			# delete selected assets
-			
-			db = connector.Connect(**self.config)
-			cursor =  db.cursor()
-			
+
+			queries = []
 			for assetid in selectedIds:
-				query = '''DELETE FROM assets WHERE hhid=%s AND pid=%s AND assetid='%s' ''' % (hhid, pid,  assetid)	
-				cursor.execute(query)
-				db.commit()
-    
-			# close database connection
-			cursor.close()
-			db.close()
+				queries.append('''DELETE FROM assets WHERE hhid=%s AND pid=%s AND assetid='%s' ''' % (hhid, pid,  assetid))
+			self.executeUpdateQueries(queries)
 			
 			self.retrieveHouseholdAssets()
 
@@ -527,57 +472,46 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			QMessageBox.information(self,"Delete Assets","Please select the rows containing assets to be deleted.")
 		
 	def retrieveHouseholdAssets(self):
-         ''' retrieves and shows a list of household asset '''
-         temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
-         hhid = temp[0]
-         pid = self.parent.projectid
-         # select query to retrieve household assets
-         query = '''SELECT assetid, assetcategory, assettype, unitofmeasure, unitcost, totalunits 
+		''' retrieves and shows a list of household asset '''
+		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		hhid = temp[0]
+		pid = self.parent.projectid
+                # select query to retrieve household assets
+		query = '''SELECT assetid, assetcategory, assettype, unitofmeasure, unitcost, totalunits 
              FROM assets WHERE hhid=%i AND pid=%s''' % (hhid, pid)
          
-         # retrieve and display assets
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
+		rows = self.executeResultsQuery(query)
+                # set model headers
+		model.setHorizontalHeaderItem(0,QStandardItem('Asset ID.'))
+		model.setHorizontalHeaderItem(1,QStandardItem('Category'))
+		model.setHorizontalHeaderItem(2,QStandardItem('Asset Type'))
+		model.setHorizontalHeaderItem(3,QStandardItem('Unit'))
+		model.setHorizontalHeaderItem(4,QStandardItem('Cost Per Unit'))
+		model.setHorizontalHeaderItem(5,QStandardItem('Number of Units'))
          
-         cursor.execute(query)
-         
-         model = QStandardItemModel(1,2)
-         
-         # set model headers
-         model.setHorizontalHeaderItem(0,QStandardItem('Asset ID.'))
-         model.setHorizontalHeaderItem(1,QStandardItem('Category'))
-         model.setHorizontalHeaderItem(2,QStandardItem('Asset Type'))
-         model.setHorizontalHeaderItem(3,QStandardItem('Unit'))
-         model.setHorizontalHeaderItem(4,QStandardItem('Cost Per Unit'))
-         model.setHorizontalHeaderItem(5,QStandardItem('Number of Units'))
-         
-         # add  data rows
-         num = 0
+                # add  data rows
+		num = 0
 
-         for row in cursor.fetchall():
-             qtAssetID = QStandardItem( "%i" % row[0])
-             qtAssetID.setTextAlignment( Qt.AlignCenter )
-             qtAssetCategory = QStandardItem( row[1] )
-             qtAssetType = QStandardItem( row[2] )	
-             qtUnitOfMeasure = QStandardItem( row[3] )
-             qtCostPerUnit = QStandardItem( "%.2f" % row[4] )
-             qtNumUnits = QStandardItem( "%.2f" % row[5] )
-
-             model.setItem( num, 0, qtAssetID )
-             model.setItem( num, 1, qtAssetCategory )
-             model.setItem( num, 2, qtAssetType )
-             model.setItem( num, 3, qtUnitOfMeasure )
-             model.setItem( num, 4, qtCostPerUnit )
-             model.setItem( num, 5, qtNumUnits )
-             num = num + 1
-
-         cursor.close()   
-         db.close()
-
-         self.tblAssets.setModel(model)
-         self.tblAssets.resizeColumnsToContents()
-         self.tblAssets.hideColumn(0)
-         self.tblAssets.show()
+		for row in rows:
+			qtAssetID = QStandardItem( "%i" % row[0])
+			qtAssetID.setTextAlignment( Qt.AlignCenter )
+			qtAssetCategory = QStandardItem( row[1] )
+			qtAssetType = QStandardItem( row[2] )	
+			qtUnitOfMeasure = QStandardItem( row[3] )
+			qtCostPerUnit = QStandardItem( "%.2f" % row[4] )
+			qtNumUnits = QStandardItem( "%.2f" % row[5] )
+    
+			model.setItem( num, 0, qtAssetID )
+			model.setItem( num, 1, qtAssetCategory )
+			model.setItem( num, 2, qtAssetType )
+			model.setItem( num, 3, qtUnitOfMeasure )
+			model.setItem( num, 4, qtCostPerUnit )
+			model.setItem( num, 5, qtNumUnits )
+			num = num + 1
+    	     self.tblAssets.setModel(model)
+	     self.tblAssets.resizeColumnsToContents()
+	     self.tblAssets.hideColumn(0)
+	     self.tblAssets.show()
 
 	#-------------------------------------------------------------------------------------------------------
 	# Income: Crops
@@ -636,18 +570,11 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			hhid = temp[0]
 			pid = self.parent.projectid
 			# delete selected crops
-			
-			db = connector.Connect(**self.config)
-			cursor =  db.cursor()
-			
+
+			queries = []
 			for incomeid in selectedIds:
-				query = '''DELETE FROM cropincome WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid)	
-				cursor.execute(query)
-				db.commit()
-    
-			# close database connection
-			cursor.close()
-			db.close()
+				queries.append('''DELETE FROM cropincome WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid))
+			self.executeMultipleUpdateQueries(queries)
 			
 			self.retrieveHouseholdCropIncome()
 
@@ -660,15 +587,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
          temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
          hhid = temp[0]
          pid = self.parent.projectid 
-         # select query to retrieve household crop income
-         query = '''SELECT id, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed 
-                 FROM cropincome WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
-
-         # run query
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-
-         cursor.execute(query)
 
          model = QStandardItemModel(1,2)
          
@@ -682,10 +600,15 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
          model.setHorizontalHeaderItem(6,QStandardItem('Other Uses'))
          model.setHorizontalHeaderItem(7,QStandardItem('Units Consumed'))
          
+         # select query to retrieve household crop income
+         query = '''SELECT id, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed 
+                 FROM cropincome WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
+
+	 rows = self.excuteResultsQuery(query)
          # add  data rows
          num = 0
          
-         for row in cursor.fetchall():
+         for row in rows:
              qtIncomeID = QStandardItem( "%i" % row[0])
              qtIncomeID.setTextAlignment( Qt.AlignCenter )
              qtIncomeType = QStandardItem( row[1] )	
@@ -705,9 +628,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
              model.setItem( num, 6, qtOtherUses )
              model.setItem( num, 7, qtUnitConsumed )
              num = num + 1
-
-         cursor.close()   
-         db.close()
 
          self.tblCropIncome.setModel(model)
          self.tblCropIncome.resizeColumnsToContents()
@@ -772,18 +692,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			pid = self.parent.projectid
 			# delete selected livestock items
 			
-			db = connector.Connect(**self.config)
-			cursor =  db.cursor()
-			
+			queries = []
 			for incomeid in selectedIds:
-				query = '''DELETE FROM livestockincome WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid)	
-				cursor.execute(query)
-				db.commit()
-    
-			# close database connection
-			cursor.close()
-			db.close()
-			
+				queries.append('''DELETE FROM livestockincome WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid))
+			self.executeMultipleUpdateQueries(queries)
 			self.retrieveHouseholdLivestockIncome()
 
 		else:
@@ -795,15 +707,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
          temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
          hhid = temp[0]
          pid = self.parent.projectid 
-         # select query to retrieve household crop income
-         query = '''SELECT id, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed 
-                 FROM livestockincome WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
-
-         # run query
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-
-         cursor.execute(query)
 
          model = QStandardItemModel(1,2)
          
@@ -817,10 +720,15 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
          model.setHorizontalHeaderItem(6,QStandardItem('Other Uses'))
          model.setHorizontalHeaderItem(7,QStandardItem('Units Consumed'))
          
-         # add  data rows
+
+         # select query to retrieve household crop income
+         query = '''SELECT id, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed 
+                 FROM livestockincome WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
+	 rows = self.executeResultsQuery(query)
+	 # add  data rows
          num = 0
          
-         for row in cursor.fetchall():
+         for row in rows:
              qtIncomeID = QStandardItem( "%i" % row[0])
              qtIncomeID.setTextAlignment( Qt.AlignCenter )
              qtIncomeType = QStandardItem( row[1] )	
@@ -840,9 +748,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
              model.setItem( num, 6, qtOtherUses )
              model.setItem( num, 7, qtUnitConsumed )
              num = num + 1
-
-         cursor.close()   
-         db.close()
 
          self.tblLivestockIncome.setModel(model)
          self.tblLivestockIncome.resizeColumnsToContents()
@@ -908,17 +813,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			pid = self.parent.projectid
 			# delete selected gifts items
 			
-			db = connector.Connect(**self.config)
-			cursor =  db.cursor()
-			
+			queries = []
 			for incomeid in selectedIds:
-				query = '''DELETE FROM transfers WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid)	
-				cursor.execute(query)
-				db.commit()
-    
-			# close database connection
-			cursor.close()
-			db.close()
+				queries.append('''DELETE FROM transfers WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid))
+			self.executeMultipleUpdateQueries(queries)
 			
 			self.retrieveHouseholdGiftsIncome()
 
@@ -935,11 +833,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		query = '''SELECT id, sourceoftransfer, cashperyear, foodtype, unitofmeasure, unitsconsumed , unitssold, priceperunit 
 				   FROM transfers WHERE hhid=%i AND pid=%s AND sourcetype='Internal' ''' % (hhid,  pid)
 		
-		# retrieve and display items
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
+		rows = self.executeResultsQuery(query)
 		
 		model = QStandardItemModel(1,2)
 		
@@ -956,7 +850,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		# add  data rows
 		num = 0
 		
-		for row in cursor.fetchall():
+		for row in rows:
 			qtIncomeID = QStandardItem( "%i" % row[0])
 			qtIncomeID.setTextAlignment( Qt.AlignCenter )
 			qtSource = QStandardItem( row[1] )	
@@ -977,9 +871,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			model.setItem( num, 7, qtUnitPrice )
 			
 			num = num + 1
-		
-		cursor.close()   
-		db.close()
 		
 		self.tblGiftsIncome.setModel(model)
 		self.tblGiftsIncome.hideColumn(0)
@@ -1043,18 +934,12 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			hhid = temp[0]
 			pid = self.parent.projectid
 			# delete selected employment items
-			
-			db = connector.Connect(**self.config)
-			cursor =  db.cursor()
-			
+
+			queries = []
 			for incomeid in selectedIds:
-				query = '''DELETE FROM employmentincome WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid)	
-				cursor.execute(query)
-				db.commit()
-    
-			# close database connection
-			cursor.close()
-			db.close()
+				queries.append('''DELETE FROM employmentincome WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid))
+
+			self.executeMultipleUpdateQueries(queries)
 			
 			self.retrieveHouseholdEmploymentIncome()
 
@@ -1071,11 +956,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		query = '''SELECT *
 				   FROM employmentincome WHERE hhid=%i AND pid=%s ''' % (hhid,  pid)
 		
-		# retrieve and display items
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
+		rows = self.executeResultsQuery(query)
 		
 		model = QStandardItemModel(1,2)
 		
@@ -1088,10 +969,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		model.setHorizontalHeaderItem(5,QStandardItem('Energy Value (KCals)'))
 		model.setHorizontalHeaderItem(6,QStandardItem('Cash Income'))
 		
-		# add  data rows
-		num = 0
-		
-		for row in cursor.fetchall():
+		for row in rows:
 			qtIncomeID = QStandardItem( "%i" % row[0])
 			qtIncomeID.setTextAlignment( Qt.AlignCenter )
 			qtIncomeType = QStandardItem( row[2] )	
@@ -1110,9 +988,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			model.setItem( num, 6, qtCashIncome )
 			
 			num = num + 1
-		
-		cursor.close()   
-		db.close()
 		
 		self.tblEmploymentIncome.setModel(model)
 		self.tblEmploymentIncome.resizeColumnsToContents()
@@ -1175,18 +1050,12 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			hhid = temp[0]
 			pid = self.parent.projectid
 			# delete selected transfer items
-			
-			db = connector.Connect(**self.config)
-			cursor =  db.cursor()
-			
+
+			queries = []
 			for incomeid in selectedIds:
-				query = '''DELETE FROM transfers WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid, incomeid)	
-				cursor.execute(query)
-				db.commit()
-    
-			# close database connection
-			cursor.close()
-			db.close()
+				queries.append('''DELETE FROM transfers WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid, incomeid))
+
+			self.executeMultipleUpdateQueries(queries)
 			
 			self.retrieveHouseholdTransferIncome()
 
@@ -1204,10 +1073,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 				   FROM transfers WHERE hhid=%i AND pid=%s AND sourcetype='External' ''' % (hhid, pid)
 		
 		# retrieve and display items
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
+		rows = self.executeResultsQuery(query)
 		
 		model = QStandardItemModel(1,2)
 		
@@ -1224,7 +1090,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		# add  data rows
 		num = 0
 		
-		for row in cursor.fetchall():
+		for row in rows:
 			qtIncomeID = QStandardItem( "%i" % row[0])
 			qtIncomeID.setTextAlignment( Qt.AlignCenter )
 			qtSource = QStandardItem( row[1] )	
@@ -1245,9 +1111,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			model.setItem( num, 7, qtUnitPrice )
 			
 			num = num + 1
-		
-		cursor.close()   
-		db.close()
 		
 		self.tblTransferIncome.setModel(model)
 		self.tblTransferIncome.hideColumn(0)
@@ -1311,18 +1174,11 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			hhid = temp[0]
 			pid = self.parent.projectid
 			# delete selected wildfoods items
-			
-			db = connector.Connect(**self.config)
-			cursor =  db.cursor()
-			
+
+			queries = []
 			for incomeid in selectedIds:
-				query = '''DELETE FROM wildfoods WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid)	
-				cursor.execute(query)
-				db.commit()
-    
-			# close database connection
-			cursor.close()
-			db.close()
+				queries.append('''DELETE FROM wildfoods WHERE hhid=%s AND pid=%s AND id=%s ''' % (hhid, pid,  incomeid))
+			self.executeMultipleUpdateQueries(queries)
 			
 			self.retrieveHouseholdWildfoodsIncome()
 
@@ -1340,10 +1196,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
                  FROM wildfoods WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
 
          # run query
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-
-         cursor.execute(query)
+	 rows = self.executeResultsQuery(query)
 
          model = QStandardItemModel(1,2)
          
@@ -1360,7 +1213,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
          # add  data rows
          num = 0
          
-         for row in cursor.fetchall():
+         for row in rows:
              qtIncomeID = QStandardItem( "%i" % row[0])
              qtIncomeID.setTextAlignment( Qt.AlignCenter )
              qtIncomeType = QStandardItem( row[1] )	
@@ -1380,9 +1233,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
              model.setItem( num, 6, qtOtherUses )
              model.setItem( num, 7, qtUnitConsumed )
              num = num + 1
-
-         cursor.close()   
-         db.close()
 
          self.tblWildfoodsIncome.setModel(model)
          self.tblWildfoodsIncome.resizeColumnsToContents()
@@ -1447,17 +1297,11 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			pid = self.parent.projectid
 			# delete selected expenses
 			
-			db = connector.Connect(**self.config)
-			cursor =  db.cursor()
-			
+			queries = []
 			for expid in selectedIds:
-				query = '''DELETE FROM expenditure WHERE hhid=%s AND pid=%s AND expid=%s ''' % (hhid, pid,  expid)	
-				cursor.execute(query)
-				db.commit()
-    
-			# close database connection
-			cursor.close()
-			db.close()
+				queries.append('''DELETE FROM expenditure WHERE hhid=%s AND pid=%s AND expid=%s ''' % (hhid, pid,  expid))
+
+			self.executeMultipleUpdateQueries(queries)
 			
 			self.retrieveHouseholdExpenses()
 
@@ -1473,11 +1317,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		# select query to retrieve household expenses
 		query = '''SELECT * FROM expenditure WHERE hhid=%i AND pid=%s''' % (hhid,  pid)
 		
-		# retrieve and display assets
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
+		rows = self.executeResultsQuery(query)
 		
 		model = QStandardItemModel(1,2)
 		
@@ -1492,7 +1332,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 		# add  data rows
 		num = 0
 		
-		for row in cursor.fetchall():
+		for row in rows:
 			qtAssetID = QStandardItem( "%i" % row[0])
 			qtAssetID.setTextAlignment( Qt.AlignCenter )
 			qtAssetType = QStandardItem( row[2] )	
@@ -1511,9 +1351,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MDIDialogMixin):
 			model.setItem( num, 4, qtKCalPerUnit )
 			model.setItem( num, 5, qtNumUnits )
 			num = num + 1
-		
-		cursor.close()   
-		db.close()
 		
 		self.tblExpenditure.setModel(model)
 		self.tblExpenditure.resizeColumnsToContents()

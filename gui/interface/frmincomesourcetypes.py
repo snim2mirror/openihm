@@ -26,14 +26,14 @@ from gui.designs.ui_incomesourcetypes import Ui_IncomeSourcesTypes
 
 from mixins import MDIDialogMixin
 
-class FrmIncomeSourcesTypes(Ui_IncomeSourcesTypes, MDIDialogMixin):	
-	''' Creates the Manage Income Sources Types from. Uses the design class
-		in gui.designs.ui_incomesourcetypes. '''	
-	def setupUi(self, Form, Mdi):
-		''' Set up the dialog box interface '''
-		Ui_IncomeSourcesTypes.setupUi(self, Form)
-		self.Mdi = Mdi
-		
-		# connect relevant signals and slots
-		QtCore.QObject.connect(self.btnIncomeSourcesClose, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
+class FrmIncomeSourcesTypes(Ui_IncomeSourcesTypes, MDIDialogMixin):    
+    ''' Creates the Manage Income Sources Types from. Uses the design class
+        in gui.designs.ui_incomesourcetypes. '''    
+    def setupUi(self, Form, Mdi):
+        ''' Set up the dialog box interface '''
+        Ui_IncomeSourcesTypes.setupUi(self, Form)
+        self.Mdi = Mdi
+        
+        # connect relevant signals and slots
+        QtCore.QObject.connect(self.btnIncomeSourcesClose, QtCore.SIGNAL("clicked()"), Mdi.closeActiveSubWindow)
 

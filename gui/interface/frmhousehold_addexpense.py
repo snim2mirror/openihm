@@ -23,13 +23,12 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 from gui.designs.ui_household_addexpense import Ui_AddHouseholdExpense
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin):	
+class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin, MySQLMixin):	
     ''' Form to add or edit Household Expenditure  '''	
     def __init__(self, parent,  hhid, hhname, expid = 0 ):
 		''' Set up the dialog box interface '''
@@ -55,29 +54,19 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin):
 		''' Retrieve Expenditure Types and display them in a combobox '''
 		# select query to Asset Types
 		query = '''SELECT expendituretype FROM setup_expendituretypes'''
+		rows = executeResultsQuery(query)
 		
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		
-		cursor.execute(query)
-		
-		for row in cursor.fetchall():
+		for row in rows:
 		    exptype = row[0]
 		    self.cboExpenditure.addItem(exptype)
-		 
-		cursor.close()   
-		db.close()
         
     def displayExpenditureDetails(self):
 		''' Retrieve and display Household Expenditure details '''
 		query = '''SELECT * FROM expenditure WHERE hhid=%s AND pid=%s AND expid=%s ''' % ( self.hhid, self.pid, self.expid )
 		
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
+		rows = executeResultsQuery(query)
 		
-		cursor.execute(query)
-		
-		for row in cursor.fetchall():
+		for row in rows:
 			exptype = row[2]
 			self.cboExpenditure.setCurrentIndex( self.cboExpenditure.findText( exptype ) )
 			unitofmeasure = row[3]
@@ -90,9 +79,6 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin):
 			self.txtKCalPerUnit.setText( str(kcalperunit) )
 			numunits = row[6]
 			self.txtNumberOfUnits.setText( str(numunits) )
-		 
-		cursor.close()   
-		db.close()
         
     def saveExpenditure(self):
 		''' Saves expenditure to database '''    	
@@ -104,8 +90,6 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin):
 		kcalperunit	  = self.txtKCalPerUnit.text()
 		numunits      = self.txtNumberOfUnits.text()
 			
-		db = connector.Connect(**self.config)
-		
 		# create UPDATE query
 		expid 	= self.expid
 		hhid 	= self.hhid
@@ -122,14 +106,7 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin):
                         
 #		QMessageBox.information(self,"Edit Member",query)
 		
-		# execute query and commit changes
-		cursor =  db.cursor()
-		cursor.execute(query)
-		db.commit()
-		
-		# close database connection
-		cursor.close()
-		db.close()
+		self.executeUpdateQuery(query)
 		
 		# close new project window
 		self.parent.retrieveHouseholdExpenses()

@@ -22,13 +22,12 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 from gui.designs.ui_household_editmembercharacteristic import Ui_EditMemberCharacteristic
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmEditPersonalCharacteristic(QDialog, Ui_EditMemberCharacteristic, MDIDialogMixin):	
+class FrmEditPersonalCharacteristic(QDialog, Ui_EditMemberCharacteristic, MySQLMixin, MDIDialogMixin):	
     ''' Creates the Edit Personal Characteristic form. '''	
     def __init__(self, parent, pid, hhid, personid, charName, charVal):
         ''' Set up the dialog box interface '''
@@ -59,9 +58,6 @@ class FrmEditPersonalCharacteristic(QDialog, Ui_EditMemberCharacteristic, MDIDia
     def saveCharacteristic(self):
 		''' Saves characteristic '''
 		
-		db 		= connector.Connect(**self.config)
-		cursor 	=  db.cursor()
-		
 		tbl = self.psCharacteristicsTable
 		if self.cboYesNoVal.isVisible():
 			charVal = self.cboYesNoVal.currentText() 
@@ -76,15 +72,9 @@ class FrmEditPersonalCharacteristic(QDialog, Ui_EditMemberCharacteristic, MDIDia
 		 	queryUpdate	= '''UPDATE %s SET `%s`='%s' WHERE hhid=%s and pid=%s and personid= '%s' ''' % (tbl, self.charName, charVal, self.hhid,  self.pid,  self.personid )
 		
 		try:
-			cursor.execute(queryInsert)
+                    self.executeUpdateQuery(queryInsert)
 		except:
-			cursor.execute(queryUpdate)
-			
-		db.commit()
-		
-		# close database connection
-		cursor.close()
-		db.close()
+                    self.executeUpdateQuery(queryUpdate)
 			
 		# close window and refresh characteristics
 		self.parent.retrievePersonalCharacteristics( self.personid )

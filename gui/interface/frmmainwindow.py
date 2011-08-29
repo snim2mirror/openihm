@@ -502,29 +502,29 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             datasheet.readdata()
             
     def importFromAccessDB(self):
-         ''' Imports projects from the old access based IHM software '''
+        """Imports projects from the old access based IHM software"""
          form = FrmImportFromAccessDB()
          form.exec_()
                 
     def reportHouseholdDisposableIncome(self,reporttype):
-        ''' Creates and Shows the Report: Household Disposable Income form '''
+        """Creates and Shows the Report: Household Disposable Income form"""
         form = HouseholdDisposableIncome(self,reporttype)
         subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
         form.show()
 
     def initialiseFoodRequirementTable(self):
-        '''Create Initial Kcal values for certain crops/foods'''
+        """Create Initial Kcal values for certain crops/foods"""
         initialiser = FoodRequirementValues()
         initialiser.insertSartUpValues()
              
     def setReporttypeAsLivingThreshold(self):
-        '''set report type for Living Threshold report'''
+        """set report type for Living Threshold report"""
         reporttype = 'LivingThreshold'
         self.reportHouseholdDisposableIncome(reporttype)
                 
     def setReporttypeDI(self):
-        '''set report type for Household Disposable Income report'''
+        """set report type for Household Disposable Income report"""
         reporttype = 'DI'
         self.reportHouseholdDisposableIncome(reporttype)
 

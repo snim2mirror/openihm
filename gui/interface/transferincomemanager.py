@@ -21,7 +21,6 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector # FIXME: Do we need this?
 from data.controller import Controller
 
 from mixins import TableViewMixin

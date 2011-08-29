@@ -117,7 +117,7 @@ class Controller:
         return chars
         
     def getCurrencies(self):
-         settingsmgr = SettingsManager()
-         currencies = settingsmgr.getCurrencies()
-         return currencies
+        settingsmgr = SettingsManager()
+        currencies = settingsmgr.getCurrencies()
+        return currencies
 

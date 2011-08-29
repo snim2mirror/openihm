@@ -23,13 +23,12 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 from gui.designs.ui_household_editcharacteristic import Ui_EditHouseholdCharacteristic
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmEditHouseholdCharacteristic(QDialog, Ui_EditHouseholdCharacteristic, MDIDialogMixin):	
+class FrmEditHouseholdCharacteristic(QDialog, Ui_EditHouseholdCharacteristic, MySQLMixin, MDIDialogMixin):	
     ''' Creates the Edit Household Characteristic form. '''	
     def __init__(self, parent, pid, hhid, charName, charVal):
         ''' Set up the dialog box interface '''
@@ -59,9 +58,6 @@ class FrmEditHouseholdCharacteristic(QDialog, Ui_EditHouseholdCharacteristic, MD
     def saveCharacteristic(self):
 		''' Saves characteristic '''
 		
-		db 		= connector.Connect(**self.config)
-		cursor 	=  db.cursor()
-		
 		tbl = self.hhCharacteristicsTable
 		if self.cboYesNoVal.isVisible():
 			charVal = self.cboYesNoVal.currentText() 
@@ -76,15 +72,9 @@ class FrmEditHouseholdCharacteristic(QDialog, Ui_EditHouseholdCharacteristic, MD
 		 	queryUpdate	= '''UPDATE %s SET `%s`='%s' WHERE hhid=%s and pid=%s''' % (tbl, self.charName, charVal, self.hhid,  self.pid )
 		 	
 		try:
-			cursor.execute(queryInsert)
+			self.executeUpdateQuery(queryInsert)
 		except:
-			cursor.execute(queryUpdate)
-			
-		db.commit()
-		
-		# close database connection
-		cursor.close()
-		db.close()
+			self.executeUpdateQuery(queryUpdate)
 			
 		# close window and refresh characteristics
 		self.parent.retrieveHouseholdCharacteristics()

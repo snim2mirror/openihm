@@ -23,12 +23,11 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.foodenergyrequirement import FoodEnergyRequirement
-from data.database import Database
 from gui.designs.ui_managefoodtypes_add import Ui_AddFoodTypes
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes, MDIDialogMixin):	
+class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes, MySQLMixin, MDIDialogMixin):
     ''' Creates the add food/crop energy requirement form '''	
 
     def __init__(self, parent, mdi):
@@ -57,16 +56,14 @@ class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes, MDIDialogMixin):
 	query = '''SELECT name, energyvalueperunit, unitofmeasure
 			FROM setup_foods_crops WHERE name='%s' ''' % (myfoodtype)    
 		
-	database = Database()
-	database.open()
-        recordset = database.execSelectQuery(query)
+        recordset = self.executeResultsQuery(query)
 
 	numrows = 0		
 	if myfoodtype!= '' and mycategory!='':
                 if len(recordset) == 0:
                     query = '''INSERT INTO setup_foods_crops(name, category,energyvalueperunit, unitofmeasure) 
                      	    VALUES('%s','%s',%s,'%s')''' % (myfoodtype,mycategory, myenergyvalue, mymeasuringunit)
-                    database.execUpdateQuery(query)
+                    self.executeUpdateQuery(query)
                     self.txtFoodType.clear()
                     self.cmbCategory.setCurrentIndex(-1)
                     self.cmbUnitOfMeasure.setCurrentIndex(-1)
@@ -76,6 +73,5 @@ class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes, MDIDialogMixin):
                     QMessageBox.information(self,"Add Food/Crop Type","Food/Crop type already exists")
         else:
             QMessageBox.information(self,"Add Food/Crop Type","Name or Category should not be blank")
-		
-        database.close()
+
         

@@ -23,16 +23,15 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 from gui.designs.ui_foodenergy_requirements import Ui_FoodEnergyRequirements
 from frmfoodenergyrequirement_add import FrmAddEnergyRequirement
 from frmfoodenergyrequirement_edit import FrmEditEnergyRequirement
 from data.foodenergyrequirement import FoodEnergyRequirement
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements, MDIDialogMixin):	
+class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements, MySQLMixin, MDIDialogMixin):	
 	''' Creates the view food energy requirements form '''	
 	def __init__(self, parent):
 	    ''' Set up the dialog box interface '''
@@ -46,15 +45,8 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements, MDIDialogMix
 	    self.getFoodEnergyRequirements()
 
 	def getFoodEnergyRequirements(self):
-		# connect to mysql database
-		db = connector.Connect(**self.config)
-		cursor = db.cursor()
-		
-		# select query to retrieve project households
                 query = '''SELECT age, kCalNeedM, kCalNeedF FROM lookup_energy_needs'''
-                
-		cursor.execute(query)
-		
+		recordset = self.executeResultsQuery(query)
 		model = QStandardItemModel(1,2)
 				
 		# set model headers
@@ -65,7 +57,7 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements, MDIDialogMix
 		# add  data rows
 		num = 0
 	    
-		for row in cursor.fetchall():
+		for row in recordset:
 		    qtAge = QStandardItem( "%i" % row[0])
 		    qtAge.setTextAlignment( Qt.AlignCenter )
 		    
@@ -87,10 +79,6 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements, MDIDialogMix
 		self.tableView.horizontalHeader().setResizeMode(2, QHeaderView.ResizeToContents)
 		self.tableView.show()
 		
-		cursor.close()
-		db.close()
-		
-
 
 	def addFoodEnergyRequirement(self):
 		''' Show the Add Food Energy Requirement form '''
@@ -139,19 +127,11 @@ class FrmFoodEnergyRequirements(QDialog, Ui_FoodEnergyRequirements, MDIDialogMix
 				selectedIds.append( self.tableView.model().item(row,0).text() )
 			 
 			# delete record with selected age
-			
-			db = connector.Connect(**self.config)
-			cursor =  db.cursor()
-			
+
+			queries = []
 			for myage in selectedIds:
-				query = '''DELETE FROM lookup_energy_needs WHERE age=%s ''' % (myage)	
-				cursor.execute(query)
-				db.commit()
-    
-			# close database connection
-			cursor.close()
-			db.close()
-			
+				queries.append('''DELETE FROM lookup_energy_needs WHERE age=%s ''' % (myage))
+			self.executeMultipleUpdateQueries(queries)
 			self.getFoodEnergyRequirements()
 
 		else:

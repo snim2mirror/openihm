@@ -25,12 +25,9 @@ from PyQt4.QtGui import *
 # import the Manage Asset Types Dialog design class
 from gui.designs.ui_expendituretypes import Ui_ExpenditureTypes
 
-#import GenericDBOP which has methods for managing database operations
-from data.GenericDBOP import GenericDBOP
+from mixins import MDIDialogMixin, MySQLMixin
 
-from mixins import MDIDialogMixin
-
-class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):	
+class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin, MySQLMixin):	
 	''' Creates the Manage Expenditure Types from. Uses the design class
 		in gui.designs.ui_expendituretypes. '''	
 	def __init__(self, parent):
@@ -43,14 +40,15 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):
 #        	self.getExpenditureCategories()
         	self.getExpenditureTypes()
 
+	### FIXME: Can we just delete this?
+		
 	#Begin block of methods for managing Expenditure Categories 	
  	# def getExpenditureCategories(self):
         #         '''Get pre-existing assets categories from database and populate categories list'''
         #        	# select query to retrieve Asset Categories
         # 	query = '''SELECT expenditurecategory FROM setup_expenditurecategories'''
         	
-        #         p = GenericDBOP(query)
-        #         recordset = p.runSelectQuery()
+        #         recordset = self.executeResultsQuery()
 				
 	# 	model = QStandardItemModel()
 	# 	num = 0
@@ -78,8 +76,7 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):
 	# 	# check if record exists
 	# 	query = '''SELECT expenditurecategory FROM setup_expenditurecategories WHERE expenditurecategory='%s' ''' % (categorytype)    
 		
-	# 	p = GenericDBOP(query)
-        #         recordset = p.runSelectQuery()
+        #         recordset = self.executeResultsQuery()
 
 	# 	numrows = 0		
 	# 	for row in recordset:
@@ -93,8 +90,7 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):
 	# 		query = '''UPDATE setup_expenditurecategories SET expenditurecategory='%s'	WHERE expenditurecategory='%s' ''' % (categorytype, categorytype)
     
         # 	# execute query and commit changes
-        # 	temp = GenericDBOP(query)
-        #         recordset = temp.runUpdateQuery()
+        #       self.executeUpdateQuery(query)
 	# 	#refresh categories list
 	# 	self.getExpenditureCategories()                
                 
@@ -107,8 +103,7 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):
 	# 	# check if record exists
 	# 	query = '''SELECT expenditurecategory FROM setup_expenditurecategories WHERE expenditurecategory='%s' ''' % (categorytype)    
 		
-	# 	p = GenericDBOP(query)
-        #         recordset = p.runSelectQuery()
+        #       recordset = self.executeResultsQuery(query)
 	# 	numrows = 0		
 	# 	for row in recordset:
 	# 		numrows = numrows + 1
@@ -121,8 +116,7 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):
         #                         query = '''DELETE FROM setup_expenditurecategories WHERE expenditurecategory='%s' ''' % (categorytype)
 
         #                         # execute query and commit changes
-        #                         temp = GenericDBOP(query)
-        #                         recordset = temp.runUpdateQuery()
+        #                         self.executeUpdateQuery(query)
 
         #                         self.txtCategory.clear()
         #                         #refresh categories list
@@ -138,8 +132,7 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):
                	# select query to retrieve Asset Categories
         	query = '''SELECT expendituretype FROM setup_expendituretypes'''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 				
 		model = QStandardItemModel()
 		num = 0
@@ -167,8 +160,7 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT expendituretype FROM setup_expendituretypes WHERE expendituretype='%s' ''' % (myexpendituretype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 
 		numrows = 0		
 		for row in recordset:
@@ -182,8 +174,7 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):
 			query = '''UPDATE setup_expendituretypes SET expendituretype='%s'	WHERE expendituretype='%s' ''' % (myexpendituretype, myexpendituretype)
     
         	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+                self.executeUpdateQuery(query)
 		#refresh categories list
 		self.getExpenditureTypes()                
                 
@@ -194,10 +185,9 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):
         	myexpendituretype = self.txtExpenseType.text()		
         	
 		# check if record exists
-		query = '''SELECT expendituretype FROM setup_expendituretypes WHERE expendituretype='%s' ''' % (myexpendituretype)    
-		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+		query = '''SELECT expendituretype FROM setup_expendituretypes WHERE expendituretype='%s' ''' % (myexpendituretype)
+
+                recordset = self.executeResultsQuery(query)
 		numrows = 0		
 		for row in recordset:
 			numrows = numrows + 1
@@ -210,8 +200,7 @@ class FrmExpenditureTypes(QDialog, Ui_ExpenditureTypes, MDIDialogMixin):
                                 query = '''DELETE FROM setup_expendituretypes WHERE expendituretype='%s' ''' % (myexpendituretype)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+                                recordset = self.executeUpdateQuery(query)
 
                                 self.txtExpenseType.clear()
                                 #refresh categories list

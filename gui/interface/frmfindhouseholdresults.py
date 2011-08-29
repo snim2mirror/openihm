@@ -23,7 +23,6 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 # import the Create Project Dialog design class
 from gui.designs.ui_findhouseholdresults import Ui_FindHouseholdResults
@@ -70,10 +69,7 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, MDIDialogMixin):
 			query = ''' SELECT hhid, householdname, dateofcollection 
 					FROM households WHERE pid=%i ''' % ( self.parent.projectid )
 		
-		db = connector.Connect(**self.config)             
-		cursor = db.cursor()
-		cursor.execute(query)
-		rows = cursor.fetchall()
+		rows = self.executeResultsQuery(query)
 		count = len( rows )
 		
 		self.setWindowTitle("%i matching household(s) found." % (count) )
@@ -106,9 +102,6 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, MDIDialogMixin):
 		self.tblResults.setModel(model)
 		self.tblResults.resizeColumnsToContents()
 		self.tblResults.show()
-		
-		cursor.close()
-		db.close()
 		
 	def addHousehold(self):
 		''' Show the Add Household form '''
@@ -160,18 +153,10 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, MDIDialogMixin):
 			 
 			# delete selected households
 			
-			db = data.mysql.connector.Connect(**self.config)
-			cursor =  db.cursor()
-			
 			for hhid in selectedIds:
 				query = '''DELETE FROM households WHERE hhid=%s ''' % (hhid)	
-				cursor.execute(query)
-				db.commit()
-    
-			# close database connection
-			cursor.close()
-			db.close()
-			
+				self.executeUpdateQuery(query)
+    			
 			self.getHouseholds()
 
 		else:

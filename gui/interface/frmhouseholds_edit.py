@@ -51,24 +51,16 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
 
     def getHouseholdData(self):
         ''' Retrieve and display household data '''
-        # connect to mysql database
-        db = connector.Connect(**self.config)
-        cursor = db.cursor()
-        
         # select query to retrieve project data
         query = '''SELECT hhid, householdname, dateofcollection 
                      FROM households WHERE hhid=%s''' % (self.hhid)
         
-        cursor.execute(query)
+        rows = self.executeResultsQuery(query)
         
-        for row in cursor.fetchall():
+        for row in rows:
             hhid = row[0]
             householdname = row[1]
             dateofcollection = row[2]
-            
-        # close database connection
-        cursor.close()
-        db.close()
         
         self.txtShortHouseHoldName.setText(str(hhid))
         self.dtpDateVisted.setDate(dateofcollection)
@@ -76,10 +68,6 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
         
     def saveHousehold(self):
         ''' Saves changes to household to database '''
-        
-        # connect to mysql database
-        db = connector.Connect(**self.config)
-        cursor = db.cursor()
         
         # get the data entered by user
         hhid              = self.txtShortHouseHoldName.text()
@@ -91,14 +79,7 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
         query = '''UPDATE households SET hhid=%s, dateofcollection='%s', householdname='%s'
                      WHERE hhid=%s AND pid=%s''' % (hhid, dateofcollection, householdname,  self.hhid,  pid)
     
-        # execute query and commit changes
-        cursor.execute(query)
-        db.commit()
-        
-        # close database connection
-        cursor.close()
-        db.close()
-        
+        self.executeUpdateQuery(query)
         # close new project window
         self.parent.getHouseholds()
         self.mdiClose()

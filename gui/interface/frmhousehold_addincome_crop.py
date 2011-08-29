@@ -22,13 +22,12 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 from gui.designs.ui_household_income_crops import Ui_AddHouseholdIncomeCrops
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops, MDIDialogMixin):	
+class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops, MySQLMixin, MDIDialogMixin):	
      ''' Form to add or edit a Household Crop Income  '''	
      def __init__(self, parent,  hhid, hhname, incomeid = 0 ):
          ''' Set up the dialog box interface '''
@@ -63,34 +62,24 @@ class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops, MDIDialogMixin
          ''' Retrieve Crop Types and display them in a combobox '''
          # select query to Crop Types
          query = '''SELECT name, unitofmeasure FROM setup_foods_crops WHERE category='crops' '''
+         rows = self.executeResultsQuery(query)
 
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-
-         cursor.execute(query)
-
-         for row in cursor.fetchall():
+         for row in rows:
              croptype = row[0]
              measuringunit = row[1]
              self.cboIncomeType.addItem(croptype, QVariant(measuringunit))
 
          unitofmeasure = self.cboIncomeType.itemData( self.cboIncomeType.currentIndex() ).toString()
          self.txtUnitOfMeasure.setText( unitofmeasure )
-
-         cursor.close()   
-         db.close()
         
      def displayIncomeDetails(self):
          ''' Retrieve and display Household Income details '''
          query = '''SELECT incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed  
              FROM cropincome WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
          
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
+         rows = executeResultsQuery(query)
 
-         cursor.execute(query)
-
-         for row in cursor.fetchall():
+         for row in rows:
              croptype = row[0]
              self.cboIncomeType.setCurrentIndex( self.cboIncomeType.findText( croptype ) )
              unitofmeasure = row[1]
@@ -105,9 +94,6 @@ class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops, MDIDialogMixin
              self.txtUnitsOtherUses.setText( str(otheruses) )
              unitsconsumed = row[6]
              self.txtUnitsConsumed.setText( str(unitsconsumed) )
-
-         cursor.close()   
-         db.close()
         
      def saveIncome(self):
          ''' Saves crop income to database '''    	
@@ -121,8 +107,6 @@ class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops, MDIDialogMixin
          unitprice		= self.txtUnitPrice.text() if self.txtUnitPrice.text() != "" else "0"
          otheruses       = self.txtUnitsOtherUses.text() if self.txtUnitsOtherUses.text() != "" else "0"
 
-         db = connector.Connect(**self.config)
-
          # create UPDATE query
          if (self.incomeid == 0):
              query = '''INSERT INTO cropincome (hhid, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, 
@@ -133,14 +117,7 @@ class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops, MDIDialogMixin
                   unitprice=%s, otheruses=%s, unitsconsumed=%s WHERE hhid=%s AND pid=%s AND  
                   id=%s ''' % ( croptype, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed, self.hhid, self.pid,  self.incomeid)
 
-         # execute query and commit changes
-         cursor =  db.cursor()
-         cursor.execute(query)
-         db.commit()
-
-         # close database connection
-         cursor.close()
-         db.close()
+         self.executeUpdateQuery(query)
 
          # close new project window
          self.parent.retrieveHouseholdCropIncome()

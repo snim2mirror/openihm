@@ -23,7 +23,6 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 from gui.designs.ui_household_addasset import Ui_AddHouseholdAsset
 
@@ -86,21 +85,15 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset, MDIDialogMixin):
              
          query = '''SELECT %s, %s FROM %s''' % (assetfld, unitfld, tblname)
 
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
-
-         cursor.execute(query)
+         rows = self.executeResultsQuery(query)
          self.cboAssetType.clear()
-         for row in cursor.fetchall():
+         for row in rows:
              assettype = row[0]
              unitofmeasure = row[1]
              self.cboAssetType.addItem(assettype,  QVariant(unitofmeasure))
         
          unitofmeasure = self.cboAssetType.itemData( self.cboAssetType.currentIndex() ).toString()
          self.txtUnitOfMeasure.setText( unitofmeasure )
-
-         cursor.close()   
-         db.close()
          
      def displayUnitOfMeasure(self):
          ''' displays the unit of measure of the selected income source '''
@@ -112,12 +105,9 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset, MDIDialogMixin):
          query = '''SELECT assetid, assetcategory, assettype, unitofmeasure, unitcost, totalunits 
                        FROM assets WHERE hhid=%s AND pid=%s AND assetid=%s ''' % ( self.hhid, self.pid,  self.assetid )
          
-         db = connector.Connect(**self.config)             
-         cursor = db.cursor()
+         rows = self.executeResultsQuery(query)
 
-         cursor.execute(query)
-
-         for row in cursor.fetchall():
+         for row in rows:
              assetcategory = row[1]
              self.cboAssetCategory.setCurrentIndex( self.cboAssetCategory.findText( assetcategory ) )
              
@@ -135,9 +125,6 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset, MDIDialogMixin):
              numunits = row[5]
              self.txtNumberOfUnits.setText( str(numunits) )
 
-         cursor.close()   
-         db.close()
-
      def saveAsset(self):
          ''' Saves asset to database '''    	
 
@@ -148,8 +135,6 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset, MDIDialogMixin):
          costperunit     = self.txtCostPerUnit.text()
          numunits        = self.txtNumberOfUnits.text()
 
-         db = connector.Connect(**self.config)
-         
          # create UPDATE query
          if (self.assetid == 0):
              query = '''INSERT INTO assets (hhid, assetcategory, assettype, unitofmeasure, unitcost, totalunits, pid )
@@ -159,14 +144,7 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset, MDIDialogMixin):
                      WHERE hhid=%s AND pid=%s 
                      AND assetid=%s ''' % ( category,  assettype, unitofmeasure, costperunit, numunits, self.hhid, self.pid,  self.assetid)
 
-         # execute query and commit changes
-         cursor =  db.cursor()
-         cursor.execute(query)
-         db.commit()
-
-         # close database connection
-         cursor.close()
-         db.close()
+         self.executeUpdateQuery(query)
 
          # close new project window
          self.parent.retrieveHouseholdAssets()

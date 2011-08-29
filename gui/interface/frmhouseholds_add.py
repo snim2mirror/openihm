@@ -23,14 +23,13 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
 from data.config import Config
-import includes.mysql.connector as connector
 
 # import the Create Project Dialog design class
 from gui.designs.ui_households_add import Ui_Households_Add
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmAddHousehold(QDialog, Ui_Households_Add, MDIDialogMixin):	
+class FrmAddHousehold(QDialog, Ui_Households_Add, MySQLMixin, MDIDialogMixin):	
     ''' Creates the add household form '''	
 
     def __init__(self, parent, projectid, projectname):
@@ -70,14 +69,7 @@ class FrmAddHousehold(QDialog, Ui_Households_Add, MDIDialogMixin):
         query = '''INSERT INTO households(hhid,pid,dateofcollection,householdname) 
                      VALUES(%s,%s, '%s', '%s')''' % (hhid, pid, dateofcollection, householdname)
                      
-    
-        # execute query and commit changes
-        cursor.execute(query)
-        db.commit()
-        
-        # close database connection
-        cursor.close()
-        db.close()
+        self.executeUpdateQuery(query)
         
         # close new project window
         self.parent.getHouseholds()

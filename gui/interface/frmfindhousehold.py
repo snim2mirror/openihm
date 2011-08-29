@@ -30,7 +30,7 @@ from frmfindhouseholdresults import FrmFindHouseholdResults
 
 from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin):
+class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin, MySQLMixin):
 	''' Creates the Find Household form'''	
 	def __init__(self, parent):
 		''' Set up the dialog box interface '''
@@ -59,12 +59,8 @@ class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin):
 		else:
 			query = ''' SELECT hhid FROM households WHERE pid=%i ''' % ( self.parent.projectid )
 		
-		db = data.mysql.connector.Connect(**self.config)             
-		cursor = db.cursor()
-		cursor.execute(query)
-		count = len( cursor.fetchall() )
-		cursor.close()
-		db.close()
+		recordset = self.executeResultsQuery(query)
+		count = len(recordset)
 		
 		if ( count != 0 ):
 			form = FrmFindHouseholdResults( self.parent, hhid, hhname )

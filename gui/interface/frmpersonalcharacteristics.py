@@ -21,14 +21,12 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-from data.GenericDBOP import GenericDBOP
-
 # import the Create House Characteristics Dialog design class
 from gui.designs.ui_personalcharacteristics import Ui_PersonalCharacteristics
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics, MDIDialogMixin):
+class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics, MySQLMixin, MDIDialogMixin):
         def __init__(self, parent):
                 ''' Set up the dialog box interface '''
                 self.parent = parent
@@ -43,8 +41,7 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics, MDIDialogM
                	# select query to retrieve Food Types and related information
         	query = '''SELECT characteristic FROM globalpersonalcharacteristics'''
 
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 	      		
 		for row in recordset:
 			characteristic = row[0]
@@ -71,8 +68,7 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics, MDIDialogM
 
         	# select query to retrieve Food Types and related information
         	query = '''SELECT characteristic, datatype, description FROM globalpersonalcharacteristics WHERE characteristic ='%s' ''' % (mycharacteristic)
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
                 formdatatype = 0
                 description = ''
        		
@@ -118,8 +114,7 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics, MDIDialogM
 		query = '''SELECT characteristic, datatype, description
 				FROM globalpersonalcharacteristics WHERE characteristic='%s' ''' % (mycharacteristic)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 
 		numrows = 0		
 		for row in recordset:
@@ -134,8 +129,7 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics, MDIDialogM
                      		WHERE characteristic='%s' ''' % (mycharacteristic, mydatatype, mydescription, mycharacteristic)
     
         	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+                self.executeUpdateQuery(query)
 		#populate Food Types Combobox
 		self.cmbCharacteristic.clear()
 		self.getPersonalCharacteristics()
@@ -152,8 +146,7 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics, MDIDialogM
 		query = '''SELECT characteristic, datatype, description
 				FROM globalpersonalcharacteristics WHERE characteristic='%s' ''' % (mycharacteristic)  
 
-      		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 		numrows = 0		
 		for row in recordset:
 			numrows = numrows + 1
@@ -167,8 +160,7 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics, MDIDialogM
                                 query = '''DELETE FROM globalpersonalcharacteristics WHERE characteristic='%s' ''' % (mycharacteristic)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+				self.executeUpdateQuery(query)
 
                                 self.cmbCharacteristic.clear()
                                 self.cmbDataType.clear()

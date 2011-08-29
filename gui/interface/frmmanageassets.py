@@ -24,12 +24,10 @@ from PyQt4.QtGui import *
 # import the Manage Asset Types Dialog design class
 from gui.designs.ui_manageassets import Ui_ManageAssetDetails
 
-#import GenericDBOP which has methods for managing database operations
-from data.GenericDBOP import GenericDBOP
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):	
+class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialogMixin):	
 	''' Creates the Manage Asset Details from. Uses the design class
 		in gui.designs.ui_manageassets. '''	
 	
@@ -59,8 +57,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                	# select query to retrieve Savings Categories
         	query = '''SELECT savingscategory FROM savingscategories'''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 				
 		model = QStandardItemModel()
 		num = 0
@@ -88,8 +85,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT savingscategory FROM savingscategories WHERE savingscategory='%s' ''' % (categorytype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 
 		numrows = 0		
 		for row in recordset:
@@ -103,8 +99,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
 			query = '''UPDATE savingscategories SET savingscategory='%s'	WHERE assettype='%s' ''' % (categorytype, categorytype)
     
         	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+                self.executeUpdateQuery(query)
                 self.getSavingsCategories()
                                 
 	def deleteSavingsType(self):
@@ -116,8 +111,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT savingscategory FROM savingscategories WHERE savingscategory='%s' ''' % (categorytype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 		numrows = 0		
 		for row in recordset:
 			numrows = numrows + 1
@@ -131,8 +125,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                                 query = '''DELETE FROM savingscategories WHERE savingscategory='%s' ''' % (categorytype)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+				self.executeUpdateQuery(query)
 
                                 self.txtSavingCategories.clear()		
                                 #refresh categories list
@@ -149,8 +142,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                	# select query to retrieve Food types
         	query = '''SELECT foodtype FROM setup_crops'''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 				
 		model = QStandardItemModel()
 		num = 0
@@ -172,8 +164,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                 #select query to retrieve food-energy value and measuring unit for selected food item 
         	query = '''SELECT energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (selectedFoodItem)
 
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 	      		
 		for row in recordset:
                         kcalValue = row[0]
@@ -193,8 +184,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 
 		numrows = 0		
 		for row in recordset:
@@ -209,8 +199,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                      		WHERE foodtype='%s' ''' % (myfoodtype, myenergyvalue, unitofmeasure, myfoodtype)
     
         	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+                self.executeUpdateQuery(query)
                 self.getFoodTypes()
 		#refresh categories list
 		#self.getCategories()
@@ -224,8 +213,8 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
+
 		numrows = 0		
 		for row in recordset:
 			numrows = numrows + 1
@@ -238,8 +227,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                                 query = '''DELETE FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+				self.executeUpdateQuery(query)
 
                                 self.txtFoodStockType.clear()
                                 self.txtEnergyValue.clear()
@@ -258,9 +246,8 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                	# select query to retrieve Food types
         	query = '''SELECT landtype FROM setup_landtypes'''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-				
+                recordset = self.executeResultsQuery(query)
+
 		model = QStandardItemModel()
 		num = 0
 
@@ -281,9 +268,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                 #select query to retrieve measuring unit for selected land type
         	query = '''SELECT unitofmeasure FROM setup_landtypes WHERE landtype='%s' ''' % (selectedLandType)
 
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-	      		
+                recordset = self.executeResultsQuery(query)
 		for row in recordset:
                         unitOfMeasure = row[0]
 
@@ -299,9 +284,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT landtype, unitofmeasure FROM setup_landtypes WHERE landtype='%s' ''' % (mylandtype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-
+                recordset = self.executeResultsQuery(query)
 		numrows = 0		
 		for row in recordset:
 			numrows = numrows + 1
@@ -314,9 +297,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
 			query = '''UPDATE setup_landtypes SET landtype='%s', unitofmeasure='%s'
                      		WHERE landtype='%s' ''' % (mylandtype, myunitofmeasure, mylandtype)
     
-        	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+		self.executeUpdateQuery(query)
                 self.getLandTypes()
 		#refresh categories list
 		#self.getCategories()
@@ -330,8 +311,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT landtype, unitofmeasure FROM setup_landtypes WHERE landtype='%s' ''' % (mylandtype)
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 		numrows = 0		
 		for row in recordset:
 			numrows = numrows + 1
@@ -344,8 +324,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                                 query = '''DELETE FROM setup_landtypes WHERE landtype='%s' ''' % (mylandtype)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+				self.executeUpdateQuery(query)
                                 self.txtLandType.clear()
                                 self.txtLandMeasuringUnit.clear()
 
@@ -363,8 +342,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                	# select query to retrieve Food types
         	query = '''SELECT treetype FROM setup_treetypes'''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 				
 		model = QStandardItemModel()
 		num = 0
@@ -386,8 +364,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                 #select query to retrieve measuring unit for selected tree type
         	query = '''SELECT measuringunit FROM setup_treetypes WHERE treetype='%s' ''' % (selectedTreeType)
 
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 	      		
 		for row in recordset:
                         unitOfMeasure = row[0]
@@ -404,8 +381,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT treetype, measuringunit FROM setup_treetypes WHERE treetype='%s' ''' % (mytreetype)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 
 		numrows = 0		
 		for row in recordset:
@@ -420,8 +396,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                      		WHERE treetype='%s' ''' % (mytreetype, mymeasuringunit, mytreetype)
     
         	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+                self.executeUpdateQuery(query)
                 self.getTreeTypes()
                                 
 	def deleteTreeType(self):
@@ -433,8 +408,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT treetype, measuringunit FROM setup_treetypes WHERE treetype='%s' ''' % (mytreetype)
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 		numrows = 0		
 		for row in recordset:
 			numrows = numrows + 1
@@ -447,8 +421,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                                 query = '''DELETE FROM setup_treetypes WHERE treetype='%s' ''' % (mytreetype)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+				self.executeUpdateQuery(query)
 
                                 self.txtTreeType.clear()
                                 self.txtTreeMeasuringUnit.clear()
@@ -467,8 +440,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                 # select query to retrieve Food types
                 query = '''SELECT tradablegoodtype FROM setup_tradablegoods'''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 				
                 model = QStandardItemModel()
                 num = 0
@@ -490,9 +462,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                 #select query to retrieve measuring unit for selected tree type
                 query = '''SELECT unitofmeasure FROM setup_tradablegoods WHERE tradablegoodtype='%s' ''' % (selectedTradableGoodType)
 
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-	      		
+                recordset = self.executeResultsQuery(query)
                 for row in recordset:
                     unitOfMeasure = row[0]
 
@@ -508,8 +478,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                 # check if record exists
                 query = '''SELECT tradablegoodtype, unitofmeasure FROM setup_tradablegoods WHERE tradablegoodtype='%s' ''' % (mytradablegood)    
 		
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 
                 numrows = 0		
                 for row in recordset:
@@ -524,8 +493,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                      		WHERE tradablegoodtype='%s' ''' % (mytradablegood, mymeasuringunit, mytradablegood)
     
                 # execute query and commit changes
-                temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+		self.executeUpdateQuery(query)
                 self.getTradableGoodTypes()
                                 
         def deleteTradableGoodType(self):
@@ -537,8 +505,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                 # check if record exists
                 query = '''SELECT tradablegoodtype, unitofmeasure FROM setup_tradablegoods WHERE tradablegoodtype='%s' ''' % (mytradablegood)
 		
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
                 numrows = 0		
                 for row in recordset:
                         numrows = numrows + 1
@@ -550,8 +517,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                                 query = '''DELETE FROM setup_tradablegoods WHERE tradablegoodtype='%s' ''' % (mytradablegood)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+				self.executeUpdateQuery(query)
 			
                                 self.txtTradableGoodType.clear()
                                 self.txtTradableGoodMeasuringUnit.clear()
@@ -570,8 +536,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                	# select query to retrieve Food types
         	query = '''SELECT incomesource FROM setup_livestock'''
         	
-                p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 				
 		model = QStandardItemModel()
 		num = 0
@@ -593,8 +558,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                 #select query to retrieve food-energy value and measuring unit for selected food item 
         	query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (selectedLivestockItem)
 
-        	p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 	      		
 		for row in recordset:
                         kcalValue = row[0]
@@ -614,9 +578,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
-
+                recordset = self.executeResultsQuery(query)
 		numrows = 0		
 		for row in recordset:
 			numrows = numrows + 1
@@ -630,8 +592,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                      		WHERE incomesource='%s' ''' % (myincomesource, myenergyvalue, unitofmeasure, myincomesource)
     
         	# execute query and commit changes
-        	temp = GenericDBOP(query)
-                recordset = temp.runUpdateQuery()
+                self.executeUpdateQuery(query)
 		#refresh categories list
 		self.getLivestockTypes()
                                 
@@ -644,8 +605,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
 		# check if record exists
 		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)    
 		
-		p = GenericDBOP(query)
-                recordset = p.runSelectQuery()
+                recordset = self.executeResultsQuery(query)
 		numrows = 0		
 		for row in recordset:
 			numrows = numrows + 1
@@ -659,8 +619,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MDIDialogMixin):
                                 query = '''DELETE FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)
 
                                 # execute query and commit changes
-                                temp = GenericDBOP(query)
-                                recordset = temp.runUpdateQuery()
+				self.executeUpdateQuery(query)
                                 #refresh categories list
                                 self.getLivestockTypes()			
 			
