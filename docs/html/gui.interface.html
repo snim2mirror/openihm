@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="open-ihm v1.0 documentation" href="index.html" />
     <link rel="up" title="gui Package" href="gui.html" />
-    <link rel="next" title="inputs Package" href="inputs.html" />
+    <link rel="next" title="includes Package" href="includes.html" />
     <link rel="prev" title="designs Package" href="gui.designs.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="inputs.html" title="inputs Package"
+          <a href="includes.html" title="includes Package"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="gui.designs.html" title="designs Package"
@@ -57,12 +57,175 @@
 <h1>interface Package<a class="headerlink" href="#interface-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">interface</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-gui.interface"></span><p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
 </div>
-<div class="section" id="cropincomemanager-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">cropincomemanager</span></tt> Module<a class="headerlink" href="#cropincomemanager-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.cropincomemanager">
+<span id="cropincomemanager-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">cropincomemanager</span></tt> Module<a class="headerlink" href="#module-gui.interface.cropincomemanager" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.cropincomemanager.CropIncomeManager">
+<em class="property">class </em><tt class="descclassname">gui.interface.cropincomemanager.</tt><tt class="descname">CropIncomeManager</tt><a class="headerlink" href="#gui.interface.cropincomemanager.CropIncomeManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gui.interface.mixins.TableViewMixin" title="gui.interface.mixins.TableViewMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.TableViewMixin</span></tt></a></p>
+<dl class="method">
+<dt id="gui.interface.cropincomemanager.CropIncomeManager.displayAvailableCrops">
+<tt class="descname">displayAvailableCrops</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.cropincomemanager.CropIncomeManager.displayAvailableCrops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve and display available crops</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.cropincomemanager.CropIncomeManager.displaySelectedCrops">
+<tt class="descname">displaySelectedCrops</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.cropincomemanager.CropIncomeManager.displaySelectedCrops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve and display Project Crop Incomes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.cropincomemanager.CropIncomeManager.getProjectCrops">
+<tt class="descname">getProjectCrops</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.cropincomemanager.CropIncomeManager.getProjectCrops" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.cropincomemanager.CropIncomeManager.moveAllCrops">
+<tt class="descname">moveAllCrops</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.cropincomemanager.CropIncomeManager.moveAllCrops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add all available crops to Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.cropincomemanager.CropIncomeManager.moveSelectedCrops">
+<tt class="descname">moveSelectedCrops</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.cropincomemanager.CropIncomeManager.moveSelectedCrops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add selected available crops to Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.cropincomemanager.CropIncomeManager.removeAllCrops">
+<tt class="descname">removeAllCrops</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.cropincomemanager.CropIncomeManager.removeAllCrops" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove all listed household or person characteristics from Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.cropincomemanager.CropIncomeManager.removeSelectedCrops">
+<tt class="descname">removeSelectedCrops</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.cropincomemanager.CropIncomeManager.removeSelectedCrops" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove selected crops from Project</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.cropincomemanager.bin">
+<tt class="descclassname">gui.interface.cropincomemanager.</tt><tt class="descname">bin</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.cropincomemanager.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>bin(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.cropincomemanager.hex">
+<tt class="descclassname">gui.interface.cropincomemanager.</tt><tt class="descname">hex</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.cropincomemanager.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>hex(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.cropincomemanager.oct">
+<tt class="descclassname">gui.interface.cropincomemanager.</tt><tt class="descname">oct</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.cropincomemanager.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>oct(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
 </div>
-<div class="section" id="employmentincomemanager-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">employmentincomemanager</span></tt> Module<a class="headerlink" href="#employmentincomemanager-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.employmentincomemanager">
+<span id="employmentincomemanager-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">employmentincomemanager</span></tt> Module<a class="headerlink" href="#module-gui.interface.employmentincomemanager" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.employmentincomemanager.EmploymentIncomeManager">
+<em class="property">class </em><tt class="descclassname">gui.interface.employmentincomemanager.</tt><tt class="descname">EmploymentIncomeManager</tt><a class="headerlink" href="#gui.interface.employmentincomemanager.EmploymentIncomeManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gui.interface.mixins.TableViewMixin" title="gui.interface.mixins.TableViewMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.TableViewMixin</span></tt></a></p>
+<dl class="method">
+<dt id="gui.interface.employmentincomemanager.EmploymentIncomeManager.displayAvailableEmployment">
+<tt class="descname">displayAvailableEmployment</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.employmentincomemanager.EmploymentIncomeManager.displayAvailableEmployment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve and display available employment</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.employmentincomemanager.EmploymentIncomeManager.displaySelectedEmployment">
+<tt class="descname">displaySelectedEmployment</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.employmentincomemanager.EmploymentIncomeManager.displaySelectedEmployment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve and display Project employment Incomes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.employmentincomemanager.EmploymentIncomeManager.getProjectEmployment">
+<tt class="descname">getProjectEmployment</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.employmentincomemanager.EmploymentIncomeManager.getProjectEmployment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.employmentincomemanager.EmploymentIncomeManager.moveAllEmployment">
+<tt class="descname">moveAllEmployment</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.employmentincomemanager.EmploymentIncomeManager.moveAllEmployment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add all available employment to Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.employmentincomemanager.EmploymentIncomeManager.moveSelectedEmployment">
+<tt class="descname">moveSelectedEmployment</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.employmentincomemanager.EmploymentIncomeManager.moveSelectedEmployment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add selected available employment to Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.employmentincomemanager.EmploymentIncomeManager.removeAllEmployment">
+<tt class="descname">removeAllEmployment</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.employmentincomemanager.EmploymentIncomeManager.removeAllEmployment" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove all listed household or person characteristics from Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.employmentincomemanager.EmploymentIncomeManager.removeSelectedEmployment">
+<tt class="descname">removeSelectedEmployment</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.employmentincomemanager.EmploymentIncomeManager.removeSelectedEmployment" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove selected employment from Project</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.employmentincomemanager.bin">
+<tt class="descclassname">gui.interface.employmentincomemanager.</tt><tt class="descname">bin</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.employmentincomemanager.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>bin(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.employmentincomemanager.hex">
+<tt class="descclassname">gui.interface.employmentincomemanager.</tt><tt class="descname">hex</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.employmentincomemanager.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>hex(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.employmentincomemanager.oct">
+<tt class="descclassname">gui.interface.employmentincomemanager.</tt><tt class="descname">oct</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.employmentincomemanager.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>oct(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
 </div>
 <div class="section" id="frm-about-openihm-module">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">frm_about_openihm</span></tt> Module<a class="headerlink" href="#frm-about-openihm-module" title="Permalink to this headline">¶</a></h2>
@@ -226,20 +389,390 @@
 <div class="section" id="frmstandardoflivingmanager-module">
 <h2><tt class="xref py py-mod docutils literal"><span class="pre">frmstandardoflivingmanager</span></tt> Module<a class="headerlink" href="#frmstandardoflivingmanager-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="images-rc-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">images_rc</span></tt> Module<a class="headerlink" href="#images-rc-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.images_rc">
+<span id="images-rc-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">images_rc</span></tt> Module<a class="headerlink" href="#module-gui.interface.images_rc" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="gui.interface.images_rc.qCleanupResources">
+<tt class="descclassname">gui.interface.images_rc.</tt><tt class="descname">qCleanupResources</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.images_rc.qCleanupResources" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.images_rc.qInitResources">
+<tt class="descclassname">gui.interface.images_rc.</tt><tt class="descname">qInitResources</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.images_rc.qInitResources" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
-<div class="section" id="livestockincomemanager-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">livestockincomemanager</span></tt> Module<a class="headerlink" href="#livestockincomemanager-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.livestockincomemanager">
+<span id="livestockincomemanager-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">livestockincomemanager</span></tt> Module<a class="headerlink" href="#module-gui.interface.livestockincomemanager" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.livestockincomemanager.LivestockIncomeManager">
+<em class="property">class </em><tt class="descclassname">gui.interface.livestockincomemanager.</tt><tt class="descname">LivestockIncomeManager</tt><a class="headerlink" href="#gui.interface.livestockincomemanager.LivestockIncomeManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gui.interface.mixins.TableViewMixin" title="gui.interface.mixins.TableViewMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.TableViewMixin</span></tt></a></p>
+<dl class="method">
+<dt id="gui.interface.livestockincomemanager.LivestockIncomeManager.displayAvailableLivestock">
+<tt class="descname">displayAvailableLivestock</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.livestockincomemanager.LivestockIncomeManager.displayAvailableLivestock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve and display available livestock</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.livestockincomemanager.LivestockIncomeManager.displaySelectedLivestock">
+<tt class="descname">displaySelectedLivestock</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.livestockincomemanager.LivestockIncomeManager.displaySelectedLivestock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve and display Project Livestock Incomes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.livestockincomemanager.LivestockIncomeManager.getProjectLivestock">
+<tt class="descname">getProjectLivestock</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.livestockincomemanager.LivestockIncomeManager.getProjectLivestock" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.livestockincomemanager.LivestockIncomeManager.moveAllLivestock">
+<tt class="descname">moveAllLivestock</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.livestockincomemanager.LivestockIncomeManager.moveAllLivestock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add all available livestocks to Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.livestockincomemanager.LivestockIncomeManager.moveSelectedLivestock">
+<tt class="descname">moveSelectedLivestock</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.livestockincomemanager.LivestockIncomeManager.moveSelectedLivestock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add selected available livestocks to Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.livestockincomemanager.LivestockIncomeManager.removeAllLivestock">
+<tt class="descname">removeAllLivestock</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.livestockincomemanager.LivestockIncomeManager.removeAllLivestock" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove all listed household or person characteristics from Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.livestockincomemanager.LivestockIncomeManager.removeSelectedLivestock">
+<tt class="descname">removeSelectedLivestock</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.livestockincomemanager.LivestockIncomeManager.removeSelectedLivestock" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove selected livestocks from Project</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.livestockincomemanager.bin">
+<tt class="descclassname">gui.interface.livestockincomemanager.</tt><tt class="descname">bin</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.livestockincomemanager.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>bin(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.livestockincomemanager.hex">
+<tt class="descclassname">gui.interface.livestockincomemanager.</tt><tt class="descname">hex</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.livestockincomemanager.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>hex(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.livestockincomemanager.oct">
+<tt class="descclassname">gui.interface.livestockincomemanager.</tt><tt class="descname">oct</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.livestockincomemanager.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>oct(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
 </div>
-<div class="section" id="mixins-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">mixins</span></tt> Module<a class="headerlink" href="#mixins-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.mixins">
+<span id="mixins-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">mixins</span></tt> Module<a class="headerlink" href="#module-gui.interface.mixins" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.mixins.DataEntryMixin">
+<em class="property">class </em><tt class="descclassname">gui.interface.mixins.</tt><tt class="descname">DataEntryMixin</tt><a class="headerlink" href="#gui.interface.mixins.DataEntryMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="gui.interface.mixins.DataEntryMixin.getDbString">
+<tt class="descname">getDbString</tt><big>(</big><em>strSeed</em><big>)</big><a class="headerlink" href="#gui.interface.mixins.DataEntryMixin.getDbString" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.mixins.DataEntryMixin.getIntMonth">
+<tt class="descname">getIntMonth</tt><big>(</big><em>month</em><big>)</big><a class="headerlink" href="#gui.interface.mixins.DataEntryMixin.getIntMonth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.mixins.DataEntryMixin.getStringMonth">
+<tt class="descname">getStringMonth</tt><big>(</big><em>month</em><big>)</big><a class="headerlink" href="#gui.interface.mixins.DataEntryMixin.getStringMonth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.mixins.DataEntryMixin.getViewString">
+<tt class="descname">getViewString</tt><big>(</big><em>strSeed</em><big>)</big><a class="headerlink" href="#gui.interface.mixins.DataEntryMixin.getViewString" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gui.interface.mixins.MDIDialogMixin">
+<em class="property">class </em><tt class="descclassname">gui.interface.mixins.</tt><tt class="descname">MDIDialogMixin</tt><a class="headerlink" href="#gui.interface.mixins.MDIDialogMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Used by all dialog boxes.</p>
+<dl class="method">
+<dt id="gui.interface.mixins.MDIDialogMixin.mdiClose">
+<tt class="descname">mdiClose</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.mixins.MDIDialogMixin.mdiClose" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close this dialog box.</p>
+<p>The dialog may be the active sub-window of an MDI area, or not.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.mixins.MDIDialogMixin.setMdi">
+<tt class="descname">setMdi</tt><big>(</big><em>mdi</em><big>)</big><a class="headerlink" href="#gui.interface.mixins.MDIDialogMixin.setMdi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gui.interface.mixins.MySQLMixin">
+<em class="property">class </em><tt class="descclassname">gui.interface.mixins.</tt><tt class="descname">MySQLMixin</tt><a class="headerlink" href="#gui.interface.mixins.MySQLMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Methods for dealing with the MySQL database.</p>
+<p>TODO: move this from the gui package to a model (as in MVC) package.</p>
+<dl class="method">
+<dt id="gui.interface.mixins.MySQLMixin.executeMultipleResultsQueries">
+<tt class="descname">executeMultipleResultsQueries</tt><big>(</big><em>queries</em><big>)</big><a class="headerlink" href="#gui.interface.mixins.MySQLMixin.executeMultipleResultsQueries" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is idential to self.executeResultsQuery
+except that it takes a list of query strings, executes each in turn
+and returns a corresponding list of results.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.mixins.MySQLMixin.executeMultipleUpdateQueries">
+<tt class="descname">executeMultipleUpdateQueries</tt><big>(</big><em>queries</em><big>)</big><a class="headerlink" href="#gui.interface.mixins.MySQLMixin.executeMultipleUpdateQueries" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method is idential to self.executeUpdateQuery
+except that it takes a list of query strings and executes each in turn</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.mixins.MySQLMixin.executeResultsQuery">
+<tt class="descname">executeResultsQuery</tt><big>(</big><em>query</em><big>)</big><a class="headerlink" href="#gui.interface.mixins.MySQLMixin.executeResultsQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a query for which the database will return results.
+For example a SELECT query.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.mixins.MySQLMixin.executeUpdateQuery">
+<tt class="descname">executeUpdateQuery</tt><big>(</big><em>query</em><big>)</big><a class="headerlink" href="#gui.interface.mixins.MySQLMixin.executeUpdateQuery" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a query that needs to be committed to the database.
+For example, an INSERT or UPDATE query.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gui.interface.mixins.TableViewMixin">
+<em class="property">class </em><tt class="descclassname">gui.interface.mixins.</tt><tt class="descname">TableViewMixin</tt><a class="headerlink" href="#gui.interface.mixins.TableViewMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="gui.interface.mixins.TableViewMixin.countRowsSelected">
+<tt class="descname">countRowsSelected</tt><big>(</big><em>tblVw</em><big>)</big><a class="headerlink" href="#gui.interface.mixins.TableViewMixin.countRowsSelected" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.mixins.TableViewMixin.getCurrentRow">
+<tt class="descname">getCurrentRow</tt><big>(</big><em>tblVw</em><big>)</big><a class="headerlink" href="#gui.interface.mixins.TableViewMixin.getCurrentRow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.mixins.TableViewMixin.getSelectedRows">
+<tt class="descname">getSelectedRows</tt><big>(</big><em>tblVw</em><big>)</big><a class="headerlink" href="#gui.interface.mixins.TableViewMixin.getSelectedRows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.mixins.bin">
+<tt class="descclassname">gui.interface.mixins.</tt><tt class="descname">bin</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.mixins.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>bin(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.mixins.hex">
+<tt class="descclassname">gui.interface.mixins.</tt><tt class="descname">hex</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.mixins.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>hex(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.mixins.oct">
+<tt class="descclassname">gui.interface.mixins.</tt><tt class="descname">oct</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.mixins.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>oct(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
 </div>
-<div class="section" id="transferincomemanager-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">transferincomemanager</span></tt> Module<a class="headerlink" href="#transferincomemanager-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.transferincomemanager">
+<span id="transferincomemanager-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">transferincomemanager</span></tt> Module<a class="headerlink" href="#module-gui.interface.transferincomemanager" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.transferincomemanager.TransferIncomeManager">
+<em class="property">class </em><tt class="descclassname">gui.interface.transferincomemanager.</tt><tt class="descname">TransferIncomeManager</tt><a class="headerlink" href="#gui.interface.transferincomemanager.TransferIncomeManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gui.interface.mixins.TableViewMixin" title="gui.interface.mixins.TableViewMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.TableViewMixin</span></tt></a></p>
+<dl class="method">
+<dt id="gui.interface.transferincomemanager.TransferIncomeManager.displayAvailableTransfers">
+<tt class="descname">displayAvailableTransfers</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.transferincomemanager.TransferIncomeManager.displayAvailableTransfers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve and display available transfers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.transferincomemanager.TransferIncomeManager.displaySelectedTransfers">
+<tt class="descname">displaySelectedTransfers</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.transferincomemanager.TransferIncomeManager.displaySelectedTransfers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve and display Project Transfer Incomes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.transferincomemanager.TransferIncomeManager.getProjectTransfers">
+<tt class="descname">getProjectTransfers</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.transferincomemanager.TransferIncomeManager.getProjectTransfers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.transferincomemanager.TransferIncomeManager.moveAllTransfers">
+<tt class="descname">moveAllTransfers</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.transferincomemanager.TransferIncomeManager.moveAllTransfers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add all available transfers to Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.transferincomemanager.TransferIncomeManager.moveSelectedTransfers">
+<tt class="descname">moveSelectedTransfers</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.transferincomemanager.TransferIncomeManager.moveSelectedTransfers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add selected available transfers to Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.transferincomemanager.TransferIncomeManager.removeAllTransfers">
+<tt class="descname">removeAllTransfers</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.transferincomemanager.TransferIncomeManager.removeAllTransfers" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove all listed household or person characteristics from Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.transferincomemanager.TransferIncomeManager.removeSelectedTransfers">
+<tt class="descname">removeSelectedTransfers</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.transferincomemanager.TransferIncomeManager.removeSelectedTransfers" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove selected transfers from Project</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.transferincomemanager.bin">
+<tt class="descclassname">gui.interface.transferincomemanager.</tt><tt class="descname">bin</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.transferincomemanager.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>bin(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.transferincomemanager.hex">
+<tt class="descclassname">gui.interface.transferincomemanager.</tt><tt class="descname">hex</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.transferincomemanager.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>hex(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.transferincomemanager.oct">
+<tt class="descclassname">gui.interface.transferincomemanager.</tt><tt class="descname">oct</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.transferincomemanager.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>oct(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
 </div>
-<div class="section" id="wildfoodincomemanager-module">
-<h2><tt class="xref py py-mod docutils literal"><span class="pre">wildfoodincomemanager</span></tt> Module<a class="headerlink" href="#wildfoodincomemanager-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-gui.interface.wildfoodincomemanager">
+<span id="wildfoodincomemanager-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">wildfoodincomemanager</span></tt> Module<a class="headerlink" href="#module-gui.interface.wildfoodincomemanager" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="gui.interface.wildfoodincomemanager.WildfoodIncomeManager">
+<em class="property">class </em><tt class="descclassname">gui.interface.wildfoodincomemanager.</tt><tt class="descname">WildfoodIncomeManager</tt><a class="headerlink" href="#gui.interface.wildfoodincomemanager.WildfoodIncomeManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#gui.interface.mixins.TableViewMixin" title="gui.interface.mixins.TableViewMixin"><tt class="xref py py-class docutils literal"><span class="pre">gui.interface.mixins.TableViewMixin</span></tt></a></p>
+<dl class="method">
+<dt id="gui.interface.wildfoodincomemanager.WildfoodIncomeManager.displayAvailableWildfoods">
+<tt class="descname">displayAvailableWildfoods</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.wildfoodincomemanager.WildfoodIncomeManager.displayAvailableWildfoods" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve and display available wildfood</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.wildfoodincomemanager.WildfoodIncomeManager.displaySelectedWildfoods">
+<tt class="descname">displaySelectedWildfoods</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.wildfoodincomemanager.WildfoodIncomeManager.displaySelectedWildfoods" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve and display Project Wildfood Incomes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.wildfoodincomemanager.WildfoodIncomeManager.getProjectWildfoods">
+<tt class="descname">getProjectWildfoods</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.wildfoodincomemanager.WildfoodIncomeManager.getProjectWildfoods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.wildfoodincomemanager.WildfoodIncomeManager.moveAllWildfoods">
+<tt class="descname">moveAllWildfoods</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.wildfoodincomemanager.WildfoodIncomeManager.moveAllWildfoods" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add all available wildfoods to Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.wildfoodincomemanager.WildfoodIncomeManager.moveSelectedWildfoods">
+<tt class="descname">moveSelectedWildfoods</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.wildfoodincomemanager.WildfoodIncomeManager.moveSelectedWildfoods" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add selected available wildfoods to Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.wildfoodincomemanager.WildfoodIncomeManager.removeAllWildfoods">
+<tt class="descname">removeAllWildfoods</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.wildfoodincomemanager.WildfoodIncomeManager.removeAllWildfoods" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove all listed household or person characteristics from Project</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gui.interface.wildfoodincomemanager.WildfoodIncomeManager.removeSelectedWildfoods">
+<tt class="descname">removeSelectedWildfoods</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.wildfoodincomemanager.WildfoodIncomeManager.removeSelectedWildfoods" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove selected wildfoods from Project</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.wildfoodincomemanager.bin">
+<tt class="descclassname">gui.interface.wildfoodincomemanager.</tt><tt class="descname">bin</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.wildfoodincomemanager.bin" title="Permalink to this definition">¶</a></dt>
+<dd><p>bin(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.wildfoodincomemanager.hex">
+<tt class="descclassname">gui.interface.wildfoodincomemanager.</tt><tt class="descname">hex</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.wildfoodincomemanager.hex" title="Permalink to this definition">¶</a></dt>
+<dd><p>hex(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="gui.interface.wildfoodincomemanager.oct">
+<tt class="descclassname">gui.interface.wildfoodincomemanager.</tt><tt class="descname">oct</tt><big>(</big><big>)</big><a class="headerlink" href="#gui.interface.wildfoodincomemanager.oct" title="Permalink to this definition">¶</a></dt>
+<dd><p>oct(QTextStream) -&gt; QTextStream</p>
+</dd></dl>
+
 </div>
 </div>
 
@@ -256,8 +789,8 @@
   <ul>
 <li><a class="reference internal" href="#">interface Package</a><ul>
 <li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">interface</span></tt> Package</a></li>
-<li><a class="reference internal" href="#cropincomemanager-module"><tt class="docutils literal"><span class="pre">cropincomemanager</span></tt> Module</a></li>
-<li><a class="reference internal" href="#employmentincomemanager-module"><tt class="docutils literal"><span class="pre">employmentincomemanager</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.cropincomemanager"><tt class="docutils literal"><span class="pre">cropincomemanager</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.employmentincomemanager"><tt class="docutils literal"><span class="pre">employmentincomemanager</span></tt> Module</a></li>
 <li><a class="reference internal" href="#frm-about-openihm-module"><tt class="docutils literal"><span class="pre">frm_about_openihm</span></tt> Module</a></li>
 <li><a class="reference internal" href="#frm-managefoodtypes-add-module"><tt class="docutils literal"><span class="pre">frm_managefoodtypes_add</span></tt> Module</a></li>
 <li><a class="reference internal" href="#frm-managefoodtypes-edit-module"><tt class="docutils literal"><span class="pre">frm_managefoodtypes_edit</span></tt> Module</a></li>
@@ -312,11 +845,11 @@
 <li><a class="reference internal" href="#frmproject-edit-module"><tt class="docutils literal"><span class="pre">frmproject_edit</span></tt> Module</a></li>
 <li><a class="reference internal" href="#frmproject-open-module"><tt class="docutils literal"><span class="pre">frmproject_open</span></tt> Module</a></li>
 <li><a class="reference internal" href="#frmstandardoflivingmanager-module"><tt class="docutils literal"><span class="pre">frmstandardoflivingmanager</span></tt> Module</a></li>
-<li><a class="reference internal" href="#images-rc-module"><tt class="docutils literal"><span class="pre">images_rc</span></tt> Module</a></li>
-<li><a class="reference internal" href="#livestockincomemanager-module"><tt class="docutils literal"><span class="pre">livestockincomemanager</span></tt> Module</a></li>
-<li><a class="reference internal" href="#mixins-module"><tt class="docutils literal"><span class="pre">mixins</span></tt> Module</a></li>
-<li><a class="reference internal" href="#transferincomemanager-module"><tt class="docutils literal"><span class="pre">transferincomemanager</span></tt> Module</a></li>
-<li><a class="reference internal" href="#wildfoodincomemanager-module"><tt class="docutils literal"><span class="pre">wildfoodincomemanager</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.images_rc"><tt class="docutils literal"><span class="pre">images_rc</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.livestockincomemanager"><tt class="docutils literal"><span class="pre">livestockincomemanager</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.mixins"><tt class="docutils literal"><span class="pre">mixins</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.transferincomemanager"><tt class="docutils literal"><span class="pre">transferincomemanager</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-gui.interface.wildfoodincomemanager"><tt class="docutils literal"><span class="pre">wildfoodincomemanager</span></tt> Module</a></li>
 </ul>
 </li>
 </ul>
@@ -325,8 +858,8 @@
   <p class="topless"><a href="gui.designs.html"
                         title="previous chapter">designs Package</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="inputs.html"
-                        title="next chapter">inputs Package</a></p>
+  <p class="topless"><a href="includes.html"
+                        title="next chapter">includes Package</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/gui.interface.txt"
@@ -359,7 +892,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="inputs.html" title="inputs Package"
+          <a href="includes.html" title="includes Package"
              >next</a> |</li>
         <li class="right" >
           <a href="gui.designs.html" title="designs Package"

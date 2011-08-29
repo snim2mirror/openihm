@@ -10,21 +10,16 @@ Welcome to open-ihm's documentation!
 Contents:
 ---------
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 4
 
-   connector.rst
+   control.rst
+   data.rst
    gui.rst
+   includes.rst
    inputs.rst
+   model.rst
    outputs.rst
-
-External modules packaged with open-ihm (used for reading / writing Excel spreadsheets) :
------------------------------------------------------------------------------------------
-.. toctree::
-   :maxdepth: 3
-
-   xlrd.rst
-   xlwt.rst
-
+   tests.rst
 
 Indices and tables
 ==================
