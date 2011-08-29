@@ -16,12 +16,3 @@ General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 """
-
-# Ensure we can import open-ihm modules.
-import sys
-sys.path.append('../src/openihm/')
-from openihm.data.common import *
-
-def test_main():
-    assert False
-

@@ -4,17 +4,20 @@
 
 echo "Generating RST files in directory rst/"
 
-root=`pwd`
+root=`pwd`/src/openihm
 
-python scripts/generate_modules.py -f -s rst -d rst/  data $root/data/scripts
-python scripts/generate_modules.py -f -s rst -d rst/  gui $root/gui/interface/images_rc $root/gui/designs/images_rc
-python scripts/generate_modules.py -f -s rst -d rst/  inputs
-python scripts/generate_modules.py -f -s rst -d rst/  outputs 
+python scripts/generate_modules.py -f -s rst -d rst/  $root/data $root/data/scripts
+python scripts/generate_modules.py -f -s rst -d rst/  $root/gui $root/gui/interface/images_rc $root/gui/designs/images_rc
+python scripts/generate_modules.py -f -s rst -d rst/  $root/inputs
+python scripts/generate_modules.py -f -s rst -d rst/  $root/outputs 
+
+# Test cases
+
 python scripts/generate_modules.py -f -s rst -d rst/  tests 
 
 # Modules we have imported from elsewhere
 
-python scripts/generate_modules.py -f -s rst -d rst/  includes $root/includes/mysql/ $root/includes/mysql/connector
+python scripts/generate_modules.py -f -s rst -d rst/  $root/includes $root/includes/mysql/ $root/includes/mysql/connector
 
 echo "Finished generating documention."
 echo "Please re-create the documention in HTML."
