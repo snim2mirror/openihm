@@ -24,7 +24,7 @@ from PyQt4 import uic
 
 from data.config import Config
 
-Ui_EditMemberCharacteristic, base_class = uic.loadUiType("gui/designs/ui_editmembercharacteristic.ui")
+Ui_EditMemberCharacteristic, base_class = uic.loadUiType("gui/designs/ui_household_editmembercharacteristic.ui")
 
 from mixins import MDIDialogMixin, MySQLMixin
 

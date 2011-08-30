@@ -26,7 +26,10 @@ from PyQt4 import uic
 from data.config import Config
 
 # import the Create Project Dialog design class
-from gui.designs.ui_findhouseholdresults import Ui_FindHouseholdResults
+#from gui.designs.ui_findhouseholdresults import Ui_FindHouseholdResults
+
+Ui_FindHouseholdResults, base_class = uic.loadUiType("gui/designs/ui_findhouseholdresults.ui")
+
 from frmhouseholds_add import FrmAddHousehold
 from frmhouseholds_edit import FrmEditHousehold
 from frmhousehold_data import FrmHouseholdData
