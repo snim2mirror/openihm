@@ -26,11 +26,11 @@ from data.config import Config
     
 class TableViewMixin(object):
 
-    def countRowsSelected(tblVw):
-         selectedRows = getSelectedRows(tblVw)
+    def countRowsSelected(self, tblVw):
+         selectedRows = self.getSelectedRows(tblVw)
          return len(selectedRows)
 
-    def getSelectedRows(tblVw):
+    def getSelectedRows(self, tblVw):
          selectedRows = []
          selectedIndexes = tblVw.selectedIndexes()
 
@@ -40,7 +40,7 @@ class TableViewMixin(object):
 
          return selectedRows
 
-    def getCurrentRow(tblVw):
+    def getCurrentRow(self, tblVw):
          indexVal = tblVw.currentIndex()
          return indexVal.row()
 
@@ -136,20 +136,20 @@ class MySQLMixin(object):
     
 class DataEntryMixin(object):
     
-    def getDbString(strSeed):
+    def getDbString(self, strSeed):
          return strSeed.replace("'", "xxx")
 
-    def getViewString(strSeed):
+    def getViewString(self, strSeed):
          return strSeed.replace("xxx", "'")
 
-    def getStringMonth(month):
+    def getStringMonth(self, month):
         return {"1" : "January","2" : "February", "3" : "March", "4" : "April",
                 "5" : "May","6" : "June", "7" : "July","8" : "August",
                 "9" : "September","10" : "October","11" : "November",
                 "12" : "December"}[month]
 
-    def getIntMonth(month):
-        return {"1" : "January","2" : "February", "3" : "March", "4" : "April",
-                "5" : "May","6" : "June", "7" : "July","8" : "August",
-                "9" : "September","10" : "October","11" : "November",
-                "12" : "December"}[month]
+    def getIntMonth(self, month):
+        return {"January":"1","February":"2","March": "3", "April":"4" ,
+                 "May":"5" ,"June":"6", "July":"7","August":"8",
+                 "September":"9","October":"10","November":"11" ,
+                 "December":"12"}[month]

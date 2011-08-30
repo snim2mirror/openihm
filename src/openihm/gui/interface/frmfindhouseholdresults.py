@@ -34,9 +34,9 @@ from frmhouseholds_add import FrmAddHousehold
 from frmhouseholds_edit import FrmEditHousehold
 from frmhousehold_data import FrmHouseholdData
 
-from mixins import MDIDialogMixin, TableViewMixin
+from mixins import MDIDialogMixin, TableViewMixin,  MySQLMixin
 
-class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, MDIDialogMixin):
+class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, MDIDialogMixin, MySQLMixin):
 	''' Creates the Find Household Results form. '''	
 	def __init__(self, parent, hhid = "", hhname = ""):
 		''' Set up the dialog box interface '''

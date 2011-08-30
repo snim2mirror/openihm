@@ -456,46 +456,47 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 			QMessageBox.information(self,"Delete Assets","Please select the rows containing assets to be deleted.")
 		
 	def retrieveHouseholdAssets(self):
-		''' retrieves and shows a list of household asset '''
-		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
-		hhid = temp[0]
-		pid = self.parent.projectid
-                # select query to retrieve household assets
-		query = '''SELECT assetid, assetcategory, assettype, unitofmeasure, unitcost, totalunits 
-             FROM assets WHERE hhid=%i AND pid=%s''' % (hhid, pid)
-         
-		rows = self.executeResultsQuery(query)
-                # set model headers
-		model.setHorizontalHeaderItem(0,QStandardItem('Asset ID.'))
-		model.setHorizontalHeaderItem(1,QStandardItem('Category'))
-		model.setHorizontalHeaderItem(2,QStandardItem('Asset Type'))
-		model.setHorizontalHeaderItem(3,QStandardItem('Unit'))
-		model.setHorizontalHeaderItem(4,QStandardItem('Cost Per Unit'))
-		model.setHorizontalHeaderItem(5,QStandardItem('Number of Units'))
-         
-                # add  data rows
-		num = 0
+		 ''' retrieves and shows a list of household asset '''
+		 temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
+		 hhid = temp[0]
+		 pid = self.parent.projectid
+		 # select query to retrieve household assets
+		 query = '''SELECT assetid, assetcategory, assettype, unitofmeasure, unitcost, totalunits 
+		 FROM assets WHERE hhid=%i AND pid=%s''' % (hhid, pid)
+		 
+		 rows = self.executeResultsQuery(query)
+		 model = QStandardItemModel(1,2)
+		 # set model headers
+		 model.setHorizontalHeaderItem(0,QStandardItem('Asset ID.'))
+		 model.setHorizontalHeaderItem(1,QStandardItem('Category'))
+		 model.setHorizontalHeaderItem(2,QStandardItem('Asset Type'))
+		 model.setHorizontalHeaderItem(3,QStandardItem('Unit'))
+		 model.setHorizontalHeaderItem(4,QStandardItem('Cost Per Unit'))
+		 model.setHorizontalHeaderItem(5,QStandardItem('Number of Units'))
+		 
+		 # add  data rows
+		 num = 0
 
-		for row in rows:
-			qtAssetID = QStandardItem( "%i" % row[0])
-			qtAssetID.setTextAlignment( Qt.AlignCenter )
-			qtAssetCategory = QStandardItem( row[1] )
-			qtAssetType = QStandardItem( row[2] )	
-			qtUnitOfMeasure = QStandardItem( row[3] )
-			qtCostPerUnit = QStandardItem( "%.2f" % row[4] )
-			qtNumUnits = QStandardItem( "%.2f" % row[5] )
-    
-			model.setItem( num, 0, qtAssetID )
-			model.setItem( num, 1, qtAssetCategory )
-			model.setItem( num, 2, qtAssetType )
-			model.setItem( num, 3, qtUnitOfMeasure )
-			model.setItem( num, 4, qtCostPerUnit )
-			model.setItem( num, 5, qtNumUnits )
-			num = num + 1
-		self.tblAssets.setModel(model)
-		self.tblAssets.resizeColumnsToContents()
-		self.tblAssets.hideColumn(0)
-		self.tblAssets.show()
+		 for row in rows:
+		     qtAssetID = QStandardItem( "%i" % row[0])
+		     qtAssetID.setTextAlignment( Qt.AlignCenter )
+		     qtAssetCategory = QStandardItem( row[1] )
+		     qtAssetType = QStandardItem( row[2] )	
+		     qtUnitOfMeasure = QStandardItem( row[3] )
+		     qtCostPerUnit = QStandardItem( "%.2f" % row[4] )
+		     qtNumUnits = QStandardItem( "%.2f" % row[5] )
+		 
+		     model.setItem( num, 0, qtAssetID )
+		     model.setItem( num, 1, qtAssetCategory )
+		     model.setItem( num, 2, qtAssetType )
+		     model.setItem( num, 3, qtUnitOfMeasure )
+		     model.setItem( num, 4, qtCostPerUnit )
+		     model.setItem( num, 5, qtNumUnits )
+		     num = num + 1
+		 self.tblAssets.setModel(model)
+		 self.tblAssets.resizeColumnsToContents()
+		 self.tblAssets.hideColumn(0)
+		 self.tblAssets.show()
 
 	#-------------------------------------------------------------------------------------------------------
 	# Income: Crops
@@ -588,7 +589,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
          query = '''SELECT id, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed 
                  FROM cropincome WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
 
-	 rows = self.excuteResultsQuery(query)
+	 rows = self.executeResultsQuery(query)
          # add  data rows
          num = 0
          
