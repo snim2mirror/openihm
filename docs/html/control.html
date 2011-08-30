@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>control Package &mdash; open-ihm v1.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="open-ihm v1.0 documentation" href="index.html" />
+    <link rel="next" title="data Package" href="data.html" />
+    <link rel="prev" title="Welcome to open-ihm’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="data.html" title="data Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to open-ihm’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">open-ihm v1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="control-package">
+<h1>control Package<a class="headerlink" href="#control-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">control</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-control.__init__"></span><p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+</div>
+<div class="section" id="module-control.controller">
+<span id="controller-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">controller</span></tt> Module<a class="headerlink" href="#module-control.controller" title="Permalink to this headline">¶</a></h2>
+<p>The main controller module for openihm. Based on earlier work on
+controller.py in the data sub-package.</p>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="control.controller.Controller">
+<em class="property">class </em><tt class="descclassname">control.controller.</tt><tt class="descname">Controller</tt><a class="headerlink" href="#control.controller.Controller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#control.currencymanager.CurrencyManager" title="control.currencymanager.CurrencyManager"><tt class="xref py py-class docutils literal"><span class="pre">control.currencymanager.CurrencyManager</span></tt></a>, <a class="reference internal" href="#control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager" title="control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager"><tt class="xref py py-class docutils literal"><span class="pre">control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager</span></tt></a>, <a class="reference internal" href="#control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager" title="control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager"><tt class="xref py py-class docutils literal"><span class="pre">control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager</span></tt></a>, <a class="reference internal" href="#control.transfermanager.TransferManager" title="control.transfermanager.TransferManager"><tt class="xref py py-class docutils literal"><span class="pre">control.transfermanager.TransferManager</span></tt></a></p>
+<dl class="method">
+<dt id="control.controller.Controller.addProject">
+<tt class="descname">addProject</tt><big>(</big><em>projectname</em>, <em>startdate</em>, <em>enddate</em>, <em>description</em>, <em>currency</em><big>)</big><a class="headerlink" href="#control.controller.Controller.addProject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.controller.Controller.addProjectCharacteristic">
+<tt class="descname">addProjectCharacteristic</tt><big>(</big><em>pid</em>, <em>characteristic</em>, <em>characteristictype</em>, <em>datatype</em><big>)</big><a class="headerlink" href="#control.controller.Controller.addProjectCharacteristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.controller.Controller.existsProjectMatching">
+<tt class="descname">existsProjectMatching</tt><big>(</big><em>pid=''</em>, <em>ptitle=''</em><big>)</big><a class="headerlink" href="#control.controller.Controller.existsProjectMatching" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.controller.Controller.getProject">
+<tt class="descname">getProject</tt><big>(</big><em>pid</em><big>)</big><a class="headerlink" href="#control.controller.Controller.getProject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.controller.Controller.getProjectName">
+<tt class="descname">getProjectName</tt><big>(</big><em>pid</em><big>)</big><a class="headerlink" href="#control.controller.Controller.getProjectName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.controller.Controller.getProjects">
+<tt class="descname">getProjects</tt><big>(</big><big>)</big><a class="headerlink" href="#control.controller.Controller.getProjects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.controller.Controller.getProjectsMatching">
+<tt class="descname">getProjectsMatching</tt><big>(</big><em>pid=''</em>, <em>ptitle=''</em><big>)</big><a class="headerlink" href="#control.controller.Controller.getProjectsMatching" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.controller.Controller.removeProjectCharacteristic">
+<tt class="descname">removeProjectCharacteristic</tt><big>(</big><em>pid</em>, <em>characteristic</em>, <em>characteristictype</em><big>)</big><a class="headerlink" href="#control.controller.Controller.removeProjectCharacteristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.controller.Controller.saveProject">
+<tt class="descname">saveProject</tt><big>(</big><em>pid</em>, <em>projectname</em>, <em>startdate</em>, <em>enddate</em>, <em>description</em>, <em>currency</em><big>)</big><a class="headerlink" href="#control.controller.Controller.saveProject" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-control.currencymanager">
+<span id="currencymanager-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">currencymanager</span></tt> Module<a class="headerlink" href="#module-control.currencymanager" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="control.currencymanager.CurrencyManager">
+<em class="property">class </em><tt class="descclassname">control.currencymanager.</tt><tt class="descname">CurrencyManager</tt><a class="headerlink" href="#control.currencymanager.CurrencyManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manages currencies. Allows adding, editing, deleting and retrieval of currencies.</p>
+<dl class="method">
+<dt id="control.currencymanager.CurrencyManager.addCurrency">
+<tt class="descname">addCurrency</tt><big>(</big><em>currencyname</em>, <em>abbreviation</em>, <em>symbol</em><big>)</big><a class="headerlink" href="#control.currencymanager.CurrencyManager.addCurrency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.currencymanager.CurrencyManager.delCurrency">
+<tt class="descname">delCurrency</tt><big>(</big><em>currencyid</em><big>)</big><a class="headerlink" href="#control.currencymanager.CurrencyManager.delCurrency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.currencymanager.CurrencyManager.editCurrency">
+<tt class="descname">editCurrency</tt><big>(</big><em>currencyid</em>, <em>currencyname</em>, <em>abbreviation</em>, <em>symbol</em><big>)</big><a class="headerlink" href="#control.currencymanager.CurrencyManager.editCurrency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.currencymanager.CurrencyManager.existsCurrency">
+<tt class="descname">existsCurrency</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#control.currencymanager.CurrencyManager.existsCurrency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.currencymanager.CurrencyManager.getCurrencies">
+<tt class="descname">getCurrencies</tt><big>(</big><big>)</big><a class="headerlink" href="#control.currencymanager.CurrencyManager.getCurrencies" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.currencymanager.CurrencyManager.getCurrencyByID">
+<tt class="descname">getCurrencyByID</tt><big>(</big><em>currencyid</em><big>)</big><a class="headerlink" href="#control.currencymanager.CurrencyManager.getCurrencyByID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.currencymanager.CurrencyManager.getCurrencyByName">
+<tt class="descname">getCurrencyByName</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#control.currencymanager.CurrencyManager.getCurrencyByName" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-control.globalhouseholdcharacteristicsmanager">
+<span id="globalhouseholdcharacteristicsmanager-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">globalhouseholdcharacteristicsmanager</span></tt> Module<a class="headerlink" href="#module-control.globalhouseholdcharacteristicsmanager" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager">
+<em class="property">class </em><tt class="descclassname">control.globalhouseholdcharacteristicsmanager.</tt><tt class="descname">GlobalHouseholdCharacteristicsManager</tt><a class="headerlink" href="#control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager.addGlobalHouseholdCharacteristic">
+<tt class="descname">addGlobalHouseholdCharacteristic</tt><big>(</big><em>charname</em>, <em>datatype</em><big>)</big><a class="headerlink" href="#control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager.addGlobalHouseholdCharacteristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager.delGlobalHouseholdCharacteristic">
+<tt class="descname">delGlobalHouseholdCharacteristic</tt><big>(</big><em>charid=''</em>, <em>charname=''</em><big>)</big><a class="headerlink" href="#control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager.delGlobalHouseholdCharacteristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager.editGlobalHouseholdCharacteristic">
+<tt class="descname">editGlobalHouseholdCharacteristic</tt><big>(</big><em>charid</em>, <em>charname</em>, <em>datatype</em><big>)</big><a class="headerlink" href="#control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager.editGlobalHouseholdCharacteristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager.getGlobalHouseholdCharacteristic">
+<tt class="descname">getGlobalHouseholdCharacteristic</tt><big>(</big><em>charid=0</em>, <em>charname=''</em><big>)</big><a class="headerlink" href="#control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager.getGlobalHouseholdCharacteristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager.getGlobalHouseholdCharacteristics">
+<tt class="descname">getGlobalHouseholdCharacteristics</tt><big>(</big><big>)</big><a class="headerlink" href="#control.globalhouseholdcharacteristicsmanager.GlobalHouseholdCharacteristicsManager.getGlobalHouseholdCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-control.globalpersoncharacteristicsmanager">
+<span id="globalpersoncharacteristicsmanager-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">globalpersoncharacteristicsmanager</span></tt> Module<a class="headerlink" href="#module-control.globalpersoncharacteristicsmanager" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager">
+<em class="property">class </em><tt class="descclassname">control.globalpersoncharacteristicsmanager.</tt><tt class="descname">GlobalPersonCharacteristicsManager</tt><a class="headerlink" href="#control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Manages global Person Characteristics from which project person characteristics can be chosen.
+Allows adding, editing, deleting and retrieval of global person characteristic.</p>
+<dl class="method">
+<dt id="control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager.addGlobalPersonCharacteristics">
+<tt class="descname">addGlobalPersonCharacteristics</tt><big>(</big><em>charname</em>, <em>datatype</em><big>)</big><a class="headerlink" href="#control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager.addGlobalPersonCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager.delGlobalPersonCharacteristic">
+<tt class="descname">delGlobalPersonCharacteristic</tt><big>(</big><em>charid=''</em>, <em>charname=''</em><big>)</big><a class="headerlink" href="#control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager.delGlobalPersonCharacteristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager.editGlobalPersonCharacteristic">
+<tt class="descname">editGlobalPersonCharacteristic</tt><big>(</big><em>charid</em>, <em>charname</em>, <em>datatype</em><big>)</big><a class="headerlink" href="#control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager.editGlobalPersonCharacteristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager.getGlobalPersonCharacteristic">
+<tt class="descname">getGlobalPersonCharacteristic</tt><big>(</big><em>charid=''</em>, <em>charname=''</em><big>)</big><a class="headerlink" href="#control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager.getGlobalPersonCharacteristic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager.getGlobalPersonCharacteristics">
+<tt class="descname">getGlobalPersonCharacteristics</tt><big>(</big><big>)</big><a class="headerlink" href="#control.globalpersoncharacteristicsmanager.GlobalPersonCharacteristicsManager.getGlobalPersonCharacteristics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-control.transfermanager">
+<span id="transfermanager-module"></span><h2><tt class="xref py py-mod docutils literal"><span class="pre">transfermanager</span></tt> Module<a class="headerlink" href="#module-control.transfermanager" title="Permalink to this headline">¶</a></h2>
+<p>This file is part of open-ihm.</p>
+<p>open-ihm is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>open-ihm is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with open-ihm.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<dl class="class">
+<dt id="control.transfermanager.TransferManager">
+<em class="property">class </em><tt class="descclassname">control.transfermanager.</tt><tt class="descname">TransferManager</tt><a class="headerlink" href="#control.transfermanager.TransferManager" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="control.transfermanager.TransferManager.delCorrespondingProject">
+<tt class="descname">delCorrespondingProject</tt><big>(</big><em>projectid</em>, <em>projectname</em>, <em>dateofcollection</em>, <em>currency</em><big>)</big><a class="headerlink" href="#control.transfermanager.TransferManager.delCorrespondingProject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the project was transfered before</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="control.transfermanager.TransferManager.existsCorrespondingProject">
+<tt class="descname">existsCorrespondingProject</tt><big>(</big><em>projectid</em>, <em>projectname</em>, <em>dateofcollection</em>, <em>currency</em><big>)</big><a class="headerlink" href="#control.transfermanager.TransferManager.existsCorrespondingProject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the project was transfered before</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="control.transfermanager.TransferManager.getProjectsFromAccess">
+<tt class="descname">getProjectsFromAccess</tt><big>(</big><em>filename</em><big>)</big><a class="headerlink" href="#control.transfermanager.TransferManager.getProjectsFromAccess" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.transfermanager.TransferManager.importProject">
+<tt class="descname">importProject</tt><big>(</big><em>filename</em>, <em>projectid</em><big>)</big><a class="headerlink" href="#control.transfermanager.TransferManager.importProject" title="Permalink to this definition">¶</a></dt>
+<dd><p>transfers project data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="control.transfermanager.TransferManager.importProjects">
+<tt class="descname">importProjects</tt><big>(</big><em>filename</em>, <em>selectedProjects=''</em><big>)</big><a class="headerlink" href="#control.transfermanager.TransferManager.importProjects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imports all or selected projects from Access DB to OpenIHM</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="control.transfermanager.TransferManager.logTransfer">
+<tt class="descname">logTransfer</tt><big>(</big><em>pid</em>, <em>pid_access</em>, <em>projectname</em>, <em>startdate</em>, <em>currency</em><big>)</big><a class="headerlink" href="#control.transfermanager.TransferManager.logTransfer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="control.transfermanager.TransferManager.transferHouseholds">
+<tt class="descname">transferHouseholds</tt><big>(</big><em>accessfilename</em>, <em>sourcepid</em>, <em>targetpid</em>, <em>startdate</em><big>)</big><a class="headerlink" href="#control.transfermanager.TransferManager.transferHouseholds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/EfDUnimaChancoCompositeSmall.jpg" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">control Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">control</span></tt> Package</a></li>
+<li><a class="reference internal" href="#module-control.controller"><tt class="docutils literal"><span class="pre">controller</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-control.currencymanager"><tt class="docutils literal"><span class="pre">currencymanager</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-control.globalhouseholdcharacteristicsmanager"><tt class="docutils literal"><span class="pre">globalhouseholdcharacteristicsmanager</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-control.globalpersoncharacteristicsmanager"><tt class="docutils literal"><span class="pre">globalpersoncharacteristicsmanager</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-control.transfermanager"><tt class="docutils literal"><span class="pre">transfermanager</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to open-ihm&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="data.html"
+                        title="next chapter">data Package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/control.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="data.html" title="data Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to open-ihm’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">open-ihm v1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, University of Malawi, Evidence for Development, University of Wolverhampton.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

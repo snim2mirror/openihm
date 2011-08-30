@@ -16,11 +16,9 @@ import sys, os
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.append(os.path.abspath('../data'))
-sys.path.append(os.path.abspath('../gui'))
-sys.path.append(os.path.abspath('../inputs'))
-sys.path.append(os.path.abspath('../outputs'))
-sys.path.append(os.path.abspath('../includes'))
+sys.path.append(os.path.abspath('../src/openihm/'))
+sys.path.append(os.path.abspath('../src/'))
+sys.path.append(os.path.abspath('../tests/'))
 
 
 # -- General configuration -----------------------------------------------------
@@ -115,7 +113,7 @@ html_theme = 'default'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = '../resources/images/EfDUnimaChancoCompositeSmall.jpg'
+html_logo = '../src/openihm/resources/images/EfDUnimaChancoCompositeSmall.jpg'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
