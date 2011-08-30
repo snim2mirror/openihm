@@ -227,7 +227,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         ''' Initialises Main Window. Adds the MdiArea (QMdiArea) '''
         QtGui.QMainWindow.__init__(self)
-	self.setupUi(self)
+        self.setupUi(self)
 
         self.projectid = -1
         self.projectname = ""

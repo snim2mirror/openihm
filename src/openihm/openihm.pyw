@@ -47,7 +47,7 @@ def main():
 
           # import database initialisation classes
           from gui.interface.frmdatabasemessage import FrmDatabaseMessage
-          from data.databaseinitialiser import *
+          from data.databaseinitialiser import DbConfig, DatabaseInitialiser
           
           log.info('Initialising database.')
           
