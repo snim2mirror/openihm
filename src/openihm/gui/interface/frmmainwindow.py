@@ -177,7 +177,7 @@ class OpenIhmUpdator(QtCore.QThread):
 
         FIXME: Do this with setuptools or distutils or similar. May need runpy.
         """
-        copy_tree(os.path.join(REPO_DIR, 'open-ihm'), INSTALL_DIR)
+        copy_tree(os.path.join(REPO_DIR, 'src/openihm'), INSTALL_DIR)
         return
 
     def updateFail(self, message):
