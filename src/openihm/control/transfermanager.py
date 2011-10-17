@@ -18,8 +18,8 @@ You should have received a copy of the GNU General Public License
 along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from model.database import Database
-from model.accessdb import AccessDB
+from model.database import Database          # connector to mysql database
+from model.accessdb import AccessDB         #  connector to access database
 from datetime import date
 
 class TransferManager:
