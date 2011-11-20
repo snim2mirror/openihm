@@ -88,7 +88,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
 
 		rowset = self.executeResultsQuery(query)
 	      		
-		for row in recordset:
+		for row in rowset:
                         kcalValue = row[0]
 			unitOfMeasure = row[1]
 
