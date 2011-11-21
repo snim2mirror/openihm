@@ -262,7 +262,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 		
 		for field in fields:
 			query = '''SELECT `%s` FROM %s WHERE hhid=%i AND personid='%s' ''' % ( field, tbl, hhid,  personid )	
-			rows = seld.executeResultsQuery(query)
+			rows = self.executeResultsQuery(query)
 			val = "Not Set"
 			for row in rows:
 				if ( row[0] != None ):

@@ -191,7 +191,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
 		# check if record exists
 		query = '''SELECT incomesource FROM setup_employment WHERE incomesource='%s' ''' % (employment)    
 		
-                recordset = self.executeResultsQuery()
+                recordset = self.executeResultsQuery(query)
 
 		numrows = len(recordset)
 				      	
