@@ -50,7 +50,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
                 #set input validator and restrict input to numeric values,
                 myIntVal = QIntValidator(0, 10000, self.txtEnergyValue)
                 self.txtEnergyValue.setValidator(myIntVal);
-                self.txtLivestockEnergyValue.setValidator(myIntVal)
+                #self.txtLivestockEnergyValue.setValidator(myIntVal)
 
 	#Begin block of methods for managing Savings Categories 
 	def getSavingsCategories(self):
@@ -159,6 +159,8 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
 
         def pickSelectedFoodItem(self,index):
                 '''get selected item and populate categories textbox'''
+                self.txtEnergyValue.setText("")
+                self.txtMeasuringUnit.setText("")
                 
                 selectedFoodItem = self.foodListView.model().item(index.row(),0).text()
                 self.txtFoodStockType.setText(selectedFoodItem)
@@ -171,8 +173,10 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
                         kcalValue = row[0]
 			unitOfMeasure = row[1]
 
-		self.txtEnergyValue.setText(str(kcalValue))
-                self.txtMeasuringUnit.setText(unitOfMeasure)
+		if kcalValue:
+                        self.txtEnergyValue.setText(str(kcalValue))
+                if unitOfMeasure:
+                        self.txtMeasuringUnit.setText(unitOfMeasure)
 
         def saveFoodStockType(self):
         	''' Saves newly created data to database '''
@@ -565,7 +569,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
                         kcalValue = row[0]
 			unitOfMeasure = row[1]
 
-		self.txtLivestockEnergyValue.setText(str(kcalValue))
+		#self.txtLivestockEnergyValue.setText(str(kcalValue))
                 self.txtLivestockUnit.setText(unitOfMeasure)
 
         def saveLivestockType(self):
@@ -573,11 +577,11 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
 
         	# get the data entered by user
         	myincomesource = self.txtLivestockPType.text()
-        	myenergyvalue = self.txtLivestockEnergyValue.text()
+        	#myenergyvalue = self.txtLivestockEnergyValue.text()
         	unitofmeasure = self.txtLivestockUnit.text()
                         	
 		# check if record exists
-		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)    
+		query = '''SELECT unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)    
 		
                 recordset = self.executeResultsQuery(query)
 		numrows = 0		
@@ -586,11 +590,11 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
 				      	
 		if numrows == 0:
 			
-			query = '''INSERT INTO setup_livestock(incomesource, energyvalueperunit, unitofmeasure) 
-                     		VALUES('%s',%s,'%s')''' % (myincomesource, myenergyvalue, unitofmeasure)
+			query = '''INSERT INTO setup_livestock(incomesource, unitofmeasure) 
+                     		VALUES('%s','%s')''' % (myincomesource, unitofmeasure)
 		else:
-			query = '''UPDATE setup_livestock SET incomesource='%s', energyvalueperunit=%s, unitofmeasure='%s'
-                     		WHERE incomesource='%s' ''' % (myincomesource, myenergyvalue, unitofmeasure, myincomesource)
+			query = '''UPDATE setup_livestock SET incomesource='%s', unitofmeasure='%s'
+                     		WHERE incomesource='%s' ''' % (myincomesource, unitofmeasure, myincomesource)
     
         	# execute query and commit changes
                 self.executeUpdateQuery(query)
@@ -604,7 +608,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
         	myincomesource = self.txtLivestockPType.text()		
         	
 		# check if record exists
-		query = '''SELECT energyvalueperunit, unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)    
+		query = '''SELECT unitofmeasure FROM setup_livestock WHERE incomesource='%s' ''' % (myincomesource)    
 		
                 recordset = self.executeResultsQuery(query)
 		numrows = 0		

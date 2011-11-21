@@ -29,13 +29,13 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabCashSavings">
       <attribute name="title">
        <string>Cash Savings</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -107,7 +107,7 @@
       <attribute name="title">
        <string>Food Stock</string>
       </attribute>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -318,21 +318,11 @@
       <attribute name="title">
        <string>Livestock</string>
       </attribute>
-      <widget class="QLineEdit" name="txtLivestockEnergyValue">
-       <property name="geometry">
-        <rect>
-         <x>350</x>
-         <y>110</y>
-         <width>201</width>
-         <height>28</height>
-        </rect>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_9">
        <property name="geometry">
         <rect>
          <x>260</x>
-         <y>170</y>
+         <y>130</y>
          <width>81</width>
          <height>16</height>
         </rect>
@@ -344,27 +334,11 @@
         <cstring>txtLivestockUnit</cstring>
        </property>
       </widget>
-      <widget class="QLabel" name="label_11">
-       <property name="geometry">
-        <rect>
-         <x>260</x>
-         <y>120</y>
-         <width>54</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>KCalories</string>
-       </property>
-       <property name="buddy">
-        <cstring>txtLivestockEnergyValue</cstring>
-       </property>
-      </widget>
       <widget class="QLineEdit" name="txtLivestockUnit">
        <property name="geometry">
         <rect>
          <x>350</x>
-         <y>160</y>
+         <y>120</y>
          <width>201</width>
          <height>31</height>
         </rect>
@@ -734,7 +708,6 @@
   <tabstop>txtLandMeasuringUnit</tabstop>
   <tabstop>btnLandDelete</tabstop>
   <tabstop>landListView</tabstop>
-  <tabstop>txtLivestockEnergyValue</tabstop>
   <tabstop>txtLivestockUnit</tabstop>
   <tabstop>btnLivestockDelete</tabstop>
   <tabstop>livestockListView</tabstop>
@@ -867,7 +840,7 @@
   </connection>
   <connection>
    <sender>treeListView</sender>
-   <signal>activated(QModelIndex)</signal>
+   <signal>clicked(QModelIndex)</signal>
    <receiver>ManageAssetDetails</receiver>
    <slot>pickSelectedTreeType()</slot>
    <hints>
@@ -885,7 +858,7 @@
    <sender>btnTreeSave</sender>
    <signal>clicked()</signal>
    <receiver>ManageAssetDetails</receiver>
-   <slot>pickSelectedTreeType()</slot>
+   <slot>saveTreeType()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>385</x>
@@ -974,6 +947,54 @@
     <hint type="destinationlabel">
      <x>572</x>
      <y>325</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnFoodStockSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>saveFoodStockType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>468</x>
+     <y>144</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>285</x>
+     <y>211</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>foodListView</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>pickSelectedFoodItem()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>149</x>
+     <y>207</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>285</x>
+     <y>211</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnCashSave</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>saveSavingsType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>341</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>285</x>
+     <y>211</y>
     </hint>
    </hints>
   </connection>
