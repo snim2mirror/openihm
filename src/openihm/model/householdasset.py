@@ -51,38 +51,38 @@ class HouseholdAsset:
        
          # execute query
          database.execUpdateQuery( query )
+         
+         query = "SELECT LAST_INSERT_ID()"
+         rows = database.execSelectQuery( query )
+         for row in rows:
+            assetid = row[0]
+            
          database.close()
-         # update household attributes
+         # update asset attributes
          self.pid = pid
          self.hhid = hhid
-         self.memberid = personid
-         self.headofhousehold = headofhousehold
-         self.yearofbirth = yearofbirth
-         self.sex = sex
-         self.education = education
-         self.periodaway = periodaway
-         self.reason = reason
-         self.whereto = whereto
+         self.assetid = assetid
+         self.category = category
+         self.assettype = assettype
+         self.unitofmeasure = unitofmeasure
+         self.costperunit = costperunit
+         self.numunits = numunits
         
-     def editData(self, personid,  headofhousehold, yearofbirth, sex, education, periodaway, reason, whereto):
+     def editData(self, category,  assettype, unitofmeasure, costperunit, numunits):
          database = Database()
          database.open()
         
-         query = '''UPDATE householdmembers
-                     SET personid='%s', headofhousehold='%s', yearofbirth=%s, sex='%s', education='%s', periodaway=%s, reason='%s', whereto='%s'
-                     WHERE pid=%s and hhid=%s and personid='%s' ''' 
-                     
-         query = query % (personid, headofhousehold, yearofbirth, sex, education, periodaway, reason, whereto,  self.pid,  self.hhid,  self.memberid)
+         query = ''' UPDATE assets SET assetcategory='%s', assettype='%s', unitofmeasure='%s', unitcost=%s, totalunits=%s
+                     WHERE hhid=%s AND pid=%s 
+                     AND assetid=%s ''' % ( category,  assettype, unitofmeasure, costperunit, numunits, self.hhid, self.pid,  self.assetid)
        
          # execute query
          database.execUpdateQuery( query )
          database.close()
          
-         # update household attributes
-         self.headofhousehold = headofhousehold
-         self.yearofbirth = yearofbirth
-         self.sex = sex
-         self.education = education
-         self.periodaway = periodaway
-         self.reason = reason
-         self.whereto = whereto
+         # update asset attributes
+         self.category = category
+         self.assettype = assettype
+         self.unitofmeasure = unitofmeasure
+         self.costperunit = costperunit
+         self.numunits = numunits
