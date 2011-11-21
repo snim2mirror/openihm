@@ -121,6 +121,7 @@ class TransferManager:
          for row in rows:
              household = project.addHousehold(row.HHID, row.HHRealName, startdate)
              self.transferHouseholdMembers( accessfilename, sourcepid,  row.HHID,  household )
+             self.transferHouseholdAssets( accessfilename, sourcepid,  row.HHID,  household )
              
          db.close()
          
@@ -147,4 +148,24 @@ class TransferManager:
              
          db.close()
          
+     def transferHouseholdAssets(self, accessfilename, sourcepid,  sourcehhid,  household ):
+         query = '''SELECT tblLkUpAssets.AssetCategory, tblLkUpAssets.AssetName, tblLkUpAssets.Unit, tblLkUpAssets.PriceUnit, TblAssetVals.Value
+                       FROM TblAssetVals, tblLkUpAssets
+                       WHERE TblAssetVals.AssetID = tblLkUpAssets.AssetID AND TblAssetVals.ProjectID=%s 
+                       AND TblAssetVals.HHID=%s''' % (sourcepid, sourcehhid)
+         print query
+         
+         db = AccessDB(accessfilename)
+         db.open()
+         rows = db.execSelectQuery( query )
+         
+         for row in rows:
+             category = row.AssetCategory
+             assettype = row.AssetName
+             unitofmeasure = row.Unit
+             costperunit = row.PriceUnit
+             numunits = row.Value
+             household.addAsset(category,  assettype, unitofmeasure, costperunit, numunits )    
+             
+         db.close()
     
