@@ -953,6 +953,8 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 		model.setHorizontalHeaderItem(4,QStandardItem('Units Paid'))
 		model.setHorizontalHeaderItem(5,QStandardItem('Energy Value (KCals)'))
 		model.setHorizontalHeaderItem(6,QStandardItem('Cash Income'))
+
+		num = 0
 		
 		for row in rows:
 			qtIncomeID = QStandardItem( "%i" % row[0])
