@@ -123,6 +123,8 @@ class TransferManager:
              self.transferHouseholdMembers( accessfilename, sourcepid,  row.HHID,  household )
              self.transferHouseholdAssets( accessfilename, sourcepid,  row.HHID,  household )
              self.transferHouseholdCropIncome( accessfilename, sourcepid,  row.HHID,  household )
+             self.transferHouseholdLivestockIncome( accessfilename, sourcepid,  row.HHID,  household )
+             self.transferHouseholdWildfoodsIncome( accessfilename, sourcepid,  row.HHID,  household )
              
          db.close()
          
@@ -178,6 +180,33 @@ class TransferManager:
                        WHERE TblLkUpIncomeSources.IncomeSourceID=TblIncomeSourcesCrops.IncomeSourceIDCrops 
                        AND TblIncomeSourcesCrops.IncomeSourceIDCrops=TblIncomeValsCrops.IncomeSourceIDCrops 
                        AND TblIncomeValsCrops.ProjectID=%s AND TblIncomeValsCrops.HHID=%s ''' % (sourcepid, sourcehhid)
+         
+         db = AccessDB(accessfilename)
+         db.open()
+         rows = db.execSelectQuery( query )
+         
+         for row in rows:
+             incomesource = row.IncomeSource
+             unitofmeasure = row.Unit
+             unitsproduced = row.UnitsProduced if row.UnitsProduced != None else 0
+             unitssold = row.UnitsSold if row.UnitsSold != None else 0
+             unitprice = row.PriceUnit if row.PriceUnit != None else 0
+             otheruses = row.OtherUses if row.OtherUses != None else 0
+             unitsconsumed = row.UnitsConsumed if row.UnitsConsumed != None else 0
+             unitsproduced = unitsconsumed if unitsproduced==0 and unitsconsumed != 0 else unitsproduced
+             household.addCropIncome(incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed )    
+             
+         db.close()
+         
+     def transferHouseholdLivestockIncome(self, accessfilename, sourcepid,  sourcehhid,  household ):
+         query = '''SELECT TblLkUpIncomeSources.IncomeSource, TblIncomeSourcesLS.Unit, 
+                                 TblIncomeValsLS.UnitsSold + TblIncomeValsLS.UnitsConsumed AS UnitsProduced, 
+                                 TblIncomeValsLS.UnitsSold, TblIncomeValsLS.PriceUnit, 0 AS OtherUses, 
+                                 TblIncomeValsLS.UnitsConsumed
+                       FROM TblLkUpIncomeSources, TblIncomeSourcesLS, TblIncomeValsLS
+                       WHERE TblLkUpIncomeSources.IncomeSourceID=TblIncomeSourcesLS.IncomeSourceIDLS 
+                       AND TblIncomeSourcesLS.IncomeSourceIDLS=TblIncomeValsLS.IncomeSourceIDLS 
+                       AND TblIncomeValsLS.ProjectID=%s AND TblIncomeValsLS.HHID=%s ''' % (sourcepid, sourcehhid)
                        
          print query
          
@@ -193,8 +222,37 @@ class TransferManager:
              unitprice = row.PriceUnit if row.PriceUnit != None else 0
              otheruses = row.OtherUses if row.OtherUses != None else 0
              unitsconsumed = row.UnitsConsumed if row.UnitsConsumed != None else 0
-             household.addCropIncome(incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed )    
+             unitsproduced = unitsconsumed if unitsproduced==0 and unitsconsumed != 0 else unitsproduced
+             household.addLivestockIncome(incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed )    
              
          db.close()
          
+     def transferHouseholdWildfoodsIncome(self, accessfilename, sourcepid,  sourcehhid,  household ):
+         query = '''SELECT TblLkUpIncomeSources.IncomeSource, TblIncomeSourcesWF.Unit, 
+                                 TblIncomeValsWF.UnitsSold + TblIncomeValsWF.UnitsConsumed AS UnitsProduced, 
+                                 TblIncomeValsWF.UnitsSold, 0 AS PriceUnit, 0 AS OtherUses, 
+                                 TblIncomeValsWF.UnitsConsumed
+                       FROM TblLkUpIncomeSources, TblIncomeSourcesWF, TblIncomeValsWF
+                       WHERE TblLkUpIncomeSources.IncomeSourceID=TblIncomeSourcesWF.IncomeSourceIDWF 
+                       AND TblIncomeSourcesWF.IncomeSourceIDWF=TblIncomeValsWF.IncomeSourceIDWF 
+                       AND TblIncomeValsWF.ProjectID=%s AND TblIncomeValsWF.HHID=%s ''' % (sourcepid, sourcehhid)
+                       
+         print query
+         
+         db = AccessDB(accessfilename)
+         db.open()
+         rows = db.execSelectQuery( query )
+         
+         for row in rows:
+             incomesource = row.IncomeSource
+             unitofmeasure = row.Unit
+             unitsproduced = row.UnitsProduced if row.UnitsProduced != None else 0
+             unitssold = row.UnitsSold if row.UnitsSold != None else 0
+             unitprice = row.PriceUnit if row.PriceUnit != None else 0
+             otheruses = row.OtherUses if row.OtherUses != None else 0
+             unitsconsumed = row.UnitsConsumed if row.UnitsConsumed != None else 0
+             unitsproduced = unitsconsumed if unitsproduced==0 and unitsconsumed != 0 else unitsproduced
+             household.addWildfoodsIncome(incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed )    
+             
+         db.close()
     
