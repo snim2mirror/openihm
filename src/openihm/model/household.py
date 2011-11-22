@@ -21,8 +21,9 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 from database import Database
 from householdmember_manager import HouseholdMemberManager
 from householdasset_manager import HouseholdAssetManager
+from householdincome_crop_manager import HouseholdCropIncomeManager
 
-class Household(HouseholdMemberManager, HouseholdAssetManager):
+class Household(HouseholdMemberManager, HouseholdAssetManager, HouseholdCropIncomeManager):
     def __init__(self, pid, hhid=0, householdname="", dateofcollection=""):
         self.database = Database() 
         self.pid = pid

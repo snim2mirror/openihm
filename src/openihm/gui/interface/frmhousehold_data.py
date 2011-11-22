@@ -448,7 +448,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 			queries = []
 			for assetid in selectedIds:
 				queries.append('''DELETE FROM assets WHERE hhid=%s AND pid=%s AND assetid='%s' ''' % (hhid, pid,  assetid))
-			self.executeUpdateQueries(queries)
+			self.executeMultipleUpdateQueries(queries)
 			
 			self.retrieveHouseholdAssets()
 

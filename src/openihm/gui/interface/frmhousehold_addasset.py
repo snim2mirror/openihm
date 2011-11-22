@@ -23,13 +23,13 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from data.config import Config
+from control.controller import Controller
 
 Ui_AddHouseholdAsset, base_class = uic.loadUiType("gui/designs/ui_household_addasset.ui")
 
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin,  MySQLMixin
 
-class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset, MDIDialogMixin):	
+class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset,  MySQLMixin,  MDIDialogMixin):	
      ''' Form to add or edit a Household Asset  '''	
      def __init__(self, parent,  hhid, hhname, assetid = 0 ):
          ''' Set up the dialog box interface '''
@@ -39,8 +39,6 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset, MDIDialogMixin):
          self.hhid 		= hhid
          self.pid           = parent.parent.projectid
          self.assetid 	= assetid
-         
-         self.config = Config.dbinfo().copy()
 
          self.getAssetCategories()
          self.getAssetTypes()

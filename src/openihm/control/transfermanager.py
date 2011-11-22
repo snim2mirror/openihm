@@ -122,6 +122,7 @@ class TransferManager:
              household = project.addHousehold(row.HHID, row.HHRealName, startdate)
              self.transferHouseholdMembers( accessfilename, sourcepid,  row.HHID,  household )
              self.transferHouseholdAssets( accessfilename, sourcepid,  row.HHID,  household )
+             self.transferHouseholdCropIncome( accessfilename, sourcepid,  row.HHID,  household )
              
          db.close()
          
@@ -153,7 +154,6 @@ class TransferManager:
                        FROM TblAssetVals, tblLkUpAssets
                        WHERE TblAssetVals.AssetID = tblLkUpAssets.AssetID AND TblAssetVals.ProjectID=%s 
                        AND TblAssetVals.HHID=%s''' % (sourcepid, sourcehhid)
-         print query
          
          db = AccessDB(accessfilename)
          db.open()
@@ -168,4 +168,33 @@ class TransferManager:
              household.addAsset(category,  assettype, unitofmeasure, costperunit, numunits )    
              
          db.close()
+         
+     def transferHouseholdCropIncome(self, accessfilename, sourcepid,  sourcehhid,  household ):
+         query = '''SELECT TblLkUpIncomeSources.IncomeSource, TblIncomeSourcesCrops.Unit, 
+                                 TblIncomeValsCrops.UnitsSold + TblIncomeValsCrops.UnitsConsumed AS UnitsProduced, 
+                                 TblIncomeValsCrops.UnitsSold, TblIncomeValsCrops.PriceUnit, 0 AS OtherUses, 
+                                 TblIncomeValsCrops.UnitsConsumed
+                       FROM TblLkUpIncomeSources, TblIncomeSourcesCrops, TblIncomeValsCrops
+                       WHERE TblLkUpIncomeSources.IncomeSourceID=TblIncomeSourcesCrops.IncomeSourceIDCrops 
+                       AND TblIncomeSourcesCrops.IncomeSourceIDCrops=TblIncomeValsCrops.IncomeSourceIDCrops 
+                       AND TblIncomeValsCrops.ProjectID=%s AND TblIncomeValsCrops.HHID=%s ''' % (sourcepid, sourcehhid)
+                       
+         print query
+         
+         db = AccessDB(accessfilename)
+         db.open()
+         rows = db.execSelectQuery( query )
+         
+         for row in rows:
+             incomesource = row.IncomeSource
+             unitofmeasure = row.Unit
+             unitsproduced = row.UnitsProduced if row.UnitsProduced != None else 0
+             unitssold = row.UnitsSold if row.UnitsSold != None else 0
+             unitprice = row.PriceUnit if row.PriceUnit != None else 0
+             otheruses = row.OtherUses if row.OtherUses != None else 0
+             unitsconsumed = row.UnitsConsumed if row.UnitsConsumed != None else 0
+             household.addCropIncome(incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed )    
+             
+         db.close()
+         
     
