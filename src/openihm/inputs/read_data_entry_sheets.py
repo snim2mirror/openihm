@@ -615,7 +615,7 @@ class ReadDataEntrySheets:
             for col_index in range(0,columns):
                 exitmain = False
                 personid =''
-                cellvalue = str(householdsheet.cell(current_row_index,col_index).value)
+                cellvalue = householdsheet.cell(current_row_index,col_index).value
                 datatype = str(householdsheet.cell(datatype_row_index,col_index).value)
                 if cellvalue == 'HouseholdCharacteristics':
                     exitmain = True
@@ -685,7 +685,7 @@ class ReadDataEntrySheets:
         fielddatatypes=[]
         for col_index in range (0,householdsheet.ncols):
             
-            datafieldvalue = str(householdsheet.cell(field_row_index,col_index).value) 
+            datafieldvalue = householdsheet.cell(field_row_index,col_index).value 
             fieldtype = str(householdsheet.cell(datatype_row_index,col_index).value)
             
             if datafieldvalue!='':
@@ -738,7 +738,6 @@ class ReadDataEntrySheets:
 
                 values.append(cellvalue)
                 
-
             if exitmain == True or empty_cell_count==columns:
                 break
             else:
@@ -752,7 +751,6 @@ class ReadDataEntrySheets:
                     query= '''DELETE FROM %s WHERE hhid=%s AND pid=%s''' %(self.hcharstable,hhid,self.pid)
                     database.execUpdateQuery(query)
                     query = self.buildCharInsertQuery(values,datafields,fielddatatypes,hhid,self.hcharstable)
-                    
                 database.execUpdateQuery(query)
                 
             empty_cell_count = 0
