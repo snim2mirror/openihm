@@ -167,8 +167,9 @@ class FrmPersonalCharacteristics(QDialog, Ui_PersonalCharacteristics, MySQLMixin
                                 self.cmbDataType.clear()
                                 self.txtDescription.clear()
 			
-                                #populate Food Types Combobox
-                                self.getPersonalCharacteristics()			
+                                #populate personal chars and data types Combo boxes
+                                self.getPersonalCharacteristics()
+                                self.setDatatypes()
 			
 		else:
 			QMessageBox.information(self, 'Delete Personal characteristic', "Record not found")
