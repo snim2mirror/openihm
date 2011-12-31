@@ -248,7 +248,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 		
 		fields = []
 		for row in rows:
-			if ( (row[0] != "hhid")  and (row[0]!= "pid" )  and (row[0]!= "personid" ) ):
+			if ( (row[0] != "hhid")  and (row[0]!= "pid" ) and (row[0]!= "personid" ) ):
 				fields.append( row[0] )
 		
 		model = QStandardItemModel(1,1)
@@ -273,7 +273,6 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 				qtVal	= QStandardItem( "%i" % val )
 			else:
 				qtVal	= QStandardItem( "%s" % val )
-				
 			model.setItem( num, 0, qtChar )
 			model.setItem( num, 1, qtVal )
 				

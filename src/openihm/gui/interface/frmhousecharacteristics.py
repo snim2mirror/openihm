@@ -169,8 +169,9 @@ class FrmHouseCharacteristics(QDialog, Ui_HouseCharacteristics, MySQLMixin, MDID
                                 self.cmbDataType.clear()
                                 self.txtDescription.clear()
 			
-                                #populate Food Types Combobox
-                                self.getHouseholdCharacteristics()			
+                                #populate personal chars and data types Combo boxes
+                                self.getHouseholdCharacteristics()
+                                self.setDataTypes()
 			
 		else:
 			QMessageBox.information(self, 'Household Characteristic', "Record not found")
