@@ -101,7 +101,7 @@ class FrmFindProjectResults(QDialog, Ui_FindProjectResults, TableViewMixin, MDID
         if ( ret == QMessageBox.No ):
             return
         
-        selectedRow = self.getCurrentRow(tblResults)
+        selectedRow = self.getCurrentRow(self.tblResults)
         pid 		= self.tblResults.model().item(selectedRow,0).text()
         ptitle 		= self.tblResults.model().item(selectedRow,1).text()
         
