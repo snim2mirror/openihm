@@ -23,7 +23,7 @@ from model.globalcharacteristic import GlobalCharacteristic
 
 class GlobalCharacteristicsManager:
      def existsGlobalCharacteristic(self, charname):
-         char = self.getCharacteristic(charname)
+         char = self.getGlobalCharacteristic(charname)
          if char.name == "":
              return False
          else:
