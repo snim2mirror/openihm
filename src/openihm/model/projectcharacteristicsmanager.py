@@ -18,48 +18,50 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 
-from model.database import Database
-from model.globalcharacteristic import GlobalCharacteristic
+from database import Database
+from projectcharacteristic import ProjectCharacteristic
 
-class GlobalCharacteristicsManager:
-     def existsGlobalCharacteristic(self, charname):
+class ProjectCharacteristicsManager:
+     def existsProjectCharacteristic(self, charname):
          char = self.getCharacteristic(charname)
          if char.name == "":
              return False
          else:
              return True
      
-     def getGlobalCharacteristic(self,  charname=""):
-        char = GlobalCharacteristic( charname )
+     def getProjectCharacteristic(self,  charname=""):
+        char = ProjectCharacteristic( self.pid,  charname )
         return char
         
-     def addGlobalCharacteristic(self,  charname,  chartype,  datatype,  description  = "" ):
-        char = GlobalCharacteristic( charname,  chartype,  datatype,  description )
+     def addProjectCharacteristic(self,  charname,  chartype,  datatype ):
+        char = ProjectCharacteristic( self.pid,  charname,  chartype,  datatype )
         return char
         
-     def delGlobalCharacteristic(self,  charname=""):  
+     def delProjectCharacteristic(self,  charname=""):  
          database = Database()      
-         query = "DELETE FROM globalcharacteristics WHERE characteristic='%s' " % ( charname )
+         query = "DELETE FROM projectcharacteristics WHERE pid=%s AND characteristic='%s' " % ( self.pid,  charname )
          database.open()
          database.execUpdateQuery( query )
          database.close()
     
-     def getGlobalCharacteristics(self,  chartype="Any"):
+     def getProjectCharacteristics(self,  chartype="Any"):
          
          if (chartype != "Any"):
-             strcondition = "WHERE chartype='%s' " % chartype
+             strcondition = "WHERE pid=%s AND chartype='%s' " % (self.pid,  chartype)
          else:
-             strcondition = ""
+             strcondition = "WHERE pid=%s" % (self.pid)
          
-         query = "SELECT characteristic FROM globalcharacteristics %s" % strcondition
-         self.database.open()
-         rows = self.database.execSelectQuery( query )
-         self.database.close()
+         query = "SELECT characteristic FROM projectcharacteristics %s" % strcondition
+         
+         database = Database()
+         database.open()
+         rows = database.execSelectQuery( query )
+         database.close()
          chars = []
         
          for row in rows:
              charname = row[0]
-             char = GlobalCharacteristic(charname)
+             char = ProjectCharacteristic(self.pid,  charname)
              chars.append( char )
             
          return chars

@@ -50,7 +50,7 @@ class FrmAddPersonalCharacteristic (QDialog, Ui_AddPersonalCharacteristic):
          
      def showDetails(self):
          controller = Controller()
-         char = controller.getCharacteristic(self.characteristic)
+         char = controller.getGlobalCharacteristic(self.characteristic)
          self.txtCharacteristic.setText( char.name )
          self.txtDescription.setText( char.description )
          self.cmbDataType.setCurrentIndex( self.cmbDataType.findText( char.datatypestr ) )
@@ -63,13 +63,13 @@ class FrmAddPersonalCharacteristic (QDialog, Ui_AddPersonalCharacteristic):
          description = self.txtDescription.text()
          
          if self.characteristic == "":
-             if controller.existsCharacteristic( charname ):
+             if controller.existsGlobalCharacteristic( charname ):
                  QMessageBox.information(self,"Add Personal Characteristic","Personal Characteristic Already Exists.")
                  return
              else:
-                 controller.addCharacteristic(charname, "Personal", datatype, description)
+                 controller.addGlobalCharacteristic(charname, "Personal", datatype, description)
          else:
-             char = controller.getCharacteristic( self.characteristic )
+             char = controller.getGlobalCharacteristic( self.characteristic )
              char.editData(charname, "Personal", datatype, description)
          
          self.parent.loadCharacteristics()

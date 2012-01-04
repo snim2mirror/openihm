@@ -50,7 +50,7 @@ class FrmAddHouseholdCharacteristic (QDialog, Ui_AddHouseholdCharacteristic):
          
      def showDetails(self):
          controller = Controller()
-         char = controller.getCharacteristic(self.characteristic)
+         char = controller.getGlobalCharacteristic(self.characteristic)
          self.txtCharacteristic.setText( char.name )
          self.txtDescription.setText( char.description )
          self.cmbDataType.setCurrentIndex( self.cmbDataType.findText( char.datatypestr ) )
@@ -63,13 +63,13 @@ class FrmAddHouseholdCharacteristic (QDialog, Ui_AddHouseholdCharacteristic):
          description = self.txtDescription.text()
          
          if self.characteristic == "":
-             if controller.existsCharacteristic( charname ):
+             if controller.existsGlobalCharacteristic( charname ):
                  QMessageBox.information(self,"Add Household Characteristic","Household Characteristic Already Exists.")
                  return
              else:
-                 controller.addCharacteristic(charname, "Household", datatype, description)
+                 controller.addGlobalCharacteristic(charname, "Household", datatype, description)
          else:
-             char = controller.getCharacteristic( self.characteristic )
+             char = controller.getGlobalCharacteristic( self.characteristic )
              char.editData(charname, "Household", datatype, description)
          
          self.parent.loadCharacteristics()

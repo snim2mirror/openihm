@@ -321,7 +321,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             form = FrmConfigureProject(self)
             subWin = self.mdi.addSubWindow(form)
             self.centerSubWindow(subWin)
-            form.show()
+            form.showMaximized()
         
     def addHousehold(self):
         ''' Creates and Shows the Add House Hold form '''

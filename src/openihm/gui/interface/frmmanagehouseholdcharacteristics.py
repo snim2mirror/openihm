@@ -82,7 +82,7 @@ class FrmManageHouseholdCharacteristics (QDialog, TableViewMixin, MDIDialogMixin
              selectedRows = self.getSelectedRows(self.tblHouseholdCharacteristics)
              for row in selectedRows:
                  charname = self.tblHouseholdCharacteristics.model().item(row,0).text()
-                 controller.delCharacteristic(charname)
+                 controller.delGlobalCharacteristic(charname)
 
              self.loadCharacteristics()
 

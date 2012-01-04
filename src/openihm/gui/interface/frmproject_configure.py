@@ -23,7 +23,7 @@ from PyQt4.QtGui import *
 from PyQt4 import uic
 
 from data.config import Config
-from data.controller import Controller
+from control.controller import Controller
 
 # import the Create Project Dialog design class
 Ui_ProjectConfiguration, base_class = uic.loadUiType("gui/designs/ui_projectconfiguration.ui")
@@ -59,10 +59,10 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
          self.lblProjectName.setText(self.parent.projectname)
         
          # display Available and Selected Household Characteristics
-         self.displayAvailableChars("household", self.lstHouseholdAvailableChars)
-         self.displayAvailableChars("person", self.lstPersonalAvailableChars)
-         self.displaySelectedChars("household", self.lstHouseholdSelectedChars)
-         self.displaySelectedChars("person", self.lstPersonalSelectedChars)
+         self.displayAvailableChars("Household", self.lstHouseholdAvailableChars)
+         self.displayAvailableChars("Personal", self.lstPersonalAvailableChars)
+         self.displaySelectedChars("Household", self.lstHouseholdSelectedChars)
+         self.displaySelectedChars("Personal", self.lstPersonalSelectedChars)
          self.listDiets()
          self.getCropTypes()
          self.displayStandardOfLiving()
@@ -399,19 +399,19 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
      #-------------------------------------------------------------------------------------------------------------------------
         
      def getProjectCharacteristics(self, lstVw):
-        chars = []
-        row = 0
-        while (lstVw.model().item(row,0)):
-            val = lstVw.model().item(row,0).text()
-            chars.append(val)
-            row = row + 1
+         chars = []
+         row = 0
+         while (lstVw.model().item(row,0)):
+             val = lstVw.model().item(row,0).text()
+             chars.append(val)
+             row = row + 1
             
-        return chars
+         return chars
         
      def displayAvailableChars(self, chartype, lstAvailable):
         ''' Retrieve and display available Household Characteristics ''' 
         controller = Controller()
-        chars = controller.getGlobalHouseholdCharacteristics() if chartype == "household" else controller.getGlobalPersonCharacteristics()
+        chars = controller.getGlobalCharacteristics(chartype)
         
         model = QStandardItemModel(1,2)
         
@@ -422,9 +422,9 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
         # add  data rows
         num = 0
         
-        for characteristic in chars:
-            qtCharacteristic = QStandardItem( characteristic.getName() )
-            qtDataType = QStandardItem( "%i" % characteristic.getDataType() )		
+        for char in chars:
+            qtCharacteristic = QStandardItem( char.name )
+            qtDataType = QStandardItem( char.datatypestr )		
             model.setItem( num, 0, qtCharacteristic )
             model.setItem( num, 1, qtDataType )
             num = num + 1
@@ -435,22 +435,22 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
      def displaySelectedChars(self, chartype, lstSelected):
         ''' Retrieve and display Project Characteristics (Household or Personal)'''
         # select query to retrieve selected characteristics
-        if ( chartype == "household" ):
-            chars = self.project.getHouseholdCharacteristics()
-        else:
-            chars = self.project.getPersonCharacteristics()
+        chars = self.project.getProjectCharacteristics(chartype)
 
         model = QStandardItemModel(1,1)
 
         # set model headers
         model.setHorizontalHeaderItem(0,QStandardItem('Characteristic'))
+        model.setHorizontalHeaderItem(1,QStandardItem('Data Type'))
 
         # add  data rows
         num = 0
 
         for characteristic in chars:
             qtCharacteristic = QStandardItem( characteristic.getName() )	
+            qtDataType = QStandardItem( char.datatypestr )		
             model.setItem( num, 0, qtCharacteristic )
+            model.setItem( num, 1, qtDataType )
             num = num + 1
 
         lstSelected.setModel(model)
@@ -458,17 +458,14 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
 
      def removeCharacteristic(self, chartype , characteristic):
         ''' removes a characteristic from a project'''
-        if ( chartype == "household" ):
-            self.project.removeHouseholdCharacteristic( characteristic )
-        else:
-            self.project.removePersonCharacteristic( characteristic )
+        self.project.delProjectCharacteristic(characteristic)
         
      def addCharacteristic(self, chartype, characteristic, datatype):
         ''' adds a characteristic to a project'''
-        if ( chartype == "household" ):
-            self.project.addHouseholdCharacteristic( characteristic,  datatype )
-        else:
-            self.project.addPersonCharacteristic( characteristic,  datatype )
+        controller = Controller()
+        globalchar = controller.getGlobalCharacteristic(characteristic)
+        
+        self.project.addProjectCharacteristic(globalchar.name, globalchar.chartype, globalchar.datatype)
         
      def moveAllChars(self, chartype, lstAvailable, lstSelected):
         ''' Add all available household or person characteristics to Project'''
@@ -539,23 +536,23 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
 
      def moveAllHouseholdChars(self):
         ''' Add all available personal characteristics to Project'''
-        self.moveAllChars( "household", self.lstHouseholdAvailableChars, self.lstHouseholdSelectedChars )
-        self.displaySelectedChars( "household", self.lstHouseholdSelectedChars )
+        self.moveAllChars( "Household", self.lstHouseholdAvailableChars, self.lstHouseholdSelectedChars )
+        self.displaySelectedChars( "Household", self.lstHouseholdSelectedChars )
         
      def removeAllHouseholdChars(self):
         ''' remove all listed personal characteristics from Project'''
-        self.removeAllChars( "household", self.lstHouseholdSelectedChars )
-        self.displaySelectedChars( "household", self.lstHouseholdSelectedChars )
+        self.removeAllChars( "Household", self.lstHouseholdSelectedChars )
+        self.displaySelectedChars( "Household", self.lstHouseholdSelectedChars )
         
      def moveSelectedHouseholdChars(self):
         ''' Add selected available household characteristics to Project'''
-        self.moveSelectedChars( "household", self.lstHouseholdAvailableChars, self.lstHouseholdSelectedChars )
-        self.displaySelectedChars( "household", self.lstHouseholdSelectedChars ) 
+        self.moveSelectedChars( "Household", self.lstHouseholdAvailableChars, self.lstHouseholdSelectedChars )
+        self.displaySelectedChars( "Household", self.lstHouseholdSelectedChars ) 
         
      def removeSelectedHouseholdChars(self):
         ''' remove selected household characteristics from Project'''
-        self.removeSelectedChars( "household", self.lstHouseholdSelectedChars )
-        self.displaySelectedChars( "household", self.lstHouseholdSelectedChars )
+        self.removeSelectedChars( "Household", self.lstHouseholdSelectedChars )
+        self.displaySelectedChars( "Household", self.lstHouseholdSelectedChars )
             
      #-----------------------------------------------------------------------------------------------------------
      # Personal Characteristics methods
@@ -563,21 +560,21 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, CropIncomeManager, L
 
      def moveAllPersonalChars(self):
         ''' Add all available personal characteristics to Project'''
-        self.moveAllChars("person", self.lstPersonalAvailableChars, self.lstPersonalSelectedChars)
-        self.displaySelectedChars( "person", self.lstPersonalSelectedChars )
+        self.moveAllChars("Personal", self.lstPersonalAvailableChars, self.lstPersonalSelectedChars)
+        self.displaySelectedChars( "Personal", self.lstPersonalSelectedChars )
         
      def removeAllPersonalChars(self):
         ''' remove all listed personal characteristics from Project'''
-        self.removeAllChars("person", self.lstPersonalSelectedChars)
-        self.displaySelectedChars( "person", self.lstPersonalSelectedChars )
+        self.removeAllChars("Personal", self.lstPersonalSelectedChars)
+        self.displaySelectedChars( "Personal", self.lstPersonalSelectedChars )
         
      def moveSelectedPersonalChars(self):
         ''' Add selected available household characteristics to Project'''
-        self.moveSelectedChars("person", self.lstPersonalAvailableChars, self.lstPersonalSelectedChars)
-        self.displaySelectedChars( "person", self.lstPersonalSelectedChars ) 
+        self.moveSelectedChars("Personal", self.lstPersonalAvailableChars, self.lstPersonalSelectedChars)
+        self.displaySelectedChars( "Personal", self.lstPersonalSelectedChars ) 
         
      def removeSelectedPersonalChars(self):
         ''' remove selected household characteristics from Project'''
-        self.removeSelectedChars("person", self.lstPersonalSelectedChars)
-        self.displaySelectedChars( "person", self.lstPersonalSelectedChars )
+        self.removeSelectedChars("Personal", self.lstPersonalSelectedChars)
+        self.displaySelectedChars( "Personal", self.lstPersonalSelectedChars )
         

@@ -82,7 +82,7 @@ class FrmManagePersonalCharacteristics (QDialog, MDIDialogMixin, TableViewMixin,
              selectedRows = self.getSelectedRows(self.tblPersonalCharacteristics)
              for row in selectedRows:
                  charname = self.tblPersonalCharacteristics.model().item(row,0).text()
-                 controller.delCharacteristic(charname)
+                 controller.delGlobalCharacteristic(charname)
 
              self.loadCharacteristics()
 
