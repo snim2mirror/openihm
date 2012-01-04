@@ -125,6 +125,9 @@ class TransferManager:
              self.transferHouseholdCropIncome( accessfilename, sourcepid,  row.HHID,  household )
              self.transferHouseholdLivestockIncome( accessfilename, sourcepid,  row.HHID,  household )
              self.transferHouseholdWildfoodsIncome( accessfilename, sourcepid,  row.HHID,  household )
+             self.transferHouseholdGiftsIncome( accessfilename, sourcepid,  row.HHID,  household )
+             self.transferHouseholdAIDIncome( accessfilename, sourcepid,  row.HHID,  household )
+             self.transferHouseholdEmploymentIncome( accessfilename, sourcepid,  row.HHID,  household )
              
          db.close()
          
@@ -253,6 +256,98 @@ class TransferManager:
              unitsconsumed = row.UnitsConsumed if row.UnitsConsumed != None else 0
              unitsproduced = unitsconsumed if unitsproduced==0 and unitsconsumed != 0 else unitsproduced
              household.addWildfoodsIncome(incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed )    
+             
+         db.close()
+         
+     def transferHouseholdGiftsIncome(self, accessfilename, sourcepid,  sourcehhid,  household ):
+         query = '''SELECT TblLkUpIncomeSources.IncomeSource AS sourceoftransfer, 'Internal' AS sourcetype, 
+                                 TblIncomeValsGift.CashYr AS cashperyear, '' AS foodtype,TblIncomeSourcesGift.Unit AS unitofmeasure,
+                                 TblIncomeValsGift.UnitsConsumed AS unitsgiven,
+                                 TblIncomeValsGift.UnitsConsumed AS unitsconsumed,
+                                 0 AS unitssold, 0 AS priceperunit
+                       FROM TblLkUpIncomeSources, TblIncomeSourcesGift, TblIncomeValsGift
+                       WHERE TblLkUpIncomeSources.IncomeSourceID=TblIncomeSourcesGift.IncomeSourceIDGift 
+                       AND TblIncomeSourcesGift.IncomeSourceIDGift=TblIncomeValsGift.IncomeSourceIDGift 
+                       AND TblIncomeValsGift.ProjectID=%s AND TblIncomeValsGift.HHID=%s ''' % (sourcepid, sourcehhid)
+                       
+         print query
+         
+         db = AccessDB(accessfilename)
+         db.open()
+         rows = db.execSelectQuery( query )
+         
+         for row in rows:
+             sourcetype = row.sourcetype
+             sourceoftransfer = row.sourceoftransfer
+             cashperyear = row.cashperyear if row.cashperyear != None else 0
+             foodtype = row.foodtype if row.foodtype != None else ""
+             unitofmeasure = row.unitofmeasure if row.unitofmeasure != None else ""
+             unitsgiven = row.unitsgiven if row.unitsgiven != None else 0
+             unitsconsumed = row.unitsconsumed if row.unitsconsumed != None else 0
+             unitssold = row.unitssold if row.unitssold != None else 0
+             priceperunit = row.priceperunit if row.priceperunit != None else 0
+             household.addTransferIncome(sourcetype, sourceoftransfer, cashperyear, foodtype, unitofmeasure, unitsgiven, unitsconsumed, unitssold, priceperunit )    
+             
+         db.close()
+         
+     def transferHouseholdAIDIncome(self, accessfilename, sourcepid,  sourcehhid,  household ):
+         query = '''SELECT TblLkUpIncomeSources.IncomeSource AS sourceoftransfer, 'External' AS sourcetype, 
+                                 TblIncomeValsAID.UnitValueCash * TblIncomeValsAID.TimesItemsReceived AS cashperyear,
+                                 '' AS foodtype,
+                                 TblIncomeSourcesAID.Unit AS unitofmeasure,
+                                 TblIncomeValsAID.UnitValueFood * TblIncomeValsAID.TimesItemsReceived AS unitsgiven,
+                                 0 AS unitsconsumed,
+                                 0 AS unitssold, 0 AS priceperunit
+                       FROM TblLkUpIncomeSources, TblIncomeSourcesAID, TblIncomeValsAID
+                       WHERE TblLkUpIncomeSources.IncomeSourceID=TblIncomeSourcesAID.IncomeSourceID 
+                       AND TblIncomeSourcesAID.IncomeSourceID=TblIncomeValsAID.IncomeSourceID 
+                       AND TblIncomeValsAID.ProjectID=%s AND TblIncomeValsAID.HHID=%s ''' % (sourcepid, sourcehhid)
+                       
+         print query
+         
+         db = AccessDB(accessfilename)
+         db.open()
+         rows = db.execSelectQuery( query )
+         
+         for row in rows:
+             sourcetype = row.sourcetype
+             sourceoftransfer = row.sourceoftransfer
+             cashperyear = row.cashperyear if row.cashperyear != None else 0
+             foodtype = row.foodtype if row.foodtype != None else ""
+             unitofmeasure = row.unitofmeasure if row.unitofmeasure != None else ""
+             unitsgiven = row.unitsgiven if row.unitsgiven != None else 0
+             unitsconsumed = row.unitsconsumed if row.unitsconsumed != None else 0
+             unitssold = row.unitssold if row.unitssold != None else 0
+             priceperunit = row.priceperunit if row.priceperunit != None else 0
+             household.addTransferIncome(sourcetype, sourceoftransfer, cashperyear, foodtype, unitofmeasure, unitsgiven, unitsconsumed, unitssold, priceperunit )    
+             
+         db.close()
+         
+     def transferHouseholdEmploymentIncome(self, accessfilename, sourcepid,  sourcehhid,  household ):
+         query = '''SELECT TblLkUpIncomeSources.IncomeSource AS incomesource, TblIncomeSourcesEmp.FoodTypePaid as foodtypepaid, 
+                                 TblIncomeSourcesEmp.FoodUnit as unitofmeasure,
+                                 TblIncomeValsEmp.NFoodUnits AS unitspaid, 
+                                 TblIncomeValsEmp.IncomeKcals AS incomekcal, 
+                                 TblIncomeValsEmp.IncomeCash AS cashincome
+                       FROM TblLkUpIncomeSources, TblIncomeSourcesEmp, TblIncomeValsEmp
+                       WHERE TblLkUpIncomeSources.IncomeSourceID=TblIncomeSourcesEmp.IncomeSourceIDEmp 
+                       AND TblIncomeSourcesEmp.IncomeSourceIDEmp=TblIncomeValsEmp.IncomeSourceIDEmp 
+                       AND TblIncomeValsEmp.ProjectID=%s AND TblIncomeValsEmp.HHID=%s ''' % (sourcepid, sourcehhid)
+                       
+         print query
+         
+         db = AccessDB(accessfilename)
+         db.open()
+         rows = db.execSelectQuery( query )
+         
+         for row in rows:
+             incomesource = row.incomesource
+             foodtypepaid = row.foodtypepaid
+             unitofmeasure = row.unitofmeasure if row.unitofmeasure != None else ''
+             unitspaid= row.unitspaid if row.unitspaid != None else 0
+             incomekcal = row.incomekcal if row.incomekcal != None else 0
+             cashincome= row.cashincome if row.cashincome != None else 0
+             household.addEmploymentIncome(incomesource, foodtypepaid, unitofmeasure, unitspaid, incomekcal, cashincome  )    
              
          db.close()
     

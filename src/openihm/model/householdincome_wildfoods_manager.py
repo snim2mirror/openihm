@@ -24,7 +24,7 @@ class HouseholdWildfoodsIncomeManager:
      '''
          Manages household wildfoods income - inherited by Household. Allows adding, editing, deleting and retrieval of household wildfoods income.
      '''   
-     def existsLivestockIncome(self, incomeid):
+     def existsWildfoodsIncome(self, incomeid):
          wsincome = self.getWildfoodsIncome(incomeid)
          if wsincome.incomeid == "":
              return False

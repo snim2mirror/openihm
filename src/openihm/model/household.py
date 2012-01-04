@@ -24,8 +24,10 @@ from householdasset_manager import HouseholdAssetManager
 from householdincome_crop_manager import HouseholdCropIncomeManager
 from householdincome_livestock_manager import HouseholdLivestockIncomeManager
 from householdincome_wildfoods_manager import HouseholdWildfoodsIncomeManager
+from householdincome_transfers_manager import HouseholdTransfersIncomeManager
+from householdincome_employment_manager import HouseholdEmploymentIncomeManager
 
-class Household(HouseholdMemberManager, HouseholdAssetManager, HouseholdCropIncomeManager, HouseholdLivestockIncomeManager, HouseholdWildfoodsIncomeManager):
+class Household(HouseholdMemberManager, HouseholdAssetManager, HouseholdCropIncomeManager, HouseholdLivestockIncomeManager, HouseholdWildfoodsIncomeManager, HouseholdTransfersIncomeManager, HouseholdEmploymentIncomeManager):
     def __init__(self, pid, hhid=0, householdname="", dateofcollection=""):
         self.database = Database() 
         self.pid = pid
