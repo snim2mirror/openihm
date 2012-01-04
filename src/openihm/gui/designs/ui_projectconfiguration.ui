@@ -95,7 +95,7 @@
       <item row="0" column="0">
        <widget class="QTabWidget" name="tabProject">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tabProjectHouseholdCharacteristics">
          <attribute name="title">
@@ -120,17 +120,20 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QGridLayout" name="gridLayout_6">
+                <item row="1" column="0">
+                 <widget class="QTableView" name="tblAvailableHouseholdCharacteristics">
+                  <property name="alternatingRowColors">
+                   <bool>true</bool>
+                  </property>
+                  <property name="sortingEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
                 <item row="0" column="0">
                  <widget class="QLabel" name="label_5">
                   <property name="text">
                    <string>Available Household Characteristics</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QListView" name="lstHouseholdAvailableChars">
-                  <property name="alternatingRowColors">
-                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -236,17 +239,20 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QGridLayout" name="gridLayout_7">
+                <item row="1" column="0">
+                 <widget class="QTableView" name="tblSelectedHouseholdCharacteristics">
+                  <property name="alternatingRowColors">
+                   <bool>true</bool>
+                  </property>
+                  <property name="sortingEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
                 <item row="0" column="0">
                  <widget class="QLabel" name="label_6">
                   <property name="text">
                    <string>Selected Household Characteristics</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QListView" name="lstHouseholdSelectedChars">
-                  <property name="alternatingRowColors">
-                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -281,17 +287,20 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QGridLayout" name="gridLayout_10">
+                <item row="1" column="0">
+                 <widget class="QTableView" name="tblAvailablePersonalCharacteristics">
+                  <property name="alternatingRowColors">
+                   <bool>true</bool>
+                  </property>
+                  <property name="sortingEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
                 <item row="0" column="0">
                  <widget class="QLabel" name="label_3">
                   <property name="text">
                    <string>Available Personal Characteristics</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QListView" name="lstPersonalAvailableChars">
-                  <property name="alternatingRowColors">
-                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -397,17 +406,20 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QGridLayout" name="gridLayout_9">
+                <item row="1" column="0">
+                 <widget class="QTableView" name="tblSelectedPersonalCharacteristics">
+                  <property name="alternatingRowColors">
+                   <bool>true</bool>
+                  </property>
+                  <property name="sortingEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
                 <item row="0" column="0">
                  <widget class="QLabel" name="label_4">
                   <property name="text">
                    <string>Selected Personal Characteristics</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QListView" name="lstPersonalSelectedChars">
-                  <property name="alternatingRowColors">
-                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
@@ -1791,12 +1803,140 @@
    <slot>mdiClose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>577</x>
-     <y>508</y>
+     <x>642</x>
+     <y>547</y>
     </hint>
     <hint type="destinationlabel">
      <x>667</x>
      <y>504</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdHouseholdMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllHouseholdCharacteristics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>352</x>
+     <y>247</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>25</x>
+     <y>595</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdHouseholdRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllHouseholdCharacteristics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>363</x>
+     <y>281</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>116</x>
+     <y>599</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdHouseholdMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedHouseholdCharacteristics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>378</x>
+     <y>319</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>389</x>
+     <y>596</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdHouseholdRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedHouseholdCharacteristics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>388</x>
+     <y>357</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>615</x>
+     <y>595</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdPersonalMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllPersonalCharacteristics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>341</x>
+     <y>245</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>2</x>
+     <y>451</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdPersonalRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllPersonalCharacteristics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>355</x>
+     <y>281</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>406</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdPersonalMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedPersonalCharacteristics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>367</x>
+     <y>322</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1</x>
+     <y>370</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdPersonalRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedPersonalCharacteristics()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>384</x>
+     <y>356</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>325</y>
     </hint>
    </hints>
   </connection>
@@ -1807,14 +1947,14 @@
   <slot>displayUnitOfMeasure()</slot>
   <slot>getExpenseItems()</slot>
   <slot>adjustTopList()</slot>
-  <slot>moveAllHouseholdChars()</slot>
-  <slot>removeAllHouseholdChars()</slot>
-  <slot>moveSelectedHouseholdChars()</slot>
-  <slot>removeSelectedHouseholdChars()</slot>
-  <slot>moveAllPersonalChars()</slot>
-  <slot>removeAllPersonalChars()</slot>
-  <slot>moveSelectedPersonalChars()</slot>
-  <slot>removeSelectedPersonalChars()</slot>
+  <slot>moveAllHouseholdCharacteristics()</slot>
+  <slot>removeAllHouseholdCharacteristics()</slot>
+  <slot>moveSelectedHouseholdCharacteristics()</slot>
+  <slot>removeSelectedHouseholdCharacteristics()</slot>
+  <slot>moveAllPersonalCharacteristics()</slot>
+  <slot>removeAllPersonalCharacteristics()</slot>
+  <slot>moveSelectedPersonalCharacteristics()</slot>
+  <slot>removeSelectedPersonalCharacteristics()</slot>
   <slot>saveDiet()</slot>
   <slot>delDiets()</slot>
   <slot>showStandardOfLivingItem()</slot>

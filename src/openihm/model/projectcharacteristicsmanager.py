@@ -23,7 +23,7 @@ from projectcharacteristic import ProjectCharacteristic
 
 class ProjectCharacteristicsManager:
      def existsProjectCharacteristic(self, charname):
-         char = self.getCharacteristic(charname)
+         char = self.getProjectCharacteristic(charname)
          if char.name == "":
              return False
          else:

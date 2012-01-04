@@ -21,7 +21,7 @@ from database import Database
 
 class ProjectCharacteristic:
      def __init__(self, pid,  characteristic, chartype="", datatype=""):
-         if (chartype == "" and datatype=="" and description=="" ):
+         if (chartype == "" and datatype=="" ):
              if ( not self.getCharacteristicDetails(pid,  characteristic) ):
                  self.name = ""
                  return None
@@ -41,8 +41,8 @@ class ProjectCharacteristic:
              for row in rows:
                  self.pid = pid
                  self.name = characteristic
-                 self.chartype = row[1]
-                 self.datatype = row[2]
+                 self.chartype = row[2]
+                 self.datatype = row[3]
                  self.datatypestr = self.getStringDataType()
                  
          else:
@@ -54,7 +54,7 @@ class ProjectCharacteristic:
          database = Database()
          database.open()
         
-         query = '''INSERT INTO projectcharacteristics (pid, characteristic, chartype, datatype, description )
+         query = '''INSERT INTO projectcharacteristics (pid, characteristic, chartype, datatype )
                  VALUES(%s,'%s','%s',%s) ''' % ( pid,  characteristic, chartype, datatype )
        
          # execute query
@@ -87,6 +87,7 @@ class ProjectCharacteristic:
          self.datatypestr = self.getStringDataType()
          
      def getStringDataType(self):
+         print self.datatype
          if self.datatype == 1:
              return "Boolean/Yes/No"
          elif self.datatype == 2:
