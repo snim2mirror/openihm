@@ -126,7 +126,7 @@ class DatabaseInitialiser:
          
          upToDate = False
          for row in rows:
-             if row[0] == "transferlog":
+             if row[0] == "globalcharacteristics":
                      upToDate = True
          
          return upToDate
