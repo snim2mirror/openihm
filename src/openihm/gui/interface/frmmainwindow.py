@@ -70,6 +70,10 @@ from frm_report_householdbudgets import RepHouseholdBudget
 #import dialog for transfering data from access db
 from frmimportfromaccessdb import FrmImportFromAccessDB
 
+#import dialogs for managing global characteristics
+from frmmanagehouseholdcharacteristics import FrmManageHouseholdCharacteristics
+from frmmanagepersonalcharacteristics import FrmManagePersonalCharacteristics
+
 
 # Import modules used by the automatic software updator.
 from mercurial import commands, hg, ui, error
@@ -386,24 +390,24 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def manageFoodTypes(self):
         ''' Creates and Shows the Manage Crop Types form'''
         #form = FrmManageFoodTypes(self.mdi)
-        form = FrmManageTypes(self.mdi)
+        form = FrmManageTypes(self)
         subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
         form.show()
 
     def manageHouseholdCharacteristics(self):
         ''' Creates and Shows the Household Characteristics form'''
-        form = FrmHouseCharacteristics(self.mdi)
+        form = FrmManageHouseholdCharacteristics(self)
         subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
-        form.show()
+        form.showMaximized()
        
     def managePersonalCharacteristics(self):
         ''' Creates and Shows the Personal Characteristics form'''
-        form = FrmPersonalCharacteristics(self.mdi)
+        form = FrmManagePersonalCharacteristics(self.mdi)
         subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
-        form.show()
+        form.showMaximized()
     
     def manageAssetDetails(self):
         ''' Creates and Shows the Manage Asset Details form '''

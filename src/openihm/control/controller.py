@@ -25,9 +25,10 @@ from model.project import Project
 from currencymanager import CurrencyManager
 from globalhouseholdcharacteristicsmanager import GlobalHouseholdCharacteristicsManager
 from globalpersoncharacteristicsmanager import GlobalPersonCharacteristicsManager
+from globalcharacteristicsmanager import GlobalCharacteristicsManager
 from transfermanager import TransferManager
 
-class Controller(CurrencyManager, GlobalHouseholdCharacteristicsManager, GlobalPersonCharacteristicsManager, TransferManager):
+class Controller(CurrencyManager, GlobalCharacteristicsManager,  GlobalHouseholdCharacteristicsManager, GlobalPersonCharacteristicsManager, TransferManager):
     def __init__(self):
         self.database = Database()
         
