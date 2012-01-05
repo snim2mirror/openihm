@@ -24,8 +24,9 @@ from projecthouseholdcharacteristic import ProjectHouseholdCharacteristic
 from projectpersoncharacteristic import ProjectPersonCharacteristic
 from incomesourcemanager import IncomeSourceManager
 from projectcharacteristicsmanager import ProjectCharacteristicsManager
+from standardoflivingentrymanager import StandardOfLivingEntryManager
 
-class Project(IncomeSourceManager, ProjectCharacteristicsManager):
+class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivingEntryManager):
     def __init__(self, pid=0, projectname="", startdate="", enddate="", description="", currency=""):
         self.database = Database() 
         if ( pid != 0 ):
