@@ -95,7 +95,7 @@
       <item row="0" column="0">
        <widget class="QTabWidget" name="tabProject">
         <property name="currentIndex">
-         <number>3</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="tabProjectHouseholdCharacteristics">
          <attribute name="title">
@@ -2017,6 +2017,70 @@
     <hint type="destinationlabel">
      <x>2</x>
      <y>90</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tblDiets</sender>
+   <signal>clicked(QModelIndex)</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>showSelectedDiet()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>75</x>
+     <y>135</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>137</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbFoodItem</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>displayUnitOfMeasure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>556</x>
+     <y>140</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>181</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSaveDiet</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>saveDiet()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>591</x>
+     <y>272</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelDiet</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>delDiets()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>485</x>
+     <y>457</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>437</y>
     </hint>
    </hints>
   </connection>
