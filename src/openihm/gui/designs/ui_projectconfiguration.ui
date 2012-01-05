@@ -95,7 +95,7 @@
       <item row="0" column="0">
        <widget class="QTabWidget" name="tabProject">
         <property name="currentIndex">
-         <number>2</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="tabProjectHouseholdCharacteristics">
          <attribute name="title">
@@ -902,7 +902,7 @@
                 <enum>QTabWidget::North</enum>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>4</number>
                </property>
                <widget class="QWidget" name="tabCrops">
                 <attribute name="title">
@@ -2081,6 +2081,326 @@
     <hint type="destinationlabel">
      <x>0</x>
      <y>437</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCropsMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllCrops()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>347</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>2</x>
+     <y>245</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCropsRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllCrops()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>364</x>
+     <y>297</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>314</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCropsMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedCrops()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>346</x>
+     <y>329</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>397</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdCropsRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedCrops()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>361</x>
+     <y>368</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>487</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEmploymentMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllEmployment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>359</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>211</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEmploymentRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllEmployment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>339</x>
+     <y>291</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>724</x>
+     <y>127</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEmploymentMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedEmployment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>357</x>
+     <y>328</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>724</x>
+     <y>153</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEmploymentRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedEmployment()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>354</x>
+     <y>363</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>723</x>
+     <y>178</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdLivestockMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllLivestock()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>356</x>
+     <y>255</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>722</x>
+     <y>209</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdLivestockRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllLivestock()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>364</x>
+     <y>293</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>725</x>
+     <y>235</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdLivestockMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedLivestock()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>361</x>
+     <y>326</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>722</x>
+     <y>266</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdLivestockRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedLivestock()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>361</x>
+     <y>364</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>723</x>
+     <y>294</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdTransfersMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllTransfers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>362</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>721</x>
+     <y>327</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdTransfersRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllTransfers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>345</x>
+     <y>293</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>721</x>
+     <y>352</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdTransfersMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedTransfers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>330</x>
+     <y>326</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>721</x>
+     <y>379</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdTransfersRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedTransfers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>356</x>
+     <y>364</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>722</x>
+     <y>407</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdWildfoodMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllWildfoods()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>345</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>28</x>
+     <y>-20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdWildfoodRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllWildfoods()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>342</x>
+     <y>297</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>48</x>
+     <y>-16</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdWildfoodMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedWildfoods()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>353</x>
+     <y>329</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>67</x>
+     <y>-12</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdWildfoodRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedWildfoods()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>372</x>
+     <y>365</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>92</x>
+     <y>-7</y>
     </hint>
    </hints>
   </connection>

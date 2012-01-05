@@ -27,7 +27,6 @@ from control.controller import Controller
 # import the Create Project Dialog design class
 Ui_ProjectConfiguration, base_class = uic.loadUiType("gui/designs/ui_projectconfiguration.ui")
 
-
 from frmproject_configure_cropincome import CropIncomeManager
 from frmproject_configure_livestockincome import LivestockIncomeManager
 from frmproject_configure_wildfoodincome import WildfoodIncomeManager
@@ -37,7 +36,6 @@ from frmproject_configure_householdcharacteristics import HouseholdCharacteristi
 from frmproject_configure_personalcharacteristics import PersonalCharacteristicsManager
 from frmproject_configure_standardofliving import StandardOfLivingManager
 from frmproject_configure_diet import DietManager
-
 
 from mixins import MDIDialogMixin, MySQLMixin, TableViewMixin
 
