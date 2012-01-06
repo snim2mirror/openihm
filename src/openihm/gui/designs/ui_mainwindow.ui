@@ -35,16 +35,15 @@
     <addaction name="actionFind_Project"/>
     <addaction name="actionClose_Project"/>
     <addaction name="separator"/>
+    <addaction name="actionExport_Project_to_IHM_file"/>
     <addaction name="actionImport_Projects_from_Access_DB"/>
     <addaction name="actionImport_Project_from_IHM_file"/>
-    <addaction name="actionExport_Project_to_IHM_file"/>
     <addaction name="separator"/>
     <addaction name="actionEdit_Project"/>
     <addaction name="actionConfigure_Project"/>
     <addaction name="separator"/>
     <addaction name="actionGenerate_Data_Entry_Sheets"/>
     <addaction name="actionImport_Project_Data"/>
-    <addaction name="actionExport_Project_Data"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>

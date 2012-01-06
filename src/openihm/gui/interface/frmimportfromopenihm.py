@@ -49,8 +49,9 @@ class FrmImportFromOpenIHM (QDialog, TableViewMixin, Ui_ImportFromOpenIHM):
          
      def getDB(self):
          self.filename = QFileDialog.getOpenFileName(self, 'Open file','/home', 'IHM file (*.ihm)')
-         self.txtFilename.setText( self.filename )
-         self.showProject()
+         if self.filename:
+             self.txtFilename.setText( self.filename )
+             self.showProject()
          
      def showProject(self):
          controller = Controller()

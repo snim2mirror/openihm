@@ -520,7 +520,15 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
     def exportToOpenIHM(self):
         """Export project to IHM file"""
-        pass
+        mydialog = QtGui.QFileDialog()     
+        self.centerSubWindow(mydialog)
+        
+        filename = mydialog.getSaveFileName(self, 'Create IHM File to Export to', '.', 'IHM file (*.ihm)')
+        
+        if filename:
+             ihmFile = open(filename, 'w')
+             ihmFile.write("project<d>testing file generation<d>2012-01-06<d>2012-01-06<d>file generation<d>MK<d><endl>")
+             ihmFile.close()
                 
     def reportHouseholdDisposableIncome(self,reporttype):
         """Creates and Shows the Report: Household Disposable Income form"""

@@ -61,8 +61,9 @@ class FrmImportFromAccessDB (QDialog, TableViewMixin, Ui_ImportFromAccessDB):
          
      def getDB(self):
          self.filename = QFileDialog.getOpenFileName(self, 'Open file','/home', 'Access Database (*.mdb)')
-         self.txtFilename.setText( self.filename )
-         self.loadProjects()
+         if self.filename:
+             self.txtFilename.setText( self.filename )
+             self.loadProjects()
          
      def loadProjects(self):
          
