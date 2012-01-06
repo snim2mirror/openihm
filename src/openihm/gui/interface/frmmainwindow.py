@@ -70,6 +70,9 @@ from frm_report_householdbudgets import RepHouseholdBudget
 #import dialog for transfering data from access db
 from frmimportfromaccessdb import FrmImportFromAccessDB
 
+#import dialog for transfering data from IHM file
+from frmimportfromopenihm import FrmImportFromOpenIHM
+
 #import dialogs for managing global characteristics
 from frmmanagehouseholdcharacteristics import FrmManageHouseholdCharacteristics
 from frmmanagepersonalcharacteristics import FrmManagePersonalCharacteristics
@@ -509,6 +512,15 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         """Imports projects from the old access based IHM software"""
         form = FrmImportFromAccessDB()
         form.exec_()
+        
+    def importFromOpenIHM(self):
+        """Imports projects from IHM file"""
+        form = FrmImportFromOpenIHM()
+        form.exec_()
+        
+    def exportToOpenIHM(self):
+        """Export project to IHM file"""
+        pass
                 
     def reportHouseholdDisposableIncome(self,reporttype):
         """Creates and Shows the Report: Household Disposable Income form"""
