@@ -98,7 +98,7 @@ class TransferManager:
              
          # old IHM does not have these
          description = ""
-         enddate = "0000-00-00"
+         enddate = row.DateOfDataCollection
              
          project = self.addProject(projectname, startdate, enddate, description, currency)
              

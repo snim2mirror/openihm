@@ -19,10 +19,9 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 """
 
 from model.database import Database          # connector to mysql database
-from model.accessdb import AccessDB         #  connector to access database
 from datetime import date
 
-class OpenIhmTransferManager:
+class OpenIhmImportManager:
      def logIhmTransfer(self, pid, pid_access, projectname, startdate, currency ):
          query = '''INSERT INTO transferlog(pid,pid_access,projectname,datecollected,currency) 
                       VALUES(%s,%s,'%s','%s','%s')''' % (pid, pid_access, projectname, startdate, currency)

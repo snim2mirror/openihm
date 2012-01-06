@@ -21,7 +21,6 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 from PyQt4 import QtGui, QtCore,  uic
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
-import pyodbc
 
 # import controller
 from control.controller import Controller

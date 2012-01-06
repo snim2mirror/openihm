@@ -1,73 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ImportFromOpenIHM</class>
- <widget class="QDialog" name="ImportFromOpenIHM">
+ <class>ExportToOpenIHM</class>
+ <widget class="QDialog" name="ExportToOpenIHM">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>451</width>
-    <height>258</height>
+    <height>192</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Import Project from OpenIHM file</string>
+   <string>Export Project to IHM file</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <item>
-    <widget class="QFrame" name="frame">
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Database File:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="txtFilename">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="cmdGetDB">
-        <property name="toolTip">
-         <string>Select Database</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../../../../../../../Brown/.designer/resources/images/addreport.png</normaloff>../../../../../../../Brown/.designer/resources/images/addreport.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>32</width>
-          <height>32</height>
-         </size>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item>
     <widget class="QFrame" name="frame_2">
      <property name="frameShape">
@@ -159,7 +105,7 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="0">
-       <widget class="QPushButton" name="cmdImport">
+       <widget class="QPushButton" name="cmdExport">
         <property name="minimumSize">
          <size>
           <width>90</width>
@@ -167,7 +113,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Import</string>
+         <string>Export</string>
         </property>
        </widget>
       </item>
@@ -205,57 +151,41 @@
  <resources/>
  <connections>
   <connection>
-   <sender>cmdGetDB</sender>
+   <sender>cmdExport</sender>
    <signal>clicked()</signal>
-   <receiver>ImportFromOpenIHM</receiver>
-   <slot>getDB()</slot>
+   <receiver>ExportToOpenIHM</receiver>
+   <slot>exportProject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>431</x>
-     <y>58</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>450</x>
-     <y>65</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdImport</sender>
-   <signal>clicked()</signal>
-   <receiver>ImportFromOpenIHM</receiver>
-   <slot>importProject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>78</x>
-     <y>238</y>
+     <x>97</x>
+     <y>172</y>
     </hint>
     <hint type="destinationlabel">
      <x>88</x>
-     <y>257</y>
+     <y>191</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>cmdClose</sender>
    <signal>clicked()</signal>
-   <receiver>ImportFromOpenIHM</receiver>
+   <receiver>ExportToOpenIHM</receiver>
    <slot>closeForm()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>431</x>
-     <y>238</y>
+     <y>172</y>
     </hint>
     <hint type="destinationlabel">
      <x>432</x>
-     <y>257</y>
+     <y>191</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
   <slot>getDB()</slot>
-  <slot>importProject()</slot>
+  <slot>exportProject()</slot>
   <slot>closeForm()</slot>
  </slots>
 </ui>

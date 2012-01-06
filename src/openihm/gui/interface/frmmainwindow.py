@@ -70,8 +70,9 @@ from frm_report_householdbudgets import RepHouseholdBudget
 #import dialog for transfering data from access db
 from frmimportfromaccessdb import FrmImportFromAccessDB
 
-#import dialog for transfering data from IHM file
+#import dialogd for transfering data to and from IHM file
 from frmimportfromopenihm import FrmImportFromOpenIHM
+from frmexporttoopenihm import FrmExportToOpenIHM
 
 #import dialogs for managing global characteristics
 from frmmanagehouseholdcharacteristics import FrmManageHouseholdCharacteristics
@@ -510,25 +511,22 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
     def importFromAccessDB(self):
         """Imports projects from the old access based IHM software"""
-        form = FrmImportFromAccessDB()
+        form = FrmImportFromAccessDB(self)
         form.exec_()
         
     def importFromOpenIHM(self):
         """Imports projects from IHM file"""
-        form = FrmImportFromOpenIHM()
+        form = FrmImportFromOpenIHM(self)
         form.exec_()
         
     def exportToOpenIHM(self):
         """Export project to IHM file"""
-        mydialog = QtGui.QFileDialog()     
-        self.centerSubWindow(mydialog)
-        
-        filename = mydialog.getSaveFileName(self, 'Create IHM File to Export to', '.', 'IHM file (*.ihm)')
-        
-        if filename:
-             ihmFile = open(filename, 'w')
-             ihmFile.write("project<d>testing file generation<d>2012-01-06<d>2012-01-06<d>file generation<d>MK<d><endl>")
-             ihmFile.close()
+        if self.projectid == -1:
+             msg = "No project is active. First create a new project or open an existing project."
+             QtGui.QMessageBox.information(self,"Notice",msg)
+        else:
+             form = FrmExportToOpenIHM(self, self.projectid)
+             form.exec_()
                 
     def reportHouseholdDisposableIncome(self,reporttype):
         """Creates and Shows the Report: Household Disposable Income form"""

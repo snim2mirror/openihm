@@ -52,7 +52,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>C:/Users/Brown/.designer/resources/images/addreport.png</normaloff>C:/Users/Brown/.designer/resources/images/addreport.png</iconset>
+          <normaloff>../../../../../../../Brown/.designer/resources/images/addreport.png</normaloff>../../../../../../../Brown/.designer/resources/images/addreport.png</iconset>
         </property>
         <property name="iconSize">
          <size>
