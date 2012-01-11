@@ -30,8 +30,8 @@ class ReadDataEntrySheets:
     def __init__(self,projectid):
         self.database = Database()
         self.pid = projectid
-        self.pcharstable = 'p' + str(projectid) +'PersonalCharacteristics'
-        self.hcharstable = 'p' + str(projectid) +'HouseholdCharacteristics'
+        self.pcharstable = 'personalcharacteristics'
+        self.hcharstable = 'householdcharacteristics'
 
     def readdata(self):
         '''Base method for data importation'''
@@ -623,8 +623,7 @@ class ReadDataEntrySheets:
                 if cellvalue == '':
                     empty_cell_count = empty_cell_count + 1
                     cellvalue = 'NULL'
-                    if col_index==0:
-                        personid ='NULL'
+
                 if datatype=='Double':
                     try:
                         cellvalue = float(cellvalue)
@@ -650,18 +649,25 @@ class ReadDataEntrySheets:
             if exitmain == True or empty_cell_count==columns:
                 break
             else:
-                if personid=='NULL':
+                if values[0]=='NULL': #skip row if personid was not entered in sheet
                     continue
                 else:
-                    testquery='''SELECT * from %s WHERE personid='%s' AND hhid=%s AND pid=%s''' %(self.pcharstable,values[0],hhid,self.pid)
-                    numrows = self.checkRecordExistence(testquery)
-                    if numrows == 0:
-                        query = self.buildCharInsertQuery(values,datafields,fielddatatypes,hhid,self.pcharstable)
-                    else:
-                        query= '''DELETE FROM %s WHERE personid='%s' AND hhid=%s AND pid=%s''' %(self.pcharstable,values[0],hhid,self.pid)
+                    for dataindex in range (1,len(datafields)):
+                        paramlist=[]
+                        characteristic = datafields[dataindex]
+                        charvalue= values[dataindex]
+                        testquery='''SELECT * from personalcharacteristics WHERE personid='%s' AND hhid=%s AND pid=%s AND characteristic='%s' ''' %(values[0],hhid,self.pid,characteristic)
+                        numrows = self.checkRecordExistence(testquery)
+                        paramlist = (hhid,values[0],datafields[dataindex],values[dataindex])
+                        if numrows == 0:
+                            
+                            print paramlist
+                            query = self.buildPCharInsertQuery(paramlist)
+                        else:
+                            query= '''DELETE FROM personalcharacteristics WHERE personid='%s' AND hhid=%s AND pid=%s AND characteristic='%s' ''' %(values[0],hhid,self.pid,characteristic)
+                            database.execUpdateQuery(query)
+                            query = self.buildPCharInsertQuery(paramlist)
                         database.execUpdateQuery(query)
-                        query = self.buildCharInsertQuery(values,datafields,fielddatatypes,hhid,self.pcharstable)
-                    database.execUpdateQuery(query)
                 
             empty_cell_count = 0
                 
@@ -670,6 +676,7 @@ class ReadDataEntrySheets:
 
     def readHCharacteristicsData(self,householdsheet,row_index):
         '''Import Data on Household Characteristics'''
+        
         
         field_row_index = row_index + 1
         datatype_row_index = row_index + 2
@@ -741,46 +748,53 @@ class ReadDataEntrySheets:
             if exitmain == True or empty_cell_count==columns:
                 break
             else:
-                testquery='''SELECT * from %s WHERE hhid=%s AND pid=%s''' %(self.hcharstable,hhid,self.pid)
-                numrows = self.checkRecordExistence(testquery)
-                if numrows == 0:
-                    query = self.buildCharInsertQuery(values,datafields,fielddatatypes,hhid,self.hcharstable)
-                    
-                else:
-                    
-                    query= '''DELETE FROM %s WHERE hhid=%s AND pid=%s''' %(self.hcharstable,hhid,self.pid)
-                    database.execUpdateQuery(query)
-                    query = self.buildCharInsertQuery(values,datafields,fielddatatypes,hhid,self.hcharstable)
-                database.execUpdateQuery(query)
-                
-            empty_cell_count = 0
+                for dataindex in range (0,len(datafields)):
+                        paramlist=[]
+                        characteristic = datafields[dataindex]
+                        charvalue= values[dataindex]
+                        testquery='''SELECT * from householdcharacteristics WHERE hhid=%s AND pid=%s AND characteristic='%s' ''' %(hhid,self.pid,characteristic)
+                        numrows = self.checkRecordExistence(testquery)
+                        paramlist = (hhid,values[0],datafields[dataindex],values[dataindex])
+                        if numrows == 0:
+                            
+                            print paramlist
+                            query = self.buildHCharInsertQuery(paramlist)
+                        else:
+                            query= '''DELETE FROM householdcharacteristics WHERE hhid=%s AND pid=%s AND characteristic='%s' ''' %(hhid,self.pid,characteristic)
+                            database.execUpdateQuery(query)
+                            query = self.buildHCharInsertQuery(paramlist)
+                        database.execUpdateQuery(query)
                 
         database.close()
         
-    def buildCharInsertQuery(self,values,datafields,fielddatatypes,hhid,tablename):
-        '''Dynamic query generation for inserting personal or household characteristics'''
-        
-        query = "INSERT INTO %s (hhid, pid" % tablename
-        parameterlist =' VALUES (' + str(hhid) +', ' + str(self.pid)
-        listlength = len(datafields)
-        
-        for i in range(0,listlength):
-            tempvalue = values[i]
+    def buildPCharInsertQuery(self,paramlist):
+        ''' query generation for inserting personal characteristics'''
+
+        query = "INSERT INTO personalcharacteristics (pid, hhid, personid,characteristic,charvalue) VALUES " 
+        parameterlist = '(' + str(self.pid) +',' + str(paramlist[0]) +', ' + "'" + str(paramlist[1]) + "'"+ ', ' +"'" + str(paramlist[2]) +"'"+ ', '
+        if (type(paramlist[3]) is str) or (type(paramlist[3]) is unicode):
+            parameterlist = parameterlist + "'" + paramlist[3] + "'"
+        else:
+            parameterlist = parameterlist + str(paramlist[3])
             
-            if fielddatatypes[i]=='String' or fielddatatypes[i]=='Yes/No':
-                parameterlist= parameterlist + ', ' + "'" +str(tempvalue) + "'"
-            else:
-                parameterlist= parameterlist + ', ' + str(tempvalue)
-
-            if datafields[i]!='': # addressing error where a null fieldname was being appended to the query, when importing field names
-                query = query +', '+ datafields[i]
-                
-        parameterlist= parameterlist + ')'
-        query = query + ')'
+        parameterlist = parameterlist + ')'
         query = query + parameterlist
-
-        #QtGui.QMessageBox.information(None, 'Importing Data', query)
         return query
+
+    def buildHCharInsertQuery(self,characteristic,charvalue,hhid):
+        ''' query generation for inserting household characteristics'''
+
+        query = "INSERT INTO householdcharacteristics (pid, hhid,characteristic,charvalue) VALUES " 
+        parameterlist = '(' + str(self.pid) +',' + str(paramlist[0]) +', ' + str(paramlist[1]) +"'"+ ', '
+        if (type(paramlist[2]) is str) or (type(paramlist[2]) is unicode):
+            parameterlist = parameterlist + "'" + paramlist[2] + "'"
+        else:
+            parameterlist = parameterlist + str(paramlist[2])
+            
+        parameterlist = parameterlist + ')'
+        query = query + parameterlist
+        return query
+
 
     def checkRecordExistence(self,testquery):
         '''Test if a record with some given primary key already exists'''

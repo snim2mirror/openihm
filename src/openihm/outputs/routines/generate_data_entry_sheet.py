@@ -33,8 +33,9 @@ class DataEntrySheets:
         self.pid = projectid
         self.config = Config.dbinfo().copy()
 
+    
     def getPersonalCharacteristics(self):
-        query = '''SHOW columns FROM %s''' %(self.pcharstable)
+        query = '''SELECT characteristic, datatype FROM projectcharacteristics WHERE pid=%s and chartype='Personal' ''' %(self.pid)
         self.database.open()
         pchars = self.database.execSelectQuery(query)
         self.database.close()
@@ -42,7 +43,7 @@ class DataEntrySheets:
         
 
     def getHouseholdCharacteristics(self):
-        query = '''SHOW columns FROM %s''' %(self.hcharstable)
+        query = '''SELECT characteristic, datatype FROM projectcharacteristics WHERE pid=%s and chartype='Household' ''' %(self.pid)
         self.database.open()
         hchars = self.database.execSelectQuery(query)
         self.database.close()
@@ -126,25 +127,25 @@ class DataEntrySheets:
         hchars = self.getHouseholdCharacteristics()
 
         #section for extended personal characteristics
-        sheet2.write(8, 0, "PersonalCharacteristics", style1)
         col = 0
+        sheet2.write(8, 0, "PersonalCharacteristics", style1)
+        sheet2.write(9, col, 'personid', style2)
+        sheet2.write(10, col, 'String', style3)
+        col = col + 1
+
         for char in pchars:
             value = char[0]
-            typep = char[1]
+            chartype = char[1]
+            vartype =''
             if value!='pid' and value !='hhid':
-                stringvar = 'varchar'
-                boolvar = 'enum'
-                intvar = 'bigint'
-                doublevar ='double'
-                if typep.startswith(tuple(stringvar)):
-                    vartype ='String'
-                elif typep.startswith(tuple(boolvar)):
+                if chartype == 1:
                     vartype ='Yes/No'
-                elif typep.startswith(tuple(intvar)):
+                elif chartype == 2:
                     vartype ='Integer'
-                elif typep.startswith(tuple(doublevar)):
+                elif chartype == 3:
+                    vartype ='String'
+                elif chartype == 4:
                     vartype ='Double'
-
                 sheet2.write(9, col, value, style2)
                 sheet2.write(10, col, vartype, style3)
                 col = col + 1
@@ -154,19 +155,16 @@ class DataEntrySheets:
         col = 0
         for char in hchars:
             value = char[0]
-            typep = char[1]
-            if value !='pid' and value !='hhid':
-                stringvar = 'varchar'
-                boolvar = 'enum'
-                intvar = 'bigint'
-                doublevar ='double'
-                if typep.startswith(tuple(stringvar)):
-                    vartype ='String'
-                elif typep.startswith(tuple(boolvar)):
+            chartype = char[1]
+            vartype =''
+            if value!='pid' and value !='hhid':
+                if chartype == 1:
                     vartype ='Yes/No'
-                elif typep.startswith(tuple(intvar)):
+                elif chartype == 2:
                     vartype ='Integer'
-                elif typep.startswith(tuple(doublevar)):
+                elif chartype == 3:
+                    vartype ='String'
+                elif chartype == 4:
                     vartype ='Double'
 
                 sheet2.write(18, col, value, style2)
