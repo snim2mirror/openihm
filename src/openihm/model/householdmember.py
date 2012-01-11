@@ -4,8 +4,9 @@
 #------------------------------------------------------------------------------------------------------------------------------------
 from datetime import date
 from database import Database
+from householdmembercharacteristicmanager import HouseholdMemberCharacteristicManager
 
-class HouseholdMember:
+class HouseholdMember(HouseholdMemberCharacteristicManager):
      def __init__(self, pid, hhid, personid, yearofbirth="", headhousehold="",  sex="", education="", periodaway="", reason="", whereto=""):
          if (yearofbirth == "" ):
              if ( not self.getHouseholdMemberDetails(pid, hhid, personid) ):

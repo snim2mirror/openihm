@@ -22,61 +22,56 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from data.config import Config
+from control.controller import Controller
 
 Ui_EditMemberCharacteristic, base_class = uic.loadUiType("gui/designs/ui_household_editmembercharacteristic.ui")
 
 from mixins import MDIDialogMixin, MySQLMixin
 
 class FrmEditPersonalCharacteristic(QDialog, Ui_EditMemberCharacteristic, MySQLMixin, MDIDialogMixin):	
-    ''' Creates the Edit Personal Characteristic form. '''	
-    def __init__(self, parent, pid, hhid, personid, charName, charVal):
-        ''' Set up the dialog box interface '''
-        QDialog.__init__(self)
-        self.setupUi(self)
-        self.parent = parent
-        self.hhid = hhid
-        self.pid = pid
-        self.personid = personid
-        self.charName = charName
-        self.psCharacteristicsTable = "p%iPersonalCharacteristics" % (pid )
-        # connect to database
-        self.config = Config.dbinfo().copy()       
+     ''' Creates the Edit Personal Characteristic form. '''	
+     def __init__(self, parent, pid, hhid, personid, charName, charVal):
+         ''' Set up the dialog box interface '''
+         QDialog.__init__(self)
+         self.setupUi(self)
+         self.parent = parent
+         self.hhid = hhid
+         self.pid = pid
+         self.personid = personid
+         self.charName = charName
         
-        # display characteristic name
-        self.lblCharName.setText(charName)
-        if ( self.parent.getPersonalCharacteristicDataType( charName ) == 1 ):
-        	self.cboYesNoVal.setVisible( True )
-        	self.txtValue.setVisible( False )
-        	if ( charVal != "Not Set" ):
-        		self.cboYesNoVal.setCurrentIndex( self.cboYesNoVal.findText( charVal ) )
-        else:
-        	self.cboYesNoVal.setVisible( False )
-        	self.txtValue.setVisible( True )
-        	if ( charVal != "Not Set" ):
-        		self.txtValue.setText( charVal )
-        	
-    def saveCharacteristic(self):
-		''' Saves characteristic '''
-		
-		tbl = self.psCharacteristicsTable
-		if self.cboYesNoVal.isVisible():
-			charVal = self.cboYesNoVal.currentText() 
-		else:
-			charVal = self.txtValue.text()
-			
-		if ( self.parent.getPersonalCharacteristicDataType( self.charName ) == 2 ):
-			queryInsert = '''INSERT INTO %s (hhid, pid, personid,`%s`) VALUES (%s, %s, '%s', %s )''' % (tbl, self.charName, self.hhid, self.pid,  self.personid, charVal )
-			queryUpdate	= '''UPDATE %s SET `%s`=%s WHERE hhid=%s and pid=%s and personid= '%s' ''' % (tbl, self.charName, charVal, self.hhid,  self.pid,  self.personid )
-		else:
-		 	queryInsert = '''INSERT INTO %s (hhid, pid, personid,`%s`) VALUES (%s, %s, '%s', '%s' )''' % (tbl, self.charName, self.hhid, self.pid,  self.personid,  charVal )
-		 	queryUpdate	= '''UPDATE %s SET `%s`='%s' WHERE hhid=%s and pid=%s and personid= '%s' ''' % (tbl, self.charName, charVal, self.hhid,  self.pid,  self.personid )
-		
-		try:
-                    self.executeUpdateQuery(queryInsert)
-		except:
-                    self.executeUpdateQuery(queryUpdate)
-			
-		# close window and refresh characteristics
-		self.parent.retrievePersonalCharacteristics( self.personid )
-		self.mdiClose()
+         # display characteristic name
+         self.lblCharName.setText(charName)
+         if ( self.parent.getPersonalCharacteristicDataType( charName ) == 1 ):
+             self.cboYesNoVal.setVisible( True )
+             self.txtValue.setVisible( False )
+             if ( charVal != "Not Set" ):
+                 self.cboYesNoVal.setCurrentIndex( self.cboYesNoVal.findText( charVal ) )
+         else:
+             self.cboYesNoVal.setVisible( False )
+             self.txtValue.setVisible( True )
+             if ( charVal != "Not Set" ):
+                 self.txtValue.setText( charVal )
+
+     def saveCharacteristic(self):
+         ''' Saves characteristic '''
+         
+         if self.cboYesNoVal.isVisible():
+             charVal = self.cboYesNoVal.currentText() 
+         else:
+             charVal = self.txtValue.text()
+         
+         controller = Controller()
+         project = controller.getProject(self.pid)
+         household = project.getHousehold(self.hhid)
+         member = household.getMember(self.personid)
+         
+         if not member.existsCharacteristic(self.charName):
+             member.addCharacteristic(self.charName, charVal)
+         else:
+             char = member.getCharacteristic(self.charName)
+             char.editData(self.charName, charVal)
+             
+         # close window and refresh characteristics
+         self.parent.retrievePersonalCharacteristics( self.personid )
+         self.mdiClose()
