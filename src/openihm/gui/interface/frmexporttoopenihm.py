@@ -62,5 +62,5 @@ class FrmExportToOpenIHM (QDialog, TableViewMixin, Ui_ExportToOpenIHM):
          if filename:
              controller = Controller()
              controller.exportIhmProject(self.pid, filename)
-             QMessageBox.information(self,"Exporting Project to IHM file","Project data has been imported to "+filename) 
+             QMessageBox.information(self,"Exporting Project to IHM file","Project data has been exported to "+filename) 
              self.close()  

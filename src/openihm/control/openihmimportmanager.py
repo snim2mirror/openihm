@@ -36,7 +36,7 @@ class OpenIhmImportManager:
          contents = dbfile.read()
          dbfile.close()
          
-         lines = contents.split('<endl>')
+         lines = contents.split('<endl>\n')
          projectflds = lines[0].split('<d>')
          
          project = dict()
@@ -91,9 +91,25 @@ class OpenIhmImportManager:
              self.delCorrespondingIhmProject(projectdata["projectname"], projectdata["startdate"], projectdata["currency"])
              
          project = self.addProject(projectdata["projectname"], projectdata["startdate"], projectdata["enddate"], projectdata["description"], projectdata["currency"])
-             
+         
+         self.importIhmProjectData(project,  filename)
+         
          self.logTransfer(project.pid, project.pid, project.projectname, project.startdate, project.currency)
          
          if not self.existsCurrency(project.currency):
              self.addCurrency(project.currency, project.currency, project.currency)
+             
+     def importIhmProjectData(self, project, filename):
+         dbfile = file(filename, 'r')
+         contents = dbfile.read()
+         dbfile.close()
+         
+         lines = contents.split('<endl>\n')
+         for line in lines:
+             fields = line.split('<d>')
+             if fields[0] == "household":
+                 self.importProjectHousehold(project, fields)
+                 
+     def importProjectHousehold(self, project, fields):
+         project.addHousehold(fields[1], fields[2], fields[3])
     
