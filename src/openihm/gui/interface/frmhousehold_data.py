@@ -24,6 +24,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 from data.config import Config
+from control.controller import Controller
 
 
 Ui_HouseholdData, base_class = uic.loadUiType("gui/designs/ui_household_data.ui")
@@ -318,24 +319,19 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 	#-----------------------------------------------------------------------------------
 	
 	def getCharacteristicDataType(self, charName):
-		tbl = "globalhouseholdcharacteristics"
-		query = '''SELECT datatype FROM %s WHERE characteristic='%s' ''' % (tbl, charName)
-		rows = self.executeResultsQuery(query)		
-		for row in rows:
-			return row[0]
+		controller = Controller()
+		char = controller.getGlobalCharacteristic(charName)
+		print char.name 
+		print char.datatype
+		return char.datatype
 	
 	def retrieveHouseholdCharacteristics( self ):
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
 		hhid = temp[0]
-		tbl = self.hhCharacteristicsTable
-		# select query to retrieve project household characteristics
-		query = '''SHOW COLUMNS FROM %s''' % (tbl)
-		rows = self.executeResultsQuery(query)
-		
-		fields = []
-		for row in rows:
-			if ( (row[0] != "hhid")  and (row[0]!= "pid" ) ):
-				fields.append( row[0] )
+		controller = Controller()
+		project = controller.getProject(self.parent.projectid)
+		household = project.getHousehold(hhid)
+		chars = household.getAllCharacteristics()    # get set and unset characteristics
 		
 		model = QStandardItemModel(1,1)
 		
@@ -346,19 +342,12 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 		# add  data rows
 		num = 0
 		
-		for field in fields:
-			query = '''SELECT `%s` FROM %s WHERE hhid=%i ''' % ( field, tbl, hhid )	
-			rows = self.executeResultsQuery(query)
-			val = "Not Set"
-			for row in rows:
-				if ( row[0] != None ):
-					val = row[0]
-					
-			qtChar 	= QStandardItem( field )
-			if ( ( self.getCharacteristicDataType( field ) == 2 ) and (val != "Not Set") ):
-				qtVal	= QStandardItem( "%i" % val )
+		for char in chars:
+			qtChar 	= QStandardItem( char.name )
+			if ( ( self.getCharacteristicDataType( char.name ) == 2 ) and (char.charvalue != "Not Set") ):
+				qtVal	= QStandardItem( "%i" % int( char.charvalue))
 			else:
-				qtVal	= QStandardItem( "%s" % val )
+				qtVal	= QStandardItem( "%s" % char.charvalue )
 				
 			model.setItem( num, 0, qtChar )
 			model.setItem( num, 1, qtVal )

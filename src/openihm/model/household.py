@@ -17,7 +17,6 @@ You should have received a copy of the GNU General Public License
 along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-
 from database import Database
 from householdmember_manager import HouseholdMemberManager
 from householdasset_manager import HouseholdAssetManager
@@ -26,8 +25,9 @@ from householdincome_livestock_manager import HouseholdLivestockIncomeManager
 from householdincome_wildfoods_manager import HouseholdWildfoodsIncomeManager
 from householdincome_transfers_manager import HouseholdTransfersIncomeManager
 from householdincome_employment_manager import HouseholdEmploymentIncomeManager
+from householdcharacteristicmanager import HouseholdCharacteristicManager 
 
-class Household(HouseholdMemberManager, HouseholdAssetManager, HouseholdCropIncomeManager, HouseholdLivestockIncomeManager, HouseholdWildfoodsIncomeManager, HouseholdTransfersIncomeManager, HouseholdEmploymentIncomeManager):
+class Household(HouseholdMemberManager, HouseholdCharacteristicManager,  HouseholdAssetManager, HouseholdCropIncomeManager, HouseholdLivestockIncomeManager, HouseholdWildfoodsIncomeManager, HouseholdTransfersIncomeManager, HouseholdEmploymentIncomeManager):
     def __init__(self, pid, hhid=0, householdname="", dateofcollection=""):
         self.pid = pid
         self.hhid = hhid
