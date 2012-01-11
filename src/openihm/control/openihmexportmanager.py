@@ -24,9 +24,19 @@ from datetime import date
 class OpenIhmExportManager:
      def exportIhmProject(self, projectid,  filename):
          project = self.getProject(projectid)                  # self refers to controller which inherits OpenIhmExportManager
-         projectline = "project<d>%s<d>%s<d>%s<d>%s<d>%s<d><endl>" \
+         projectline = "project<d>%s<d>%s<d>%s<d>%s<d>%s<d><endl>\n" \
                            % (project.projectname + " [imported]", project.startdate, project.enddate,  project.description,  project.currency)
          ihmFile = open(filename, 'w')
          ihmFile.write(projectline)
+         ihmFile.close()
+         self.exportHouseholds(project, filename)
+         
+     def exportHouseholds(self, project,  filename):
+         households = project.getHouseholds()
+         ihmFile = open(filename, 'a')
+         for household in households:
+             householdline = "household<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (household.hhid, household.householdname, household.dateofcollection)
+             ihmFile.write(householdline)
          ihmFile.close()
     

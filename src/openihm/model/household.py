@@ -29,19 +29,19 @@ from householdincome_employment_manager import HouseholdEmploymentIncomeManager
 
 class Household(HouseholdMemberManager, HouseholdAssetManager, HouseholdCropIncomeManager, HouseholdLivestockIncomeManager, HouseholdWildfoodsIncomeManager, HouseholdTransfersIncomeManager, HouseholdEmploymentIncomeManager):
     def __init__(self, pid, hhid=0, householdname="", dateofcollection=""):
-        self.database = Database() 
         self.pid = pid
         self.hhid = hhid
         if ( householdname == "" and dateofcollection== "" ):
             if ( not self.getHouseholdDetails() ):
-                return None
+                self.householdname = ""
         else:
             self.setData(householdname,  dateofcollection)
             
     def getHouseholdDetails(self):
-        self.database.open()
+        database = Database()
+        database.open()
         query = "SELECT householdname, dateofcollection FROM households WHERE pid=%s AND hhid=%s " % ( self.pid,  self.hhid )
-        rows = self.database.execSelectQuery( query )
+        rows = database.execSelectQuery( query )
         num = len(rows)
         if (num != 0):
             exists = True
@@ -50,11 +50,12 @@ class Household(HouseholdMemberManager, HouseholdAssetManager, HouseholdCropInco
                 self.dateofcollection = row[1]
         else:
             exists = False
-        self.database.close()
+        database.close()
         return exists
         
     def setData(self, householdname,  dateofcollection,  newhhid=""):
-        self.database.open()
+        database = Database()
+        database.open()
         # create query to update or insert new household
         if ( newhhid == "" ):  # newhhid defaults to "" when inserting a new household
             query = '''INSERT INTO households(hhid,pid,dateofcollection,householdname) 
@@ -65,8 +66,8 @@ class Household(HouseholdMemberManager, HouseholdAssetManager, HouseholdCropInco
             self.hhid = newhhid
             
         # execute query
-        self.database.execUpdateQuery( query )
-        self.database.close()
+        database.execUpdateQuery( query )
+        database.close()
         # update household attributes
         self.householdname = householdname
         self.dateofcollection = dateofcollection

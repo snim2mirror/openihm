@@ -29,7 +29,6 @@ from projectdietitemmanager import ProjectDietItemManager
 
 class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivingEntryManager, ProjectDietItemManager):
     def __init__(self, pid=0, projectname="", startdate="", enddate="", description="", currency=""):
-        self.database = Database() 
         if ( pid != 0 ):
             if ( not self.getProjectDetails( pid ) ):
                 return None
@@ -37,10 +36,11 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
             self.addProject(projectname, startdate, enddate, description, currency)
             
     def getProjectDetails(self,  pid):
-        self.database.open()
+        database = Database()
+        database.open()
         query = "SELECT pid, projectname, startdate, enddate, description, currency FROM projects WHERE pid=%i " % (pid)
-        rows = self.database.execSelectQuery( query )
-        self.database.close()
+        rows = database.execSelectQuery( query )
+        database.close()
         num = len(rows)
         if (num != 0):
             exists = True
@@ -53,7 +53,7 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
                 self.currency = row[5]
         else:
             exists = False
-        self.database.close()
+        database.close()
         return exists
         
     def addProject(self, projectname, startdate, enddate, description, currency):
@@ -62,12 +62,13 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
                      VALUES('%s','%s', '%s', '%s', '%s')''' % (projectname, startdate, enddate, description, currency)
         
         # execute query and commit changes
-        self.database.open()
-        self.database.execUpdateQuery( query )
+        database = Database()
+        database.open()
+        database.execUpdateQuery( query )
         
         # get the ID of the newly inserted project
         query = "SELECT LAST_INSERT_ID()"
-        rows = self.database.execSelectQuery( query )
+        rows = database.execSelectQuery( query )
         for row in rows:
             projectid = row[0]
             
@@ -92,7 +93,7 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
 						 ENGINE = InnoDB
 						 DEFAULT CHARACTER SET = latin1;''' % (HouseholdCharacteristicsTableName, projectid, projectid)
                         
-        self.database.execDefinitionQuery( queryCreate )
+        database.execDefinitionQuery( queryCreate )
         
         queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` (
 						  `personid` VARCHAR(20) NOT NULL ,
@@ -108,7 +109,7 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
 						 ENGINE = InnoDB
 						 DEFAULT CHARACTER SET = latin1;''' % (PersonalCharactericticsTableName, projectid, projectid)
         
-        self.database.execDefinitionQuery( queryCreate )
+        database.execDefinitionQuery( queryCreate )
 
         queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` (
 						  `foodtype` VARCHAR(50) NOT NULL ,
@@ -119,7 +120,7 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
 						 ENGINE = InnoDB
 						 DEFAULT CHARACTER SET = latin1;''' % (CropsTableName)
         
-        self.database.execDefinitionQuery( queryCreate )
+        database.execDefinitionQuery( queryCreate )
 
         queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` (
 						  `incomesource` VARCHAR(50) NOT NULL ,
@@ -130,7 +131,7 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
 						 ENGINE = InnoDB
 						 DEFAULT CHARACTER SET = latin1;''' % (LivestockTableName)
         
-        self.database.execDefinitionQuery( queryCreate )
+        database.execDefinitionQuery( queryCreate )
 
         queryCreate = '''CREATE  TABLE IF NOT EXISTS `openihmdb`.`%s` (
 						  `incomesource` VARCHAR(50) NOT NULL ,
@@ -141,9 +142,9 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
 						 ENGINE = InnoDB
 						 DEFAULT CHARACTER SET = latin1;''' % (WildFoosTableName)
         
-        self.database.execDefinitionQuery( queryCreate )
+        database.execDefinitionQuery( queryCreate )
         
-        self.database.close()
+        database.close()
         
         # set project attributes to saved values
         self.pid = projectid
@@ -177,9 +178,10 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
                      WHERE pid=%i''' % (projectname, startdate, enddate, description, currency, self.pid)
     
         # execute query
-        self.database.open()
-        self.database.execUpdateQuery( query )
-        self.database.close()
+        database = Database()
+        database.open()
+        database.execUpdateQuery( query )
+        database.close()
         
         # set project attributes to saved values
         self.projectname = projectname
@@ -199,12 +201,13 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
          #get target table
         tbl = '''p%iHouseholdCharacteristics''' % (self.pid)
         #delete the characteristic field
-        self.database.open()
+        database = Database()
+        database.open()
             
         queryAlter = '''ALTER TABLE `%s` DROP `%s` ''' % (tbl, char)
         
-        self.database.execDefinitionQuery(queryAlter)
-        self.database.close()
+        database.execDefinitionQuery(queryAlter)
+        database.close()
         
     def getHouseholdCharacteristics(self):
         #get target table
@@ -212,9 +215,10 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
         
         query = '''SHOW COLUMNS FROM %s ''' % (tbl)
         
-        self.database.open()
-        rows = self.database.execSelectQuery(query)
-        self.database.close()
+        database = Database()
+        database.open()
+        rows = database.execSelectQuery(query)
+        database.close()
         
         chars = []
         for row in rows:
@@ -235,12 +239,13 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
          #get target table
         tbl = '''p%iPersonalCharacteristics''' % (self.pid)
         #delete the characteristic field
-        self.database.open()
+        database = Database()
+        database.open()
             
         queryAlter = '''ALTER TABLE `%s` DROP `%s` ''' % (tbl, char)
         
-        self.database.execDefinitionQuery(queryAlter)
-        self.database.close()
+        database.execDefinitionQuery(queryAlter)
+        database.close()
         
     def getPersonCharacteristics(self):
         #get target table
@@ -248,9 +253,10 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
         
         query = '''SHOW COLUMNS FROM %s ''' % (tbl)
         
-        self.database.open()
-        rows = self.database.execSelectQuery(query)
-        self.database.close()
+        database = Database()
+        database.open()
+        rows = database.execSelectQuery(query)
+        database.close()
         
         chars = []
         for row in rows:
@@ -279,16 +285,18 @@ class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivi
         
     def delHousehold(self,  hhid):
         query = "DELETE FROM households WHERE pid=%s AND hhid=%s " % ( self.pid, hhid )
-        self.database.open()
-        self.database.execUpdateQuery( query )
-        self.database.close()
+        database = Database()
+        database.open()
+        database.execUpdateQuery( query )
+        database.close()
         
     def getHouseholds(self):
         query = '''SELECT hhid FROM households WHERE pid=%s ''' % (self.pid)
         
-        self.database.open()
-        rows = self.database.execSelectQuery(query)
-        self.database.close()
+        database = Database()
+        database.open()
+        rows = database.execSelectQuery(query)
+        database.close()
         
         households = []
         for row in rows:

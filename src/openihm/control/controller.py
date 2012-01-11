@@ -60,9 +60,10 @@ class Controller(CurrencyManager, GlobalCharacteristicsManager,  GlobalHousehold
         
     def getProjects(self):       
         query = "SELECT pid FROM projects"
-        self.database.open()
-        rows = self.database.execSelectQuery( query )
-        self.database.close()
+        database = Database()
+        database.open()
+        rows = database.execSelectQuery( query )
+        database.close()
         projects = []
         
         for row in rows:
@@ -85,9 +86,10 @@ class Controller(CurrencyManager, GlobalCharacteristicsManager,  GlobalHousehold
                 
         query = ''' SELECT pid FROM projects%s''' % ( SQLcondition )
         
-        self.database.open()
-        rows = self.database.execSelectQuery(  query )
-        self.database.close()
+        database = Database()
+        database.open()
+        rows = database.execSelectQuery(  query )
+        database.close()
         
         projects = []
         for row in rows:
