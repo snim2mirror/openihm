@@ -21,7 +21,7 @@ class HouseholdMember(HouseholdMemberCharacteristicManager):
          database = Database()
          database.open()
          query = '''SELECT pid, hhid, personid, headofhousehold, yearofbirth, sex, education, periodaway, reason, whereto
-                       FROM householdmembers WHERE hhid=%i and pid=%i and personid='%s' ''' % (hhid,  pid,  memberid)
+                       FROM householdmembers WHERE hhid=%i and pid=%i and personid='%s' ''' % (int( hhid ), int (pid) ,  memberid)
                      
          rows = database.execSelectQuery( query )
          num = len(rows)

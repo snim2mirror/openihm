@@ -127,6 +127,18 @@ class OpenIhmImportManager:
                  
              if fields[0] == "householdwildfoodsincome":
                  self.importHouseholdWildfoodsIncome(project, fields)
+                 
+             if fields[0] == "householdemploymentincome":
+                 self.importHouseholdEmploymentIncome(project, fields)
+                 
+             if fields[0] == "householdtransferincome":
+                 self.importHouseholdTransferIncome(project, fields)
+                 
+             if fields[0] == "householdmember":
+                 self.importHouseholdMember(project, fields)
+                 
+             if fields[0] == "householdmembercharacteristic":
+                 self.importHouseholdMemberCharacteristic(project, fields)
      
      def importProjectCharacteristic(self, project, fields):
          project.addProjectCharacteristic(fields[1], fields[2], fields[3]) 
@@ -153,4 +165,19 @@ class OpenIhmImportManager:
      def importHouseholdWildfoodsIncome(self, project, fields):
          household = project.getHousehold(fields[1])
          household.addWildfoodsIncome(fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8])
+         
+     def importHouseholdEmploymentIncome(self, project, fields):
+         household = project.getHousehold(fields[1])
+         household.addEmploymentIncome(fields[2], fields[3], fields[4], fields[5], fields[6], fields[7])
+         
+     def importHouseholdTransferIncome(self, project, fields):
+         household = project.getHousehold(fields[1])
+         household.addTransferIncome(fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8], fields[9], fields[10])
     
+     def importHouseholdMember(self, project, fields):
+         household = project.getHousehold(fields[1])
+         household.addMember(fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8], fields[9])
+         
+     def importHouseholdMemberCharacteristic(self, project, fields):
+         member = project.getHousehold(fields[1]).getMember(fields[2])
+         member.addCharacteristic(fields[3], fields[4])
