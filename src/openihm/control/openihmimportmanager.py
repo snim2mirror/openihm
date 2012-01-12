@@ -107,9 +107,50 @@ class OpenIhmImportManager:
          lines = contents.split('<endl>\n')
          for line in lines:
              fields = line.split('<d>')
+             if fields[0] == "projectcharacteristic":
+                 self.importProjectCharacteristic(project, fields)
+             
              if fields[0] == "household":
                  self.importProjectHousehold(project, fields)
                  
+             if fields[0] == "householdcharacteristic":
+                 self.importHouseholdCharacteristic(project, fields)
+                 
+             if fields[0] == "householdasset":
+                 self.importHouseholdAsset(project, fields)
+                 
+             if fields[0] == "householdcropincome":
+                 self.importHouseholdCropIncome(project, fields)
+                 
+             if fields[0] == "householdlivestockincome":
+                 self.importHouseholdLivestockIncome(project, fields)
+                 
+             if fields[0] == "householdwildfoodsincome":
+                 self.importHouseholdWildfoodsIncome(project, fields)
+     
+     def importProjectCharacteristic(self, project, fields):
+         project.addProjectCharacteristic(fields[1], fields[2], fields[3]) 
+      
      def importProjectHousehold(self, project, fields):
          project.addHousehold(fields[1], fields[2], fields[3])
+         
+     def importHouseholdCharacteristic(self, project, fields):
+         household = project.getHousehold(fields[1])
+         household.addCharacteristic(fields[2], fields[3])
+         
+     def importHouseholdAsset(self, project, fields):
+         household = project.getHousehold(fields[1])
+         household.addAsset(fields[2], fields[3], fields[4], fields[5], fields[6])
+         
+     def importHouseholdCropIncome(self, project, fields):
+         household = project.getHousehold(fields[1])
+         household.addCropIncome(fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8])
+         
+     def importHouseholdLivestockIncome(self, project, fields):
+         household = project.getHousehold(fields[1])
+         household.addLivestockIncome(fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8])
+         
+     def importHouseholdWildfoodsIncome(self, project, fields):
+         household = project.getHousehold(fields[1])
+         household.addWildfoodsIncome(fields[2], fields[3], fields[4], fields[5], fields[6], fields[7], fields[8])
     

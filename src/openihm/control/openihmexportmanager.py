@@ -29,7 +29,17 @@ class OpenIhmExportManager:
          ihmFile = open(filename, 'w')
          ihmFile.write(projectline)
          ihmFile.close()
+         self.exportProjectCharacteristics(project, filename)
          self.exportHouseholds(project, filename)
+         
+     def exportProjectCharacteristics(self, project, filename):
+         chars = project.getProjectCharacteristics()
+         ihmFile = open(filename, 'a')
+         for char in chars:
+             charline = "projectcharacteristic<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (char.name, char.chartype, char.datatype)
+             ihmFile.write(charline)
+         ihmFile.close()
          
      def exportHouseholds(self, project,  filename):
          households = project.getHouseholds()
@@ -39,4 +49,75 @@ class OpenIhmExportManager:
                  % (household.hhid, household.householdname, household.dateofcollection)
              ihmFile.write(householdline)
          ihmFile.close()
+         
+         for household in households:
+             self.exportHouseholdCharacteristics(household, filename)
+             self.exportHouseholdAssets(household, filename)
+             self.exportHouseholdExpenditure(household, filename)
+             self.exportHouseholdCropIncome(household, filename)
+             self.exportHouseholdLivestockIncome(household, filename)
+             self.exportHouseholdWildfoodsIncome(household, filename)
+             self.exportHouseholdEmploymentIncome(household, filename)
+             self.exportHouseholdTransfersIncome(household, filename)
+             self.exportHouseholdMembers(household, filename)
+             
+     def exportHouseholdCharacteristics(self, household, filename):
+         chars = household.getCharacteristicsWithValues()
+         ihmFile = open(filename, 'a')
+         for char in chars:
+             charline = "householdcharacteristic<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (char.hhid, char.name, char.charvalue)
+             ihmFile.write(charline)
+         ihmFile.close()
+         
+     def exportHouseholdAssets(self, household, filename):
+         assets = household.getAssets()
+         ihmFile = open(filename, 'a')
+         for asset in assets:
+             assetline = "householdasset<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (asset.hhid, asset.category, asset.assettype, asset.unitofmeasure, asset.costperunit, asset.numunits)
+             ihmFile.write(assetline)
+         ihmFile.close()
+         
+     def exportHouseholdExpenditure(self, household, filename):
+         pass
+         
+     def exportHouseholdCropIncome(self, household, filename):
+         crops = household.getCropIncomes()
+         ihmFile = open(filename, 'a')
+         for crop in crops:
+             cropline = "householdcropincome<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (crop.hhid,  crop.incomesource, crop.unitofmeasure, crop.unitsproduced, crop.unitssold, crop.unitprice,
+                       crop.otheruses, crop.unitsconsumed)
+             ihmFile.write(cropline)
+         ihmFile.close()
+         
+     def exportHouseholdLivestockIncome(self, household, filename):
+         items = household.getLivestockIncomes()
+         ihmFile = open(filename, 'a')
+         for item in items:
+             livestockline = "householdlivestockincome<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (item.hhid,  item.incomesource, item.unitofmeasure, item.unitsproduced, item.unitssold, item.unitprice,
+                       item.otheruses, item.unitsconsumed)
+             ihmFile.write(livestockline)
+         ihmFile.close()
+         
+     def exportHouseholdWildfoodsIncome(self, household, filename):
+         items = household.getWildfoodsIncomes()
+         ihmFile = open(filename, 'a')
+         for item in items:
+             wfline = "householdwildfoodsincome<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (item.hhid,  item.incomesource, item.unitofmeasure, item.unitsproduced, item.unitssold, item.unitprice,
+                       item.otheruses, item.unitsconsumed)
+             ihmFile.write(wfline)
+         ihmFile.close()
+         
+     def exportHouseholdEmploymentIncome(self, household, filename):
+         pass
+         
+     def exportHouseholdTransfersIncome(self, household, filename):
+         pass
+         
+     def exportHouseholdMembers(self, household, filename):
+         pass
     

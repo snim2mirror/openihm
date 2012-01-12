@@ -632,8 +632,8 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectcharacteristics` (
   CONSTRAINT `fk_projectcharacteristics_projects1`
     FOREIGN KEY (`pid` )
     REFERENCES `openihmdb`.`projects` (`pid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
@@ -652,8 +652,8 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`householdcharacteristics` (
   CONSTRAINT `fk_householdcharacteristics_households1`
     FOREIGN KEY (`hhid` , `pid` )
     REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
@@ -672,8 +672,8 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`personalcharacteristics` (
   CONSTRAINT `fk_personalcharacteristics_householdmembers1`
     FOREIGN KEY (`personid` , `hhid` , `pid` )
     REFERENCES `openihmdb`.`householdmembers` (`personid` , `hhid` , `pid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
