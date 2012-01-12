@@ -22,11 +22,9 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from data.config import Config
-import includes.mysql.connector as connector
+from control.controller import Controller
 
 Ui_Households_Edit, base_class = uic.loadUiType("gui/designs/ui_households_edit.ui")
-
 
 from mixins import MDIDialogMixin
 
@@ -39,7 +37,6 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
         self.parent = parent
         self.projectid = projectid
         self.hhid = hhid
-        self.config = Config.dbinfo().copy()
         self.mdi = None
         
         # get current project details
@@ -53,16 +50,11 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
 
     def getHouseholdData(self):
         ''' Retrieve and display household data '''
-        # select query to retrieve project data
-        query = '''SELECT hhid, householdname, dateofcollection 
-                     FROM households WHERE hhid=%s''' % (self.hhid)
-        
-        rows = self.executeResultsQuery(query)
-        
-        for row in rows:
-            hhid = row[0]
-            householdname = row[1]
-            dateofcollection = row[2]
+        controller = Controller()
+        household = controller.getProject(self.projectid).getHousehold(self.hhid)
+        hhid = household.hhid
+        householdname = household.householdname
+        dateofcollection = household.dateofcollection
         
         self.txtShortHouseHoldName.setText(str(hhid))
         self.dtpDateVisted.setDate(dateofcollection)
@@ -77,11 +69,10 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
         dateofcollection  = self.dtpDateVisted.date().toString("yyyy-MM-dd")
         pid               = self.projectid
         
-        # create UPDATE query
-        query = '''UPDATE households SET hhid=%s, dateofcollection='%s', householdname='%s'
-                     WHERE hhid=%s AND pid=%s''' % (hhid, dateofcollection, householdname,  self.hhid,  pid)
-    
-        self.executeUpdateQuery(query)
+        controller = Controller()
+        household = controller.getProject(pid).getHousehold(self.hhid)
+        household.editData(hhid, householdname, dateofcollection)
+        
         # close new project window
         self.parent.getHouseholds()
         self.mdiClose()

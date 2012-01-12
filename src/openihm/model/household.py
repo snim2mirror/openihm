@@ -53,22 +53,32 @@ class Household(HouseholdMemberManager, HouseholdCharacteristicManager,  Househo
         database.close()
         return exists
         
-    def setData(self, householdname,  dateofcollection,  newhhid=""):
+    def setData(self, householdname,  dateofcollection):
         database = Database()
         database.open()
-        # create query to update or insert new household
-        if ( newhhid == "" ):  # newhhid defaults to "" when inserting a new household
-            query = '''INSERT INTO households(hhid,pid,dateofcollection,householdname) 
+        
+        query = '''INSERT INTO households(hhid,pid,dateofcollection,householdname) 
                      VALUES(%s,%s, '%s', '%s')''' % (self.hhid, self.pid, dateofcollection, householdname)
-        else:                       
-            query = '''UPDATE households SET hhid=%s, dateofcollection='%s', householdname='%s'
-                     WHERE hhid=%s AND pid=%s''' % (newhhid, dateofcollection, householdname,  self.hhid,  self.pid)
-            self.hhid = newhhid
             
         # execute query
         database.execUpdateQuery( query )
         database.close()
         # update household attributes
+        self.householdname = householdname
+        self.dateofcollection = dateofcollection
+        
+    def editData(self, hhid,  householdname,  dateofcollection):
+        database = Database()
+        database.open()
+                           
+        query = '''UPDATE households SET hhid=%s, dateofcollection='%s', householdname='%s'
+                     WHERE hhid=%s AND pid=%s''' % (hhid, dateofcollection, householdname,  self.hhid,  self.pid)
+            
+        # execute query
+        database.execUpdateQuery( query )
+        database.close()
+        # update household attributes
+        self.hhid = hhid
         self.householdname = householdname
         self.dateofcollection = dateofcollection
         

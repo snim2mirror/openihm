@@ -23,7 +23,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from data.config import Config
+from control.controller import Controller
 
 # import the Create Project Dialog design class
 Ui_Households_Add, base_class = uic.loadUiType("gui/designs/ui_households_add.ui")
@@ -40,7 +40,6 @@ class FrmAddHousehold(QDialog, Ui_Households_Add, MySQLMixin, MDIDialogMixin):
         self.setupUi(self)
         self.parent = parent
         self.projectid = projectid
-        self.config = Config.dbinfo().copy()
         self.mdi = None
         
         # set the dates to the date of today
@@ -56,21 +55,15 @@ class FrmAddHousehold(QDialog, Ui_Households_Add, MySQLMixin, MDIDialogMixin):
     def saveHousehold(self):
         ''' Saves newly created household data to database '''
         
-        # connect to mysql database
-        db = connector.Connect(**self.config)
-        cursor = db.cursor()
-        
         # get the data entered by user
         hhid             = self.txtShortHouseHoldName.text()
         householdname 	 = self.txtHouseholdName.text()
         dateofcollection = self.dtpDateVisted.date().toString("yyyy-MM-dd")
         pid              = self.projectid
         
-        # create INSERT INTO query
-        query = '''INSERT INTO households(hhid,pid,dateofcollection,householdname) 
-                     VALUES(%s,%s, '%s', '%s')''' % (hhid, pid, dateofcollection, householdname)
-                     
-        self.executeUpdateQuery(query)
+        controller = Controller()
+        project = controller.getProject(pid)
+        project.addHousehold(hhid, householdname, dateofcollection)
         
         # close new project window
         self.parent.getHouseholds()

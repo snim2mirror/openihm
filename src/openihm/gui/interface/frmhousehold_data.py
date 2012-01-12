@@ -216,17 +216,20 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 		else:
 		     self.cmdEditMember.setEnabled( False )
 		     self.cmdDelMember.setEnabled( False )
-		     
-		self.retrievePersonalCharacteristics(personid)
+		     self.cmdEditPersonalCharacteristic.setEnabled( False )
+		
+		if (num > 0):
+		     self.retrievePersonalCharacteristics(personid)
 		
 	def showMemberPersonalCharacteristics(self):
          ''' show personal characteristics of selected household member '''
          selectedRow = self.getCurrentRow(self.tblMembers)
          if ( self.tblMembers.model().item(selectedRow, 0) != None ):
              personid = self.tblMembers.model().item(selectedRow,0).text()
+             self.retrievePersonalCharacteristics(personid)
          else:
              personid = "0"
-         self.retrievePersonalCharacteristics(personid)
+         
          
 	#-----------------------------------------------------------------------------------
 	#	Personal Characteristics

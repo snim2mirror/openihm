@@ -23,14 +23,13 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from data.config import Config
+from control.controller import Controller
 
 Ui_AddHouseholdMember, base_class = uic.loadUiType("gui/designs/ui_household_addmember.ui")
 
+from mixins import MDIDialogMixin
 
-from mixins import MDIDialogMixin, MySQLMixin
-
-class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MySQLMixin, MDIDialogMixin):	
+class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):	
     ''' Creates the Add Household Member form. '''	
     def __init__(self, parent,  hhid, hhname):
         ''' Set up the dialog box interface '''
@@ -38,10 +37,6 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MySQLMixin, MDIDialo
         self.setupUi(self)
         self.parent = parent
         self.hhid = hhid
-        
-        # connect to database
-        config = Config.dbinfo().copy()
-        self.db = connector.Connect(**config)
         
         # add years to the year of birth combo box: current year to 150 years ago
         thisyear = date.today().year
@@ -89,11 +84,10 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MySQLMixin, MDIDialo
         periodaway = self.cmbMonthsAbsent.currentText()
         reason = self.txtReason.text()
         whereto = self.txtWhere.text()
-        # create UPDATE query
-        query = '''INSERT INTO householdmembers 
-        	    VALUES('%s',%s,'%s',%s,'%s','%s',%s,%s,'%s','%s')''' % (memberid, self.hhid, headhousehold, yearofbirth, sex, education, pid, periodaway, reason, whereto)
-    
-        self.executeUpdateQuery(query)
+        
+        controller = Controller()
+        household = controller.getProject(pid).getHousehold(self.hhid)
+        household.addMember(memberid, yearofbirth, headhousehold,  sex, education, periodaway, reason, whereto)
         
         # close new project window
         self.parent.retrieveHouseholdMembers()
