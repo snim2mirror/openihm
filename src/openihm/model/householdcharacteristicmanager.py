@@ -81,7 +81,7 @@ class HouseholdCharacteristicManager:
          return chars
          
      def getAllCharacteristics(self):
-         query = "SELECT characteristic FROM projectcharacteristics WHERE pid=%s " % ( self.pid )
+         query = "SELECT characteristic FROM projectcharacteristics WHERE pid=%s AND chartype='Household'" % ( self.pid )
          database = Database()
          database.open()
          rows =database.execSelectQuery( query )
