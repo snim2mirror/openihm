@@ -113,11 +113,45 @@ class OpenIhmExportManager:
          ihmFile.close()
          
      def exportHouseholdEmploymentIncome(self, household, filename):
-         pass
+         items = household.getEmploymentIncomes()
+         ihmFile = open(filename, 'a')
+         for item in items:
+             empline = "householdemploymentincome<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (item.hhid,  item.incomesource, item.foodtypepaid, item.unitofmeasure, item.unitspaid, item.incomekcal,
+                       item.cashincome)
+             ihmFile.write(empline)
+         ihmFile.close()
          
      def exportHouseholdTransfersIncome(self, household, filename):
-         pass
+         items = household.getTransferIncomes()
+         ihmFile = open(filename, 'a')
+         for item in items:
+             transline = "householdtransferincome<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (item.hhid,  item.sourcetype, item.sourceoftransfer, item.cashperyear, item.foodtype, item.unitofmeasure,
+                       item.unitsgiven, item.unitsconsumed, item.unitssold, item.priceperunit)
+             ihmFile.write(transline)
+         ihmFile.close()
          
      def exportHouseholdMembers(self, household, filename):
-         pass
+         members = household.getMembers()
+         ihmFile = open(filename, 'a')
+         for member in members:
+             memberline = "householdmember<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (member.hhid,  member.memberid, member.yearofbirth, member.headofhousehold,  member.sex, member.education, 
+                       member.periodaway, member.reason, member.whereto)
+    
+             ihmFile.write(memberline)
+         ihmFile.close()
+         
+         for member in members:
+             self.exportPersonalCharacteristics(member, filename)
+             
+     def exportPersonalCharacteristics(self, member, filename):
+         chars = member.getCharacteristicsWithValues()
+         ihmFile = open(filename, 'a')
+         for char in chars:
+             charline = "householdmembercharacteristic<d>%s<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (char.hhid, char.personid,  char.name, char.charvalue)
+             ihmFile.write(charline)
+         ihmFile.close()
     

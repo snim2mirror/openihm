@@ -49,7 +49,7 @@ class HouseholdMemberManager:
         
          for row in rows:
              id = row[0]
-             member = HouseholdMember(id)
+             member = HouseholdMember(self.pid,  self.hhid,  id)
              members.append( member )
             
          return members
