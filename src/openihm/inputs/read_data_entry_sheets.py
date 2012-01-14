@@ -661,7 +661,6 @@ class ReadDataEntrySheets:
                         paramlist = (hhid,values[0],datafields[dataindex],values[dataindex])
                         if numrows == 0:
                             
-                            print paramlist
                             query = self.buildPCharInsertQuery(paramlist)
                         else:
                             query= '''DELETE FROM personalcharacteristics WHERE personid='%s' AND hhid=%s AND pid=%s AND characteristic='%s' ''' %(values[0],hhid,self.pid,characteristic)
@@ -676,7 +675,6 @@ class ReadDataEntrySheets:
 
     def readHCharacteristicsData(self,householdsheet,row_index):
         '''Import Data on Household Characteristics'''
-        
         
         field_row_index = row_index + 1
         datatype_row_index = row_index + 2
@@ -757,7 +755,6 @@ class ReadDataEntrySheets:
                         paramlist = (hhid,values[0],datafields[dataindex],values[dataindex])
                         if numrows == 0:
                             
-                            print paramlist
                             query = self.buildHCharInsertQuery(paramlist)
                         else:
                             query= '''DELETE FROM householdcharacteristics WHERE hhid=%s AND pid=%s AND characteristic='%s' ''' %(hhid,self.pid,characteristic)
