@@ -48,8 +48,8 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
         	self.getLivestockTypes()
         	
                 #set input validator and restrict input to numeric values,
-                myIntVal = QIntValidator(0, 10000, self.txtEnergyValue)
-                self.txtEnergyValue.setValidator(myIntVal);
+                #myIntVal = QIntValidator(0, 10000, self.txtEnergyValue)
+                #self.txtEnergyValue.setValidator(myIntVal);
                 #self.txtLivestockEnergyValue.setValidator(myIntVal)
 
 	#Begin block of methods for managing Savings Categories 
@@ -159,22 +159,22 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
 
         def pickSelectedFoodItem(self,index):
                 '''get selected item and populate categories textbox'''
-                self.txtEnergyValue.setText("")
+                #self.txtEnergyValue.setText("")
                 self.txtMeasuringUnit.setText("")
                 
                 selectedFoodItem = self.foodListView.model().item(index.row(),0).text()
                 self.txtFoodStockType.setText(selectedFoodItem)
                 #select query to retrieve food-energy value and measuring unit for selected food item 
-        	query = '''SELECT energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (selectedFoodItem)
+        	query = '''SELECT measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (selectedFoodItem)
 
                 recordset = self.executeResultsQuery(query)
 	      		
 		for row in recordset:
-                        kcalValue = row[0]
-			unitOfMeasure = row[1]
+                        #kcalValue = row[0]
+			unitOfMeasure = row[0]
 
-		if kcalValue:
-                        self.txtEnergyValue.setText(str(kcalValue))
+		'''if kcalValue:
+                        self.txtEnergyValue.setText(str(kcalValue))'''
                 if unitOfMeasure:
                         self.txtMeasuringUnit.setText(unitOfMeasure)
 
@@ -183,11 +183,11 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
 
         	# get the data entered by user
         	myfoodtype = self.txtFoodStockType.text()
-        	myenergyvalue = self.txtEnergyValue.text()
+        	#myenergyvalue = self.txtEnergyValue.text()
         	unitofmeasure = self.txtMeasuringUnit.text()
                         	
 		# check if record exists
-		query = '''SELECT energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
+		query = '''SELECT * FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
 		
                 recordset = self.executeResultsQuery(query)
 
@@ -197,17 +197,17 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
 				      	
 		if numrows == 0:
 			
-			query = '''INSERT INTO setup_crops(foodtype, energyvalueperunit, measuringunit) 
-                     		VALUES('%s',%s,'%s')''' % (myfoodtype, myenergyvalue, unitofmeasure)
+			query = '''INSERT INTO setup_crops(foodtype, measuringunit) 
+                     		VALUES('%s','%s')''' % (myfoodtype, unitofmeasure)
 		else:
-			query = '''UPDATE setup_crops SET foodtype='%s', energyvalueperunit=%s, measuringunit='%s'
-                     		WHERE foodtype='%s' ''' % (myfoodtype, myenergyvalue, unitofmeasure, myfoodtype)
+			query = '''UPDATE setup_crops SET foodtype='%s', measuringunit='%s'
+                     		WHERE foodtype='%s' ''' % (myfoodtype, unitofmeasure, myfoodtype)
     
         	# execute query and commit changes
                 self.executeUpdateQuery(query)
                 self.getFoodTypes()
-		#refresh categories list
-		#self.getCategories()
+                self.txtFoodStockType.clear()
+                self.txtMeasuringUnit.clear()
                                 
 	def deleteFoodStockType(self):
 		''' Deletes record from database '''
@@ -216,7 +216,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
         	myfoodtype = self.txtFoodStockType.text()		
         	
 		# check if record exists
-		query = '''SELECT energyvalueperunit, measuringunit FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
+		query = '''SELECT * FROM setup_crops WHERE foodtype='%s' ''' % (myfoodtype)    
 		
                 recordset = self.executeResultsQuery(query)
 
@@ -235,7 +235,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
 				self.executeUpdateQuery(query)
 
                                 self.txtFoodStockType.clear()
-                                self.txtEnergyValue.clear()
+                                #self.txtEnergyValue.clear()
                                 self.txtMeasuringUnit.clear()
                                 #refresh foodtype list
                                 self.getFoodTypes()			

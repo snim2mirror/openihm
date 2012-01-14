@@ -139,6 +139,9 @@
            <string>Add/Edit Food Stock Details</string>
           </property>
           <layout class="QFormLayout" name="formLayout_2">
+           <property name="fieldGrowthPolicy">
+            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+           </property>
            <item row="0" column="0">
             <widget class="QLabel" name="label_3">
              <property name="text">
@@ -153,19 +156,6 @@
             <widget class="QLineEdit" name="txtFoodStockType"/>
            </item>
            <item row="1" column="0">
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>KCalories</string>
-             </property>
-             <property name="buddy">
-              <cstring>txtEnergyValue</cstring>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="txtEnergyValue"/>
-           </item>
-           <item row="2" column="0">
             <widget class="QLabel" name="label_4">
              <property name="text">
               <string>Unit of Measure</string>
@@ -175,17 +165,17 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
+           <item row="1" column="1">
             <widget class="QLineEdit" name="txtMeasuringUnit"/>
            </item>
-           <item row="3" column="1">
+           <item row="2" column="1">
             <widget class="QPushButton" name="btnFoodStockSave">
              <property name="text">
               <string>Save</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="3" column="1">
             <widget class="QPushButton" name="btnFoodStockDelete">
              <property name="text">
               <string>Delete</string>
@@ -991,6 +981,22 @@
     <hint type="sourcelabel">
      <x>341</x>
      <y>92</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>285</x>
+     <y>211</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnFoodStockDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>deleteFoodStockType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>468</x>
+     <y>173</y>
     </hint>
     <hint type="destinationlabel">
      <x>285</x>
