@@ -600,8 +600,6 @@ class ReadDataEntrySheets:
             fieldtype = str(householdsheet.cell(datatype_row_index,col_index).value)
             
             if datafieldvalue!='':
-                datafieldvalue ="`"+ datafieldvalue +"`"
-                
                 datafields.append(datafieldvalue)
                 fielddatatypes.append(fieldtype)
                 columns = columns + 1
@@ -638,7 +636,13 @@ class ReadDataEntrySheets:
                         cellvalue = 0
                         
                 elif datatype=='Yes/No':
+                    try:
+                        cellvalue = int(cellvalue)
+                    except:
+                        pass
                     tempvalue = str(cellvalue)
+                    tempvalue = tempvalue.strip()
+                    
                     if (tempvalue == '1' or tempvalue.lower() =='yes' or tempvalue.lower() =='y'):
                         cellvalue = 'Yes'
                     else:
@@ -694,7 +698,6 @@ class ReadDataEntrySheets:
             fieldtype = str(householdsheet.cell(datatype_row_index,col_index).value)
             
             if datafieldvalue!='':
-                datafieldvalue ="`"+ datafieldvalue +"`"
                 datafields.append(datafieldvalue)
                 fielddatatypes.append(fieldtype)
                 columns = columns + 1
@@ -731,15 +734,17 @@ class ReadDataEntrySheets:
                         cellvalue = 0
                         
                 elif datatype=='Yes/No':
+                    try:
+                        cellvalue = int(cellvalue)
+                    except:
+                        pass
                     tempvalue = str(cellvalue)
-                    tempvalue = tempvalue.strip('')
-                    
+                    tempvalue = tempvalue.strip()
                     
                     if tempvalue == '1' or tempvalue.lower() =='yes' or tempvalue.lower() =='y':
                         cellvalue = 'Yes'
                     else:
                         cellvalue = 'No'
-                    
 
                 values.append(cellvalue)
                 
@@ -752,9 +757,8 @@ class ReadDataEntrySheets:
                         charvalue= values[dataindex]
                         testquery='''SELECT * from householdcharacteristics WHERE hhid=%s AND pid=%s AND characteristic='%s' ''' %(hhid,self.pid,characteristic)
                         numrows = self.checkRecordExistence(testquery)
-                        paramlist = (hhid,values[0],datafields[dataindex],values[dataindex])
+                        paramlist = (hhid,datafields[dataindex],values[dataindex])
                         if numrows == 0:
-                            
                             query = self.buildHCharInsertQuery(paramlist)
                         else:
                             query= '''DELETE FROM householdcharacteristics WHERE hhid=%s AND pid=%s AND characteristic='%s' ''' %(hhid,self.pid,characteristic)
@@ -778,11 +782,11 @@ class ReadDataEntrySheets:
         query = query + parameterlist
         return query
 
-    def buildHCharInsertQuery(self,characteristic,charvalue,hhid):
+    def buildHCharInsertQuery(self,paramlist):
         ''' query generation for inserting household characteristics'''
-
+        print paramlist
         query = "INSERT INTO householdcharacteristics (pid, hhid,characteristic,charvalue) VALUES " 
-        parameterlist = '(' + str(self.pid) +',' + str(paramlist[0]) +', ' + str(paramlist[1]) +"'"+ ', '
+        parameterlist = '(' + str(self.pid) +',' + str(paramlist[0]) +', ' +"'"+ str(paramlist[1]) +"'"+ ', '
         if (type(paramlist[2]) is str) or (type(paramlist[2]) is unicode):
             parameterlist = parameterlist + "'" + paramlist[2] + "'"
         else:
@@ -791,7 +795,6 @@ class ReadDataEntrySheets:
         parameterlist = parameterlist + ')'
         query = query + parameterlist
         return query
-
 
     def checkRecordExistence(self,testquery):
         '''Test if a record with some given primary key already exists'''
