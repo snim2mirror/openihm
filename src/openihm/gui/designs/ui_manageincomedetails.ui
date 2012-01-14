@@ -35,7 +35,7 @@
     </size>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="tabIncomeCrops">
     <attribute name="title">
@@ -459,12 +459,15 @@
        <height>301</height>
       </rect>
      </property>
+     <property name="toolTip">
+      <string>entered value can only be either 'External' or 'Internal'</string>
+     </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Assistance Type</string>
+       <string>Assistance Source</string>
       </attribute>
       <widget class="QLabel" name="label_32">
        <property name="geometry">
@@ -476,7 +479,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Add/ Edit Transfer Type</string>
+        <string>Add/ Edit Transfer Source</string>
        </property>
       </widget>
       <widget class="QListView" name="transferTypesListView">
@@ -580,7 +583,10 @@
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
-       <string>Assistance Source(External or Internal?)</string>
+       <string>Assistance Category(either External or Internal)</string>
+      </attribute>
+      <attribute name="toolTip">
+       <string>Entered value can only be 'External' or 'Internal'. Internal means Social Transfer</string>
       </attribute>
       <widget class="QLabel" name="label_35">
        <property name="geometry">
@@ -592,7 +598,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Add/ Edit Transfer Source</string>
+        <string>Add/ Edit Transfer Category</string>
        </property>
       </widget>
       <widget class="QListView" name="transferSourcesListView">
