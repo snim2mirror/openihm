@@ -784,7 +784,7 @@ class ReadDataEntrySheets:
 
     def buildHCharInsertQuery(self,paramlist):
         ''' query generation for inserting household characteristics'''
-        print paramlist
+        
         query = "INSERT INTO householdcharacteristics (pid, hhid,characteristic,charvalue) VALUES " 
         parameterlist = '(' + str(self.pid) +',' + str(paramlist[0]) +', ' +"'"+ str(paramlist[1]) +"'"+ ', '
         if (type(paramlist[2]) is str) or (type(paramlist[2]) is unicode):
