@@ -23,7 +23,7 @@ from PyQt4 import QtGui, QtCore, uic
 # import the Create Project Dialog design class
 Ui_NewProject, base_class = uic.loadUiType("gui/designs/ui_newproject.ui")
 
-from data.controller import Controller
+from control.controller import Controller
 
 from mixins import MDIDialogMixin
 

@@ -23,7 +23,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from data.controller import Controller
+from control.controller import Controller
 
 # import the Create Project Dialog design class
 Ui_FindProjectResults, base_class = uic.loadUiType("gui/designs/ui_findprojectresults.ui")
