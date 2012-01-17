@@ -20,8 +20,7 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 
-from data.config import Config
-from data.controller import Controller
+from control.controller import Controller
 
 from mixins import TableViewMixin
 
