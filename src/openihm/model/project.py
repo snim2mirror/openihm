@@ -26,8 +26,9 @@ from incomesourcemanager import IncomeSourceManager
 from projectcharacteristicsmanager import ProjectCharacteristicsManager
 from standardoflivingentrymanager import StandardOfLivingEntryManager
 from projectdietitemmanager import ProjectDietItemManager
+from projectassetsmanager import ProjectAssetsManager
 
-class Project(IncomeSourceManager, ProjectCharacteristicsManager, StandardOfLivingEntryManager, ProjectDietItemManager):
+class Project(IncomeSourceManager, ProjectAssetsManager,  ProjectCharacteristicsManager, StandardOfLivingEntryManager, ProjectDietItemManager):
     def __init__(self, pid=0, projectname="", startdate="", enddate="", description="", currency=""):
         if ( pid != 0 ):
             if ( not self.getProjectDetails( pid ) ):

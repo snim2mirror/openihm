@@ -36,10 +36,13 @@ from frmproject_configure_householdcharacteristics import HouseholdCharacteristi
 from frmproject_configure_personalcharacteristics import PersonalCharacteristicsManager
 from frmproject_configure_standardofliving import StandardOfLivingManager
 from frmproject_configure_diet import DietManager
+from frmproject_configure_assets import ProjectAssetsManager
 
 from mixins import MDIDialogMixin, MySQLMixin, TableViewMixin
 
-class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, PersonalCharacteristicsManager,  HouseholdCharacteristicsManager,  DietManager,  StandardOfLivingManager,  CropIncomeManager, LivestockIncomeManager, WildfoodIncomeManager, EmploymentIncomeManager, TransferIncomeManager, TableViewMixin, MySQLMixin, MDIDialogMixin):	
+class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, PersonalCharacteristicsManager,  HouseholdCharacteristicsManager,  
+                          DietManager,  StandardOfLivingManager,  CropIncomeManager, LivestockIncomeManager, WildfoodIncomeManager, 
+                          EmploymentIncomeManager, TransferIncomeManager, ProjectAssetsManager, TableViewMixin, MySQLMixin, MDIDialogMixin):	
      ''' Creates the Edit Project form. '''	
      def __init__(self, parent):
          ''' Set up the dialog box interface '''
@@ -86,3 +89,6 @@ class FrmConfigureProject(QDialog, Ui_ProjectConfiguration, PersonalCharacterist
          
          self.displayAvailableTransfers()
          self.displaySelectedTransfers()
+         
+         self.displayAvailableAssets()
+         self.displaySelectedAssets()
