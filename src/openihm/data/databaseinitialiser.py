@@ -126,7 +126,7 @@ class DatabaseInitialiser:
          
          upToDate = False
          for row in rows:
-             if row[0] == "globalcharacteristics":
+             if row[0] == "projectassets":
                      upToDate = True
          
          return upToDate

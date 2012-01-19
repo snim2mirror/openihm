@@ -678,7 +678,33 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
+-- -----------------------------------------------------
+-- Table `openihmdb`.`projectassets`
+-- -----------------------------------------------------
 
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectassets` (
+  `pid` INT NOT NULL ,
+  `assetname` VARCHAR(255) NOT NULL ,
+  `assettype` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`pid`, `assetname`) ,
+  INDEX `pid` (`pid` ASC) ,
+  CONSTRAINT `pid`
+    FOREIGN KEY (`pid` )
+    REFERENCES `openihmdb`.`projects` (`pid` )
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `openihmdb`.`setup_assets`
+-- -----------------------------------------------------
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_assets` (
+  `assetname` VARCHAR(255) NOT NULL ,
+  `assettype` VARCHAR(50) NOT NULL ,
+  `unitofmeasure` VARCHAR(45) NOT NULL ,
+  PRIMARY KEY (`assetname`) )
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
