@@ -20,6 +20,7 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 
 from includes.mysql.connector import Connect
 from includes.mysql.connector import errors
+from datetime import date
 
 class DbConfig(object):
      """ Configures the mysql database connector which is then called as below:
@@ -52,6 +53,9 @@ class DatabaseInitialiser:
      def __init__(self, host='localhost', rootpwd=''):
          self.host = host
          self.rootpwd = rootpwd
+         
+         #date of latest DB update: must be reset to latest date when DB changes are being pushed
+         self.latestupdatestring = "latest update on 2012-01-22" 
          
      def initialiseDB(self):
          config = DbConfig(self.host, 'openihmdb', 'openihm', 'ihm2010')
@@ -121,13 +125,19 @@ class DatabaseInitialiser:
          cursor.execute(query)
          rows = cursor.fetchall()
          
-         cursor.close()
-         db.close()
-         
          upToDate = False
          for row in rows:
-             if row[0] == "projectassets":
-                     upToDate = True
+             if row[0] == "dbupdate":
+                 query = "SELECT lastupdate FROM dbupdate"
+                 cursor.execute(query)
+                 rows = cursor.fetchall()
+                 
+                 for row in rows:
+                     if row[0] > self.latestupdatestring:
+                         upToDate = True
+                         
+         cursor.close()
+         db.close()
          
          return upToDate
         
@@ -150,6 +160,16 @@ class DatabaseInitialiser:
                  for command in commandlist:
                      if ( not command.isspace() ):
                          cursor.execute(command)
+                         
+                 query = "DELETE FROM dbupdate"
+                 cursor.execute(query)
+                 db.commit()
+                 
+                 updatestr = "latest update on %s" % (date.today().isoformat())
+                 
+                 query = "INSERT INTO dbupdate VALUES('%s')" % updatestr
+                 cursor.execute(query)
+                 db.commit()
              
                  cursor.close()
                  db.close()

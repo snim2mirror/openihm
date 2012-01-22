@@ -5,6 +5,14 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 USE `openihmdb`;
 
 -- -----------------------------------------------------
+-- Table `openihmdb`.`dbupdate`
+-- -----------------------------------------------------
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`dbupdate` (
+  `lastupdate` VARCHAR(50) NOT NULL ,
+  PRIMARY KEY (`lastupdate`) );
+
+-- -----------------------------------------------------
 -- Table `openihmdb`.`projectassets`
 -- -----------------------------------------------------
 
@@ -128,6 +136,22 @@ COLLATE = latin1_swedish_ci;
 -- -----------------------------------------------------
 -- Enforce referential integrity
 -- -----------------------------------------------------
+
+ALTER TABLE `openihmdb`.`diet` DROP FOREIGN KEY `fk_diet_projects1` ;
+ALTER TABLE `openihmdb`.`diet` 
+  ADD CONSTRAINT `fk_diet_projects1`
+  FOREIGN KEY (`pid` )
+  REFERENCES `openihmdb`.`projects` (`pid` )
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+ALTER TABLE `openihmdb`.`standardofliving` DROP FOREIGN KEY `fk_standardofliving_projects1` ;
+ALTER TABLE `openihmdb`.`standardofliving` 
+  ADD CONSTRAINT `fk_standardofliving_projects1`
+  FOREIGN KEY (`pid` )
+  REFERENCES `openihmdb`.`projects` (`pid` )
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
 
 ALTER TABLE `openihmdb`.`personalcharacteristics` DROP FOREIGN KEY `fk_personalcharacteristics_householdmembers1` ;
 ALTER TABLE `openihmdb`.`personalcharacteristics` 

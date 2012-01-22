@@ -207,8 +207,8 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`diet` (
   CONSTRAINT `fk_diet_projects1`
     FOREIGN KEY (`pid` )
     REFERENCES `openihmdb`.`projects` (`pid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
@@ -516,8 +516,8 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`standardofliving` (
   CONSTRAINT `fk_standardofliving_projects1`
     FOREIGN KEY (`pid` )
     REFERENCES `openihmdb`.`projects` (`pid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
