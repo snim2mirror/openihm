@@ -120,7 +120,8 @@ class TransferManager:
          
          for row in rows:
              household = project.addHousehold(row.HHID, row.HHRealName, startdate)
-             self.transferHouseholdMembers( accessfilename, sourcepid,  row.HHID,  household )
+             self.transferHouseholdChars( accessfilename, sourcepid,  row.HHID,  household ,  project)
+             self.transferHouseholdMembers( accessfilename, sourcepid,  row.HHID,  household,  project )
              self.transferHouseholdAssets( accessfilename, sourcepid,  row.HHID,  household )
              self.transferHouseholdCropIncome( accessfilename, sourcepid,  row.HHID,  household )
              self.transferHouseholdLivestockIncome( accessfilename, sourcepid,  row.HHID,  household )
@@ -128,10 +129,14 @@ class TransferManager:
              self.transferHouseholdGiftsIncome( accessfilename, sourcepid,  row.HHID,  household )
              self.transferHouseholdAIDIncome( accessfilename, sourcepid,  row.HHID,  household )
              self.transferHouseholdEmploymentIncome( accessfilename, sourcepid,  row.HHID,  household )
+             self.transferHouseholdExpenditure( accessfilename, sourcepid,  row.HHID,  household )
              
          db.close()
          
-     def transferHouseholdMembers(self, accessfilename, sourcepid,  sourcehhid,  household ):
+     def transferHouseholdChars(self, accessfilename, sourcepid,  sourcehhid,  household,  project ):
+         pass
+         
+     def transferHouseholdMembers(self, accessfilename, sourcepid,  sourcehhid,  household,  project ):
          query = "SELECT PersonID, Sex, Age FROM TblDemog WHERE ProjectID=%s AND HHID=%s " % (sourcepid, sourcehhid)
          
          db = AccessDB(accessfilename)
@@ -150,9 +155,13 @@ class TransferManager:
          for row in rows:
              yearofbirth = thisyear - int(row.Age)
              sex = "Male" if row.Sex == "M" else "Female"
-             household.addMember(row.PersonID, yearofbirth, headhousehold,  sex, education, periodaway, reason, whereto)
+             member = household.addMember(row.PersonID, yearofbirth, headhousehold,  sex, education, periodaway, reason, whereto)
+             self.transferHouseholdMemberChars(accessfilename, sourcepid, sourcehhid,  row.PersonID,  member,  project)
              
          db.close()
+         
+     def transferHouseholdMemberChars(self, accessfilename, sourcepid,  sourcehhid,  personid,  member,  project):
+         pass
          
      def transferHouseholdAssets(self, accessfilename, sourcepid,  sourcehhid,  household ):
          query = '''SELECT tblLkUpAssets.AssetCategory, tblLkUpAssets.AssetName, tblLkUpAssets.Unit, tblLkUpAssets.PriceUnit, TblAssetVals.Value
@@ -350,4 +359,7 @@ class TransferManager:
              household.addEmploymentIncome(incomesource, foodtypepaid, unitofmeasure, unitspaid, incomekcal, cashincome  )    
              
          db.close()
+         
+     def transferHouseholdExpenditure( self,  accessfilename, sourcepid,  sourcehhid,  household ):
+         pass
     
