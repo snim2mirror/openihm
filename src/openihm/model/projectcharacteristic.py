@@ -87,7 +87,6 @@ class ProjectCharacteristic:
          self.datatypestr = self.getStringDataType()
          
      def getStringDataType(self):
-         print self.datatype
          if self.datatype == 1:
              return "Boolean/Yes/No"
          elif self.datatype == 2:

@@ -134,7 +134,37 @@ class TransferManager:
          db.close()
          
      def transferHouseholdChars(self, accessfilename, sourcepid,  sourcehhid,  household,  project ):
-         pass
+          
+         query = '''SELECT tblLkUpHHItem.ItemName, tblLkUpHHItem.Unit, tblHHItemValues.Value, tblHHItemValues.TrueFalse
+                       FROM tblLkUpHHItem, tblHHItemValues
+                       WHERE tblHHItemValues.ItemID = tblLkUpHHItem.ItemID AND tblHHItemValues.ProjectID=%s 
+                       AND tblHHItemValues.HHID=%s''' % (sourcepid, sourcehhid)
+         
+         db = AccessDB(accessfilename)
+         db.open()
+         rows = db.execSelectQuery( query )
+         
+         for row in rows:
+             chartype = "Household"
+             charname = row.ItemName
+             val = row.Value
+             valyesno = row.TrueFalse
+             if row.Unit != "Yes/No":
+                 datatype = 3
+                 charvalue = val
+             else:
+                 datatype = 1
+                 charvalue = "Yes" if str(valyesno) == "True" else "No"
+                 
+             if not self.existsGlobalCharacteristic(charname):
+                 self.addGlobalCharacteristic(charname,  chartype,  datatype)
+                 
+             if not project.existsProjectCharacteristic(charname):
+                 project.addProjectCharacteristic(charname, chartype, datatype)
+                 
+             household.addCharacteristic(charname, charvalue)  
+             
+         db.close()
          
      def transferHouseholdMembers(self, accessfilename, sourcepid,  sourcehhid,  household,  project ):
          query = "SELECT PersonID, Sex, Age FROM TblDemog WHERE ProjectID=%s AND HHID=%s " % (sourcepid, sourcehhid)
@@ -161,7 +191,41 @@ class TransferManager:
          db.close()
          
      def transferHouseholdMemberChars(self, accessfilename, sourcepid,  sourcehhid,  personid,  member,  project):
-         pass
+         query = '''SELECT tblLkUpPersonalChars.CharType, tblPersonValsNew.DataValue, tblPersonValsNew.TrueFalse,
+                      tblPersonValsNew.PercentTimeAway
+                       FROM tblLkUpPersonalChars, tblPersonValsNew
+                       WHERE tblPersonValsNew.CharID = tblLkUpPersonalChars.CharID AND tblPersonValsNew.ProjectID=%s 
+                       AND tblPersonValsNew.HHID=%s AND tblPersonValsNew.PersonID=%s  ''' % (sourcepid, sourcehhid, personid)
+         
+         db = AccessDB(accessfilename)
+         db.open()
+         rows = db.execSelectQuery( query )
+         
+         for row in rows:
+             chartype = "Personal"
+             charname = row.CharType
+             valdata = row.DataValue
+             valpercent = row.PercentTimeAway
+             valyesno = row.TrueFalse
+             if valdata != None and str(valyesno) != "True":
+                 datatype = 3
+                 charvalue = valdata
+             elif valpercent != None and str(valyesno) != "True":
+                 datatype = 3
+                 charvalue = valpercent
+             else:
+                 datatype = 1
+                 charvalue = "Yes" if str(valyesno) == "True" else "No"
+                 
+             if not self.existsGlobalCharacteristic(charname):
+                 self.addGlobalCharacteristic(charname,  chartype,  datatype)
+                 
+             if not project.existsProjectCharacteristic(charname):
+                 project.addProjectCharacteristic(charname, chartype, datatype)
+                 
+             member.addCharacteristic(charname, charvalue)
+             
+         db.close()
          
      def transferHouseholdAssets(self, accessfilename, sourcepid,  sourcehhid,  household ):
          query = '''SELECT tblLkUpAssets.AssetCategory, tblLkUpAssets.AssetName, tblLkUpAssets.Unit, tblLkUpAssets.PriceUnit, TblAssetVals.Value
