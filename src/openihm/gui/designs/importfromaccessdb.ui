@@ -52,7 +52,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../../../../../../../Brown/.designer/resources/images/addreport.png</normaloff>../../../../../../../Brown/.designer/resources/images/addreport.png</iconset>
+          <normaloff>../../../../../../.designer/resources/images/addreport.png</normaloff>../../../../../../.designer/resources/images/addreport.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -139,7 +139,7 @@
          </size>
         </property>
         <property name="text">
-         <string>Close</string>
+         <string>Cancel</string>
         </property>
        </widget>
       </item>

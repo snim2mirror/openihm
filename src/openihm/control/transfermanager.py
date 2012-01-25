@@ -83,6 +83,7 @@ class TransferManager:
          
      def importProject(self, filename, projectid):
          ''' transfers project data '''
+         
          query = "SELECT ProjectID, ProjectName, DateOfDataCollection, Currency FROM TblProject WHERE ProjectID=%s" % projectid
          
          db = AccessDB(filename)
