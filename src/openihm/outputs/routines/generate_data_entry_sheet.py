@@ -63,10 +63,38 @@ class DataEntrySheets:
         dbconnector.close()
         return recordset
     
+    def getprojetAssets(self):
+        query = '''SELECT assettype, assetname FROM projectassets WHERE pid=%s ORDER BY assettype, assetname''' % self.pid
+        self.database.open()
+        assets = self.database.execSelectQuery(query)
+        self.database.close()
+        return assets
+    
+    def addProjectAssets(self,book,style2):
+        ''' Populate Sheet 3 with Assets for a selected project'''
+        sheet4 = book.add_sheet("Assets")
+        sheet4.write(1, 0, "Asset Type", style2)
+        sheet4.write(1, 1, "Asset Name", style2)
+
+        #set column width for sheet3 - Asset Columns
+        for i in range(0,2):
+            sheet4.col(i).width = 6000
+
+        recordset = self.getprojetAssets()
+        row = 2
+        for rec in recordset:
+            col = 0
+            assettype = rec[0]
+            assetname = rec[1]
+            sheet4.write(row, col, assettype)
+            col = col + 1
+            sheet4.write(row, col, assetname)
+            row = row + 1
+    
     def populateIncomeSourcesSheet(self,book,style2):
         ''' Populate Sheet 3 with income sources for a selected project'''
         
-        #Basic Details for Household Members
+        #Income Sources
         sheet3 = book.add_sheet("Income Sources")
         sheet3.write(1, 0, "Crop Types", style2)
         sheet3.write(1, 2, "Employment Types", style2)
@@ -275,7 +303,7 @@ class DataEntrySheets:
             sheet2.col(i).width = 6000
             
         self.populateIncomeSourcesSheet(book,style1)
-       
+        self.addProjectAssets(book,style1)
 
         folder = "inputs/"
         filename = folder + "dataEntrySheet-ProjectID-" + str(self.pid) + ".xls"
