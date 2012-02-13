@@ -141,6 +141,9 @@ class OpenIhmImportManager:
                  self.importHouseholdMemberCharacteristic(project, fields)
      
      def importProjectCharacteristic(self, project, fields):
+         if not self.existsGlobalCharacteristic(fields[1]):
+             self.addGlobalCharacteristic(fields[1], fields[2], fields[3]) 
+             
          project.addProjectCharacteristic(fields[1], fields[2], fields[3]) 
       
      def importProjectHousehold(self, project, fields):
