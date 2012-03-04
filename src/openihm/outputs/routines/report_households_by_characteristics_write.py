@@ -28,7 +28,7 @@ class HouseholdsByCharacteristicsWrite:
         #self.database = Database()
 
     def writeSpreadsheetReport(self,reporttable):
-        book = xlwt.Workbook(encoding="utf-8") 
+        book = includes.xlwt.Workbook(encoding="utf-8") 
 
         sheet1 = book.add_sheet("Households By Characteristics")
         sheet1.write(0, 0, "Household ID")
