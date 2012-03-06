@@ -108,6 +108,14 @@ class FrmHouseholdWildfoodsIncome(QDialog, Ui_AddHouseholdIncomeWildfoods, MySQL
          unitssold		= self.txtUnitsSold.text() if self.txtUnitsSold.text() != "" else "0"
          unitprice		= self.txtUnitPrice.text() if self.txtUnitPrice.text() != "" else "0"
          otheruses       = self.txtUnitsOtherUses.text() if self.txtUnitsOtherUses.text() != "" else "0"
+         
+         totalusage = int(unitsconsumed) + int(unitssold) + int(otheruses)
+         totalproduced = int(unitsproduced)
+         
+         if totalproduced < totalusage:
+             msg = "The total of units consumed, units sold and units for otheruses should not exceed units produced."
+             QMessageBox.information(self,"Add Wildfood Income", msg)	
+             return
 
          # create UPDATE query
          if (self.incomeid == 0):

@@ -238,7 +238,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 	def getPersonalCharacteristicDataType(self, charName):
 		controller = Controller()
 		char = controller.getGlobalCharacteristic(charName)
-		return char.datatype
+		if char.name != "": 
+		     return char.datatype
+		else:
+		     return 3
 	
 	def retrievePersonalCharacteristics( self,  personid ):
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
@@ -313,7 +316,10 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 	def getCharacteristicDataType(self, charName):
 		controller = Controller()
 		char = controller.getGlobalCharacteristic(charName)
-		return char.datatype
+		if char.name != "": 
+		     return char.datatype
+		else:
+		     return 3
 	
 	def retrieveHouseholdCharacteristics( self ):
 		temp = self.cboHouseholdNumber.itemData(self.cboHouseholdNumber.currentIndex()).toInt()
@@ -1319,4 +1325,5 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 		
 		self.tblExpenditure.setModel(model)
 		self.tblExpenditure.resizeColumnsToContents()
+		self.tblExpenditure.hideColumn(0)
 		self.tblExpenditure.show()

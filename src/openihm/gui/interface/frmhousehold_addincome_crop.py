@@ -78,7 +78,7 @@ class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops, MySQLMixin, MD
          query = '''SELECT incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed  
              FROM cropincome WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
          
-         rows = executeResultsQuery(query)
+         rows = self.executeResultsQuery(query)
 
          for row in rows:
              croptype = row[0]
@@ -107,6 +107,14 @@ class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops, MySQLMixin, MD
          unitssold		= self.txtUnitsSold.text() if self.txtUnitsSold.text() != "" else "0"
          unitprice		= self.txtUnitPrice.text() if self.txtUnitPrice.text() != "" else "0"
          otheruses       = self.txtUnitsOtherUses.text() if self.txtUnitsOtherUses.text() != "" else "0"
+         
+         totalusage = int(unitsconsumed) + int(unitssold) + int(otheruses)
+         totalproduced = int(unitsproduced)
+         
+         if totalproduced < totalusage:
+             msg = "The total of units consumed, units sold and units for otheruses should not exceed unitsproduced."
+             QMessageBox.information(self,"Add Crop Income", msg)	
+             return
 
          # create UPDATE query
          if (self.incomeid == 0):

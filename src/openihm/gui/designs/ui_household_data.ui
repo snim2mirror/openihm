@@ -34,7 +34,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="tabHouseHoldMembers">
     <attribute name="title">
@@ -228,7 +228,7 @@
       <enum>QTabWidget::West</enum>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
@@ -866,8 +866,8 @@
    <slot>addHouseholdMember()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>85</x>
-     <y>564</y>
+     <x>87</x>
+     <y>562</y>
     </hint>
     <hint type="destinationlabel">
      <x>98</x>
@@ -978,8 +978,8 @@
    <slot>addHouseholdCropIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>132</x>
-     <y>557</y>
+     <x>154</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>176</x>
@@ -1010,8 +1010,8 @@
    <slot>delHouseholdCropIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>315</x>
-     <y>557</y>
+     <x>339</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>274</x>
@@ -1026,8 +1026,8 @@
    <slot>addHouseholdLivestockIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>132</x>
-     <y>557</y>
+     <x>154</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>44</x>
@@ -1090,8 +1090,8 @@
    <slot>editHouseholdEmploymentIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>185</x>
-     <y>557</y>
+     <x>209</x>
+     <y>554</y>
     </hint>
     <hint type="destinationlabel">
      <x>6</x>
@@ -1167,7 +1167,7 @@
    <sender>cmdAddGifts</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>addHouseholdTransferIncome()</slot>
+   <slot>addHouseholdGiftsIncome()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>109</x>
@@ -1183,7 +1183,7 @@
    <sender>cmdEditGifts</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>editHouseholdTransferIncome()</slot>
+   <slot>editHouseholdGiftsIncome()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>213</x>
@@ -1199,7 +1199,7 @@
    <sender>cmdDelGifts</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>delHouseholdTransferIncome()</slot>
+   <slot>delHouseholdGiftsIncome()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>310</x>

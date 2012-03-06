@@ -106,13 +106,12 @@ class FrmHouseholdTransferIncome(QDialog, Ui_AddHouseholdIncomeTransfers, MySQLM
          # get the data entered by user
          sourceoftransfer  = self.cmbSourceOfTransfer.currentText()
          sourcetype		= "External"
-         cash                 = self.txtCash.text()
+         cash                 = self.txtCash.text() if self.txtCash.text() != "" else "0"
          foodtype           = self.cmbFoodType.currentText()
          unitofmeasure	= self.txtUnitOfMeasure.text()
-         unitsconsumed	= self.txtUnitsConsumed.text()
-         unitssold           = self.txtUnitsSold.text()
-         unitprice           = self.txtUnitPrice.text()
-
+         unitsconsumed	= self.txtUnitsConsumed.text() if self.txtUnitsConsumed.text() != "" else "0"
+         unitssold           = self.txtUnitsSold.text() if self.txtUnitsSold.text() != "" else "0"
+         unitprice           = self.txtUnitPrice.text() if self.txtUnitPrice.text() != "" else "0"
 
          # create UPDATE query
          if (self.incomeid == 0):
