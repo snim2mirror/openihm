@@ -55,7 +55,7 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin, MySQL
 		''' Retrieve Expenditure Types and display them in a combobox '''
 		# select query to Asset Types
 		query = '''SELECT expendituretype FROM setup_expendituretypes'''
-		rows = executeResultsQuery(query)
+		rows = self.executeResultsQuery(query)
 		
 		for row in rows:
 		    exptype = row[0]
@@ -65,7 +65,7 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin, MySQL
 		''' Retrieve and display Household Expenditure details '''
 		query = '''SELECT * FROM expenditure WHERE hhid=%s AND pid=%s AND expid=%s ''' % ( self.hhid, self.pid, self.expid )
 		
-		rows = executeResultsQuery(query)
+		rows = self.executeResultsQuery(query)
 		
 		for row in rows:
 			exptype = row[2]
@@ -86,10 +86,10 @@ class FrmHouseholdExpense(QDialog, Ui_AddHouseholdExpense, MDIDialogMixin, MySQL
 		
 		# get the data entered by user
 		exptype       = self.cboExpenditure.currentText()
-		unitofmeasure = self.txtUnitOfMeasure.text()
-		costperunit   = self.txtCostPerUnit.text()
-		kcalperunit	  = self.txtKCalPerUnit.text()
-		numunits      = self.txtNumberOfUnits.text()
+		unitofmeasure = self.txtUnitOfMeasure.text() if self.txtUnitOfMeasure.text() != "" else "Kg"
+		costperunit   = self.txtCostPerUnit.text() if self.txtCostPerUnit.text() != "" else "0"
+		kcalperunit	  = self.txtKCalPerUnit.text() if self.txtKCalPerUnit.text() != "" else "0"
+		numunits      = self.txtNumberOfUnits.text() if self.txtNumberOfUnits.text() != "" else "0"
 			
 		# create UPDATE query
 		expid 	= self.expid

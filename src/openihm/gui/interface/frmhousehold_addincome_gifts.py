@@ -109,12 +109,12 @@ class FrmHouseholdGiftsIncome(QDialog, Ui_AddHouseholdIncomeGifts, MySQLMixin, M
          # get the data entered by user
          sourceoftransfer  = self.cmbSourceOfTransfer.currentText()
          sourcetype		= "Internal"
-         cash                 = self.txtCash.text()
+         cash                 = self.txtCash.text() if self.txtCash.text() != "" else "0"
          foodtype           = self.cmbFoodType.currentText()
          unitofmeasure	= self.txtUnitOfMeasure.text()
-         unitsconsumed	= self.txtUnitsConsumed.text()
-         unitssold           = self.txtUnitsSold.text()
-         unitprice           = self.txtUnitPrice.text()
+         unitsconsumed	= self.txtUnitsConsumed.text() if self.txtUnitsConsumed.text() != "" else "0"
+         unitssold           = self.txtUnitsSold.text() if self.txtUnitsSold.text() != "" else "0"
+         unitprice           = self.txtUnitPrice.text() if self.txtUnitPrice.text() != "" else "0"
 
          # create UPDATE query
          if (self.incomeid == 0):
@@ -125,6 +125,8 @@ class FrmHouseholdGiftsIncome(QDialog, Ui_AddHouseholdIncomeGifts, MySQLMixin, M
              query = ''' UPDATE transfers SET sourceoftransfer='%s',  cashperyear=%s, foodtype='%s', unitofmeasure='%s', unitsconsumed=%s, 
                          unitssold='%s', priceperunit=%s WHERE hhid=%s AND pid=%s AND 
                          id=%s ''' % ( sourceoftransfer, cash, foodtype, unitofmeasure,  unitsconsumed,  unitssold,  unitprice, self.hhid, self.pid,  self.incomeid)
+                         
+         print query
 
          self.executeUpdateQuery(query)
          

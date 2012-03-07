@@ -120,9 +120,9 @@ class FrmHouseholdAsset(QDialog, Ui_AddHouseholdAsset,  MySQLMixin,  MDIDialogMi
          # get the data entered by user
          category        = self.cboAssetCategory.currentText()
          assettype       = self.cboAssetType.currentText()
-         unitofmeasure	= self.txtUnitOfMeasure.text()
-         costperunit     = self.txtCostPerUnit.text()
-         numunits        = self.txtNumberOfUnits.text()
+         unitofmeasure	= self.txtUnitOfMeasure.text() 
+         costperunit     = self.txtCostPerUnit.text() if self.txtCostPerUnit.text() != "" else 0
+         numunits        = self.txtNumberOfUnits.text() if self.txtNumberOfUnits.text() != "" else 0
 
          # create UPDATE query
          if (self.assetid == 0):

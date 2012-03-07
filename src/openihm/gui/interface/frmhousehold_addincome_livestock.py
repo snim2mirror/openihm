@@ -64,7 +64,7 @@ class FrmHouseholdLivestockIncome(QDialog, Ui_AddHouseholdIncomeLivestock, MySQL
          ''' Retrieve Livestock Types and display them in a combobox '''
          # select query to Livestock Types
          query = '''SELECT name, unitofmeasure FROM setup_foods_crops WHERE category='livestock' '''
-         row = self.executeResultsQuery(query)
+         rows = self.executeResultsQuery(query)
          for row in rows:
              incometype = row[0]
              measuringunit = row[1]
@@ -107,6 +107,14 @@ class FrmHouseholdLivestockIncome(QDialog, Ui_AddHouseholdIncomeLivestock, MySQL
          unitssold		= self.txtUnitsSold.text() if self.txtUnitsSold.text() != "" else "0"
          unitprice		= self.txtUnitPrice.text() if self.txtUnitPrice.text() != "" else "0"
          otheruses       = self.txtUnitsOtherUses.text() if self.txtUnitsOtherUses.text() != "" else "0"
+         
+         totalusage = int(unitsconsumed) + int(unitssold) + int(otheruses)
+         totalproduced = int(unitsproduced)
+         
+         if totalproduced < totalusage:
+             msg = "The total of units consumed, units sold and units for otheruses should not exceed unitsproduced."
+             QMessageBox.information(self,"Add Livestock Income", msg)	
+             return
 
          # create UPDATE query
          if (self.incomeid == 0):
