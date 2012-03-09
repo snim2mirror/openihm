@@ -34,10 +34,15 @@ class HouseholdsByCharacteristicsWrite:
         sheet1.write(0, 0, "Household ID")
         sheet1.write(0, 1, "Name of Household")
         i = 1
+        sheet1.col(0).width = 5500
+        sheet1.col(1).width = 5500
         for row in reporttable:
-            sheet1.write(i, 0, "%s" % row[0])
-            sheet1.write(i, 1, "%s" % row[1])
+            sheet1.write(i, 0, "%s" % row[1])
+            sheet1.write(i, 1, "%s" % row[2])
             i = i + 1
+
+        sheet1.col(0).width = 5500
+        sheet1.col(1).width = 5500
 
         folder = "outputs/spreadsheets/"
         filename =  folder + "openihm_ProjectHouseholdsByCharacteristics-" + str(time()) + ".xls"

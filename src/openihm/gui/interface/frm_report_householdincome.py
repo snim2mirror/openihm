@@ -367,7 +367,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport, MDIDialogMixin):
         return self.listViewHCharacteristics.selectedIndexes()
 
     def getSelectedPersonalCharacteristics(self):
-        ''' get list of user selected househpersonal characteristics as part of the criteria for report generation'''
+        ''' get list of user selected householdpersonal characteristics as part of the criteria for report generation'''
 		
 	selectedRows = []
 	selectedIndexes = self.getSelectedPIndexes()

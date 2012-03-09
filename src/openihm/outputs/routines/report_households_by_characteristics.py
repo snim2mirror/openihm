@@ -31,10 +31,13 @@ class HouseholdsByCharacteristics:
         
         houseid = tablename + '.hhid'
         
-        basequery = '''SELECT households.hhid, households.householdname FROM households JOIN %s ON households.hhid = %s''' % (tablename,houseid)
-        for coulumnname in pcharacteristics:
-            currentcolumn =  tablename + '.' + '%s' % coulumnname
-            basequery = basequery + " and '%s' IS NOT NULL" % (currentcolumn)
+        basequery = '''SELECT households.pid,households.hhid, households.householdname FROM households
+                        JOIN personalcharacteristics ON households.hhid = personalcharacteristics.hhid AND households.pid=personalcharacteristics.pid''' 
+        for currentcharacteristic in pcharacteristics:
+            #currentcharacteristic =  'personalcharacteristics' + '.' + '%s' % characteristic
+            basequery = basequery + " AND personalcharacteristics.characteristic ='%s' AND personalcharacteristics.charvalue='Yes'" % (currentcharacteristic)
+
+        basequery = basequery + " GROUP BY households.pid,households.hhid" 
         print basequery
         return basequery
         
@@ -44,16 +47,20 @@ class HouseholdsByCharacteristics:
         #settingsmanager = ReportsSettingsManager()
         houseid = tablename + '.hhid'
         
-        basequery = '''SELECT households.hhid, households.householdname FROM households JOIN %s ON households.hhid = %s''' % (tablename,houseid)
-        for coulumnname in hcharacteristics:
-            currentcolumn =  tablename + '.' + '%s' % coulumnname
-            basequery = basequery + " and '%s' IS NOT NULL" % (currentcolumn)
+        basequery = '''SELECT households.pid,households.hhid, households.householdname FROM households
+                        JOIN householdcharacteristics ON households.hhid = householdcharacteristics.hhid AND households.pid=householdcharacteristics.pid''' 
+        for currentcharacteristic in hcharacteristics:
+            #currentcharacteristic =  'householdcharacteristics' + '.' + '%s' % characteristic
+            basequery = basequery + " AND householdcharacteristics.characteristic ='%s' AND householdcharacteristics.charvalue='Yes'" % (currentcharacteristic)
+            
+        basequery = basequery + " GROUP BY households.pid,households.hhid" 
+        print basequery
         return basequery
 
     def getReportTable(self,projectid,pcharselected,hcharselected,pquery,hquery):
         ''' generate report tables'''
         
-        pcharstable =self.getPcharacteristicsTable(pquery)
+        pcharstable = self.getPcharacteristicsTable(pquery)
         hcharstable = self.getHcharacteristicsTable(hquery)
         x = len(pcharstable)
         y = len(hcharstable)
@@ -64,6 +71,7 @@ class HouseholdsByCharacteristics:
         elif (x !=0 and y != 0):
             query = ''' SELECT * FROM (%s UNION ALL %s) AS tbl GROUP BY tbl.hhid HAVING COUNT(*) = 2''' % (pquery,hquery)
             reporttable = self.getFinalReportTableData(query)
+            print reporttable
             return reporttable
         elif (x == 0 and pcharselected ==0):
             return hcharstable
@@ -73,6 +81,7 @@ class HouseholdsByCharacteristics:
     def getPcharacteristicsTable(self,pquery):
         ''' get households where selected personal characteristics from the interface are met'''
         self.database.open()
+        print pquery
         ptable = self.database.execSelectQuery( pquery )
         self.database.close()
         return ptable

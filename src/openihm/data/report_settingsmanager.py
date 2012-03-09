@@ -48,7 +48,7 @@ class ReportsSettingsManager:
         
         if projectid != 0: 
             tablename = self.setHCharacteristicsTableName(projectid)
-            query = '''SELECT characteristic from projectcharacteristics WHERE pid=%s AND chartype='Household' ''' % projectid
+            query = '''SELECT characteristic from projectcharacteristics WHERE pid=%s AND chartype='Household' AND datatype=1''' % projectid
             self.database.open()
             rows = self.database.execSelectQuery( query )
             self.database.close()
@@ -60,7 +60,7 @@ class ReportsSettingsManager:
         if projectid != 0:
             
             tablename = self.setPCharacteristicsTableName(projectid)
-            query = '''SELECT characteristic from projectcharacteristics WHERE pid=%s AND chartype='Personal' ''' % projectid
+            query = '''SELECT characteristic from projectcharacteristics WHERE pid=%s AND chartype='Personal' AND datatype=1''' % projectid
             self.database.open()
             rows = self.database.execSelectQuery( query )
             self.database.close()

@@ -314,10 +314,8 @@ class DisposableHouseholdIncome:
 
     #build queries for household total cash income
     def totalCropCashIncomeQuery(self,projectid,houseids):
-        print 'houses ', houseids
         query = '''SELECT hhid,SUM(unitssold * unitprice) AS cropincome FROM cropincome
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
-        print query
         return query
     
     def totalEmploymentCashIncomeQuery(self,projectid,houseids):
@@ -386,15 +384,15 @@ class DisposableHouseholdIncome:
                 householdids = self.getReportHouseholdIDs(query)
                 
             elif len(selectedpchars) !=0 and len(selectedhchars) !=0:
-                pcharsQuery =self.buildPCharacteristicsQuery(pcharselected, pharsTable)
-                hcharsQuery = self.buildHCharacteristicsQuery(hcharselected, hcharsTable)
+                pcharsQuery =self.buildPCharacteristicsQuery(pcharselected, projectid)
+                hcharsQuery = self.buildHCharacteristicsQuery(hcharselected, projectid)
                 query = '''SELECT * FROM (%s UNION ALL %s UNION ALL %s) AS tbl GROUP BY tbl.hhid HAVING COUNT(*) = 3 ''' % (householdsquery,pcharsQuery,hcharsQuery)
                 
             elif len(selectedhchars) !=0:
-                hcharsQuery = self.buildHCharacteristicsQuery(hcharselected, hcharsTable)
+                hcharsQuery = self.buildHCharacteristicsQuery(hcharselected, projectid)
                 query = '''SELECT * FROM (%s UNION ALL %s) AS tbl GROUP BY tbl.hhid HAVING COUNT(*) = 2 ''' % (householdsquery,hcharsQuery)
             elif len(selectedpchars) !=0:
-                pcharsQuery =self.buildPCharacteristicsQuery(pcharselected, pharsTable)
+                pcharsQuery =self.buildPCharacteristicsQuery(pcharselected, projectid)
                 query = '''SELECT * FROM (%s UNION ALL %s) AS tbl GROUP BY tbl.hhid HAVING COUNT(*) = 2 ''' % (householdsquery,pcharsQuery)
         return query
 
@@ -416,29 +414,26 @@ class DisposableHouseholdIncome:
             databaseConnector.close()
         return reporthouseholdIDs
 
-    def buildPCharacteristicsQuery(self,pcharacteristics, tablename):
+    def buildPCharacteristicsQuery(self,pcharacteristics, projectid):
         ''' build query for selecting households that meet selected personal characteristics from the report interface'''
         
-        houseid = tablename + '.hhid'
         basequery = ''
         
         if len(pcharacteristics)!=0:
-            basequery = '''SELECT households.hhid, households.pid FROM households JOIN %s ON households.hhid = %s''' % (tablename,houseid)
-            for coulumnname in pcharacteristics:
-                currentcolumn =  tablename + '.' + coulumnname
-                basequery = basequery + " and '%s'='Yes'" % (currentcolumn)
-        print 'pchars Query ', basequery
+            basequery = '''SELECT personalcharacteristics.hhid, personalcharacteristics.pid FROM personalcharacteristics WHERE
+                            personalcharacteristics.pid=%s''' % (projectid)
+            for pcharacteristic in pcharacteristics:
+                basequery = basequery + " AND personalcharacteristics.characteristic='%s' AND personalcharacteristics.charvalue='Yes'" % (pcharacteristic)
         return basequery
         
-    def buildHCharacteristicsQuery(self,hcharacteristics, tablename):
+    def buildHCharacteristicsQuery(self,hcharacteristics, projectid):
         ''' build query for selecting households that meet selected household characteristics from the report interface'''
-        houseid = tablename + '.hhid'
         basequery = ''
         
         if len(hcharacteristics)!=0:
-            basequery = '''SELECT households.hhid, households.pid FROM households JOIN %s ON households.hhid = %s''' % (tablename,houseid)
-            for coulumnname in hcharacteristics:
-                currentcolumn =  tablename + '.' + coulumnname
-                basequery = basequery + " and '%s'='Yes'" % (currentcolumn)
+            basequery = '''SELECT householdcharacteristics.hhid, householdcharacteristics.pid FROM householdcharacteristics WHERE
+                            householdcharacteristics.pid=%s''' % (projectid)
+            for hcharacteristic in hcharacteristics:
+                basequery = basequery + " AND householdcharacteristics.characteristic='%s' AND householdcharacteristics.charvalue='Yes'" % (hcharacteristic)
         return basequery
 
