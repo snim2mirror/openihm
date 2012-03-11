@@ -130,7 +130,9 @@ class DataEntrySheets:
 
         #create sheet for entering project households
         #projectid = self.pid
+        #projectsheet = 'p' + str(self.pid)
         sheettitle = "%s" % self.pid
+        #sheettitle = projectsheet
         sheet1 = book.add_sheet(sheettitle)
         sheet1.write(0, 0, "Project Households", style1)
         sheet1.write(1, 0, "HouseholdNumber", style2)
