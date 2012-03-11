@@ -147,6 +147,11 @@ class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin, MySQLMixin
              queries = ["DELETE FROM currencies WHERE id='%s'" % (currencyid)	for currencyid in selectedIds]
              
              self.executeMultipleUpdateQueries(queries)
+
+             # clear text boxes and refresh list
+             self.txtCurrencyName.setText("")
+             self.txtAbbreviation.setText("")
+             self.txtSymbol.setText("")
              
              self.currencyid = 0
              self.listCurrencies()
