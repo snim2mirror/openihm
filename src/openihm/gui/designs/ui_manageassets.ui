@@ -1004,6 +1004,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btnCashDelete</sender>
+   <signal>clicked()</signal>
+   <receiver>ManageAssetDetails</receiver>
+   <slot>deleteSavingsType()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>341</x>
+     <y>121</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>285</x>
+     <y>211</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>pickSelectedSaving()</slot>
