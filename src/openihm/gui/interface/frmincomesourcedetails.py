@@ -204,6 +204,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
     
                 self.executeUpdateQuery(query)
 		#refresh categories list
+                self.txtEmploymentType.clear()
 		self.getEmploymentCategories()               
                 
 	def deleteEmploymentType(self):
@@ -228,6 +229,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
 
                                 # execute query and commit changes
                                 self.executeUpdateQuery(query)
+                                self.txtEmploymentType.clear()
                                 #refresh categories list
                                 self.getEmploymentCategories()			
 			
