@@ -77,5 +77,3 @@ class FrmEditEnergyRequirement(QDialog, Ui_EditFoodEnergyRequirement, MDIDialogM
 	
 	controller = FoodEnergyRequirement(myage,  malesenergyrequirement,  femalesenergyrequirement)
         controller.setData()      
-        # close add food energy requirement window
-        self.mdiClose()
