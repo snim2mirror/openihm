@@ -449,7 +449,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
 	def getTransferSourceCategories(self):
                 '''Get pre-existing assets categories from database and populate categories list'''
                	# select query to retrieve Asset Categories
-        	query = '''SELECT sourcetype FROM setup_transfersources'''
+        	query = '''SELECT sourceoftransfer FROM setup_transfers WHERE assistancetype='EXTERNAL' '''
         	recordset = self.executeResultsQuery(query)
 				
 		model = QStandardItemModel()
@@ -476,7 +476,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
         	mytransfersource = unicode(self.txtTransferSources.text())
         	
 		# check if record exists
-		query = '''SELECT sourcetype FROM setup_transfersources WHERE sourcetype='%s' ''' % (mytransfersource)    
+		query = '''SELECT sourceoftransfer FROM setup_transfers WHERE sourceoftransfer='%s' AND assistancetype='EXTERNAL' ''' % (mytransfersource)    
 		
                 recordset = self.executeResultsQuery(query)
 
@@ -484,10 +484,10 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
 				      	
 		if numrows == 0:
 			
-			query = '''INSERT INTO setup_transfersources(sourcetype) 
-                     		VALUES('%s')''' % (mytransfersource)
+			query = '''INSERT INTO setup_transfers(sourcetype,sourceoftransfer) 
+                     		VALUES('INTERNAL','%s')''' % (mytransfersource)
 		else:
-			query = '''UPDATE setup_transfersources SET sourcetype='%s'	WHERE sourcetype='%s' ''' % (mytransfersource, mytransfersource)
+			query = '''UPDATE setup_transfers SET sourceoftransfer='%s'	WHERE sourceoftransfer='%s' AND assistancetype='EXTERNAL' ''' % (mytransfersource, mytransfersource)
     
         	# execute query and commit changes
                 self.executeUpdateQuery(query)
@@ -502,7 +502,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
         	mytransfersource = self.txtTransferSources.text()		
         	
 		# check if record exists
-		query = '''SELECT sourcetype FROM setup_transfersources WHERE sourcetype='%s' ''' % (mytransfersource)    
+		query = '''SELECT sourceoftransfer FROM setup_transfers WHERE sourceoftransfer='%s' AND assistancetype='EXTERNAL' ''' % (mytransfersource)    
 		
                 recordset = self.executeResultsQuery(query)
 		numrows = len(recordset)
@@ -513,7 +513,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
                         ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
                         if ret == QMessageBox.Yes:
 
-                                query = '''DELETE FROM setup_transfersources WHERE sourcetype='%s' ''' % (mytransfersource)
+                                query = '''DELETE FROM setup_transfers WHERE sourceoftransfer='%s' AND assistancetype='EXTERNAL' ''' % (mytransfersource)
 
                                 # execute query and commit changes
                                 self.executeUpdateQuery(query)			
@@ -530,7 +530,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
 	def getTransferTypes(self):
                 '''Get pre-existing assets categories from database and populate categories list'''
                	# select query to retrieve Asset Categories
-        	query = '''SELECT assistancetype FROM setup_transfers'''
+        	query = '''SELECT sourceoftransfer FROM setup_transfers WHERE assistancetype='INTERNAL' '''
         	
                 recordset = self.executeResultsQuery(query)
 				
@@ -552,7 +552,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
                 self.txtTransferType.setText(selectedItem)
 
                 #select query to retrieve food-energy value and measuring unit for selected food item 
-        	query = '''SELECT unitofmeasure FROM setup_transfers WHERE assistancetype='%s' ''' % (selectedItem)
+        	query = '''SELECT unitofmeasure FROM setup_transfers WHERE sourceoftransfer='%s' AND assistancetype='INTERNAL' ''' % (selectedItem)
 
                 recordset = self.executeResultsQuery(query)
 	      		
@@ -569,7 +569,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
         	mytransfertype = self.txtTransferType.text()
         	mymeasuringUnit = self.txtTransferUnitofMeasure.text()
 		# check if record exists
-		query = '''SELECT assistancetype FROM setup_transfers WHERE assistancetype='%s' ''' % (mytransfertype)    
+		query = '''SELECT sourceoftransfer FROM setup_transfers WHERE sourceoftransfer='%s' AND assistancetype='INTERNAL' ''' % (mytransfertype)    
 		
                 recordset = self.executeResultsQuery(query)
 
@@ -577,10 +577,10 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
 				      	
 		if numrows == 0:
 			
-			query = '''INSERT INTO setup_transfers(assistancetype, unitofmeasure) 
-                     		VALUES('%s', '%s')''' % (mytransfertype,mymeasuringUnit)
+			query = '''INSERT INTO setup_transfers(assistancetype,sourceoftransfer, unitofmeasure) 
+                     		VALUES('INTERNAL','%s', '%s')''' % (mytransfertype,mymeasuringUnit)
 		else:
-			query = '''UPDATE setup_transfers SET assistancetype='%s', unitofmeasure='%s' 	WHERE assistancetype='%s' ''' % (mytransfertype, mymeasuringUnit,mytransfertype)
+			query = '''UPDATE setup_transfers SET sourceoftransfer='%s', unitofmeasure='%s' 	WHERE sourceoftransfer='%s' AND assistancetype='INTERNAL' ''' % (mytransfertype, mymeasuringUnit,mytransfertype)
     
         	# execute query and commit changes
                 self.executeUpdateQuery(query)
@@ -596,7 +596,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
         	mytransfertype = self.txtTransferType.text()		
         	
 		# check if record exists
-		query = '''SELECT assistancetype FROM setup_transfers WHERE assistancetype='%s' ''' % (mytransfertype)    
+		query = '''SELECT sourceoftransfer FROM setup_transfers WHERE sourceoftransfer='%s' AND assistancetype='INTERNAL' ''' % (mytransfertype)    
 		
                 recordset = self.executeResultsQuery(query)
 		numrows = len(recordset)
@@ -607,7 +607,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
                         ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
                         if ret == QMessageBox.Yes:
 
-                                query = '''DELETE FROM setup_transfers WHERE assistancetype='%s' ''' % (mytransfertype)
+                                query = '''DELETE FROM setup_transfers WHERE sourceoftransfer='%s' AND assistancetype='INTERNAL' ''' % (mytransfertype)
 
                                 # execute query and commit changes
                                 self.executeUpdateQuery(query)

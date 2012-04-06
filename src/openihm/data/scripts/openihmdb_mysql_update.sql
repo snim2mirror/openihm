@@ -5,6 +5,23 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 USE `openihmdb`;
 
 -- -----------------------------------------------------
+-- Table `openihmdb`.`setup_transfers`
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `openihmdb`.`setup_transfers`;
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_transfers` (
+  `assistancetype` VARCHAR(200) NOT NULL ,
+  `sourceoftransfer` VARCHAR(200) NOT NULL ,
+  `unitofmeasure` VARCHAR(45),
+  PRIMARY KEY (`assistancetype`,`sourceoftransfer`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+INSERT INTO setup_transfers (assistancetype,sourceoftransfer,unitofmeasure) SELECT DISTINCT sourcetype,sourceoftransfer,unitofmeasure 
+FROM transfers GROUP BY sourcetype,sourceoftransfer;
+
+-- -----------------------------------------------------
 -- Table `openihmdb`.`dbupdate`
 -- -----------------------------------------------------
 

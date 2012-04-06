@@ -463,11 +463,11 @@
       <string>entered value can only be either 'External' or 'Internal'</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Assistance Source</string>
+       <string>Unofficial Transfers</string>
       </attribute>
       <widget class="QLabel" name="label_32">
        <property name="geometry">
@@ -583,10 +583,7 @@
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
-       <string>Assistance Category(either External or Internal)</string>
-      </attribute>
-      <attribute name="toolTip">
-       <string>Entered value can only be 'External' or 'Internal'. Internal means Social Transfer</string>
+       <string>Official Transfers</string>
       </attribute>
       <widget class="QLabel" name="label_35">
        <property name="geometry">

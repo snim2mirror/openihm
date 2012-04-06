@@ -19,6 +19,7 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 
 import os
 from includes.xlwt import Workbook, easyxf
+from includes.xlrd import open_workbook
 import includes.mysql.connector as connector # FIXME: DO we need this?
 from data.config import Config
 from PyQt4 import QtGui
@@ -32,7 +33,6 @@ class DataEntrySheets:
         self.hcharstable = 'p' + str(projectid) +'HouseholdCharacteristics'
         self.pid = projectid
         self.config = Config.dbinfo().copy()
-
     
     def getPersonalCharacteristics(self):
         query = '''SELECT characteristic, datatype FROM projectcharacteristics WHERE pid=%s and chartype='Personal' ''' %(self.pid)
@@ -40,7 +40,6 @@ class DataEntrySheets:
         pchars = self.database.execSelectQuery(query)
         self.database.close()
         return pchars
-        
 
     def getHouseholdCharacteristics(self):
         query = '''SELECT characteristic, datatype FROM projectcharacteristics WHERE pid=%s and chartype='Household' ''' %(self.pid)
@@ -54,15 +53,33 @@ class DataEntrySheets:
         query = '''SELECT incomesource FROM projectincomesources WHERE incometype='%s' AND pid=%s''' % (incometype,self.pid)
         return query
 
+    def getProjectCropsFoods(self,incometype,projectincomes):
+        incomes = []
+        for income in projectincomes:
+            tempname = "'" + income[0] + "'"
+            incomes.append(tempname)
+
+        incomesourcelist = ','.join(incomes)
+        query = '''SELECT name, unitofmeasure FROM  setup_foods_crops WHERE  category='%s' AND name in (%s)''' % (incometype,incomesourcelist)
+        recordset = self.getincomeSources(query)
+        
+        return recordset
+
     def getincomeSources(self,query):
         '''run various select queries'''
-        
         dbconnector = Database()
         dbconnector.open()
         recordset = dbconnector.execSelectQuery(query)
         dbconnector.close()
         return recordset
-    
+
+    def getCropsFoodsIncomeSourceDetails(self,incometype):
+        '''Get Income-source Names and Units of Measure for Crops, Livestocks, and Wildfoods, to be displayed in data entry spreadsheet'''
+        incomesquery = self.buildQueries(incometype)
+        projectincomes = self.getincomeSources(incomesquery)
+        incomesourcedetails = self.getProjectCropsFoods(incometype,projectincomes)
+        return incomesourcedetails
+   
     def getprojetAssets(self):
         query = '''SELECT assettype, assetname FROM projectassets WHERE pid=%s ORDER BY assettype, assetname''' % self.pid
         self.database.open()
@@ -90,7 +107,85 @@ class DataEntrySheets:
             col = col + 1
             sheet4.write(row, col, assetname)
             row = row + 1
-    
+
+
+    def writeFoodsCropsHeaders(self,sectionheading,headerrow,book,style1,style2):
+
+        headings = ["Name","Unit","UnitsProduced","UnitsSold","UnitPrice","OtherUses","UnitsConsumed"]
+        col = 0
+        sheet = book.get_sheet(1)
+        if sectionheading=='Livestock':
+                sectionheading = sectionheading + '-C'
+        sheet.write(headerrow, col, sectionheading,style1)
+        headerrow = headerrow +1
+            
+        for itemheader in headings:
+            sheet.write(headerrow, col, itemheader, style2)
+            col = col + 1
+
+        headerrow = headerrow +1
+        return headerrow
+
+    def populateFoodsCropsSections(self,book,style1,style2,row):
+        ''' Populate data Entry Sheet with Crops,Livestock,Wildfoods for a selected project'''
+
+        incometypes = ['Crops','Livestock','Wildfoods']
+        col = 0
+        for incometype in incometypes:
+            #set section Headings
+            row = self.writeFoodsCropsHeaders(incometype,row,book,style1,style2)
+            
+            #get incomesource details and write in spreadsheet
+            recordset = self.getCropsFoodsIncomeSourceDetails(incometype.lower())
+            sheet = book.get_sheet(1)
+
+            for rec in recordset:
+                for col in range (0,2):
+                    celvalue = rec[col]
+                    sheet.write(row, col, celvalue,style1)
+                row = row + 1
+                
+            row = row + 4 # set space between Income source type sections
+        return row
+
+    def writeEmploymentSectionHeaders(self,headerrow,book,style1,style2):
+
+        headings = ["Type","FoodPaid","Unit","UnitsPaid","Kcals","CashIncome"]
+        col = 0
+        sheet = book.get_sheet(1)
+        sheet.write(headerrow, 0, "Employment", style1)
+        headerrow = headerrow +1
+        for itemheader in headings:
+            sheet.write(headerrow, col, itemheader, style2)
+            col = col + 1
+
+        headerrow = headerrow +1
+        return headerrow
+
+    def getProjectEmploymentTypes(self):
+        incometype = 'employment'
+        query = self.buildQueries(incometype)
+        recordset = self.getincomeSources(query)
+        print recordset
+        return recordset
+
+    def populateEmployemntDetails(self,row,book,style1,style2):
+        row = self.writeEmploymentSectionHeaders(row,book,style1,style2)
+        recordset = self.getProjectEmploymentTypes()
+        sheet = book.get_sheet(1)
+
+        col = 0
+        for rec in recordset:
+            celvalue = rec[col]
+            sheet.write(row, col, celvalue,style1)
+            row = row + 1
+                
+        row = row + 4 # set space between Income source type sections
+        return row
+        
+            
+
+            
     def populateIncomeSourcesSheet(self,book,style2):
         ''' Populate Sheet 3 with income sources for a selected project'''
         
@@ -129,10 +224,8 @@ class DataEntrySheets:
         style3 = easyxf('font: name Arial;''font: colour green;''font: bold True;''border: left thick, top thick, right thick, bottom thick')
 
         #create sheet for entering project households
-        #projectid = self.pid
-        #projectsheet = 'p' + str(self.pid)
         sheettitle = "%s" % self.pid
-        #sheettitle = projectsheet
+
         sheet1 = book.add_sheet(sheettitle)
         sheet1.write(0, 0, "Project Households", style1)
         sheet1.write(1, 0, "HouseholdNumber", style2)
@@ -223,60 +316,15 @@ class DataEntrySheets:
         sheet2.write(itemrow, 3, "UnitCost", style2)
         sheet2.write(itemrow, 4, "Units", style2)
 
-        #Crop Income
+        #Crop, Livestock, and Wildfood Income
         headerrow = headerrow + 11
-        itemrow = itemrow + 11
-
-        sheet2.write(headerrow, 0, "Crops", style1)
-        sheet2.write(itemrow, 0, "Name", style2)
-        sheet2.write(itemrow, 1, "Unit", style2)
-        sheet2.write(itemrow, 2, "UnitsProduced", style2)
-        sheet2.write(itemrow, 3, "UnitsSold", style2)
-        sheet2.write(itemrow, 4, "UnitPrice", style2)
-        sheet2.write(itemrow, 5, "OtherUses", style2)
-        sheet2.write(itemrow, 6, "UnitsConsumed", style2)
-
-        #Livestock
-        headerrow = headerrow + 11
-        itemrow = itemrow + 11
-        
-        sheet2.write(headerrow, 0, "Livestock-C", style1)
-        sheet2.write(itemrow, 0, "Name", style2)
-        sheet2.write(itemrow, 1, "Unit", style2)
-        sheet2.write(itemrow, 2, "UnitsProduced", style2)
-        sheet2.write(itemrow, 3, "UnitsSold", style2)
-        sheet2.write(itemrow, 4, "UnitPrice", style2)
-        sheet2.write(itemrow, 5, "OtherUses", style2)
-        sheet2.write(itemrow, 6, "UnitsConsumed", style2)
-        						
-        #WildFoods
-        headerrow = headerrow + 11
-        itemrow = itemrow + 11
-        
-        sheet2.write(headerrow, 0, "WildFoods", style1)
-        sheet2.write(itemrow, 0, "Name", style2)
-        sheet2.write(itemrow, 1, "Unit", style2)
-        sheet2.write(itemrow, 2, "UnitsProduced", style2)
-        sheet2.write(itemrow, 3, "UnitsSold", style2)
-        sheet2.write(itemrow, 4, "UnitPrice", style2)
-        sheet2.write(itemrow, 5, "OtherUses", style2)
-        sheet2.write(itemrow, 6, "UnitsConsumed", style2)
+        headerrow = self.populateFoodsCropsSections(book,style1,style2,headerrow)
 
         #Employment
-        headerrow = headerrow + 11
-        itemrow = itemrow + 11
+        headerrow = self.populateEmployemntDetails(headerrow,book,style1,style2)
         
-        sheet2.write(headerrow, 0, "Employment", style1)
-        sheet2.write(itemrow, 0, "Type", style2)
-        sheet2.write(itemrow, 1, "FoodPaid", style2)
-        sheet2.write(itemrow, 2, "Unit", style2)
-        sheet2.write(itemrow, 3, "UnitsPaid", style2)
-        sheet2.write(itemrow, 4, "Kcals", style2)
-        sheet2.write(itemrow, 5, "CashIncome", style2)
-
         #Social Transfers
-        headerrow = headerrow + 11
-        itemrow = itemrow + 11
+        itemrow = headerrow + 1
         
         sheet2.write(headerrow, 0, "SocialTransfer", style1)
         sheet2.write(itemrow, 0, "TransferSource", style2)
