@@ -101,6 +101,7 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
     
         	# execute query and commit changes
                 self.executeUpdateQuery(query)
+                self.txtSavingCategories.clear()
                 self.getSavingsCategories()
                                 
 	def deleteSavingsType(self):
@@ -303,6 +304,8 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
                      		WHERE landtype='%s' ''' % (mylandtype, myunitofmeasure, mylandtype)
     
 		self.executeUpdateQuery(query)
+		self.txtLandType.clear()
+                self.txtLandMeasuringUnit.clear()
                 self.getLandTypes()
 		#refresh categories list
 		#self.getCategories()
@@ -402,6 +405,8 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
     
         	# execute query and commit changes
                 self.executeUpdateQuery(query)
+                self.txtTreeType.clear()
+                self.txtTreeMeasuringUnit.clear()
                 self.getTreeTypes()
                                 
 	def deleteTreeType(self):
@@ -499,6 +504,8 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
     
                 # execute query and commit changes
 		self.executeUpdateQuery(query)
+		self.txtTradableGoodType.clear()
+                self.txtTradableGoodMeasuringUnit.clear()
                 self.getTradableGoodTypes()
                                 
         def deleteTradableGoodType(self):
@@ -599,6 +606,8 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
         	# execute query and commit changes
                 self.executeUpdateQuery(query)
 		#refresh categories list
+                self.txtLivestockPType.clear()
+                self.txtLivestockUnit.clear()
 		self.getLivestockTypes()
                                 
 	def deleteLivestockType(self):
@@ -625,6 +634,8 @@ class FrmManageAssetDetails(QDialog, Ui_ManageAssetDetails, MySQLMixin, MDIDialo
 
                                 # execute query and commit changes
 				self.executeUpdateQuery(query)
+				self.txtLivestockPType.clear()
+                                self.txtLivestockUnit.clear()
                                 #refresh categories list
                                 self.getLivestockTypes()			
 			

@@ -438,10 +438,10 @@ DEFAULT CHARACTER SET = latin1;
 -- Table `openihmdb`.`setup_transfers`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_transfers` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `assistancetype` VARCHAR(200) NOT NULL ,
-  `unitofmeasure` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`id`) )
+  `sourceoftransfer` VARCHAR(200) NOT NULL ,
+  `unitofmeasure` VARCHAR(45),
+  PRIMARY KEY (`assistancetype`,`sourceoftransfer`) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
