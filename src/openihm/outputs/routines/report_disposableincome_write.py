@@ -42,7 +42,7 @@ class HouseholdsIncomeWrite:
         #write Headers
         sheet1.write(2, 0, 'hhid', style1)
         
-        if reporttype=='Living Threshold':
+        if reporttype=='Standard of Living':
             
             sheet1.write(2, 1, 'DIncome - Below STOL', style1)
             sheet1.write(2, 2, 'DIncome - Above STOL', style1)
@@ -61,7 +61,7 @@ class HouseholdsIncomeWrite:
             sheet1.write(myrow, 0, int(hhid))
             
             
-            if reporttype=='Living Threshold':
+            if reporttype=='Standard of Living':
                 incomeLessExpenses = row[2]
                 if incomeLessExpenses < 0:
                     sheet1.write(myrow, 1, float(householdDI))

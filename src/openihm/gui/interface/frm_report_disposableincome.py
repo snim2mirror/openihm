@@ -271,7 +271,7 @@ class HouseholdDisposableIncome(QDialog, Ui_HouseholdDisposableIncome, MDIDialog
         pid = self.getProjectID()
         householdIDs = self.getReportHouseholdIDs()
         reporttype = self.setReportType()
-        if reporttype=='Living Threshold':
+        if reporttype=='Standard of Living':
             connector = LivingThreshhold()
             reportTable = connector.determineLThresholdPosition(reporttype,pid,householdIDs)
         else:

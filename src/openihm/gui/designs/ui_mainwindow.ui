@@ -427,7 +427,7 @@
   </action>
   <action name="actionLiving_Threshold">
    <property name="text">
-    <string>Living Threshold</string>
+    <string>Standard of Living</string>
    </property>
   </action>
   <action name="actionUpdate_open_ihm">

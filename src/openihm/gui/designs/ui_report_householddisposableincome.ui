@@ -52,12 +52,12 @@
      </item>
      <item>
       <property name="text">
-       <string>Disposable Income - Standardised</string>
+       <string>DI/AE</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Living Threshold</string>
+       <string>Standard of Living</string>
       </property>
      </item>
     </widget>
