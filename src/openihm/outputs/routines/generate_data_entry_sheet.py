@@ -79,13 +79,49 @@ class DataEntrySheets:
         projectincomes = self.getincomeSources(incomesquery)
         incomesourcedetails = self.getProjectCropsFoods(incometype,projectincomes)
         return incomesourcedetails
-   
+
     def getprojetAssets(self):
         query = '''SELECT assettype, assetname FROM projectassets WHERE pid=%s ORDER BY assettype, assetname''' % self.pid
         self.database.open()
         assets = self.database.execSelectQuery(query)
         self.database.close()
         return assets
+    
+    def getAssetUnitOfMeasure(self,unitfld, tblname,assetfld,assettype):
+        unitofmeasure =""
+        query = '''SELECT %s FROM %s WHERE %s='%s' ''' % (unitfld, tblname,assetfld,assettype)
+        self.database.open()
+        assets = self.database.execSelectQuery(query)
+        
+        for item in assets:
+            unitofmeasure = item[0]
+        self.database.close()
+        return unitofmeasure
+
+    def getAssetList(self):
+        assets = []
+        assets = self.getprojetAssets()
+        finalassetlist = []
+        for row in assets:
+            templist = []
+            for item in row:
+                templist.append(item)
+                
+            if templist [0] =='Crops':
+                tblname, assetfld, unitfld = "setup_crops", "foodtype", "measuringunit"
+            elif templist [0] =='Land':
+                tblname, assetfld, unitfld = "setup_landtypes", "landtype", "unitofmeasure"
+            elif templist [0] =='Livestock':
+                tblname, assetfld, unitfld = "setup_livestock", "incomesource", "unitofmeasure"
+            elif templist [0] =='Tradable Goods':
+                tblname, assetfld, unitfld = "setup_tradablegoods", "tradablegoodtype", "unitofmeasure"
+            elif templist [0] =='Trees':
+                tblname, assetfld, unitfld = "setup_treetypes", "treetype", "measuringunit"
+            unitofmeasure = self.getAssetUnitOfMeasure(unitfld, tblname,assetfld,templist[1])
+            templist.append(unitofmeasure)
+            listtuple = tuple(templist)
+            finalassetlist.append(listtuple)
+        return finalassetlist
     
     def addProjectAssets(self,book,style2):
         ''' Populate Sheet 3 with Assets for a selected project'''
@@ -108,6 +144,28 @@ class DataEntrySheets:
             sheet4.write(row, col, assetname)
             row = row + 1
 
+    def populateProjectAssetssection(self,book,style1,style2,row):
+        headings = ["Category","Type","Unit","UnitCost","Units"]
+        col = 0
+        sheet = book.get_sheet(1)
+        for itemheader in headings:
+            sheet.write(row, col, itemheader, style2)
+            col = col + 1
+        row = row +1
+        
+        recordset = self.getAssetList()
+        for rec in recordset:
+            col = 0
+            assettype = rec[0]
+            assetname = rec[1]
+            unitofmeasure = rec[2]
+            sheet.write(row, col, assettype)
+            col = col + 1
+            sheet.write(row, col, assetname)
+            col = col + 1
+            sheet.write(row, col, unitofmeasure)
+            row = row + 1
+        return row
 
     def writeFoodsCropsHeaders(self,sectionheading,headerrow,book,style1,style2):
 
@@ -142,7 +200,7 @@ class DataEntrySheets:
             for rec in recordset:
                 for col in range (0,2):
                     celvalue = rec[col]
-                    sheet.write(row, col, celvalue,style1)
+                    sheet.write(row, col, celvalue)
                 row = row + 1
                 
             row = row + 4 # set space between Income source type sections
@@ -166,7 +224,6 @@ class DataEntrySheets:
         incometype = 'employment'
         query = self.buildQueries(incometype)
         recordset = self.getincomeSources(query)
-        print recordset
         return recordset
 
     def populateEmployemntDetails(self,row,book,style1,style2):
@@ -177,14 +234,11 @@ class DataEntrySheets:
         col = 0
         for rec in recordset:
             celvalue = rec[col]
-            sheet.write(row, col, celvalue,style1)
+            sheet.write(row, col, celvalue)
             row = row + 1
                 
         row = row + 4 # set space between Income source type sections
         return row
-        
-            
-
             
     def populateIncomeSourcesSheet(self,book,style2):
         ''' Populate Sheet 3 with income sources for a selected project'''
@@ -299,22 +353,18 @@ class DataEntrySheets:
 
         #Assets
         sheet2.write(headerrow, 0, "Assets", style1)
-        sheet2.write(itemrow, 0, "Category", style2)
-        sheet2.write(itemrow, 1, "Type", style2)
-        sheet2.write(itemrow, 2, "Unit", style2)
-        sheet2.write(itemrow, 3, "UnitCost", style2)
-        sheet2.write(itemrow, 4, "Units", style2)
-
-        #Expenditure
-        headerrow = headerrow + 11
-        itemrow = itemrow + 11
+        headerrow = headerrow + 1
+        headerrow = self.populateProjectAssetssection(book,style1,style2,headerrow)
         
+        #Expenditure
+        headerrow = headerrow + 5
         sheet2.write(headerrow, 0, "Expenditure", style1)
-        sheet2.write(itemrow, 0, "Type", style2)
-        sheet2.write(itemrow, 1, "Unit", style2)
-        sheet2.write(itemrow, 2, "KCalPerUnit", style2)
-        sheet2.write(itemrow, 3, "UnitCost", style2)
-        sheet2.write(itemrow, 4, "Units", style2)
+        headerrow = headerrow + 1
+        sheet2.write(headerrow, 0, "Type", style2)
+        sheet2.write(headerrow, 1, "Unit", style2)
+        sheet2.write(headerrow, 2, "KCalPerUnit", style2)
+        sheet2.write(headerrow, 3, "UnitCost", style2)
+        sheet2.write(headerrow, 4, "Units", style2)
 
         #Crop, Livestock, and Wildfood Income
         headerrow = headerrow + 11
