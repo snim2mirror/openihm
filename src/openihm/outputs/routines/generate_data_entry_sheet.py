@@ -123,26 +123,22 @@ class DataEntrySheets:
             finalassetlist.append(listtuple)
         return finalassetlist
     
-    def addProjectAssets(self,book,style2):
+    def addProjectAssets(self,book,style1,style2):
         ''' Populate Sheet 3 with Assets for a selected project'''
-        sheet4 = book.add_sheet("Assets")
-        sheet4.write(1, 0, "Asset Type", style2)
-        sheet4.write(1, 1, "Asset Name", style2)
-
-        #set column width for sheet3 - Asset Columns
-        for i in range(0,2):
-            sheet4.col(i).width = 6000
-
-        recordset = self.getprojetAssets()
-        row = 2
-        for rec in recordset:
-            col = 0
-            assettype = rec[0]
-            assetname = rec[1]
-            sheet4.write(row, col, assettype)
+        sheet4 = book.add_sheet("New Assets")
+        headings = ["Category","Type","Unit","UnitCost","NumberOfUnits"]
+        col = 0
+        row = 0
+        sheet4.write(row, col, "Assets", style1)
+        row = row + 1
+        for itemheader in headings:
+            sheet4.write(row, col, itemheader, style2)
             col = col + 1
-            sheet4.write(row, col, assetname)
-            row = row + 1
+        row = row +1
+
+        #set column width for sheet4 - Asset Columns
+        for i in range(0,5):
+            sheet4.col(i).width = 6000
 
     def populateProjectAssetssection(self,book,style1,style2,row):
         headings = ["Category","Type","Unit","UnitCost","Units"]
@@ -236,38 +232,30 @@ class DataEntrySheets:
             celvalue = rec[col]
             sheet.write(row, col, celvalue)
             row = row + 1
-                
         row = row + 4 # set space between Income source type sections
         return row
             
-    def populateIncomeSourcesSheet(self,book,style2):
-        ''' Populate Sheet 3 with income sources for a selected project'''
+    def populateIncomeSourcesSheet(self,book,style1,style2):
+        ''' Populate Sheet 3 with Headers for ebtry of new income sources users may find during field visits'''
         
         #Income Sources
-        sheet3 = book.add_sheet("Income Sources")
-        sheet3.write(1, 0, "Crop Types", style2)
-        sheet3.write(1, 2, "Employment Types", style2)
-        sheet3.write(1, 4, "Livestock Types", style2)
-        sheet3.write(1, 6, "Transfer Types", style2)
-        sheet3.write(1, 8, "Wild Food Types", style2)
-
-        #set column width for sheet3
-        for i in range(0,10,2):
-            sheet3.col(i).width = 6000
-
-        incometypes = ['crops','employment','livestock','transfers','wildfoods']
+        sheet3 = book.add_sheet("New Income Sources")
+        incometypes = ['Crops','Livestock','Wildfoods']
         col = 0
-
+        headerrow = 0
         for incometype in incometypes:
-            row = 2
-            query = self.buildQueries(incometype)
-            recordset = self.getincomeSources(query)
-
-            for rec in recordset:
-                cellvalue = rec[0]
-                sheet3.write(row, col, cellvalue)
-                row = row + 1
-            col = col + 2
+            #set section Headings
+            headings = ["Name","Unit","UnitsProduced","UnitsSold","UnitPrice","OtherUses","UnitsConsumed"]
+            col = 0
+            sheet3.write(headerrow, 0,incometype , style1)
+            headerrow = headerrow +1
+            for itemheader in headings:
+                sheet3.write(headerrow, col, itemheader, style2)
+                col = col + 1
+            headerrow = headerrow +11
+        #set column width for sheet1
+        for i in range(0,7):
+            sheet3.col(i).width = 6000
     
     def writeDataSheets(self):
         book = Workbook(encoding="utf-8")
@@ -402,8 +390,8 @@ class DataEntrySheets:
         for i in range(0,7):
             sheet2.col(i).width = 6000
             
-        self.populateIncomeSourcesSheet(book,style1)
-        self.addProjectAssets(book,style1)
+        self.populateIncomeSourcesSheet(book,style1,style2)
+        self.addProjectAssets(book,style1,style2)
 
         folder = "inputs/"
         filename = folder + "dataEntrySheet-ProjectID-" + str(self.pid) + ".xls"
