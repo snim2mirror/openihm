@@ -98,6 +98,7 @@
     <addaction name="actionHousehold_by_Characteristics"/>
     <addaction name="actionIncome_By_Source"/>
     <addaction name="actionLiving_Threshold"/>
+    <addaction name="actionRun_Simulations"/>
    </widget>
    <addaction name="menuProject"/>
    <addaction name="menuHousehold"/>
@@ -459,6 +460,11 @@
   <action name="actionExport_Project_to_IHM_file">
    <property name="text">
     <string>Export Project to IHM file</string>
+   </property>
+  </action>
+  <action name="actionRun_Simulations">
+   <property name="text">
+    <string>Run Simulations</string>
    </property>
   </action>
  </widget>
@@ -1058,6 +1064,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionRun_Simulations</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>runIncomeSimulations()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>newProject()</slot>
@@ -1096,5 +1118,6 @@
   <slot>importFromAccessDB()</slot>
   <slot>importFromOpenIHM()</slot>
   <slot>exportToOpenIHM()</slot>
+  <slot>runIncomeSimulations()</slot>
  </slots>
 </ui>
