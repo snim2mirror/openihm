@@ -109,7 +109,7 @@ class TransferManager:
          self.transferStandardOfLiving(filename, row.ProjectID,  project.pid)
          
          #transfer diet
-         #self.transferProjectDiet(filename, row.ProjectID,  project.pid)
+         self.transferProjectDiet(filename, row.ProjectID,  project.pid)
          
          if not self.existsCurrency(row.Currency):
              self.addCurrency(row.Currency, row.Currency, row.Currency)
@@ -144,6 +144,24 @@ class TransferManager:
              
              summary = "%s - %s - [%s to %s years]" % (item,  gender,  agebottom,  agetop) if scope == "Person" else "%s - %s" % (item, scope)
              project.addStandardOfLivingEntry(summary, scope, gender, agebottom, agetop, item, costperyear)
+             
+     def transferProjectDiet(self, accessfilename, sourcepid, targetpid):
+         query = '''SELECT tblLkUpFoodVals.FoodName, tblFoodPurchase.PercentInDiet, tblFoodPurchase.PurchasePrice
+                       FROM tblLkUpFoodVals, tblFoodPurchase
+                       WHERE tblFoodPurchase.FoodUnitID = tblLkUpFoodVals.FoodUnitID AND tblFoodPurchase.ProjectID=%s''' % sourcepid
+         
+         db = AccessDB(accessfilename)
+         db.open()
+         rows = db.execSelectQuery( query )
+         
+         project = self.getProject( targetpid )
+         
+         for row in rows:
+             fooditem = row.FoodName
+             percentage = row.PercentInDiet
+             priceperunit = row.PurchasePrice
+             unitofmeasure = "Kg"
+             project.addProjectDietItem(fooditem, unitofmeasure, percentage, priceperunit)
          
      def transferHouseholds(self, accessfilename, sourcepid, targetpid, startdate):
          query = "SELECT HHID, HHRealName FROM TblHouseholds WHERE ProjectID=%s" % sourcepid
