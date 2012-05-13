@@ -86,6 +86,9 @@ import shutil
 import sys
 import traceback
 
+#import module for simulation dialog
+from frm_project_income_simulation import FrmRunIncomeSimulation
+
 # FIXME: Edit this value in Brown's innosetup script, take it from an .ini file.
 REPO_DIR = os.path.expanduser(os.path.join('~', '.openihmrepo'))
 
@@ -603,6 +606,13 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def reportHouseholdbudget(self):
         ''' Creates and Shows the dialog for Household Budget Reports'''
         form = RepHouseholdBudget(self)
+        subWin = self.mdi.addSubWindow(form)
+        self.centerSubWindow(subWin)
+        form.show()
+
+    def runIncomeSimulations(self):
+        ''' Creates and Shows the dialog for Running Simmulations'''
+        form = FrmRunIncomeSimulation(self)
         subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
         form.show()

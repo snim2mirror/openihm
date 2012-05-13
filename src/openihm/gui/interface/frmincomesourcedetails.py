@@ -468,15 +468,24 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
                 '''get selected item and populate categories textbox'''
                 selectedItem = self.transferSourcesListView.model().item(index.row(),0).text()
                 self.txtTransferSources.setText(selectedItem)
+                #select query to retrieve food-energy value and measuring unit for selected food item 
+        	query = '''SELECT unitofmeasure FROM setup_transfers WHERE sourceoftransfer='%s' AND assistancetype='EXTERNAL' ''' % (selectedItem)
+
+                recordset = self.executeResultsQuery(query)
+	      		
+		for row in recordset:
+                        unitOfMeasure = row[0]
+
+		self.txtOTransferUnitofMeasure.setText(unitOfMeasure)
+
                 
         def saveTransferSourceType(self):
         	''' Saves newly created data to database '''
-
         	# get the data entered by user
-        	mytransfersource = unicode(self.txtTransferSources.text())
-        	
+        	mytransfertype = self.txtTransferSources.text()
+        	mymeasuringUnit = self.txtOTransferUnitofMeasure.text()
 		# check if record exists
-		query = '''SELECT sourceoftransfer FROM setup_transfers WHERE sourceoftransfer='%s' AND assistancetype='EXTERNAL' ''' % (mytransfersource)    
+		query = '''SELECT sourceoftransfer FROM setup_transfers WHERE sourceoftransfer='%s' AND assistancetype='EXTERNAL' ''' % (mytransfertype)    
 		
                 recordset = self.executeResultsQuery(query)
 
@@ -484,16 +493,18 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
 				      	
 		if numrows == 0:
 			
-			query = '''INSERT INTO setup_transfers(sourcetype,sourceoftransfer) 
-                     		VALUES('INTERNAL','%s')''' % (mytransfersource)
+			query = '''INSERT INTO setup_transfers(assistancetype,sourceoftransfer, unitofmeasure) 
+                     		VALUES('EXTERNAL','%s', '%s')''' % (mytransfertype,mymeasuringUnit)
 		else:
-			query = '''UPDATE setup_transfers SET sourceoftransfer='%s'	WHERE sourceoftransfer='%s' AND assistancetype='EXTERNAL' ''' % (mytransfersource, mytransfersource)
+			query = '''UPDATE setup_transfers SET sourceoftransfer='%s', unitofmeasure='%s' WHERE sourceoftransfer='%s' AND assistancetype='EXTERNAL' ''' % (mytransfertype, mymeasuringUnit,mytransfertype)
     
         	# execute query and commit changes
                 self.executeUpdateQuery(query)
                 self.txtTransferSources.clear()
+        	self.txtOTransferUnitofMeasure.clear()                        
 		#refresh categories list
-		self.getTransferSourceCategories()               
+		self.getTransferSourceCategories()              
+
                 
 	def deleteTransferSourceType(self):
 		''' Deletes record from database '''
@@ -518,7 +529,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
                                 # execute query and commit changes
                                 self.executeUpdateQuery(query)			
                                 self.txtTransferSources.clear()
-			
+                                self.txtOTransferUnitofMeasure.clear()
                                 #refresh categories list
                                 self.getTransferSourceCategories()			
 			
@@ -529,7 +540,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
 	#Begin block of methods for managing Transfer Types	
 	def getTransferTypes(self):
                 '''Get pre-existing assets categories from database and populate categories list'''
-               	# select query to retrieve Asset Categories
+               	# select query to retrieve Social Transfer Sources
         	query = '''SELECT sourceoftransfer FROM setup_transfers WHERE assistancetype='INTERNAL' '''
         	
                 recordset = self.executeResultsQuery(query)
@@ -563,7 +574,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
                 
                 
         def saveTransferType(self):
-        	''' Saves newly created data to database '''
+        	''' Saves newly created official transfer to database '''
 
         	# get the data entered by user
         	mytransfertype = self.txtTransferType.text()
@@ -580,7 +591,7 @@ class FrmIncomeSourceDetails(QDialog, Ui_ManageIncome, MySQLMixin, MDIDialogMixi
 			query = '''INSERT INTO setup_transfers(assistancetype,sourceoftransfer, unitofmeasure) 
                      		VALUES('INTERNAL','%s', '%s')''' % (mytransfertype,mymeasuringUnit)
 		else:
-			query = '''UPDATE setup_transfers SET sourceoftransfer='%s', unitofmeasure='%s' 	WHERE sourceoftransfer='%s' AND assistancetype='INTERNAL' ''' % (mytransfertype, mymeasuringUnit,mytransfertype)
+			query = '''UPDATE setup_transfers SET sourceoftransfer='%s', unitofmeasure='%s' WHERE sourceoftransfer='%s' AND assistancetype='INTERNAL' ''' % (mytransfertype, mymeasuringUnit,mytransfertype)
     
         	# execute query and commit changes
                 self.executeUpdateQuery(query)

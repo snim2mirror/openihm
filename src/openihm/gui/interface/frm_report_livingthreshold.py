@@ -33,7 +33,7 @@ from frm_report_disposableincome import HouseholdDisposableIncome
 from mixins import MDIDialogMixin
 
 #
-# FIXME: Are we using this file?
+# FIXME: Are we using this file? - yes
 #
 
 

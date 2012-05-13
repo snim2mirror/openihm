@@ -518,7 +518,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Select Transfer Type</string>
+        <string>Select Transfer Source</string>
        </property>
       </widget>
       <widget class="QPushButton" name="btnTransferTypeSave">
@@ -537,7 +537,7 @@
       <widget class="QLineEdit" name="txtTransferType">
        <property name="geometry">
         <rect>
-         <x>340</x>
+         <x>350</x>
          <y>40</y>
          <width>221</width>
          <height>28</height>
@@ -547,7 +547,7 @@
       <widget class="QLineEdit" name="txtTransferUnitofMeasure">
        <property name="geometry">
         <rect>
-         <x>340</x>
+         <x>350</x>
          <y>90</y>
          <width>221</width>
          <height>28</height>
@@ -572,12 +572,12 @@
         <rect>
          <x>260</x>
          <y>50</y>
-         <width>71</width>
+         <width>81</width>
          <height>16</height>
         </rect>
        </property>
        <property name="text">
-        <string>Transfer Type</string>
+        <string>Transfer Source</string>
        </property>
       </widget>
      </widget>
@@ -595,7 +595,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Add/ Edit Transfer Category</string>
+        <string>Add/ Edit Transfer Source</string>
        </property>
       </widget>
       <widget class="QListView" name="transferSourcesListView">
@@ -615,7 +615,7 @@
        <property name="geometry">
         <rect>
          <x>480</x>
-         <y>120</y>
+         <y>140</y>
          <width>80</width>
          <height>28</height>
         </rect>
@@ -641,7 +641,7 @@
        <property name="geometry">
         <rect>
          <x>280</x>
-         <y>120</y>
+         <y>140</y>
          <width>80</width>
          <height>28</height>
         </rect>
@@ -653,14 +653,50 @@
       <widget class="QLineEdit" name="txtTransferSources">
        <property name="geometry">
         <rect>
-         <x>280</x>
+         <x>360</x>
          <y>40</y>
-         <width>281</width>
+         <width>221</width>
          <height>28</height>
         </rect>
        </property>
        <property name="toolTip">
         <string>Transfer Source should be 'Internal' or 'External'</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtOTransferUnitofMeasure">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>90</y>
+         <width>221</width>
+         <height>28</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>100</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Unit of Measure</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_10">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>50</y>
+         <width>81</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Transfer Source</string>
        </property>
       </widget>
      </widget>
