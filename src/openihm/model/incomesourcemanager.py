@@ -122,10 +122,17 @@ class IncomeSourceManager:
          db.close()
          return incomesources
 
-     def getTransferIncomes(self):
+     def getTransferIncomes(self, transfertype="All"):
          ''' Retrieve transfer incomes '''
          # select query to get matchng food incomes
-         query = '''SELECT sourceoftransfer FROM setup_transfers'''
+         if transfertype == "Official":
+             condstr = "WHERE assistancetype='Official' OR assistancetype='External' "
+         elif transfertype == "Unofficial":
+             condstr = "WHERE assistancetype='UnOfficial' OR assistancetype='Internal' "
+         else:
+             condstr = ""
+             
+         query = '''SELECT sourceoftransfer FROM setup_transfers %s ''' % condstr
 
          db = Database()            
          db.open()

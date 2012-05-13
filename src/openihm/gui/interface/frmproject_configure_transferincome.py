@@ -37,7 +37,8 @@ class TransferIncomeManager(TableViewMixin):
         
      def displayAvailableTransfers(self):
          ''' Retrieve and display available transfers ''' 
-         incomes = self.project.getTransferIncomes() 
+         transfertype = self.cmbTransferType.currentText()
+         incomes = self.project.getTransferIncomes(transfertype) 
         
          model = QStandardItemModel(1,1)
         
@@ -146,4 +147,8 @@ class TransferIncomeManager(TableViewMixin):
              
          else:
              msg = "Please select the transfers you want to remove."
-             QMessageBox.information(self,"Project Configuration",msg) 
+             QMessageBox.information(self,"Project Configuration",msg)
+             
+     def refreshTransfersLists(self):
+         self.displayAvailableTransfers()
+         self.displaySelectedTransfers()
