@@ -105,10 +105,45 @@ class TransferManager:
              
          self.logTransfer(project.pid, row.ProjectID, projectname, startdate, currency)
          
+         #transfer standard of living
+         self.transferStandardOfLiving(filename, row.ProjectID,  project.pid)
+         
+         #transfer diet
+         #self.transferProjectDiet(filename, row.ProjectID,  project.pid)
+         
          if not self.existsCurrency(row.Currency):
              self.addCurrency(row.Currency, row.Currency, row.Currency)
              
          self.transferHouseholds(filename, row.ProjectID, project.pid,  startdate)
+         
+     def transferStandardOfLiving(self, accessfilename, sourcepid, targetpid):
+         query = '''SELECT tblLkUpExpenses.ExpenseType, tblLkUpExpenses.Price, tblExpenses.Category, tblExpenses.LowerAgeM,
+                       tblExpenses.UpperAgeM, tblExpenses.LowerAgeF, tblExpenses.UpperAgeF
+                       FROM tblLkUpExpenses, tblExpenses
+                       WHERE tblExpenses.ExpenseID = tblLkUpExpenses.ExpenseID AND tblExpenses.ProjectID=%s''' % sourcepid
+         
+         db = AccessDB(accessfilename)
+         db.open()
+         rows = db.execSelectQuery( query )
+         
+         project = self.getProject( targetpid )
+         
+         for row in rows:
+             if (row.Category == "HH"):
+                 scope = "Household"
+                 gender = "All"
+                 agetop = 0
+                 agebottom = 0
+             else:
+                 scope = "Person"
+                 gender = "Male" if row.Category == "M" else "Female"
+                 agetop = row.UpperAgeM if gender=="Male" else row.UpperAgeF
+                 agebottom = row.LowerAgeM if gender=="Male" else row.LowerAgeF
+             item = row.ExpenseType
+             costperyear = row.Price
+             
+             summary = "%s - %s - [%s to %s years]" % (item,  gender,  agebottom,  agetop) if scope == "Person" else "%s - %s" % (item, scope)
+             project.addStandardOfLivingEntry(summary, scope, gender, agebottom, agetop, item, costperyear)
          
      def transferHouseholds(self, accessfilename, sourcepid, targetpid, startdate):
          query = "SELECT HHID, HHRealName FROM TblHouseholds WHERE ProjectID=%s" % sourcepid
