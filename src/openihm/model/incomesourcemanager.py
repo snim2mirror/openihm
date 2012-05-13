@@ -125,7 +125,7 @@ class IncomeSourceManager:
      def getTransferIncomes(self):
          ''' Retrieve transfer incomes '''
          # select query to get matchng food incomes
-         query = '''SELECT assistancetype FROM setup_transfers'''
+         query = '''SELECT sourceoftransfer FROM setup_transfers'''
 
          db = Database()            
          db.open()
