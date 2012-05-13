@@ -54,7 +54,7 @@ class FrmHouseholdGiftsIncome(QDialog, Ui_AddHouseholdIncomeGifts, MySQLMixin, M
      def getGiftsTypes(self):
          ''' Retrieve Gifts Types and display them in a combobox '''
          # select query to Gifts Types
-         query = '''SELECT assistancetype FROM setup_transfers'''
+         query = '''SELECT sourceoftransfer FROM setup_transfers WHERE assistancetype='internal' OR assistancetype='unofficial' '''
          rows = self.executeResultsQuery(query)
 
          for row in rows:
