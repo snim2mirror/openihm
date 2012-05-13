@@ -128,7 +128,7 @@ class IncomeSourceManager:
          if transfertype == "Official":
              condstr = "WHERE assistancetype='Official' OR assistancetype='External' "
          elif transfertype == "Unofficial":
-             condstr = "WHERE assistancetype='UnOfficial' OR assistancetype='Internal' "
+             condstr = "WHERE assistancetype='Unofficial' OR assistancetype='Internal' "
          else:
              condstr = ""
              
@@ -145,4 +145,19 @@ class IncomeSourceManager:
         
          db.close()
          return incomesources
+         
+     def getTransferType(self, sourceoftransfer):
+         query = '''SELECT assistancetype FROM setup_transfers WHERE sourceoftransfer='%s' ''' % sourceoftransfer
+
+         db = Database()            
+         db.open()
+         records = db.execSelectQuery( query )
+         
+         transfertype = 'Internal'
+
+         for rec in records:
+             transfertype = 'Internal' if (rec[0] == 'Internal' or rec[0] == 'Unofficial') else 'External'
+        
+         db.close()
+         return transfertype
 
