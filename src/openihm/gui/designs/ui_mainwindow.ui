@@ -310,7 +310,7 @@
   </action>
   <action name="actionImport_Project_Data">
    <property name="text">
-    <string>Import Project Data</string>
+    <string>Import Spreadsheet Data</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+I</string>
