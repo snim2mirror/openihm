@@ -60,11 +60,11 @@ class ReadDataEntrySheets:
                     self.readAssetData(householdsheet,row_index)
                 elif cellvalue == 'Expenditure':
                     self.readExpenditureData(householdsheet,row_index)
-                elif cellvalue == 'Crops':
+                elif cellvalue == 'Crops-C':
                     self.readCropAndFoodsIncomeData(householdsheet,row_index,cellvalue)
                 elif cellvalue == 'Livestock-C':
                     self.readCropAndFoodsIncomeData(householdsheet,row_index,cellvalue)
-                elif cellvalue == 'WildFoods':
+                elif cellvalue == 'Wildfoods-C':
                     self.readCropAndFoodsIncomeData(householdsheet,row_index,cellvalue)
                 elif cellvalue == 'Employment':
                     self.readEmploymentData(householdsheet,row_index)
@@ -365,15 +365,15 @@ class ReadDataEntrySheets:
                 digitvalue = True
                 skiprow = False
                 cellvalue = str(householdsheet.cell(current_row_index,col_index).value)
-                if incometype== 'Crops':
+                if incometype== 'Crops-C':
                     if cellvalue == 'Livestock-C':
                         exitmain = True
                         break
                 elif incometype== 'Livestock-C':
-                    if cellvalue == 'WildFoods':
+                    if cellvalue == 'Wildfoods-C':
                         exitmain = True
                         break
-                elif incometype== 'WildFoods':
+                elif incometype== 'Wildfoods-C':
                     if cellvalue == 'Employment':
                         exitmain = True
                         break
@@ -411,11 +411,11 @@ class ReadDataEntrySheets:
                     unitprice = values[4]
                     otheruses = values[5]
                     unitsconsumed = values[6]
-                    if incometype=='Crops':
+                    if incometype=='Crops-C':
                         tablename='cropincome'
                     elif incometype=='Livestock-C':
                         tablename='livestockincome'
-                    elif incometype=='WildFoods':
+                    elif incometype=='Wildfoods-C':
                         tablename='wildfoods'
 
                     testquery =''' SELECT * FROM %s WHERE hhid=%s AND incomesource='%s' AND pid=%s ''' % (tablename,hhid,name,self.pid)

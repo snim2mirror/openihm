@@ -141,7 +141,7 @@ class DataEntrySheets:
             sheet4.col(i).width = 6000
 
     def populateProjectAssetssection(self,book,style1,style2,row):
-        headings = ["Category","Type","Unit","UnitCost","Units"]
+        headings = ["Category","Type","Unit","UnitCost","TotalUnits"]
         col = 0
         sheet = book.get_sheet(1)
         for itemheader in headings:
@@ -168,8 +168,8 @@ class DataEntrySheets:
         headings = ["Name","Unit","UnitsProduced","UnitsSold","UnitPrice","OtherUses","UnitsConsumed"]
         col = 0
         sheet = book.get_sheet(1)
-        if sectionheading=='Livestock':
-                sectionheading = sectionheading + '-C'
+        #if sectionheading=='Livestock':
+        sectionheading = sectionheading + '-C'
         sheet.write(headerrow, col, sectionheading,style1)
         headerrow = headerrow +1
             
@@ -253,6 +253,32 @@ class DataEntrySheets:
                 sheet3.write(headerrow, col, itemheader, style2)
                 col = col + 1
             headerrow = headerrow +11
+
+        #Write Employment Headings
+        employmentheadings = ["Type","FoodPaid","Unit","UnitsPaid","Kcals","CashIncome"]
+        col = 0
+        sheet3.write(headerrow, 0, "Employment", style1)
+        headerrow = headerrow +1
+        for itemheader in employmentheadings:
+            sheet3.write(headerrow, col, itemheader, style2)
+            col = col + 1
+        headerrow = headerrow +11
+
+        #Write Transfer Headers
+        incometypes = ['Social Transfers','Official Transfers']
+        col = 0
+        for incometype in incometypes:
+            #set section Headings
+            transferheadings = ["TransferSource","CashPerYear","FoodType","Unit","UnitsConsumed","UnitsSold","PricePerUnit"]
+            col = 0
+            sheet3.write(headerrow, 0,incometype , style1)
+            headerrow = headerrow +1
+            for itemheader in transferheadings:
+                sheet3.write(headerrow, col, itemheader, style2)
+                col = col + 1
+            headerrow = headerrow +11
+
+        sheet3.write(headerrow, 0, "")
         #set column width for sheet1
         for i in range(0,7):
             sheet3.col(i).width = 6000
