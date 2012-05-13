@@ -2139,8 +2139,8 @@
    <slot>moveAllHouseholdCharacteristics()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>131</y>
+     <x>397</x>
+     <y>260</y>
     </hint>
     <hint type="destinationlabel">
      <x>25</x>
@@ -2155,8 +2155,8 @@
    <slot>removeAllHouseholdCharacteristics()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>131</y>
+     <x>397</x>
+     <y>297</y>
     </hint>
     <hint type="destinationlabel">
      <x>116</x>
@@ -2171,8 +2171,8 @@
    <slot>moveSelectedHouseholdCharacteristics()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>131</y>
+     <x>397</x>
+     <y>334</y>
     </hint>
     <hint type="destinationlabel">
      <x>389</x>
@@ -2187,8 +2187,8 @@
    <slot>removeSelectedHouseholdCharacteristics()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>131</y>
+     <x>397</x>
+     <y>371</y>
     </hint>
     <hint type="destinationlabel">
      <x>615</x>
@@ -2203,8 +2203,8 @@
    <slot>moveAllPersonalCharacteristics()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>131</y>
+     <x>397</x>
+     <y>260</y>
     </hint>
     <hint type="destinationlabel">
      <x>2</x>
@@ -2219,8 +2219,8 @@
    <slot>removeAllPersonalCharacteristics()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>131</y>
+     <x>397</x>
+     <y>297</y>
     </hint>
     <hint type="destinationlabel">
      <x>3</x>
@@ -2235,8 +2235,8 @@
    <slot>moveSelectedPersonalCharacteristics()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>131</y>
+     <x>397</x>
+     <y>334</y>
     </hint>
     <hint type="destinationlabel">
      <x>1</x>
@@ -2251,8 +2251,8 @@
    <slot>removeSelectedPersonalCharacteristics()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>131</y>
+     <x>397</x>
+     <y>371</y>
     </hint>
     <hint type="destinationlabel">
      <x>3</x>
@@ -2267,8 +2267,8 @@
    <slot>getExpenseItems()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>130</y>
+     <x>559</x>
+     <y>150</y>
     </hint>
     <hint type="destinationlabel">
      <x>2</x>
@@ -2283,8 +2283,8 @@
    <slot>adjustTopList()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>130</y>
+     <x>559</x>
+     <y>202</y>
     </hint>
     <hint type="destinationlabel">
      <x>2</x>
@@ -2299,8 +2299,8 @@
    <slot>saveStandardOfLivingItem()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>131</y>
+     <x>661</x>
+     <y>359</y>
     </hint>
     <hint type="destinationlabel">
      <x>2</x>
@@ -2315,8 +2315,8 @@
    <slot>delStandardOfLivingItems()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>131</y>
+     <x>473</x>
+     <y>469</y>
     </hint>
     <hint type="destinationlabel">
      <x>3</x>
@@ -2363,8 +2363,8 @@
    <slot>displayUnitOfMeasure()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>130</y>
+     <x>628</x>
+     <y>150</y>
     </hint>
     <hint type="destinationlabel">
      <x>4</x>
@@ -2379,8 +2379,8 @@
    <slot>saveDiet()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>119</x>
-     <y>131</y>
+     <x>661</x>
+     <y>285</y>
     </hint>
     <hint type="destinationlabel">
      <x>0</x>
@@ -2395,8 +2395,8 @@
    <slot>delDiets()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>129</x>
-     <y>131</y>
+     <x>530</x>
+     <y>469</y>
     </hint>
     <hint type="destinationlabel">
      <x>0</x>
@@ -2753,6 +2753,70 @@
     <hint type="destinationlabel">
      <x>233</x>
      <y>-20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdTransfersMoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveAllTransfers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>351</x>
+     <y>275</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>311</x>
+     <y>-10</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdTransfersRemoveAll</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeAllTransfers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>378</x>
+     <y>315</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>369</x>
+     <y>-12</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdTransfersMoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>moveSelectedTransfers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>362</x>
+     <y>352</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>421</x>
+     <y>-13</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdTransfersRemoveSelected</sender>
+   <signal>clicked()</signal>
+   <receiver>ProjectConfiguration</receiver>
+   <slot>removeSelectedTransfers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>366</x>
+     <y>390</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>719</x>
+     <y>203</y>
     </hint>
    </hints>
   </connection>

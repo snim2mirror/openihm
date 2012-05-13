@@ -62,6 +62,9 @@ class TransferIncomeManager(TableViewMixin):
          ''' Retrieve and display Project Transfer Incomes'''
         
          incomes = self.project.getIncomeSources("transfers") 
+         
+         transfertype = self.cmbTransferType.currentText()
+         incomesAvail = self.project.getTransferIncomes(transfertype) 
 
          model = QStandardItemModel(1,1)
 
@@ -72,9 +75,10 @@ class TransferIncomeManager(TableViewMixin):
          num = 0
 
          for income in incomes:
-             qtIncome = QStandardItem( income.name )	
-             model.setItem( num, 0, qtIncome )
-             num = num + 1
+             if income.name in incomesAvail:
+                 qtIncome = QStandardItem( income.name )
+                 model.setItem( num, 0, qtIncome )
+                 num = num + 1
 
          self.tblSelectedTransfers.setModel(model)
          self.tblSelectedTransfers.setSelectionMode(QAbstractItemView.ExtendedSelection)
