@@ -87,6 +87,61 @@ class DataEntrySheets:
         self.database.close()
         return assets
     
+    def getProjectSocialTransfers(self):
+        query = '''SELECT incomesource FROM projectincomesources WHERE incometype ='transfers' AND pid=%s ORDER BY incomesource''' % self.pid
+        self.database.open()
+        transfers = self.database.execSelectQuery(query)
+        self.database.close()
+        return transfers
+
+    def getProjectOfficialTransfers(self):
+        query = '''SELECT incomesource FROM projectincomesources WHERE incometype ='officialtransfer' AND pid=%s ORDER BY incomesource''' % self.pid
+        self.database.open()
+        transfers = self.database.execSelectQuery(query)
+        self.database.close()
+        return transfers
+
+    def populateSocialTranfers(self,book,style1,style2,row):
+        recordset = self.getProjectSocialTransfers()
+        sheet = book.get_sheet(1)
+        col = 0
+        #set section Headings
+        transferheadings = ["TransferSource","CashPerYear","FoodType","Unit","UnitsConsumed","UnitsSold","PricePerUnit"]
+        for itemheader in transferheadings:
+            sheet.write(row, col, itemheader, style2)
+            col = col + 1
+        row = row +1
+
+        #write transfer sources
+        col = 0
+        for rec in recordset:
+            celvalue = rec[col]
+            sheet.write(row, col, celvalue)
+            row = row + 1
+        row = row + 4 # set space between Income source type sections
+        return row
+
+    def populateOfficialTranfers(self,book,style1,style2,row):
+        recordset = self.getProjectSocialTransfers()
+        sheet = book.get_sheet(1)
+        col = 0
+        #set section Headings
+        transferheadings = ["TransferSource","CashPerYear","FoodType","Unit","UnitsConsumed","UnitsSold","PricePerUnit"]
+        for itemheader in transferheadings:
+            sheet.write(row, col, itemheader, style2)
+            col = col + 1
+        row = row +1
+
+        #write transfer sources
+        col = 0
+        for rec in recordset:
+            celvalue = rec[col]
+            sheet.write(row, col, celvalue)
+            row = row + 1
+        row = row + 4 # set space between Income source type sections
+        return row
+
+    
     def getAssetUnitOfMeasure(self,unitfld, tblname,assetfld,assettype):
         unitofmeasure =""
         query = '''SELECT %s FROM %s WHERE %s='%s' ''' % (unitfld, tblname,assetfld,assettype)
@@ -388,18 +443,12 @@ class DataEntrySheets:
         headerrow = self.populateEmployemntDetails(headerrow,book,style1,style2)
         
         #Social Transfers
-        itemrow = headerrow + 1
-        
-        sheet2.write(headerrow, 0, "SocialTransfer", style1)
-        sheet2.write(itemrow, 0, "TransferSource", style2)
-        sheet2.write(itemrow, 1, "CashPerYear", style2)
-        sheet2.write(itemrow, 2, "FoodType", style2)
-        sheet2.write(itemrow, 3, "Unit", style2)
-        sheet2.write(itemrow, 4, "UnitsConsumed", style2)
-        sheet2.write(itemrow, 5, "UnitsSold", style2)
-        sheet2.write(itemrow, 6, "PricePerUnit", style2)
+        headerrow = self.populateSocialTranfers(book,style1,style2,headerrow)
 
         #Transfers from Organisations
+        #headerrow = self.populateOfficialTranfers(book,style1,style2,headerrow) - ACTIVATE THIS
+
+        #DELETE FROM HERE
         headerrow = headerrow + 11
         itemrow = itemrow + 11
         
@@ -410,7 +459,7 @@ class DataEntrySheets:
         sheet2.write(itemrow, 3, "Unit", style2)
         sheet2.write(itemrow, 4, "UnitsConsumed", style2)
         sheet2.write(itemrow, 5, "UnitsSold", style2)
-        sheet2.write(itemrow, 6, "PricePerUnit", style2)
+        sheet2.write(itemrow, 6, "PricePerUnit", style2) #UP TO HERE
 
         #set column width for sheet2
         for i in range(0,7):
