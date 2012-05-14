@@ -87,6 +87,61 @@ class DataEntrySheets:
         self.database.close()
         return assets
     
+    def getProjectSocialTransfers(self):
+        query = '''SELECT incomesource FROM projectincomesources WHERE incometype ='Social Transfers' AND pid=%s ORDER BY incomesource''' % self.pid
+        self.database.open()
+        transfers = self.database.execSelectQuery(query)
+        self.database.close()
+        return transfers
+
+    def getProjectOfficialTransfers(self):
+        query = '''SELECT incomesource FROM projectincomesources WHERE incometype ='Official Transfers' AND pid=%s ORDER BY incomesource''' % self.pid
+        self.database.open()
+        transfers = self.database.execSelectQuery(query)
+        self.database.close()
+        return transfers
+
+    def populateSocialTranfers(self,book,style1,style2,row):
+        recordset = self.getProjectSocialTransfers()
+        sheet = book.get_sheet(1)
+        col = 0
+        #set section Headings
+        transferheadings = ["TransferSource","CashPerYear","FoodType","Unit","UnitsConsumed","UnitsSold","PricePerUnit"]
+        for itemheader in transferheadings:
+            sheet.write(row, col, itemheader, style2)
+            col = col + 1
+        row = row +1
+
+        #write transfer sources
+        col = 0
+        for rec in recordset:
+            celvalue = rec[col]
+            sheet.write(row, col, celvalue)
+            row = row + 1
+        row = row + 4 # set space between Income source type sections
+        return row
+
+    def populateOfficialTranfers(self,book,style1,style2,row):
+        recordset = self.getProjectOfficialTransfers()
+        sheet = book.get_sheet(1)
+        col = 0
+        #set section Headings
+        transferheadings = ["TransferSource","CashPerYear","FoodType","Unit","UnitsConsumed","UnitsSold","PricePerUnit"]
+        for itemheader in transferheadings:
+            sheet.write(row, col, itemheader, style2)
+            col = col + 1
+        row = row +1
+
+        #write transfer sources
+        col = 0
+        for rec in recordset:
+            celvalue = rec[col]
+            sheet.write(row, col, celvalue)
+            row = row + 1
+        row = row + 4 # set space between Income source type sections
+        return row
+
+    
     def getAssetUnitOfMeasure(self,unitfld, tblname,assetfld,assettype):
         unitofmeasure =""
         query = '''SELECT %s FROM %s WHERE %s='%s' ''' % (unitfld, tblname,assetfld,assettype)
@@ -141,7 +196,7 @@ class DataEntrySheets:
             sheet4.col(i).width = 6000
 
     def populateProjectAssetssection(self,book,style1,style2,row):
-        headings = ["Category","Type","Unit","UnitCost","Units"]
+        headings = ["Category","Type","Unit","UnitCost","TotalUnits"]
         col = 0
         sheet = book.get_sheet(1)
         for itemheader in headings:
@@ -168,8 +223,8 @@ class DataEntrySheets:
         headings = ["Name","Unit","UnitsProduced","UnitsSold","UnitPrice","OtherUses","UnitsConsumed"]
         col = 0
         sheet = book.get_sheet(1)
-        if sectionheading=='Livestock':
-                sectionheading = sectionheading + '-C'
+        #if sectionheading=='Livestock':
+        sectionheading = sectionheading + '-C'
         sheet.write(headerrow, col, sectionheading,style1)
         headerrow = headerrow +1
             
@@ -253,6 +308,32 @@ class DataEntrySheets:
                 sheet3.write(headerrow, col, itemheader, style2)
                 col = col + 1
             headerrow = headerrow +11
+
+        #Write Employment Headings
+        employmentheadings = ["Type","FoodPaid","Unit","UnitsPaid","Kcals","CashIncome"]
+        col = 0
+        sheet3.write(headerrow, 0, "Employment", style1)
+        headerrow = headerrow +1
+        for itemheader in employmentheadings:
+            sheet3.write(headerrow, col, itemheader, style2)
+            col = col + 1
+        headerrow = headerrow +11
+
+        #Write Transfer Headers
+        incometypes = ['Social Transfers','Official Transfers']
+        col = 0
+        for incometype in incometypes:
+            #set section Headings
+            transferheadings = ["TransferSource","CashPerYear","FoodType","Unit","UnitsConsumed","UnitsSold","PricePerUnit"]
+            col = 0
+            sheet3.write(headerrow, 0,incometype , style1)
+            headerrow = headerrow +1
+            for itemheader in transferheadings:
+                sheet3.write(headerrow, col, itemheader, style2)
+                col = col + 1
+            headerrow = headerrow +11
+
+        sheet3.write(headerrow, 0, "")
         #set column width for sheet1
         for i in range(0,7):
             sheet3.col(i).width = 6000
@@ -362,29 +443,10 @@ class DataEntrySheets:
         headerrow = self.populateEmployemntDetails(headerrow,book,style1,style2)
         
         #Social Transfers
-        itemrow = headerrow + 1
-        
-        sheet2.write(headerrow, 0, "SocialTransfer", style1)
-        sheet2.write(itemrow, 0, "TransferSource", style2)
-        sheet2.write(itemrow, 1, "CashPerYear", style2)
-        sheet2.write(itemrow, 2, "FoodType", style2)
-        sheet2.write(itemrow, 3, "Unit", style2)
-        sheet2.write(itemrow, 4, "UnitsConsumed", style2)
-        sheet2.write(itemrow, 5, "UnitsSold", style2)
-        sheet2.write(itemrow, 6, "PricePerUnit", style2)
+        headerrow = self.populateSocialTranfers(book,style1,style2,headerrow)
 
         #Transfers from Organisations
-        headerrow = headerrow + 11
-        itemrow = itemrow + 11
-        
-        sheet2.write(headerrow, 0, "TransferFromOrganisations", style1)
-        sheet2.write(itemrow, 0, "TransferSource", style2)
-        sheet2.write(itemrow, 1, "CashPerYear", style2)
-        sheet2.write(itemrow, 2, "FoodType", style2)
-        sheet2.write(itemrow, 3, "Unit", style2)
-        sheet2.write(itemrow, 4, "UnitsConsumed", style2)
-        sheet2.write(itemrow, 5, "UnitsSold", style2)
-        sheet2.write(itemrow, 6, "PricePerUnit", style2)
+        headerrow = self.populateOfficialTranfers(book,style1,style2,headerrow)
 
         #set column width for sheet2
         for i in range(0,7):
