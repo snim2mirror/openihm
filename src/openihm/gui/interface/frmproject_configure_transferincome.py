@@ -60,11 +60,14 @@ class TransferIncomeManager(TableViewMixin):
         
      def displaySelectedTransfers(self):
          ''' Retrieve and display Project Transfer Incomes'''
-        
-         incomes = self.project.getIncomeSources("transfers") 
          
          transfertype = self.cmbTransferType.currentText()
-         incomesAvail = self.project.getTransferIncomes(transfertype) 
+         if transfertype == "Official":
+             incomes = self.project.getIncomeSources("Official Transfers") 
+         elif transfertype == "Unofficial":
+             incomes = self.project.getIncomeSources("Social Transfers") 
+         else:
+             incomes = self.project.getIncomeSources("Transfers") 
 
          model = QStandardItemModel(1,1)
 
@@ -75,10 +78,9 @@ class TransferIncomeManager(TableViewMixin):
          num = 0
 
          for income in incomes:
-             if income.name in incomesAvail:
-                 qtIncome = QStandardItem( income.name )
-                 model.setItem( num, 0, qtIncome )
-                 num = num + 1
+             qtIncome = QStandardItem( income.name )
+             model.setItem( num, 0, qtIncome )
+             num = num + 1
 
          self.tblSelectedTransfers.setModel(model)
          self.tblSelectedTransfers.setSelectionMode(QAbstractItemView.ExtendedSelection)
@@ -92,7 +94,8 @@ class TransferIncomeManager(TableViewMixin):
             
              currentProjectTransfers = self.getProjectTransfers()
              if income not in currentProjectTransfers:
-                 self.project.addIncomeSource(income, "transfers")
+                 transfertype = 'Social Transfers' if self.project.getTransferType(income) == 'Internal' else 'Official Transfers'
+                 self.project.addIncomeSource(income, transfertype)
              else:
                  msg = "The income source labelled, %s, has already been added to project" % (income)
                  QMessageBox.information(self,"Project Configuration",msg)
@@ -122,7 +125,8 @@ class TransferIncomeManager(TableViewMixin):
                 
                  currentProjectTransfers = self.getProjectTransfers()
                  if income not in currentProjectTransfers:
-                     self.project.addIncomeSource(income, "transfers")
+                     transfertype = 'Social Transfers' if self.project.getTransferType(income) == 'Internal' else 'Official Transfers'
+                     self.project.addIncomeSource(income, transfertype)
                  else:
                      msg = "The income source labelled, %s, has already been added to project" % (income)
                      QMessageBox.information(self,"Project Configuration",msg)
