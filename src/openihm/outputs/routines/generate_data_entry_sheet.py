@@ -448,19 +448,6 @@ class DataEntrySheets:
         #Transfers from Organisations
         #headerrow = self.populateOfficialTranfers(book,style1,style2,headerrow) - ACTIVATE THIS
 
-        #DELETE FROM HERE
-        headerrow = headerrow + 11
-        itemrow = itemrow + 11
-        
-        sheet2.write(headerrow, 0, "TransferFromOrganisations", style1)
-        sheet2.write(itemrow, 0, "TransferSource", style2)
-        sheet2.write(itemrow, 1, "CashPerYear", style2)
-        sheet2.write(itemrow, 2, "FoodType", style2)
-        sheet2.write(itemrow, 3, "Unit", style2)
-        sheet2.write(itemrow, 4, "UnitsConsumed", style2)
-        sheet2.write(itemrow, 5, "UnitsSold", style2)
-        sheet2.write(itemrow, 6, "PricePerUnit", style2) #UP TO HERE
-
         #set column width for sheet2
         for i in range(0,7):
             sheet2.col(i).width = 6000
