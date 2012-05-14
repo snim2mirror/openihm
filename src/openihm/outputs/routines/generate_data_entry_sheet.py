@@ -88,14 +88,14 @@ class DataEntrySheets:
         return assets
     
     def getProjectSocialTransfers(self):
-        query = '''SELECT incomesource FROM projectincomesources WHERE incometype ='transfers' AND pid=%s ORDER BY incomesource''' % self.pid
+        query = '''SELECT incomesource FROM projectincomesources WHERE incometype ='Social Transfers' AND pid=%s ORDER BY incomesource''' % self.pid
         self.database.open()
         transfers = self.database.execSelectQuery(query)
         self.database.close()
         return transfers
 
     def getProjectOfficialTransfers(self):
-        query = '''SELECT incomesource FROM projectincomesources WHERE incometype ='officialtransfer' AND pid=%s ORDER BY incomesource''' % self.pid
+        query = '''SELECT incomesource FROM projectincomesources WHERE incometype ='Official Transfers' AND pid=%s ORDER BY incomesource''' % self.pid
         self.database.open()
         transfers = self.database.execSelectQuery(query)
         self.database.close()
@@ -122,7 +122,7 @@ class DataEntrySheets:
         return row
 
     def populateOfficialTranfers(self,book,style1,style2,row):
-        recordset = self.getProjectSocialTransfers()
+        recordset = self.getProjectOfficialTransfers()
         sheet = book.get_sheet(1)
         col = 0
         #set section Headings
@@ -446,7 +446,7 @@ class DataEntrySheets:
         headerrow = self.populateSocialTranfers(book,style1,style2,headerrow)
 
         #Transfers from Organisations
-        #headerrow = self.populateOfficialTranfers(book,style1,style2,headerrow) - ACTIVATE THIS
+        headerrow = self.populateOfficialTranfers(book,style1,style2,headerrow)
 
         #set column width for sheet2
         for i in range(0,7):
