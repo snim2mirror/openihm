@@ -370,7 +370,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             form = FrmHouseholdData(self)
             subWin = self.mdi.addSubWindow(form)
             self.centerSubWindow(subWin)
-            form.show()
+            form.showMaximized()
         
     def findHousehold(self):
         ''' Creates and Shows the Find Household form '''

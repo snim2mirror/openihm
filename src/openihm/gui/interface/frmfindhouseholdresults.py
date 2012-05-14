@@ -177,7 +177,7 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, 
 			form = FrmHouseholdData(self.parent,hhid)
 			subWin = self.parent.mdi.addSubWindow(form)
 			self.parent.centerSubWindow(subWin)
-			form.show()
+			form.showMaximized()
 		else:
 			msg = "Please select the row containing a household whose data you want to view or edit."
 			QMessageBox.information(self,"View|Edit Household Data",msg)

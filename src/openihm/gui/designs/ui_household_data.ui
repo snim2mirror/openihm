@@ -6,1064 +6,1405 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>797</width>
-    <height>620</height>
+    <width>767</width>
+    <height>583</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>797</width>
-    <height>620</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>Household Data</string>
   </property>
-  <widget class="QTabWidget" name="tabHouseHold">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>781</width>
-     <height>531</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>8</pointsize>
-    </font>
-   </property>
-   <property name="currentIndex">
-    <number>2</number>
-   </property>
-   <widget class="QWidget" name="tabHouseHoldMembers">
-    <attribute name="title">
-     <string>Members</string>
-    </attribute>
-    <widget class="QTableView" name="tblMembers">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>371</width>
-       <height>431</height>
-      </rect>
+  <layout class="QGridLayout" name="gridLayout_34">
+   <item row="0" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
      </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
      </property>
-     <property name="sortingEnabled">
-      <bool>true</bool>
-     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_12">
+      <item>
+       <widget class="QFrame" name="frame_2">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_33">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Household Name:</string>
+           </property>
+           <property name="buddy">
+            <cstring>cboHouseholdNumber</cstring>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="cboHouseholdNumber">
+           <property name="minimumSize">
+            <size>
+             <width>250</width>
+             <height>0</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <spacer name="horizontalSpacer_13">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_3">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_32">
+         <item row="0" column="0">
+          <widget class="QTabWidget" name="tabHouseHold">
+           <property name="font">
+            <font>
+             <pointsize>8</pointsize>
+            </font>
+           </property>
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <widget class="QWidget" name="tabHouseHoldMembers">
+            <attribute name="title">
+             <string>Members</string>
+            </attribute>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QFrame" name="frame_27">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_10">
+                <item>
+                 <widget class="QFrame" name="frame_29">
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_27">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="label_8">
+                     <property name="text">
+                      <string>Household Members</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frame_28">
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_25">
+                   <item row="0" column="0">
+                    <widget class="QTableView" name="tblMembers">
+                     <property name="alternatingRowColors">
+                      <bool>true</bool>
+                     </property>
+                     <property name="sortingEnabled">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frame_30">
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_26">
+                   <item row="0" column="0">
+                    <widget class="QPushButton" name="cmdAddMember">
+                     <property name="minimumSize">
+                      <size>
+                       <width>80</width>
+                       <height>31</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Add</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <widget class="QPushButton" name="cmdEditMember">
+                     <property name="minimumSize">
+                      <size>
+                       <width>80</width>
+                       <height>31</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Edit</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QPushButton" name="cmdDelMember">
+                     <property name="minimumSize">
+                      <size>
+                       <width>80</width>
+                       <height>31</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Delete</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="3">
+                    <spacer name="horizontalSpacer_10">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_31">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_11">
+                <item>
+                 <widget class="QFrame" name="frame_33">
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_30">
+                   <item row="0" column="0">
+                    <widget class="QLabel" name="lblPersonalCharacteristicsHeader">
+                     <property name="text">
+                      <string>Personal Characteristics:</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frame_32">
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_29">
+                   <item row="0" column="0">
+                    <widget class="QTableView" name="tblPersonalCharacteristics">
+                     <property name="alternatingRowColors">
+                      <bool>true</bool>
+                     </property>
+                     <property name="sortingEnabled">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QFrame" name="frame_34">
+                  <property name="frameShape">
+                   <enum>QFrame::StyledPanel</enum>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Raised</enum>
+                  </property>
+                  <layout class="QGridLayout" name="gridLayout_28">
+                   <item row="0" column="0">
+                    <widget class="QPushButton" name="cmdEditPersonalCharacteristic">
+                     <property name="minimumSize">
+                      <size>
+                       <width>140</width>
+                       <height>31</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Edit Characteristic</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="1">
+                    <spacer name="horizontalSpacer_11">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tabHouseholdAssets">
+            <attribute name="title">
+             <string>Assets</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <widget class="QFrame" name="frame_21">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_19">
+                <item row="0" column="0">
+                 <widget class="QTableView" name="tblAssets">
+                  <property name="alternatingRowColors">
+                   <bool>true</bool>
+                  </property>
+                  <property name="sortingEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_22">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_20">
+                <item row="0" column="0">
+                 <widget class="QPushButton" name="cmdAddAsset">
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Add</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QPushButton" name="cmdEditAsset">
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Edit</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="cmdDelAsset">
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Delete</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3">
+                 <spacer name="horizontalSpacer_7">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tabHouseholdIncome">
+            <attribute name="title">
+             <string>Income</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout_18">
+             <item row="0" column="0">
+              <widget class="QTabWidget" name="tabWidget">
+               <property name="tabPosition">
+                <enum>QTabWidget::West</enum>
+               </property>
+               <property name="currentIndex">
+                <number>0</number>
+               </property>
+               <widget class="QWidget" name="tab">
+                <attribute name="title">
+                 <string>Crops</string>
+                </attribute>
+                <layout class="QGridLayout" name="gridLayout_3">
+                 <item row="0" column="0">
+                  <widget class="QFrame" name="frame_5">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout">
+                    <item>
+                     <widget class="QFrame" name="frame_6">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_2">
+                       <item row="0" column="0">
+                        <widget class="QTableView" name="tblCropIncome">
+                         <property name="alternatingRowColors">
+                          <bool>true</bool>
+                         </property>
+                         <property name="sortingEnabled">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QFrame" name="frame_7">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout">
+                       <item row="0" column="0">
+                        <widget class="QPushButton" name="cmdAddCrop">
+                         <property name="minimumSize">
+                          <size>
+                           <width>80</width>
+                           <height>31</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Add</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="1">
+                        <widget class="QPushButton" name="cmdEditCrop">
+                         <property name="minimumSize">
+                          <size>
+                           <width>80</width>
+                           <height>31</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Edit</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="2">
+                        <widget class="QPushButton" name="cmdDelCrop">
+                         <property name="minimumSize">
+                          <size>
+                           <width>80</width>
+                           <height>31</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Delete</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="3">
+                        <spacer name="horizontalSpacer">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="tab_2">
+                <attribute name="title">
+                 <string>Livestock</string>
+                </attribute>
+                <layout class="QGridLayout" name="gridLayout_6">
+                 <item row="0" column="0">
+                  <widget class="QFrame" name="frame_8">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_2">
+                    <item>
+                     <widget class="QFrame" name="frame_10">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_4">
+                       <item row="0" column="0">
+                        <widget class="QTableView" name="tblLivestockIncome">
+                         <property name="alternatingRowColors">
+                          <bool>true</bool>
+                         </property>
+                         <property name="sortingEnabled">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QFrame" name="frame_9">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_5">
+                       <item row="0" column="0">
+                        <widget class="QPushButton" name="cmdAddLivestock">
+                         <property name="minimumSize">
+                          <size>
+                           <width>80</width>
+                           <height>31</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Add</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="1">
+                        <widget class="QPushButton" name="cmdEditLivestock">
+                         <property name="minimumSize">
+                          <size>
+                           <width>80</width>
+                           <height>31</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Edit</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="2">
+                        <widget class="QPushButton" name="cmdDelLivestock">
+                         <property name="minimumSize">
+                          <size>
+                           <width>80</width>
+                           <height>31</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Delete</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="3">
+                        <spacer name="horizontalSpacer_2">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="tab_3">
+                <attribute name="title">
+                 <string>Employment</string>
+                </attribute>
+                <layout class="QGridLayout" name="gridLayout_9">
+                 <item row="0" column="0">
+                  <widget class="QFrame" name="frame_11">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_3">
+                    <item>
+                     <widget class="QFrame" name="frame_12">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_7">
+                       <item row="0" column="0">
+                        <widget class="QTableView" name="tblEmploymentIncome">
+                         <property name="alternatingRowColors">
+                          <bool>true</bool>
+                         </property>
+                         <property name="sortingEnabled">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QFrame" name="frame_13">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_8">
+                       <item row="0" column="0">
+                        <widget class="QPushButton" name="cmdAddEmployment">
+                         <property name="minimumSize">
+                          <size>
+                           <width>80</width>
+                           <height>31</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Add</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="1">
+                        <widget class="QPushButton" name="cmdEditEmployment">
+                         <property name="minimumSize">
+                          <size>
+                           <width>80</width>
+                           <height>31</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Edit</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="2">
+                        <widget class="QPushButton" name="cmdDelEmployment">
+                         <property name="minimumSize">
+                          <size>
+                           <width>80</width>
+                           <height>31</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Delete</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="3">
+                        <spacer name="horizontalSpacer_3">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="tab_4">
+                <attribute name="title">
+                 <string>Wildfoods</string>
+                </attribute>
+                <layout class="QGridLayout" name="gridLayout_12">
+                 <item row="0" column="0">
+                  <widget class="QFrame" name="frame_14">
+                   <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_4">
+                    <item>
+                     <widget class="QFrame" name="frame_16">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_10">
+                       <item row="0" column="0">
+                        <widget class="QTableView" name="tblWildfoodsIncome">
+                         <property name="alternatingRowColors">
+                          <bool>true</bool>
+                         </property>
+                         <property name="sortingEnabled">
+                          <bool>true</bool>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QFrame" name="frame_15">
+                      <property name="frameShape">
+                       <enum>QFrame::StyledPanel</enum>
+                      </property>
+                      <property name="frameShadow">
+                       <enum>QFrame::Raised</enum>
+                      </property>
+                      <layout class="QGridLayout" name="gridLayout_11">
+                       <item row="0" column="0">
+                        <widget class="QPushButton" name="cmdAddWildfoods">
+                         <property name="minimumSize">
+                          <size>
+                           <width>80</width>
+                           <height>31</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Add</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="1">
+                        <widget class="QPushButton" name="cmdEditWildfoods">
+                         <property name="minimumSize">
+                          <size>
+                           <width>80</width>
+                           <height>31</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Edit</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="2">
+                        <widget class="QPushButton" name="cmdDelWildfoods">
+                         <property name="minimumSize">
+                          <size>
+                           <width>80</width>
+                           <height>31</height>
+                          </size>
+                         </property>
+                         <property name="text">
+                          <string>Delete</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="3">
+                        <spacer name="horizontalSpacer_4">
+                         <property name="orientation">
+                          <enum>Qt::Horizontal</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>40</width>
+                           <height>20</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="tab_5">
+                <attribute name="title">
+                 <string>Transfers</string>
+                </attribute>
+                <layout class="QGridLayout" name="gridLayout_17">
+                 <item row="0" column="0">
+                  <widget class="QTabWidget" name="tabWidget_2">
+                   <property name="currentIndex">
+                    <number>0</number>
+                   </property>
+                   <widget class="QWidget" name="tab_7">
+                    <attribute name="title">
+                     <string>Social Transfers</string>
+                    </attribute>
+                    <layout class="QVBoxLayout" name="verticalLayout_5">
+                     <item>
+                      <widget class="QFrame" name="frame_17">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QGridLayout" name="gridLayout_13">
+                        <item row="0" column="0">
+                         <widget class="QTableView" name="tblGiftsIncome">
+                          <property name="alternatingRowColors">
+                           <bool>true</bool>
+                          </property>
+                          <property name="sortingEnabled">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_18">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QGridLayout" name="gridLayout_14">
+                        <item row="0" column="0">
+                         <widget class="QPushButton" name="cmdAddGifts">
+                          <property name="minimumSize">
+                           <size>
+                            <width>80</width>
+                            <height>31</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Add</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="1">
+                         <widget class="QPushButton" name="cmdEditGifts">
+                          <property name="minimumSize">
+                           <size>
+                            <width>80</width>
+                            <height>31</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="2">
+                         <widget class="QPushButton" name="cmdDelGifts">
+                          <property name="minimumSize">
+                           <size>
+                            <width>80</width>
+                            <height>31</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Delete</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="3">
+                         <spacer name="horizontalSpacer_5">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>40</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QWidget" name="tab_8">
+                    <attribute name="title">
+                     <string>Official Transfers</string>
+                    </attribute>
+                    <layout class="QVBoxLayout" name="verticalLayout_6">
+                     <item>
+                      <widget class="QFrame" name="frame_19">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QGridLayout" name="gridLayout_15">
+                        <item row="0" column="0">
+                         <widget class="QTableView" name="tblTransferIncome">
+                          <property name="alternatingRowColors">
+                           <bool>true</bool>
+                          </property>
+                          <property name="sortingEnabled">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QFrame" name="frame_20">
+                       <property name="frameShape">
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <layout class="QGridLayout" name="gridLayout_16">
+                        <item row="0" column="0">
+                         <widget class="QPushButton" name="cmdAddTransfer">
+                          <property name="minimumSize">
+                           <size>
+                            <width>80</width>
+                            <height>31</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Add</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="1">
+                         <widget class="QPushButton" name="cmdEditTransfer">
+                          <property name="minimumSize">
+                           <size>
+                            <width>80</width>
+                            <height>31</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Edit</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="2">
+                         <widget class="QPushButton" name="cmdDelTransfer">
+                          <property name="minimumSize">
+                           <size>
+                            <width>80</width>
+                            <height>31</height>
+                           </size>
+                          </property>
+                          <property name="text">
+                           <string>Delete</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="3">
+                         <spacer name="horizontalSpacer_6">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>40</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tabHouseholdExpenditure">
+            <attribute name="title">
+             <string>Expenditure</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <item>
+              <widget class="QFrame" name="frame_23">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_21">
+                <item row="0" column="0">
+                 <widget class="QTableView" name="tblExpenditure">
+                  <property name="alternatingRowColors">
+                   <bool>true</bool>
+                  </property>
+                  <property name="sortingEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_24">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_22">
+                <item row="0" column="0">
+                 <widget class="QPushButton" name="cmdAddExpenditure">
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Add</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QPushButton" name="cmdEditExpenditure">
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Edit</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QPushButton" name="cmdDelExpenditure">
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Delete</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="3">
+                 <spacer name="horizontalSpacer_8">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tabHouseholdCharacteristics">
+            <attribute name="title">
+             <string>Characteristics</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <item>
+              <widget class="QFrame" name="frame_25">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_23">
+                <item row="0" column="0">
+                 <widget class="QTableView" name="tblCharacteristics">
+                  <property name="alternatingRowColors">
+                   <bool>true</bool>
+                  </property>
+                  <property name="sortingEnabled">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_26">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_24">
+                <item row="0" column="0">
+                 <widget class="QPushButton" name="cmdEditCharacteristic">
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>31</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Edit</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <spacer name="horizontalSpacer_9">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_4">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_31">
+         <item row="0" column="1">
+          <widget class="QPushButton" name="cmdClose">
+           <property name="minimumSize">
+            <size>
+             <width>91</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Close</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <spacer name="horizontalSpacer_12">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
     </widget>
-    <widget class="QPushButton" name="cmdAddMember">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdEditMember">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdDelMember">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-    <widget class="QTableView" name="tblPersonalCharacteristics">
-     <property name="geometry">
-      <rect>
-       <x>390</x>
-       <y>30</y>
-       <width>371</width>
-       <height>431</height>
-      </rect>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <property name="sortingEnabled">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdEditPersonalCharacteristic">
-     <property name="geometry">
-      <rect>
-       <x>390</x>
-       <y>470</y>
-       <width>141</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit Characteristic</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_8">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>10</y>
-       <width>111</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Household Members</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblPersonalCharacteristicsHeader">
-     <property name="geometry">
-      <rect>
-       <x>400</x>
-       <y>10</y>
-       <width>231</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Personal Characteristics:</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tabHouseholdAssets">
-    <attribute name="title">
-     <string>Assets</string>
-    </attribute>
-    <widget class="QTableView" name="tblAssets">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>751</width>
-       <height>451</height>
-      </rect>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <property name="sortingEnabled">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdAddAsset">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdEditAsset">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdDelAsset">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tabHouseholdIncome">
-    <attribute name="title">
-     <string>Income</string>
-    </attribute>
-    <widget class="QTabWidget" name="tabWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>751</width>
-       <height>491</height>
-      </rect>
-     </property>
-     <property name="tabPosition">
-      <enum>QTabWidget::West</enum>
-     </property>
-     <property name="currentIndex">
-      <number>4</number>
-     </property>
-     <widget class="QWidget" name="tab">
-      <attribute name="title">
-       <string>Crops</string>
-      </attribute>
-      <widget class="QPushButton" name="cmdAddCrop">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Add</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdEditCrop">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Edit</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdDelCrop">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Delete</string>
-       </property>
-      </widget>
-      <widget class="QTableView" name="tblCropIncome">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>40</y>
-         <width>701</width>
-         <height>401</height>
-        </rect>
-       </property>
-       <property name="alternatingRowColors">
-        <bool>true</bool>
-       </property>
-       <property name="sortingEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_2">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>10</y>
-         <width>161</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Crops</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="title">
-       <string>Livestock</string>
-      </attribute>
-      <widget class="QTableView" name="tblLivestockIncome">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>40</y>
-         <width>701</width>
-         <height>401</height>
-        </rect>
-       </property>
-       <property name="alternatingRowColors">
-        <bool>true</bool>
-       </property>
-       <property name="sortingEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_3">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>10</y>
-         <width>121</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Livestock</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdEditLivestock">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Edit</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdDelLivestock">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Delete</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdAddLivestock">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Add</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="tab_3">
-      <attribute name="title">
-       <string>Employment</string>
-      </attribute>
-      <widget class="QLabel" name="label_4">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>10</y>
-         <width>121</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Employment</string>
-       </property>
-      </widget>
-      <widget class="QTableView" name="tblEmploymentIncome">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>40</y>
-         <width>701</width>
-         <height>401</height>
-        </rect>
-       </property>
-       <property name="alternatingRowColors">
-        <bool>true</bool>
-       </property>
-       <property name="sortingEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdEditEmployment">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Edit</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdDelEmployment">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Delete</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdAddEmployment">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Add</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="tab_4">
-      <attribute name="title">
-       <string>Wildfoods</string>
-      </attribute>
-      <widget class="QLabel" name="label_5">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>10</y>
-         <width>151</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Wildfoods and Hunting</string>
-       </property>
-      </widget>
-      <widget class="QTableView" name="tblWildfoodsIncome">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>40</y>
-         <width>701</width>
-         <height>401</height>
-        </rect>
-       </property>
-       <property name="alternatingRowColors">
-        <bool>true</bool>
-       </property>
-       <property name="sortingEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdEditWildfoods">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Edit</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdDelWildfoods">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Delete</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdAddWildfoods">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Add</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="tab_5">
-      <attribute name="title">
-       <string>Transfers</string>
-      </attribute>
-      <widget class="QLabel" name="label_6">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>10</y>
-         <width>121</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Transfers</string>
-       </property>
-      </widget>
-      <widget class="QTableView" name="tblGiftsIncome">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>40</y>
-         <width>701</width>
-         <height>401</height>
-        </rect>
-       </property>
-       <property name="alternatingRowColors">
-        <bool>true</bool>
-       </property>
-       <property name="sortingEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdEditGifts">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Edit</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdDelGifts">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Delete</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdAddGifts">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Add</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QWidget" name="tab_6">
-      <attribute name="title">
-       <string>Transfers From Orgs</string>
-      </attribute>
-      <widget class="QLabel" name="label_7">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>10</y>
-         <width>221</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Transfers from Organisations</string>
-       </property>
-      </widget>
-      <widget class="QTableView" name="tblTransferIncome">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>40</y>
-         <width>701</width>
-         <height>401</height>
-        </rect>
-       </property>
-       <property name="alternatingRowColors">
-        <bool>true</bool>
-       </property>
-       <property name="sortingEnabled">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdEditTransfer">
-       <property name="geometry">
-        <rect>
-         <x>120</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Edit</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdDelTransfer">
-       <property name="geometry">
-        <rect>
-         <x>220</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Delete</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cmdAddTransfer">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>450</y>
-         <width>91</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Add</string>
-       </property>
-      </widget>
-     </widget>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tabHouseholdExpenditure">
-    <attribute name="title">
-     <string>Expenditure</string>
-    </attribute>
-    <widget class="QTableView" name="tblExpenditure">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>751</width>
-       <height>451</height>
-      </rect>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <property name="sortingEnabled">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdAddExpenditure">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Add</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdEditExpenditure">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdDelExpenditure">
-     <property name="geometry">
-      <rect>
-       <x>210</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Delete</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="tabHouseholdCharacteristics">
-    <attribute name="title">
-     <string>Characteristics</string>
-    </attribute>
-    <widget class="QTableView" name="tblCharacteristics">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>751</width>
-       <height>451</height>
-      </rect>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <property name="sortingEnabled">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cmdEditCharacteristic">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>470</y>
-       <width>91</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Edit</string>
-     </property>
-    </widget>
-   </widget>
-  </widget>
-  <widget class="QPushButton" name="cmdClose">
-   <property name="geometry">
-    <rect>
-     <x>694</x>
-     <y>580</y>
-     <width>91</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Close</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="cboHouseholdNumber">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>10</y>
-     <width>221</width>
-     <height>22</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>10</y>
-     <width>111</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Household Name:</string>
-   </property>
-   <property name="buddy">
-    <cstring>cboHouseholdNumber</cstring>
-   </property>
-  </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>cmdClose</sender>
-   <signal>clicked()</signal>
+   <sender>cboHouseholdNumber</sender>
+   <signal>currentIndexChanged(int)</signal>
    <receiver>HouseholdData</receiver>
-   <slot>mdiClose()</slot>
+   <slot>displayHouseholdData()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>737</x>
-     <y>586</y>
+     <x>159</x>
+     <y>36</y>
     </hint>
     <hint type="destinationlabel">
-     <x>545</x>
-     <y>591</y>
+     <x>30</x>
+     <y>-18</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>cmdAddMember</sender>
+   <sender>cmdAddTransfer</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>addHouseholdMember()</slot>
+   <slot>addHouseholdTransferIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>87</x>
-     <y>562</y>
+     <x>117</x>
+     <y>432</y>
     </hint>
     <hint type="destinationlabel">
-     <x>98</x>
-     <y>589</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdEditMember</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>editHouseholdMember()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>193</x>
-     <y>544</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>323</x>
-     <y>587</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdDelMember</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>delHouseholdMembers()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>261</x>
-     <y>552</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>391</x>
-     <y>597</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdEditPersonalCharacteristic</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>editPersonalCharacteristic()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>503</x>
-     <y>547</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>614</x>
-     <y>581</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdAddAsset</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>addHouseholdAsset()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>61</x>
-     <y>561</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>76</x>
-     <y>587</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdEditAsset</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>editHouseholdAsset()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>192</x>
-     <y>560</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>302</x>
-     <y>592</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdDelAsset</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>delHouseholdAssets()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>291</x>
-     <y>561</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>294</x>
+     <x>131</x>
      <y>579</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>cmdAddCrop</sender>
+   <sender>cmdEditTransfer</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>addHouseholdCropIncome()</slot>
+   <slot>editHouseholdTransferIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>154</x>
-     <y>554</y>
+     <x>209</x>
+     <y>434</y>
     </hint>
     <hint type="destinationlabel">
-     <x>176</x>
-     <y>573</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdEditCrop</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>editHouseholdCropIncome()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>205</x>
-     <y>546</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>82</x>
-     <y>614</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdDelCrop</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>delHouseholdCropIncome()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>339</x>
-     <y>554</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>274</x>
-     <y>601</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdAddLivestock</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>addHouseholdLivestockIncome()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>154</x>
-     <y>554</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>44</x>
+     <x>329</x>
      <y>579</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>cmdEditLivestock</sender>
+   <sender>cmdDelTransfer</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>editHouseholdLivestockIncome()</slot>
+   <slot>delHouseholdTransferIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>306</x>
+     <y>431</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>509</x>
+     <y>579</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddGifts</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdGiftsIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>116</x>
+     <y>433</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>92</x>
+     <y>578</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditGifts</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdGiftsIncome()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>204</x>
-     <y>539</y>
+     <y>435</y>
     </hint>
     <hint type="destinationlabel">
-     <x>14</x>
-     <y>594</y>
+     <x>111</x>
+     <y>582</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>cmdDelLivestock</sender>
+   <sender>cmdDelGifts</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>delHouseholdLivestockIncome()</slot>
+   <slot>delHouseholdGiftsIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>313</x>
-     <y>549</y>
+     <x>308</x>
+     <y>436</y>
     </hint>
     <hint type="destinationlabel">
-     <x>63</x>
-     <y>601</y>
+     <x>3</x>
+     <y>566</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddWildfoods</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdWildfoodsIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>118</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>510</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditWildfoods</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdWildfoodsIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>209</x>
+     <y>434</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>475</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelWildfoods</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>delHouseholdWildfoodsIncome()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>292</x>
+     <y>440</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>0</x>
+     <y>459</y>
     </hint>
    </hints>
   </connection>
@@ -1074,12 +1415,12 @@
    <slot>addHouseholdEmploymentIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>107</x>
-     <y>549</y>
+     <x>130</x>
+     <y>431</y>
     </hint>
     <hint type="destinationlabel">
-     <x>7</x>
-     <y>529</y>
+     <x>3</x>
+     <y>433</y>
     </hint>
    </hints>
   </connection>
@@ -1090,12 +1431,12 @@
    <slot>editHouseholdEmploymentIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>209</x>
-     <y>554</y>
+     <x>204</x>
+     <y>439</y>
     </hint>
     <hint type="destinationlabel">
-     <x>6</x>
-     <y>555</y>
+     <x>3</x>
+     <y>412</y>
     </hint>
    </hints>
   </connection>
@@ -1107,203 +1448,107 @@
    <hints>
     <hint type="sourcelabel">
      <x>304</x>
-     <y>542</y>
+     <y>435</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1</x>
-     <y>495</y>
+     <x>2</x>
+     <y>395</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>cmdAddWildfoods</sender>
+   <sender>cmdAddLivestock</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>addHouseholdWildfoodsIncome()</slot>
+   <slot>addHouseholdLivestockIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>105</x>
-     <y>544</y>
+     <x>149</x>
+     <y>436</y>
     </hint>
     <hint type="destinationlabel">
      <x>6</x>
-     <y>475</y>
+     <y>378</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>cmdEditWildfoods</sender>
+   <sender>cmdEditLivestock</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>editHouseholdWildfoodsIncome()</slot>
+   <slot>editHouseholdLivestockIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>206</x>
-     <y>545</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>6</x>
-     <y>438</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdDelWildfoods</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>editHouseholdWildfoodsIncome()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>325</x>
-     <y>540</y>
+     <x>217</x>
+     <y>434</y>
     </hint>
     <hint type="destinationlabel">
      <x>4</x>
-     <y>414</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdAddGifts</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>addHouseholdGiftsIncome()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>109</x>
-     <y>546</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>7</x>
-     <y>464</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdEditGifts</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>editHouseholdGiftsIncome()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>213</x>
-     <y>531</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>5</x>
-     <y>407</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdDelGifts</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>delHouseholdGiftsIncome()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>310</x>
-     <y>540</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>4</x>
-     <y>372</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdAddTransfer</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>addHouseholdTransferIncome()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>102</x>
-     <y>548</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>8</x>
      <y>355</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>cmdEditTransfer</sender>
+   <sender>cmdDelLivestock</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>editHouseholdTransferIncome()</slot>
+   <slot>delHouseholdLivestockIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>220</x>
-     <y>534</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>3</x>
-     <y>310</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdDelTransfer</sender>
-   <signal>clicked()</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>delHouseholdTransferIncome()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>302</x>
-     <y>539</y>
+     <x>295</x>
+     <y>433</y>
     </hint>
     <hint type="destinationlabel">
      <x>6</x>
-     <y>256</y>
+     <y>341</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>cmdAddExpenditure</sender>
+   <sender>cmdAddCrop</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>addHouseholdExpenditure()</slot>
+   <slot>addHouseholdCropIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>77</x>
-     <y>557</y>
+     <x>106</x>
+     <y>438</y>
     </hint>
     <hint type="destinationlabel">
-     <x>9</x>
-     <y>295</y>
+     <x>1</x>
+     <y>326</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>cmdEditExpenditure</sender>
+   <sender>cmdEditCrop</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>editHouseholdExpenditure()</slot>
+   <slot>editHouseholdCropIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>175</x>
-     <y>548</y>
+     <x>190</x>
+     <y>437</y>
     </hint>
     <hint type="destinationlabel">
-     <x>8</x>
-     <y>248</y>
+     <x>1</x>
+     <y>306</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>cmdDelExpenditure</sender>
+   <sender>cmdDelCrop</sender>
    <signal>clicked()</signal>
    <receiver>HouseholdData</receiver>
-   <slot>delHouseholdExpenses()</slot>
+   <slot>delHouseholdCropIncome()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>275</x>
-     <y>548</y>
+     <x>273</x>
+     <y>436</y>
     </hint>
     <hint type="destinationlabel">
-     <x>8</x>
-     <y>216</y>
+     <x>-2</x>
+     <y>289</y>
     </hint>
    </hints>
   </connection>
@@ -1315,11 +1560,187 @@
    <hints>
     <hint type="sourcelabel">
      <x>82</x>
-     <y>547</y>
+     <y>457</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>277</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddExpenditure</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdExpenditure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>74</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>260</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditExpenditure</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdExpenditure()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>164</x>
+     <y>459</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>2</x>
+     <y>229</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelExpenditure</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>delHouseholdExpenses()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>252</x>
+     <y>451</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>208</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddAsset</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdAsset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>92</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>203</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditAsset</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdAsset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>174</x>
+     <y>458</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>4</x>
+     <y>171</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelAsset</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>delHouseholdAssets()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>241</x>
+     <y>455</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdAddMember</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>addHouseholdMember()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>98</x>
+     <y>445</y>
     </hint>
     <hint type="destinationlabel">
      <x>5</x>
-     <y>146</y>
+     <y>165</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditMember</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editHouseholdMember()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>173</x>
+     <y>448</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>5</x>
+     <y>132</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdDelMember</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>delHouseholdMembers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>256</x>
+     <y>445</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>6</x>
+     <y>102</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdEditPersonalCharacteristic</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>editPersonalCharacteristic()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>477</x>
+     <y>450</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>763</x>
+     <y>428</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>HouseholdData</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>696</x>
+     <y>541</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>763</x>
+     <y>538</y>
     </hint>
    </hints>
   </connection>
@@ -1330,28 +1751,12 @@
    <slot>showMemberPersonalCharacteristics()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>231</x>
-     <y>214</y>
+     <x>213</x>
+     <y>196</y>
     </hint>
     <hint type="destinationlabel">
-     <x>440</x>
-     <y>21</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cboHouseholdNumber</sender>
-   <signal>currentIndexChanged(int)</signal>
-   <receiver>HouseholdData</receiver>
-   <slot>displayHouseholdData()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>314</x>
-     <y>21</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>398</x>
-     <y>31</y>
+     <x>763</x>
+     <y>231</y>
     </hint>
    </hints>
   </connection>
