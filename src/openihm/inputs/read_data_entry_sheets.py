@@ -74,7 +74,6 @@ class ReadDataEntrySheets:
                     self.readTransferData(householdsheet,row_index,cellvalue)
         QtGui.QMessageBox.information(None, 'Importing Data', "Data Importation Completed")
         #QtGui.QMessageBox.information(None, 'Importing Data Error', "Data Importation Failed")
-                         
 
     def readProjectHouseholdsData(self,book):
         '''Import Project Households'''
@@ -299,7 +298,7 @@ class ReadDataEntrySheets:
                 digitvalue = True
                 skiprow = False
                 cellvalue = str(householdsheet.cell(current_row_index,col_index).value)
-                if cellvalue == 'Crops':
+                if cellvalue == 'Crops-C':
                     exitmain = True
                     break
                 if  col_index == 0 and cellvalue=='':

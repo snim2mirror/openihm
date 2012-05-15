@@ -106,6 +106,8 @@ class DataEntrySheets:
         sheet = book.get_sheet(1)
         col = 0
         #set section Headings
+        sheet.write(row, col, "SocialTransfer", style1)
+        row = row + 1
         transferheadings = ["TransferSource","CashPerYear","FoodType","Unit","UnitsConsumed","UnitsSold","PricePerUnit"]
         for itemheader in transferheadings:
             sheet.write(row, col, itemheader, style2)
@@ -126,6 +128,8 @@ class DataEntrySheets:
         sheet = book.get_sheet(1)
         col = 0
         #set section Headings
+        sheet.write(row, col, "TransferFromOrganisations", style1)
+        row = row + 1
         transferheadings = ["TransferSource","CashPerYear","FoodType","Unit","UnitsConsumed","UnitsSold","PricePerUnit"]
         for itemheader in transferheadings:
             sheet.write(row, col, itemheader, style2)
