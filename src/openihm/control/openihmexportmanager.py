@@ -29,7 +29,11 @@ class OpenIhmExportManager:
          ihmFile = open(filename, 'w')
          ihmFile.write(projectline)
          ihmFile.close()
+         
+         # export project data
          self.exportProjectCharacteristics(project, filename)
+         self.exportProjectDiet(project, filename)
+         self.exportProjectStandardOfLiving(project, filename)
          self.exportHouseholds(project, filename)
          
      def exportProjectCharacteristics(self, project, filename):
@@ -39,6 +43,42 @@ class OpenIhmExportManager:
              charline = "projectcharacteristic<d>%s<d>%s<d>%s<d><endl>\n" \
                  % (char.name, char.chartype, char.datatype)
              ihmFile.write(charline)
+         ihmFile.close()
+         
+     def exportProjectIncomeSources(self, project, filename):
+         chars = project.getProjectCharacteristics()
+         ihmFile = open(filename, 'a')
+         for char in chars:
+             charline = "projectcharacteristic<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (char.name, char.chartype, char.datatype)
+             ihmFile.write(charline)
+         ihmFile.close()
+         
+     def exportProjectDiet(self, project, filename):
+         diets = project.getProjectDietItems()
+         ihmFile = open(filename, 'a')
+         for diet in diets:
+             dietline = "projectdiet<d>%s<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (diet.fooditem, diet.unitofmeasure, diet.percentage, diet.priceperunit)
+             ihmFile.write(dietline)
+         ihmFile.close()
+         
+     def exportProjectAssets(self, project, filename):
+         assets = project.getProjectCharacteristics()
+         ihmFile = open(filename, 'a')
+         for asset in assets:
+             assetline = "projectasset<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (char.name, char.chartype, char.datatype)
+             ihmFile.write(assetline)
+         ihmFile.close()
+         
+     def exportProjectStandardOfLiving(self, project, filename):
+         stdLvs = project.getStandardOfLivingEntries()
+         ihmFile = open(filename, 'a')
+         for stdLv in stdLvs:
+             stdLvline = "projectstandardofliving<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d>%s<d><endl>\n" \
+                 % (stdLv.summary, stdLv.scope, stdLv.gender, stdLv.agebottom, stdLv.agetop, stdLv.item, stdLv.costperyear)
+             ihmFile.write(stdLvline)
          ihmFile.close()
          
      def exportHouseholds(self, project,  filename):
