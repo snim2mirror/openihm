@@ -460,14 +460,14 @@
       </rect>
      </property>
      <property name="toolTip">
-      <string>entered value can only be either 'External' or 'Internal'</string>
+      <string/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Unofficial Transfers</string>
+       <string>Informal Transfers</string>
       </attribute>
       <widget class="QLabel" name="label_32">
        <property name="geometry">
@@ -544,29 +544,6 @@
         </rect>
        </property>
       </widget>
-      <widget class="QLineEdit" name="txtTransferUnitofMeasure">
-       <property name="geometry">
-        <rect>
-         <x>350</x>
-         <y>90</y>
-         <width>221</width>
-         <height>28</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label">
-       <property name="geometry">
-        <rect>
-         <x>260</x>
-         <y>100</y>
-         <width>81</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Unit of Measure</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_2">
        <property name="geometry">
         <rect>
@@ -583,7 +560,7 @@
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
-       <string>Official Transfers</string>
+       <string>Formal Transfers</string>
       </attribute>
       <widget class="QLabel" name="label_35">
        <property name="geometry">
@@ -661,29 +638,6 @@
        </property>
        <property name="toolTip">
         <string>Transfer Source should be 'Internal' or 'External'</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="txtOTransferUnitofMeasure">
-       <property name="geometry">
-        <rect>
-         <x>360</x>
-         <y>90</y>
-         <width>221</width>
-         <height>28</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_5">
-       <property name="geometry">
-        <rect>
-         <x>280</x>
-         <y>100</y>
-         <width>81</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Unit of Measure</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_10">
