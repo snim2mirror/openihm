@@ -103,7 +103,7 @@ class DataEntrySheets:
 
     def populateSocialTranfers(self,book,style1,style2,row):
         recordset = self.getProjectSocialTransfers()
-        sheet = book.get_sheet(1)
+        sheet = book.get_sheet(3)
         col = 0
         #set section Headings
         sheet.write(row, col, "SocialTransfer", style1)
@@ -125,7 +125,7 @@ class DataEntrySheets:
 
     def populateOfficialTranfers(self,book,style1,style2,row):
         recordset = self.getProjectOfficialTransfers()
-        sheet = book.get_sheet(1)
+        sheet = book.get_sheet(3)
         col = 0
         #set section Headings
         sheet.write(row, col, "TransferFromOrganisations", style1)
@@ -184,25 +184,25 @@ class DataEntrySheets:
     
     def addProjectAssets(self,book,style1,style2):
         ''' Populate Sheet 3 with Assets for a selected project'''
-        sheet4 = book.add_sheet("New Assets")
+        sheet3 = book.add_sheet("New Assets")
         headings = ["Category","Type","Unit","UnitCost","NumberOfUnits"]
         col = 0
         row = 0
-        sheet4.write(row, col, "Assets", style1)
+        sheet3.write(row, col, "Assets", style1)
         row = row + 1
         for itemheader in headings:
-            sheet4.write(row, col, itemheader, style2)
+            sheet3.write(row, col, itemheader, style2)
             col = col + 1
         row = row +1
 
         #set column width for sheet4 - Asset Columns
         for i in range(0,5):
-            sheet4.col(i).width = 6000
+            sheet3.col(i).width = 6000
 
     def populateProjectAssetssection(self,book,style1,style2,row):
         headings = ["Category","Type","Unit","UnitCost","TotalUnits"]
         col = 0
-        sheet = book.get_sheet(1)
+        sheet = book.get_sheet(3)
         for itemheader in headings:
             sheet.write(row, col, itemheader, style2)
             col = col + 1
@@ -226,7 +226,7 @@ class DataEntrySheets:
 
         headings = ["Name","Unit","UnitsProduced","UnitsSold","UnitPrice","OtherUses","UnitsConsumed"]
         col = 0
-        sheet = book.get_sheet(1)
+        sheet = book.get_sheet(3)
         #if sectionheading=='Livestock':
         sectionheading = sectionheading + '-C'
         sheet.write(headerrow, col, sectionheading,style1)
@@ -250,7 +250,7 @@ class DataEntrySheets:
             
             #get incomesource details and write in spreadsheet
             recordset = self.getCropsFoodsIncomeSourceDetails(incometype.lower())
-            sheet = book.get_sheet(1)
+            sheet = book.get_sheet(3)
 
             for rec in recordset:
                 for col in range (0,2):
@@ -265,7 +265,7 @@ class DataEntrySheets:
 
         headings = ["Type","FoodPaid","Unit","UnitsPaid","Kcals","CashIncome"]
         col = 0
-        sheet = book.get_sheet(1)
+        sheet = book.get_sheet(3)
         sheet.write(headerrow, 0, "Employment", style1)
         headerrow = headerrow +1
         for itemheader in headings:
@@ -284,7 +284,7 @@ class DataEntrySheets:
     def populateEmployemntDetails(self,row,book,style1,style2):
         row = self.writeEmploymentSectionHeaders(row,book,style1,style2)
         recordset = self.getProjectEmploymentTypes()
-        sheet = book.get_sheet(1)
+        sheet = book.get_sheet(3)
 
         col = 0
         for rec in recordset:
@@ -298,7 +298,7 @@ class DataEntrySheets:
         ''' Populate Sheet 3 with Headers for ebtry of new income sources users may find during field visits'''
         
         #Income Sources
-        sheet3 = book.add_sheet("New Income Sources")
+        sheet2 = book.add_sheet("New Income Sources")
         incometypes = ['Crops','Livestock','Wildfoods']
         col = 0
         headerrow = 0
@@ -306,20 +306,20 @@ class DataEntrySheets:
             #set section Headings
             headings = ["Name","Unit","UnitsProduced","UnitsSold","UnitPrice","OtherUses","UnitsConsumed"]
             col = 0
-            sheet3.write(headerrow, 0,incometype , style1)
+            sheet2.write(headerrow, 0,incometype , style1)
             headerrow = headerrow +1
             for itemheader in headings:
-                sheet3.write(headerrow, col, itemheader, style2)
+                sheet2.write(headerrow, col, itemheader, style2)
                 col = col + 1
             headerrow = headerrow +11
 
         #Write Employment Headings
         employmentheadings = ["Type","FoodPaid","Unit","UnitsPaid","Kcals","CashIncome"]
         col = 0
-        sheet3.write(headerrow, 0, "Employment", style1)
+        sheet2.write(headerrow, 0, "Employment", style1)
         headerrow = headerrow +1
         for itemheader in employmentheadings:
-            sheet3.write(headerrow, col, itemheader, style2)
+            sheet2.write(headerrow, col, itemheader, style2)
             col = col + 1
         headerrow = headerrow +11
 
@@ -330,17 +330,17 @@ class DataEntrySheets:
             #set section Headings
             transferheadings = ["TransferSource","CashPerYear","FoodType","Unit","UnitsConsumed","UnitsSold","PricePerUnit"]
             col = 0
-            sheet3.write(headerrow, 0,incometype , style1)
+            sheet2.write(headerrow, 0,incometype , style1)
             headerrow = headerrow +1
             for itemheader in transferheadings:
-                sheet3.write(headerrow, col, itemheader, style2)
+                sheet2.write(headerrow, col, itemheader, style2)
                 col = col + 1
             headerrow = headerrow +11
 
-        sheet3.write(headerrow, 0, "")
+        sheet2.write(headerrow, 0, "")
         #set column width for sheet1
         for i in range(0,7):
-            sheet3.col(i).width = 6000
+            sheet2.col(i).width = 6000
     
     def writeDataSheets(self):
         book = Workbook(encoding="utf-8")
@@ -363,14 +363,17 @@ class DataEntrySheets:
         for i in range(0,3):
             sheet1.col(i).width = 6000
 
+        self.populateIncomeSourcesSheet(book,style1,style2)
+        self.addProjectAssets(book,style1,style2)
+
         #Basic Details for Household Members
-        sheet2 = book.add_sheet("Template")
-        sheet2.write(1, 0, "HouseholdMembers", style1)
-        sheet2.write(2, 0, "Sex", style2)
-        sheet2.write(2, 1, "Age", style2)
-        sheet2.write(2, 2, "YearofBirth", style2)
-        sheet2.write(2, 3, "HouseholdHead", style2)
-        sheet2.write(2, 4, "PeriodAway", style2)
+        sheet4 = book.add_sheet("HouseholdID")
+        sheet4.write(1, 0, "HouseholdMembers", style1)
+        sheet4.write(2, 0, "Sex", style2)
+        sheet4.write(2, 1, "Age", style2)
+        sheet4.write(2, 2, "YearofBirth", style2)
+        sheet4.write(2, 3, "HouseholdHead", style2)
+        sheet4.write(2, 4, "PeriodAway", style2)
 
         #get personal and household characteristics, configured for current project
         pchars = self.getPersonalCharacteristics()
@@ -378,9 +381,9 @@ class DataEntrySheets:
 
         #section for extended personal characteristics
         col = 0
-        sheet2.write(8, 0, "PersonalCharacteristics", style1)
-        sheet2.write(9, col, 'personid', style2)
-        sheet2.write(10, col, 'String', style3)
+        sheet4.write(8, 0, "PersonalCharacteristics", style1)
+        sheet4.write(9, col, 'personid', style2)
+        sheet4.write(10, col, 'String', style3)
         col = col + 1
 
         for char in pchars:
@@ -396,12 +399,12 @@ class DataEntrySheets:
                     vartype ='String'
                 elif chartype == 4:
                     vartype ='Double'
-                sheet2.write(9, col, value, style2)
-                sheet2.write(10, col, vartype, style3)
+                sheet4.write(9, col, value, style2)
+                sheet4.write(10, col, vartype, style3)
                 col = col + 1
                 
         #section for household characteristics
-        sheet2.write(17, 0, "HouseholdCharacteristics", style1)
+        sheet4.write(17, 0, "HouseholdCharacteristics", style1)
         col = 0
         for char in hchars:
             value = char[0]
@@ -417,27 +420,27 @@ class DataEntrySheets:
                 elif chartype == 4:
                     vartype ='Double'
 
-                sheet2.write(18, col, value, style2)
-                sheet2.write(19, col, vartype, style3)
+                sheet4.write(18, col, value, style2)
+                sheet4.write(19, col, vartype, style3)
                 col = col + 1
 
         headerrow = 25
         itemrow = 26
 
         #Assets
-        sheet2.write(headerrow, 0, "Assets", style1)
+        sheet4.write(headerrow, 0, "Assets", style1)
         headerrow = headerrow + 1
         headerrow = self.populateProjectAssetssection(book,style1,style2,headerrow)
         
         #Expenditure
         headerrow = headerrow + 5
-        sheet2.write(headerrow, 0, "Expenditure", style1)
+        sheet4.write(headerrow, 0, "Expenditure", style1)
         headerrow = headerrow + 1
-        sheet2.write(headerrow, 0, "Type", style2)
-        sheet2.write(headerrow, 1, "Unit", style2)
-        sheet2.write(headerrow, 2, "KCalPerUnit", style2)
-        sheet2.write(headerrow, 3, "UnitCost", style2)
-        sheet2.write(headerrow, 4, "Units", style2)
+        sheet4.write(headerrow, 0, "Type", style2)
+        sheet4.write(headerrow, 1, "Unit", style2)
+        sheet4.write(headerrow, 2, "KCalPerUnit", style2)
+        sheet4.write(headerrow, 3, "UnitCost", style2)
+        sheet4.write(headerrow, 4, "Units", style2)
 
         #Crop, Livestock, and Wildfood Income
         headerrow = headerrow + 11
@@ -454,10 +457,8 @@ class DataEntrySheets:
 
         #set column width for sheet2
         for i in range(0,7):
-            sheet2.col(i).width = 6000
+            sheet4.col(i).width = 6000
             
-        self.populateIncomeSourcesSheet(book,style1,style2)
-        self.addProjectAssets(book,style1,style2)
 
         folder = "inputs/"
         filename = folder + "dataEntrySheet-ProjectID-" + str(self.pid) + ".xls"
