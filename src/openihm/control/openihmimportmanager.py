@@ -109,6 +109,12 @@ class OpenIhmImportManager:
              fields = line.split('<d>')
              if fields[0] == "projectcharacteristic":
                  self.importProjectCharacteristic(project, fields)
+                 
+             if fields[0] == "projectdiet":
+                 self.importProjectDiet(project, fields)
+                 
+             if fields[0] == "projectstandardofliving":
+                 self.importProjectStandardOfLiving(project, fields)
              
              if fields[0] == "household":
                  self.importProjectHousehold(project, fields)
@@ -145,6 +151,12 @@ class OpenIhmImportManager:
              self.addGlobalCharacteristic(fields[1], fields[2], fields[3]) 
              
          project.addProjectCharacteristic(fields[1], fields[2], fields[3]) 
+         
+     def importProjectDiet(self, project, fields):
+         project.addProjectDietItem(fields[1], fields[2], fields[3], fields[4]) 
+         
+     def importProjectStandardOfLiving(self, project, fields):
+         project.addStandardOfLivingEntry(fields[1], fields[2], fields[3], fields[4], fields[5], fields[6], fields[7]) 
       
      def importProjectHousehold(self, project, fields):
          project.addHousehold(fields[1], fields[2], fields[3])
