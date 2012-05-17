@@ -54,8 +54,8 @@ class DatabaseInitialiser:
          self.host = host
          self.rootpwd = rootpwd
          
-         #date of latest DB update: must be reset to latest date when DB changes are being pushed
-         self.latestupdatestring = "latest update on 2012-04-06" 
+         #date of latest DB update: must be reset to latest date when DB changes are being pushed - format yyyy-mm-dd
+         self.latestupdatestring = "latest update on 2012-05-16" 
          
      def initialiseDB(self):
          config = DbConfig(self.host, 'openihmdb', 'openihm', 'ihm2010')

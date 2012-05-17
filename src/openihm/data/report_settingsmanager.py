@@ -170,3 +170,23 @@ class ReportsSettingsManager:
             rows = self.database.execSelectQuery( query )
             self.database.close()
         return rows
+
+    def getProjectDiet(self,projectid):
+        
+        rows =[]
+        if projectid != 0:
+            query = '''SELECT fooditem,percentage,priceperunit,modelprice FROM diet WHERE pid=%s ''' % (projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
+    def getProjectStandardofLiving(self,projectid):
+        
+        rows =[]
+        if projectid != 0:
+            query = '''SELECT summary,costperyear,modelprice FROM standardofliving WHERE pid=%s ''' % (projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows

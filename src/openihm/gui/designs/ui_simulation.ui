@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>Simulation</class>
+ <widget class="QDialog" name="Simulation">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>958</width>
+    <width>1011</width>
     <height>620</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>953</width>
+    <width>1011</width>
     <height>620</height>
    </size>
   </property>
@@ -25,7 +25,7 @@
      <x>10</x>
      <y>40</y>
      <width>441</width>
-     <height>571</height>
+     <height>531</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -40,12 +40,12 @@
    <property name="midLineWidth">
     <number>0</number>
    </property>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btnClearIncomeValues">
     <property name="geometry">
      <rect>
-      <x>321</x>
+      <x>302</x>
       <y>64</y>
-      <width>112</width>
+      <width>131</width>
       <height>23</height>
      </rect>
     </property>
@@ -53,7 +53,7 @@
      <string>Reset Refence Values</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="btnResetIncome">
     <property name="geometry">
      <rect>
       <x>301</x>
@@ -70,23 +70,10 @@
     <property name="geometry">
      <rect>
       <x>301</x>
-      <y>270</y>
-      <width>132</width>
+      <y>250</y>
+      <width>81</width>
       <height>20</height>
      </rect>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton">
-    <property name="geometry">
-     <rect>
-      <x>321</x>
-      <y>41</y>
-      <width>78</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>All Subjects</string>
     </property>
    </widget>
    <widget class="QSplitter" name="splitter">
@@ -106,7 +93,7 @@
       <string>Category</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="comboBox">
+    <widget class="QComboBox" name="cmbIncomeSources">
      <item>
       <property name="text">
        <string>Crop Production</string>
@@ -139,14 +126,27 @@
      </item>
     </widget>
    </widget>
-   <widget class="QTableView" name="tableView">
+   <widget class="QTableView" name="tblIncome">
     <property name="geometry">
      <rect>
       <x>12</x>
       <y>38</y>
       <width>281</width>
-      <height>521</height>
+      <height>481</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnSaveIncome">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>300</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save Changes</string>
     </property>
    </widget>
   </widget>
@@ -155,7 +155,7 @@
     <rect>
      <x>471</x>
      <y>40</y>
-     <width>339</width>
+     <width>401</width>
      <height>282</height>
     </rect>
    </property>
@@ -165,26 +165,24 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QTableView" name="tableView_2">
+   <widget class="QTableView" name="tblStandardofLiving">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>321</width>
+      <width>381</width>
       <height>261</height>
      </rect>
     </property>
    </widget>
-   <zorder>tableView_2</zorder>
-   <zorder></zorder>
   </widget>
   <widget class="QFrame" name="frame_4">
    <property name="geometry">
     <rect>
      <x>471</x>
      <y>328</y>
-     <width>339</width>
-     <height>281</height>
+     <width>401</width>
+     <height>241</height>
     </rect>
    </property>
    <property name="frameShape">
@@ -193,21 +191,21 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTableView" name="tblDiets">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>11</y>
-      <width>321</width>
-      <height>251</height>
+      <y>10</y>
+      <width>381</width>
+      <height>221</height>
      </rect>
     </property>
    </widget>
   </widget>
-  <widget class="QPushButton" name="pushButton_3">
+  <widget class="QPushButton" name="btnClearExpenditureValues">
    <property name="geometry">
     <rect>
-     <x>821</x>
+     <x>880</x>
      <y>81</y>
      <width>122</width>
      <height>23</height>
@@ -217,10 +215,10 @@
     <string>Reset Reference Values</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
+  <widget class="QPushButton" name="btnClearDietValues">
    <property name="geometry">
     <rect>
-     <x>821</x>
+     <x>880</x>
      <y>397</y>
      <width>122</width>
      <height>23</height>
@@ -247,13 +245,76 @@
      <string>Project</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="comboBox_2">
+   <widget class="QComboBox" name="cmbProjects">
     <property name="sizeAdjustPolicy">
      <enum>QComboBox::AdjustToContentsOnFirstShow</enum>
     </property>
    </widget>
   </widget>
+  <widget class="QPushButton" name="btnSaveDataTable">
+   <property name="geometry">
+    <rect>
+     <x>750</x>
+     <y>580</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Show Report</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnClose">
+   <property name="geometry">
+    <rect>
+     <x>850</x>
+     <y>580</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmbProjects</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>Simulation</receiver>
+   <slot>getProjectDiet()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>304</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>505</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbProjects</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>Simulation</receiver>
+   <slot>getProjectStandardOfLiving()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>304</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>505</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>getProjectDiet()</slot>
+  <slot>getProjectStandardOfLiving()</slot>
+ </slots>
 </ui>

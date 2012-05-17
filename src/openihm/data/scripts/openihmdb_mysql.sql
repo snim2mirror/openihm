@@ -167,6 +167,8 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`cropincome` (
   `otheruses` DOUBLE NULL DEFAULT '0' ,
   `unitsconsumed` DOUBLE NULL DEFAULT '0' ,
   `pid` INT(11) NOT NULL ,
+  `preferenceprice` DOUBLE NULL DEFAULT '100' ,
+  `preferenceproduction` DOUBLE NULL DEFAULT '100' ,
   PRIMARY KEY (`id`, `hhid`, `pid`) ,
   INDEX `fk_cropincome_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_cropincome_households1`
@@ -202,6 +204,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`diet` (
   `unitofmeasure` VARCHAR(45) NOT NULL ,
   `percentage` DOUBLE NOT NULL ,
   `priceperunit` DOUBLE NOT NULL ,
+  `modelprice` DOUBLE NOT NULL DEFAULT 0.0 ,
   PRIMARY KEY (`id`, `pid`) ,
   INDEX `fk_diet_projects1` (`pid` ASC) ,
   CONSTRAINT `fk_diet_projects1`
@@ -225,6 +228,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`employmentincome` (
   `incomekcal` DOUBLE NULL DEFAULT NULL ,
   `cashincome` DOUBLE NULL DEFAULT NULL ,
   `pid` INT(11) NOT NULL ,
+  `preferenceincome` DOUBLE NULL DEFAULT '100' ,
   PRIMARY KEY (`id`, `hhid`, `pid`) ,
   INDEX `fk_employmentincome_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_employmentincome_households1`
@@ -321,6 +325,8 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`livestockincome` (
   `otheruses` DOUBLE NULL DEFAULT '0' ,
   `unitsconsumed` DOUBLE NULL DEFAULT '0' ,
   `pid` INT(11) NOT NULL ,
+  `preferenceprice` DOUBLE NULL DEFAULT '100' ,
+  `preferenceproduction` DOUBLE NULL DEFAULT '100' ,
   PRIMARY KEY (`id`, `hhid`, `pid`) ,
   INDEX `fk_livestockincome_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_livestockincome_households1`
@@ -511,6 +517,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`standardofliving` (
   `agetop` INT NULL DEFAULT 0 ,
   `item` VARCHAR(255) NOT NULL ,
   `costperyear` DOUBLE NOT NULL ,
+  `modelprice` DOUBLE NULL DEFAULT 0.0,
   PRIMARY KEY (`pid`, `summary`) ,
   INDEX `fk_standardofliving_projects1` (`pid` ASC) ,
   CONSTRAINT `fk_standardofliving_projects1`
@@ -538,6 +545,8 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`transfers` (
   `unitsconsumed` DOUBLE NULL DEFAULT 0.00 ,
   `unitssold` DOUBLE NULL DEFAULT 0.00 ,
   `priceperunit` DOUBLE NULL DEFAULT 0.00 ,
+  `preferenceprice` DOUBLE NULL DEFAULT '100' ,
+  `preferenceproduction` DOUBLE NULL DEFAULT '100' ,
   PRIMARY KEY (`id`, `hhid`, `pid`) ,
   INDEX `fk_transfers_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_transfers_households1`
@@ -575,6 +584,8 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`wildfoods` (
   `otheruses` DOUBLE NULL DEFAULT '0' ,
   `unitsconsumed` DOUBLE NULL DEFAULT '0' ,
   `pid` INT(11) NOT NULL ,
+  `preferenceprice` DOUBLE NULL DEFAULT '100' ,
+  `preferenceproduction` DOUBLE NULL DEFAULT '100' ,
   PRIMARY KEY (`id`, `hhid`, `pid`) ,
   INDEX `fk_wildfoods_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_wildfoods_households1`
