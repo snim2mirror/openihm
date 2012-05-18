@@ -23,13 +23,15 @@ from PyQt4.QtGui import *
 from PyQt4 import uic
 from data.config import Config
 from control.controller import Controller
-from mixins import MDIDialogMixin
+from mixins import MDIDialogMixin, TableViewMixin
 from data.report_settingsmanager import ReportsSettingsManager
+from frm_simulation_standardofliving_edit import FrmStandardOfLivingModelPrice
+from frm_simulation_diet_edit import FrmDietModelPrice
 
 
 Ui_HouseholdData, base_class = uic.loadUiType("gui/designs/ui_simulation.ui")
 
-class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin):
+class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewMixin):
     
     ''' Creates the run simulations form '''	
     def __init__(self, parent, hhid=0):
@@ -38,6 +40,10 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin):
 	QDialog.__init__(self)
 	self.setupUi(self)
 	self.parent = parent
+	self.stlitem = ""
+	self.stlmodelprice = 0
+	self.stlprice = 0
+	
 	self.connector = ReportsSettingsManager()
 	self.getPorjects()
 	self.insertDietHeader()
@@ -124,7 +130,7 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin):
 	    qtPricePerUnit = QStandardItem( "%i" % row[2] )
 	    qtPricePerUnit.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
 
-	    qtModelPrice = QStandardItem( "%i" % row[2] )
+	    qtModelPrice = QStandardItem( "%i" % row[3] )
 	    qtModelPrice.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
 		    
 	    model.setItem( num, 0, qtFood )
@@ -154,15 +160,14 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin):
 				
 	# add  data rows
 	num = 0
-		    
 	for row in recordset:
 	    qtItem = QStandardItem( "%s" % row[0])
 	    qtItem.setTextAlignment( Qt.AlignCenter )
 		    
-	    qtPrice = QStandardItem( "%i" % row[1] )
+	    qtPrice = QStandardItem( "%d" % row[1] )
 	    qtPrice.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
 		    
-	    qtModelPrice = QStandardItem( "%i" % row[2] )
+	    qtModelPrice = QStandardItem( "%d" % row[2] )
 	    qtModelPrice.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
 
 	    model.setItem( num, 0, qtItem )
@@ -176,3 +181,43 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin):
 	self.tblStandardofLiving.horizontalHeader().setResizeMode(1, QHeaderView.ResizeToContents)
 	self.tblStandardofLiving.horizontalHeader().setResizeMode(2, QHeaderView.ResizeToContents)
 	self.tblStandardofLiving.show()
+	
+    def editDietPrice(self):
+	if self.countRowsSelected(self.tblDiets) != 0:
+	    # get the age of the selected record
+	    selectedRow = self.getCurrentRow(self.tblDiets)
+	    foodname = self.tblDiets.model().item(selectedRow,0).text()
+	    percentageindiet = self.tblDiets.model().item(selectedRow,1).text()
+	    unitprice = self.tblDiets.model().item(selectedRow,2).text()
+	    modelprice = self.tblDiets.model().item(selectedRow,3).text()
+	    projectid = self.getProjectID()
+
+	    # show edit food energy requirement form
+	    form = FrmDietModelPrice(self.parent,foodname,percentageindiet,unitprice,modelprice,projectid)
+	    form.setWindowIcon(QIcon('resources/images/openihm.png'))
+	    form.exec_()
+	    self.getProjectDiet()
+			
+	else:
+            
+	    QMessageBox.information(self,"Edit Diet Model Value","Please select the row containing the model price to be edited.")
+
+    def editStandardOfLiving(self):
+	# get the age of the selected record
+	if self.countRowsSelected(self.tblStandardofLiving) != 0:
+            selectedRow = self.getCurrentRow(self.tblStandardofLiving)
+            projectid = self.getProjectID()
+            stlitem = self.tblStandardofLiving.model().item(selectedRow,0).text()
+            stlprice = self.tblStandardofLiving.model().item(selectedRow,1).text()
+            stlmodelprice = self.tblStandardofLiving.model().item(selectedRow,2).text()
+
+            # show edit food energy requirement form
+            form = FrmStandardOfLivingModelPrice(self.parent,stlitem, stlprice,stlmodelprice,projectid)
+            form.setWindowIcon(QIcon('resources/images/openihm.png'))
+            form.exec_()
+            self.getProjectStandardOfLiving()
+			
+	else:
+            
+	    QMessageBox.information(self,"Edit Standard of Living Model Values","Please select the row containing the model price to be edited.")
+

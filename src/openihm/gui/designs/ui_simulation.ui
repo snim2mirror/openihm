@@ -43,7 +43,7 @@
    <widget class="QPushButton" name="btnClearIncomeValues">
     <property name="geometry">
      <rect>
-      <x>302</x>
+      <x>300</x>
       <y>64</y>
       <width>131</width>
       <height>23</height>
@@ -56,8 +56,8 @@
    <widget class="QPushButton" name="btnResetIncome">
     <property name="geometry">
      <rect>
-      <x>301</x>
-      <y>206</y>
+      <x>300</x>
+      <y>120</y>
       <width>87</width>
       <height>23</height>
      </rect>
@@ -69,8 +69,8 @@
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>301</x>
-      <y>250</y>
+      <x>300</x>
+      <y>164</y>
       <width>81</width>
       <height>20</height>
      </rect>
@@ -135,18 +135,24 @@
       <height>481</height>
      </rect>
     </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::SingleSelection</enum>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectItems</enum>
+    </property>
    </widget>
-   <widget class="QPushButton" name="btnSaveIncome">
+   <widget class="QPushButton" name="btnEditIncome">
     <property name="geometry">
      <rect>
       <x>300</x>
       <y>300</y>
       <width>101</width>
-      <height>21</height>
+      <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Save Changes</string>
+     <string>Edit Model Values</string>
     </property>
    </widget>
   </widget>
@@ -174,6 +180,12 @@
       <height>261</height>
      </rect>
     </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::SingleSelection</enum>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectItems</enum>
+    </property>
    </widget>
   </widget>
   <widget class="QFrame" name="frame_4">
@@ -199,6 +211,12 @@
       <width>381</width>
       <height>221</height>
      </rect>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::SingleSelection</enum>
+    </property>
+    <property name="selectionBehavior">
+     <enum>QAbstractItemView::SelectItems</enum>
     </property>
    </widget>
   </widget>
@@ -277,6 +295,32 @@
     <string>Close</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="btnEditStandardOfLiving">
+   <property name="geometry">
+    <rect>
+     <x>880</x>
+     <y>130</y>
+     <width>91</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Edit Model Value</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnEditDiet">
+   <property name="geometry">
+    <rect>
+     <x>880</x>
+     <y>440</y>
+     <width>101</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Edit Model Value</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>
@@ -312,9 +356,62 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btnEditStandardOfLiving</sender>
+   <signal>clicked()</signal>
+   <receiver>Simulation</receiver>
+   <slot>editStandardOfLiving()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>925</x>
+     <y>141</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>505</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnEditDiet</sender>
+   <signal>clicked()</signal>
+   <receiver>Simulation</receiver>
+   <slot>editDietPrice()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>930</x>
+     <y>451</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>505</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnClose</sender>
+   <signal>clicked()</signal>
+   <receiver>Simulation</receiver>
+   <slot>mdiClose()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>895</x>
+     <y>591</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>505</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>getProjectDiet()</slot>
   <slot>getProjectStandardOfLiving()</slot>
+  <slot>editDietPrice()</slot>
+  <slot>editStandardOfLiving()</slot>
+  <slot>pickStandardOfLivingSelectedItems()</slot>
+  <slot>getSelectedStandardOfLivingItems()</slot>
+  <slot>mdiClose()</slot>
  </slots>
 </ui>

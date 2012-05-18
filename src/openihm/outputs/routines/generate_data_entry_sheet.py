@@ -54,21 +54,25 @@ class DataEntrySheets:
         return query
 
     def getProjectCropsFoods(self,incometype,projectincomes):
+        #incomesourcelist = ','.join(projectincomes)
         incomes = []
-        for income in projectincomes:
-            tempname = "'" + income[0] + "'"
-            incomes.append(tempname)
+        recordset = []
+        if len(projectincomes)!= 0:
+            for income in projectincomes:
+                tempname = "'" + income[0] + "'"
+                incomes.append(tempname)
 
-        incomesourcelist = ','.join(incomes)
-        query = '''SELECT name, unitofmeasure FROM  setup_foods_crops WHERE  category='%s' AND name in (%s)''' % (incometype,incomesourcelist)
-        recordset = self.getincomeSources(query)
-        
+            incomesourcelist = ','.join(incomes)
+            query = '''SELECT name, unitofmeasure FROM  setup_foods_crops WHERE  category='%s' AND name in (%s)''' % (incometype,incomesourcelist)
+            print query
+            recordset = self.getincomeSources(query)
         return recordset
 
     def getincomeSources(self,query):
         '''run various select queries'''
         dbconnector = Database()
         dbconnector.open()
+        print query
         recordset = dbconnector.execSelectQuery(query)
         dbconnector.close()
         return recordset
