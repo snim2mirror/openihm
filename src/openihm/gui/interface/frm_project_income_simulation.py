@@ -26,7 +26,11 @@ from control.controller import Controller
 from mixins import MDIDialogMixin, TableViewMixin
 from data.report_settingsmanager import ReportsSettingsManager
 from frm_simulation_standardofliving_edit import FrmStandardOfLivingModelPrice
-from frm_simulation_diet_edit import FrmDietModelPrice
+from frm_simulation_diet_edit import FrmDietModelPrice 
+from frm_report_disposableincome import HouseholdDisposableIncome
+from outputs.routines.report_disposable_income import DisposableHouseholdIncome
+from outputs.routines.report_disposable_income_simulation import SimulationDisposableHouseholdIncome
+from outputs.routines.report_disposableincome_simulation_write import HouseholdsIncomeWrite
 
 
 Ui_HouseholdData, base_class = uic.loadUiType("gui/designs/ui_simulation.ui")
@@ -169,6 +173,7 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
 		    
 	    qtModelPrice = QStandardItem( "%d" % row[2] )
 	    qtModelPrice.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
+	    print row[2]
 
 	    model.setItem( num, 0, qtItem )
 	    model.setItem( num, 1, qtPrice )
@@ -221,3 +226,31 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
             
 	    QMessageBox.information(self,"Edit Standard of Living Model Values","Please select the row containing the model price to be edited.")
 
+    def getReportTables(self):
+        reporttype = 'Simulation'
+        connector = HouseholdDisposableIncome(reporttype,self.parent)
+        normaldisposableincome = connector.getReportTable()
+        
+    def getNormalDIReportTable (self):
+        '''Get report table'''
+
+        pid = self.getProjectID()
+        householdIDs = self.getReportHouseholdIDs()
+        reporttype = 'Simulation'
+        connector = DisposableHouseholdIncome()
+        simconnector = SimulationDisposableHouseholdIncome()
+        writeconnector = HouseholdsIncomeWrite()
+        normalDIreportTable = connector.householdDisposableIncome(reporttype,pid,householdIDs)
+        simulationDIreportTable = simconnector.householdDisposableIncome(reporttype,pid,householdIDs)
+        writeconnector.writeSpreadsheetReport(normalDIreportTable,simulationDIreportTable)
+        print simulationDIreportTable
+        return simulationDIreportTable
+    
+    def getReportHouseholdIDs(self):
+        householdnumbers = []
+        projectid = self.getProjectID()
+        connector = ReportsSettingsManager()
+        recordset = connector.getHouseholdIDs(projectid)
+        for row in recordset:
+            householdnumbers.append(str(row[0]))
+        return householdnumbers

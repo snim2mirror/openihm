@@ -404,6 +404,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>btnSaveDataTable</sender>
+   <signal>clicked()</signal>
+   <receiver>Simulation</receiver>
+   <slot>getNormalDIReportTable()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>795</x>
+     <y>591</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>505</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>getProjectDiet()</slot>
@@ -413,5 +429,8 @@
   <slot>pickStandardOfLivingSelectedItems()</slot>
   <slot>getSelectedStandardOfLivingItems()</slot>
   <slot>mdiClose()</slot>
+  <slot>getReportTables()</slot>
+  <slot>getReportHouseholdIDs()</slot>
+  <slot>getNormalDIReportTable()</slot>
  </slots>
 </ui>
