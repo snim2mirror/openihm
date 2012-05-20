@@ -31,6 +31,7 @@ from frm_report_disposableincome import HouseholdDisposableIncome
 from outputs.routines.report_disposable_income import DisposableHouseholdIncome
 from outputs.routines.report_disposable_income_simulation import SimulationDisposableHouseholdIncome
 from outputs.routines.report_disposableincome_simulation_write import HouseholdsIncomeWrite
+from frm_simulation_incomesources_edit import FrmIncomeSourceModelDetails
 
 
 Ui_HouseholdData, base_class = uic.loadUiType("gui/designs/ui_simulation.ui")
@@ -52,6 +53,7 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
 	self.getPorjects()
 	self.insertDietHeader()
 	self.insertStandardOfLivingHeader()
+	self.insertIncomeSourcesHeader()
 
     def getPorjects(self):
         ''' populate projects combobox with available projects'''
@@ -83,7 +85,7 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
         else: return 0
 
     def insertDietHeader(self):
-        '''Insert Title for treeViewHouseholds'''
+        '''Insert Title for tblDiets'''
         model = QStandardItemModel()
         model.setHorizontalHeaderItem(0,QStandardItem('Food Type'))
         model.setHorizontalHeaderItem(1,QStandardItem('% in Diet'))
@@ -94,7 +96,7 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
         self.tblDiets.show()	
 
     def insertStandardOfLivingHeader(self):
-        '''Insert Title for listViewHCharacteristics'''
+        '''Insert Title for tblStandardofLiving'''
         
         model = QStandardItemModel()
         model.setHorizontalHeaderItem(0,QStandardItem('Expense Type'))
@@ -103,6 +105,17 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
         
         self.tblStandardofLiving.setModel(model)
         self.tblStandardofLiving.show()	
+
+    def insertIncomeSourcesHeader(self):
+        '''Insert Title for tblIncome'''
+        
+        model = QStandardItemModel()
+        model.setHorizontalHeaderItem(0,QStandardItem('Income Source'))
+	model.setHorizontalHeaderItem(1,QStandardItem('% Ref Price'))
+	model.setHorizontalHeaderItem(2,QStandardItem('% Ref Production'))
+        
+        self.tblIncome.setModel(model)
+        self.tblIncome.show()	
 
     def getFoodEnergyRequirements(self):
         query = '''SELECT age, kCalNeedM, kCalNeedF FROM lookup_energy_needs'''
@@ -186,7 +199,124 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
 	self.tblStandardofLiving.horizontalHeader().setResizeMode(1, QHeaderView.ResizeToContents)
 	self.tblStandardofLiving.horizontalHeader().setResizeMode(2, QHeaderView.ResizeToContents)
 	self.tblStandardofLiving.show()
-	
+
+    def determineIncomeToGet(self):
+        currentincomecategory = self.getActiveIcomeSourceCategory()
+        if currentincomecategory =='Crops':
+            self.getProjectIncomeSources()
+        elif currentincomecategory =='Formal Transfers':
+            self.getProjectIncomeSources()
+        elif currentincomecategory =='Informal Tansfers':
+            self.getProjectIncomeSources()
+        elif currentincomecategory =='Livestock':
+            self.getProjectIncomeSources()
+        elif currentincomecategory =='WildFoods':
+            self.getProjectIncomeSources()
+        elif currentincomecategory =='Employment':
+            self.getProjectEmploymentIncomeSources()
+            
+    def getProjectIncomeSources(self):
+        projectid = self.getProjectID()
+        settingsmgr = ReportsSettingsManager()
+        currentincomecategory = self.getActiveIcomeSourceCategory()
+        if currentincomecategory =='Crops':
+            recordset = settingsmgr.getSimulationCropIncomeSources(projectid)
+        elif currentincomecategory =='Formal Transfers':
+            recordset = settingsmgr.getSimulationFormalTransferIncomeSources(projectid)
+        elif currentincomecategory =='Informal Tansfers':
+            recordset = settingsmgr.getSimulationInformalTransferIncomeSources(projectid)
+        elif currentincomecategory =='Livestock':
+            recordset = settingsmgr.getSimulationLivestockIncomeSources(projectid)
+        elif currentincomecategory =='WildFoods':
+            recordset = settingsmgr.getSimulationWildfoodsIncomeSources(projectid)
+        
+	model = QStandardItemModel(1,3)
+
+	#set headers
+        model.setHorizontalHeaderItem(0,QStandardItem('Income Source'))
+	model.setHorizontalHeaderItem(1,QStandardItem('% Ref Price'))
+	model.setHorizontalHeaderItem(2,QStandardItem('% Ref Production'))
+				
+	# add  data rows
+	num = 0
+	for row in recordset:
+	    qtItem = QStandardItem( "%s" % row[0])
+	    qtItem.setTextAlignment( Qt.AlignCenter )
+		    
+	    qtRefPrice = QStandardItem( "%d" % row[1] )
+	    qtRefPrice.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
+		    
+	    qtRefProduction = QStandardItem( "%d" % row[2] )
+	    qtRefProduction.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
+
+	    model.setItem( num, 0, qtItem )
+	    model.setItem( num, 1, qtRefPrice )
+	    model.setItem( num, 2, qtRefProduction )
+	    num = num + 1
+	    
+	self.tblIncome.setModel(model)
+	#self.tableView.verticalHeader().hide()
+        self.tblIncome.horizontalHeader().setResizeMode(0, QHeaderView.ResizeToContents)                                              
+	self.tblIncome.horizontalHeader().setResizeMode(1, QHeaderView.ResizeToContents)
+	self.tblIncome.horizontalHeader().setResizeMode(2, QHeaderView.ResizeToContents)
+	self.tblIncome.show()
+
+
+    def getProjectEmploymentIncomeSources(self):
+        projectid = self.getProjectID()
+        settingsmgr = ReportsSettingsManager()
+        recordset = settingsmgr.getSimulationEmploymentIncomeSources(projectid)
+        
+	model = QStandardItemModel(1,2)
+
+	#set headers
+        model.setHorizontalHeaderItem(0,QStandardItem('Income Source'))
+	model.setHorizontalHeaderItem(1,QStandardItem('% Ref Income'))
+				
+	# add  data rows
+	num = 0
+	for row in recordset:
+	    qtItem = QStandardItem( "%s" % row[0])
+	    qtItem.setTextAlignment( Qt.AlignCenter )
+		    
+	    qtRefIncome = QStandardItem( "%d" % row[1] )
+	    qtRefIncome.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
+
+	    model.setItem( num, 0, qtItem )
+	    model.setItem( num, 1, qtRefIncome )
+	    num = num + 1
+	    
+	self.tblIncome.setModel(model)
+	#self.tableView.verticalHeader().hide()
+        self.tblIncome.horizontalHeader().setResizeMode(0, QHeaderView.ResizeToContents)                                              
+	self.tblIncome.horizontalHeader().setResizeMode(1, QHeaderView.ResizeToContents)
+	self.tblIncome.horizontalHeader().setResizeMode(2, QHeaderView.ResizeToContents)
+	self.tblIncome.show()
+
+    def getActiveIcomeSourceCategory(self):
+        category = self.cmbIncomeSources.currentText()
+        return category
+
+    def editIncomeSourceReferenceValues(self):
+	if self.countRowsSelected(self.tblIncome) != 0:
+	    # get the age of the selected record
+	    selectedRow = self.getCurrentRow(self.tblIncome)
+	    incomesource = self.tblIncome.model().item(selectedRow,0).text()
+	    preferenceprice = self.tblIncome.model().item(selectedRow,1).text()
+	    preferenceproduction = self.tblIncome.model().item(selectedRow,2).text()
+	    projectid = self.getProjectID()
+	    currentincomecategory = self.getActiveIcomeSourceCategory()
+
+	    # show edit food energy requirement form
+	    form = FrmIncomeSourceModelDetails(self.parent,currentincomecategory,incomesource,preferenceprice,preferenceproduction,projectid)
+	    form.setWindowIcon(QIcon('resources/images/openihm.png'))
+	    form.exec_()
+	    self.getProjectIncomeSources()
+			
+	else:
+            
+	    QMessageBox.information(self,"Edit Income Sources Model Values","Please select the row containing the model values to be edited.")
+
     def editDietPrice(self):
 	if self.countRowsSelected(self.tblDiets) != 0:
 	    # get the age of the selected record

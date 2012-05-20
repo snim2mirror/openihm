@@ -139,6 +139,61 @@ class ReportsSettingsManager:
             rows = self.database.execSelectQuery( query )
             self.database.close()
         return rows
+    
+    def getSimulationInformalTransferIncomeSources(self,projectid):
+        rows =[]
+        if projectid != 0:
+            query = ''' SELECT sourceoftransfer,preferenceprice,preferenceproduction FROM transfers WHERE pid='%s' AND sourcetype='Internal' ''' %(projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
+    def getSimulationFormalTransferIncomeSources(self,projectid):
+        rows =[]
+        if projectid != 0:
+            query = ''' SELECT sourceoftransfer,preferenceprice,preferenceproduction FROM transfers WHERE pid='%s' AND sourcetype='External' ''' %(projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
+    def getSimulationCropIncomeSources(self,projectid):
+        rows =[]
+        if projectid != 0:
+            query = ''' SELECT incomesource,preferenceprice,preferenceproduction FROM cropincome WHERE pid='%s' ''' %(projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
+    def getSimulationEmploymentIncomeSources(self,projectid):
+        rows =[]
+        if projectid != 0:
+            query = ''' SELECT DISTINCT incomesource,preferenceincome FROM employmentincome WHERE pid='%s' ''' %(projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
+    def getSimulationLivestockIncomeSources(self,projectid):
+        rows =[]
+        if projectid != 0:
+            query = ''' SELECT incomesource,preferenceprice,preferenceproduction FROM livestockincome WHERE pid='%s' ''' %(projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
+    def getSimulationWildfoodsIncomeSources(self,projectid):
+        rows =[]
+        if projectid != 0:
+            query = ''' SELECT incomesource,preferenceprice,preferenceproduction FROM wildfoods WHERE pid='%s' ''' %(projectid)
+            self.database.open()
+            rows = self.database.execSelectQuery( query )
+            self.database.close()
+        return rows
+
 
     def getLoanIncomeSources(self,projectid):
         rows =[]

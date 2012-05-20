@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1011</width>
+    <width>1040</width>
     <height>620</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1011</width>
+    <width>1040</width>
     <height>620</height>
    </size>
   </property>
@@ -24,7 +24,7 @@
     <rect>
      <x>10</x>
      <y>40</y>
-     <width>441</width>
+     <width>481</width>
      <height>531</height>
     </rect>
    </property>
@@ -43,7 +43,7 @@
    <widget class="QPushButton" name="btnClearIncomeValues">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>340</x>
       <y>64</y>
       <width>131</width>
       <height>23</height>
@@ -56,7 +56,7 @@
    <widget class="QPushButton" name="btnResetIncome">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>340</x>
       <y>120</y>
       <width>87</width>
       <height>23</height>
@@ -66,10 +66,10 @@
      <string>Reset Values To:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="txtIncomeDefaultValues">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>340</x>
       <y>164</y>
       <width>81</width>
       <height>20</height>
@@ -96,7 +96,7 @@
     <widget class="QComboBox" name="cmbIncomeSources">
      <item>
       <property name="text">
-       <string>Crop Production</string>
+       <string>Crops</string>
       </property>
      </item>
      <item>
@@ -111,12 +111,12 @@
      </item>
      <item>
       <property name="text">
-       <string>Social Tansfers</string>
+       <string>Informal Tansfers</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Organisational Transfers</string>
+       <string>Formal Transfers</string>
       </property>
      </item>
      <item>
@@ -131,7 +131,7 @@
      <rect>
       <x>12</x>
       <y>38</y>
-      <width>281</width>
+      <width>321</width>
       <height>481</height>
      </rect>
     </property>
@@ -145,8 +145,8 @@
    <widget class="QPushButton" name="btnEditIncome">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>300</y>
+      <x>340</x>
+      <y>230</y>
       <width>101</width>
       <height>23</height>
      </rect>
@@ -155,11 +155,24 @@
      <string>Edit Model Values</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnSaveIncome">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>290</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save Changes</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QFrame" name="frame_3">
    <property name="geometry">
     <rect>
-     <x>471</x>
+     <x>501</x>
      <y>40</y>
      <width>401</width>
      <height>282</height>
@@ -191,7 +204,7 @@
   <widget class="QFrame" name="frame_4">
    <property name="geometry">
     <rect>
-     <x>471</x>
+     <x>501</x>
      <y>328</y>
      <width>401</width>
      <height>241</height>
@@ -223,7 +236,7 @@
   <widget class="QPushButton" name="btnClearExpenditureValues">
    <property name="geometry">
     <rect>
-     <x>880</x>
+     <x>910</x>
      <y>81</y>
      <width>122</width>
      <height>23</height>
@@ -236,7 +249,7 @@
   <widget class="QPushButton" name="btnClearDietValues">
    <property name="geometry">
     <rect>
-     <x>880</x>
+     <x>910</x>
      <y>397</y>
      <width>122</width>
      <height>23</height>
@@ -272,7 +285,7 @@
   <widget class="QPushButton" name="btnSaveDataTable">
    <property name="geometry">
     <rect>
-     <x>750</x>
+     <x>780</x>
      <y>580</y>
      <width>91</width>
      <height>23</height>
@@ -285,7 +298,7 @@
   <widget class="QPushButton" name="btnClose">
    <property name="geometry">
     <rect>
-     <x>850</x>
+     <x>880</x>
      <y>580</y>
      <width>91</width>
      <height>23</height>
@@ -298,7 +311,7 @@
   <widget class="QPushButton" name="btnEditStandardOfLiving">
    <property name="geometry">
     <rect>
-     <x>880</x>
+     <x>910</x>
      <y>130</y>
      <width>91</width>
      <height>23</height>
@@ -311,7 +324,7 @@
   <widget class="QPushButton" name="btnEditDiet">
    <property name="geometry">
     <rect>
-     <x>880</x>
+     <x>910</x>
      <y>440</y>
      <width>101</width>
      <height>23</height>
@@ -420,6 +433,54 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>cmbProjects</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>Simulation</receiver>
+   <slot>determineIncomeToGet()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>304</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>505</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmbIncomeSources</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>Simulation</receiver>
+   <slot>determineIncomeToGet()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>284</x>
+     <y>61</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>505</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>btnEditIncome</sender>
+   <signal>clicked()</signal>
+   <receiver>Simulation</receiver>
+   <slot>editIncomeSourceReferenceValues()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>360</x>
+     <y>281</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>505</x>
+     <y>309</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>getProjectDiet()</slot>
@@ -432,5 +493,9 @@
   <slot>getReportTables()</slot>
   <slot>getReportHouseholdIDs()</slot>
   <slot>getNormalDIReportTable()</slot>
+  <slot>getProjectIncomeSources()</slot>
+  <slot>editIncomeSourceReferenceValues()</slot>
+  <slot>getProjectEmploymentIncomeSources()</slot>
+  <slot>determineIncomeToGet()</slot>
  </slots>
 </ui>

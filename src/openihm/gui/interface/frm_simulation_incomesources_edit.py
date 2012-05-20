@@ -23,18 +23,18 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from data.simulation_diet import EditDietModelPrice
+from data.simulation_incomesources import EditIncomeSourcesModelPrice
 
 # import the Create Add Food Energy Requirement Dialog design class
-Ui_EditFoodEnergyRequirement, base_class = uic.loadUiType("gui/designs/ui_simulation_editdiet.ui")
+Ui_EditIncomeSourceModelDetails, base_class = uic.loadUiType("gui/designs/ui_setincomesimulationvalues.ui")
 
 from mixins import MDIDialogMixin
 
-class FrmDietModelPrice(QDialog, Ui_EditFoodEnergyRequirement, MDIDialogMixin):
+class FrmIncomeSourceModelDetails(QDialog, Ui_EditIncomeSourceModelDetails, MDIDialogMixin):
     
     ''' Creates the Edit Simulation Model Price form '''	
 
-    def __init__(self,parent,foodname,percentageindiet,unitprice,modelprice,projectid):
+    def __init__(self,parent,incomesourcecategory,incomesource,percentageprice,percentageproduction,projectid):
         
         ''' Set up the dialog box interface '''
         # self.parent = parent
@@ -42,34 +42,34 @@ class FrmDietModelPrice(QDialog, Ui_EditFoodEnergyRequirement, MDIDialogMixin):
         
         self.setupUi(self)
         self.parent = parent
-        self.foodname = foodname
-        self.percentageindiet = percentageindiet
-        self.unitprice = unitprice
-        self.modelprice = modelprice
+        self.incomesourcecategory = incomesourcecategory
+        self.incomesource = incomesource
+        self.percentageprice = percentageprice
+        self.percentageproduction = percentageproduction
         self.projectid = projectid
 
         #set input validator and restrict input to numeric values,
-        myPriceVal = QDoubleValidator(0, 100000000.0,2, self.txtModelprice)
+        myPriceVal = QDoubleValidator(0, 100000000000.0,2, self.txtPercentReferencePrice)
                                
-        self.txtModelprice.setValidator(myPriceVal)
+        self.txtPercentReferencePrice.setValidator(myPriceVal)
+        self.txtPercentReferenceProduction.setValidator(myPriceVal)
 
         #display energy requirements data
-        self.showDietDetails()
+        self.showIncomeSourceDetails()
  
-        
-    def showDietDetails(self):
+    def showIncomeSourceDetails(self):
         ''' Display energy requirements data '''
-        self.txtItem.setText(self.foodname)
-        self.txtPercentageinDiet.setText(self.percentageindiet)
-        self.txtUnitPrice.setText(self.unitprice)
-        self.txtModelprice.setText(self.modelprice)
+        self.txtIncomeSource.setText(self.incomesource)
+        self.txtPercentReferencePrice.setText(self.percentageprice)
+        self.txtPercentReferenceProduction.setText(self.percentageproduction)
 
-    def saveDietDetails(self):
-        ''' Saves newly created food energy requirement data to database '''
+    def saveIncomeSourceDetails(self):
+        ''' Saves income source model data to database '''
 
         # get the data entered by user
-        mymodelprice                       = self.txtModelprice.text()
+        mpercentageprice = self.txtPercentReferencePrice.text()
+        mpercentageproduction = self.txtPercentReferenceProduction.text()
                       	
 	# save data entered by user
-	controller = EditDietModelPrice(mymodelprice,  self.foodname,  self.projectid)
+	controller = EditIncomeSourcesModelPrice(self.incomesourcecategory,self.incomesource,mpercentageprice, mpercentageproduction, self.projectid)
         controller.setData()      
