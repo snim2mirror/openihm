@@ -46,10 +46,10 @@ class HouseholdsIncomeWrite:
         sheet1.write(2, 1, 'Normal DIncome', style1)
         sheet1.write(2, 2, 'Simulation DIncome', style1)
         sheet1.col(1).width = 6000
+        sheet1.col(2).width = 6000
 
         #write Data 
         myrow = 3
-        print simreporttable
         counter = len(reporttable)
         for i in range(0,counter):
                        

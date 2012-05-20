@@ -469,7 +469,7 @@
    <sender>btnEditIncome</sender>
    <signal>clicked()</signal>
    <receiver>Simulation</receiver>
-   <slot>editIncomeSourceReferenceValues()</slot>
+   <slot>determineIncomeToEdit()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>360</x>
@@ -497,5 +497,6 @@
   <slot>editIncomeSourceReferenceValues()</slot>
   <slot>getProjectEmploymentIncomeSources()</slot>
   <slot>determineIncomeToGet()</slot>
+  <slot>determineIncomeToEdit()</slot>
  </slots>
 </ui>

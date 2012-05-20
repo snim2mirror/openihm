@@ -32,6 +32,7 @@ from outputs.routines.report_disposable_income import DisposableHouseholdIncome
 from outputs.routines.report_disposable_income_simulation import SimulationDisposableHouseholdIncome
 from outputs.routines.report_disposableincome_simulation_write import HouseholdsIncomeWrite
 from frm_simulation_incomesources_edit import FrmIncomeSourceModelDetails
+from frm_simulation_employment_edit import FrmEmploymentModelDetails
 
 
 Ui_HouseholdData, base_class = uic.loadUiType("gui/designs/ui_simulation.ui")
@@ -186,7 +187,6 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
 		    
 	    qtModelPrice = QStandardItem( "%d" % row[2] )
 	    qtModelPrice.setTextAlignment( Qt.AlignRight | Qt.AlignVCenter )
-	    print row[2]
 
 	    model.setItem( num, 0, qtItem )
 	    model.setItem( num, 1, qtPrice )
@@ -215,6 +215,21 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
         elif currentincomecategory =='Employment':
             self.getProjectEmploymentIncomeSources()
             
+    def determineIncomeToEdit(self):
+        currentincomecategory = self.getActiveIcomeSourceCategory()
+        if currentincomecategory =='Crops':
+            self.editIncomeSourceReferenceValues()
+        elif currentincomecategory =='Formal Transfers':
+            self.editIncomeSourceReferenceValues()
+        elif currentincomecategory =='Informal Tansfers':
+            self.editIncomeSourceReferenceValues()
+        elif currentincomecategory =='Livestock':
+            self.editIncomeSourceReferenceValues()
+        elif currentincomecategory =='WildFoods':
+            self.editIncomeSourceReferenceValues()
+        elif currentincomecategory =='Employment':
+            self.editEmploymentReferenceValues()
+
     def getProjectIncomeSources(self):
         projectid = self.getProjectID()
         settingsmgr = ReportsSettingsManager()
@@ -317,6 +332,25 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
             
 	    QMessageBox.information(self,"Edit Income Sources Model Values","Please select the row containing the model values to be edited.")
 
+    def editEmploymentReferenceValues(self):
+	if self.countRowsSelected(self.tblIncome) != 0:
+	    # get the age of the selected record
+	    selectedRow = self.getCurrentRow(self.tblIncome)
+	    incomesource = self.tblIncome.model().item(selectedRow,0).text()
+	    preferenceincome = self.tblIncome.model().item(selectedRow,1).text()
+	    projectid = self.getProjectID()
+
+	    # show edit food energy requirement form
+	    form = FrmEmploymentModelDetails(self.parent,incomesource,preferenceincome,projectid)
+	    form.setWindowIcon(QIcon('resources/images/openihm.png'))
+	    form.exec_()
+	    self.getProjectEmploymentIncomeSources()
+			
+	else:
+            
+	    QMessageBox.information(self,"Edit Income Sources Model Values","Please select the row containing the model values to be edited.")
+
+
     def editDietPrice(self):
 	if self.countRowsSelected(self.tblDiets) != 0:
 	    # get the age of the selected record
@@ -373,7 +407,6 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
         normalDIreportTable = connector.householdDisposableIncome(reporttype,pid,householdIDs)
         simulationDIreportTable = simconnector.householdDisposableIncome(reporttype,pid,householdIDs)
         writeconnector.writeSpreadsheetReport(normalDIreportTable,simulationDIreportTable)
-        print simulationDIreportTable
         return simulationDIreportTable
     
     def getReportHouseholdIDs(self):
