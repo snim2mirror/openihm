@@ -71,7 +71,7 @@ class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin, MySQLMixin):
 			# close this form
 			self.parent.mdi.closeActiveSubWindow()
 			# show the details form
-			form.show()
+			form.showMaximized()
 		else:
 			msg = "No household matching the criteria specified exists."
 			QMessageBox.information( self, "Find Household", msg )

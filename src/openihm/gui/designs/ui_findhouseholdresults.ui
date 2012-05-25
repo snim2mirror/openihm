@@ -6,156 +6,320 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>548</width>
-    <height>550</height>
+    <width>716</width>
+    <height>512</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>548</width>
-    <height>550</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>Household Search Results</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_3">
    <item>
-    <widget class="QLabel" name="label_3">
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
+    <widget class="QFrame" name="frame_2">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
      </property>
-     <property name="text">
-      <string>Project Name:</string>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="lblProjectName">
-     <property name="text">
-      <string>{projectname}</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="title">
-      <string>Search Criteria</string>
-     </property>
-     <layout class="QFormLayout" name="formLayout">
-      <property name="fieldGrowthPolicy">
-       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-      </property>
-      <item row="0" column="0" colspan="2">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Enter Household No. or Household Name [entering nothing will list all households in the current project]</string>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Household No:</string>
-        </property>
-        <property name="buddy">
-         <cstring>txtHouseholdNo</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="txtHouseholdNo"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Household Name:</string>
-        </property>
-        <property name="buddy">
-         <cstring>txtHouseholdName</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="txtHouseholdName"/>
-      </item>
-      <item row="3" column="1">
-       <widget class="QPushButton" name="cmdSearch">
-        <property name="text">
-         <string>Search</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="title">
-      <string>Households</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QTableView" name="tblResults">
-        <property name="alternatingRowColors">
-         <bool>true</bool>
+       <widget class="QFrame" name="frame">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
         </property>
-        <property name="sortingEnabled">
-         <bool>true</bool>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
         </property>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="font">
+            <font>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Project Name:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="lblProjectName">
+           <property name="minimumSize">
+            <size>
+             <width>420</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Box</enum>
+           </property>
+           <property name="text">
+            <string>{projectname}</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="groupBox_3">
-        <property name="title">
-         <string/>
+       <widget class="QFrame" name="frame_3">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
          <item>
+          <widget class="QLabel" name="label_5">
+           <property name="font">
+            <font>
+             <pointsize>9</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Search for Households</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Enter Household No. or Household Name [entering nothing will list all households in the current project]</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_4">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QFrame" name="frame_5">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QFormLayout" name="formLayout_2">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Household No:</string>
+              </property>
+              <property name="buddy">
+               <cstring>txtHouseholdNo</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="txtHouseholdNo">
+              <property name="minimumSize">
+               <size>
+                <width>291</width>
+                <height>0</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Household Name:</string>
+              </property>
+              <property name="buddy">
+               <cstring>txtHouseholdName</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="txtHouseholdName">
+              <property name="minimumSize">
+               <size>
+                <width>291</width>
+                <height>0</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QFrame" name="frame_6">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QGridLayout" name="gridLayout">
+            <item row="0" column="0">
+             <widget class="QPushButton" name="cmdSearch">
+              <property name="minimumSize">
+               <size>
+                <width>101</width>
+                <height>41</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Search</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_7">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QTableView" name="tblResults">
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="frame_8">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="cmdAdd">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>31</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Add</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
           <widget class="QPushButton" name="cmdEdit">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>31</height>
+            </size>
+           </property>
            <property name="text">
             <string>Edit</string>
            </property>
           </widget>
          </item>
-         <item>
+         <item row="0" column="2">
           <widget class="QPushButton" name="cmdDel">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>31</height>
+            </size>
+           </property>
            <property name="text">
             <string>Delete</string>
            </property>
           </widget>
          </item>
-         <item>
+         <item row="0" column="3">
           <widget class="QPushButton" name="cmdData">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>31</height>
+            </size>
+           </property>
            <property name="text">
-            <string>View|Edit Household Data</string>
+            <string>View | Edit Household Data</string>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QPushButton" name="cmdAdd">
+         <item row="0" column="5">
+          <widget class="QPushButton" name="cmdClose">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>31</height>
+            </size>
+           </property>
            <property name="text">
-            <string>Add</string>
+            <string>Close</string>
            </property>
           </widget>
+         </item>
+         <item row="0" column="4">
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </widget>
@@ -163,24 +327,9 @@
      </layout>
     </widget>
    </item>
-   <item>
-    <widget class="QPushButton" name="cmdClose">
-     <property name="text">
-      <string>Close</string>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <tabstops>
-  <tabstop>txtHouseholdNo</tabstop>
-  <tabstop>txtHouseholdName</tabstop>
-  <tabstop>cmdSearch</tabstop>
-  <tabstop>tblResults</tabstop>
-  <tabstop>cmdEdit</tabstop>
-  <tabstop>cmdDel</tabstop>
-  <tabstop>cmdData</tabstop>
-  <tabstop>cmdAdd</tabstop>
   <tabstop>cmdClose</tabstop>
  </tabstops>
  <resources/>
@@ -192,28 +341,12 @@
    <slot>mdiClose()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>452</x>
-     <y>540</y>
+     <x>686</x>
+     <y>482</y>
     </hint>
     <hint type="destinationlabel">
      <x>353</x>
-     <y>578</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>cmdSearch</sender>
-   <signal>clicked()</signal>
-   <receiver>FindHouseholdResults</receiver>
-   <slot>getHouseholds()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>529</x>
-     <y>218</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>372</x>
-     <y>157</y>
+     <y>511</y>
     </hint>
    </hints>
   </connection>
@@ -224,8 +357,8 @@
    <slot>editHousehold()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>380</x>
-     <y>346</y>
+     <x>234</x>
+     <y>482</y>
     </hint>
     <hint type="destinationlabel">
      <x>222</x>
@@ -240,8 +373,8 @@
    <slot>delHouseholds()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>466</x>
-     <y>373</y>
+     <x>340</x>
+     <y>482</y>
     </hint>
     <hint type="destinationlabel">
      <x>404</x>
@@ -256,8 +389,8 @@
    <slot>viewHouseholdData()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>488</x>
-     <y>424</y>
+     <x>496</x>
+     <y>482</y>
     </hint>
     <hint type="destinationlabel">
      <x>488</x>
@@ -272,12 +405,28 @@
    <slot>addHousehold()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>399</x>
-     <y>456</y>
+     <x>128</x>
+     <y>482</y>
     </hint>
     <hint type="destinationlabel">
      <x>447</x>
      <y>273</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSearch</sender>
+   <signal>clicked()</signal>
+   <receiver>FindHouseholdResults</receiver>
+   <slot>getHouseholds()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>513</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>712</x>
+     <y>181</y>
     </hint>
    </hints>
   </connection>
