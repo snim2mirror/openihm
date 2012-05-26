@@ -74,12 +74,11 @@ def main():
                
           elif ( dbstatus['dbuptodate'] == False ):
                log.info('DB not up to date.')
-               # inform user mysal not started
+               # inform user update failed 
+               # because no 'root' access to database.
                msg = '''Failed to automatically update the database.'''
                window = FrmDatabaseMessage(msg)
                window.show()
-               window = FrmMainWindow()
-               window.showMaximized()
                
           elif ( dbstatus['dbinstalled'] == False ):
                log.info('DB not installed.')

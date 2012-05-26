@@ -74,7 +74,8 @@ class DatabaseInitialiser:
          except ( errors.OperationalError,  errors.ProgrammingError) as e:
              dbinstalled = self.createDatabase()
              
-         if ( dbinstalled ):
+         dbuptodate = False
+         if ( mysqlstarted and dbinstalled ):
                  dbuptodate = self.updateDatabase()
                  self.insertStartupCrops()
 
