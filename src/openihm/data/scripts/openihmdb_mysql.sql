@@ -722,6 +722,16 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
+-- Table `openihmdb`.`dbupdate`
+-- -----------------------------------------------------
+
+CREATE  TABLE IF NOT EXISTS `openihmdb`.`dbupdate` (
+
+  `lastupdate` VARCHAR(50) NOT NULL ,
+
+  PRIMARY KEY (`lastupdate`) );
+
+-- -----------------------------------------------------
 -- User `openihm@localhost`
 -- -----------------------------------------------------
 

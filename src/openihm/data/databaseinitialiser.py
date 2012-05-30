@@ -100,6 +100,11 @@ class DatabaseInitialiser:
              for command in commandlist:
                  if ( not command.isspace() ):
                      cursor.execute(command)
+                     
+             updatestr = "latest update on %s" % (date.today().isoformat())       
+             query = "INSERT INTO dbupdate VALUES('%s')" % updatestr
+             cursor.execute(query)
+             db.commit()
              
              cursor.close()
              db.close()
