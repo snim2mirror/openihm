@@ -133,7 +133,7 @@ class DatabaseInitialiser:
                  rows = cursor.fetchall()
                  
                  for row in rows:
-                     if row[0] > self.latestupdatestring:
+                     if row[0] >= self.latestupdatestring:
                          upToDate = True
                          
          cursor.close()
@@ -160,14 +160,10 @@ class DatabaseInitialiser:
                  for command in commandlist:
                      if ( not command.isspace() ):
                          cursor.execute(command)
-                         
-                 query = "DELETE FROM dbupdate"
-                 cursor.execute(query)
-                 db.commit()
-                 
+                               
                  updatestr = "latest update on %s" % (date.today().isoformat())
                  
-                 query = "INSERT INTO dbupdate VALUES('%s')" % updatestr
+                 query = "UPDATE dbupdate SET lastupdate='%s'" % updatestr
                  cursor.execute(query)
                  db.commit()
              

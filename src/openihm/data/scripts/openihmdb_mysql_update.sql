@@ -201,8 +201,8 @@ ALTER TABLE `openihmdb`.`projectcharacteristics`
   ON DELETE CASCADE
   ON UPDATE CASCADE;
 
-ALTER TABLE `openihmdb`.`diet` ADD modelprice DOUBLE DEFAULT 0.0 AFTER priceperunit;
- 
+ALTER TABLE `openihmdb`.`diet` ADD `modelprice` DOUBLE DEFAULT 0.0 AFTER priceperunit;
+
 ALTER TABLE `openihmdb`.`standardofliving` ADD modelprice DOUBLE DEFAULT 0.0 AFTER costperyear;
 
 ALTER TABLE `openihmdb`.`cropincome` ADD preferenceprice DOUBLE NULL DEFAULT '100' AFTER pid;
