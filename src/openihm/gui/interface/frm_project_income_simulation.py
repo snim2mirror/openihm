@@ -51,7 +51,7 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
 	self.stlprice = 0
 	
 	self.connector = ReportsSettingsManager()
-	myReferenceVal = QDoubleValidator(0, 100000000000.0,2, self.txtIncomeDefaultValues)
+	myReferenceVal = QDoubleValidator(0, 100000000,2, self.txtIncomeDefaultValues)
         self.txtIncomeDefaultValues.setValidator(myReferenceVal)
 
 	self.getPorjects()

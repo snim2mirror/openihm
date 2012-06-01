@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Disposable Income Simulations</string>
   </property>
   <widget class="QFrame" name="frame">
    <property name="geometry">
@@ -48,6 +48,9 @@
       <width>101</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>Sets all reference production and price %age values, for the active income category to the value set in the box below. This is saved to the database</string>
     </property>
     <property name="text">
      <string>Reset Values To:</string>
@@ -138,6 +141,9 @@
       <height>23</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Edit Model reference values for selected income row</string>
+    </property>
     <property name="text">
      <string>Edit Model Values</string>
     </property>
@@ -216,6 +222,9 @@
      <height>23</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>Sets 'Model Price' to match 'Price Column'. This is saved to the database</string>
+   </property>
    <property name="text">
     <string>Reset Reference Values</string>
    </property>
@@ -228,6 +237,9 @@
      <width>122</width>
      <height>23</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>Sets 'Model Price' to match 'Price Column'. This is saved to the database</string>
    </property>
    <property name="text">
     <string>Reset Reference Values</string>
@@ -291,6 +303,9 @@
      <height>23</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>Edit Model Price for selected row</string>
+   </property>
    <property name="text">
     <string>Edit Model Value</string>
    </property>
@@ -303,6 +318,9 @@
      <width>101</width>
      <height>23</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>Edit Model Price for selected row</string>
    </property>
    <property name="text">
     <string>Edit Model Value</string>
