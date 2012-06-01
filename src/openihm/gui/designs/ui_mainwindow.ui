@@ -93,12 +93,18 @@
     <property name="title">
      <string>&amp;Reports</string>
     </property>
+    <widget class="QMenu" name="menuRun_Simulations">
+     <property name="title">
+      <string>Run Simulations</string>
+     </property>
+     <addaction name="actionRun_Disposable_Income_Simulations"/>
+    </widget>
     <addaction name="actionDisposable_Income"/>
     <addaction name="actionHousehold_Budget"/>
     <addaction name="actionHousehold_by_Characteristics"/>
     <addaction name="actionIncome_By_Source"/>
     <addaction name="actionLiving_Threshold"/>
-    <addaction name="actionRun_Simulations"/>
+    <addaction name="menuRun_Simulations"/>
    </widget>
    <addaction name="menuProject"/>
    <addaction name="menuHousehold"/>
@@ -462,9 +468,9 @@
     <string>Export Project to IHM file</string>
    </property>
   </action>
-  <action name="actionRun_Simulations">
+  <action name="actionRun_Disposable_Income_Simulations">
    <property name="text">
-    <string>Run Simulations</string>
+    <string>Run Disposable Income Simulations</string>
    </property>
   </action>
  </widget>
@@ -1065,7 +1071,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>actionRun_Simulations</sender>
+   <sender>actionRun_Disposable_Income_Simulations</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>runIncomeSimulations()</slot>
