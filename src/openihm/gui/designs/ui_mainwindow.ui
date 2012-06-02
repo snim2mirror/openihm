@@ -71,8 +71,6 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionUpdate_open_ihm"/>
-    <addaction name="separator"/>
     <addaction name="actionContents"/>
     <addaction name="actionAboutOpenIHM"/>
    </widget>

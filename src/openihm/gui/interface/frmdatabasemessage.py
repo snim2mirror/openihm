@@ -32,5 +32,5 @@ class FrmDatabaseMessage(QDialog, Ui_DatabaseMessage, MDIDialogMixin):
         QDialog.__init__(self)
         self.parent = parent
         self.setupUi(self)
-        self.setupUi(self).lblMessage.setText( message )
+        self.lblMessage.setText( message )
         self.setWindowIcon( QIcon('resources/images/openihm.png') )

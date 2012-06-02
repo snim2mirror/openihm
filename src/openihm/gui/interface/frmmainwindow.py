@@ -392,7 +392,7 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
             form = FrmFindHouseholdResults(self)
             subWin = self.mdi.addSubWindow(form)
             self.centerSubWindow(subWin)
-            form.show()
+            form.showMaximized()
     
     def manageFoodTypes(self):
         ''' Creates and Shows the Manage Crop Types form'''
