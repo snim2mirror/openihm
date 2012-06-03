@@ -27,7 +27,9 @@ class DbConfig(object):
     
         mysql.connector.Connect(**Config.dbinfo())
      """
-     def __init__(self,  host='localhost', database='', user='', password='', port=3306, superuser='root', superuser_password='', charset='utf8', unicode = True,  warnings=True):
+     def __init__(self,  host='localhost', database='', user='', password='',
+                  port=3306, superuser='root', superuser_password='',
+                  charset='utf8', unicode = True,  warnings = True):
          self.host = host
          self.database = database
          self.user = user
@@ -42,24 +44,24 @@ class DbConfig(object):
     
      def superuser_dbinfo(self):
          return {
-            'host'          : self.host,
-            'database'      : self.database,
-            'user'          : self.superuser,
-            'password'      : self.superuser_password,
-            'charset'       : self.charset,
-            'use_unicode'   : self.unicode,
-            'get_warnings'  : self.warnings,
+            'host': self.host,
+            'database': self.database,
+            'user': self.superuser,
+            'password': self.superuser_password,
+            'charset': self.charset,
+            'use_unicode': self.unicode,
+            'get_warnings': self.warnings,
             }
 
      def dbinfo(self):
          return {
-            'host'          : self.host,
-            'database'      : self.database,
-            'user'          : self.user,
-            'password'      : self.password,
-            'charset'       : self.charset,
-            'use_unicode'   : self.unicode,
-            'get_warnings'  : self.warnings,
+            'host': self.host,
+            'database': self.database,
+            'user': self.user,
+            'password': self.password,
+            'charset': self.charset,
+            'use_unicode': self.unicode,
+            'get_warnings': self.warnings,
             }
 
 class DatabaseInitialiser:
