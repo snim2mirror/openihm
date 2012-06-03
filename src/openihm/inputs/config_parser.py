@@ -13,6 +13,17 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
         config = OpenIHMConfig()
         config.read(CONFIGFILE)
 
+    The config file can contain these directives,
+
+        [database]
+        host = host
+        database = database
+        user = user
+        password = userpassword
+        port = 3306
+        superuser = root
+        superuser_password = password
+
     """
 
     def __init__(self):
