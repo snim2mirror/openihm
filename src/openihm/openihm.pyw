@@ -30,7 +30,9 @@ from PyQt4 import QtGui, QtCore
 import logging
 import logging.handlers
 import traceback
+from inputs.config_parser import OpenIHMConfig
 
+CONFIGFILE = 'openihm.cfg'
 LOGFILE = 'openihmlog.txt'
 
 def main():
@@ -39,6 +41,8 @@ def main():
      handler = logging.handlers.RotatingFileHandler(LOGFILE, backupCount=5)
      log.addHandler(handler)
 
+     config = OpenIHMConfig()
+     config.read(CONFIGFILE)
      #
      # Start open-ihm.
      #
@@ -49,11 +53,12 @@ def main():
 
           # import database initialisation classes
           from gui.interface.frmdatabasemessage import FrmDatabaseMessage
+          dbconfig = config.database_config()
           from data.databaseinitialiser import DbConfig, DatabaseInitialiser
           
           log.info('Initialising database.')
           
-          dbInitialiser = DatabaseInitialiser()
+          dbInitialiser = DatabaseInitialiser(DbConfig(**dbconfig))
           dbstatus = dbInitialiser.initialiseDB()
 
           # initiate application, main window and show main window

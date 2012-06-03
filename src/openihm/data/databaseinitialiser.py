@@ -27,17 +27,30 @@ class DbConfig(object):
     
         mysql.connector.Connect(**Config.dbinfo())
      """
-     def __init__(self,  host='localhost', database='', user='', password='', port=3306, charset='utf8', unicode = True,  warnings=True):
+     def __init__(self,  host='localhost', database='', user='', password='', port=3306, superuser='root', superuser_password='', charset='utf8', unicode = True,  warnings=True):
          self.host = host
          self.database = database
          self.user = user
          self.password = password
          self.port = port
+         self.superuser_password = superuser_password
+         self.superuser = superuser
     
          self.charset = charset
          self.unicode = unicode
          self.warnings = warnings
     
+     def superuser_dbinfo(self):
+         return {
+            'host'          : self.host,
+            'database'      : self.database,
+            'user'          : self.superuser,
+            'password'      : self.superuser_password,
+            'charset'       : self.charset,
+            'use_unicode'   : self.unicode,
+            'get_warnings'  : self.warnings,
+            }
+
      def dbinfo(self):
          return {
             'host'          : self.host,
@@ -50,15 +63,14 @@ class DbConfig(object):
             }
 
 class DatabaseInitialiser:
-     def __init__(self, host='localhost', rootpwd=''):
-         self.host = host
-         self.rootpwd = rootpwd
+     def __init__(self, config):
+         self.config = config
          
          #date of latest DB update: must be reset to latest date when DB changes are being pushed - format yyyy-mm-dd
          self.latestupdatestring = "latest update on 2012-05-16" 
          
      def initialiseDB(self):
-         config = DbConfig(self.host, 'openihmdb', 'openihm', 'ihm2010')
+         config = self.config
          dbinfo = config.dbinfo().copy()
          # assume that mysql server is running and database is installed already
          mysqlstarted = True
@@ -121,7 +133,7 @@ class DatabaseInitialiser:
          # check if the database is already up to date: i.e. there is "summary" in standardofliving
          #   checks in assets
          
-         config = DbConfig(self.host, 'openihmdb', 'openihm', 'ihm2010')
+         config = self.config
          dbinfo = config.dbinfo().copy()
          db = Connect(**dbinfo)             
          cursor = db.cursor()
@@ -166,8 +178,7 @@ class DatabaseInitialiser:
              commandlist = commands.split(';')
              sqlfile.close()
              try:
-                 config = DbConfig(self.host, '', 'root', self.rootpwd)
-                 dbinfo = config.dbinfo().copy()
+                 dbinfo = self.config.superuser_dbinfo().copy()
                  db = Connect(**dbinfo)             
                  cursor = db.cursor()
 
@@ -202,7 +213,7 @@ class DatabaseInitialiser:
          # check if the database is already up to date: i.e. there is "summary" in standardofliving
          #   checks in assets
          
-         config = DbConfig(self.host, 'openihmdb', 'openihm', 'ihm2010')
+         config = self.config
          dbinfo = config.dbinfo().copy()
          db = Connect(**dbinfo)             
          cursor = db.cursor()
@@ -237,8 +248,7 @@ class DatabaseInitialiser:
              commandlist = commands.split(';')
              sqlfile.close()
              try:
-                 config = DbConfig(self.host, '', 'root', self.rootpwd)
-                 dbinfo = config.dbinfo().copy()
+                 dbinfo = self.config.superuser_dbinfo().copy()
                  db = Connect(**dbinfo)             
                  cursor = db.cursor()
 
