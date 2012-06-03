@@ -3,6 +3,18 @@ import ConfigParser
 
 class OpenIHMConfig(ConfigParser.SafeConfigParser):
 
+    """
+    Configuration file parser based on
+    ConfigParser.SafeConfigParser
+
+    The parser is setup with defaults for most of the
+    settings.
+
+        config = OpenIHMConfig()
+        config.read(CONFIGFILE)
+
+    """
+
     def __init__(self):
         self.defaults = {
             'host': 'localhost',
@@ -17,6 +29,21 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
                                                 allow_no_value=True)
 
     def database_config(self):
+        """
+        Returns a dictionary containing the database configuration
+        information.  If it can not load the settings from the
+        ini file it simply returns the default settings.
+
+            {
+                'host': 'localhost',
+                'database': 'openihmdb',
+                'user': 'openihm',
+                'password': 'ihm2010',
+                'port': '3306',
+                'superuser': 'root',
+                'superuser_password': '',
+            }
+        """
         try:
             return {
                 'host':               self.get('database', 'host'),
