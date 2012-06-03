@@ -74,14 +74,19 @@ class MySQLMixin(object):
     TODO: move this from the gui package to a model (as in MVC) package.
     """
 
-    def executeUpdateQuery(self, query):
+    def executeUpdateQuery(self, query, params = None):
         """Execute a query that needs to be committed to the database.
         For example, an INSERT or UPDATE query.
         """
         config = Config.dbinfo().copy()
-        db = connector.Connect(**config)             
+        db = connector.Connect(**config)
         cursor = db.cursor()
-        cursor.execute(query)
+        # turn any QStrings to python strings.
+        if params:
+            converted_qt = [(isinstance(x, QString) and str(x)) or x for x in params]
+        else:
+            converted_qt = None
+        cursor.execute(query, converted_qt)
         db.commit()
         cursor.close()
         db.close()

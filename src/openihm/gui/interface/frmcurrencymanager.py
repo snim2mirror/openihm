@@ -56,13 +56,15 @@ class FrmCurrencyManager(QDialog, Ui_CurrencyManager, MDIDialogMixin, MySQLMixin
          # create INSERT or UPDATE query
          if (self.currencyid == 0):
              query = '''INSERT INTO currencies (currencyname,abbreviation,symbol )
-                         VALUES('%s','%s','%s') ''' % ( currencyName, abbreviation, symbol )
+                         VALUES(%s,%s,%s) '''
+             params = ( currencyName, abbreviation, symbol )
          else:
-             query = ''' UPDATE currencies SET currencyname='%s', abbreviation='%s', symbol='%s'
-                         WHERE id=%s ''' % ( currencyName, abbreviation, symbol, self.currencyid)
+             query = ''' UPDATE currencies SET currencyname=%s, abbreviation=%s, symbol=%s
+                         WHERE id=%s '''
+             params = ( currencyName, abbreviation, symbol, self.currencyid)
 
 
-         self.executeUpdateQuery(query)
+         self.executeUpdateQuery(query, params)
          
          # clear text boxes and refresh list
          self.txtCurrencyName.setText("")
