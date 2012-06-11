@@ -33,7 +33,7 @@ class HouseholdsIncomeWrite:
         sheet1 = book.add_sheet("Households By Income Source")
         style1 = easyxf('font: name Arial;''font: bold True;')
 
-
+        print reporttable
         #Write Table Title
         reptitle = "%s" % reporttype
         sheet1.write(0, 0, reptitle, style1) 

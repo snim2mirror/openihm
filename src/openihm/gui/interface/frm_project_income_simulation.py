@@ -33,7 +33,7 @@ from outputs.routines.report_disposable_income_simulation import SimulationDispo
 from outputs.routines.report_disposableincome_simulation_write import HouseholdsIncomeWrite
 from frm_simulation_incomesources_edit import FrmIncomeSourceModelDetails
 from frm_simulation_employment_edit import FrmEmploymentModelDetails
-
+from data.simulation import EditIncomesourcesReferenceData
 
 Ui_HouseholdData, base_class = uic.loadUiType("gui/designs/ui_simulation.ui")
 
@@ -51,10 +51,37 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
 	self.stlprice = 0
 	
 	self.connector = ReportsSettingsManager()
+	myReferenceVal = QDoubleValidator(0, 100000000,2, self.txtIncomeDefaultValues)
+        self.txtIncomeDefaultValues.setValidator(myReferenceVal)
+
 	self.getPorjects()
 	self.insertDietHeader()
 	self.insertStandardOfLivingHeader()
 	self.insertIncomeSourcesHeader()
+	
+    def resetIncomeReferenceValues(self):
+        incomesource = self.getActiveIcomeSourceCategory()
+        activeprojectid =self.getProjectID()
+        referencevalue = self.txtIncomeDefaultValues.text()
+        if referencevalue == "" or activeprojectid =="":
+            completionmessage = '''Please make sure that you have selected a project and specified a value to which model values should be set'''
+            QMessageBox.information(None, 'Set Reference Values', completionmessage)
+        else:
+            myconnector = EditIncomesourcesReferenceData()
+            myconnector.setIncomeData(incomesource,referencevalue, referencevalue,activeprojectid)
+            self.determineIncomeToGet()
+
+    def resetDietReferenceValues(self):
+        activeprojectid =self.getProjectID()
+        myconnector = EditIncomesourcesReferenceData()
+        myconnector.restDietModelData(activeprojectid)
+        self.getProjectDiet()
+
+    def resetSTLReferenceValues(self):
+        activeprojectid =self.getProjectID()
+        myconnector = EditIncomesourcesReferenceData()
+        myconnector.resetStandardOfLivingModelData(activeprojectid)
+        self.getProjectStandardOfLiving()
 
     def getPorjects(self):
         ''' populate projects combobox with available projects'''
