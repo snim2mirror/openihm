@@ -49,7 +49,7 @@ class CurrencyManager( object ):
     def existsCurrency(self, name):
         """Check if currency 'name' exists
         """
-        currency = self.getCurrencyByName(name)
+        currency = Currency(currencyname=name)
         if not currency.name :
             return False
         else:
