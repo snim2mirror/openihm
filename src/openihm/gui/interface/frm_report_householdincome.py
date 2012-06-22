@@ -22,6 +22,7 @@ along with open-ihm.  If not, see <http://www.gnu.org/licenses/>.
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
+import operator
 
 # import packages
 Ui_HouseholdIncomeReport, base_class = uic.loadUiType("gui/designs/ui_report_householdincome.ui")
@@ -612,10 +613,28 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport, MDIDialogMixin):
 
     def writeTable(self):
         reporttable= self.getReportTable()
+        sortedtable = self.sortReportTable(reporttable)
         writer = HouseholdsIncomeWrite()
         reporttype = self.setReportType()
-        writer.writeSpreadsheetReport(reporttable,reporttype)
+        writer.writeSpreadsheetReport(sortedtable,reporttype)
 
     def setReportType(self):
         reporttype = self.cmbReportType.currentText()
         return reporttype
+    
+    def sortReportTable (self,reporttable):
+        totalincome = 0
+        if len(reporttable)!=0:
+            row = reporttable[0]
+            keylist = row.keys()
+            for row in reporttable:
+                for key in keylist:
+                    if key!='hhid':
+                        if row[key]:
+                            totalincome = totalincome + float(row[key])
+                row['incometotal'] = totalincome
+                totalincome = 0
+            reporttable.sort(key=operator.itemgetter('incometotal'))
+        return reporttable
+        
+         

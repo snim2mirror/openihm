@@ -201,24 +201,7 @@ ALTER TABLE `openihmdb`.`projectcharacteristics`
   ON DELETE CASCADE
   ON UPDATE CASCADE;
 
-ALTER TABLE `openihmdb`.`diet` ADD `modelprice` DOUBLE DEFAULT 0.0 AFTER priceperunit;
 
-ALTER TABLE `openihmdb`.`standardofliving` ADD modelprice DOUBLE DEFAULT 0.0 AFTER costperyear;
-
-ALTER TABLE `openihmdb`.`cropincome` ADD preferenceprice DOUBLE NULL DEFAULT '100' AFTER pid;
-ALTER TABLE `openihmdb`.`cropincome` ADD preferenceproduction DOUBLE NULL DEFAULT '100' AFTER preferenceprice;
-
-ALTER TABLE `openihmdb`.`wildfoods` ADD preferenceprice DOUBLE NULL DEFAULT '100' AFTER pid;
-ALTER TABLE `openihmdb`.`wildfoods` ADD preferenceproduction DOUBLE NULL DEFAULT '100' AFTER preferenceprice;
-
-ALTER TABLE `openihmdb`.`livestockincome` ADD preferenceprice DOUBLE NULL DEFAULT '100' AFTER pid;
-ALTER TABLE `openihmdb`.`livestockincome` ADD preferenceproduction DOUBLE NULL DEFAULT '100' AFTER preferenceprice;
-
-ALTER TABLE `openihmdb`.`employmentincome` ADD preferenceincome DOUBLE NULL DEFAULT '100' NULL DEFAULT '100' AFTER pid;
-
-ALTER TABLE `openihmdb`.`transfers` ADD preferenceprice DOUBLE NULL DEFAULT '100' AFTER priceperunit;
-ALTER TABLE `openihmdb`.`transfers` ADD preferenceproduction DOUBLE NULL DEFAULT '100' AFTER preferenceprice;  
-  
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
