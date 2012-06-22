@@ -36,6 +36,7 @@ class Currency:
              query = "SELECT * FROM currencies WHERE id=%s " % (id)
          else:
              query = "SELECT * FROM currencies WHERE currencyname='%s' " % (currencyname)
+         print query;
          rows = self.database.execSelectQuery( query )
          self.database.close()
          num = len(rows)
