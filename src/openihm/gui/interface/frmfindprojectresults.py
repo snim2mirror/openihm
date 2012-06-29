@@ -111,4 +111,20 @@ class FrmFindProjectResults(QDialog, Ui_FindProjectResults, TableViewMixin, MDID
         self.parent.actionClose_Project.setDisabled(False)
         self.parent.mdi.closeAllSubWindows()
         
-            
+    def deleteProject(self):
+        ''' Delete Selected Project '''
+        
+        selectedRow = self.getCurrentRow(self.tblResults)
+        pid 		= self.tblResults.model().item(selectedRow,0).text()
+        ptitle 		= self.tblResults.model().item(selectedRow,1).text()
+        
+        msg = "Are you sure you want to delete " +  ptitle + " project?"
+        
+        ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+        # if opening is rejected return
+        if ( ret == QMessageBox.No ):
+            return
+        
+        controller  = Controller()
+        controller.deleteProject(pid)
+        self.showResults()

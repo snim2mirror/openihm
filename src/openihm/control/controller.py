@@ -50,6 +50,13 @@ class Controller(CurrencyManager, GlobalCharacteristicsManager,  GlobalHousehold
         project = Project(pid)
         project.setData(projectname, startdate, enddate, description, currency)
         
+    def deleteProject(self, pid):
+        query = "DELETE FROM projects WHERE pid=%s" % pid
+        database = Database()
+        database.open()
+        database.execUpdateQuery( query )
+        database.close()
+        
     def addProjectCharacteristic(self, pid, characteristic, characteristictype, datatype):
         project = Project(pid)
         project.addCharacteristic(characteristic, characteristictype, datatype)
