@@ -81,7 +81,7 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
                 'database': 'openihmdb',
                 'user': 'openihm',
                 'password': 'ihm2010',
-                'charset', 'utf8',
+                'charset': 'utf8',
                 'use_unicode'   : True,
                 'get_warnings'  : True,
             }
