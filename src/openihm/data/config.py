@@ -25,25 +25,17 @@ class Config(object):
         includes.mysql.connector.Connect(**Config.dbinfo())
     """
     
-    HOST = 'localhost'
-    DATABASE = 'openihmdb'
-    USER = 'openihm'
-    PASSWORD = 'ihm2010'
-    PORT = 3306
+    """
+    Set the OpenIHMConfig object with the config options.
+    """
+    @classmethod
+    def set_config(cls, config_object):
+        cls.config = config_object
     
-    CHARSET = 'utf8'
-    UNICODE = True
-    WARNINGS = True
-    
+    """
+    Return the database configuration.
+    """
     @classmethod
     def dbinfo(cls):
-        return {
-            'host'          : cls.HOST,
-            'database'      : cls.DATABASE,
-            'user'          : cls.USER,
-            'password'      : cls.PASSWORD,
-            'charset'       : cls.CHARSET,
-            'use_unicode'   : cls.UNICODE,
-            'get_warnings'  : cls.WARNINGS,
-            }
+        return cls.config.dbinfo()
     
