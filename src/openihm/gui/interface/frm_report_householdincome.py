@@ -30,6 +30,7 @@ Ui_HouseholdIncomeReport, base_class = uic.loadUiType("gui/designs/ui_report_hou
 from data.report_settingsmanager import ReportsSettingsManager
 from outputs.routines.report_householdsincome import HouseholdIncome
 from outputs.routines.report_householdsincome_write import HouseholdsIncomeWrite
+from outputs.routines.report_disposable_income import DisposableHouseholdIncome
 
 from mixins import MDIDialogMixin
 
@@ -598,7 +599,7 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport, MDIDialogMixin):
     def getFinalReportTableQuery(self):
 
         projectid = self.getProjectID()
-        householdIDs = self.getReportHouseholdIDs()
+        householdIDs = self.getDISortedHouseholdIDs()
         cropdetails = self.getCropReportDetails()
         employmentdetails = self.getEmploymentReportDetails()
         livestockdetails = self.getLivestockReportDetails()
@@ -606,35 +607,31 @@ class HouseholdIncomeReport(QDialog, Ui_HouseholdIncomeReport, MDIDialogMixin):
         transferdetails = self.getTransfersDetails()
         wildfoodsdetails = self.getWildFoodDetails()
         reporttype = self.setReportType()
-
+        
         connector = HouseholdIncome()
         householdIDsQuery = connector.getFinalIncomeReportTableQuery(reporttype,projectid,householdIDs,cropdetails,employmentdetails, livestockdetails,loandetails,transferdetails,wildfoodsdetails )
         return householdIDsQuery
 
     def writeTable(self):
         reporttable= self.getReportTable()
-        sortedtable = self.sortReportTable(reporttable)
         writer = HouseholdsIncomeWrite()
         reporttype = self.setReportType()
-        writer.writeSpreadsheetReport(sortedtable,reporttype)
+        writer.writeSpreadsheetReport(reporttable,reporttype)
 
     def setReportType(self):
         reporttype = self.cmbReportType.currentText()
         return reporttype
     
-    def sortReportTable (self,reporttable):
-        totalincome = 0
-        if len(reporttable)!=0:
-            row = reporttable[0]
-            keylist = row.keys()
-            for row in reporttable:
-                for key in keylist:
-                    if key!='hhid':
-                        if row[key]:
-                            totalincome = totalincome + float(row[key])
-                row['incometotal'] = totalincome
-                totalincome = 0
-            reporttable.sort(key=operator.itemgetter('incometotal'))
-        return reporttable
+    def getDISortedHouseholdIDs(self):
+        """ Returns list of household IDs ordered according to DI/AE, from poorest to richest"""
+        householdIDs = self.getReportHouseholdIDs()
+        pid = self.getProjectID()
+        reporttype = 'DI/AE'
+        connector = DisposableHouseholdIncome()
+        disposableincome = connector.householdDisposableIncome(reporttype,pid,householdIDs)
+        houseids = []
+        for row in disposableincome:
+            houseids.append(row[0])
+        return houseids
         
          
