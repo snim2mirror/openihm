@@ -6,6 +6,7 @@ open-ihm/.eric4project/
 open-ihm/open-ihm.e4p
 open-ihm/.aliases
 .aliases
+.pythoscope
 
 open-ihm/openihmlog.txt
 syntax: glob
