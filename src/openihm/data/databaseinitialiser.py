@@ -106,8 +106,7 @@ class DatabaseInitialiser:
          commandlist = commands.split(';')
          sqlfile.close()
          try:
-             config = DbConfig(self.host, '', 'root', self.rootpwd)
-             dbinfo = config.dbinfo().copy()
+             dbinfo = self.config.superuser_dbinfo().copy()
              db = Connect(**dbinfo)             
              cursor = db.cursor()
 
