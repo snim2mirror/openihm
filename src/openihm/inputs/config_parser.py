@@ -68,3 +68,30 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
             }
         except ConfigParser.NoSectionError, e:
             return self.defaults
+
+    def dbinfo(self):
+        """
+        Returns a dictionary containing the database configuration
+        information.  In the format the Config object dbinfo method 
+        provided it.
+
+
+            {
+                'host': 'localhost',
+                'database': 'openihmdb',
+                'user': 'openihm',
+                'password': 'ihm2010',
+                'charset': 'utf8',
+                'use_unicode'   : True,
+                'get_warnings'  : True,
+            }
+        """
+        config = self.database_config()
+        # this makes the config consistent with what is currently returned.
+        for key in ['superuser_password', 'superuser', 'port']:
+            del config[key]
+        config['charset'] = 'utf8'
+        for key in ['use_unicode', 'get_warnings']:
+            config[key] = True
+        return config
+

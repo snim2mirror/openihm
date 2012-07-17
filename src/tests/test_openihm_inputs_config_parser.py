@@ -39,5 +39,18 @@ superuser_password = password
         }
         self.assertEqual(expected, open_ihm_config.database_config())
 
+    def test_database_config(self):
+        open_ihm_config = OpenIHMConfig()
+        expected = {
+            'host': 'localhost',
+            'database': 'openihmdb',
+            'user': 'openihm',
+            'password': 'ihm2010',
+            'charset': 'utf8',
+            'use_unicode': True,
+            'get_warnings': True,
+        }
+        self.assertEqual(expected, open_ihm_config.dbinfo())
+
 if __name__ == '__main__':
     unittest.main()

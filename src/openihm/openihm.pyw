@@ -31,6 +31,7 @@ import logging
 import logging.handlers
 import traceback
 from inputs.config_parser import OpenIHMConfig
+from data.config import Config
 
 CONFIGFILE = 'openihm.cfg'
 LOGFILE = 'openihmlog.txt'
@@ -43,6 +44,9 @@ def main():
 
      config = OpenIHMConfig()
      config.read(CONFIGFILE)
+     # also set the global Config options config.
+     Config.set_config(config)
+
      #
      # Start open-ihm.
      #

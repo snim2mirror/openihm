@@ -164,7 +164,7 @@ class TransferManager:
              project.addProjectDietItem(fooditem, unitofmeasure, percentage, priceperunit)
          
      def transferHouseholds(self, accessfilename, sourcepid, targetpid, startdate):
-         query = "SELECT HHID, HHRealName FROM TblHouseholds WHERE ProjectID=%s" % sourcepid
+         query = "SELECT HHID, HHName, HHRealName FROM TblHouseholds WHERE ProjectID=%s" % sourcepid
          
          db = AccessDB(accessfilename)
          db.open()
@@ -173,7 +173,7 @@ class TransferManager:
          project = self.getProject( targetpid )
          
          for row in rows:
-             household = project.addHousehold(row.HHID, row.HHRealName, startdate)
+             household = project.addHousehold(row.HHName, row.HHRealName, startdate)
              self.transferHouseholdChars( accessfilename, sourcepid,  row.HHID,  household ,  project)
              self.transferHouseholdMembers( accessfilename, sourcepid,  row.HHID,  household,  project )
              self.transferHouseholdAssets( accessfilename, sourcepid,  row.HHID,  household )
