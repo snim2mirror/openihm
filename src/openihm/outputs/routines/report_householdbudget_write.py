@@ -154,7 +154,7 @@ class HouseholdBudgetWrite:
 
         sheetNumber = 1
         listIndex = 0
-        
+
         for hid in selectedHouseholds:
             sheetName = 'sheet' + '%s' % sheetNumber
             sheetNumber = sheetNumber + 1
