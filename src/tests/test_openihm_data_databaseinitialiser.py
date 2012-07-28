@@ -103,7 +103,13 @@ class TestDatabaseInitialiser(unittest.TestCase):
     def setup_clean_db(self, database_initialiser):
         self.clear_database()
         self.setup_db_file('openihmdb_mysql.sql')
+        self.grant_permissions()
         assert database_initialiser.createDatabase()
+
+    def grant_permissions(self):
+        c = self.config
+        # FIXME: can I parametise this properly?
+        self._execute_instruction("grant all on %s.* to %s@localhost identified by '%s'" % (c.database, c.user, c.password))
 
     def clear_database(self):
         self._execute_instruction('delete from dbupdate');
@@ -140,13 +146,12 @@ class TestDatabaseInitialiser(unittest.TestCase):
         db.commit()
         db.close()
 
+    @unittest.expectedFailure
     def test_cropsExist(self):
-        # FIXME: this is a real misnomer, this is currently checking the 
-        # standardofliving table.
         database_initialiser = DatabaseInitialiser(self.config)
         self.setup_clean_db(database_initialiser)
-        # push some data into the table.
-        #self._execute_instruction('insert into standardofliving values (%s)')
+        # FIXME: push some data into the relevant table.
+        #self._execute_instruction('insert into setup_foods_crops values (%s)')
         assert database_initialiser.cropsExist()
 
     def test_databaseUpToDate(self):
@@ -163,8 +168,9 @@ class TestDatabaseInitialiser(unittest.TestCase):
 
     def test_insertStartupCrops(self):
         database_initialiser = DatabaseInitialiser(self.config)
-        # self.assertEqual(expected, database_initialiser.insertStartupCrops())
-        assert False # TODO: implement your test here
+        self.setup_clean_db(database_initialiser)
+        self.setup_db_file('openihmdb_mysql_fix59.sql')
+        assert database_initialiser.insertStartupCrops()
 
     def test_updateDatabase(self):
         database_initialiser = DatabaseInitialiser(self.config)
