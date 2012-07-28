@@ -161,9 +161,8 @@ class TestDatabaseInitialiser(unittest.TestCase):
 
     def test_initialiseDB(self):
         database_initialiser = DatabaseInitialiser(self.config)
-        # database_initialiser = DatabaseInitialiser(config)
-        # self.assertEqual(expected, database_initialiser.initialiseDB())
-        assert False # TODO: implement your test here
+        self.setup_clean_db(database_initialiser)
+        self.assertEqual({ 'mysqlstarted': True, 'dbinstalled' : True, 'dbuptodate' : True }, database_initialiser.initialiseDB())
 
     def test_insertStartupCrops(self):
         database_initialiser = DatabaseInitialiser(self.config)
@@ -173,9 +172,10 @@ class TestDatabaseInitialiser(unittest.TestCase):
 
     def test_updateDatabase(self):
         database_initialiser = DatabaseInitialiser(self.config)
-        # database_initialiser = DatabaseInitialiser(config)
-        # self.assertEqual(expected, database_initialiser.updateDatabase())
-        assert False # TODO: implement your test here
+        self.setup_clean_db(database_initialiser)
+        # this isn't much of a check...
+        # our coverage isn't very good.
+        assert database_initialiser.updateDatabase()
 
 if __name__ == '__main__':
     unittest.main()
