@@ -100,6 +100,37 @@ class TestDatabaseInitialiser(unittest.TestCase):
         self.setup_db_file('openihmdb_mysql.sql')
         assert database_initialiser.createDatabase()
 
+    @unittest.expectedFailure
+    def test_cropsExist(self):
+        database_initialiser = DatabaseInitialiser(self.config)
+        self.setup_clean_db(database_initialiser)
+        # FIXME: push some data into the relevant table.
+        #self._execute_instruction('insert into setup_foods_crops values (%s)')
+        assert database_initialiser.cropsExist()
+
+    def test_databaseUpToDate(self):
+        database_initialiser = DatabaseInitialiser(self.config)
+        self.setup_clean_db(database_initialiser)
+        assert database_initialiser.databaseUpToDate()
+
+    def test_initialiseDB(self):
+        database_initialiser = DatabaseInitialiser(self.config)
+        self.setup_clean_db(database_initialiser)
+        self.assertEqual({ 'mysqlstarted': True, 'dbinstalled' : True, 'dbuptodate' : True }, database_initialiser.initialiseDB())
+
+    def test_insertStartupCrops(self):
+        database_initialiser = DatabaseInitialiser(self.config)
+        self.setup_clean_db(database_initialiser)
+        self.setup_db_file('openihmdb_mysql_fix59.sql')
+        assert database_initialiser.insertStartupCrops()
+
+    def test_updateDatabase(self):
+        database_initialiser = DatabaseInitialiser(self.config)
+        self.setup_clean_db(database_initialiser)
+        # this isn't much of a check...
+        # our coverage isn't very good.
+        assert database_initialiser.updateDatabase()
+
     def setup_clean_db(self, database_initialiser):
         self.clear_database()
         self.setup_db_file('openihmdb_mysql.sql')
@@ -145,37 +176,6 @@ class TestDatabaseInitialiser(unittest.TestCase):
         cursor.execute(query, data);
         db.commit()
         db.close()
-
-    @unittest.expectedFailure
-    def test_cropsExist(self):
-        database_initialiser = DatabaseInitialiser(self.config)
-        self.setup_clean_db(database_initialiser)
-        # FIXME: push some data into the relevant table.
-        #self._execute_instruction('insert into setup_foods_crops values (%s)')
-        assert database_initialiser.cropsExist()
-
-    def test_databaseUpToDate(self):
-        database_initialiser = DatabaseInitialiser(self.config)
-        self.setup_clean_db(database_initialiser)
-        assert database_initialiser.databaseUpToDate()
-
-    def test_initialiseDB(self):
-        database_initialiser = DatabaseInitialiser(self.config)
-        self.setup_clean_db(database_initialiser)
-        self.assertEqual({ 'mysqlstarted': True, 'dbinstalled' : True, 'dbuptodate' : True }, database_initialiser.initialiseDB())
-
-    def test_insertStartupCrops(self):
-        database_initialiser = DatabaseInitialiser(self.config)
-        self.setup_clean_db(database_initialiser)
-        self.setup_db_file('openihmdb_mysql_fix59.sql')
-        assert database_initialiser.insertStartupCrops()
-
-    def test_updateDatabase(self):
-        database_initialiser = DatabaseInitialiser(self.config)
-        self.setup_clean_db(database_initialiser)
-        # this isn't much of a check...
-        # our coverage isn't very good.
-        assert database_initialiser.updateDatabase()
 
 if __name__ == '__main__':
     unittest.main()
