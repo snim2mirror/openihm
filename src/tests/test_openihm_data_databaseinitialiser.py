@@ -156,9 +156,8 @@ class TestDatabaseInitialiser(unittest.TestCase):
 
     def test_databaseUpToDate(self):
         database_initialiser = DatabaseInitialiser(self.config)
-        # database_initialiser = DatabaseInitialiser(config)
-        # self.assertEqual(expected, database_initialiser.databaseUpToDate())
-        assert False # TODO: implement your test here
+        self.setup_clean_db(database_initialiser)
+        assert database_initialiser.databaseUpToDate()
 
     def test_initialiseDB(self):
         database_initialiser = DatabaseInitialiser(self.config)
