@@ -56,7 +56,7 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
                 'superuser_password': '',
             }
         """
-        # FIXME: should we also be returning utf8 and warnings params 
+        # FIXME: should we also be returning utf8 and warnings params
         # here?
         try:
             return {
@@ -75,7 +75,7 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
     def dbinfo(self):
         """
         Returns a dictionary containing the database configuration
-        information.  In the format the Config object dbinfo method 
+        information.  In the format the Config object dbinfo method
         provided it.
 
 
@@ -97,4 +97,3 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
         for key in ['use_unicode', 'get_warnings']:
             config[key] = True
         return config
-
