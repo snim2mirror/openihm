@@ -93,16 +93,15 @@ class TestDatabaseInitialiser(unittest.TestCase):
         Config.set_config(config)
         self.dbconfig = config.database_config()
         self.config = DbConfig(**self.dbconfig)
+        self.create_database()
         # the module uses a lot of relative paths
         # assuming they are in the openihm directory
-        # FIXME: perhaps I should use a different directory to
-        # allow me to use a test version of the SQL schema.
         os.chdir('tests')
 
     def tearDown(self):
         # drop the database
+        self.drop_database()
         os.chdir('..')
-        pass
 
     def test___init__(self):
         database_initialiser = DatabaseInitialiser(self.config)
@@ -197,6 +196,21 @@ class TestDatabaseInitialiser(unittest.TestCase):
         db = Connect( **self.config.superuser_dbinfo().copy() )
         cursor = db.cursor()
         cursor.execute(query, data);
+        db.commit()
+        db.close()
+
+    def drop_database(self):
+        self._ddl_command('drop database ' + self.config.database);
+
+    def create_database(self):
+        self._ddl_command('create database ' + self.config.database);
+
+    def _ddl_command(self, query, params = None):
+        config = self.config.superuser_dbinfo().copy()
+        config['database'] = 'mysql'
+        db = Connect( **config )
+        cursor = db.cursor()
+        cursor.execute(query, params);
         db.commit()
         db.close()
 
