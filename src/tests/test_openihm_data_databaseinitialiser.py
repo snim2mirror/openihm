@@ -2,6 +2,7 @@ import unittest
 from openihm.data.databaseinitialiser import DatabaseInitialiser, DbConfig
 from openihm.inputs.config_parser import OpenIHMConfig
 from openihm.data.config import Config
+from includes.mysql.connector import errors
 from includes.mysql.connector import Connect
 import os
 
@@ -121,6 +122,7 @@ class TestDatabaseInitialiser(unittest.TestCase):
     def test_cropsExist(self):
         database_initialiser = DatabaseInitialiser(self.config)
         self.setup_clean_db(database_initialiser)
+        self.setup_db_file('openihmdb_mysql_fix59.sql')
         # FIXME: push some data into the relevant table.
         #self._execute_instruction('insert into setup_foods_crops values (%s)')
         assert database_initialiser.cropsExist()
@@ -160,7 +162,11 @@ class TestDatabaseInitialiser(unittest.TestCase):
         self._execute_instruction("grant all on %s.* to %s@localhost identified by '%s'" % (c.database, c.user, c.password))
 
     def clear_database(self):
-        self._execute_instruction('delete from dbupdate');
+        try:
+            self._execute_instruction('delete from dbupdate');
+        except errors.ProgrammingError, e:
+            # swallow these exceptions, we might be called when there is no database.
+            pass
 
     def setup_db_file(self, filename):
         # FIXME: this is all assuming the tests are run
