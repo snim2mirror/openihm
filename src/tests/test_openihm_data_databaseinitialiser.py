@@ -182,7 +182,7 @@ class TestDatabaseInitialiser(unittest.TestCase):
         remove_db_name = re.compile('`openihmdb`\.', re.I)
         skip_statements = (schema_create, use_statement, grant_statement)
         for line in f.readlines():
-            if not any([ x.match(line) for x in skip_statements ]):
+            if not any([x.match(line) for x in skip_statements]):
                 line = remove_db_name.sub('', line)
                 out.write(line)
         f.close()
@@ -190,26 +190,26 @@ class TestDatabaseInitialiser(unittest.TestCase):
 
     def _execute_instruction(self, query, data = None):
         """
-        Yet another wrapper around execute 
-        """ 
-        db = Connect( **self.config.superuser_dbinfo().copy() )
+        Yet another wrapper around execute
+        """
+        db = Connect(**self.config.superuser_dbinfo().copy())
         cursor = db.cursor()
-        cursor.execute(query, data);
+        cursor.execute(query, data)
         db.commit()
         db.close()
 
     def drop_database(self):
-        self._ddl_command('drop database ' + self.config.database);
+        self._ddl_command('drop database ' + self.config.database)
 
     def create_database(self):
-        self._ddl_command('create database ' + self.config.database);
+        self._ddl_command('create database ' + self.config.database)
 
     def _ddl_command(self, query, params = None):
         config = self.config.superuser_dbinfo().copy()
         config['database'] = 'mysql'
-        db = Connect( **config )
+        db = Connect(**config)
         cursor = db.cursor()
-        cursor.execute(query, params);
+        cursor.execute(query, params)
         db.commit()
         db.close()
 
