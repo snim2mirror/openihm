@@ -6,6 +6,7 @@ from includes.mysql.connector import errors
 from includes.mysql.connector import Connect
 import os
 
+
 class TestDbConfig(unittest.TestCase):
 
     def test___init__(self):
@@ -67,9 +68,10 @@ class TestDbConfig(unittest.TestCase):
         }
         self.assertEqual(expected, db_config.superuser_dbinfo())
 
+
 class TestDatabaseInitialiser(unittest.TestCase):
     """
-    In order to use these tests you need to have a config file named 
+    In order to use these tests you need to have a config file named
     test_openihm.cfg in the directory you are running the tests from
     (i.e. the src directory).
 
@@ -89,7 +91,8 @@ class TestDatabaseInitialiser(unittest.TestCase):
     def setUp(self):
         config = OpenIHMConfig()
         read = config.read('test_openihm.cfg')
-        self.assertEqual(len(read), 1, 'Need test_openihm.cfg setup with database parameters') 
+        self.assertEqual(len(read), 1,
+          'Need test_openihm.cfg setup with database parameters')
         Config.set_config(config)
         self.dbconfig = config.database_config()
         self.config = DbConfig(**self.dbconfig)
@@ -105,15 +108,14 @@ class TestDatabaseInitialiser(unittest.TestCase):
 
     def test___init__(self):
         database_initialiser = DatabaseInitialiser(self.config)
-        # FIXME: this test is probably bogus 
-        # we're really just checking we manage to create the 
+        # FIXME: this test is probably bogus
+        # we're really just checking we manage to create the
         # object okay.
-        expected = "latest update on 2012-05-16" 
+        expected = "latest update on 2012-05-16"
         self.assertEqual(expected, database_initialiser.latestupdatestring)
 
     def test_createDatabase(self):
         database_initialiser = DatabaseInitialiser(self.config)
-        self.clear_database()
         self.setup_db_file('openihmdb_mysql.sql')
         assert database_initialiser.createDatabase()
 
@@ -134,7 +136,10 @@ class TestDatabaseInitialiser(unittest.TestCase):
     def test_initialiseDB(self):
         database_initialiser = DatabaseInitialiser(self.config)
         self.setup_clean_db(database_initialiser)
-        self.assertEqual({ 'mysqlstarted': True, 'dbinstalled' : True, 'dbuptodate' : True }, database_initialiser.initialiseDB())
+        self.assertEqual({
+            'mysqlstarted': True,
+            'dbinstalled': True,
+            'dbuptodate': True}, database_initialiser.initialiseDB())
 
     def test_insertStartupCrops(self):
         database_initialiser = DatabaseInitialiser(self.config)
@@ -150,7 +155,6 @@ class TestDatabaseInitialiser(unittest.TestCase):
         assert database_initialiser.updateDatabase()
 
     def setup_clean_db(self, database_initialiser):
-        self.clear_database()
         self.setup_db_file('openihmdb_mysql.sql')
         self.grant_permissions()
         assert database_initialiser.createDatabase()
@@ -158,14 +162,9 @@ class TestDatabaseInitialiser(unittest.TestCase):
     def grant_permissions(self):
         c = self.config
         # FIXME: can I parametise this properly?
-        self._execute_instruction("grant all on %s.* to %s@localhost identified by '%s'" % (c.database, c.user, c.password))
-
-    def clear_database(self):
-        try:
-            self._execute_instruction('delete from dbupdate');
-        except errors.ProgrammingError, e:
-            # swallow these exceptions, we might be called when there is no database.
-            pass
+        self._execute_instruction(
+            "grant all on %s.* to %s@localhost identified by '%s'"
+            % (c.database, c.user, c.password))
 
     def setup_db_file(self, filename):
         # FIXME: this is all assuming the tests are run
