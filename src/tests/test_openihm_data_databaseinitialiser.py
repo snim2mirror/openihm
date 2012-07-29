@@ -188,7 +188,7 @@ class TestDatabaseInitialiser(unittest.TestCase):
         f.close()
         out.close()
 
-    def _execute_instruction(self, query, data = None):
+    def _execute_instruction(self, query, data=None):
         """
         Yet another wrapper around execute
         """
@@ -204,7 +204,7 @@ class TestDatabaseInitialiser(unittest.TestCase):
     def create_database(self):
         self._ddl_command('create database ' + self.config.database)
 
-    def _ddl_command(self, query, params = None):
+    def _ddl_command(self, query, params=None):
         config = self.config.superuser_dbinfo().copy()
         config['database'] = 'mysql'
         db = Connect(**config)
