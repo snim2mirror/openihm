@@ -127,6 +127,12 @@ class TestDatabaseInitialiser(unittest.TestCase):
         self.make_db_outofdate()
         assert not database_initialiser.databaseUpToDate()
 
+    def test_databaseUpToDate_fresh_db(self):
+        database_initialiser = DatabaseInitialiser(self.config)
+        self.helper.setup_clean_db()
+        self.helper.execute_instruction('delete from dbupdate')
+        assert database_initialiser.databaseUpToDate()
+
     def make_db_outofdate(self):
         updatestr = "latest update on %s" % (date.min.isoformat())
         self.helper.execute_instruction(
