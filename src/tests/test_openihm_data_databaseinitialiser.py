@@ -1,6 +1,7 @@
 import unittest
 from openihm.data.databaseinitialiser import DatabaseInitialiser, DbConfig
 from database_helper import DatabaseHelper
+from datetime import date
 
 
 class TestDbConfig(unittest.TestCase):
@@ -120,6 +121,17 @@ class TestDatabaseInitialiser(unittest.TestCase):
         self.helper.setup_clean_db()
         assert database_initialiser.databaseUpToDate()
 
+    def test_databaseUpToDate_needupdate(self):
+        database_initialiser = DatabaseInitialiser(self.config)
+        self.helper.setup_clean_db()
+        self.make_db_outofdate()
+        assert not database_initialiser.databaseUpToDate()
+
+    def make_db_outofdate(self):
+        updatestr = "latest update on %s" % (date.min.isoformat())
+        self.helper.execute_instruction(
+            "update dbupdate set lastupdate = %s", [updatestr])
+
     def test_initialiseDB(self):
         database_initialiser = DatabaseInitialiser(self.config)
         self.helper.setup_clean_db()
@@ -139,6 +151,13 @@ class TestDatabaseInitialiser(unittest.TestCase):
         self.helper.setup_clean_db()
         # this isn't much of a check...
         # our coverage isn't very good.
+        assert database_initialiser.updateDatabase()
+
+    def test_updateDatabase_needs_update(self):
+        database_initialiser = DatabaseInitialiser(self.config)
+        self.helper.setup_clean_db()
+        self.make_db_outofdate()
+        self.helper.setup_db_file('openihmdb_mysql_update.sql')
         assert database_initialiser.updateDatabase()
 
 

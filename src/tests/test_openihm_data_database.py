@@ -64,7 +64,7 @@ class TestDatabase(unittest.TestCase):
 
     def test_execSelectQuery(self):
         self.helper.setup_clean_db()
-        self.helper._execute_instruction("""
+        self.helper.execute_instruction("""
             insert into projects
                 (projectname, startdate, enddate, description, currency)
             values

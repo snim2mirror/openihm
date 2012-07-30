@@ -40,7 +40,7 @@ class DatabaseHelper(object):
     def grant_permissions(self):
         c = self.config
         # FIXME: can I parametise this properly?
-        self._execute_instruction(
+        self.execute_instruction(
             "grant all on %s.* to %s@localhost identified by '%s'"
             % (c.database, c.user, c.password))
 
@@ -66,7 +66,7 @@ class DatabaseHelper(object):
         f.close()
         out.close()
 
-    def _execute_instruction(self, query, data=None):
+    def execute_instruction(self, query, data=None):
         """
         Yet another wrapper around execute
         """
