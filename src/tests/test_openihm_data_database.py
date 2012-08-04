@@ -1,7 +1,6 @@
 import unittest
 from database_helper import DatabaseHelper
 from openihm.data.database import Database
-import os
 
 
 class TestDatabase(unittest.TestCase):
@@ -86,6 +85,7 @@ class TestDatabase(unittest.TestCase):
             values
                 ('test', 2012-06-04, 2013-07-03, 'a simple test', 'GBP')""")
         query = 'select * from projects'
+        # FIXME: the None's look hinky.
         self.assertEqual([(2, u'test', None, None, u'a simple test', u'GBP')],
                         database.execSelectQuery(query))
         database.close()
