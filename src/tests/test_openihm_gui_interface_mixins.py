@@ -1,6 +1,6 @@
 import unittest
-from openihm.gui.interface.mixins import *
 from database_helper import DatabaseHelper
+from openihm.gui.interface.mixins import TableViewMixin, MDIDialogMixin, MySQLMixin
 
 
 class Fake(TableViewMixin):
@@ -60,8 +60,9 @@ class TestMDIDialogMixin(unittest.TestCase):
 
     def test_setMdi(self):
         m_di_dialog_mixin = FakeMDI()
+        mdi = FakeMDI()
         m_di_dialog_mixin.setMdi(mdi)
-        self.assertEqual(expected, m_di_dialog_mixin.mdi)
+        self.assertEqual(mdi, m_di_dialog_mixin.mdi)
 
 
 class TestMySQLMixin(unittest.TestCase):
@@ -84,10 +85,8 @@ class TestMySQLMixin(unittest.TestCase):
     """
 
     def setUp(self):
-        import pdb; pdb.set_trace()
         self.helper = DatabaseHelper(self)
         self.helper.start_tests()
-        
 
     def tearDown(self):
         # drop the database
