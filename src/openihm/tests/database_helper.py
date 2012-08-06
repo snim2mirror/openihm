@@ -1,4 +1,4 @@
-import os
+import os, sys
 from data.config import Config
 from inputs.config_parser import OpenIHMConfig
 from includes.mysql.connector import errors
@@ -13,7 +13,9 @@ class DatabaseHelper(object):
     # assuming they are in the openihm directory
     def __init__(self, unittest):
         config = OpenIHMConfig()
-        read = config.read('test_openihm.cfg')
+        self.test_dir = sys.path[0]
+        config_file = os.path.join(self.test_dir, '..', 'test_openihm.cfg')
+        read = config.read(config_file)
         unittest.assertEqual(len(read), 1,
           'Need test_openihm.cfg setup with database parameters')
         Config.set_config(config)
@@ -24,12 +26,13 @@ class DatabaseHelper(object):
         return self.config
 
     def start_tests(self):
-        os.chdir('tests')
+        self.prev_path = os.getcwd()
+        os.chdir(self.test_dir)
         self.create_database()
 
     def end_tests(self):
         self.drop_database()
-        os.chdir('..')
+        os.chdir(self.prev_path)
 
     def setup_clean_db(self):
         database_initialiser = DatabaseInitialiser(self.config)
