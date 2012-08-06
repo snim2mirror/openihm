@@ -153,6 +153,8 @@ class TestDatabaseInitialiser(unittest.TestCase):
         assert database_initialiser.insertStartupCrops()
 
     def test_updateDatabase(self):
+        # NOTE: it might be worth adding a test that compares the new
+        # database to the updated database to check they match.
         database_initialiser = DatabaseInitialiser(self.config)
         self.helper.setup_clean_db()
         # this isn't much of a check...
