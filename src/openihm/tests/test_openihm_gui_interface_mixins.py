@@ -1,6 +1,6 @@
 import unittest
 from database_helper import DatabaseHelper
-from gui.interface.mixins import TableViewMixin, MDIDialogMixin, MySQLMixin
+from gui.interface.mixins import TableViewMixin, MDIDialogMixin, DataEntryMixin
 
 
 class Fake(TableViewMixin):
@@ -67,24 +67,22 @@ class TestMDIDialogMixin(unittest.TestCase):
 
 class TestDataEntryMixin(unittest.TestCase):
     def test_getDbString(self):
-        # data_entry_mixin = DataEntryMixin()
-        # self.assertEqual(expected, data_entry_mixin.getDbString(strSeed))
-        assert False # TODO: implement your test here
+        data_entry_mixin = DataEntryMixin()
+        self.assertEqual("donxxxt really want this", 
+            data_entry_mixin.getDbString("don't really want this"))
 
     def test_getIntMonth(self):
-        # data_entry_mixin = DataEntryMixin()
-        # self.assertEqual(expected, data_entry_mixin.getIntMonth(month))
-        assert False # TODO: implement your test here
+        data_entry_mixin = DataEntryMixin()
+        self.assertEqual("6", data_entry_mixin.getIntMonth("June"))
 
     def test_getStringMonth(self):
-        # data_entry_mixin = DataEntryMixin()
-        # self.assertEqual(expected, data_entry_mixin.getStringMonth(month))
-        assert False # TODO: implement your test here
+        data_entry_mixin = DataEntryMixin()
+        self.assertEqual('June', data_entry_mixin.getStringMonth("6"))
 
     def test_getViewString(self):
-        # data_entry_mixin = DataEntryMixin()
-        # self.assertEqual(expected, data_entry_mixin.getViewString(strSeed))
-        assert False # TODO: implement your test here
+        data_entry_mixin = DataEntryMixin()
+        self.assertEqual("don't really want this", 
+            data_entry_mixin.getViewString("donxxxt really want this"))
 
 if __name__ == '__main__':
     unittest.main()
