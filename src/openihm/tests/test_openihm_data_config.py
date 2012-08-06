@@ -1,5 +1,5 @@
 import unittest
-from openihm.data.config import Config
+from data.config import Config
 
 
 class dummy_config:

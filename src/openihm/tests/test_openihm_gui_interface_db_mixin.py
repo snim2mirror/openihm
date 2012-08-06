@@ -1,6 +1,6 @@
 import unittest
+from gui.interface.mixins import MySQLMixin
 from database_helper import DatabaseHelper
-from openihm.gui.interface.mixins import MySQLMixin
 
 
 class TestMySQLMixin(unittest.TestCase):
@@ -33,9 +33,11 @@ class TestMySQLMixin(unittest.TestCase):
     def test_executeMultipleResultsQueries(self):
         # my_sql_mixin = MySQLMixin()
         # self.assertEqual(expected, my_sql_mixin.executeMultipleResultsQueries(queries))
+        #pass
         assert False # TODO: implement your test here
 
     def test_executeMultipleUpdateQueries(self):
+        self.helper.setup_clean_db()
         my_sql_mixin = MySQLMixin()
         queries = [
         """
@@ -52,7 +54,7 @@ class TestMySQLMixin(unittest.TestCase):
         my_sql_mixin.executeMultipleUpdateQueries(queries)
         expected = [
             (u'test', None, None, u'a simple test', u'GBP'),
-            (u'test2', None, None, u'a simple test', u'GBP')
+            (u'test2', None, None, u'simple test', u'AUS')
         ]
         query = """
         select projectname, startdate, enddate, description, currency
@@ -60,9 +62,9 @@ class TestMySQLMixin(unittest.TestCase):
         """
         # FIXME: the None's look hinky.
         self.assertEqual(expected, my_sql_mixin.executeResultsQuery(query))
-        assert False # TODO: implement your test here
 
     def test_executeResultsQuery(self):
+        self.helper.setup_clean_db()
         my_sql_mixin = MySQLMixin()
         my_sql_mixin.executeUpdateQuery("""
             insert into projects
@@ -75,6 +77,7 @@ class TestMySQLMixin(unittest.TestCase):
         self.assertEqual(expected, my_sql_mixin.executeResultsQuery(query))
 
     def test_executeUpdateQuery(self):
+        self.helper.setup_clean_db()
         my_sql_mixin = MySQLMixin()
         my_sql_mixin.executeUpdateQuery("""
             insert into projects

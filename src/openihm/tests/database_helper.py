@@ -1,10 +1,10 @@
 import os
-from openihm.data.config import Config
-from openihm.inputs.config_parser import OpenIHMConfig
+from data.config import Config
+from inputs.config_parser import OpenIHMConfig
 from includes.mysql.connector import errors
 from includes.mysql.connector import Connect
-from openihm.data.databaseinitialiser import DatabaseInitialiser, DbConfig
-from openihm.inputs.config_parser import OpenIHMConfig
+from data.databaseinitialiser import DatabaseInitialiser, DbConfig
+from inputs.config_parser import OpenIHMConfig
 
 
 class DatabaseHelper(object):
@@ -50,7 +50,7 @@ class DatabaseHelper(object):
         base_components = ['data', 'scripts']
         base_path = os.path.join(*base_components)
         script = os.path.join(base_path, filename)
-        source_script = os.path.join('..', 'openihm', base_path, filename)
+        source_script = os.path.join('..', base_path, filename)
         f = open(source_script, 'r')
         out = open(script, 'w')
         import re

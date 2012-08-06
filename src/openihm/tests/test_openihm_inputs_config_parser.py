@@ -1,5 +1,5 @@
 import unittest
-from openihm.inputs.config_parser import OpenIHMConfig
+from inputs.config_parser import OpenIHMConfig
 import io
 
 class TestOpenIHMConfig(unittest.TestCase):

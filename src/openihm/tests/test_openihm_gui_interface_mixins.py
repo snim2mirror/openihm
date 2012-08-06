@@ -1,6 +1,6 @@
 import unittest
 from database_helper import DatabaseHelper
-from openihm.gui.interface.mixins import TableViewMixin, MDIDialogMixin, MySQLMixin
+from gui.interface.mixins import TableViewMixin, MDIDialogMixin, MySQLMixin
 
 
 class Fake(TableViewMixin):

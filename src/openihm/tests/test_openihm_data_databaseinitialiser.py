@@ -1,5 +1,5 @@
 import unittest
-from openihm.data.databaseinitialiser import DatabaseInitialiser, DbConfig
+from data.databaseinitialiser import DatabaseInitialiser, DbConfig
 from database_helper import DatabaseHelper
 from datetime import date
 

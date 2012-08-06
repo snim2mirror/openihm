@@ -1,6 +1,7 @@
 import unittest
 from database_helper import DatabaseHelper
-from openihm.data.database import Database
+from data.database import Database
+from data.config import Config
 
 
 class TestDatabase(unittest.TestCase):
