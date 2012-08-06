@@ -56,7 +56,7 @@ class TestDatabase(unittest.TestCase):
         database.open()
         database.execDefinitionQuery('create table simples (test int)')
         database.close()
-        # and just to provie it's there to put something into.
+        # and just to prove it's there to put something into.
         database.open()
         database.execUpdateQuery('insert into simples values (3)')
         database.close()
