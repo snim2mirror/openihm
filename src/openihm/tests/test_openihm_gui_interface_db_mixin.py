@@ -31,10 +31,37 @@ class TestMySQLMixin(unittest.TestCase):
         self.helper.end_tests()
 
     def test_executeMultipleResultsQueries(self):
-        # my_sql_mixin = MySQLMixin()
-        # self.assertEqual(expected, my_sql_mixin.executeMultipleResultsQueries(queries))
-        #pass
-        assert False # TODO: implement your test here
+        self.helper.setup_clean_db()
+        mixin = MySQLMixin()
+        queries = [
+        """
+            insert into projects
+                (projectname, startdate, enddate, description, currency)
+            values
+                ('test', 2012-06-04, 2013-07-03, 'a simple test', 'GBP')""",
+        """
+            insert into projects
+                (projectname, startdate, enddate, description, currency)
+            values
+                ('test2', 2012-06-04, 2013-07-03, 'simple test', 'AUS')""",
+        ]
+        mixin.executeMultipleUpdateQueries(queries)
+        expected = [
+            [(u'test', None, None, u'a simple test', u'GBP')],
+            [(u'test2', None, None, u'simple test', u'AUS')]
+        ]
+        s_queries = [
+        """
+        select projectname, startdate, enddate, description, currency
+        from projects limit 1
+        """,
+        """
+        select projectname, startdate, enddate, description, currency
+        from projects limit 1 offset 1
+        """,
+        ]
+        # FIXME: the None's look hinky.
+        self.assertEqual(expected, mixin.executeMultipleResultsQueries(s_queries))
 
     def test_executeMultipleUpdateQueries(self):
         self.helper.setup_clean_db()
