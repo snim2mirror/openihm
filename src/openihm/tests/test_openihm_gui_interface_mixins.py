@@ -68,7 +68,7 @@ class TestMDIDialogMixin(unittest.TestCase):
 class TestDataEntryMixin(unittest.TestCase):
     def test_getDbString(self):
         data_entry_mixin = DataEntryMixin()
-        self.assertEqual("donxxxt really want this", 
+        self.assertEqual("donxxxt really want this",
             data_entry_mixin.getDbString("don't really want this"))
 
     def test_getIntMonth(self):
@@ -81,7 +81,7 @@ class TestDataEntryMixin(unittest.TestCase):
 
     def test_getViewString(self):
         data_entry_mixin = DataEntryMixin()
-        self.assertEqual("don't really want this", 
+        self.assertEqual("don't really want this",
             data_entry_mixin.getViewString("donxxxt really want this"))
 
 if __name__ == '__main__':

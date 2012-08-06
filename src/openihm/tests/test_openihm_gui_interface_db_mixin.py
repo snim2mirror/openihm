@@ -46,7 +46,7 @@ class TestMySQLMixin(unittest.TestCase):
                 ('test2', 2012-06-04, 2013-07-03, 'simple test', 'AUS')""",
         ]
         mixin.executeMultipleUpdateQueries(queries)
-        expected = [
+        exp = [
             [(u'test', None, None, u'a simple test', u'GBP')],
             [(u'test2', None, None, u'simple test', u'AUS')]
         ]
@@ -61,7 +61,7 @@ class TestMySQLMixin(unittest.TestCase):
         """,
         ]
         # FIXME: the None's look hinky.
-        self.assertEqual(expected, mixin.executeMultipleResultsQueries(s_queries))
+        self.assertEqual(exp, mixin.executeMultipleResultsQueries(s_queries))
 
     def test_executeMultipleUpdateQueries(self):
         self.helper.setup_clean_db()
