@@ -103,6 +103,20 @@ class TestMySQLMixin(unittest.TestCase):
         # FIXME: the None's look hinky.
         self.assertEqual(expected, my_sql_mixin.executeResultsQuery(query))
 
+    def test_executeUpdateQueryWithParams(self):
+        self.helper.setup_clean_db()
+        my_sql_mixin = MySQLMixin()
+        p = ['test3', 'description', 'LIR']
+        my_sql_mixin.executeUpdateQuery("""
+            insert into projects
+                (projectname, startdate, enddate, description, currency)
+            values
+                (%s, 2012-06-04, 2013-07-03, %s, %s)""", p)
+        expected = [(2, u'test3', None, None, u'description', u'LIR')]
+        query = 'select * from projects'
+        # FIXME: the None's look hinky.
+        self.assertEqual(expected, my_sql_mixin.executeResultsQuery(query))
+
     def test_executeUpdateQuery(self):
         self.helper.setup_clean_db()
         my_sql_mixin = MySQLMixin()
