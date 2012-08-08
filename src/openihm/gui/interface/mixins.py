@@ -23,26 +23,27 @@ from PyQt4.QtGui import *
 
 import includes.mysql.connector as connector
 from data.config import Config
-    
+
+
 class TableViewMixin(object):
 
     def countRowsSelected(self, tblVw):
-         selectedRows = self.getSelectedRows(tblVw)
-         return len(selectedRows)
+        selectedRows = self.getSelectedRows(tblVw)
+        return len(selectedRows)
 
     def getSelectedRows(self, tblVw):
-         selectedRows = []
-         selectedIndexes = tblVw.selectedIndexes()
+        selectedRows = []
+        selectedIndexes = tblVw.selectedIndexes()
 
-         for indexVal in selectedIndexes:
-             if indexVal.row() not in selectedRows:
-                 selectedRows.append(indexVal.row())
+        for indexVal in selectedIndexes:
+            if indexVal.row() not in selectedRows:
+                selectedRows.append(indexVal.row())
 
-         return selectedRows
+        return selectedRows
 
     def getCurrentRow(self, tblVw):
-         indexVal = tblVw.currentIndex()
-         return indexVal.row()
+        indexVal = tblVw.currentIndex()
+        return indexVal.row()
 
 
 class MDIDialogMixin(object):
@@ -51,15 +52,16 @@ class MDIDialogMixin(object):
 
     def setMdi(self, mdi):
         self.mdi = mdi
-        
+
     def mdiClose(self):
         """Close this dialog box.
-        
+
         The dialog may be the active sub-window of an MDI area, or not.
         """
         if hasattr(self, 'mdi') and self.mdi is not None:
             self.mdi.closeActiveSubWindow()
-        elif hasattr(self, 'parent') and hasattr(self.parent, 'closeActiveSubWindow'):
+        elif hasattr(self, 'parent') and hasattr(self.parent,
+                                        'closeActiveSubWindow'):
             self.parent.closeActiveSubWindow()
         elif hasattr(self, 'parent') and hasattr(self.parent, 'mdi'):
             self.parent.mdi.closeActiveSubWindow()
@@ -74,7 +76,7 @@ class MySQLMixin(object):
     TODO: move this from the gui package to a model (as in MVC) package.
     """
 
-    def executeUpdateQuery(self, query, params = None):
+    def executeUpdateQuery(self, query, params=None):
         """Execute a query that needs to be committed to the database.
         For example, an INSERT or UPDATE query.
         """
@@ -83,7 +85,8 @@ class MySQLMixin(object):
         cursor = db.cursor()
         # turn any QStrings to python strings.
         if params:
-            converted_qt = [(isinstance(x, QString) and str(x)) or x for x in params]
+            converted_qt = [(isinstance(x, QString) and str(x)) or x
+                                                        for x in params]
         else:
             converted_qt = None
         cursor.execute(query, converted_qt)
@@ -91,13 +94,13 @@ class MySQLMixin(object):
         cursor.close()
         db.close()
         return
-    
+
     def executeResultsQuery(self, query):
         """Execute a query for which the database will return results.
         For example a SELECT query.
         """
         config = Config.dbinfo().copy()
-        db = connector.Connect(**config)              
+        db = connector.Connect(**config)
         cursor = db.cursor()
         cursor.execute(query)
         results = cursor.fetchall()
@@ -105,14 +108,12 @@ class MySQLMixin(object):
         db.close()
         return results
 
-    
     def executeMultipleUpdateQueries(self, queries):
         """This method is idential to self.executeUpdateQuery
         except that it takes a list of query strings and executes each in turn
         """
         config = Config.dbinfo().copy()
-        db = connector.Connect(**config)   
-        
+        db = connector.Connect(**config)
         cursor = db.cursor()
         for query in queries:
             cursor.execute(query)
@@ -126,9 +127,9 @@ class MySQLMixin(object):
         except that it takes a list of query strings, executes each in turn
         and returns a corresponding list of results.
         """
-        results = []        
+        results = []
         config = Config.dbinfo().copy()
-        db = connector.Connect(**config)             
+        db = connector.Connect(**config)
         cursor = db.cursor()
         for query in queries:
             cursor.execute(query)
@@ -137,24 +138,24 @@ class MySQLMixin(object):
         cursor.close()
         db.close()
         return results
-    
-    
+
+
 class DataEntryMixin(object):
-    
+
     def getDbString(self, strSeed):
-         return strSeed.replace("'", "xxx")
+        return strSeed.replace("'", "xxx")
 
     def getViewString(self, strSeed):
-         return strSeed.replace("xxx", "'")
+        return strSeed.replace("xxx", "'")
 
     def getStringMonth(self, month):
-        return {"1" : "January","2" : "February", "3" : "March", "4" : "April",
-                "5" : "May","6" : "June", "7" : "July","8" : "August",
-                "9" : "September","10" : "October","11" : "November",
-                "12" : "December"}[month]
+        return {"1": "January", "2": "February",  "3": "March",  "4": "April",
+                "5": "May", "6": "June",  "7": "July", "8": "August",
+                "9": "September", "10": "October", "11": "November",
+                "12": "December"}[month]
 
     def getIntMonth(self, month):
-        return {"January":"1","February":"2","March": "3", "April":"4" ,
-                 "May":"5" ,"June":"6", "July":"7","August":"8",
-                 "September":"9","October":"10","November":"11" ,
-                 "December":"12"}[month]
+        return {"January":  "1", "February": "2", "March":  "3", "April": "4",
+                 "May": "5", "June": "6", "July": "7", "August": "8",
+                 "September": "9", "October": "10", "November": "11",
+                 "December": "12"}[month]
