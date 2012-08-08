@@ -37,14 +37,14 @@ class TestMySQLMixin(unittest.TestCase):
         queries = [
         """
             insert into projects
-                (projectname, startdate, enddate, description, currency)
+                (projectname, description, currency)
             values
-                ('test', 2012-06-04, 2013-07-03, 'a simple test', 'GBP')""",
+                ('test', 'a simple test', 'GBP')""",
         """
             insert into projects
-                (projectname, startdate, enddate, description, currency)
+                (projectname, description, currency)
             values
-                ('test2', 2012-06-04, 2013-07-03, 'simple test', 'AUS')""",
+                ('test2', 'simple test', 'AUS')""",
         ]
         mixin.executeMultipleUpdateQueries(queries)
         exp = [
@@ -61,7 +61,6 @@ class TestMySQLMixin(unittest.TestCase):
         from projects limit 1 offset 1
         """,
         ]
-        # FIXME: the None's look hinky.
         self.assertEqual(exp, mixin.executeMultipleResultsQueries(s_queries))
 
     def test_executeMultipleUpdateQueries(self):
@@ -70,14 +69,14 @@ class TestMySQLMixin(unittest.TestCase):
         queries = [
         """
             insert into projects
-                (projectname, startdate, enddate, description, currency)
+                (projectname, description, currency)
             values
-                ('test', 2012-06-04, 2013-07-03, 'a simple test', 'GBP')""",
+                ('test', 'a simple test', 'GBP')""",
         """
             insert into projects
-                (projectname, startdate, enddate, description, currency)
+                (projectname, description, currency)
             values
-                ('test2', 2012-06-04, 2013-07-03, 'simple test', 'AUS')""",
+                ('test2', 'simple test', 'AUS')""",
         ]
         my_sql_mixin.executeMultipleUpdateQueries(queries)
         expected = [
@@ -88,7 +87,6 @@ class TestMySQLMixin(unittest.TestCase):
         select projectname, startdate, enddate, description, currency
         from projects
         """
-        # FIXME: the None's look hinky.
         self.assertEqual(expected, my_sql_mixin.executeResultsQuery(query))
 
     def test_executeResultsQuery(self):
@@ -96,12 +94,11 @@ class TestMySQLMixin(unittest.TestCase):
         my_sql_mixin = MySQLMixin()
         my_sql_mixin.executeUpdateQuery("""
             insert into projects
-                (projectname, startdate, enddate, description, currency)
+                (projectname, description, currency)
             values
-                ('test', 2012-06-04, 2013-07-03, 'a simple test', 'GBP')""")
+                ('test', 'a simple test', 'GBP')""")
         expected = [(2, u'test', None, None, u'a simple test', u'GBP')]
         query = 'select * from projects'
-        # FIXME: the None's look hinky.
         self.assertEqual(expected, my_sql_mixin.executeResultsQuery(query))
 
     def test_executeUpdateQueryWithParams(self):
@@ -116,7 +113,6 @@ class TestMySQLMixin(unittest.TestCase):
         expected = [(2, u'test3', datetime.date(2012, 6, 4),
                     datetime.date(2013, 7, 3), u'description', u'LIR')]
         query = 'select * from projects'
-        # FIXME: the None's look hinky.
         self.assertEqual(expected, my_sql_mixin.executeResultsQuery(query))
 
     def test_executeUpdateQuery(self):
@@ -124,12 +120,11 @@ class TestMySQLMixin(unittest.TestCase):
         my_sql_mixin = MySQLMixin()
         my_sql_mixin.executeUpdateQuery("""
             insert into projects
-                (projectname, startdate, enddate, description, currency)
+                (projectname, description, currency)
             values
-                ('test', 2012-06-04, 2013-07-03, 'a simple test', 'GBP')""")
+                ('test', 'a simple test', 'GBP')""")
         expected = [(2, u'test', None, None, u'a simple test', u'GBP')]
         query = 'select * from projects'
-        # FIXME: the None's look hinky.
         self.assertEqual(expected, my_sql_mixin.executeResultsQuery(query))
 
 
