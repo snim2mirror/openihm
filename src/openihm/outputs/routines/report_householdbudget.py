@@ -22,6 +22,7 @@ from report_adultequivalent import AdultEquivalent
 from data.report_settingsmanager import ReportsSettingsManager
 from PyQt4 import QtGui
 import datetime
+from outputs.routines.report_livingthreshold import LivingThreshhold 
 
 class HouseholdBudget:
     def getHouseholdMembership(self,projectid,selectedHouseholds):
@@ -232,11 +233,13 @@ class HouseholdBudget:
     def getnonFoodExepenses(self,projectid,hid):
         '''Get household non-food expenses'''
         expenses = 0
-        query = ''' SELECT SUM(priceperunit * totalunits) AS householdepenses FROM expenditure WHERE pid=%s AND hhid=%s''' % (projectid,hid)
-        recset = self.executeQuery(query)
-        for row in recset:
-            if row[0]:
-                expenses = row[0]
+        #query = ''' SELECT SUM(priceperunit * totalunits) AS householdepenses FROM expenditure WHERE pid=%s AND hhid=%s''' % (projectid,hid)
+        #recset = self.executeQuery(query)
+        #for row in recset:
+        #   if row[0]:
+        #       expenses = row[0]
+        connector = LivingThreshhold()
+        expenses = connector.getHouseholdExpenditure(projectid,hid)
         return expenses
             
     def householdBudgetSummaries(self,projectid,selectedHouseholds):

@@ -26,10 +26,15 @@ class HouseholdIncomeQuery:
     def buildFinalReportQuery (self,projectid,householdIDs,cropsQuery,employmentQuery,livestockQuery,loansQuery,transfersQuery,wildfoodsQuery):
         
         householdids = ','.join(householdIDs)
+        temphouseidsortorder = ['hhid']
+        for i in range (0, len(householdIDs)):
+                    temphouseidsortorder.append(householdIDs[i])
+        householdidsorder = ','.join(temphouseidsortorder)
+                        
         if len(householdIDs)!=0:
             
             if cropsQuery !='' or employmentQuery!='' or livestockQuery !='' or loansQuery !='' or transfersQuery !='' or wildfoodsQuery !='':
-                self.query  = '''SELECT hhid from households WHERE hhid IN (%s) and pid =%s''' % (householdids,projectid)
+                self.query  = '''SELECT hhid from households WHERE hhid IN (%s) and pid =%s ORDER BY FIELD (%s) ''' % (householdids,projectid,householdidsorder)
                 if cropsQuery !='':
                     self.query  = '''SELECT * FROM ((%s) table1 LEFT JOIN (%s) table2 USING (hhid) )''' % (self.query,cropsQuery)
                 if employmentQuery!='':
@@ -44,5 +49,4 @@ class HouseholdIncomeQuery:
                     self.query  = '''SELECT * FROM ((%s) table1 LEFT JOIN (%s) table2 USING (hhid) )''' % (self.query,wildfoodsQuery)
             else:
                 QtGui.QMessageBox.information(None,"Households By Income Source","No Income sources Selected")
-
         return self.query 
