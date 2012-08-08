@@ -23,6 +23,7 @@ from PyQt4.QtGui import *
 
 import includes.mysql.connector as connector
 from data.config import Config
+from data.param_conversion import ParamsUtility
 
 
 class TableViewMixin(object):
@@ -83,12 +84,7 @@ class MySQLMixin(object):
         config = Config.dbinfo().copy()
         db = connector.Connect(**config)
         cursor = db.cursor()
-        # turn any QStrings to python strings.
-        if params:
-            converted_qt = [(isinstance(x, QString) and str(x)) or x
-                                                        for x in params]
-        else:
-            converted_qt = None
+        converted_qt = ParamsUtility.make_parameters_safe(params)
         cursor.execute(query, converted_qt)
         db.commit()
         cursor.close()
