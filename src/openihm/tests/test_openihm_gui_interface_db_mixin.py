@@ -1,4 +1,5 @@
 import unittest
+import datetime
 from gui.interface.mixins import MySQLMixin
 from database_helper import DatabaseHelper
 
@@ -106,13 +107,14 @@ class TestMySQLMixin(unittest.TestCase):
     def test_executeUpdateQueryWithParams(self):
         self.helper.setup_clean_db()
         my_sql_mixin = MySQLMixin()
-        p = ['test3', 'description', 'LIR']
+        p = ['test3', '2012-06-04', 'description', 'LIR']
         my_sql_mixin.executeUpdateQuery("""
             insert into projects
                 (projectname, startdate, enddate, description, currency)
             values
-                (%s, 2012-06-04, 2013-07-03, %s, %s)""", p)
-        expected = [(2, u'test3', None, None, u'description', u'LIR')]
+                (%s, %s, '2013-07-03', %s, %s)""", p)
+        expected = [(2, u'test3', datetime.date(2012, 6, 4),
+                    datetime.date(2013, 7, 3), u'description', u'LIR')]
         query = 'select * from projects'
         # FIXME: the None's look hinky.
         self.assertEqual(expected, my_sql_mixin.executeResultsQuery(query))
