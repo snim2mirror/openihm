@@ -1,4 +1,5 @@
 import unittest
+import datetime
 from database_helper import DatabaseHelper
 from data.database import Database
 from data.config import Config
@@ -66,13 +67,14 @@ class TestDatabase(unittest.TestCase):
         self.helper.setup_clean_db()
         self.helper.execute_instruction("""
             insert into projects
-                (projectname, startdate, enddate, description, currency)
+              (projectname, startdate, enddate, description, currency)
             values
-                ('test', 2012-06-04, 2013-07-03, 'a simple test', 'GBP')""")
+              ('test', '2012-06-04', '2013-07-03', 'a simple test', 'GBP')""")
         database = Database()
         query = 'select * from projects'
         database.open()
-        self.assertEqual([(2, u'test', None, None, u'a simple test', u'GBP')],
+        self.assertEqual([(2, u'test', datetime.date(2012, 6, 4),
+                        datetime.date(2013, 7, 3), u'a simple test', u'GBP')],
                         database.execSelectQuery(query))
         database.close()
 
@@ -82,12 +84,12 @@ class TestDatabase(unittest.TestCase):
         database.open()
         database.execUpdateQuery("""
             insert into projects
-                (projectname, startdate, enddate, description, currency)
+              (projectname, startdate, enddate, description, currency)
             values
-                ('test', 2012-06-04, 2013-07-03, 'a simple test', 'GBP')""")
+              ('test', '2012-06-04', '2013-07-03', 'a simple test', 'GBP')""")
         query = 'select * from projects'
-        # FIXME: the None's look hinky.
-        self.assertEqual([(2, u'test', None, None, u'a simple test', u'GBP')],
+        self.assertEqual([(2, u'test', datetime.date(2012, 6, 4),
+                        datetime.date(2013, 7, 3), u'a simple test', u'GBP')],
                         database.execSelectQuery(query))
         database.close()
 
