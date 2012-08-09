@@ -30,13 +30,15 @@ class DatabaseHelper(object):
         return self.config
 
     def start_tests(self):
+        self.drop_database()
         self.prev_path = os.getcwd()
         os.chdir(self.test_dir)
         self.create_database()
+        self.create_indicator_table()
 
     def end_tests(self):
-        self.drop_database()
         os.chdir(self.prev_path)
+        self.drop_database()
 
     def setup_clean_db(self):
         database_initialiser = DatabaseInitialiser(self.config)
@@ -79,12 +81,38 @@ class DatabaseHelper(object):
         """
         db = Connect(**self.config.superuser_dbinfo().copy())
         cursor = db.cursor()
-        cursor.execute(query, data)
+        results = cursor.execute(query, data)
         db.commit()
         db.close()
+        return cursor
+
+    def execute_select(self, query, data=None):
+        """
+        Yet another wrapper around queries
+        """
+        db = Connect(**self.config.superuser_dbinfo().copy())
+        cursor = db.cursor()
+        cursor.execute(query, data)
+        yield cursor.fetchall()
+        db.close()
+
+    def create_indicator_table(self):
+        # this is an attempt to ensure we don't accidentally
+        # blow away a database we're not supposed to.
+        self.execute_instruction("""
+            create table openihm_test_table (test varchar(1))""")
+
+    def test_indicator_present(self):
+        rows = self.execute_select("show tables like 'openihm_test_table'")
+        l = [x for x in rows]
+        return len(l) == 1
 
     def drop_database(self):
-        self._ddl_command('drop database ' + self.config.database)
+        try:
+            if self.test_indicator_present():
+                self._ddl_command('drop database ' + self.config.database)
+        except errors.ProgrammingError:
+            pass
 
     def create_database(self):
         self._ddl_command('create database ' + self.config.database)
