@@ -24,7 +24,7 @@ class TestMySQLMixin(unittest.TestCase):
     """
 
     def setUp(self):
-        self.helper = DatabaseHelper(self)
+        self.helper = DatabaseHelper()
         self.helper.start_tests()
 
     def tearDown(self):

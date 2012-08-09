@@ -5,19 +5,22 @@ from includes.mysql.connector import errors
 from includes.mysql.connector import Connect
 from data.databaseinitialiser import DatabaseInitialiser, DbConfig
 from inputs.config_parser import OpenIHMConfig
+import unittest
 
 
 class DatabaseHelper(object):
 
     # the module uses a lot of relative paths
     # assuming they are in the openihm directory
-    def __init__(self, unittest):
+    def __init__(self):
         config = OpenIHMConfig()
         self.test_dir = sys.path[0]
         config_file = os.path.join(self.test_dir, '..', 'test_openihm.cfg')
         read = config.read(config_file)
-        unittest.assertEqual(len(read), 1,
-          'Need test_openihm.cfg setup with database parameters')
+        if len(read) != 1:
+            m = 'Need test_openihm.cfg setup with database parameters'
+            e = unittest.SkipTest(m)
+            raise e
         Config.set_config(config)
         self.dbconfig = config.database_config()
         self.config = DbConfig(**self.dbconfig)
