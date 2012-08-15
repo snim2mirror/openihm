@@ -87,11 +87,12 @@ class DatabaseInitialiser:
          # OperationalError or ProgrammingError happen if the db does not exist
          except ( errors.OperationalError,  errors.ProgrammingError) as e:
              dbinstalled = self.createDatabase()
+             self.setupStartupCrops() # initialise setup_foods_crops table
              
          dbuptodate = False
          if ( mysqlstarted and dbinstalled ):
                  dbuptodate = self.updateDatabase()
-                 self.insertStartupCrops()
+                 #self.insertStartupCrops()
 
          dbstatus = dict()
          dbstatus['mysqlstarted'] = mysqlstarted
@@ -217,7 +218,7 @@ class DatabaseInitialiser:
          
          query = "SHOW COLUMNS FROM standardofliving"
          ## will change to:
-         ## query = "SELECT * FROM setup_foods_crops"
+         #query = "SELECT * FROM setup_foods_crops"
          ## if it returns some rows then returns otherwise returns false
          
          cursor.execute(query)
@@ -265,3 +266,33 @@ class DatabaseInitialiser:
              except ( errors.OperationalError,  errors.ProgrammingError) as e:
                  print e
                  return False
+
+     def setupStartupCrops(self):
+          """ Initialise table setup_foods_crops at database creation time"""
+          sqlfile = file('data/scripts/openihmdb_mysql_fix59.sql', 'r')
+          commands = sqlfile.read()
+          commandlist = commands.split(';')
+          sqlfile.close()
+          try:
+               config = DbConfig(self.host, '', 'root', self.rootpwd)
+               dbinfo = config.dbinfo().copy()
+               db = Connect(**dbinfo)             
+               cursor = db.cursor()
+
+               for command in commandlist:
+                    if ( not command.isspace() ):
+                         
+                         cursor.execute(command)
+             
+               cursor.close()
+               db.close()
+         
+               return True
+         
+          except errors.InterfaceError,  e:
+               print e
+               return False
+         
+          except ( errors.OperationalError,  errors.ProgrammingError) as e:
+               print e
+               return False
