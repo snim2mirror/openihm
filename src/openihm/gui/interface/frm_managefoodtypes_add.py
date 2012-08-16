@@ -53,6 +53,8 @@ class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes, MySQLMixin, MDIDialogMixin):
         mycategory = self.cmbCategory.currentText()
 	mymeasuringunit = self.cmbUnitOfMeasure.currentText()
         myenergyvalue  = self.txtKCalories.text()
+
+	print myfoodtype, mycategory, mymeasuringunit, myenergyvalue
         	
 	# check if record exists
 	query = '''SELECT name, energyvalueperunit, unitofmeasure
@@ -60,12 +62,14 @@ class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes, MySQLMixin, MDIDialogMixin):
 		
         recordset = self.executeResultsQuery(query)
 
-	numrows = 0		
+	numrows = 0
+	print recordset
 	if myfoodtype!= '' and mycategory!='':
                 if len(recordset) == 0:
                     query = '''INSERT INTO setup_foods_crops(name, category,energyvalueperunit, unitofmeasure) 
                      	    VALUES('%s','%s',%s,'%s')''' % (myfoodtype,mycategory, myenergyvalue, mymeasuringunit)
                     self.executeUpdateQuery(query)
+                    print query
                     self.txtFoodType.clear()
                     self.cmbCategory.setCurrentIndex(-1)
                     self.cmbUnitOfMeasure.setCurrentIndex(-1)
