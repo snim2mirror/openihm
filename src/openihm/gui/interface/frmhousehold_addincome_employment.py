@@ -122,7 +122,7 @@ class FrmHouseholdEmploymentIncome(QDialog, Ui_AddHouseholdIncomeEmployment, MyS
 						WHERE hhid=%s AND pid=%s AND id=%s 
 					''' % ( employmenttype, foodtype, unitofmeasure, unitspaid, incomekcal, cashpaid, self.hhid, self.pid, self.incomeid)
 		
-		self.executeUpdate(query)
+		self.executeUpdateQuery(query)
 		
 		# close new project window
 		self.parent.retrieveHouseholdEmploymentIncome()
