@@ -152,6 +152,12 @@ class TestDatabaseInitialiser(unittest.TestCase):
         self.helper.setup_db_file('openihmdb_mysql_fix59.sql')
         assert database_initialiser.insertStartupCrops()
 
+    def test_setupStartupCrops(self):
+        database_initialiser = DatabaseInitialiser(self.config)
+        self.helper.setup_clean_db()
+        self.helper.setup_db_file('openihmdb_mysql_fix59.sql')
+        assert database_initialiser.setupStartupCrops()
+
     def test_updateDatabase(self):
         # NOTE: it might be worth adding a test that compares the new
         # database to the updated database to check they match.

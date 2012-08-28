@@ -42,7 +42,7 @@ class ReadDataEntrySheets:
         
         projectid = projectsheet.name
             
-        for sheet_index in range(4,book.nsheets):
+        for sheet_index in range(3,book.nsheets):
             householdsheet = book.sheet_by_index(sheet_index)
             houseid = householdsheet.name
             
