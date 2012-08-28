@@ -29,55 +29,53 @@ Ui_AddFoodTypes, base_class = uic.loadUiType("gui/designs/ui_managefoodtypes_add
 
 from mixins import MDIDialogMixin, MySQLMixin
 
+
 class FrmAddFoodCropType(QDialog, Ui_AddFoodTypes, MySQLMixin, MDIDialogMixin):
-    ''' Creates the add food/crop energy requirement form '''	
+    ''' Creates the add food/crop energy requirement form '''
 
     def __init__(self, parent, mdi):
         ''' Set up the dialog box interface '''
         self.parent = parent
         QDialog.__init__(self)
-        
+
         self.setupUi(self)
         self.parent = parent
         self.mdi = mdi
-        
+
         #set input validator and restrict input to numeric values,
         myIntVal = QIntValidator(0, 10000, self.txtKCalories)
-        self.txtKCalories.setValidator(myIntVal);
-        
+        self.txtKCalories.setValidator(myIntVal)
+
     def saveDetails(self):
         ''' Saves newly created food/crop energy requirement data to database '''
 
         # get the data entered by user
         myfoodtype = self.txtFoodType.text()
         mycategory = self.cmbCategory.currentText()
-	mymeasuringunit = self.cmbUnitOfMeasure.currentText()
-        myenergyvalue  = self.txtKCalories.text()
+        mymeasuringunit = self.cmbUnitOfMeasure.currentText()
+        myenergyvalue = self.txtKCalories.text()
 
-	print myfoodtype, mycategory, mymeasuringunit, myenergyvalue
-        	
-	# check if record exists
-	query = '''SELECT name, energyvalueperunit, unitofmeasure
-			FROM setup_foods_crops WHERE name='%s' ''' % (myfoodtype)    
-		
+        print myfoodtype, mycategory, mymeasuringunit, myenergyvalue
+
+        # check if record exists
+        query = '''SELECT name, energyvalueperunit, unitofmeasure
+                        FROM setup_foods_crops WHERE name='%s' ''' % (myfoodtype)
+
         recordset = self.executeResultsQuery(query)
 
-	numrows = 0
-	print recordset
-	if myfoodtype!= '' and mycategory!='':
-                if len(recordset) == 0:
-                    query = '''INSERT INTO setup_foods_crops(name, category,energyvalueperunit, unitofmeasure) 
-                     	    VALUES('%s','%s',%s,'%s')''' % (myfoodtype,mycategory, myenergyvalue, mymeasuringunit)
-                    self.executeUpdateQuery(query)
-                    print query
-                    self.txtFoodType.clear()
-                    self.cmbCategory.setCurrentIndex(-1)
-                    self.cmbUnitOfMeasure.setCurrentIndex(-1)
-                    self.txtKCalories.clear()
-                
-                else:
-                    QMessageBox.information(self,"Add Food/Crop Type","Food/Crop type already exists")
+        numrows = 0
+        print recordset
+        if myfoodtype != '' and mycategory != '':
+            if len(recordset) == 0:
+                query = '''INSERT INTO setup_foods_crops(name, category,energyvalueperunit, unitofmeasure)
+                             VALUES('%s','%s',%s,'%s')''' % (myfoodtype, mycategory, myenergyvalue, mymeasuringunit)
+                self.executeUpdateQuery(query)
+                print query
+                self.txtFoodType.clear()
+                self.cmbCategory.setCurrentIndex(-1)
+                self.cmbUnitOfMeasure.setCurrentIndex(-1)
+                self.txtKCalories.clear()
+            else:
+                QMessageBox.information(self, "Add Food/Crop Type", "Food/Crop type already exists")
         else:
-            QMessageBox.information(self,"Add Food/Crop Type","Name or Category should not be blank")
-
-        
+            QMessageBox.information(self, "Add Food/Crop Type", "Name or Category should not be blank")
