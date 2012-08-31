@@ -1,4 +1,9 @@
 import unittest
+try:
+    import PyQt4.QtCore
+    import PyQt4.QtGui
+except:
+    raise unittest.SkipTest("Need PyQt4 installed to do gui tests")
 import datetime
 from gui.interface.mixins import MySQLMixin
 from database_helper import DatabaseHelper
