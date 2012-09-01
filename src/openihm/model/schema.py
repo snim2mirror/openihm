@@ -8,1968 +8,1658 @@ from sqlalchemy.databases.mysql import *
 metadata = MetaData()
 
 
-absencefromhousehold =  Table('absencefromhousehold', metadata,
+absencefromhousehold = Table('absencefromhousehold', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'percentageaway', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'reason', VARCHAR(length=200), primary_key=False, nullable=False),
-            Column(u'whereto', VARCHAR(length=200), primary_key=False, nullable=False),
-            Column(u'personid', VARCHAR(length=20), primary_key=False, nullable=False),
-            Column(u'hhid', INTEGER(), primary_key=False, nullable=False),
-            Column(u'pid', INTEGER(), primary_key=False, nullable=False),
+    Column(u'percentageaway', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'reason', VARCHAR(length=200), primary_key=False, nullable=False),
+    Column(u'whereto', VARCHAR(length=200), primary_key=False, nullable=False),
+    Column(u'personid', VARCHAR(length=20), primary_key=False, nullable=False),
+    Column(u'hhid', INTEGER(), primary_key=False, nullable=False),
+    Column(u'pid', INTEGER(), primary_key=False, nullable=False),
     ForeignKeyConstraint([u'personid', u'hhid', u'pid'], [u'openihmdb.householdmembers.personid', u'openihmdb.householdmembers.hhid', u'openihmdb.householdmembers.pid'], name=u'fk_absencefromhousehold_householdmembers1'),
-    
     )
 Index(u'fk_absencefromhousehold_householdmembers1', absencefromhousehold.c.personid, absencefromhousehold.c.hhid, absencefromhousehold.c.pid, unique=False)
 
 
-assets =  Table('assets', metadata,
+assets = Table('assets', metadata,
     Column(u'assetid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'assetcategory', VARCHAR(length=255), primary_key=False, nullable=False),
-            Column(u'assettype', VARCHAR(length=100), primary_key=False, nullable=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False, nullable=False),
-            Column(u'unitcost', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'totalunits', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'pid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'assetcategory', VARCHAR(length=255), primary_key=False, nullable=False),
+    Column(u'assettype', VARCHAR(length=100), primary_key=False, nullable=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False, nullable=False),
+    Column(u'unitcost', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'totalunits', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'pid', INTEGER(), primary_key=True, nullable=False),
     ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_assets_households1'),
-    
     )
 Index(u'fk_assets_households1', assets.c.hhid, assets.c.pid, unique=False)
 
 
-assettypes =  Table('assettypes', metadata,
+assettypes = Table('assettypes', metadata,
     Column(u'assettype', VARCHAR(length=100), primary_key=True, nullable=False),
-    
-    
     )
 
 
-creditandloans =  Table('creditandloans', metadata,
+creditandloans = Table('creditandloans', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'creditsource', VARCHAR(length=200), primary_key=False),
-            Column(u'unit', VARCHAR(length=45), primary_key=False),
-            Column(u'creditvalue', Float(asdecimal=True), primary_key=False),
-            Column(u'credituse', VARCHAR(length=200), primary_key=False),
-    
-    
+    Column(u'creditsource', VARCHAR(length=200), primary_key=False),
+    Column(u'unit', VARCHAR(length=45), primary_key=False),
+    Column(u'creditvalue', Float(asdecimal=True), primary_key=False),
+    Column(u'credituse', VARCHAR(length=200), primary_key=False),
     )
 
 
-cropincome =  Table('cropincome', metadata,
+cropincome = Table('cropincome', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'incomesource', VARCHAR(length=200), primary_key=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
-            Column(u'unitsproduced', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'unitssold', Float(asdecimal=True), primary_key=False),
-            Column(u'unitprice', Float(asdecimal=True), primary_key=False),
-            Column(u'otheruses', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'unitsconsumed', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'preferenceprice', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
-            Column(u'preferenceproduction', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
+    Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'incomesource', VARCHAR(length=200), primary_key=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
+    Column(u'unitsproduced', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'unitssold', Float(asdecimal=True), primary_key=False),
+    Column(u'unitprice', Float(asdecimal=True), primary_key=False),
+    Column(u'otheruses', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'unitsconsumed', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'pid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'preferenceprice', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
+    Column(u'preferenceproduction', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
     ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_cropincome_households1'),
-    
     )
 Index(u'fk_cropincome_households1', cropincome.c.hhid, cropincome.c.pid, unique=False)
 
 
-currencies =  Table('currencies', metadata,
+currencies = Table('currencies', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'currencyname', VARCHAR(length=250), primary_key=False, nullable=False),
-            Column(u'abbreviation', VARCHAR(length=45), primary_key=False, nullable=False),
-            Column(u'symbol', VARCHAR(length=45), primary_key=False),
-    
-    
+    Column(u'currencyname', VARCHAR(length=250), primary_key=False, nullable=False),
+    Column(u'abbreviation', VARCHAR(length=45), primary_key=False, nullable=False),
+    Column(u'symbol', VARCHAR(length=45), primary_key=False),
     )
 
 
-dbupdate =  Table('dbupdate', metadata,
+dbupdate = Table('dbupdate', metadata,
     Column(u'lastupdate', VARCHAR(length=50), primary_key=True, nullable=False),
-    
-    
     )
 
 
-diet =  Table('diet', metadata,
+diet = Table('diet', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'fooditem', VARCHAR(length=45), primary_key=False, nullable=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False, nullable=False),
-            Column(u'percentage', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'priceperunit', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'modelprice', Float(asdecimal=True), primary_key=False, nullable=False, default=text(u"'0'")),
+    Column(u'pid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'fooditem', VARCHAR(length=45), primary_key=False, nullable=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False, nullable=False),
+    Column(u'percentage', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'priceperunit', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'modelprice', Float(asdecimal=True), primary_key=False, nullable=False, default=text(u"'0'")),
     ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'fk_diet_projects1'),
-    
     )
 Index(u'fk_diet_projects1', diet.c.pid, unique=False)
 
 
-employmentincome =  Table('employmentincome', metadata,
+employmentincome = Table('employmentincome', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'incomesource', VARCHAR(length=200), primary_key=False),
-            Column(u'foodtypepaid', VARCHAR(length=200), primary_key=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
-            Column(u'unitspaid', Float(asdecimal=True), primary_key=False),
-            Column(u'incomekcal', Float(asdecimal=True), primary_key=False),
-            Column(u'cashincome', Float(asdecimal=True), primary_key=False),
-            Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'preferenceincome', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
+    Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'incomesource', VARCHAR(length=200), primary_key=False),
+    Column(u'foodtypepaid', VARCHAR(length=200), primary_key=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
+    Column(u'unitspaid', Float(asdecimal=True), primary_key=False),
+    Column(u'incomekcal', Float(asdecimal=True), primary_key=False),
+    Column(u'cashincome', Float(asdecimal=True), primary_key=False),
+    Column(u'pid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'preferenceincome', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
     ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_employmentincome_households1'),
-    
     )
 Index(u'fk_employmentincome_households1', employmentincome.c.hhid, employmentincome.c.pid, unique=False)
 
 
-expenditure =  Table('expenditure', metadata,
+expenditure = Table('expenditure', metadata,
     Column(u'expid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'exptype', VARCHAR(length=100), primary_key=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
-            Column(u'priceperunit', Float(asdecimal=True), primary_key=False),
-            Column(u'kcalperunit', Float(asdecimal=True), primary_key=False),
-            Column(u'totalunits', Float(asdecimal=True), primary_key=False),
-            Column(u'pid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'exptype', VARCHAR(length=100), primary_key=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
+    Column(u'priceperunit', Float(asdecimal=True), primary_key=False),
+    Column(u'kcalperunit', Float(asdecimal=True), primary_key=False),
+    Column(u'totalunits', Float(asdecimal=True), primary_key=False),
+    Column(u'pid', INTEGER(), primary_key=True, nullable=False),
     ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_expenditure_households1'),
-    
     )
 Index(u'fk_expenditure_households1', expenditure.c.hhid, expenditure.c.pid, unique=False)
 
 
-globalcharacteristics =  Table('globalcharacteristics', metadata,
+globalcharacteristics = Table('globalcharacteristics', metadata,
     Column(u'characteristic', VARCHAR(length=250), primary_key=True, nullable=False),
-            Column(u'chartype', VARCHAR(length=50), primary_key=False, nullable=False),
-            Column(u'datatype', INTEGER(), primary_key=False, nullable=False),
-            Column(u'description', VARCHAR(length=250), primary_key=False),
-    
-    
+    Column(u'chartype', VARCHAR(length=50), primary_key=False, nullable=False),
+    Column(u'datatype', INTEGER(), primary_key=False, nullable=False),
+    Column(u'description', VARCHAR(length=250), primary_key=False),
     )
 
 
-globalhouseholdcharacteristics =  Table('globalhouseholdcharacteristics', metadata,
+globalhouseholdcharacteristics = Table('globalhouseholdcharacteristics', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'characteristic', VARCHAR(length=250), primary_key=False, nullable=False),
-            Column(u'datatype', INTEGER(), primary_key=False, nullable=False),
-            Column(u'description', VARCHAR(length=250), primary_key=False),
-    
-    
+    Column(u'characteristic', VARCHAR(length=250), primary_key=False, nullable=False),
+    Column(u'datatype', INTEGER(), primary_key=False, nullable=False),
+    Column(u'description', VARCHAR(length=250), primary_key=False),
     )
 
 
-globalpersonalcharacteristics =  Table('globalpersonalcharacteristics', metadata,
+globalpersonalcharacteristics = Table('globalpersonalcharacteristics', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'characteristic', VARCHAR(length=250), primary_key=False),
-            Column(u'datatype', INTEGER(), primary_key=False),
-            Column(u'description', VARCHAR(length=250), primary_key=False),
-    
-    
+    Column(u'characteristic', VARCHAR(length=250), primary_key=False),
+    Column(u'datatype', INTEGER(), primary_key=False),
+    Column(u'description', VARCHAR(length=250), primary_key=False),
     )
 
 
-householdcharacteristics =  Table('householdcharacteristics', metadata,
+householdcharacteristics = Table('householdcharacteristics', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'characteristic', VARCHAR(length=250), primary_key=True, nullable=False),
-            Column(u'charvalue', VARCHAR(length=255), primary_key=False, nullable=False),
+    Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'characteristic', VARCHAR(length=250), primary_key=True, nullable=False),
+    Column(u'charvalue', VARCHAR(length=255), primary_key=False, nullable=False),
     ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_householdcharacteristics_households1'),
-    
     )
 Index(u'fk_householdcharacteristics_households1', householdcharacteristics.c.hhid, householdcharacteristics.c.pid, unique=False)
 
 
-householdmembers =  Table('householdmembers', metadata,
+householdmembers = Table('householdmembers', metadata,
     Column(u'personid', VARCHAR(length=20), primary_key=True, nullable=False),
-            Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'headofhousehold', Enum(u'Yes', u'No'), primary_key=False, nullable=False),
-            Column(u'yearofbirth', INTEGER(), primary_key=False, nullable=False),
-            Column(u'sex', Enum(u'Male', u'Female'), primary_key=False, nullable=False),
-            Column(u'education', VARCHAR(length=200), primary_key=False),
-            Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'periodaway', INTEGER(), primary_key=False, default=text(u"'0'")),
-            Column(u'reason', VARCHAR(length=200), primary_key=False),
-            Column(u'whereto', VARCHAR(length=200), primary_key=False),
+    Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'headofhousehold', Enum(u'Yes', u'No'), primary_key=False, nullable=False),
+    Column(u'yearofbirth', INTEGER(), primary_key=False, nullable=False),
+    Column(u'sex', Enum(u'Male', u'Female'), primary_key=False, nullable=False),
+    Column(u'education', VARCHAR(length=200), primary_key=False),
+    Column(u'pid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'periodaway', INTEGER(), primary_key=False, default=text(u"'0'")),
+    Column(u'reason', VARCHAR(length=200), primary_key=False),
+    Column(u'whereto', VARCHAR(length=200), primary_key=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x276acd0>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x276ad10>),
             ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_householdmembers_households1'),
             CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x276a650>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x276a690>),
-    
     )
 Index(u'fk_householdmembers_households1', householdmembers.c.hhid, householdmembers.c.pid, unique=False)
 
 
-households =  Table('households', metadata,
+households = Table('households', metadata,
     Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'householdname', VARCHAR(length=100), primary_key=False, nullable=False),
-            Column(u'totalassetvalue', Float(asdecimal=True), primary_key=False, nullable=False, default=text(u"'0'")),
-            Column(u'totalincomevalue', Float(asdecimal=True), primary_key=False, nullable=False, default=text(u"'0'")),
-            Column(u'totalexpenditure', Float(asdecimal=True), primary_key=False, nullable=False, default=text(u"'0'")),
-            Column(u'dateofcollection', DATE(), primary_key=False, nullable=False),
-            Column(u'pid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'householdname', VARCHAR(length=100), primary_key=False, nullable=False),
+    Column(u'totalassetvalue', Float(asdecimal=True), primary_key=False, nullable=False, default=text(u"'0'")),
+    Column(u'totalincomevalue', Float(asdecimal=True), primary_key=False, nullable=False, default=text(u"'0'")),
+    Column(u'totalexpenditure', Float(asdecimal=True), primary_key=False, nullable=False, default=text(u"'0'")),
+    Column(u'dateofcollection', DATE(), primary_key=False, nullable=False),
+    Column(u'pid', INTEGER(), primary_key=True, nullable=False),
     ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'fk_households_projects1'),
-    
     )
 Index(u'fk_households_projects1', households.c.pid, unique=False)
 
 
-incomeseasonality =  Table('incomeseasonality', metadata,
+incomeseasonality = Table('incomeseasonality', metadata,
     Column(u'incometype', VARCHAR(length=45), primary_key=True, nullable=False),
-            Column(u'jan', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'feb', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'mar', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'apr', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'may', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'jun', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'jul', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'aug', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'sep', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'oct', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'nov', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'dec', Float(asdecimal=True), primary_key=False, nullable=False),
-    
-    
+    Column(u'jan', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'feb', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'mar', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'apr', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'may', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'jun', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'jul', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'aug', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'sep', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'oct', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'nov', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'dec', Float(asdecimal=True), primary_key=False, nullable=False),
     )
 
 
-livestockincome =  Table('livestockincome', metadata,
+livestockincome = Table('livestockincome', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'incomesource', VARCHAR(length=200), primary_key=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
-            Column(u'unitsproduced', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'unitssold', Float(asdecimal=True), primary_key=False),
-            Column(u'unitprice', Float(asdecimal=True), primary_key=False),
-            Column(u'otheruses', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'unitsconsumed', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'preferenceprice', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
-            Column(u'preferenceproduction', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
+    Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'incomesource', VARCHAR(length=200), primary_key=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
+    Column(u'unitsproduced', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'unitssold', Float(asdecimal=True), primary_key=False),
+    Column(u'unitprice', Float(asdecimal=True), primary_key=False),
+    Column(u'otheruses', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'unitsconsumed', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'pid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'preferenceprice', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
+    Column(u'preferenceproduction', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
     ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_livestockincome_households1'),
-    
     )
 Index(u'fk_livestockincome_households1', livestockincome.c.hhid, livestockincome.c.pid, unique=False)
 
 
-lookup_energy_needs =  Table('lookup_energy_needs', metadata,
+lookup_energy_needs = Table('lookup_energy_needs', metadata,
     Column(u'age', INTEGER(), primary_key=True, nullable=False),
-            Column(u'kCalNeedM', INTEGER(), primary_key=False),
-            Column(u'kCalNeedF', INTEGER(), primary_key=False),
-    
-    
+    Column(u'kCalNeedM', INTEGER(), primary_key=False),
+    Column(u'kCalNeedF', INTEGER(), primary_key=False),
     )
 
 
-personalcharacteristics =  Table('personalcharacteristics', metadata,
+personalcharacteristics = Table('personalcharacteristics', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'personid', VARCHAR(length=20), primary_key=True, nullable=False),
-            Column(u'characteristic', VARCHAR(length=250), primary_key=True, nullable=False),
-            Column(u'charvalue', VARCHAR(length=255), primary_key=False, nullable=False),
+    Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'personid', VARCHAR(length=20), primary_key=True, nullable=False),
+    Column(u'characteristic', VARCHAR(length=250), primary_key=True, nullable=False),
+    Column(u'charvalue', VARCHAR(length=255), primary_key=False, nullable=False),
     ForeignKeyConstraint([u'personid', u'hhid', u'pid'], [u'openihmdb.householdmembers.personid', u'openihmdb.householdmembers.hhid', u'openihmdb.householdmembers.pid'], name=u'fk_personalcharacteristics_householdmembers1'),
-    
     )
 Index(u'fk_personalcharacteristics_householdmembers1', personalcharacteristics.c.personid, personalcharacteristics.c.hhid, personalcharacteristics.c.pid, unique=False)
 
 
-projectassets =  Table('projectassets', metadata,
+projectassets = Table('projectassets', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'assetname', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'assettype', VARCHAR(length=45), primary_key=False, nullable=False),
+    Column(u'assetname', VARCHAR(length=255), primary_key=True, nullable=False),
+    Column(u'assettype', VARCHAR(length=45), primary_key=False, nullable=False),
     ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'pid'),
-    
     )
 Index(u'pid', projectassets.c.pid, unique=False)
 
 
-projectcharacteristics =  Table('projectcharacteristics', metadata,
+projectcharacteristics = Table('projectcharacteristics', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'characteristic', VARCHAR(length=250), primary_key=True, nullable=False),
-            Column(u'chartype', VARCHAR(length=50), primary_key=False, nullable=False),
-            Column(u'datatype', INTEGER(), primary_key=False, nullable=False),
+    Column(u'characteristic', VARCHAR(length=250), primary_key=True, nullable=False),
+    Column(u'chartype', VARCHAR(length=50), primary_key=False, nullable=False),
+    Column(u'datatype', INTEGER(), primary_key=False, nullable=False),
     ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'fk_projectcharacteristics_projects1'),
-    
     )
 
 
-projectincomesources =  Table('projectincomesources', metadata,
+projectincomesources = Table('projectincomesources', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'incomesource', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'incometype', VARCHAR(length=45), primary_key=True, nullable=False),
+    Column(u'incomesource', VARCHAR(length=255), primary_key=True, nullable=False),
+    Column(u'incometype', VARCHAR(length=45), primary_key=True, nullable=False),
     ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'fk_projectincomesources_projects'),
-    
     )
 Index(u'fk_projectincomesources_projects', projectincomesources.c.pid, unique=False)
 
 
-projects =  Table('projects', metadata,
+projects = Table('projects', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'projectname', VARCHAR(length=100), primary_key=False, nullable=False),
-            Column(u'startdate', DATE(), primary_key=False, nullable=False),
-            Column(u'enddate', DATE(), primary_key=False, nullable=False),
-            Column(u'description', TEXT(), primary_key=False, nullable=False),
-            Column(u'currency', TEXT(), primary_key=False, nullable=False),
-    
-    
+    Column(u'projectname', VARCHAR(length=100), primary_key=False, nullable=False),
+    Column(u'startdate', DATE(), primary_key=False, nullable=False),
+    Column(u'enddate', DATE(), primary_key=False, nullable=False),
+    Column(u'description', TEXT(), primary_key=False, nullable=False),
+    Column(u'currency', TEXT(), primary_key=False, nullable=False),
     )
 
 
-savingscategories =  Table('savingscategories', metadata,
+savingscategories = Table('savingscategories', metadata,
     Column(u'savingscategory', VARCHAR(length=100), primary_key=True, nullable=False),
-    
-    
     )
 
 
-setup_assets =  Table('setup_assets', metadata,
+setup_assets = Table('setup_assets', metadata,
     Column(u'assetname', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'assettype', VARCHAR(length=50), primary_key=False, nullable=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False, nullable=False),
-    
-    
+    Column(u'assettype', VARCHAR(length=50), primary_key=False, nullable=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False, nullable=False),
     )
 
 
-setup_crops =  Table('setup_crops', metadata,
+setup_crops = Table('setup_crops', metadata,
     Column(u'foodtype', VARCHAR(length=100), primary_key=True, nullable=False),
-            Column(u'energyvalueperunit', Float(asdecimal=True), primary_key=False),
-            Column(u'measuringunit', VARCHAR(length=45), primary_key=False),
-    
-    
+    Column(u'energyvalueperunit', Float(asdecimal=True), primary_key=False),
+    Column(u'measuringunit', VARCHAR(length=45), primary_key=False),
     )
 
 
-setup_employment =  Table('setup_employment', metadata,
+setup_employment = Table('setup_employment', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'incomesource', VARCHAR(length=200), primary_key=False),
-    
-    
+    Column(u'incomesource', VARCHAR(length=200), primary_key=False),
     )
 
 
-setup_expenditurecategories =  Table('setup_expenditurecategories', metadata,
+setup_expenditurecategories = Table('setup_expenditurecategories', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'expenditurecategory', VARCHAR(length=200), primary_key=False),
-    
-    
+    Column(u'expenditurecategory', VARCHAR(length=200), primary_key=False),
     )
 
 
-setup_expendituretypes =  Table('setup_expendituretypes', metadata,
+setup_expendituretypes = Table('setup_expendituretypes', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'expendituretype', VARCHAR(length=200), primary_key=False),
-    
-    
+    Column(u'expendituretype', VARCHAR(length=200), primary_key=False),
     )
 
 
-setup_foods_crops =  Table('setup_foods_crops', metadata,
+setup_foods_crops = Table('setup_foods_crops', metadata,
     Column(u'name', VARCHAR(length=200), primary_key=True, nullable=False),
-            Column(u'category', VARCHAR(length=200), primary_key=False, nullable=False),
-            Column(u'energyvalueperunit', Float(asdecimal=True), primary_key=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
-    
-    
+    Column(u'category', VARCHAR(length=200), primary_key=False, nullable=False),
+    Column(u'energyvalueperunit', Float(asdecimal=True), primary_key=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
     )
 
 
-setup_landtypes =  Table('setup_landtypes', metadata,
+setup_landtypes = Table('setup_landtypes', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'landtype', VARCHAR(length=200), primary_key=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
-    
-    
+    Column(u'landtype', VARCHAR(length=200), primary_key=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
     )
 
 
-setup_livestock =  Table('setup_livestock', metadata,
+setup_livestock = Table('setup_livestock', metadata,
     Column(u'incomesource', VARCHAR(length=200), primary_key=True, nullable=False, default=text(u"''")),
-            Column(u'energyvalueperunit', Float(asdecimal=True), primary_key=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
-    
-    
+    Column(u'energyvalueperunit', Float(asdecimal=True), primary_key=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
     )
 
 
-setup_standardofliving =  Table('setup_standardofliving', metadata,
+setup_standardofliving = Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, table= Table('setup_standardofliving', metadata,
     Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
+    Column(u'type', Enum(u'Household', u'Person', u'Both'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x28bf590>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x28bf5d0>),
-    
     )
 
 
-setup_tradablegoods =  Table('setup_tradablegoods', metadata,
+setup_tradablegoods = Table('setup_tradablegoods', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'tradablegoodtype', VARCHAR(length=200), primary_key=False, nullable=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False, nullable=False),
-    
-    
+    Column(u'tradablegoodtype', VARCHAR(length=200), primary_key=False, nullable=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False, nullable=False),
     )
 
 
-setup_transfers =  Table('setup_transfers', metadata,
+setup_transfers = Table('setup_transfers', metadata,
     Column(u'assistancetype', VARCHAR(length=200), primary_key=True, nullable=False),
-            Column(u'sourceoftransfer', VARCHAR(length=200), primary_key=True, nullable=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
-    
-    
+    Column(u'sourceoftransfer', VARCHAR(length=200), primary_key=True, nullable=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
     )
 
 
-setup_transfersources =  Table('setup_transfersources', metadata,
+setup_transfersources = Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, table= Table('setup_transfersources', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2934b10>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 , _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2934b50>),
-    
     )
 
 
-setup_treetypes =  Table('setup_treetypes', metadata,
+setup_treetypes = Table('setup_treetypes', metadata,
     Column(u'treetype', VARCHAR(length=100), primary_key=True, nullable=False),
-            Column(u'measuringunit', VARCHAR(length=45), primary_key=False),
-    
-    
+    Column(u'measuringunit', VARCHAR(length=45), primary_key=False),
     )
 
 
-setup_wildfoods =  Table('setup_wildfoods', metadata,
+setup_wildfoods = Table('setup_wildfoods', metadata,
     Column(u'incomesource', VARCHAR(length=200), primary_key=True, nullable=False, default=text(u"''")),
-            Column(u'energyvalueperunit', Float(asdecimal=True), primary_key=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
-    
-    
+    Column(u'energyvalueperunit', Float(asdecimal=True), primary_key=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
     )
 
 
-standardofliving =  Table('standardofliving', metadata,
+standardofliving = Table('standardofliving', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'summary', VARCHAR(length=255), primary_key=True, nullable=False),
-            Column(u'scope', Enum(u'Household', u'Person'), primary_key=False, nullable=False),
-            Column(u'gender', Enum(u'Male', u'Female', u'All'), primary_key=False),
-            Column(u'agebottom', INTEGER(), primary_key=False, default=text(u"'0'")),
-            Column(u'agetop', INTEGER(), primary_key=False, default=text(u"'0'")),
-            Column(u'item', VARCHAR(length=255), primary_key=False, nullable=False),
-            Column(u'costperyear', Float(asdecimal=True), primary_key=False, nullable=False),
-            Column(u'modelprice', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'summary', VARCHAR(length=255), primary_key=True, nullable=False),
+    Column(u'scope', Enum(u'Household', u'Person'), primary_key=False, nullable=False),
+    Column(u'gender', Enum(u'Male', u'Female', u'All'), primary_key=False),
+    Column(u'agebottom', INTEGER(), primary_key=False, default=text(u"'0'")),
+    Column(u'agetop', INTEGER(), primary_key=False, default=text(u"'0'")),
+    Column(u'item', VARCHAR(length=255), primary_key=False, nullable=False),
+    Column(u'costperyear', Float(asdecimal=True), primary_key=False, nullable=False),
+    Column(u'modelprice', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2949910>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2949950>),
             ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'fk_standardofliving_projects1'),
             CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2949350>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2949390>),
-    
     )
 Index(u'fk_standardofliving_projects1', standardofliving.c.pid, unique=False)
 
 
-transferlog =  Table('transferlog', metadata,
+transferlog = Table('transferlog', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'pid_access', INTEGER(), primary_key=False, nullable=False),
-            Column(u'projectname', VARCHAR(length=45), primary_key=False, nullable=False),
-            Column(u'datecollected', VARCHAR(length=45), primary_key=False, nullable=False),
-            Column(u'currency', VARCHAR(length=45), primary_key=False, nullable=False),
+    Column(u'pid_access', INTEGER(), primary_key=False, nullable=False),
+    Column(u'projectname', VARCHAR(length=45), primary_key=False, nullable=False),
+    Column(u'datecollected', VARCHAR(length=45), primary_key=False, nullable=False),
+    Column(u'currency', VARCHAR(length=45), primary_key=False, nullable=False),
     ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'fk_transferlog_projects1'),
-    
     )
 
 
-transfers =  Table('transfers', metadata,
+transfers = Table('transfers', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
-            Column(u'sourceoftransfer', VARCHAR(length=255), primary_key=False, nullable=False),
-            Column(u'cashperyear', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'foodtype', VARCHAR(length=255), primary_key=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
-            Column(u'unitsgiven', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'unitsconsumed', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'unitssold', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'priceperunit', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'preferenceprice', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
-            Column(u'preferenceproduction', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
+    Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'pid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'sourcetype', Enum(u'Internal', u'External'), primary_key=False, nullable=False),
+    Column(u'sourceoftransfer', VARCHAR(length=255), primary_key=False, nullable=False),
+    Column(u'cashperyear', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'foodtype', VARCHAR(length=255), primary_key=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
+    Column(u'unitsgiven', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'unitsconsumed', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'unitssold', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'priceperunit', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'preferenceprice', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
+    Column(u'preferenceproduction', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
     ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_transfers_households1'),
             CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2960950>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2960990>),
-    
     )
 Index(u'fk_transfers_households1', transfers.c.hhid, transfers.c.pid, unique=False)
 
 
-wildfoods =  Table('wildfoods', metadata,
+wildfoods = Table('wildfoods', metadata,
     Column(u'id', INTEGER(), primary_key=True, nullable=False),
-            Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'incomesource', VARCHAR(length=200), primary_key=False),
-            Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
-            Column(u'unitsproduced', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'unitssold', Float(asdecimal=True), primary_key=False),
-            Column(u'unitprice', Float(asdecimal=True), primary_key=False),
-            Column(u'otheruses', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'unitsconsumed', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
-            Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-            Column(u'preferenceprice', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
-            Column(u'preferenceproduction', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
+    Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'incomesource', VARCHAR(length=200), primary_key=False),
+    Column(u'unitofmeasure', VARCHAR(length=45), primary_key=False),
+    Column(u'unitsproduced', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'unitssold', Float(asdecimal=True), primary_key=False),
+    Column(u'unitprice', Float(asdecimal=True), primary_key=False),
+    Column(u'otheruses', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'unitsconsumed', Float(asdecimal=True), primary_key=False, default=text(u"'0'")),
+    Column(u'pid', INTEGER(), primary_key=True, nullable=False),
+    Column(u'preferenceprice', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
+    Column(u'preferenceproduction', Float(asdecimal=True), primary_key=False, default=text(u"'100'")),
     ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_wildfoods_households1'),
-    
     )
 Index(u'fk_wildfoods_households1', wildfoods.c.hhid, wildfoods.c.pid, unique=False)
 
