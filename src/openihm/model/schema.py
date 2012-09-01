@@ -21,8 +21,10 @@ absencefromhousehold = Table('absencefromhousehold', metadata,
                           u'openihmdb.householdmembers.hhid',
                           u'openihmdb.householdmembers.pid'],
                          name=u'fk_absencefromhousehold_householdmembers1'),
+    Index(u'fk_absencefromhousehold_householdmembers1',
+          u'personid', u'hhid', u'pid',
+          unique=False),
     )
-Index(u'fk_absencefromhousehold_householdmembers1', absencefromhousehold.c.personid, absencefromhousehold.c.hhid, absencefromhousehold.c.pid, unique=False)
 
 
 assets = Table('assets', metadata,
@@ -38,8 +40,10 @@ assets = Table('assets', metadata,
                          [u'openihmdb.households.hhid',
                           u'openihmdb.households.pid'],
                          name=u'fk_assets_households1'),
+    Index(u'fk_assets_households1',
+          u'hhid', u'pid',
+          unique=False),
     )
-Index(u'fk_assets_households1', assets.c.hhid, assets.c.pid, unique=False)
 
 
 assettypes = Table('assettypes', metadata,
@@ -73,8 +77,10 @@ cropincome = Table('cropincome', metadata,
                           u'openihmdb.households.hhid',
                           u'openihmdb.households.pid'],
                          name=u'fk_cropincome_households1'),
+    Index(u'fk_cropincome_households1',
+          u'hhid', u'pid',
+          unique=False),
     )
-Index(u'fk_cropincome_households1', cropincome.c.hhid, cropincome.c.pid, unique=False)
 
 
 currencies = Table('currencies', metadata,
@@ -101,8 +107,10 @@ diet = Table('diet', metadata,
     ForeignKeyConstraint([u'pid'],
                          [u'openihmdb.projects.pid'],
                          name=u'fk_diet_projects1'),
+    Index(u'fk_diet_projects1',
+          u'pid',
+          unique=False),
     )
-Index(u'fk_diet_projects1', diet.c.pid, unique=False)
 
 
 employmentincome = Table('employmentincome', metadata,
@@ -120,8 +128,10 @@ employmentincome = Table('employmentincome', metadata,
                          [u'openihmdb.households.hhid',
                           u'openihmdb.households.pid'],
                          name=u'fk_employmentincome_households1'),
+    Index(u'fk_employmentincome_households1',
+          u'hhid', u'pid',
+          unique=False),
     )
-Index(u'fk_employmentincome_households1', employmentincome.c.hhid, employmentincome.c.pid, unique=False)
 
 
 expenditure = Table('expenditure', metadata,
@@ -137,8 +147,10 @@ expenditure = Table('expenditure', metadata,
                          [u'openihmdb.households.hhid',
                           u'openihmdb.households.pid'],
                          name=u'fk_expenditure_households1'),
+    Index(u'fk_expenditure_households1',
+          u'hhid', u'pid',
+          unique=False),
     )
-Index(u'fk_expenditure_households1', expenditure.c.hhid, expenditure.c.pid, unique=False)
 
 
 globalcharacteristics = Table('globalcharacteristics', metadata,
@@ -174,8 +186,10 @@ householdcharacteristics = Table('householdcharacteristics', metadata,
                          [u'openihmdb.households.hhid',
                           u'openihmdb.households.pid'],
                          name=u'fk_householdcharacteristics_households1'),
+    Index(u'fk_householdcharacteristics_households1',
+          u'hhid', u'pid',
+          unique=False),
     )
-Index(u'fk_householdcharacteristics_households1', householdcharacteristics.c.hhid, householdcharacteristics.c.pid, unique=False)
 
 
 householdmembers = Table('householdmembers', metadata,
@@ -195,8 +209,10 @@ householdmembers = Table('householdmembers', metadata,
                           u'openihmdb.households.pid'],
                          name=u'fk_householdmembers_households1'),
             CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x276a650>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x276a690>),
+    Index(u'fk_householdmembers_households1',
+          u'hhid', u'pid',
+          unique=False),
     )
-Index(u'fk_householdmembers_households1', householdmembers.c.hhid, householdmembers.c.pid, unique=False)
 
 
 households = Table('households', metadata,
@@ -210,8 +226,10 @@ households = Table('households', metadata,
     ForeignKeyConstraint([u'pid'],
                          [u'openihmdb.projects.pid'],
                          name=u'fk_households_projects1'),
+    Index(u'fk_households_projects1',
+          u'pid',
+          unique=False),
     )
-Index(u'fk_households_projects1', households.c.pid, unique=False)
 
 
 incomeseasonality = Table('incomeseasonality', metadata,
@@ -248,8 +266,10 @@ livestockincome = Table('livestockincome', metadata,
                          [u'openihmdb.households.hhid',
                           u'openihmdb.households.pid'],
                          name=u'fk_livestockincome_households1'),
+    Index(u'fk_livestockincome_households1',
+          u'hhid', u'pid',
+          unique=False),
     )
-Index(u'fk_livestockincome_households1', livestockincome.c.hhid, livestockincome.c.pid, unique=False)
 
 
 lookup_energy_needs = Table('lookup_energy_needs', metadata,
@@ -270,8 +290,10 @@ personalcharacteristics = Table('personalcharacteristics', metadata,
                           u'openihmdb.householdmembers.hhid',
                           u'openihmdb.householdmembers.pid'],
                          name=u'fk_personalcharacteristics_householdmembers1'),
+    Index(u'fk_personalcharacteristics_householdmembers1',
+          u'personid', u'hhid', u'pid',
+          unique=False),
     )
-Index(u'fk_personalcharacteristics_householdmembers1', personalcharacteristics.c.personid, personalcharacteristics.c.hhid, personalcharacteristics.c.pid, unique=False)
 
 
 projectassets = Table('projectassets', metadata,
@@ -281,8 +303,10 @@ projectassets = Table('projectassets', metadata,
     ForeignKeyConstraint([u'pid'],
                          [u'openihmdb.projects.pid'],
                          name=u'pid'),
+    Index(u'pid',
+          u'pid',
+          unique=False),
     )
-Index(u'pid', projectassets.c.pid, unique=False)
 
 
 projectcharacteristics = Table('projectcharacteristics', metadata,
@@ -303,8 +327,10 @@ projectincomesources = Table('projectincomesources', metadata,
     ForeignKeyConstraint([u'pid'],
                          [u'openihmdb.projects.pid'],
                          name=u'fk_projectincomesources_projects'),
+    Index(u'fk_projectincomesources_projects',
+          u'pid',
+          unique=False),
     )
-Index(u'fk_projectincomesources_projects', projectincomesources.c.pid, unique=False)
 
 
 projects = Table('projects', metadata,
@@ -1652,8 +1678,10 @@ standardofliving = Table('standardofliving', metadata,
                          [u'openihmdb.projects.pid'],
                          name=u'fk_standardofliving_projects1'),
             CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2949350>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2949390>),
+    Index(u'fk_standardofliving_projects1',
+          u'pid',
+          unique=False),
     )
-Index(u'fk_standardofliving_projects1', standardofliving.c.pid, unique=False)
 
 
 transferlog = Table('transferlog', metadata,
@@ -1688,8 +1716,10 @@ transfers = Table('transfers', metadata,
                           u'openihmdb.households.pid'],
                          name=u'fk_transfers_households1'),
             CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2960950>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2960990>),
+    Index(u'fk_transfers_households1',
+          u'hhid', u'pid',
+          unique=False),
     )
-Index(u'fk_transfers_households1', transfers.c.hhid, transfers.c.pid, unique=False)
 
 
 wildfoods = Table('wildfoods', metadata,
@@ -1709,6 +1739,8 @@ wildfoods = Table('wildfoods', metadata,
                          [u'openihmdb.households.hhid',
                           u'openihmdb.households.pid'],
                          name=u'fk_wildfoods_households1'),
+    Index(u'fk_wildfoods_households1',
+          u'hhid', u'pid',
+          unique=False),
     )
-Index(u'fk_wildfoods_households1', wildfoods.c.hhid, wildfoods.c.pid, unique=False)
 
