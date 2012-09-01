@@ -16,7 +16,11 @@ absencefromhousehold = Table('absencefromhousehold', metadata,
     Column(u'personid', VARCHAR(length=20), nullable=False),
     Column(u'hhid', INTEGER(), nullable=False),
     Column(u'pid', INTEGER(), nullable=False),
-    ForeignKeyConstraint([u'personid', u'hhid', u'pid'], [u'openihmdb.householdmembers.personid', u'openihmdb.householdmembers.hhid', u'openihmdb.householdmembers.pid'], name=u'fk_absencefromhousehold_householdmembers1'),
+    ForeignKeyConstraint([u'personid', u'hhid', u'pid'],
+                         [u'openihmdb.householdmembers.personid',
+                          u'openihmdb.householdmembers.hhid',
+                          u'openihmdb.householdmembers.pid'],
+                         name=u'fk_absencefromhousehold_householdmembers1'),
     )
 Index(u'fk_absencefromhousehold_householdmembers1', absencefromhousehold.c.personid, absencefromhousehold.c.hhid, absencefromhousehold.c.pid, unique=False)
 
@@ -30,7 +34,10 @@ assets = Table('assets', metadata,
     Column(u'unitcost', Float(asdecimal=True), nullable=False),
     Column(u'totalunits', Float(asdecimal=True), nullable=False),
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-    ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_assets_households1'),
+    ForeignKeyConstraint([u'hhid', u'pid'],
+                         [u'openihmdb.households.hhid',
+                          u'openihmdb.households.pid'],
+                         name=u'fk_assets_households1'),
     )
 Index(u'fk_assets_households1', assets.c.hhid, assets.c.pid, unique=False)
 
@@ -62,7 +69,10 @@ cropincome = Table('cropincome', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
     Column(u'preferenceprice', Float(asdecimal=True), default=text(u"'100'")),
     Column(u'preferenceproduction', Float(asdecimal=True), default=text(u"'100'")),
-    ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_cropincome_households1'),
+    ForeignKeyConstraint([u'hhid', u'pid'], 
+                          u'openihmdb.households.hhid',
+                          u'openihmdb.households.pid'],
+                         name=u'fk_cropincome_households1'),
     )
 Index(u'fk_cropincome_households1', cropincome.c.hhid, cropincome.c.pid, unique=False)
 
@@ -88,7 +98,9 @@ diet = Table('diet', metadata,
     Column(u'percentage', Float(asdecimal=True), nullable=False),
     Column(u'priceperunit', Float(asdecimal=True), nullable=False),
     Column(u'modelprice', Float(asdecimal=True), nullable=False, default=text(u"'0'")),
-    ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'fk_diet_projects1'),
+    ForeignKeyConstraint([u'pid'],
+                         [u'openihmdb.projects.pid'],
+                         name=u'fk_diet_projects1'),
     )
 Index(u'fk_diet_projects1', diet.c.pid, unique=False)
 
@@ -104,7 +116,10 @@ employmentincome = Table('employmentincome', metadata,
     Column(u'cashincome', Float(asdecimal=True)),
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
     Column(u'preferenceincome', Float(asdecimal=True), default=text(u"'100'")),
-    ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_employmentincome_households1'),
+    ForeignKeyConstraint([u'hhid', u'pid'],
+                         [u'openihmdb.households.hhid',
+                          u'openihmdb.households.pid'],
+                         name=u'fk_employmentincome_households1'),
     )
 Index(u'fk_employmentincome_households1', employmentincome.c.hhid, employmentincome.c.pid, unique=False)
 
@@ -118,7 +133,10 @@ expenditure = Table('expenditure', metadata,
     Column(u'kcalperunit', Float(asdecimal=True)),
     Column(u'totalunits', Float(asdecimal=True)),
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-    ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_expenditure_households1'),
+    ForeignKeyConstraint([u'hhid', u'pid'],
+                         [u'openihmdb.households.hhid',
+                          u'openihmdb.households.pid'],
+                         name=u'fk_expenditure_households1'),
     )
 Index(u'fk_expenditure_households1', expenditure.c.hhid, expenditure.c.pid, unique=False)
 
@@ -152,7 +170,10 @@ householdcharacteristics = Table('householdcharacteristics', metadata,
     Column(u'hhid', INTEGER(), primary_key=True, nullable=False),
     Column(u'characteristic', VARCHAR(length=250), primary_key=True, nullable=False),
     Column(u'charvalue', VARCHAR(length=255), nullable=False),
-    ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_householdcharacteristics_households1'),
+    ForeignKeyConstraint([u'hhid', u'pid'],
+                         [u'openihmdb.households.hhid',
+                          u'openihmdb.households.pid'],
+                         name=u'fk_householdcharacteristics_households1'),
     )
 Index(u'fk_householdcharacteristics_households1', householdcharacteristics.c.hhid, householdcharacteristics.c.pid, unique=False)
 
@@ -169,7 +190,10 @@ householdmembers = Table('householdmembers', metadata,
     Column(u'reason', VARCHAR(length=200)),
     Column(u'whereto', VARCHAR(length=200)),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x276acd0>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x276ad10>),
-            ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_householdmembers_households1'),
+    ForeignKeyConstraint([u'hhid', u'pid'],
+                         [u'openihmdb.households.hhid',
+                          u'openihmdb.households.pid'],
+                         name=u'fk_householdmembers_households1'),
             CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x276a650>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x276a690>),
     )
 Index(u'fk_householdmembers_households1', householdmembers.c.hhid, householdmembers.c.pid, unique=False)
@@ -183,7 +207,9 @@ households = Table('households', metadata,
     Column(u'totalexpenditure', Float(asdecimal=True), nullable=False, default=text(u"'0'")),
     Column(u'dateofcollection', DATE(), nullable=False),
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
-    ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'fk_households_projects1'),
+    ForeignKeyConstraint([u'pid'],
+                         [u'openihmdb.projects.pid'],
+                         name=u'fk_households_projects1'),
     )
 Index(u'fk_households_projects1', households.c.pid, unique=False)
 
@@ -218,7 +244,10 @@ livestockincome = Table('livestockincome', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
     Column(u'preferenceprice', Float(asdecimal=True), default=text(u"'100'")),
     Column(u'preferenceproduction', Float(asdecimal=True), default=text(u"'100'")),
-    ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_livestockincome_households1'),
+    ForeignKeyConstraint([u'hhid', u'pid'],
+                         [u'openihmdb.households.hhid',
+                          u'openihmdb.households.pid'],
+                         name=u'fk_livestockincome_households1'),
     )
 Index(u'fk_livestockincome_households1', livestockincome.c.hhid, livestockincome.c.pid, unique=False)
 
@@ -236,7 +265,11 @@ personalcharacteristics = Table('personalcharacteristics', metadata,
     Column(u'personid', VARCHAR(length=20), primary_key=True, nullable=False),
     Column(u'characteristic', VARCHAR(length=250), primary_key=True, nullable=False),
     Column(u'charvalue', VARCHAR(length=255), nullable=False),
-    ForeignKeyConstraint([u'personid', u'hhid', u'pid'], [u'openihmdb.householdmembers.personid', u'openihmdb.householdmembers.hhid', u'openihmdb.householdmembers.pid'], name=u'fk_personalcharacteristics_householdmembers1'),
+    ForeignKeyConstraint([u'personid', u'hhid', u'pid'],
+                         [u'openihmdb.householdmembers.personid',
+                          u'openihmdb.householdmembers.hhid',
+                          u'openihmdb.householdmembers.pid'],
+                         name=u'fk_personalcharacteristics_householdmembers1'),
     )
 Index(u'fk_personalcharacteristics_householdmembers1', personalcharacteristics.c.personid, personalcharacteristics.c.hhid, personalcharacteristics.c.pid, unique=False)
 
@@ -245,7 +278,9 @@ projectassets = Table('projectassets', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
     Column(u'assetname', VARCHAR(length=255), primary_key=True, nullable=False),
     Column(u'assettype', VARCHAR(length=45), nullable=False),
-    ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'pid'),
+    ForeignKeyConstraint([u'pid'],
+                         [u'openihmdb.projects.pid'],
+                         name=u'pid'),
     )
 Index(u'pid', projectassets.c.pid, unique=False)
 
@@ -255,7 +290,9 @@ projectcharacteristics = Table('projectcharacteristics', metadata,
     Column(u'characteristic', VARCHAR(length=250), primary_key=True, nullable=False),
     Column(u'chartype', VARCHAR(length=50), nullable=False),
     Column(u'datatype', INTEGER(), nullable=False),
-    ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'fk_projectcharacteristics_projects1'),
+    ForeignKeyConstraint([u'pid'],
+                         [u'openihmdb.projects.pid'],
+                         name=u'fk_projectcharacteristics_projects1'),
     )
 
 
@@ -263,7 +300,9 @@ projectincomesources = Table('projectincomesources', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
     Column(u'incomesource', VARCHAR(length=255), primary_key=True, nullable=False),
     Column(u'incometype', VARCHAR(length=45), primary_key=True, nullable=False),
-    ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'fk_projectincomesources_projects'),
+    ForeignKeyConstraint([u'pid'],
+                         [u'openihmdb.projects.pid'],
+                         name=u'fk_projectincomesources_projects'),
     )
 Index(u'fk_projectincomesources_projects', projectincomesources.c.pid, unique=False)
 
@@ -1609,7 +1648,9 @@ standardofliving = Table('standardofliving', metadata,
     Column(u'costperyear', Float(asdecimal=True), nullable=False),
     Column(u'modelprice', Float(asdecimal=True), default=text(u"'0'")),
     CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2949910>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2949950>),
-            ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'fk_standardofliving_projects1'),
+    ForeignKeyConstraint([u'pid'],
+                         [u'openihmdb.projects.pid'],
+                         name=u'fk_standardofliving_projects1'),
             CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2949350>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2949390>),
     )
 Index(u'fk_standardofliving_projects1', standardofliving.c.pid, unique=False)
@@ -1621,7 +1662,9 @@ transferlog = Table('transferlog', metadata,
     Column(u'projectname', VARCHAR(length=45), nullable=False),
     Column(u'datecollected', VARCHAR(length=45), nullable=False),
     Column(u'currency', VARCHAR(length=45), nullable=False),
-    ForeignKeyConstraint([u'pid'], [u'openihmdb.projects.pid'], name=u'fk_transferlog_projects1'),
+    ForeignKeyConstraint([u'pid'],
+                         [u'openihmdb.projects.pid'],
+                         name=u'fk_transferlog_projects1'),
     )
 
 
@@ -1640,7 +1683,10 @@ transfers = Table('transfers', metadata,
     Column(u'priceperunit', Float(asdecimal=True), default=text(u"'0'")),
     Column(u'preferenceprice', Float(asdecimal=True), default=text(u"'100'")),
     Column(u'preferenceproduction', Float(asdecimal=True), default=text(u"'100'")),
-    ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_transfers_households1'),
+    ForeignKeyConstraint([u'hhid', u'pid'],
+                         [u'openihmdb.households.hhid',
+                          u'openihmdb.households.pid'],
+                         name=u'fk_transfers_households1'),
             CheckConstraint(<sqlalchemy.sql.expression._BinaryExpression object at 0x2960950>, _create_rule=<sqlalchemy.util.langhelpers.portable_instancemethod object at 0x2960990>),
     )
 Index(u'fk_transfers_households1', transfers.c.hhid, transfers.c.pid, unique=False)
@@ -1659,7 +1705,10 @@ wildfoods = Table('wildfoods', metadata,
     Column(u'pid', INTEGER(), primary_key=True, nullable=False),
     Column(u'preferenceprice', Float(asdecimal=True), default=text(u"'100'")),
     Column(u'preferenceproduction', Float(asdecimal=True), default=text(u"'100'")),
-    ForeignKeyConstraint([u'hhid', u'pid'], [u'openihmdb.households.hhid', u'openihmdb.households.pid'], name=u'fk_wildfoods_households1'),
+    ForeignKeyConstraint([u'hhid', u'pid'],
+                         [u'openihmdb.households.hhid',
+                          u'openihmdb.households.pid'],
+                         name=u'fk_wildfoods_households1'),
     )
 Index(u'fk_wildfoods_households1', wildfoods.c.hhid, wildfoods.c.pid, unique=False)
 
