@@ -22,9 +22,6 @@ absencefromhousehold = Table('absencefromhousehold', metadata,
                           u'householdmembers.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_absencefromhousehold_householdmembers1'),
-    Index(u'fk_absencefromhousehold_householdmembers1',
-          u'personid', u'hhid', u'pid',
-          unique=False),
     )
 
 
@@ -42,9 +39,6 @@ assets = Table('assets', metadata,
                           u'households.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_assets_households1'),
-    Index(u'fk_assets_households1',
-          u'hhid', u'pid',
-          unique=False),
     )
 
 
@@ -80,9 +74,6 @@ cropincome = Table('cropincome', metadata,
                           u'households.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_cropincome_households1'),
-    Index(u'fk_cropincome_households1',
-          u'hhid', u'pid',
-          unique=False),
     )
 
 
@@ -111,9 +102,6 @@ diet = Table('diet', metadata,
                          [u'projects.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_diet_projects1'),
-    Index(u'fk_diet_projects1',
-          u'pid',
-          unique=False),
     )
 
 
@@ -133,9 +121,6 @@ employmentincome = Table('employmentincome', metadata,
                           u'households.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_employmentincome_households1'),
-    Index(u'fk_employmentincome_households1',
-          u'hhid', u'pid',
-          unique=False),
     )
 
 
@@ -153,9 +138,6 @@ expenditure = Table('expenditure', metadata,
                           u'households.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_expenditure_households1'),
-    Index(u'fk_expenditure_households1',
-          u'hhid', u'pid',
-          unique=False),
     )
 
 
@@ -193,9 +175,6 @@ householdcharacteristics = Table('householdcharacteristics', metadata,
                           u'households.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_householdcharacteristics_households1'),
-    Index(u'fk_householdcharacteristics_households1',
-          u'hhid', u'pid',
-          unique=False),
     )
 
 
@@ -215,9 +194,6 @@ householdmembers = Table('householdmembers', metadata,
                           u'households.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_householdmembers_households1'),
-    Index(u'fk_householdmembers_households1',
-          u'hhid', u'pid',
-          unique=False),
     )
 
 
@@ -233,9 +209,6 @@ households = Table('households', metadata,
                          [u'projects.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_households_projects1'),
-    Index(u'fk_households_projects1',
-          u'pid',
-          unique=False),
     )
 
 
@@ -274,9 +247,6 @@ livestockincome = Table('livestockincome', metadata,
                           u'households.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_livestockincome_households1'),
-    Index(u'fk_livestockincome_households1',
-          u'hhid', u'pid',
-          unique=False),
     )
 
 
@@ -299,9 +269,6 @@ personalcharacteristics = Table('personalcharacteristics', metadata,
                           u'householdmembers.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_personalcharacteristics_householdmembers1'),
-    Index(u'fk_personalcharacteristics_householdmembers1',
-          u'personid', u'hhid', u'pid',
-          unique=False),
     )
 
 
@@ -506,9 +473,6 @@ transfers = Table('transfers', metadata,
                           u'households.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_transfers_households1'),
-    Index(u'fk_transfers_households1',
-          u'hhid', u'pid',
-          unique=False),
     )
 
 
@@ -530,8 +494,5 @@ wildfoods = Table('wildfoods', metadata,
                           u'households.pid'],
                          ondelete='CASCADE', onupdate='CASCADE',
                          name=u'fk_wildfoods_households1'),
-    Index(u'fk_wildfoods_households1',
-          u'hhid', u'pid',
-          unique=False),
     )
 
