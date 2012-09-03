@@ -17,3 +17,7 @@ syntax: glob
 *.xls
 glob:__init__.py
 glob:OpenIHM.e4p
+
+# python distutils
+build/
+*.egg-info
