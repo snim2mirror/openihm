@@ -3,7 +3,7 @@
 ## see http://code.google.com/p/sqlautocode/
 
 from sqlalchemy import *
-from sqlalchemy.databases.mysql import *
+from sqlalchemy.dialects.mysql import *
 
 metadata = MetaData()
 
