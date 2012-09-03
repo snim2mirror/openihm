@@ -23,6 +23,7 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
         port = 3306
         superuser = root
         superuser_password = password
+        driver = mysql+mysqldb
 
     """
 
@@ -97,3 +98,38 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
         for key in ['use_unicode', 'get_warnings']:
             config[key] = True
         return config
+
+    def get_driver(self):
+        try:
+            return self.get('database', 'driver')
+        except ConfigParser.NoSectionError, e:
+            pass
+        return 'mysql+mysqldb'
+
+    def sqlalchemy_connection_string(self):
+        """
+        Returns a connection string for sqlalchemy.  The defaults will produce
+        the following connection string,
+
+            mysql+mysqldb://openihm:ihm2010@localhost/openihmdb
+
+        """
+        config = self.database_config()
+        driver = self.get_driver()
+        return "%s://%s:%s@%s/%s" % (driver, config['user'],
+                                    config['password'], config['host'],
+                                    config['database'])
+
+    def sqlalchemy_superuser_connection_string(self):
+        """
+        Returns a connection string for the superuser for sqlalchemy.
+        The defaults will produce the following connection string,
+
+        Note: this may not work with blank passwords.  Then again it
+        might.  I have no way to test it, your mileage may vary.
+        """
+        config = self.database_config()
+        driver = self.get_driver()
+        return "%s://%s:%s@%s/%s" % (driver, config['superuser'],
+                                    config['superuser_password'],
+                                    config['host'], config['database'])
