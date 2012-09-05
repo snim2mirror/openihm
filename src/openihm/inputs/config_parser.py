@@ -70,7 +70,9 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
                 'superuser_password': self.get('database',
                                                   'superuser_password'),
             }
-        except ConfigParser.NoSectionError, e:
+        except ConfigParser.NoOptionError:
+            return self.defaults
+        except ConfigParser.NoSectionError:
             return self.defaults
 
     def dbinfo(self):
@@ -102,7 +104,9 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
     def get_driver(self):
         try:
             return self.get('database', 'driver')
-        except ConfigParser.NoSectionError, e:
+        except ConfigParser.NoOptionError:
+            pass
+        except ConfigParser.NoSectionError:
             pass
         return 'mysql+mysqldb'
 
