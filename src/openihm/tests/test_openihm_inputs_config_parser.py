@@ -79,7 +79,7 @@ superuser_password = password
         self.assertEqual(expected,
                         open_ihm_config.sqlalchemy_connection_string())
 
-    def test_sqlalchemy_config(self):
+    def test_sqlalchemy_config_file(self):
         open_ihm_config = OpenIHMConfig()
         config_file = """
 [database]

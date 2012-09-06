@@ -5,7 +5,6 @@ from inputs.config_parser import OpenIHMConfig
 from includes.mysql.connector import errors
 from includes.mysql.connector import Connect
 from data.databaseinitialiser import DatabaseInitialiser, DbConfig
-from inputs.config_parser import OpenIHMConfig
 import unittest
 
 
@@ -82,7 +81,7 @@ class DatabaseHelper(object):
         """
         db = Connect(**self.config.superuser_dbinfo().copy())
         cursor = db.cursor()
-        results = cursor.execute(query, data)
+        cursor.execute(query, data)
         db.commit()
         db.close()
         return cursor

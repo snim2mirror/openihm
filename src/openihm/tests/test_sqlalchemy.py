@@ -1,11 +1,10 @@
 import unittest
-from data.databaseinitialiser import DatabaseInitialiser, DbConfig
 from database_helper import DatabaseHelper
-from datetime import date
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy.orm import mapper
-from model.schema import *
+from model.schema import setup_foods_crops
+
 
 class SetupFoodsCrops(object):
 
@@ -16,6 +15,7 @@ class SetupFoodsCrops(object):
         self.unitofmeasure = unitofmeasure
 
 mapper(SetupFoodsCrops, setup_foods_crops)
+
 
 class TestSQLAlchemy(unittest.TestCase):
     """
@@ -56,4 +56,3 @@ class TestSQLAlchemy(unittest.TestCase):
         session.add(crop)
         self.assertEqual(session.query(SetupFoodsCrops).count(), 1)
         session.commit()
-

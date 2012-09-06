@@ -4,7 +4,6 @@ try:
     import PyQt4.QtGui
 except:
     raise unittest.SkipTest("Need PyQt4 installed to do gui tests")
-from database_helper import DatabaseHelper
 from gui.interface.mixins import TableViewMixin, MDIDialogMixin, DataEntryMixin
 
 
