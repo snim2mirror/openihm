@@ -1,5 +1,4 @@
 import os
-import sys
 from data.config import Config
 from inputs.config_parser import OpenIHMConfig
 from includes.mysql.connector import errors
