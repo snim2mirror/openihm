@@ -15,7 +15,7 @@ class DatabaseHelper(object):
     def __init__(self):
         config = OpenIHMConfig()
         self.real_config = config
-        self.test_dir = sys.path[0]
+        self.test_dir = os.path.dirname(__file__)
         config_file = os.path.join(self.test_dir, '..', 'test_openihm.cfg')
         read = config.read(config_file)
         if len(read) != 1:
