@@ -1,92 +1,98 @@
 import unittest
 try:
-    import PyQt4.QtCore
-    import PyQt4.QtGui
-except:
-    raise unittest.SkipTest("Need PyQt4 installed to do gui tests")
-from gui.interface.mixins import TableViewMixin, MDIDialogMixin, DataEntryMixin
+    from gui.interface.mixins import TableViewMixin, MDIDialogMixin, DataEntryMixin
 
 
-class Fake(TableViewMixin):
+    class Fake(TableViewMixin):
 
-    pass
-
-
-class FakeMDI(MDIDialogMixin):
-
-    def closeActiveSubWindow(self):
-        pass
-
-    def parent(self):
-        pass
-
-    def close(self):
         pass
 
 
-class FakeView(object):
+    class FakeMDI(MDIDialogMixin):
 
-    def selectedIndexes(self):
-        return [FakeRow() for x in range(10)]
+        def closeActiveSubWindow(self):
+            pass
 
-    def currentIndex(self):
-        return FakeRow()
+        def parent(self):
+            pass
 
-
-class FakeRow(object):
-
-    def row(self):
-        return 'test'
+        def close(self):
+            pass
 
 
-class TestTableViewMixin(unittest.TestCase):
-    def test_countRowsSelected(self):
-        table_view_mixin = Fake()
-        view = FakeView()
-        self.assertEqual(1, table_view_mixin.countRowsSelected(view))
+    class FakeView(object):
 
-    def test_getCurrentRow(self):
-        table_view_mixin = Fake()
-        view = FakeView()
-        self.assertEqual('test', table_view_mixin.getCurrentRow(view))
+        def selectedIndexes(self):
+            return [FakeRow() for x in range(10)]
 
-    def test_getSelectedRows(self):
-        table_view_mixin = Fake()
-        view = FakeView()
-        self.assertEqual(['test'], table_view_mixin.getSelectedRows(view))
+        def currentIndex(self):
+            return FakeRow()
 
 
-class TestMDIDialogMixin(unittest.TestCase):
-    def test_mdiClose(self):
-        m_di_dialog_mixin = FakeMDI()
-        # FIXME: get more coverage
-        m_di_dialog_mixin.mdiClose()
+    class FakeRow(object):
 
-    def test_setMdi(self):
-        m_di_dialog_mixin = FakeMDI()
-        mdi = FakeMDI()
-        m_di_dialog_mixin.setMdi(mdi)
-        self.assertEqual(mdi, m_di_dialog_mixin.mdi)
+        def row(self):
+            return 'test'
 
 
-class TestDataEntryMixin(unittest.TestCase):
-    def test_getDbString(self):
-        data_entry_mixin = DataEntryMixin()
-        self.assertEqual("donxxxt really want this",
-            data_entry_mixin.getDbString("don't really want this"))
+    class TestTableViewMixin(unittest.TestCase):
+        def test_countRowsSelected(self):
+            table_view_mixin = Fake()
+            view = FakeView()
+            self.assertEqual(1, table_view_mixin.countRowsSelected(view))
 
-    def test_getIntMonth(self):
-        data_entry_mixin = DataEntryMixin()
-        self.assertEqual("6", data_entry_mixin.getIntMonth("June"))
+        def test_getCurrentRow(self):
+            table_view_mixin = Fake()
+            view = FakeView()
+            self.assertEqual('test', table_view_mixin.getCurrentRow(view))
 
-    def test_getStringMonth(self):
-        data_entry_mixin = DataEntryMixin()
-        self.assertEqual('June', data_entry_mixin.getStringMonth("6"))
+        def test_getSelectedRows(self):
+            table_view_mixin = Fake()
+            view = FakeView()
+            self.assertEqual(['test'], table_view_mixin.getSelectedRows(view))
 
-    def test_getViewString(self):
-        data_entry_mixin = DataEntryMixin()
-        self.assertEqual("don't really want this",
-            data_entry_mixin.getViewString("donxxxt really want this"))
+
+    class TestMDIDialogMixin(unittest.TestCase):
+        def test_mdiClose(self):
+            m_di_dialog_mixin = FakeMDI()
+            # FIXME: get more coverage
+            m_di_dialog_mixin.mdiClose()
+
+        def test_setMdi(self):
+            m_di_dialog_mixin = FakeMDI()
+            mdi = FakeMDI()
+            m_di_dialog_mixin.setMdi(mdi)
+            self.assertEqual(mdi, m_di_dialog_mixin.mdi)
+
+
+    class TestDataEntryMixin(unittest.TestCase):
+        def test_getDbString(self):
+            data_entry_mixin = DataEntryMixin()
+            self.assertEqual("donxxxt really want this",
+                data_entry_mixin.getDbString("don't really want this"))
+
+        def test_getIntMonth(self):
+            data_entry_mixin = DataEntryMixin()
+            self.assertEqual("6", data_entry_mixin.getIntMonth("June"))
+
+        def test_getStringMonth(self):
+            data_entry_mixin = DataEntryMixin()
+            self.assertEqual('June', data_entry_mixin.getStringMonth("6"))
+
+        def test_getViewString(self):
+            data_entry_mixin = DataEntryMixin()
+            self.assertEqual("don't really want this",
+                data_entry_mixin.getViewString("donxxxt really want this"))
+
+except ImportError, e:
+    if e.message.find('PyQt4') >= 0:
+        class TestMissingDependency(unittest.TestCase):
+
+            @unittest.skip('Missing dependency - ' + e.message)
+            def test_fail():
+                pass
+    else:
+        raise
 
 if __name__ == '__main__':
     unittest.main()
