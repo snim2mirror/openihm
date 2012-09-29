@@ -86,7 +86,7 @@ class TestDatabaseInitialiser(unittest.TestCase):
     """
 
     def setUp(self):
-        self.helper = DatabaseHelper(self)
+        self.helper = DatabaseHelper()
         self.config = self.helper.getConfig()
         self.helper.start_tests()
 

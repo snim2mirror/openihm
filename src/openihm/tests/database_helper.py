@@ -1,23 +1,26 @@
-import os, sys
+import os
 from data.config import Config
 from inputs.config_parser import OpenIHMConfig
 from includes.mysql.connector import errors
 from includes.mysql.connector import Connect
 from data.databaseinitialiser import DatabaseInitialiser, DbConfig
-from inputs.config_parser import OpenIHMConfig
+import unittest
 
 
 class DatabaseHelper(object):
 
     # the module uses a lot of relative paths
     # assuming they are in the openihm directory
-    def __init__(self, unittest):
+    def __init__(self):
         config = OpenIHMConfig()
-        self.test_dir = sys.path[0]
+        self.real_config = config
+        self.test_dir = os.path.dirname(__file__)
         config_file = os.path.join(self.test_dir, '..', 'test_openihm.cfg')
         read = config.read(config_file)
-        unittest.assertEqual(len(read), 1,
-          'Need test_openihm.cfg setup with database parameters')
+        if len(read) != 1:
+            m = 'Need test_openihm.cfg setup with database parameters'
+            e = unittest.SkipTest(m)
+            raise e
         Config.set_config(config)
         self.dbconfig = config.database_config()
         self.config = DbConfig(**self.dbconfig)
@@ -26,13 +29,15 @@ class DatabaseHelper(object):
         return self.config
 
     def start_tests(self):
+        self.drop_database()
         self.prev_path = os.getcwd()
         os.chdir(self.test_dir)
         self.create_database()
+        self.create_indicator_table()
 
     def end_tests(self):
-        self.drop_database()
         os.chdir(self.prev_path)
+        self.drop_database()
 
     def setup_clean_db(self):
         database_initialiser = DatabaseInitialiser(self.config)
@@ -81,9 +86,35 @@ class DatabaseHelper(object):
         cursor.execute(query, data)
         db.commit()
         db.close()
+        return cursor
+
+    def execute_select(self, query, data=None):
+        """
+        Yet another wrapper around queries
+        """
+        db = Connect(**self.config.superuser_dbinfo().copy())
+        cursor = db.cursor()
+        cursor.execute(query, data)
+        yield cursor.fetchall()
+        db.close()
+
+    def create_indicator_table(self):
+        # this is an attempt to ensure we don't accidentally
+        # blow away a database we're not supposed to.
+        self.execute_instruction("""
+            create table openihm_test_table (test varchar(1))""")
+
+    def test_indicator_present(self):
+        rows = self.execute_select("show tables like 'openihm_test_table'")
+        l = [x for x in rows]
+        return len(l) == 1
 
     def drop_database(self):
-        self._ddl_command('drop database ' + self.config.database)
+        try:
+            if self.test_indicator_present():
+                self._ddl_command('drop database ' + self.config.database)
+        except errors.ProgrammingError:
+            pass
 
     def create_database(self):
         self._ddl_command('create database ' + self.config.database)
