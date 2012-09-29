@@ -61,8 +61,11 @@ class DatabaseHelper(object):
         use_statement = re.compile('use.*openihmdb`', re.I)
         grant_statement = re.compile('grant all on ', re.I)
         remove_db_name = re.compile('`openihmdb`\.', re.I)
-        skip_statements = (schema_create, use_statement, grant_statement)
+        db_name = re.compile('`openihmdb`', re.I)
+        skip_statements = (schema_create, grant_statement)
         for line in f.readlines():
+            if use_statement.match(line):
+                line = db_name.sub('`' + self.config.database + '`', line)
             if not any([x.match(line) for x in skip_statements]):
                 line = remove_db_name.sub('', line)
                 out.write(line)

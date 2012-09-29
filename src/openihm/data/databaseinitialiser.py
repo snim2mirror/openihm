@@ -108,6 +108,7 @@ class DatabaseInitialiser:
          sqlfile.close()
          try:
              dbinfo = self.config.superuser_dbinfo().copy()
+             del dbinfo['database']
              db = Connect(**dbinfo)             
              cursor = db.cursor()
 
