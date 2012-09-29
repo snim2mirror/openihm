@@ -1,0 +1,6 @@
+[database]
+database = test_openihm
+user = openihm
+password = ihm2012
+superuser_password = s3cure
+superuser = root

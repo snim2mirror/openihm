@@ -81,7 +81,7 @@ def main():
                window = FrmDatabaseMessage(msg)
                window.show()
                
-          elif ( dbstatus['dbuptodate'] == False ):
+          elif ( dbstatus['dbinstalled'] == True and dbstatus['dbuptodate'] == False ):
                log.info('DB not up to date.')
                # inform user update failed 
                # because no 'root' access to database.
