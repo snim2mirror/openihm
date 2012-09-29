@@ -209,7 +209,6 @@ class ReadDataEntrySheets:
                         #personid = personid + '_' + str(numrows+1)
                         query = ''' UPDATE householdmembers SET headofhousehold='%s',yearofbirth=%s,sex='%s',periodaway=%s
                                     WHERE personid='%s' AND hhid=%s AND pid=%s''' % (hhead,yearofbirth,sex,periodaway,personid,hhid,self.pid)
-                    database.execUpdateQuery(query)
 
             empty_cell_count = 0
                 
