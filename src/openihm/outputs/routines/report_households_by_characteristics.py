@@ -26,32 +26,31 @@ class HouseholdsByCharacteristics:
     def __init__(self):
         self.database = Database()
 
-    def buildPCharacteristicsQuery(self,pcharacteristics, tablename):
+    def buildPCharacteristicsQuery(self,pcharacteristics, tablename,projectid):
         ''' build query for selecting households that meet selected personal characteristics from the report interface'''
         
         houseid = tablename + '.hhid'
-        
-        basequery = '''SELECT households.pid,households.hhid, households.householdname FROM households
-                        JOIN personalcharacteristics ON households.hhid = personalcharacteristics.hhid AND households.pid=personalcharacteristics.pid''' 
+        basequery = '''SELECT households.pid,households.hhid, households.householdname
+                            FROM households,personalcharacteristics WHERE households.pid=%s AND households.hhid = personalcharacteristics.hhid AND households.pid=personalcharacteristics.pid''' % projectid
         for currentcharacteristic in pcharacteristics:
             #currentcharacteristic =  'personalcharacteristics' + '.' + '%s' % characteristic
-            basequery = basequery + " AND personalcharacteristics.characteristic ='%s' AND personalcharacteristics.charvalue='Yes'" % (currentcharacteristic)
+            basequery = basequery + " AND personalcharacteristics.characteristic ='%s'  AND personalcharacteristics.charvalue='Yes'" % (currentcharacteristic)
 
         basequery = basequery + " GROUP BY households.pid,households.hhid" 
         print basequery
         return basequery
         
-    def buildHCharacteristicsQuery(self,hcharacteristics, tablename):
+    def buildHCharacteristicsQuery(self,hcharacteristics, tablename,projectid):
         ''' build query for selecting households that meet selected household characteristics from the report interface'''
         
         #settingsmanager = ReportsSettingsManager()
         houseid = tablename + '.hhid'
         
-        basequery = '''SELECT households.pid,households.hhid, households.householdname FROM households
-                        JOIN householdcharacteristics ON households.hhid = householdcharacteristics.hhid AND households.pid=householdcharacteristics.pid''' 
+        basequery = basequery = '''SELECT households.pid,households.hhid, households.householdname
+                            FROM households,householdcharacteristics WHERE households.pid=%s AND households.hhid = householdcharacteristics.hhid AND households.pid=householdcharacteristics.pid''' % projectid
         for currentcharacteristic in hcharacteristics:
             #currentcharacteristic =  'householdcharacteristics' + '.' + '%s' % characteristic
-            basequery = basequery + " AND householdcharacteristics.characteristic ='%s' AND householdcharacteristics.charvalue='Yes'" % (currentcharacteristic)
+            basequery = basequery + " AND householdcharacteristics.characteristic ='%s'  AND householdcharacteristics.charvalue='Yes'" % (currentcharacteristic)
             
         basequery = basequery + " GROUP BY households.pid,households.hhid" 
         print basequery
