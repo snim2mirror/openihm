@@ -45,15 +45,18 @@ class LivingThreshhold:
         
         householdDI = self.getDisposableIncome(reporttype,projectid,houseids)
         reporttable = []
+        
         for household in householdDI:
+            positionmarker = 0
             templist = []
             hhid = household[0]
             templist.append(hhid)
             hholdDi = household[1]
             templist.append(hholdDi)
             hhCosts = self.getHouseholdExpenditure(projectid,hhid)
-            livingThreshold = float(household[1]) - hhCosts
-            templist.append(livingThreshold)
+            if (float(household[1]) - hhCosts)< 0:
+                positionmarker = -1 #this is a marker just to indicate hholds below STOL, when producing output
+            templist.append(positionmarker)
             reporttable.append(tuple(templist))
         return reporttable
             
