@@ -2,5 +2,9 @@
 database = test_openihm
 user = openihm
 password = ihm2012
+<<<<<<< local
 superuser_password = s3cure
+=======
+superuser_password = ''
+>>>>>>> other
 superuser = root

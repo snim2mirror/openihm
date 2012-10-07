@@ -62,8 +62,8 @@ class HouseholdsIncomeWrite:
             
             
             if reporttype=='Standard of Living':
-                incomeLessExpenses = row[2]
-                if incomeLessExpenses < 0:
+                positionmarker = row[2]
+                if positionmarker == 0:
                     sheet1.write(myrow, 1, float(householdDI))
                     sheet1.write(myrow, 2, 0)
                 else:

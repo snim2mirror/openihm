@@ -45,7 +45,7 @@ class AdultEquivalent:
 
             # adjust member's yearly energy requirement according to absence from household
             adjustedenergyreq = self.adjustMemberEnergyReq(energyreq,periodaway)
-            householdenergyreq = householdenergyreq + adjustedenergyreq
+            householdenergyreq = householdenergyreq + adjustedenergyreq 
         return householdenergyreq
 
     def calculateEnergyReqByAgeSex(self,age,gender):
@@ -78,8 +78,8 @@ class AdultEquivalent:
         '''Adjust member's yearly energy requirement according to absence from household'''
         absence = periodaway
         adjustedenergyreq = energyreq
-        if absence <> 0:
-            adjustedenergyreq = adjustedenergyreq - (adjustedenergyreq *(absence/12))
+        if absence > 0:
+            adjustedenergyreq = adjustedenergyreq - (adjustedenergyreq *(float(absence)/12))
         return adjustedenergyreq
 
     def calculateAdultEnergyEquivalent(self):

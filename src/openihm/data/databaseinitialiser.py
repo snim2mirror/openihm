@@ -76,11 +76,12 @@ class DatabaseInitialiser:
          dbinfo = config.dbinfo().copy()
          # assume that mysql server is running and database is installed already
          mysqlstarted = True
-         dbinstalled = True
+         dbinstalled = False
          # try connecting to database
          try:
              db = Connect( **dbinfo )
              db.close()
+             dbinstalled = True
          # interfaceError occurs if MySQL server is not running
          except errors.InterfaceError:
              mysqlstarted = False
@@ -90,7 +91,7 @@ class DatabaseInitialiser:
              self.setupStartupCrops() # initialise setup_foods_crops table
              
          dbuptodate = False
-         if ( mysqlstarted and dbinstalled ):
+         if ( mysqlstarted==True and dbinstalled==True ):
                  dbuptodate = self.updateDatabase()
                  #self.insertStartupCrops()
 
@@ -123,7 +124,7 @@ class DatabaseInitialiser:
              
              cursor.close()
              db.close()
-         
+              
              return True
          
          except errors.InterfaceError,  e:
@@ -173,6 +174,7 @@ class DatabaseInitialiser:
      def updateDatabase(self):
          # if database is already up to date return
          if self.databaseUpToDate():
+                       
              return True
          # else update the database    
          else:
