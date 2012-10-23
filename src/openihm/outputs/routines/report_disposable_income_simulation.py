@@ -228,6 +228,7 @@ class SimulationDisposableHouseholdIncome:
         basicQuery = self.totalCropCashIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
+        print basicQuery
         return recordset
     
     def getEmploymentCashIncome(self,projectid,householdIDs):
@@ -313,52 +314,52 @@ class SimulationDisposableHouseholdIncome:
 
     #build queries for household total cash income
     def totalCropCashIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((unitssold * unitprice)* (preferenceprice/100)) AS cropincome FROM cropincome
+        query = '''SELECT hhid,SUM(((unitssold * unitprice)* (abs(100-preferenceproduction)/100))*(abs(100-preferenceprice)/100)) AS cropincome FROM cropincome
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
     
     def totalEmploymentCashIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((cashincome)*(preferenceincome/100)) AS employmentcashincome FROM employmentincome
+        query = '''SELECT hhid,SUM((cashincome)*((abs(100-preferenceincome))/100)) AS employmentcashincome FROM employmentincome
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalLivestockCashIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((unitssold * unitprice)*(preferenceprice/100)) AS livestockincome FROM livestockincome
+        query = '''SELECT hhid,SUM(((unitssold * unitprice)* (abs(100-preferenceproduction)/100))*(abs(100-preferenceprice)/100)) AS livestockincome FROM livestockincome
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalTransferCashIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((cashperyear)*(preferenceprice/100)) AS transferincome FROM transfers
+        query = '''SELECT hhid,SUM(((cashperyear)*(abs(100-preferenceproduction)/100))*(abs(100-preferenceprice)/100)) AS transferincome FROM transfers
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalWildFoodCashIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((unitssold * unitprice)*(preferenceprice/100)) AS wildfoodsincome FROM wildfoods
+        query = '''SELECT hhid,SUM(((unitssold * unitprice)* (abs(100-preferenceproduction)/100))*(abs(100-preferenceprice)/100)) AS wildfoodsincome FROM wildfoods
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     #build queries for household total food income
     def totalCropFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=cropincome.incomesource))*(preferenceproduction/100)) AS cropincome
+        query = '''SELECT hhid,SUM((unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=cropincome.incomesource))*((abs(100-preferenceproduction))/100)) AS cropincome
                             FROM cropincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
     
     def totalEmploymentFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((incomekcal)*(preferenceincome/100)) AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+        query = '''SELECT hhid,SUM((incomekcal)*((abs(100-preferenceincome))/100)) AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalLivestockFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=livestockincome.incomesource))*(preferenceproduction/100))
+        query = '''SELECT hhid,SUM((unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=livestockincome.incomesource))*((abs(100-preferenceproduction))/100))
                             AS livestockincome FROM livestockincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalTransferFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=transfers.foodtype))*(preferenceproduction/100)) AS transferincome
+        query = '''SELECT hhid,SUM((unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=transfers.foodtype))*((abs(100-preferenceproduction))/100)) AS transferincome
                             FROM transfers WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalWildFoodFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=wildfoods.incomesource))*(preferenceproduction/100))
+        query = '''SELECT hhid,SUM((unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=wildfoods.incomesource))*((abs(100-preferenceproduction))/100))
                             AS wildfoodsincome FROM wildfoods WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 

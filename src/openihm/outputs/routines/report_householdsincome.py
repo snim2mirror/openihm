@@ -267,7 +267,7 @@ class HouseholdIncome:
         houseAE = householdAE
         for i in range(1,listlength):
             stardisedincome = row[i]
-            if row[i]:
+            if row[i] and householdAE!=0:
                 income = float(row[i])/householdAE
                 stardisedincome= round(income,2)
             standardisedList.append(stardisedincome)
