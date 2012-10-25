@@ -302,7 +302,7 @@ class TransferManager:
          db.close()
          
      def transferHouseholdCropIncome(self, accessfilename, sourcepid,  sourcehhid,  household ):
-         query = '''SELECT TblLkUpIncomeSources.IncomeSource, TblIncomeSourcesCrops.Unit, 
+         query = '''SELECT DISTINCT TblLkUpIncomeSources.IncomeSource, TblIncomeSourcesCrops.Unit, 
                                  TblIncomeValsCrops.UnitsSold + TblIncomeValsCrops.UnitsConsumed AS UnitsProduced, 
                                  TblIncomeValsCrops.UnitsSold, TblIncomeValsCrops.PriceUnit, 0 AS OtherUses, 
                                  TblIncomeValsCrops.UnitsConsumed
@@ -329,7 +329,7 @@ class TransferManager:
          db.close()
          
      def transferHouseholdLivestockIncome(self, accessfilename, sourcepid,  sourcehhid,  household ):
-         query = '''SELECT TblLkUpIncomeSources.IncomeSource, TblIncomeSourcesLS.Unit, 
+         query = '''SELECT DISTINCT TblLkUpIncomeSources.IncomeSource, TblIncomeSourcesLS.Unit, 
                                  TblIncomeValsLS.UnitsSold + TblIncomeValsLS.UnitsConsumed AS UnitsProduced, 
                                  TblIncomeValsLS.UnitsSold, TblIncomeValsLS.PriceUnit, 0 AS OtherUses, 
                                  TblIncomeValsLS.UnitsConsumed
@@ -358,7 +358,7 @@ class TransferManager:
          db.close()
          
      def transferHouseholdWildfoodsIncome(self, accessfilename, sourcepid,  sourcehhid,  household ):
-         query = '''SELECT TblLkUpIncomeSources.IncomeSource, TblIncomeSourcesWF.Unit, 
+         query = '''SELECT DISTINCT TblLkUpIncomeSources.IncomeSource, TblIncomeSourcesWF.Unit, 
                                  TblIncomeValsWF.UnitsSold + TblIncomeValsWF.UnitsConsumed AS UnitsProduced, 
                                  TblIncomeValsWF.UnitsSold, 0 AS PriceUnit, 0 AS OtherUses, 
                                  TblIncomeValsWF.UnitsConsumed
@@ -387,7 +387,7 @@ class TransferManager:
          db.close()
          
      def transferHouseholdGiftsIncome(self, accessfilename, sourcepid,  sourcehhid,  household ):
-         query = '''SELECT TblLkUpIncomeSources.IncomeSource AS sourceoftransfer, 'Internal' AS sourcetype, 
+         query = '''SELECT DISTINCT TblLkUpIncomeSources.IncomeSource AS sourceoftransfer, 'Internal' AS sourcetype, 
                                  TblIncomeValsGift.CashYr AS cashperyear, '' AS foodtype,TblIncomeSourcesGift.Unit AS unitofmeasure,
                                  TblIncomeValsGift.UnitsConsumed AS unitsgiven,
                                  TblIncomeValsGift.UnitsConsumed AS unitsconsumed,
@@ -418,7 +418,7 @@ class TransferManager:
          db.close()
          
      def transferHouseholdAIDIncome(self, accessfilename, sourcepid,  sourcehhid,  household ):
-         query = '''SELECT TblLkUpIncomeSources.IncomeSource AS sourceoftransfer, 'External' AS sourcetype, 
+         query = '''SELECT DISTINCT TblLkUpIncomeSources.IncomeSource AS sourceoftransfer, 'External' AS sourcetype, 
                                  TblIncomeValsAID.UnitValueCash * TblIncomeValsAID.TimesItemsReceived AS cashperyear,
                                  '' AS foodtype,
                                  TblIncomeSourcesAID.Unit AS unitofmeasure,
@@ -451,7 +451,7 @@ class TransferManager:
          db.close()
          
      def transferHouseholdEmploymentIncome(self, accessfilename, sourcepid,  sourcehhid,  household ):
-         query = '''SELECT TblLkUpIncomeSources.IncomeSource AS incomesource, TblIncomeSourcesEmp.FoodTypePaid as foodtypepaid, 
+         query = '''SELECT DISTINCT TblLkUpIncomeSources.IncomeSource AS incomesource, TblIncomeSourcesEmp.FoodTypePaid as foodtypepaid, 
                                  TblIncomeSourcesEmp.FoodUnit as unitofmeasure,
                                  TblIncomeValsEmp.NFoodUnits AS unitspaid, 
                                  TblIncomeValsEmp.IncomeKcals AS incomekcal, 
