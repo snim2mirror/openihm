@@ -231,9 +231,9 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
         currentincomecategory = self.getActiveIcomeSourceCategory()
         if currentincomecategory =='Crops':
             self.getProjectIncomeSources()
-        elif currentincomecategory =='Formal Transfers':
+        elif currentincomecategory =='Official Transfers':
             self.getProjectIncomeSources()
-        elif currentincomecategory =='Informal Tansfers':
+        elif currentincomecategory =='Unofficial Tansfers':
             self.getProjectIncomeSources()
         elif currentincomecategory =='Livestock':
             self.getProjectIncomeSources()
@@ -246,9 +246,9 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
         currentincomecategory = self.getActiveIcomeSourceCategory()
         if currentincomecategory =='Crops':
             self.editIncomeSourceReferenceValues()
-        elif currentincomecategory =='Formal Transfers':
+        elif currentincomecategory =='Official Transfers':
             self.editIncomeSourceReferenceValues()
-        elif currentincomecategory =='Informal Tansfers':
+        elif currentincomecategory =='Unofficial Tansfers':
             self.editIncomeSourceReferenceValues()
         elif currentincomecategory =='Livestock':
             self.editIncomeSourceReferenceValues()
@@ -263,9 +263,9 @@ class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData,MDIDialogMixin,TableViewM
         currentincomecategory = self.getActiveIcomeSourceCategory()
         if currentincomecategory =='Crops':
             recordset = settingsmgr.getSimulationCropIncomeSources(projectid)
-        elif currentincomecategory =='Formal Transfers':
+        elif currentincomecategory =='Official Transfers':
             recordset = settingsmgr.getSimulationFormalTransferIncomeSources(projectid)
-        elif currentincomecategory =='Informal Tansfers':
+        elif currentincomecategory =='Unofficial Tansfers':
             recordset = settingsmgr.getSimulationInformalTransferIncomeSources(projectid)
         elif currentincomecategory =='Livestock':
             recordset = settingsmgr.getSimulationLivestockIncomeSources(projectid)

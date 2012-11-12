@@ -467,7 +467,7 @@
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Informal Transfers</string>
+       <string>Unofficial Transfers</string>
       </attribute>
       <widget class="QLabel" name="label_32">
        <property name="geometry">
@@ -560,7 +560,7 @@
      </widget>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
-       <string>Formal Transfers</string>
+       <string>Official Transfers</string>
       </attribute>
       <widget class="QLabel" name="label_35">
        <property name="geometry">

@@ -100,7 +100,7 @@ class PersonalCharacteristicsManager(TableViewMixin):
         
      def removeAllPersonalCharacteristics(self):
          ''' remove all listed personal characteristics from Project'''
-         msg = "Are you sure you want to remove all selected transfers from this project?"
+         msg = "Are you sure you want to remove all selected characteristics from this project?"
          ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
          # if deletion is rejected return without deleting
          if ret == QMessageBox.No:
