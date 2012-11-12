@@ -145,7 +145,7 @@ class DisposableHouseholdIncome:
                 hhDisposableIncome = householdCashIncome[i][1] + excessFoodSales
                 
             #Standardise DI if reportype is DI/AE
-            if ((reporttype =='DI/AE') or (reporttype=='Standard of Living')) and householdEnergyNeed [i][1]!=0:
+            if ((reporttype =='DI/AE') or (reporttype=='Standard of Living')or (reporttype=='Simulation')) and householdEnergyNeed [i][1]!=0:
                 houseAE = self.getHouseAE(householdEnergyNeed[i][1])
                 hhDisposableIncome = hhDisposableIncome / houseAE
 
