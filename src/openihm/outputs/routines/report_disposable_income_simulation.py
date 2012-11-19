@@ -355,7 +355,7 @@ class SimulationDisposableHouseholdIncome:
         return query
 
     def totalTransferFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=transfers.foodtype))*(preferenceproduction/100)) AS transferincome
+        query = '''SELECT hhid,SUM((unitsconsumed *(preferenceproduction/100)) * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=transfers.foodtype)) AS transferincome
                             FROM transfers WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 

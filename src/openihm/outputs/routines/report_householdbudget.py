@@ -240,6 +240,7 @@ class HouseholdBudget:
         #       expenses = row[0]
         connector = LivingThreshhold()
         expenses = connector.getHouseholdExpenditure(projectid,hid)
+        print 'expenses ',expenses
         return expenses
             
     def householdBudgetSummaries(self,projectid,selectedHouseholds):

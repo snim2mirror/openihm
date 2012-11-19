@@ -43,10 +43,14 @@ class LivingThreshhold:
     def determineLThresholdPosition(self,reporttype,projectid,houseids):
         '''Check whether a household is above or below the living threshold for a particular project'''
         
+        
         householdDI = self.getDisposableIncome(reporttype,projectid,houseids)
+        reporttype = 'raw DI' #get raw DI for determining SOLT position
+        rawhouseholdDI = self.getDisposableIncome(reporttype,projectid,houseids)
         reporttable = []
         
         for household in householdDI:
+            temphouseid= []
             positionmarker = 0
             templist = []
             hhid = household[0]
@@ -54,7 +58,13 @@ class LivingThreshhold:
             hholdDi = household[1]
             templist.append(hholdDi)
             hhCosts = self.getHouseholdExpenditure(projectid,hhid)
-            if (float(household[1]) - hhCosts)< 0:
+            temphouseid.append(hhid)
+            
+            rawhouseholdDI = self.getDisposableIncome(reporttype,projectid,temphouseid)
+            rawDI = rawhouseholdDI[0][1]
+            #print 'hhid ', hhid,' expenditure ',hhCosts, ' nyumba ', rawhouseholdDI[0][0],' raw ',rawDI
+            #if (float(household[1]) - hhCosts)< 0:
+            if (float(rawDI) - hhCosts)< 0:
                 positionmarker = -1 #this is a marker just to indicate hholds below STOL, when producing output
             templist.append(positionmarker)
             reporttable.append(tuple(templist))
