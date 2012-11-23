@@ -278,7 +278,8 @@ class HouseholdBudget:
 
             if householdFoodNeed > 0:
                 householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] - householdFoodPrice
+                hhDisposableIncome = householdCashIncome[i][6] - householdFoodPrice
+                print 'cash ',householdCashIncome[i][6], ' all ', householdCashIncome[i]
                 
                 if householdFoodPrice!=0 and hhDisposableIncome > 0:
                     percentageFoodCostMet = (hhDisposableIncome/householdFoodPrice)* 100
@@ -289,7 +290,7 @@ class HouseholdBudget:
                         percentageFoodCostMet =100
             else:
                 excessFoodSales= self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] + excessFoodSales
+                hhDisposableIncome = householdCashIncome[i][6] + excessFoodSales
                 #percentageFoodCostMet =100
                 
             templist.append(householdFoodPrice)          
