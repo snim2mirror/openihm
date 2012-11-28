@@ -114,14 +114,14 @@ class ReadDataEntrySheets:
                 datevisited = values[2]
                 pid= sheet1.name
 
-                testquery ='''SELECT hhid,pid FROM households WHERE hhid=%s AND pid =%s ''' % (hhid,self.pid)
+                testquery ='''SELECT hhid,pid FROM households WHERE hhid='%s' AND pid =%s ''' % (hhid,self.pid)
                 numrows =self.checkRecordExistence(testquery)
 		if numrows ==0:
-                    query ='''INSERT INTO households (hhid,householdname,dateofcollection,pid) VALUES (%s,'%s','%s',%s)''' % (hhid,hholdname,datevisited,pid)
+                    query ='''INSERT INTO households (hhid,householdname,dateofcollection,pid) VALUES ('%s','%s','%s',%s)''' % (hhid,hholdname,datevisited,pid)
                         
                 else:
-                    query ='''UPDATE households SET hhid=%s,householdname='%s',dateofcollection='%s',pid=%s
-                                WHERE hhid=%s AND pid =%s ''' % (hhid,hholdname,datevisited,pid,hhid,pid)
+                    query ='''UPDATE households SET hhid='%s',householdname='%s',dateofcollection='%s',pid=%s
+                                WHERE hhid='%s' AND pid =%s ''' % (hhid,hholdname,datevisited,pid,hhid,pid)
                 database.execUpdateQuery(query)
                 
 
@@ -199,16 +199,16 @@ class ReadDataEntrySheets:
 
                     periodaway = values[4]
 
-                    testquery ='''SELECT * FROM householdmembers WHERE hhid=%s AND personid ='%s' AND pid =%s ''' % (hhid,pidvalue,self.pid)
+                    testquery ='''SELECT * FROM householdmembers WHERE hhid='%s' AND personid ='%s' AND pid =%s ''' % (hhid,pidvalue,self.pid)
                     numrows =self.checkRecordExistence(testquery)
 		    if numrows ==0:
                         query ='''INSERT INTO householdmembers (personid,hhid,headofhousehold,yearofbirth,sex,periodaway,pid)
-                            VALUES ('%s',%s,'%s',%s,'%s',%s,%s)''' % (personid,hhid,hhead,yearofbirth,sex,periodaway,self.pid)
+                            VALUES ('%s','%s','%s',%s,'%s',%s,%s)''' % (personid,hhid,hhead,yearofbirth,sex,periodaway,self.pid)
                         
                     else:
                         #personid = personid + '_' + str(numrows+1)
                         query = ''' UPDATE householdmembers SET headofhousehold='%s',yearofbirth=%s,sex='%s',periodaway=%s
-                                    WHERE personid='%s' AND hhid=%s AND pid=%s''' % (hhead,yearofbirth,sex,periodaway,personid,hhid,self.pid)
+                                    WHERE personid='%s' AND hhid='%s' AND pid=%s''' % (hhead,yearofbirth,sex,periodaway,personid,hhid,self.pid)
 
             empty_cell_count = 0
                 
@@ -265,15 +265,15 @@ class ReadDataEntrySheets:
                     unitcost = values[3]
                     units = values[4]
 
-                    testquery ='''SELECT * FROM assets WHERE hhid=%s AND assetcategory='%s' AND assettype='%s' AND pid =%s ''' % (hhid,category,assettype,self.pid)
+                    testquery ='''SELECT * FROM assets WHERE hhid='%s' AND assetcategory='%s' AND assettype='%s' AND pid =%s ''' % (hhid,category,assettype,self.pid)
                     numrows =self.checkRecordExistence(testquery)
 		    if numrows ==0:
 
                         query ='''INSERT INTO assets (hhid,assetcategory,assettype,unitofmeasure,unitcost,totalunits,pid)
-                                    VALUES (%s,'%s','%s','%s',%s,%s,%s)''' % (hhid,category,assettype,unit,unitcost,units,self.pid)
+                                    VALUES ('%s','%s','%s','%s',%s,%s,%s)''' % (hhid,category,assettype,unit,unitcost,units,self.pid)
                     else:
-                        query ='''UPDATE assets SET hhid=%s,assetcategory='%s',assettype='%s',unitofmeasure='%s',unitcost=%s,totalunits=%s,pid=%s
-                                WHERE hhid=%s AND assetcategory='%s' AND assettype='%s' AND pid =%s ''' % (hhid,category,assettype,unit,unitcost,units,self.pid,hhid,category,assettype,self.pid)
+                        query ='''UPDATE assets SET hhid='%s',assetcategory='%s',assettype='%s',unitofmeasure='%s',unitcost=%s,totalunits=%s,pid=%s
+                                WHERE hhid='%s' AND assetcategory='%s' AND assettype='%s' AND pid =%s ''' % (hhid,category,assettype,unit,unitcost,units,self.pid,hhid,category,assettype,self.pid)
                  
                     database.execUpdateQuery(query)
 
@@ -331,15 +331,15 @@ class ReadDataEntrySheets:
                     unitcost = values[3]
                     units = values[4]
 
-                    testquery ='''SELECT * FROM expenditure WHERE hhid=%s AND exptype='%s' AND pid =%s''' % (hhid,expendituretype,self.pid)
+                    testquery ='''SELECT * FROM expenditure WHERE hhid='%s' AND exptype='%s' AND pid =%s''' % (hhid,expendituretype,self.pid)
                     numrows = self.checkRecordExistence(testquery)
 
 		    if numrows ==0:
                         query ='''INSERT INTO expenditure (hhid,exptype,unitofmeasure,priceperunit,kcalperunit,totalunits,pid)
-                            VALUES (%s,'%s','%s',%s,%s,%s,%s)''' % (hhid,expendituretype,unit,unitcost,kcalperunit,units,self.pid)
+                            VALUES ('%s','%s','%s',%s,%s,%s,%s)''' % (hhid,expendituretype,unit,unitcost,kcalperunit,units,self.pid)
                     else:
-                        query='''UPDATE expenditure SET hhid=%s,exptype='%s',unitofmeasure='%s',priceperunit=%s,kcalperunit=%s,totalunits=%s,pid=%s
-                                WHERE hhid=%s AND exptype='%s' AND pid =%s ''' % (hhid,expendituretype,unit,unitcost,kcalperunit,units,self.pid,hhid,expendituretype,self.pid)
+                        query='''UPDATE expenditure SET hhid='%s',exptype='%s',unitofmeasure='%s',priceperunit=%s,kcalperunit=%s,totalunits=%s,pid=%s
+                                WHERE hhid='%s' AND exptype='%s' AND pid =%s ''' % (hhid,expendituretype,unit,unitcost,kcalperunit,units,self.pid,hhid,expendituretype,self.pid)
 
                     database.execUpdateQuery(query)
 
@@ -416,7 +416,7 @@ class ReadDataEntrySheets:
                     elif incometype=='Wildfoods-C':
                         tablename='wildfoods'
 
-                    testquery =''' SELECT * FROM %s WHERE hhid=%s AND incomesource='%s' AND pid=%s ''' % (tablename,hhid,name,self.pid)
+                    testquery =''' SELECT * FROM %s WHERE hhid='%s' AND incomesource='%s' AND pid=%s ''' % (tablename,hhid,name,self.pid)
                     numrows = self.checkRecordExistence(testquery)
 
                     if numrows ==0:
@@ -424,8 +424,8 @@ class ReadDataEntrySheets:
                         query ='''INSERT INTO %s (hhid,incomesource,unitofmeasure,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,pid) 
                             VALUES (%s,'%s','%s',%s,%s,%s,%s,%s,%s)''' % (tablename,hhid,name,unit,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,self.pid)
                     else:
-                        query ='''UPDATE %s  SET hhid=%s,incomesource='%s',unitofmeasure='%s',unitsproduced=%s,unitssold=%s,unitprice=%s,otheruses=%s,unitsconsumed=%s,pid=%s 
-                            WHERE hhid=%s AND incomesource='%s' AND pid=%s  ''' % (tablename,hhid,name,unit,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,self.pid,hhid,name,self.pid)
+                        query ='''UPDATE %s  SET hhid='%s',incomesource='%s',unitofmeasure='%s',unitsproduced=%s,unitssold=%s,unitprice=%s,otheruses=%s,unitsconsumed=%s,pid=%s 
+                            WHERE hhid='%s' AND incomesource='%s' AND pid=%s  ''' % (tablename,hhid,name,unit,unitsproduced,unitssold,unitprice,otheruses,unitsconsumed,self.pid,hhid,name,self.pid)
 
                     database.execUpdateQuery(query)
 
@@ -485,16 +485,16 @@ class ReadDataEntrySheets:
                     kcals = values[4]
                     cashincome = values[5]
 
-                    testquery = '''SELECT * FROM employmentincome WHERE hhid=%s AND incomesource='%s' AND pid =%s''' %(hhid,employmenttype,self.pid)
+                    testquery = '''SELECT * FROM employmentincome WHERE hhid='%s' AND incomesource='%s' AND pid =%s''' %(hhid,employmenttype,self.pid)
                     numrows = self.checkRecordExistence(testquery)
 
 		    if numrows ==0:
                         query ='''INSERT INTO employmentincome (hhid,incomesource,foodtypepaid,unitofmeasure,unitspaid,incomekcal,cashincome,pid)
-                            VALUES (%s,'%s','%s','%s',%s,%s,%s,%s)''' % (hhid,employmenttype,foodpaid,unit,unitspaid,kcals,cashincome,self.pid)
+                            VALUES ('%s','%s','%s','%s',%s,%s,%s,%s)''' % (hhid,employmenttype,foodpaid,unit,unitspaid,kcals,cashincome,self.pid)
                         
                     else:
-                        query = '''UPDATE employmentincome SET hhid=%s,incomesource='%s',foodtypepaid='%s',unitofmeasure='%s',unitspaid=%s,incomekcal=%s,cashincome=%s,pid=%s
-                                    WHERE hhid=%s AND incomesource='%s' AND pid =%s''' % (hhid,employmenttype,foodpaid,unit,unitspaid,kcals,cashincome,self.pid,hhid,employmenttype,self.pid)
+                        query = '''UPDATE employmentincome SET hhid='%s',incomesource='%s',foodtypepaid='%s',unitofmeasure='%s',unitspaid=%s,incomekcal=%s,cashincome=%s,pid=%s
+                                    WHERE hhid='%s' AND incomesource='%s' AND pid =%s''' % (hhid,employmenttype,foodpaid,unit,unitspaid,kcals,cashincome,self.pid,hhid,employmenttype,self.pid)
 
                     database.execUpdateQuery(query)
 
@@ -562,15 +562,15 @@ class ReadDataEntrySheets:
                     elif incometype=='TransferFromOrganisations':
                         sourcetype='External'
 
-                    testquery = '''SELECT * from transfers WHERE hhid =%s AND pid=%s AND sourcetype='%s' AND sourceoftransfer='%s' ''' %(hhid,self.pid,sourcetype,transfersource)
+                    testquery = '''SELECT * from transfers WHERE hhid='%s' AND pid=%s AND sourcetype='%s' AND sourceoftransfer='%s' ''' %(hhid,self.pid,sourcetype,transfersource)
                     numrows = self.checkRecordExistence(testquery)
 		    if numrows ==0:
                         
                         query ='''INSERT INTO transfers (hhid,sourcetype,sourceoftransfer,cashperyear,foodtype,unitofmeasure,unitsconsumed,unitssold,priceperunit,pid) 
-                            VALUES (%s,'%s','%s',%s,'%s','%s',%s,%s,%s,%s)''' % (hhid,sourcetype,transfersource,cash,foodtype,unit,unitsconsumed,unitssold,unitprice,self.pid)
+                            VALUES ('%s','%s','%s',%s,'%s','%s',%s,%s,%s,%s)''' % (hhid,sourcetype,transfersource,cash,foodtype,unit,unitsconsumed,unitssold,unitprice,self.pid)
                     else:
-                        query ='''UPDATE transfers SET hhid =%s,sourcetype='%s',sourceoftransfer='%s',cashperyear=%s,foodtype='%s',unitofmeasure='%s',unitsconsumed=%s,unitssold=%s,priceperunit=%s,pid=%s
-                                WHERE hhid =%s AND pid=%s AND sourcetype='%s' AND sourceoftransfer='%s' ''' % (hhid,sourcetype,transfersource,cash,foodtype,unit,unitsconsumed,unitssold,unitprice,self.pid,hhid,self.pid,sourcetype,transfersource)
+                        query ='''UPDATE transfers SET hhid='%s',sourcetype='%s',sourceoftransfer='%s',cashperyear=%s,foodtype='%s',unitofmeasure='%s',unitsconsumed=%s,unitssold=%s,priceperunit=%s,pid=%s
+                                WHERE hhid='%s' AND pid=%s AND sourcetype='%s' AND sourceoftransfer='%s' ''' % (hhid,sourcetype,transfersource,cash,foodtype,unit,unitsconsumed,unitssold,unitprice,self.pid,hhid,self.pid,sourcetype,transfersource)
                     database.execUpdateQuery(query)
 
             empty_cell_count = 0
@@ -658,14 +658,14 @@ class ReadDataEntrySheets:
                         paramlist=[]
                         characteristic = datafields[dataindex]
                         charvalue= values[dataindex]
-                        testquery='''SELECT * from personalcharacteristics WHERE personid='%s' AND hhid=%s AND pid=%s AND characteristic='%s' ''' %(values[0],hhid,self.pid,characteristic)
+                        testquery='''SELECT * from personalcharacteristics WHERE personid='%s' AND hhid='%s' AND pid=%s AND characteristic='%s' ''' %(values[0],hhid,self.pid,characteristic)
                         numrows = self.checkRecordExistence(testquery)
                         paramlist = (hhid,values[0],datafields[dataindex],values[dataindex])
                         if numrows == 0:
                             
                             query = self.buildPCharInsertQuery(paramlist)
                         else:
-                            query= '''DELETE FROM personalcharacteristics WHERE personid='%s' AND hhid=%s AND pid=%s AND characteristic='%s' ''' %(values[0],hhid,self.pid,characteristic)
+                            query= '''DELETE FROM personalcharacteristics WHERE personid='%s' AND hhid='%s' AND pid=%s AND characteristic='%s' ''' %(values[0],hhid,self.pid,characteristic)
                             database.execUpdateQuery(query)
                             query = self.buildPCharInsertQuery(paramlist)
                         database.execUpdateQuery(query)
@@ -753,13 +753,13 @@ class ReadDataEntrySheets:
                         paramlist=[]
                         characteristic = datafields[dataindex]
                         charvalue= values[dataindex]
-                        testquery='''SELECT * from householdcharacteristics WHERE hhid=%s AND pid=%s AND characteristic='%s' ''' %(hhid,self.pid,characteristic)
+                        testquery='''SELECT * from householdcharacteristics WHERE hhid='%s' AND pid=%s AND characteristic='%s' ''' %(hhid,self.pid,characteristic)
                         numrows = self.checkRecordExistence(testquery)
                         paramlist = (hhid,datafields[dataindex],values[dataindex])
                         if numrows == 0:
                             query = self.buildHCharInsertQuery(paramlist)
                         else:
-                            query= '''DELETE FROM householdcharacteristics WHERE hhid=%s AND pid=%s AND characteristic='%s' ''' %(hhid,self.pid,characteristic)
+                            query= '''DELETE FROM householdcharacteristics WHERE hhid='%s' AND pid=%s AND characteristic='%s' ''' %(hhid,self.pid,characteristic)
                             database.execUpdateQuery(query)
                             query = self.buildHCharInsertQuery(paramlist)
                         database.execUpdateQuery(query)
@@ -768,7 +768,7 @@ class ReadDataEntrySheets:
         
     def buildPCharInsertQuery(self,paramlist):
         ''' query generation for inserting personal characteristics'''
-
+	### FIXME TODO: Check that hhid is escaped with quotes here.
         query = "INSERT INTO personalcharacteristics (pid, hhid, personid,characteristic,charvalue) VALUES " 
         parameterlist = '(' + str(self.pid) +',' + str(paramlist[0]) +', ' + "'" + str(paramlist[1]) + "'"+ ', ' +"'" + str(paramlist[2]) +"'"+ ', '
         if (type(paramlist[3]) is str) or (type(paramlist[3]) is unicode):
@@ -782,7 +782,7 @@ class ReadDataEntrySheets:
 
     def buildHCharInsertQuery(self,paramlist):
         ''' query generation for inserting household characteristics'''
-        
+	### FIXME TODO: Check that hhid is escaped with quotes here.        
         query = "INSERT INTO householdcharacteristics (pid, hhid,characteristic,charvalue) VALUES " 
         parameterlist = '(' + str(self.pid) +',' + str(paramlist[0]) +', ' +"'"+ str(paramlist[1]) +"'"+ ', '
         if (type(paramlist[2]) is str) or (type(paramlist[2]) is unicode):
