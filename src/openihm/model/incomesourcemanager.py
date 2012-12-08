@@ -126,9 +126,9 @@ class IncomeSourceManager:
          ''' Retrieve transfer incomes '''
          # select query to get matchng food incomes
          if transfertype == "Official":
-             condstr = "WHERE assistancetype='Official' OR assistancetype='External' "
+             condstr = "WHERE assistancetype='Official' OR assistancetype='EXTERNAL' "
          elif transfertype == "Unofficial":
-             condstr = "WHERE assistancetype='Unofficial' OR assistancetype='Internal' "
+             condstr = "WHERE assistancetype='Unofficial' OR assistancetype='INTERNAL' "
          else:
              condstr = ""
              
@@ -153,10 +153,10 @@ class IncomeSourceManager:
          db.open()
          records = db.execSelectQuery( query )
          
-         transfertype = 'Internal'
+         transfertype = 'INTERNAL'
 
          for rec in records:
-             transfertype = 'Internal' if (rec[0] == 'Internal' or rec[0] == 'Unofficial') else 'External'
+             transfertype = 'INTERNAL' if (rec[0] == 'INTERNAL' or rec[0] == 'Unofficial') else 'EXTERNAL'
         
          db.close()
          return transfertype

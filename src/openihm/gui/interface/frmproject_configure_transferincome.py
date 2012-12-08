@@ -94,7 +94,7 @@ class TransferIncomeManager(TableViewMixin):
             
              currentProjectTransfers = self.getProjectTransfers()
              if income not in currentProjectTransfers:
-                 transfertype = 'Social Transfers' if self.project.getTransferType(income) == 'Internal' else 'Official Transfers'
+                 transfertype = 'Social Transfers' if self.project.getTransferType(income) == 'INTERNAL' else 'Official Transfers'
                  self.project.addIncomeSource(income, transfertype)
              else:
                  msg = "The income source labelled, %s, has already been added to project" % (income)
@@ -125,7 +125,7 @@ class TransferIncomeManager(TableViewMixin):
                 
                  currentProjectTransfers = self.getProjectTransfers()
                  if income not in currentProjectTransfers:
-                     transfertype = 'Social Transfers' if self.project.getTransferType(income) == 'Internal' else 'Official Transfers'
+                     transfertype = 'Social Transfers' if self.project.getTransferType(income) == 'INTERNAL' else 'Official Transfers'
                      self.project.addIncomeSource(income, transfertype)
                  else:
                      msg = "The income source labelled, %s, has already been added to project" % (income)
