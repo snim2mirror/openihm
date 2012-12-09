@@ -54,7 +54,7 @@ class Project(IncomeSourceManager, ProjectAssetsManager,  ProjectCharacteristics
                 self.currency = row[5]
         else:
             exists = False
-        database.close()
+       
         return exists
         
     def addProject(self, projectname, startdate, enddate, description, currency):
