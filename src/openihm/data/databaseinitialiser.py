@@ -69,7 +69,7 @@ class DatabaseInitialiser:
          self.config = config
          
          #date of latest DB update: must be reset to latest date when DB changes are being pushed - format yyyy-mm-dd
-         self.latestupdatestring = "latest update on 2012-05-16" 
+         self.latestupdatestring = "latest update on 2012-12-09" 
          
      def initialiseDB(self):
          config = self.config

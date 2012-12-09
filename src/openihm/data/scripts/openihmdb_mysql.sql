@@ -10,7 +10,7 @@ USE `openihmdb`;
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`projects` (
   `pid` INT(11) NOT NULL AUTO_INCREMENT ,
-  `projectname` VARCHAR(100) NOT NULL ,
+  `projectname` VARCHAR(255) NOT NULL ,
   `startdate` DATE NOT NULL ,
   `enddate` DATE NOT NULL ,
   `description` TEXT NOT NULL ,
@@ -603,7 +603,7 @@ DEFAULT CHARACTER SET = latin1;
 CREATE  TABLE IF NOT EXISTS `openihmdb`.`transferlog` (
   `pid` INT(11) NOT NULL ,
   `pid_access` INT(11) NOT NULL ,
-  `projectname` VARCHAR(45) NOT NULL ,
+  `projectname` VARCHAR(255) NOT NULL ,
   `datecollected` VARCHAR(45) NOT NULL ,
   `currency` VARCHAR(45) NOT NULL ,
   PRIMARY KEY (`pid`) ,
