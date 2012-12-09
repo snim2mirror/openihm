@@ -39,162 +39,293 @@ class OpenIhmExportManager:
          self.exportHouseholds(project, filename)
          
      def exportProjectCharacteristics(self, project, filename):
-         chars = project.getProjectCharacteristics()
+         database = Database()
+         database.open()
+         
+         query = '''SELECT characteristic, chartype, datatype FROM projectcharacteristics
+                       WHERE pid=%s''' % project.pid
+                       
+         chars = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for char in chars:
              charline = '''INSERT INTO projectcharacteristics (pid, characteristic, chartype, datatype )
-                 VALUES({pid},'%s','%s',%s)<endl>\n''' % (char.name, char.chartype, char.datatype)
+                 VALUES({pid},'%s','%s',%s)<endl>\n''' % (char[0], char[1], char[2])
              ihmFile.write(charline)
+             
          ihmFile.close()
          
      def exportProjectIncomeSources(self, project, filename):
-         incomes = project.getIncomeSources()
+         database = Database()
+         database.open()
+         
+         query = '''SELECT incomesource, incometype FROM projectincomesources
+                       WHERE pid=%s''' % project.pid
+                       
+         incomes = database.execSelectQuery( query )
+         
+         database.close()
          ihmFile = open(filename, 'a')
          for inc in incomes:
              incomeline = '''INSERT INTO projectincomesources(pid,incomesource,incometype) 
-             VALUES({pid},'%s','%s')<endl>\n''' % (inc.name, inc.type)
+             VALUES({pid},'%s','%s')<endl>\n''' % (inc[0], inc[1])
              ihmFile.write(incomeline)
          ihmFile.close()
          
      def exportProjectDiet(self, project, filename):
-         diets = project.getProjectDietItems()
+         database = Database()
+         database.open()
+         
+         query = '''SELECT fooditem, unitofmeasure, percentage, priceperunit FROM diet
+                       WHERE pid=%s''' % project.pid
+                       
+         diets = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for diet in diets:
              dietline = '''INSERT INTO diet (pid, fooditem,unitofmeasure,percentage, priceperunit )
-                         VALUES({pid},'%s','%s',%s,%s)<endl>\n''' % (diet.fooditem, diet.unitofmeasure, diet.percentage, diet.priceperunit)
+                         VALUES({pid},'%s','%s',%s,%s)<endl>\n''' % (diet[0], diet[1], diet[2], diet[3])
              ihmFile.write(dietline)
          ihmFile.close()
          
      def exportProjectAssets(self, project, filename):
-         assets = project.getProjectAssets()
+         database = Database()
+         database.open()
+         
+         query = '''SELECT assetname, assettype FROM projectassets
+                       WHERE pid=%s''' % project.pid
+                       
+         assets = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for asset in assets:
              assetline = '''INSERT INTO projectassets(pid,assetname,assettype) 
-             VALUES({pid},'%s','%s')<endl>\n''' % (asset.name, asset.type)
+             VALUES({pid},'%s','%s')<endl>\n''' % (asset[0], asset[1])
              ihmFile.write(assetline)
          ihmFile.close()
          
      def exportProjectStandardOfLiving(self, project, filename):
-         stdLvs = project.getStandardOfLivingEntries()
+         database = Database()
+         database.open()
+         
+         query = '''SELECT summary, scope, gender, agebottom, agetop, item, costperyear FROM standardofliving
+                       WHERE pid=%s''' % project.pid
+                       
+         stdLvs = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for stdLv in stdLvs:
              stdLvline = '''INSERT INTO standardofliving (pid, summary, scope, gender, agebottom, agetop, item, costperyear )
-                 VALUES({pid},'%s','%s','%s',%s,%s,'%s',%s)<endl>\n''' % (stdLv.summary, stdLv.scope, stdLv.gender, stdLv.agebottom, stdLv.agetop, stdLv.item, stdLv.costperyear)
+                 VALUES({pid},'%s','%s','%s',%s,%s,'%s',%s)<endl>\n''' % (stdLv[0], stdLv[1], stdLv[2], stdLv[3], stdLv[4], stdLv[5], stdLv[6])
              ihmFile.write(stdLvline)
          ihmFile.close()
          
      def exportHouseholds(self, project,  filename):
-         households = project.getHouseholds()
+         database = Database()
+         database.open()
+         
+         query = '''SELECT hhid, householdname, dateofcollection FROM households
+                       WHERE pid=%s''' % project.pid
+                       
+         households = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for household in households:
              householdline = '''INSERT INTO households(pid,hhid,householdname,dateofcollection) 
-                     VALUES({pid},%s, '%s', '%s')<endl>\n''' % (household.hhid, household.householdname, household.dateofcollection)
+                     VALUES({pid},%s, '%s', '%s')<endl>\n''' % (household[0], household[1], household[2])
              ihmFile.write(householdline)
          ihmFile.close()
          
-         for household in households:
-             self.exportHouseholdCharacteristics(household, filename)
-             self.exportHouseholdAssets(household, filename)
-             self.exportHouseholdExpenditure(household, filename)
-             self.exportHouseholdCropIncome(household, filename)
-             self.exportHouseholdLivestockIncome(household, filename)
-             self.exportHouseholdWildfoodsIncome(household, filename)
-             self.exportHouseholdEmploymentIncome(household, filename)
-             self.exportHouseholdTransfersIncome(household, filename)
-             self.exportHouseholdMembers(household, filename)
+         self.exportHouseholdCharacteristics(project, filename)
+         self.exportHouseholdAssets(project, filename)
+         self.exportHouseholdExpenditure(project, filename)
+         self.exportHouseholdCropIncome(project, filename)
+         self.exportHouseholdLivestockIncome(project, filename)
+         self.exportHouseholdWildfoodsIncome(project, filename)
+         self.exportHouseholdEmploymentIncome(project, filename)
+         self.exportHouseholdTransfersIncome(project, filename)
+         self.exportHouseholdMembers(project, filename)
              
-     def exportHouseholdCharacteristics(self, household, filename):
-         chars = household.getCharacteristicsWithValues()
+     def exportHouseholdCharacteristics(self, project, filename):
+         database = Database()
+         database.open()
+         
+         query = '''SELECT hhid, characteristic, charvalue FROM householdcharacteristics
+                       WHERE pid=%s''' % project.pid
+                       
+         chars = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for char in chars:
              charline = '''INSERT INTO householdcharacteristics (pid,hhid, characteristic, charvalue )
-                 VALUES({pid},%s,'%s','%s')<endl>\n'''  % (char.hhid, char.name, char.charvalue)
+                 VALUES({pid},%s,'%s','%s')<endl>\n'''  % (char[0], char[1], char[2])
              ihmFile.write(charline)
          ihmFile.close()
          
-     def exportHouseholdAssets(self, household, filename):
-         assets = household.getAssets()
+     def exportHouseholdAssets(self, project, filename):
+         database = Database()
+         database.open()
+         
+         query = '''SELECT hhid, assetcategory, assettype, unitofmeasure, unitcost, totalunits FROM assets
+                       WHERE pid=%s''' % project.pid
+                       
+         assets = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for asset in assets:
              assetline = '''INSERT INTO assets (pid, hhid, assetcategory, assettype, unitofmeasure, unitcost, totalunits )
-                 VALUES({pid},%s,'%s','%s','%s',%s,%s)<endl>\n''' % (asset.hhid, asset.category, asset.assettype, asset.unitofmeasure, asset.costperunit, asset.numunits)
+                 VALUES({pid},%s,'%s','%s','%s',%s,%s)<endl>\n''' % (asset[0], asset[1], asset[2], asset[3], asset[4], asset[5])
              ihmFile.write(assetline)
          ihmFile.close()
          
-     def exportHouseholdExpenditure(self, household, filename):
+     def exportHouseholdExpenditure(self, project, filename):
          pass
          
-     def exportHouseholdCropIncome(self, household, filename):
-         crops = household.getCropIncomes()
+     def exportHouseholdCropIncome(self, project, filename):
+         database = Database()
+         database.open()
+         
+         query = '''SELECT hhid, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed FROM cropincome
+                       WHERE pid=%s''' % project.pid
+                       
+         crops = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for crop in crops:
              cropline = '''INSERT INTO cropincome(pid, hhid, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed)
-                 VALUES({pid},%s,'%s','%s',%s,%s,%s,%s,%s)<endl>\n''' % (crop.hhid,  crop.incomesource, crop.unitofmeasure, crop.unitsproduced, crop.unitssold, crop.unitprice,
-                       crop.otheruses, crop.unitsconsumed)
+                 VALUES({pid},%s,'%s','%s',%s,%s,%s,%s,%s)<endl>\n''' % (crop[0],  crop[1], crop[2], crop[3], crop[4], crop[5], crop[6], crop[7])
              ihmFile.write(cropline)
          ihmFile.close()
          
-     def exportHouseholdLivestockIncome(self, household, filename):
-         items = household.getLivestockIncomes()
+     def exportHouseholdLivestockIncome(self, project, filename):
+         database = Database()
+         database.open()
+         
+         query = '''SELECT hhid, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed FROM livestockincome
+                       WHERE pid=%s''' % project.pid
+                       
+         items = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for item in items:
              livestockline = '''INSERT INTO livestockincome(pid, hhid, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed)
-                 VALUES({pid},%s,'%s','%s',%s,%s,%s,%s,%s)<endl>\n''' % (item.hhid,  item.incomesource, item.unitofmeasure, item.unitsproduced, item.unitssold, item.unitprice,
-                       item.otheruses, item.unitsconsumed)
+                 VALUES({pid},%s,'%s','%s',%s,%s,%s,%s,%s)<endl>\n''' % (item[0],  item[1], item[2], item[3], item[4], item[5], item[6], item[7])
              ihmFile.write(livestockline)
          ihmFile.close()
          
-     def exportHouseholdWildfoodsIncome(self, household, filename):
-         items = household.getWildfoodsIncomes()
+     def exportHouseholdWildfoodsIncome(self, project, filename):
+         database = Database()
+         database.open()
+         
+         query = '''SELECT hhid, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed FROM wildfoods
+                       WHERE pid=%s''' % project.pid
+                       
+         items = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for item in items:
              wfline = '''INSERT INTO wildfoods(pid, hhid, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed)
-                 VALUES({pid},%s,'%s','%s',%s,%s,%s,%s,%s)<endl>\n''' % (item.hhid,  item.incomesource, item.unitofmeasure, item.unitsproduced, item.unitssold, item.unitprice,
-                       item.otheruses, item.unitsconsumed)
+                 VALUES({pid},%s,'%s','%s',%s,%s,%s,%s,%s)<endl>\n''' % (item[0],  item[1], item[2], item[3], item[4], item[5], item[6], item[7])
              ihmFile.write(wfline)
          ihmFile.close()
          
-     def exportHouseholdEmploymentIncome(self, household, filename):
-         items = household.getEmploymentIncomes()
+     def exportHouseholdEmploymentIncome(self, project, filename):
+         database = Database()
+         database.open()
+         
+         query = '''SELECT hhid, incomesource, foodtypepaid, unitofmeasure, unitspaid, incomekcal, cashincome FROM employmentincome
+                       WHERE pid=%s''' % project.pid
+                       
+         items = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for item in items:
              empline = '''INSERT INTO employmentincome(pid, hhid, incomesource, foodtypepaid, unitofmeasure, unitspaid, incomekcal, cashincome)
-                 VALUES({pid},%s,'%s','%s','%s',%s,%s,%s)<endl>\n''' % (item.hhid,  item.incomesource, item.foodtypepaid, item.unitofmeasure, item.unitspaid, item.incomekcal,
-                       item.cashincome)
+                 VALUES({pid},%s,'%s','%s','%s',%s,%s,%s)<endl>\n''' % (item[0],  item[1], item[2], item[3], item[4], item[5], item[6])
              ihmFile.write(empline)
          ihmFile.close()
          
-     def exportHouseholdTransfersIncome(self, household, filename):
-         items = household.getTransferIncomes()
+     def exportHouseholdTransfersIncome(self, project, filename):
+         database = Database()
+         database.open()
+         
+         query = '''SELECT hhid, sourcetype, sourceoftransfer, cashperyear, foodtype, unitofmeasure, unitsgiven,
+                      unitsconsumed, unitssold, priceperunit FROM transfers
+                      WHERE pid=%s''' % project.pid
+                       
+         items = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for item in items:
              transline = '''INSERT INTO transfers(pid, hhid, sourcetype, sourceoftransfer, cashperyear, foodtype, unitofmeasure, unitsgiven,
                       unitsconsumed, unitssold, priceperunit) VALUES({pid},%s,'%s','%s',%s,'%s','%s',%s,
-                      %s,%s,%s)<endl>\n''' % (item.hhid,  item.sourcetype, item.sourceoftransfer, item.cashperyear, item.foodtype, item.unitofmeasure,
-                       item.unitsgiven, item.unitsconsumed, item.unitssold, item.priceperunit)
+                      %s,%s,%s)<endl>\n''' % (item[0],  item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8], item[9])
              ihmFile.write(transline)
          ihmFile.close()
          
-     def exportHouseholdMembers(self, household, filename):
-         members = household.getMembers()
+     def exportHouseholdMembers(self, project, filename):
+         database = Database()
+         database.open()
+         
+         query = '''SELECT hhid, personid, yearofbirth, headofhousehold, sex, education, periodaway, reason, whereto 
+                      FROM householdmembers
+                      WHERE pid=%s''' % project.pid
+                       
+         members = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for member in members:
              memberline = '''INSERT INTO householdmembers(pid, hhid, personid, yearofbirth, headofhousehold, sex, education, periodaway, reason, whereto) 
-                     VALUES({pid},%s, '%s', %s,'%s','%s','%s',%s,'%s','%s')<endl>\n''' % (member.hhid,  member.memberid, member.yearofbirth, member.headofhousehold,  member.sex, member.education, 
-                       member.periodaway, member.reason, member.whereto)
+                     VALUES({pid},%s, '%s', %s,'%s','%s','%s',%s,'%s','%s')<endl>\n''' % (member[0],  member[1], member[2], member[3], 
+                     member[4], member[5], member[6], member[7], member[8])
     
              ihmFile.write(memberline)
          ihmFile.close()
          
-         for member in members:
-             self.exportPersonalCharacteristics(member, filename)
+         self.exportPersonalCharacteristics(project, filename)
              
-     def exportPersonalCharacteristics(self, member, filename):
-         chars = member.getCharacteristicsWithValues()
+     def exportPersonalCharacteristics(self, project, filename):
+         database = Database()
+         database.open()
+         
+         query = '''SELECT hhid, personid, characteristic, charvalue 
+                      FROM personalcharacteristics
+                      WHERE pid=%s''' % project.pid
+                       
+         chars = database.execSelectQuery( query )
+         
+         database.close()
+         
          ihmFile = open(filename, 'a')
          for char in chars:
              charline = '''INSERT INTO personalcharacteristics (pid,hhid, personid, characteristic, charvalue )
-                 VALUES({pid},%s,'%s','%s','%s')<endl>\n''' % (char.hhid, char.personid,  char.name, char.charvalue)
+                 VALUES({pid},%s,'%s','%s','%s')<endl>\n''' % (char[0], char[1],  char[2], char[3])
              ihmFile.write(charline)
          ihmFile.close()
     
