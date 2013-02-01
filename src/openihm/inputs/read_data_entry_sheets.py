@@ -176,7 +176,7 @@ class ReadDataEntrySheets:
                     continue
                 else:
                     
-                    sex = str(values[0])
+                    sex = str(values[0]).strip()
                     age = values[1]
                     
                     if values[2] ==0 and age !=0:
@@ -805,3 +805,4 @@ class ReadDataEntrySheets:
 	    numrows = numrows + 1
         database.open()
 	return numrows
+
