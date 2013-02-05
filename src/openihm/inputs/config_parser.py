@@ -40,7 +40,7 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
 	# Fix a bug found by a user. This is caused by a change 
 	# in the stdlib between Python versions 2.6 and 2.7.
 	version = sys.version_info
-	if version.major < 3 and version.minor < 7:
+	if version[0] < 3 and version[1] < 7:
 	        ConfigParser.SafeConfigParser.__init__(self, self.defaults)
 	else:
 	        ConfigParser.SafeConfigParser.__init__(self, self.defaults,
