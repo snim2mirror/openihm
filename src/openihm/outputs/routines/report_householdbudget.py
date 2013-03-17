@@ -149,6 +149,7 @@ class HouseholdBudget:
             houseENeed = connector.calculateHouseholdEnergyReq(hhid,projectid)
             templist.append(houseENeed)
             householdsENeed.append(tuple(templist))
+        print householdsENeed
         return householdsENeed
 
     def getHouseAE(self,houseEnergyNeed):
@@ -165,7 +166,9 @@ class HouseholdBudget:
             hhid = householdsAE[0]
             templist.append(hhid)
             housefoodNeed = householdsAE[i] - householdsFood[i]
+            print 'food to buy ',housefoodNeed
             if housefoodNeed < 0:
+                print 'food to buy ',housefoodNeed
                 foodPrice = self.calculateHouseholdFoodPrice(housefoodNeed,pid)
             templist.append(foodPrice)
             houseFoodPrice.append(tuple(templist))

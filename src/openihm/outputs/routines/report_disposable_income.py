@@ -186,6 +186,7 @@ class DisposableHouseholdIncome:
             hhid = householdsAE[0]
             templist.append(hhid)
             housefoodNeed = householdsAE[i] - householdsFood[i]
+            print 'food to buy ',housefoodNeed
             if housefoodNeed < 0:
                 foodPrice = self.calculateHouseholdFoodPrice(housefoodNeed,pid)
             templist.append(foodPrice)
@@ -232,6 +233,7 @@ class DisposableHouseholdIncome:
         
         basicQuery = self.totalCropCashIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        print finalQuery
         recordset = self.executeQuery(finalQuery)
         return recordset
     

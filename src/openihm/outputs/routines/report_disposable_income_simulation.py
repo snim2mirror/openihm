@@ -131,21 +131,28 @@ class SimulationDisposableHouseholdIncome:
         householdFoodPrice = 0
         reporttable = []
         listlen = len(householdIDs)
+        print 'food income ', householdFoodIncome
+        print 'cash income ', householdCashIncome
+        print ' HH Kcal req ', householdEnergyNeed
         for i in range(0,listlen):
             templist = []
             templist.append(householdIDs[i])
             householdFoodPrice = 0
             householdFoodNeed = householdEnergyNeed [i][1] - householdFoodIncome[i][1]
+            print 'food need/excess ', householdFoodNeed
 
             if householdFoodNeed > 0:
                 print "calculating price for deficit"
                 householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
                 hhDisposableIncome = householdCashIncome[i][1] - (householdFoodPrice * householdFoodNeed)
+                print 'food cost ', householdFoodNeed * householdFoodPrice
             else:
                 print "calculating sell price for surplus"
                 householdExcess = householdFoodNeed
                 excessFoodSales= self.calculateHouseholdFoodPrice(householdExcess,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] + (excessFoodSales * householdExcess)
+                hhDisposableIncome = householdCashIncome[i][1] + abs((excessFoodSales * householdExcess))
+                print 'food cost ', abs(householdFoodNeed * excessFoodSales)
+                
               
                 
             #Standardise DI if reportype is DI/AE
@@ -240,7 +247,7 @@ class SimulationDisposableHouseholdIncome:
         basicQuery = self.totalCropCashIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
-        print basicQuery
+        print 'cash ',recordset
         return recordset
     
     def getEmploymentCashIncome(self,projectid,householdIDs):
@@ -265,6 +272,7 @@ class SimulationDisposableHouseholdIncome:
         basicQuery = self.totalTransferCashIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
+        print 'transfer cash income ',recordset
         return recordset
     
     def getWildFoodCashIncome(self,projectid,householdIDs):
@@ -283,6 +291,7 @@ class SimulationDisposableHouseholdIncome:
         basicQuery = self.totalCropFIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
+        print 'crop food income', recordset
         return recordset
     
     def getEmploymentFIncome(self,projectid,householdIDs):
@@ -291,6 +300,7 @@ class SimulationDisposableHouseholdIncome:
         basicQuery = self.totalEmploymentFIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
+        print 'employment food ', recordset
         return recordset
     
     def getLivestockFIncome(self,projectid,householdIDs):
@@ -315,6 +325,7 @@ class SimulationDisposableHouseholdIncome:
         basicQuery = self.totalWildFoodFIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
+        print 'wild food', recordset
         return recordset
 
     def buildFinalIncomeCategoryQuery(self,query,projectid,householdids):
