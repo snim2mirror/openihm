@@ -143,7 +143,7 @@ class DisposableHouseholdIncome:
             else:
                 householdExcess = householdFoodNeed
                 excessFoodSales= self.calculateHouseholdFoodPrice(householdExcess,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] + (excessFoodSales * householdFoodNeed)
+                hhDisposableIncome = householdCashIncome[i][1] + (excessFoodSales * abs(householdFoodNeed))
                 
             #Standardise DI if reportype is DI/AE
             if ((reporttype =='DI/AE') or (reporttype=='Standard of Living')or (reporttype=='Simulation')) and householdEnergyNeed [i][1]!=0:
@@ -214,7 +214,7 @@ class DisposableHouseholdIncome:
                 #foodprice = foodprice + (foodProportion * (row[4]/kCal))
                 foodprice = foodprice + (row[3] * (row[4]/kCal))
                 
-            foodprice = round(foodprice,2)
+            #foodprice = round(foodprice,2)
         totalCost = foodprice/100
         return totalCost
         

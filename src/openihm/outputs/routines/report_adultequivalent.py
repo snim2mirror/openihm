@@ -106,7 +106,8 @@ class AdultEquivalent:
     
     def caclulateHouseholdAE(self,householdenergyreq):
         adultRequirement = self.calculateAdultEnergyEquivalent()
-        adultEquivalent = round((float(householdenergyreq) / adultRequirement ),2)
+        adultEquivalent = float(householdenergyreq) / adultRequirement 
+        #adultEquivalent = round((float(householdenergyreq) / adultRequirement ),2)
         return adultEquivalent
 
 	    

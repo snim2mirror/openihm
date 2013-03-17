@@ -150,9 +150,7 @@ class SimulationDisposableHouseholdIncome:
                 print "calculating sell price for surplus"
                 householdExcess = householdFoodNeed
                 excessFoodSales= self.calculateHouseholdFoodPrice(householdExcess,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] + abs((excessFoodSales * householdExcess))
-                print 'food cost ', abs(householdFoodNeed * excessFoodSales)
-                
+                hhDisposableIncome = householdCashIncome[i][1] + (excessFoodSales * abs(householdExcess))
               
                 
             #Standardise DI if reportype is DI/AE
@@ -224,7 +222,7 @@ class SimulationDisposableHouseholdIncome:
                 #foodprice = foodprice + (foodProportion * (row[4]/kCal))
                 foodprice = foodprice + (row[3] * (row[4]/kCal))
                 
-            foodprice = round(foodprice,2)
+            #foodprice = round(foodprice,2)
             print "FoodItem ", row[1],"makes ",row[3],"% of diet ", " Cost per Kcal ", row[4]/kCal
         totalCost = foodprice /100
         print "Cost of purchase ", totalCost
