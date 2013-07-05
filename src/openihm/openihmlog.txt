@@ -1,0 +1,3915 @@
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\openihm.pyw", line 46, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 71, in <module>
+    from frmimportfromaccessdb import FrmImportFromAccessDB
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmimportfromaccessdb.py", line 24, in <module>
+    import pyodbc
+ImportError: No module named pyodbc
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\openihm.pyw", line 46, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 71, in <module>
+    from frmimportfromaccessdb import FrmImportFromAccessDB
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmimportfromaccessdb.py", line 24, in <module>
+    import pyodbc
+ImportError: No module named pyodbc
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\openihm.pyw", line 46, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 71, in <module>
+    from frmimportfromaccessdb import FrmImportFromAccessDB
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmimportfromaccessdb.py", line 24, in <module>
+    import pyodbc
+ImportError: No module named pyodbc
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 46, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 71, in <module>
+    from frmimportfromaccessdb import FrmImportFromAccessDB
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmimportfromaccessdb.py", line 24, in <module>
+    import pyodbc
+ImportError: No module named pyodbc
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 46, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 71, in <module>
+    from frmimportfromaccessdb import FrmImportFromAccessDB
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmimportfromaccessdb.py", line 24, in <module>
+    import pyodbc
+ImportError: No module named pyodbc
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 46, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 35, in <module>
+    from frmnewproject import FrmNewProject
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmnewproject.py", line 26, in <module>
+    from data.controller import Controller
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\data\controller.py", line 25, in <module>
+    from project import Project
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\data\project.py", line 23, in <module>
+    from projecthouseholdcharacteristic import ProjectHouseholdCharacteristic
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\data\projecthouseholdcharacteristic.py", line 26
+    self.charname = "`"+ charname + "`"+
+                                        
+^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 46, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 63, in <module>
+    from outputs.routines.generate_data_entry_sheet import DataEntrySheets
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\generate_data_entry_sheet.py", line 138
+    charty vartype ='Yes/No'
+                 ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 46, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 64, in <module>
+    from inputs.read_data_entry_sheets import ReadDataEntrySheets
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\inputs\read_data_entry_sheets.py", line 776
+    parameterlist = '(' + str(self.pid) +',' + str(paramlist[0]) +', ' + "'" str(paramlist[1]) + "'"+ ', ' + "'"+ str(paramlist[2]) + "'" +', '
+                                                                               ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 63, in <module>
+    from outputs.routines.generate_data_entry_sheet import DataEntrySheets
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\generate_data_entry_sheet.py", line 115
+    sheet3.write(headerrow, col, sectionheading,style1)
+                                                      
+^
+IndentationError: unindent does not match any outer indentation level
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 63, in <module>
+    from outputs.routines.generate_data_entry_sheet import DataEntrySheets
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\generate_data_entry_sheet.py", line 90
+    def getAssetUnitOfMeasure(self,unitfld, tblname,assetfld,templist[1]):
+                                                                     ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 63, in <module>
+    from outputs.routines.generate_data_entry_sheet import DataEntrySheets
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\generate_data_entry_sheet.py", line 92
+    query = '''SELECT '%s' FROM %s WHERE %s=='%s'''' % (unitfld, tblname,assetfld,assettype)
+                                                                                           ^
+SyntaxError: EOL while scanning string literal
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 90, in <module>
+    from frm_project_income_simulation import FrmRunIncomeSimulation
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_project_income_simulation.py", line 30, in <module>
+    class FrmRunIncomeSimulation(QDialog, Ui_HouseholdData):
+NameError: name 'Ui_HouseholdData' is not defined
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 63, in <module>
+    from outputs.routines.generate_data_entry_sheet import DataEntrySheets
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\generate_data_entry_sheet.py", line 449
+    headerrow = self.populateOfficialTranfers(book,style1,style2,headerrow) - ACTIVATE THIS
+                                                                                          ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 51, in <module>
+    from frmincomesourcedetails import FrmIncomeSourceDetails
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmincomesourcedetails.py", line 472
+    '''query = '''SELECT unitofmeasure FROM setup_transfers WHERE sourceoftransfer='%s' AND assistancetype='EXTERNAL' ''' % (selectedItem)
+                       ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 90, in <module>
+    from frm_project_income_simulation import FrmRunIncomeSimulation
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_project_income_simulation.py", line 220
+    self.item = self.tblStandardofLiving.model().item(selectedRow,0).text()
+   ^
+IndentationError: unexpected indent
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 90, in <module>
+    from frm_project_income_simulation import FrmRunIncomeSimulation
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_project_income_simulation.py", line 221
+    int rowIndex = selected.indexes().at(0).row()
+               ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 57, in main
+    dbstatus = dbInitialiser.initialiseDB()
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\data\databaseinitialiser.py", line 78, in initialiseDB
+    dbuptodate = self.updateDatabase()
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\data\databaseinitialiser.py", line 146, in updateDatabase
+    if self.databaseUpToDate():
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\data\databaseinitialiser.py", line 120, in databaseUpToDate
+    db = Connect(**dbinfo)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\includes\mysql\connector\__init__.py", line 45, in Connect
+    return MySQL(*args, **kwargs)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\includes\mysql\connector\mysql.py", line 324, in __init__
+    self.connect(*args, **kwargs)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\includes\mysql\connector\mysql.py", line 425, in connect
+    self._open_connection()
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\includes\mysql\connector\mysql.py", line 98, in _open_connection
+    self.conn.open_connection()
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\includes\mysql\connector\connection.py", line 165, in open_connection
+    values=(self.get_address(),e.errno or e))
+InterfaceError: 2003: Can't connect to MySQL server on 'localhost:3306' (10050)
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 90, in <module>
+    from frm_project_income_simulation import FrmRunIncomeSimulation
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_project_income_simulation.py", line 28, in <module>
+    from frm_simulation_standardofliving_edit import FrmStandardOfLivingModelPrice
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_simulation_standardofliving_edit.py", line 51
+    myModelPriceVal = QDoubleValidator(0.0, , self.txtModelprice)
+                                            ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 90, in <module>
+    from frm_project_income_simulation import FrmRunIncomeSimulation
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_project_income_simulation.py", line 34, in <module>
+    from frm_simulation_incomesources_edit import FrmIncomeSourceModelDetails
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_simulation_incomesources_edit.py", line 52
+    myPriceVal = QDoubleValidator(0, 100000000000.0,2 self.txtPercentReferencePrice)
+                                                         ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 52, in main
+    from data.databaseinitialiser import DbConfig, DatabaseInitialiser
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\data\databaseinitialiser.py", line 137
+    if row[0] > self.latestupdatestring:
+                                       
+^
+IndentationError: unindent does not match any outer indentation level
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 52, in main
+    from data.databaseinitialiser import DbConfig, DatabaseInitialiser
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\data\databaseinitialiser.py", line 138
+    if row[0] > self.latestupdatestring:
+                                       
+^
+IndentationError: unindent does not match any outer indentation level
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 79, in main
+    window = FrmDatabaseMessage(msg)
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmdatabasemessage.py", line 35, in __init__
+    self.setupUi(self).lblMessage.setText( message )
+AttributeError: 'NoneType' object has no attribute 'lblMessage'
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+updating openihm.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 60, in <module>
+    from frm_report_householdincome import HouseholdIncomeReport
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_report_householdincome.py", line 613
+    s        return householdIDsQuery
+                  ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 60, in <module>
+    from frm_report_householdincome import HouseholdIncomeReport
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_report_householdincome.py", line 31, in <module>
+    from outputs.routines.report_householdsincome import HouseholdIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\report_householdsincome.py", line 28, in <module>
+    from report_householdsincome_query import HouseholdIncomeQuery
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\report_householdsincome_query.py", line 30
+    for i in range (0, len(householdIDs):
+                                        ^
+SyntaxError: invalid syntax
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 48, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 60, in <module>
+    from frm_report_householdincome import HouseholdIncomeReport
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_report_householdincome.py", line 31, in <module>
+    from outputs.routines.report_householdsincome import HouseholdIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\report_householdsincome.py", line 28, in <module>
+    from report_householdsincome_query import HouseholdIncomeQuery
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\report_householdsincome_query.py", line 30
+    for i in range (0, len(householdIDs):
+                                        ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 52, in main
+    from data.databaseinitialiser import DbConfig, DatabaseInitialiser
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\data\databaseinitialiser.py", line 222
+    if field == "null":
+                      
+^
+IndentationError: unindent does not match any outer indentation level
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 52, in main
+    from data.databaseinitialiser import DbConfig, DatabaseInitialiser
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\data\databaseinitialiser.py", line 288
+    return False
+   ^
+IndentationError: unexpected indent
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 52, in main
+    from data.databaseinitialiser import DbConfig, DatabaseInitialiser
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\data\databaseinitialiser.py", line 221
+    if field = "null":
+             ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 32, in <module>
+    Ui_MainWindow, base_class = uic.loadUiType("gui/designs/ui_mainwindow.ui")
+  File "c:\python27\lib\site-packages\PyQt4\uic\__init__.py", line 158, in loadUiType
+    winfo = compiler.UICompiler().compileUi(uifile, code_string)
+TypeError: compileUi() takes exactly 4 arguments (3 given)
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 83, in <module>
+    from mercurial import commands, hg, ui, error
+ImportError: No module named mercurial
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 83, in <module>
+    from mercurial import commands, hg, ui, error
+ImportError: No module named mercurial
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 83, in <module>
+    from mercurial import commands, hg, ui, error
+ImportError: No module named mercurial
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 83, in <module>
+    from mercurial import commands, hg, ui, error
+ImportError: No module named mercurial
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 83, in <module>
+    from mercurial import commands, hg, ui, error
+ImportError: No module named mercurial
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 61, in main
+    from data.databaseinitialiser import DbConfig, DatabaseInitialiser
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\data\databaseinitialiser.py", line 96
+    dbuptodate = self.updateDatabase()
+   ^
+IndentationError: unexpected indent
+
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+DB not up to date.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 85, in main
+    log.info('DB not up to date.')
+  File "openihm.pyw", line 85, in main
+    log.info('DB not up to date.')
+  File "C:\Python27\lib\bdb.py", line 48, in trace_dispatch
+    return self.dispatch_line(frame)
+  File "C:\Python27\lib\bdb.py", line 67, in dispatch_line
+    if self.quitting: raise BdbQuit
+BdbQuit
+
+Initialising database.
+Creating GUI.
+DB not installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 60, in <module>
+    from frm_report_householdincome import HouseholdIncomeReport
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_report_householdincome.py", line 31, in <module>
+    from outputs.routines.report_householdsincome import HouseholdIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\report_householdsincome.py", line 29, in <module>
+    from report_adultequivalent import AdultEquivalent
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\report_adultequivalent.py", line 84
+    print 'original= ',energyreq,'  ',adjustes = ',adjustedenergyreq
+                                               ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 90, in <module>
+    from frm_project_income_simulation import FrmRunIncomeSimulation
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_project_income_simulation.py", line 32, in <module>
+    from outputs.routines.report_disposable_income_simulation import SimulationDisposableHouseholdIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\report_disposable_income_simulation.py", line 214
+    print "fooditem: ", row[1], "food price = ",foodProportion/kCal,"*",row[4], "price " foodprice
+                                                                                                 ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 90, in <module>
+    from frm_project_income_simulation import FrmRunIncomeSimulation
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_project_income_simulation.py", line 32, in <module>
+    from outputs.routines.report_disposable_income_simulation import SimulationDisposableHouseholdIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\report_disposable_income_simulation.py", line 222
+    print "Cost of purchase" = pricePerHundred
+                             ^
+SyntaxError: invalid syntax
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 90, in <module>
+    from frm_project_income_simulation import FrmRunIncomeSimulation
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_project_income_simulation.py", line 32, in <module>
+    from outputs.routines.report_disposable_income_simulation import SimulationDisposableHouseholdIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\report_disposable_income_simulation.py", line 223
+    print "Cost of purchase" = pricePerHundred
+                             ^
+SyntaxError: invalid syntax
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 90, in <module>
+    from frm_project_income_simulation import FrmRunIncomeSimulation
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_project_income_simulation.py", line 32, in <module>
+    from outputs.routines.report_disposable_income_simulation import SimulationDisposableHouseholdIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\report_disposable_income_simulation.py", line 223
+    print "Cost of purchase " pricePerHundred
+                                            ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 90, in <module>
+    from frm_project_income_simulation import FrmRunIncomeSimulation
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_project_income_simulation.py", line 32, in <module>
+    from outputs.routines.report_disposable_income_simulation import SimulationDisposableHouseholdIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\report_disposable_income_simulation.py", line 134
+    print 'food income ' householdFoodIncome
+                                           ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 90, in <module>
+    from frm_project_income_simulation import FrmRunIncomeSimulation
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_project_income_simulation.py", line 32, in <module>
+    from outputs.routines.report_disposable_income_simulation import SimulationDisposableHouseholdIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\outputs\routines\report_disposable_income_simulation.py", line 143
+    print 'food cost ', householdFoodNeed *
+                                          ^
+SyntaxError: invalid syntax
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 93, in <module>
+    from frm_report_assets_bydisposableincmoe import FrmAssetsByDisposableIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_report_assets_bydisposableincmoe.py", line 33, in <module>
+    class FrmAssetsByDisposableIncome(QDialog, Ui_AssetsByDisposableIncome,MDIDialogMixin,TableViewMixin):
+NameError: name 'Ui_AssetsByDisposableIncome' is not defined
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 93, in <module>
+    from frm_report_assets_bydisposableincmoe import FrmAssetsByDisposableIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_report_assets_bydisposableincmoe.py", line 33, in <module>
+    class FrmAssetsByDisposableIncome(QDialog, AssetsByDisposableIncome,MDIDialogMixin,TableViewMixin):
+NameError: name 'AssetsByDisposableIncome' is not defined
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 93, in <module>
+    from frm_report_assets_bydisposableincmoe import FrmAssetsByDisposableIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_report_assets_bydisposableincmoe.py", line 33, in <module>
+    class FrmAssetsByDisposableIncome(QDialog, AssetsByDisposableIncome,MDIDialogMixin,TableViewMixin):
+NameError: name 'AssetsByDisposableIncome' is not defined
+
+Exception raised in __main__.
+Exception raised in start script. Debug info follows:
+Traceback (most recent call last):
+  File "openihm.pyw", line 56, in main
+    from gui.interface.frmmainwindow import FrmMainWindow
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frmmainwindow.py", line 93, in <module>
+    from frm_report_assets_bydisposableincmoe import FrmAssetsByDisposableIncome
+  File "C:\Users\tiwongem\Desktop\ open-ihm\src\openihm\gui\interface\frm_report_assets_bydisposableincmoe.py", line 33, in <module>
+    class FrmAssetsByDisposableIncome(QDialog, AssetsByDisposableIncome,MDIDialogMixin,TableViewMixin):
+NameError: name 'AssetsByDisposableIncome' is not defined
+
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.

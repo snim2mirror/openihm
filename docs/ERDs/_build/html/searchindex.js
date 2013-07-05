@@ -1,0 +1,1 @@
+Search.setIndex({objects:{},terms:{index:[1,3],search:[1,3],document:1,welcom:1,open:1,titl:[],modul:[1,3],tabl:1,indic:1,page:[1,3],content:1,window:[1,3],interfac:[0,1],ihm:1,main:[1,3],data:[1,2],mainwindow:[]},objtypes:{},titles:["Interface","Welcome to Open-IHM&#8217;s documentation!","Data","Main Window"],objnames:{},filenames:["interface","index","data","mainwindow"]})
