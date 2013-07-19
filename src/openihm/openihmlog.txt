@@ -3913,3 +3913,75 @@ Initialising database.
 Creating GUI.
 Started MySQL, DB up to date and DB installed.
 Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.
+Initialising database.
+Creating GUI.
+Started MySQL, DB up to date and DB installed.
+Starting main loop of GUI.

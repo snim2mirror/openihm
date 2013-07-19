@@ -149,7 +149,6 @@ class HouseholdBudget:
             houseENeed = connector.calculateHouseholdEnergyReq(hhid,projectid)
             templist.append(houseENeed)
             householdsENeed.append(tuple(templist))
-        print householdsENeed
         return householdsENeed
 
     def getHouseAE(self,houseEnergyNeed):
@@ -166,9 +165,7 @@ class HouseholdBudget:
             hhid = householdsAE[0]
             templist.append(hhid)
             housefoodNeed = householdsAE[i] - householdsFood[i]
-            print 'food to buy ',housefoodNeed
             if housefoodNeed < 0:
-                print 'food to buy ',housefoodNeed
                 foodPrice = self.calculateHouseholdFoodPrice(housefoodNeed,pid)
             templist.append(foodPrice)
             houseFoodPrice.append(tuple(templist))
@@ -183,7 +180,6 @@ class HouseholdBudget:
         householdFoodPrices = []
         foodprice = 0
         for row in householdDiet:
-            foodProportion = abs(housefoodNeed) * (row[3]/100)
             foodKcalQuery = '''SELECT  energyvalueperunit from setup_foods_crops WHERE name='%s' ''' % row[1]
             foodKcal = self.executeQuery(foodKcalQuery)
 
@@ -191,10 +187,10 @@ class HouseholdBudget:
                 kCal=item[0]
 
             if kCal!=0:
-                foodprice = foodprice + ((foodProportion/kCal) * row[4])
-                
-            foodprice = round(foodprice,2)
-        return foodprice
+                foodprice = foodprice + (row[3] * (row[4]/kCal))
+
+        totalCost = foodprice/100
+        return totalCost
 
             
     def householdDisposableIncome(self,reporttype,projectid,householdIDs):
@@ -204,7 +200,6 @@ class HouseholdBudget:
         householdCashIncome = self.calculateHouseholdCashIncome(reporttype,projectid,houseids)
         householdFoodIncome = self.calculateHouseholdFoodIncome(reporttype,projectid,houseids)
         householdEnergyNeed = self.getHouseholdEnergyNeeds(householdIDs,projectid)
-        #householdFoodPrice = self.checkHouseholdFoodNeeds(householdAE,householdFoodIncome)
         householdFoodPrice = 0
         reporttable = []
         listlen = len(householdIDs)
@@ -216,10 +211,11 @@ class HouseholdBudget:
 
             if householdFoodNeed > 0:
                 householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] - householdFoodPrice
+                hhDisposableIncome = householdCashIncome[i][1] - (householdFoodPrice * householdFoodNeed)
             else:
-                excessFoodSales= self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] + excessFoodSales
+                householdExcess = householdFoodNeed
+                excessFoodSales= self.calculateHouseholdFoodPrice(householdExcess,projectid)
+                hhDisposableIncome = householdCashIncome[i][1] + (excessFoodSales * abs(householdFoodNeed))
                 
             #Standardise DI if reportype is DI/AE
             if (reporttype =='Disposable Income - Standardised')and householdEnergyNeed [i][1]!=0:
@@ -236,24 +232,16 @@ class HouseholdBudget:
     def getnonFoodExepenses(self,projectid,hid):
         '''Get household non-food expenses'''
         expenses = 0
-        #query = ''' SELECT SUM(priceperunit * totalunits) AS householdepenses FROM expenditure WHERE pid=%s AND hhid=%s''' % (projectid,hid)
-        #recset = self.executeQuery(query)
-        #for row in recset:
-        #   if row[0]:
-        #       expenses = row[0]
         connector = LivingThreshhold()
         expenses = connector.getHouseholdExpenditure(projectid,hid)
-        print 'expenses ',expenses
         return expenses
             
     def householdBudgetSummaries(self,projectid,selectedHouseholds):
         '''Calculate household disposable income'''
         
-        #houseids = ','.join(householdIDs)
         householdCashIncome = self.getCashIncome(projectid,selectedHouseholds)
         householdFoodIncome = self.getFoodIncome(projectid,selectedHouseholds)
         householdEnergyNeed = self.getHouseholdEnergyNeeds(projectid,selectedHouseholds)
-        #householdFoodPrice = self.checkHouseholdFoodNeeds(householdAE,householdFoodIncome)
         householdFoodPrice = 0
         reporttable = []
         listlen = len(selectedHouseholds)
@@ -269,32 +257,34 @@ class HouseholdBudget:
             
             householdExpenses = self.getnonFoodExepenses(projectid,selectedHouseholds[i])
             
-            householdFoodNeed = householdEnergyNeed [i][1] - householdFoodIncome[i][1]
+            householdFoodNeed = householdEnergyNeed [i][1] - householdFoodIncome[i][6]
             
             if householdEnergyNeed [i][1]!=0:
-                percentageFoodNeedMet = (householdFoodIncome[i][1] / householdEnergyNeed [i][1]) * 100
+                percentageFoodNeedMet = (householdFoodIncome[i][6] / householdEnergyNeed [i][1]) * 100
             if percentageFoodNeedMet > 100:
                 percentageFoodNeedMet = 100
 
-            #templist.append(householdEnergyNeed)
             templist.append(round(percentageFoodNeedMet,2))
 
             if householdFoodNeed > 0:
                 householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][6] - householdFoodPrice
-                print 'cash ',householdCashIncome[i][6], ' all ', householdCashIncome[i]
+                hhDisposableIncome = householdCashIncome[i][6] - (householdFoodPrice * householdFoodNeed)
+                print 'Inde ',hhDisposableIncome
+                householdFoodPrice = abs(householdFoodPrice * householdFoodNeed)
                 
                 if householdFoodPrice!=0 and hhDisposableIncome > 0:
-                    percentageFoodCostMet = (hhDisposableIncome/householdFoodPrice)* 100
+                    percentageFoodCostMet = (householdCashIncome[i][6]/householdFoodPrice)* 100
                     if percentageFoodCostMet > 100:
                         percentageFoodCostMet =100
                 else:
                     if hhDisposableIncome > 0:
                         percentageFoodCostMet =100
+                print '%age ',percentageFoodCostMet
             else:
-                excessFoodSales= self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][6] + excessFoodSales
-                #percentageFoodCostMet =100
+                householdExcess = householdFoodNeed
+                excessFoodSales= self.calculateHouseholdFoodPrice(householdExcess,projectid)
+                hhDisposableIncome = householdCashIncome[i][6] + (excessFoodSales * abs(householdFoodNeed))
+                householdFoodPrice = abs(householdFoodPrice * householdFoodNeed)
                 
             templist.append(householdFoodPrice)          
             hhDisposableIncome = round(hhDisposableIncome,2)
