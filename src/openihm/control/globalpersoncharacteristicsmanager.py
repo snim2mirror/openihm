@@ -48,7 +48,7 @@ class GlobalPersonCharacteristicsManager:
      def getGlobalPersonCharacteristics(self):        
         query = "SELECT id FROM globalpersonalcharacteristics"
         database = Database()
-        atabase.open()
+        database.open()
         rows = database.execSelectQuery( query )
         database.close()
         chars = []
