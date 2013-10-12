@@ -326,7 +326,7 @@ class HouseholdIncome:
                 query = "SELECT hhid"
                 for myincomesource in livestockdetails:
                     outputname = myincomesource + '(KCal)'
-                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitsconsumed * unitsconsumed * ( SELECT energyvalueperunit FROM setup_foods_crops WHERE name='%s'),NULL)) AS '%s'" %(myincomesource,myincomesource,outputname)
+                    query = query + ", GROUP_CONCAT(IF (incomesource = '%s', unitsconsumed * ( SELECT energyvalueperunit FROM setup_foods_crops WHERE name='%s'),NULL)) AS '%s'" %(myincomesource,myincomesource,outputname)
                 query = query + " FROM livestockincome WHERE pid=%s AND hhid IN (%s) AND incomesource IN (%s)" % (projectid,houseids,incomesources)
                 query = query + " GROUP BY hhid"
         return query            
