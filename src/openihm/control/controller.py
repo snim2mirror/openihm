@@ -27,8 +27,8 @@ from globalhouseholdcharacteristicsmanager import GlobalHouseholdCharacteristics
 from globalpersoncharacteristicsmanager import GlobalPersonCharacteristicsManager
 from globalcharacteristicsmanager import GlobalCharacteristicsManager
 from transfermanager import TransferManager
-from openihmimportmanager import OpenIhmImportManager
-from openihmexportmanager import OpenIhmExportManager
+from openihmimportmanager1 import OpenIhmImportManager
+from openihmexportmanager1 import OpenIhmExportManager
 
 class Controller(CurrencyManager, GlobalCharacteristicsManager,  GlobalHouseholdCharacteristicsManager, GlobalPersonCharacteristicsManager, TransferManager, OpenIhmImportManager, OpenIhmExportManager):
     def __init__(self):

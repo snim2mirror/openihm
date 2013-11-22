@@ -100,7 +100,7 @@ class HouseholdCharacteristicsManager(TableViewMixin):
         
      def removeAllHouseholdCharacteristics(self):
          ''' remove all listed household characteristics from Project'''
-         msg = "Are you sure you want to remove all selected transfers from this project?"
+         msg = "Are you sure you want to remove all selected characteristics from this project?"
          ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
          # if deletion is rejected return without deleting
          if ret == QMessageBox.No:
@@ -139,7 +139,7 @@ class HouseholdCharacteristicsManager(TableViewMixin):
          numSelected = self.countRowsSelected(self.tblSelectedHouseholdCharacteristics)
          
          if  numSelected != 0:
-             msg = "Are you sure you want to remove the selected household characteristics from this project?"
+             msg = "Are you sure you want to remove the selected characteristics from this project?"
              ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
              
              # if deletion is rejected return without deleting

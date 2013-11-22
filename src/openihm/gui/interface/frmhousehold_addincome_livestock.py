@@ -108,8 +108,8 @@ class FrmHouseholdLivestockIncome(QDialog, Ui_AddHouseholdIncomeLivestock, MySQL
          unitprice		= self.txtUnitPrice.text() if self.txtUnitPrice.text() != "" else "0"
          otheruses       = self.txtUnitsOtherUses.text() if self.txtUnitsOtherUses.text() != "" else "0"
          
-         totalusage = int(unitsconsumed) + int(unitssold) + int(otheruses)
-         totalproduced = int(unitsproduced)
+         totalusage = float(unitsconsumed) + float(unitssold) + float(otheruses)
+         totalproduced = float(unitsproduced)
          
          if totalproduced < totalusage:
              msg = "The total of units consumed, units sold and units for otheruses should not exceed unitsproduced."

@@ -176,7 +176,7 @@ class ReadDataEntrySheets:
                     continue
                 else:
                     
-                    sex = str(values[0])
+                    sex = str(values[0]).strip()
                     age = values[1]
                     
                     if values[2] ==0 and age !=0:
@@ -186,7 +186,7 @@ class ReadDataEntrySheets:
                         
                         yearofbirth = date.today().year
                     else:
-                        yearofbirth = values[2]
+                        yearofbirth = values[2] 
                         
                     hhead = values[3]
                     if sex.lower() == 'male' or sex.lower() == 'm':
@@ -209,6 +209,7 @@ class ReadDataEntrySheets:
                         #personid = personid + '_' + str(numrows+1)
                         query = ''' UPDATE householdmembers SET headofhousehold='%s',yearofbirth=%s,sex='%s',periodaway=%s
                                     WHERE personid='%s' AND hhid='%s' AND pid=%s''' % (hhead,yearofbirth,sex,periodaway,personid,hhid,self.pid)
+                    database.execUpdateQuery(query)
 
             empty_cell_count = 0
                 

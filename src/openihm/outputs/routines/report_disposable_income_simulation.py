@@ -123,6 +123,7 @@ class SimulationDisposableHouseholdIncome:
         '''Calculate household disposable income'''
         
         houseids = ','.join(householdIDs)
+        print reporttype
         householdCashIncome = self.calculateHouseholdCashIncome(reporttype,projectid,houseids)
         householdFoodIncome = self.calculateHouseholdFoodIncome(reporttype,projectid,houseids)
         householdEnergyNeed = self.getHouseholdEnergyNeeds(householdIDs,projectid)
@@ -130,21 +131,30 @@ class SimulationDisposableHouseholdIncome:
         householdFoodPrice = 0
         reporttable = []
         listlen = len(householdIDs)
+        print 'food income ', householdFoodIncome
+        print 'cash income ', householdCashIncome
+        print ' HH Kcal req ', householdEnergyNeed
         for i in range(0,listlen):
             templist = []
             templist.append(householdIDs[i])
             householdFoodPrice = 0
             householdFoodNeed = householdEnergyNeed [i][1] - householdFoodIncome[i][1]
+            print 'food need/excess ', householdFoodNeed
 
             if householdFoodNeed > 0:
+                print "calculating price for deficit"
                 householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] - householdFoodPrice
+                hhDisposableIncome = householdCashIncome[i][1] - (householdFoodPrice * householdFoodNeed)
+                print 'food cost ', householdFoodNeed * householdFoodPrice
             else:
-                excessFoodSales= self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] + excessFoodSales
+                print "calculating sell price for surplus"
+                householdExcess = householdFoodNeed
+                excessFoodSales= self.calculateHouseholdFoodPrice(householdExcess,projectid)
+                hhDisposableIncome = householdCashIncome[i][1] + (excessFoodSales * abs(householdExcess))
+              
                 
             #Standardise DI if reportype is DI/AE
-            if (reporttype =='DI/AE')and householdEnergyNeed [i][1]!=0:
+            if (reporttype =='Simulation')and householdEnergyNeed [i][1]!=0:
                 houseAE = self.getHouseAE(householdEnergyNeed[i][1])
                 hhDisposableIncome = hhDisposableIncome / houseAE
 
@@ -198,7 +208,9 @@ class SimulationDisposableHouseholdIncome:
         
         householdFoodPrices = []
         foodprice = 0
+        totalCost = 0
         for row in householdDiet:
+            householdFoodKcals = abs(housefoodNeed)
             foodProportion = abs(housefoodNeed) * (row[3]/100)
             foodKcalQuery = '''SELECT  energyvalueperunit from setup_foods_crops WHERE name='%s' ''' % row[1]
             foodKcal = self.executeQuery(foodKcalQuery)
@@ -207,10 +219,15 @@ class SimulationDisposableHouseholdIncome:
                 kCal=item[0]
 
             if kCal!=0:
-                foodprice = foodprice + ((foodProportion/kCal) * row[4])
+                #foodprice = foodprice + (foodProportion * (row[4]/kCal))
+                foodprice = foodprice + (row[3] * (row[4]/kCal))
                 
-            foodprice = round(foodprice,2)
-        return foodprice
+            #foodprice = round(foodprice,2)
+            print "FoodItem ", row[1],"makes ",row[3],"% of diet ", " Cost per Kcal ", row[4]/kCal
+        totalCost = foodprice /100
+        print "Cost of purchase ", totalCost
+            
+        return totalCost
         
     def executeQuery(self,query):
         '''run various select queries'''
@@ -228,6 +245,7 @@ class SimulationDisposableHouseholdIncome:
         basicQuery = self.totalCropCashIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
+        print 'cash ',recordset
         return recordset
     
     def getEmploymentCashIncome(self,projectid,householdIDs):
@@ -252,6 +270,7 @@ class SimulationDisposableHouseholdIncome:
         basicQuery = self.totalTransferCashIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
+        print 'transfer cash income ',recordset
         return recordset
     
     def getWildFoodCashIncome(self,projectid,householdIDs):
@@ -270,6 +289,7 @@ class SimulationDisposableHouseholdIncome:
         basicQuery = self.totalCropFIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
+        print 'crop food income', recordset
         return recordset
     
     def getEmploymentFIncome(self,projectid,householdIDs):
@@ -278,6 +298,7 @@ class SimulationDisposableHouseholdIncome:
         basicQuery = self.totalEmploymentFIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
+        print 'employment food ', recordset
         return recordset
     
     def getLivestockFIncome(self,projectid,householdIDs):
@@ -302,6 +323,7 @@ class SimulationDisposableHouseholdIncome:
         basicQuery = self.totalWildFoodFIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
         recordset = self.executeQuery(finalQuery)
+        print 'wild food', recordset
         return recordset
 
     def buildFinalIncomeCategoryQuery(self,query,projectid,householdids):
@@ -313,27 +335,27 @@ class SimulationDisposableHouseholdIncome:
 
     #build queries for household total cash income
     def totalCropCashIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((unitssold * unitprice)* (preferenceprice/100)) AS cropincome FROM cropincome
+        query = '''SELECT hhid,SUM((unitssold * (preferenceproduction/100)) *(unitprice* (preferenceprice/100))) AS cropincome FROM cropincome
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
     
     def totalEmploymentCashIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((cashincome)*(preferenceincome/100)) AS employmentcashincome FROM employmentincome
+        query = '''SELECT hhid,SUM(cashincome*(preferenceincome/100)) AS employmentcashincome FROM employmentincome
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalLivestockCashIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((unitssold * unitprice)*(preferenceprice/100)) AS livestockincome FROM livestockincome
+        query = '''SELECT hhid,SUM((unitssold * (preferenceproduction/100)) *(unitprice* (preferenceprice/100)))  AS livestockincome FROM livestockincome
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalTransferCashIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((cashperyear)*(preferenceprice/100)) AS transferincome FROM transfers
+        query = '''SELECT hhid,SUM(cashperyear*(preferenceproduction/100))AS transferincome FROM transfers
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalWildFoodCashIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((unitssold * unitprice)*(preferenceprice/100)) AS wildfoodsincome FROM wildfoods
+        query = '''SELECT hhid,SUM((unitssold * (preferenceproduction/100)) *(unitprice* (preferenceprice/100))) AS wildfoodsincome FROM wildfoods
                         WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
@@ -344,7 +366,7 @@ class SimulationDisposableHouseholdIncome:
         return query
     
     def totalEmploymentFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((incomekcal)*(preferenceincome/100)) AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
+        query = '''SELECT hhid,SUM(incomekcal*(preferenceincome/100)) AS employmentcashincome FROM employmentincome WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 
     def totalLivestockFIncomeQuery(self,projectid,houseids):
@@ -353,7 +375,7 @@ class SimulationDisposableHouseholdIncome:
         return query
 
     def totalTransferFIncomeQuery(self,projectid,houseids):
-        query = '''SELECT hhid,SUM((unitsconsumed * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=transfers.foodtype))*(preferenceproduction/100)) AS transferincome
+        query = '''SELECT hhid,SUM((unitsconsumed *(preferenceproduction/100)) * (SELECT energyvalueperunit FROM setup_foods_crops WHERE setup_foods_crops.name=transfers.foodtype)) AS transferincome
                             FROM transfers WHERE pid = %s AND hhid IN (%s) GROUP BY hhid''' % (projectid,houseids)
         return query
 

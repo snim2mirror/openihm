@@ -158,7 +158,7 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport, MDIDialogMixin
                 pchars = ReportsSettingsManager ()
                 tablename = pchars.setPCharacteristicsTableName(projectid)
                 connector = HouseholdsByCharacteristics()
-                pquery = connector.buildPCharacteristicsQuery(selectedRows,tablename)
+                pquery = connector.buildPCharacteristicsQuery(selectedRows,tablename,projectid)
                 return pquery
                 
         def getHouseholdCharacteristicsQuery(self):
@@ -170,7 +170,7 @@ class RepHouseholdsByCharacteristics(QDialog, Ui_HouseHoldReport, MDIDialogMixin
                 hchars = ReportsSettingsManager ()
                 tablename = hchars.setHCharacteristicsTableName(projectid)
                 connector = HouseholdsByCharacteristics()
-                hquery = connector.buildHCharacteristicsQuery(selectedHChars,tablename)
+                hquery = connector.buildHCharacteristicsQuery(selectedHChars,tablename,projectid)
                 return hquery
                 
         def getReportData(self):

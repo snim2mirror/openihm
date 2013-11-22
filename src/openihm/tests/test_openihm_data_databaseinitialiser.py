@@ -2,6 +2,7 @@ import unittest
 from data.databaseinitialiser import DatabaseInitialiser, DbConfig
 from database_helper import DatabaseHelper
 from datetime import date
+import re
 
 
 class TestDbConfig(unittest.TestCase):
@@ -99,8 +100,8 @@ class TestDatabaseInitialiser(unittest.TestCase):
         # FIXME: this test is probably bogus
         # we're really just checking we manage to create the
         # object okay.
-        expected = "latest update on 2012-05-16"
-        self.assertEqual(expected, database_initialiser.latestupdatestring)
+        expected = re.compile("latest update on \d+-\d+-\d+")
+        self.assertRegexpMatches(database_initialiser.latestupdatestring, expected)
 
     def test_createDatabase(self):
         database_initialiser = DatabaseInitialiser(self.config)

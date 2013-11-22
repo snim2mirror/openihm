@@ -139,13 +139,14 @@ class DisposableHouseholdIncome:
 
             if householdFoodNeed > 0:
                 householdFoodPrice = self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] - householdFoodPrice
+                hhDisposableIncome = householdCashIncome[i][1] - (householdFoodPrice * householdFoodNeed)
             else:
-                excessFoodSales= self.calculateHouseholdFoodPrice(householdFoodNeed,projectid)
-                hhDisposableIncome = householdCashIncome[i][1] + excessFoodSales
+                householdExcess = householdFoodNeed
+                excessFoodSales= self.calculateHouseholdFoodPrice(householdExcess,projectid)
+                hhDisposableIncome = householdCashIncome[i][1] + (excessFoodSales * abs(householdFoodNeed))
                 
             #Standardise DI if reportype is DI/AE
-            if (reporttype =='DI/AE')and householdEnergyNeed [i][1]!=0:
+            if ((reporttype =='DI/AE') or (reporttype=='Standard of Living')or (reporttype=='Simulation')) and householdEnergyNeed [i][1]!=0:
                 houseAE = self.getHouseAE(householdEnergyNeed[i][1])
                 hhDisposableIncome = hhDisposableIncome / houseAE
 
@@ -185,6 +186,7 @@ class DisposableHouseholdIncome:
             hhid = householdsAE[0]
             templist.append(hhid)
             housefoodNeed = householdsAE[i] - householdsFood[i]
+            print 'food to buy ',housefoodNeed
             if housefoodNeed < 0:
                 foodPrice = self.calculateHouseholdFoodPrice(housefoodNeed,pid)
             templist.append(foodPrice)
@@ -199,6 +201,7 @@ class DisposableHouseholdIncome:
         
         householdFoodPrices = []
         foodprice = 0
+        totalCost = 0
         for row in householdDiet:
             foodProportion = abs(housefoodNeed) * (row[3]/100)
             foodKcalQuery = '''SELECT  energyvalueperunit from setup_foods_crops WHERE name='%s' ''' % row[1]
@@ -208,10 +211,12 @@ class DisposableHouseholdIncome:
                 kCal=item[0]
 
             if kCal!=0:
-                foodprice = foodprice + ((foodProportion/kCal) * row[4])
+                #foodprice = foodprice + (foodProportion * (row[4]/kCal))
+                foodprice = foodprice + (row[3] * (row[4]/kCal))
                 
-            foodprice = round(foodprice,2)
-        return foodprice
+            #foodprice = round(foodprice,2)
+        totalCost = foodprice/100
+        return totalCost
         
     def executeQuery(self,query):
         '''run various select queries'''
@@ -228,6 +233,7 @@ class DisposableHouseholdIncome:
         
         basicQuery = self.totalCropCashIncomeQuery(projectid,householdIDs)
         finalQuery = self.buildFinalIncomeCategoryQuery(basicQuery,projectid,householdIDs)
+        print finalQuery
         recordset = self.executeQuery(finalQuery)
         return recordset
     

@@ -89,6 +89,9 @@ import traceback
 #import module for simulation dialog
 from frm_project_income_simulation import FrmRunIncomeSimulation
 
+#import module for Assets By Disposable Income report dialog
+from frm_report_assets_bydisposableincome import FrmAssetsByDisposableIncome
+
 # FIXME: Edit this value in Brown's innosetup script, take it from an .ini file.
 REPO_DIR = os.path.expanduser(os.path.join('~', '.openihmrepo'))
 
@@ -613,6 +616,13 @@ class FrmMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def runIncomeSimulations(self):
         ''' Creates and Shows the dialog for Running Simmulations'''
         form = FrmRunIncomeSimulation(self)
+        subWin = self.mdi.addSubWindow(form)
+        self.centerSubWindow(subWin)
+        form.show()
+
+    def reportAssets(self):
+        ''' Creates and Shows the dialog for Running Simmulations'''
+        form = FrmAssetsByDisposableIncome(self)
         subWin = self.mdi.addSubWindow(form)
         self.centerSubWindow(subWin)
         form.show()
