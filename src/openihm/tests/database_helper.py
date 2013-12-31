@@ -48,9 +48,15 @@ class DatabaseHelper(object):
     def grant_permissions(self):
         c = self.config
         # FIXME: can I parametise this properly?
-        self.execute_instruction(
-            "grant all on %s.* to %s@localhost identified by '%s'"
-            % (c.database, c.user, c.password))
+        try:
+            self.execute_instruction(
+                "grant all on %s.* to %s@localhost identified by '%s'"
+                % (c.database, c.user, c.password))
+        except:
+            # this might fail and be OK if the 'superuser' doesn't have grant permissions
+            # and the 'user' has already been granted permissions
+            print "warning: failed to grant permissions to use %s database to user %s" % (c.database, c.user)
+            print "if you know the user already has the correct permissions you can ignore this warning"
 
     def setup_db_file(self, filename):
         # FIXME: this is all assuming the tests are run
@@ -121,7 +127,7 @@ class DatabaseHelper(object):
 
     def _ddl_command(self, query, params=None):
         config = self.config.superuser_dbinfo().copy()
-        config['database'] = 'mysql'
+        del(config['database'])
         db = Connect(**config)
         cursor = db.cursor()
         cursor.execute(query, params)
