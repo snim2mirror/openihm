@@ -108,9 +108,13 @@ class DatabaseInitialiser:
         sqlfile.close()
         try:
             dbinfo = self.config.superuser_dbinfo().copy()
+            database = dbinfo['database']
             del dbinfo['database']
             db = Connect(**dbinfo)
             cursor = db.cursor()
+            # FIXME: long term we should look at changing the character set.
+            cursor.execute("CREATE SCHEMA IF NOT EXISTS `%s` DEFAULT CHARACTER SET latin1 ;" % database)
+            cursor.execute("USE `%s`;" % database)
 
             for command in commandlist:
                 if ( not command.isspace() ):

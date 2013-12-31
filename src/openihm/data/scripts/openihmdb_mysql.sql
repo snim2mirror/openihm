@@ -2,13 +2,11 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE SCHEMA IF NOT EXISTS `openihmdb` DEFAULT CHARACTER SET latin1 ;
-USE `openihmdb`;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`projects`
+-- Table `projects`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`projects` (
+CREATE  TABLE IF NOT EXISTS `projects` (
   `pid` INT(11) NOT NULL AUTO_INCREMENT ,
   `projectname` VARCHAR(255) NOT NULL ,
   `startdate` DATE NOT NULL ,
@@ -21,9 +19,9 @@ AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = latin1;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`projectincomesources`
+-- Table `projectincomesources`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectincomesources` (
+CREATE  TABLE IF NOT EXISTS `projectincomesources` (
   `pid` INT(11) NOT NULL ,
   `incomesource` VARCHAR(255) NOT NULL ,
   `incometype` VARCHAR(45) NOT NULL ,
@@ -31,16 +29,16 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectincomesources` (
   INDEX `fk_projectincomesources_projects` (`pid` ASC) ,
   CONSTRAINT `fk_projectincomesources_projects`
     FOREIGN KEY (`pid` )
-    REFERENCES `openihmdb`.`projects` (`pid` )
+    REFERENCES `projects` (`pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`households`
+-- Table `households`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`households` (
+CREATE  TABLE IF NOT EXISTS `households` (
   `hhid` INT(11) NOT NULL ,
   `householdname` VARCHAR(100) NOT NULL ,
   `totalassetvalue` DOUBLE NOT NULL DEFAULT '0' ,
@@ -52,7 +50,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`households` (
   INDEX `fk_households_projects1` (`pid` ASC) ,
   CONSTRAINT `fk_households_projects1`
     FOREIGN KEY (`pid` )
-    REFERENCES `openihmdb`.`projects` (`pid` )
+    REFERENCES `projects` (`pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -60,9 +58,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`householdmembers`
+-- Table `householdmembers`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`householdmembers` (
+CREATE  TABLE IF NOT EXISTS `householdmembers` (
   `personid` VARCHAR(20) NOT NULL ,
   `hhid` INT(11) NOT NULL ,
   `headofhousehold` ENUM('Yes','No') NOT NULL ,
@@ -77,7 +75,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`householdmembers` (
   INDEX `fk_householdmembers_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_householdmembers_households1`
     FOREIGN KEY (`hhid` , `pid` )
-    REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
+    REFERENCES `households` (`hhid` , `pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -85,9 +83,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`absencefromhousehold`
+-- Table `absencefromhousehold`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`absencefromhousehold` (
+CREATE  TABLE IF NOT EXISTS `absencefromhousehold` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `percentageaway` DOUBLE NOT NULL ,
   `reason` VARCHAR(200) NOT NULL ,
@@ -99,7 +97,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`absencefromhousehold` (
   INDEX `fk_absencefromhousehold_householdmembers1` (`personid` ASC, `hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_absencefromhousehold_householdmembers1`
     FOREIGN KEY (`personid` , `hhid` , `pid` )
-    REFERENCES `openihmdb`.`householdmembers` (`personid` , `hhid` , `pid` )
+    REFERENCES `householdmembers` (`personid` , `hhid` , `pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -107,9 +105,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`assets`
+-- Table `assets`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`assets` (
+CREATE  TABLE IF NOT EXISTS `assets` (
   `assetid` INT(11) NOT NULL AUTO_INCREMENT ,
   `hhid` INT(11) NOT NULL ,
   `assetcategory` VARCHAR(255) NOT NULL ,
@@ -122,7 +120,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`assets` (
   INDEX `fk_assets_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_assets_households1`
     FOREIGN KEY (`hhid` , `pid` )
-    REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
+    REFERENCES `households` (`hhid` , `pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -130,9 +128,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`assettypes`
+-- Table `assettypes`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`assettypes` (
+CREATE  TABLE IF NOT EXISTS `assettypes` (
   `assettype` VARCHAR(100) NOT NULL ,
   PRIMARY KEY (`assettype`) )
 ENGINE = InnoDB
@@ -140,9 +138,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`creditandloans`
+-- Table `creditandloans`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`creditandloans` (
+CREATE  TABLE IF NOT EXISTS `creditandloans` (
   `id` INT(11) NOT NULL ,
   `creditsource` VARCHAR(200) NULL DEFAULT NULL ,
   `unit` VARCHAR(45) NULL DEFAULT NULL ,
@@ -154,9 +152,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`cropincome`
+-- Table `cropincome`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`cropincome` (
+CREATE  TABLE IF NOT EXISTS `cropincome` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `hhid` INT(11) NOT NULL ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
@@ -173,7 +171,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`cropincome` (
   INDEX `fk_cropincome_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_cropincome_households1`
     FOREIGN KEY (`hhid` , `pid` )
-    REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
+    REFERENCES `households` (`hhid` , `pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -182,9 +180,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`currencies`
+-- Table `currencies`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`currencies` (
+CREATE  TABLE IF NOT EXISTS `currencies` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `currencyname` VARCHAR(250) NOT NULL ,
   `abbreviation` VARCHAR(45) NOT NULL ,
@@ -195,9 +193,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`diet`
+-- Table `diet`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`diet` (
+CREATE  TABLE IF NOT EXISTS `diet` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `pid` INT(11) NOT NULL ,
   `fooditem` VARCHAR(45) NOT NULL ,
@@ -209,16 +207,16 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`diet` (
   INDEX `fk_diet_projects1` (`pid` ASC) ,
   CONSTRAINT `fk_diet_projects1`
     FOREIGN KEY (`pid` )
-    REFERENCES `openihmdb`.`projects` (`pid` )
+    REFERENCES `projects` (`pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`employmentincome`
+-- Table `employmentincome`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`employmentincome` (
+CREATE  TABLE IF NOT EXISTS `employmentincome` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `hhid` INT(11) NOT NULL ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
@@ -233,7 +231,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`employmentincome` (
   INDEX `fk_employmentincome_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_employmentincome_households1`
     FOREIGN KEY (`hhid` , `pid` )
-    REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
+    REFERENCES `households` (`hhid` , `pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -241,9 +239,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`expenditure`
+-- Table `expenditure`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`expenditure` (
+CREATE  TABLE IF NOT EXISTS `expenditure` (
   `expid` INT(11) NOT NULL AUTO_INCREMENT ,
   `hhid` INT(11) NOT NULL ,
   `exptype` VARCHAR(100) NULL DEFAULT NULL ,
@@ -256,7 +254,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`expenditure` (
   INDEX `fk_expenditure_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_expenditure_households1`
     FOREIGN KEY (`hhid` , `pid` )
-    REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
+    REFERENCES `households` (`hhid` , `pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -264,9 +262,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`globalhouseholdcharacteristics`
+-- Table `globalhouseholdcharacteristics`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`globalhouseholdcharacteristics` (
+CREATE  TABLE IF NOT EXISTS `globalhouseholdcharacteristics` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `characteristic` VARCHAR(250) NOT NULL ,
   `datatype` INT(11) NOT NULL ,
@@ -277,9 +275,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`globalpersonalcharacteristics`
+-- Table `globalpersonalcharacteristics`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`globalpersonalcharacteristics` (
+CREATE  TABLE IF NOT EXISTS `globalpersonalcharacteristics` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `characteristic` VARCHAR(250) NULL DEFAULT NULL ,
   `datatype` INT(11) NULL DEFAULT NULL ,
@@ -290,9 +288,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`incomeseasonality`
+-- Table `incomeseasonality`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`incomeseasonality` (
+CREATE  TABLE IF NOT EXISTS `incomeseasonality` (
   `incometype` VARCHAR(45) NOT NULL ,
   `jan` DOUBLE NOT NULL ,
   `feb` DOUBLE NOT NULL ,
@@ -312,9 +310,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`livestockincome`
+-- Table `livestockincome`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`livestockincome` (
+CREATE  TABLE IF NOT EXISTS `livestockincome` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `hhid` INT(11) NOT NULL ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
@@ -331,7 +329,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`livestockincome` (
   INDEX `fk_livestockincome_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_livestockincome_households1`
     FOREIGN KEY (`hhid` , `pid` )
-    REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
+    REFERENCES `households` (`hhid` , `pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -339,9 +337,9 @@ AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = latin1;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`lookup_energy_needs`
+-- Table `lookup_energy_needs`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`lookup_energy_needs` (
+CREATE  TABLE IF NOT EXISTS `lookup_energy_needs` (
   `age` INT(11) NOT NULL ,
   `kCalNeedM` INT(11) NULL DEFAULT NULL ,
   `kCalNeedF` INT(11) NULL DEFAULT NULL ,
@@ -350,9 +348,9 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`savingscategories`
+-- Table `savingscategories`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`savingscategories` (
+CREATE  TABLE IF NOT EXISTS `savingscategories` (
   `savingscategory` VARCHAR(100) NOT NULL ,
   PRIMARY KEY (`savingscategory`) )
 ENGINE = InnoDB
@@ -360,9 +358,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_crops`
+-- Table `setup_crops`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_crops` (
+CREATE  TABLE IF NOT EXISTS `setup_crops` (
   `foodtype` VARCHAR(100) NOT NULL ,
   `energyvalueperunit` DOUBLE NULL DEFAULT NULL ,
   `measuringunit` VARCHAR(45) NULL DEFAULT NULL ,
@@ -372,9 +370,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_employment`
+-- Table `setup_employment`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_employment` (
+CREATE  TABLE IF NOT EXISTS `setup_employment` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
@@ -383,9 +381,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_expenditurecategories`
+-- Table `setup_expenditurecategories`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_expenditurecategories` (
+CREATE  TABLE IF NOT EXISTS `setup_expenditurecategories` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `expenditurecategory` VARCHAR(200) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
@@ -394,9 +392,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_expendituretypes`
+-- Table `setup_expendituretypes`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_expendituretypes` (
+CREATE  TABLE IF NOT EXISTS `setup_expendituretypes` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `expendituretype` VARCHAR(200) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) )
@@ -405,9 +403,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_landtypes`
+-- Table `setup_landtypes`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_landtypes` (
+CREATE  TABLE IF NOT EXISTS `setup_landtypes` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `landtype` VARCHAR(200) NULL DEFAULT NULL ,
   `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
@@ -417,9 +415,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_livestock`
+-- Table `setup_livestock`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_livestock` (
+CREATE  TABLE IF NOT EXISTS `setup_livestock` (
   `incomesource` VARCHAR(200) NOT NULL DEFAULT '' ,
   `energyvalueperunit` DOUBLE NULL DEFAULT NULL ,
   `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
@@ -429,9 +427,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_tradablegoods`
+-- Table `setup_tradablegoods`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_tradablegoods` (
+CREATE  TABLE IF NOT EXISTS `setup_tradablegoods` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `tradablegoodtype` VARCHAR(200) NOT NULL ,
   `unitofmeasure` VARCHAR(45) NOT NULL ,
@@ -441,9 +439,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_transfers`
+-- Table `setup_transfers`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_transfers` (
+CREATE  TABLE IF NOT EXISTS `setup_transfers` (
   `assistancetype` VARCHAR(200) NOT NULL ,
   `sourceoftransfer` VARCHAR(200) NOT NULL ,
   `unitofmeasure` VARCHAR(45),
@@ -453,9 +451,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_transfersources`
+-- Table `setup_transfersources`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_transfersources` (
+CREATE  TABLE IF NOT EXISTS `setup_transfersources` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `sourcetype` ENUM('Internal','External') NOT NULL ,
   PRIMARY KEY (`id`) )
@@ -464,9 +462,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_treetypes`
+-- Table `setup_treetypes`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_treetypes` (
+CREATE  TABLE IF NOT EXISTS `setup_treetypes` (
   `treetype` VARCHAR(100) NOT NULL ,
   `measuringunit` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`treetype`) )
@@ -474,9 +472,9 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_foods_crops`
+-- Table `setup_foods_crops`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_foods_crops` (
+CREATE  TABLE IF NOT EXISTS `setup_foods_crops` (
   `name` VARCHAR(200) NOT NULL ,
   `category` VARCHAR(200) NOT NULL ,
   `energyvalueperunit` DOUBLE NULL ,
@@ -486,9 +484,9 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_wildfoods`
+-- Table `setup_wildfoods`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_wildfoods` (
+CREATE  TABLE IF NOT EXISTS `setup_wildfoods` (
   `incomesource` VARCHAR(200) NOT NULL DEFAULT '' ,
   `energyvalueperunit` DOUBLE NULL DEFAULT NULL ,
   `unitofmeasure` VARCHAR(45) NULL DEFAULT NULL ,
@@ -497,18 +495,18 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_standardofliving`
+-- Table `setup_standardofliving`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_standardofliving` (
+CREATE  TABLE IF NOT EXISTS `setup_standardofliving` (
   `item` VARCHAR(255) NOT NULL ,
   `type` ENUM('Household','Person','Both') NOT NULL ,
   PRIMARY KEY (`item`) )
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`standardofliving`
+-- Table `standardofliving`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`standardofliving` (
+CREATE  TABLE IF NOT EXISTS `standardofliving` (
   `pid` INT(11) NOT NULL ,
   `summary` VARCHAR(255) NOT NULL ,
   `scope` ENUM('Household','Person') NOT NULL ,
@@ -522,7 +520,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`standardofliving` (
   INDEX `fk_standardofliving_projects1` (`pid` ASC) ,
   CONSTRAINT `fk_standardofliving_projects1`
     FOREIGN KEY (`pid` )
-    REFERENCES `openihmdb`.`projects` (`pid` )
+    REFERENCES `projects` (`pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -530,9 +528,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`transfers`
+-- Table `transfers`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`transfers` (
+CREATE  TABLE IF NOT EXISTS `transfers` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `hhid` INT(11) NOT NULL ,
   `pid` INT(11) NOT NULL ,
@@ -551,7 +549,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`transfers` (
   INDEX `fk_transfers_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_transfers_households1`
     FOREIGN KEY (`hhid` , `pid` )
-    REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
+    REFERENCES `households` (`hhid` , `pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -559,9 +557,9 @@ DEFAULT CHARACTER SET = latin1;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_foods_crops`
+-- Table `setup_foods_crops`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_foods_crops` (
+CREATE  TABLE IF NOT EXISTS `setup_foods_crops` (
   `name` VARCHAR(200) NOT NULL ,
   `category` VARCHAR(200) NOT NULL ,
   `energyvalueperunit` DOUBLE NULL ,
@@ -571,9 +569,9 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`wildfoods`
+-- Table `wildfoods`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`wildfoods` (
+CREATE  TABLE IF NOT EXISTS `wildfoods` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `hhid` INT(11) NOT NULL ,
   `incomesource` VARCHAR(200) NULL DEFAULT NULL ,
@@ -590,17 +588,17 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`wildfoods` (
   INDEX `fk_wildfoods_households1` (`hhid` ASC, `pid` ASC) ,
   CONSTRAINT `fk_wildfoods_households1`
     FOREIGN KEY (`hhid` , `pid` )
-    REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
+    REFERENCES `households` (`hhid` , `pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`transferlog`
+-- Table `transferlog`
 -- -----------------------------------------------------
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`transferlog` (
+CREATE  TABLE IF NOT EXISTS `transferlog` (
   `pid` INT(11) NOT NULL ,
   `pid_access` INT(11) NOT NULL ,
   `projectname` VARCHAR(255) NOT NULL ,
@@ -609,7 +607,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`transferlog` (
   PRIMARY KEY (`pid`) ,
   CONSTRAINT `fk_transferlog_projects1`
     FOREIGN KEY (`pid` )
-    REFERENCES `openihmdb`.`projects` (`pid` )
+    REFERENCES `projects` (`pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -617,10 +615,10 @@ DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`globalcharacteristics`
+-- Table `globalcharacteristics`
 -- -----------------------------------------------------
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`globalcharacteristics` (
+CREATE  TABLE IF NOT EXISTS `globalcharacteristics` (
   `characteristic` VARCHAR(250) NOT NULL ,
   `chartype` VARCHAR(50) NOT NULL ,
   `datatype` INT(11) NOT NULL ,
@@ -631,10 +629,10 @@ DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`projectcharacteristics`
+-- Table `projectcharacteristics`
 -- -----------------------------------------------------
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectcharacteristics` (
+CREATE  TABLE IF NOT EXISTS `projectcharacteristics` (
   `pid` INT(11) NOT NULL ,
   `characteristic` VARCHAR(250) NOT NULL ,
   `chartype` VARCHAR(50) NOT NULL ,
@@ -642,7 +640,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectcharacteristics` (
   PRIMARY KEY (`pid`, `characteristic`) ,
   CONSTRAINT `fk_projectcharacteristics_projects1`
     FOREIGN KEY (`pid` )
-    REFERENCES `openihmdb`.`projects` (`pid` )
+    REFERENCES `projects` (`pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -651,10 +649,10 @@ COLLATE = latin1_swedish_ci;
 
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`householdcharacteristics`
+-- Table `householdcharacteristics`
 -- -----------------------------------------------------
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`householdcharacteristics` (
+CREATE  TABLE IF NOT EXISTS `householdcharacteristics` (
   `pid` INT(11) NOT NULL ,
   `hhid` INT(11) NOT NULL ,
   `characteristic` VARCHAR(250) NOT NULL ,
@@ -662,7 +660,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`householdcharacteristics` (
   PRIMARY KEY (`pid`, `hhid`, `characteristic`) ,
   CONSTRAINT `fk_householdcharacteristics_households1`
     FOREIGN KEY (`hhid` , `pid` )
-    REFERENCES `openihmdb`.`households` (`hhid` , `pid` )
+    REFERENCES `households` (`hhid` , `pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -670,10 +668,10 @@ DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`personalcharacteristics`
+-- Table `personalcharacteristics`
 -- -----------------------------------------------------
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`personalcharacteristics` (
+CREATE  TABLE IF NOT EXISTS `personalcharacteristics` (
   `pid` INT(11) NOT NULL ,
   `hhid` INT(11) NOT NULL ,
   `personid` VARCHAR(20) NOT NULL ,
@@ -682,7 +680,7 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`personalcharacteristics` (
   PRIMARY KEY (`pid`, `hhid`, `personid`, `characteristic`) ,
   CONSTRAINT `fk_personalcharacteristics_householdmembers1`
     FOREIGN KEY (`personid` , `hhid` , `pid` )
-    REFERENCES `openihmdb`.`householdmembers` (`personid` , `hhid` , `pid` )
+    REFERENCES `householdmembers` (`personid` , `hhid` , `pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -690,10 +688,10 @@ DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_swedish_ci;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`projectassets`
+-- Table `projectassets`
 -- -----------------------------------------------------
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectassets` (
+CREATE  TABLE IF NOT EXISTS `projectassets` (
   `pid` INT NOT NULL ,
   `assetname` VARCHAR(255) NOT NULL ,
   `assettype` VARCHAR(45) NOT NULL ,
@@ -701,16 +699,16 @@ CREATE  TABLE IF NOT EXISTS `openihmdb`.`projectassets` (
   INDEX `pid` (`pid` ASC) ,
   CONSTRAINT `pid`
     FOREIGN KEY (`pid` )
-    REFERENCES `openihmdb`.`projects` (`pid` )
+    REFERENCES `projects` (`pid` )
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`setup_assets`
+-- Table `setup_assets`
 -- -----------------------------------------------------
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`setup_assets` (
+CREATE  TABLE IF NOT EXISTS `setup_assets` (
   `assetname` VARCHAR(255) NOT NULL ,
   `assettype` VARCHAR(50) NOT NULL ,
   `unitofmeasure` VARCHAR(45) NOT NULL ,
@@ -722,10 +720,10 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Table `openihmdb`.`dbupdate`
+-- Table `dbupdate`
 -- -----------------------------------------------------
 
-CREATE  TABLE IF NOT EXISTS `openihmdb`.`dbupdate` (
+CREATE  TABLE IF NOT EXISTS `dbupdate` (
 
   `lastupdate` VARCHAR(50) NOT NULL ,
 
