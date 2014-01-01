@@ -30,10 +30,13 @@ Ui_FindHousehold, base_class = uic.loadUiType("gui/designs/ui_findhousehold.ui")
 
 from frmfindhouseholdresults import FrmFindHouseholdResults
 
-from mixins import MDIDialogMixin, MySQLMixin
+from mixins import MDIDialogMixin
+from data.db import session_scope
+from model.alchemy_schema import Household
+from sqlalchemy import or_
 
 
-class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin, MySQLMixin):
+class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin):
     ''' Creates the Find Household form'''
     def __init__(self, parent):
         ''' Set up the dialog box interface '''
@@ -47,23 +50,19 @@ class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin, MySQLMixin):
         hhid = self.txtHouseholdNo.text()
         hhname = self.txtHouseholdName.text()
 
-        SQLcondition = ""
-        if ( hhid != "" ):
-            SQLcondition = " hhid='%s'" % ( hhid )
-        
-        if ( hhname != "" ):
-            if ( SQLcondition == "" ):
-                SQLcondition = "householdname LIKE '%" + "%s" % ( hhname ) + "%'" 
-            else:
-                SQLcondition = "(" + SQLcondition + " OR householdname LIKE '%" + "%s" % ( hhname ) + "%' )" 
-
-        if ( SQLcondition != "" ):  
-            query = ''' SELECT hhid FROM households WHERE pid=%i AND %s ''' % ( self.parent.projectid, SQLcondition ) 
-        else:
-            query = ''' SELECT hhid FROM households WHERE pid=%i ''' % ( self.parent.projectid )
-
-        recordset = self.executeResultsQuery(query)
-        count = len(recordset)
+        pid = self.parent.projectid
+        count = 0
+        with session_scope() as session:
+            q = session.query(Household).filter(Household.pid == pid)
+            if hhname != "":
+                if hhid == "":
+                    q = q.filter(Household.householdname.like(hhname))
+                else:
+                    q = q.filter(or_(Household.householdname.like(hhname), 
+                                        Household.hhid == hhid))
+            elif hhid != "":
+                q = q.filter(Household.hhid == hhid)
+            count = q.count()
 
         if ( count != 0 ):
             form = FrmFindHouseholdResults( self.parent, hhid, hhname )
