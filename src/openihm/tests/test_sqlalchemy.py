@@ -4,6 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from sqlalchemy.orm import mapper
 from model.schema import setup_foods_crops
+from data.db import Alchemy, session_scope
 
 
 class SetupFoodsCrops(object):
@@ -56,3 +57,9 @@ class TestSQLAlchemy(unittest.TestCase):
         session.add(crop)
         self.assertEqual(session.query(SetupFoodsCrops).count(), 1)
         session.commit()
+
+    def test_alchemy_wrapper(self):
+        self.helper.setup_clean_db()
+        with session_scope() as session:
+            self.assertEqual(session.query(SetupFoodsCrops).count(), 0)
+
