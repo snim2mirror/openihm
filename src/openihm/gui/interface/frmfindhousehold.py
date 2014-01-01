@@ -32,8 +32,7 @@ from frmfindhouseholdresults import FrmFindHouseholdResults
 
 from mixins import MDIDialogMixin
 from data.db import session_scope
-from model.alchemy_schema import Household
-from sqlalchemy import or_
+from model.alchemy_schema import house_search
 
 
 class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin):
@@ -53,16 +52,8 @@ class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin):
         pid = self.parent.projectid
         count = 0
         with session_scope() as session:
-            q = session.query(Household).filter(Household.pid == pid)
-            if hhname != "":
-                if hhid == "":
-                    q = q.filter(Household.householdname.like(hhname))
-                else:
-                    q = q.filter(or_(Household.householdname.like(hhname), 
-                                        Household.hhid == hhid))
-            elif hhid != "":
-                q = q.filter(Household.hhid == hhid)
-            count = q.count()
+            query = house_search(session, pid, hhname, hhid)
+            count = query.count()
 
         if ( count != 0 ):
             form = FrmFindHouseholdResults( self.parent, hhid, hhname )

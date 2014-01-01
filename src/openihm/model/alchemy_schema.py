@@ -2,6 +2,7 @@ from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relation
 from sqlalchemy.dialects.mysql import *
+from sqlalchemy import or_
 
 DeclarativeBase = declarative_base()
 metadata = DeclarativeBase.metadata
@@ -22,4 +23,22 @@ class Household(DeclarativeBase):
     #                      ondelete='CASCADE', onupdate='CASCADE',
     #                      name=u'fk_households_projects1'),
     # )
+
+def house_search(session, project_id, name, number):
+    """
+    Searches for house holds within the project with the name or number
+    specified.  If name or number are blank strings they are not included
+    in the query.  Uses a like query to query the name.
+    """
+    q = session.query(Household).filter(Household.pid == project_id)
+    if name != "":
+        name = '%' + name + '%'
+        if number == "":
+            q = q.filter(Household.householdname.like(name))
+        else:
+            q = q.filter(or_(Household.householdname.like(name), 
+                                Household.hhid == number))
+    elif number != "":
+        q = q.filter(Household.hhid == number)
+    return q
 
