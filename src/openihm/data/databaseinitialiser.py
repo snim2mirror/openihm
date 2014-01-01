@@ -119,6 +119,13 @@ class DatabaseInitialiser:
             for command in commandlist:
                 if ( not command.isspace() ):
                     cursor.execute(command)
+            try:
+                if self.config.user != self.config.superuser:
+                    cursor.execute("GRANT ALL ON %s.* TO %s@localhost IDENTIFIED BY '%s';" % 
+                                    (database, self.config.user, self.config.password)) 
+            except ( errors.OperationalError,  errors.ProgrammingError) as e:
+                print e.msg
+                
             updatestr = "latest update on %s" % (date.today().isoformat())      
             query = "INSERT INTO dbupdate VALUES('%s')" % updatestr
             cursor.execute(query)

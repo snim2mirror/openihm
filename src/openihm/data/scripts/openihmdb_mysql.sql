@@ -733,4 +733,3 @@ CREATE  TABLE IF NOT EXISTS `dbupdate` (
 -- User `openihm@localhost`
 -- -----------------------------------------------------
 
-GRANT ALL ON openihmdb.* TO openihm@localhost IDENTIFIED BY 'ihm2010'; 

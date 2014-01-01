@@ -1,7 +1,6 @@
 -- -----------------------------------------------------
 -- Table `openihmdb`.`setup_foods_crops`
 -- -----------------------------------------------------
-USE `openihmdb`;
 
 /*!40000 ALTER TABLE `setup_foods_crops` DISABLE KEYS */;
 DELETE FROM setup_foods_crops;
