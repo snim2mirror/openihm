@@ -97,7 +97,7 @@ class TestModelHouseHold(unittest.TestCase):
         with session_scope() as session:
             q = house_search(session, 2, 'Test', '')
             self.assertEqual(q.count(), 2)
-            q2 = house_search(session, 2, 'A Test', '')
+            q2 = house_search(session, 2, 'A test', '')
             self.assertEqual(q2.count(), 1)
             q2 = house_search(session, 2, 'A Test 2', '')
             self.assertEqual(q2.count(), 1)
