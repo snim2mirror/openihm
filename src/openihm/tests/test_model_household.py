@@ -69,7 +69,7 @@ class TestModelHouseHold(unittest.TestCase):
     def test_number(self):
         # b) just number
         with session_scope() as session:
-            q = house_search(session, 2, '', '55')
+            q = house_search(session, 2, name='', number='55')
             self.assertEqual(q.count(), 1)
             q = house_search(session, 2, '', '33')
             self.assertEqual(q.count(), 0)
