@@ -31,14 +31,12 @@ def house_search(session, project_id, name, number):
     in the query.  Uses a like query to query the name.
     """
     q = session.query(Household).filter(Household.pid == project_id)
+    params = []
     if name != "":
-        name = '%' + name + '%'
-        if number == "":
-            q = q.filter(Household.householdname.like(name))
-        else:
-            q = q.filter(or_(Household.householdname.like(name), 
-                                Household.hhid == number))
-    elif number != "":
-        q = q.filter(Household.hhid == number)
+        params.append(Household.householdname.like('%' + name + '%'))
+    if number != "":
+        params.append(Household.hhid == number)
+    if len(params) > 0:
+        q = q.filter(or_(*params))
     return q
 
