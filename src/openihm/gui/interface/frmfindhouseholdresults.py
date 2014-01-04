@@ -114,7 +114,7 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, 
             projectid    = self.parent.projectid
             projectname = self.parent.projectname
             # show edit household member form
-            form = FrmEditHousehold(self, projectid, projectname, hhid)
+            form = FrmEditHousehold(self, projectid, projectname, hhid=hhid)
             form.setWindowIcon(QIcon('resources/images/openihm.png'))
             form.exec_()
 

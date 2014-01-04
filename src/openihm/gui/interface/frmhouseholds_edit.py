@@ -30,13 +30,14 @@ Ui_Households_Edit, base_class = uic.loadUiType("gui/designs/ui_households_edit.
 from mixins import MDIDialogMixin
 
 class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):	
+
     ''' Creates the Edit Household form. '''	
-    def __init__(self, parent, projectid, projectname, hhid):
+    def __init__(self, parent, projectid=None, projectname=None, hhid=None):
         ''' Set up the dialog box interface '''
         QDialog.__init__(self)
         self.setupUi(self)
         self.parent = parent
-        self.projectid = projectid
+        self.projectid = projectid or parent.projectid
         self.hhid = hhid
         self.mdi = None
         
@@ -47,7 +48,7 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
         self.dtpDateVisted.setCalendarPopup(True)
         
         # display project name
-        self.lblProjectName.setText(projectname)
+        self.lblProjectName.setText(projectname or parent.projectname)
 
     def getHouseholdData(self):
         ''' Retrieve and display household data '''
@@ -63,7 +64,7 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
             self.dtpDateVisted.setDate(dateofcollection)
             self.txtHouseholdName.setText(householdname)
         
-    def saveHousehold(self):
+    def _saveHousehold(self):
         ''' Saves changes to household to database '''
         
         # get the data entered by user
@@ -78,7 +79,11 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
             house.householdname = householdname
             house.dateofcollection = dateofcollection
             # NOTE: the implicit commit here will cause the changes to be saved.
+
+        return True
         
+    def saveHousehold(self):
         # close new project window
-        self.parent.getHouseholds()
-        self.mdiClose()
+        if self._saveHousehold():
+            self.parent.getHouseholds()
+            self.mdiClose()

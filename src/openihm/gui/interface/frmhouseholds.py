@@ -119,7 +119,7 @@ class FrmHouseholds(QDialog, Ui_AllHouseholds, MySQLMixin, TableViewMixin, MDIDi
 			projectid	= self.parent.projectid
 			projectname = self.parent.projectname
 			# show edit household member form
-			form = FrmEditHousehold(self, projectid, projectname, hhid)
+			form = FrmEditHousehold(self, projectid, projectname, hhid=hhid)
 			form.setMdi(self.parent.mdi)
 			form.setWindowIcon(QIcon('resources/images/openihm.png'))
 			form.exec_()

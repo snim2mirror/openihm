@@ -57,7 +57,7 @@ class FrmEditHouseholdGetID(QDialog, Ui_EditHouseholdGetID, MDIDialogMixin):
         ''' Show Household Details '''
         temp = self.cboHouseholdName.itemData(self.cboHouseholdName.currentIndex()).toInt()
         hhid = temp[0]
-        form = FrmEditHouseholdDetails(self.parent, hhid)
+        form = FrmEditHouseholdDetails(self.parent, hhid=hhid)
         subWin = self.parent.mdi.addSubWindow(form)
         self.parent.centerSubWindow(subWin)
         # close this form
