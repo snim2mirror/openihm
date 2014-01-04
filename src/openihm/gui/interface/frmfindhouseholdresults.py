@@ -35,6 +35,8 @@ from frmhouseholds_edit import FrmEditHousehold
 from frmhousehold_data import FrmHouseholdData
 
 from mixins import MDIDialogMixin, TableViewMixin,  MySQLMixin
+from data.db import session_scope
+from model.alchemy_schema import house_search
 
 
 class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, MDIDialogMixin, MySQLMixin):
@@ -57,28 +59,6 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, 
         hhid             = self.txtHouseholdNo.text()
         hhname             = self.txtHouseholdName.text()
 
-        SQLcondition     = ""
-        if ( hhid != "" ):
-            SQLcondition = " hhid='%s'" % ( hhid )
-
-        if ( hhname != "" ):
-            if ( SQLcondition == "" ):
-                SQLcondition = "householdname LIKE '%" + "%s" % ( hhname ) + "%'" 
-            else:
-                SQLcondition = "(" + SQLcondition + " OR householdname LIKE '%" + "%s" % ( hhname ) + "%' )" 
-
-        if ( SQLcondition != "" ):         
-            query = ''' SELECT hhid, householdname, dateofcollection 
-                    FROM households WHERE pid=%i AND %s ''' % ( self.parent.projectid, SQLcondition )
-        else:
-            query = ''' SELECT hhid, householdname, dateofcollection 
-                    FROM households WHERE pid=%i ''' % ( self.parent.projectid )
-
-        rows = self.executeResultsQuery(query)
-        count = len( rows )
-
-        self.setWindowTitle("%i matching household(s) found." % (count) )
-
         model = QStandardItemModel(1,2)
 
         # set model headers
@@ -89,20 +69,27 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, 
         # add  data rows
         num = 0
 
-        for row in rows:
-            qtHouseholdNo = QStandardItem( "%i" % row[0])
-            qtHouseholdNo.setTextAlignment( Qt.AlignCenter )
+        with session_scope() as session:
+            query = house_search(session, self.parent.projectid, hhname, hhid)
+            rows = query.all()
+            count = len(rows)
 
-            qtHouseholdName = QStandardItem( row[1] )
+            self.setWindowTitle("%i matching household(s) found." % (count) )
 
-            qtDateCollected = QStandardItem( QDate(row[2]).toString("dd/MM/yyyy") )
-            qtDateCollected.setTextAlignment( Qt.AlignCenter )
+            for row in rows:
+                qtHouseholdNo = QStandardItem( "%i" % row.hhid)
+                qtHouseholdNo.setTextAlignment( Qt.AlignCenter )
 
-            model.setItem( num, 0, qtHouseholdNo )
-            model.setItem( num, 1, qtHouseholdName )
-            model.setItem( num, 2, qtDateCollected )
+                qtHouseholdName = QStandardItem( row.householdname )
 
-            num = num + 1
+                qtDateCollected = QStandardItem( QDate(row.dateofcollection).toString("dd/MM/yyyy") )
+                qtDateCollected.setTextAlignment( Qt.AlignCenter )
+
+                model.setItem( num, 0, qtHouseholdNo )
+                model.setItem( num, 1, qtHouseholdName )
+                model.setItem( num, 2, qtDateCollected )
+
+                num = num + 1
 
         self.tblResults.setModel(model)
         self.tblResults.resizeColumnsToContents()
