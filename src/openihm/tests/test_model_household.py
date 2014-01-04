@@ -3,7 +3,7 @@ from database_helper import DatabaseHelper
 import datetime
 
 from data.db import session_scope
-from model.alchemy_schema import house_search, Household
+from model.alchemy_schema import house_search, Household, house_numbers_remove
 
 class TestModelHouseHold(unittest.TestCase):
     """
@@ -111,3 +111,19 @@ class TestModelHouseHold(unittest.TestCase):
             self.assertEqual(q.count(), 2)
             l = [ (h.hhid, h.householdname) for h in q ]
             self.assertEqual(l, [(40, 'Test'), (55, 'A Test 2')])
+
+    def test_remove(self):
+        with session_scope() as session:
+            house_numbers_remove(session, 2, [55])
+            q = house_search(session, 2, 'Test', '')
+            self.assertEqual(q.count(), 1)
+
+    def test_remove_project_scope(self):
+        # ensure we don't accidentally delete houses from
+        # different projects.
+        with session_scope() as session:
+            house_numbers_remove(session, 2, [55, 40, 42])
+            q = house_search(session, 2, '', '')
+            self.assertEqual(q.count(), 0)
+            q = house_search(session, 3, '', '')
+            self.assertEqual(q.count(), 1)

@@ -145,9 +145,8 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, 
 
             # delete selected households
 
-            for hhid in selectedIds:
-                query = '''DELETE FROM households WHERE hhid=%s ''' % (hhid)    
-                self.executeUpdateQuery(query)
+            with session_scope() as session:
+                house_numbers_remove(session, self.parent.projectid, selectedIds)
 
             self.getHouseholds()
 
