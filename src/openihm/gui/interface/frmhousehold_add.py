@@ -34,12 +34,13 @@ from model.alchemy_schema import Household
 class FrmAddHousehold(QDialog, Ui_AddHousehold, MDIDialogMixin):
     ''' Creates the add household form '''
 
-    def __init__(self, parent):
+    def __init__(self, parent, projectid=None, projectname=None):
         ''' Set up the dialog box interface '''
         QDialog.__init__(self)
 
         self.setupUi(self)
         self.parent = parent
+        self.projectid = projectid or parent.projectid
         self.mdi = None
 
         # set the dates to the date of today
@@ -50,16 +51,16 @@ class FrmAddHousehold(QDialog, Ui_AddHousehold, MDIDialogMixin):
         self.dtpDateVisted.setCalendarPopup(True)
 
         # display project name
-        self.lblProjectName.setText(self.parent.projectname)
+        self.lblProjectName.setText(projectname or parent.projectname)
 
-    def saveHousehold(self):
+    def _saveHousehold(self):
         ''' Saves newly created household data to database '''
 
         # get the data entered by user
         hhid = self.txtShortHouseHoldName.text()
         householdname = self.txtHouseholdName.text()
         dateofcollection = self.dtpDateVisted.date().toPyDate()
-        pid = self.parent.projectid
+        pid = self.projectid
 
         # save household
         with session_scope() as session:
@@ -67,4 +68,6 @@ class FrmAddHousehold(QDialog, Ui_AddHousehold, MDIDialogMixin):
                           pid=pid, dateofcollection=dateofcollection)
             session.add(h)
 
+    def saveHousehold(self):
+        self._saveHousehold()
         self.parent.mdi.closeActiveSubWindow()
