@@ -33,17 +33,17 @@ from frmhousehold_edit_details import FrmEditHouseholdDetails
 from mixins import MDIDialogMixin
 
 
-class FrmEditHouseholdGetID(QDialog, Ui_EditHouseholdGetID, MDIDialogMixin):	
-    ''' Creates the Edit Project form. '''	
+class FrmEditHouseholdGetID(QDialog, Ui_EditHouseholdGetID, MDIDialogMixin):
+    ''' Creates the Edit Project form. '''
     def __init__(self, parent):
         ''' Set up the dialog box interface '''
         self.parent = parent
         QDialog.__init__(self)
         self.setupUi(self)
-        
+
         # get projects
         self.getHouseholds()
-        
+
     def getHouseholds(self):
         with session_scope() as session:
             query = household.search(session, self.parent.projectid)
@@ -52,7 +52,7 @@ class FrmEditHouseholdGetID(QDialog, Ui_EditHouseholdGetID, MDIDialogMixin):
                 hhid = row.hhid
                 householdname = row.householdname
                 self.cboHouseholdName.addItem(householdname, QVariant(hhid))
-    
+
     def showDetails(self):
         ''' Show Household Details '''
         temp = self.cboHouseholdName.itemData(self.cboHouseholdName.currentIndex()).toInt()
