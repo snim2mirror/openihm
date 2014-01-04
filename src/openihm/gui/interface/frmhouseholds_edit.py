@@ -22,7 +22,8 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from control.controller import Controller
+from data.db import session_scope
+from model.alchemy_schema import house_search
 
 Ui_Households_Edit, base_class = uic.loadUiType("gui/designs/ui_households_edit.ui")
 
@@ -50,15 +51,17 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
 
     def getHouseholdData(self):
         ''' Retrieve and display household data '''
-        controller = Controller()
-        household = controller.getProject(self.projectid).getHousehold(self.hhid)
-        hhid = household.hhid
-        householdname = household.householdname
-        dateofcollection = household.dateofcollection
+
+        with session_scope() as session:
+            q = house_search(session, self.projectid, number=self.hhid)
+            household = q.all()[0]
+            hhid = household.hhid
+            householdname = household.householdname
+            dateofcollection = household.dateofcollection
         
-        self.txtShortHouseHoldName.setText(str(hhid))
-        self.dtpDateVisted.setDate(dateofcollection)
-        self.txtHouseholdName.setText(householdname)
+            self.txtShortHouseHoldName.setText(str(hhid))
+            self.dtpDateVisted.setDate(dateofcollection)
+            self.txtHouseholdName.setText(householdname)
         
     def saveHousehold(self):
         ''' Saves changes to household to database '''
@@ -66,12 +69,14 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
         # get the data entered by user
         hhid              = self.txtShortHouseHoldName.text()
         householdname     = self.txtHouseholdName.text()
-        dateofcollection  = self.dtpDateVisted.date().toString("yyyy-MM-dd")
-        pid               = self.projectid
+        dateofcollection  = self.dtpDateVisted.date().toPyDate()
         
-        controller = Controller()
-        household = controller.getProject(pid).getHousehold(self.hhid)
-        household.editData(hhid, householdname, dateofcollection)
+        with session_scope() as session:
+            q = house_search(session, self.projectid, number=self.hhid)
+            household = q.all()[0]
+            household.hhid = hhid
+            household.householdname = householdname
+            household.dateofcollection = dateofcollection
         
         # close new project window
         self.parent.getHouseholds()

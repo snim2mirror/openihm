@@ -28,7 +28,7 @@ def house_numbers_remove(session, project_id, numbers):
     q = session.query(Household).filter(Household.pid == project_id, Household.hhid.in_(numbers))
     q.delete(synchronize_session=False)
 
-def house_search(session, project_id, name, number):
+def house_search(session, project_id, name='', number=''):
     """
     Searches for house holds within the project with the name or number
     specified.  If name or number are blank strings they are not included
