@@ -22,15 +22,16 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from data.controller import Controller
+from data.db import session_scope
+import alchemy.household as household
 
 # import forms required to edit household
 Ui_EditHouseholdGetID, base_class = uic.loadUiType("gui/designs/ui_edithousehold_getid.ui")
 
-
 from frmhousehold_edit_details import FrmEditHouseholdDetails
 
 from mixins import MDIDialogMixin
+
 
 class FrmEditHouseholdGetID(QDialog, Ui_EditHouseholdGetID, MDIDialogMixin):	
     ''' Creates the Edit Project form. '''	
@@ -44,14 +45,13 @@ class FrmEditHouseholdGetID(QDialog, Ui_EditHouseholdGetID, MDIDialogMixin):
         self.getHouseholds()
         
     def getHouseholds(self):
-        controller = Controller()
-        project = controller.getProject( self.parent.projectid )
-        households = project.getHouseholds()
-        
-        for household in households:
-            hhid = household.getHouseholdID()
-            householdname = household.getHouseholdName()
-            self.cboHouseholdName.addItem(householdname, QVariant(hhid))
+        with session_scope() as session:
+            query = household.search(session, self.parent.projectid)
+
+            for row in query:
+                hhid = row.hhid
+                householdname = row.householdname
+                self.cboHouseholdName.addItem(householdname, QVariant(hhid))
     
     def showDetails(self):
         ''' Show Household Details '''
