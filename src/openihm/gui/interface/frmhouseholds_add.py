@@ -28,9 +28,11 @@ from control.controller import Controller
 # import the Create Project Dialog design class
 Ui_Households_Add, base_class = uic.loadUiType("gui/designs/ui_households_add.ui")
 
-from mixins import MDIDialogMixin, MySQLMixin
+from mixins import MDIDialogMixin
+from data.db import session_scope
+from model.alchemy_schema import Household
 
-class FrmAddHousehold(QDialog, Ui_Households_Add, MySQLMixin, MDIDialogMixin):	
+class FrmAddHousehold(QDialog, Ui_Households_Add, MDIDialogMixin):	
     ''' Creates the add household form '''	
 
     def __init__(self, parent, projectid, projectname):
@@ -56,15 +58,17 @@ class FrmAddHousehold(QDialog, Ui_Households_Add, MySQLMixin, MDIDialogMixin):
         ''' Saves newly created household data to database '''
         
         # get the data entered by user
-        hhid             = self.txtShortHouseHoldName.text()
-        householdname 	 = self.txtHouseholdName.text()
-        dateofcollection = self.dtpDateVisted.date().toString("yyyy-MM-dd")
+        hhid                = self.txtShortHouseHoldName.text()
+        householdname = self.txtHouseholdName.text()
+        dateofcollection       = self.dtpDateVisted.date().toPyDate()
         pid              = self.projectid
         
-        controller = Controller()
-        project = controller.getProject(pid)
-        project.addHousehold(hhid, householdname, dateofcollection)
-        
+        # save household
+        with session_scope() as session:
+            h = Household(hhid=hhid, householdname=householdname, 
+                            pid=pid, dateofcollection=dateofcollection)
+            session.add(h)
+
         # close new project window
         self.parent.getHouseholds()
         self.mdiClose()

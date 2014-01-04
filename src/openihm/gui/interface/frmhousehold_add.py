@@ -29,6 +29,8 @@ from data.controller import Controller
 Ui_AddHousehold, base_class = uic.loadUiType("gui/designs/ui_addhousehold.ui")
 
 from mixins import MDIDialogMixin
+from data.db import session_scope
+from model.alchemy_schema import Household
 
 class FrmAddHousehold(QDialog, Ui_AddHousehold, MDIDialogMixin):	
     ''' Creates the add household form '''	
@@ -58,13 +60,13 @@ class FrmAddHousehold(QDialog, Ui_AddHousehold, MDIDialogMixin):
         # get the data entered by user
         hhid                = self.txtShortHouseHoldName.text()
         householdname = self.txtHouseholdName.text()
-        dateofcollection       = self.dtpDateVisted.date().toString("yyyy-MM-dd")
+        dateofcollection       = self.dtpDateVisted.date().toPyDate()
         pid              = self.parent.projectid
         
         # save household
-        controller = Controller()
-        project = controller.getProject( pid )
-        project.addHousehold( hhid,  householdname,  dateofcollection)
-        
-        # close new project window
+        with session_scope() as session:
+            h = Household(hhid=hhid, householdname=householdname, 
+                            pid=pid, dateofcollection=dateofcollection)
+            session.add(h)
+
         self.parent.mdi.closeActiveSubWindow()
