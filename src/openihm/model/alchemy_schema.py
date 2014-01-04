@@ -24,23 +24,3 @@ class Household(DeclarativeBase):
     #                      name=u'fk_households_projects1'),
     # )
 
-def house_numbers_remove(session, project_id, numbers):
-    q = session.query(Household).filter(Household.pid == project_id, Household.hhid.in_(numbers))
-    q.delete(synchronize_session=False)
-
-def house_search(session, project_id, name='', number=''):
-    """
-    Searches for house holds within the project with the name or number
-    specified.  If name or number are blank strings they are not included
-    in the query.  Uses a like query to query the name.
-    """
-    q = session.query(Household).filter(Household.pid == project_id)
-    params = []
-    if name != "":
-        params.append(Household.householdname.like('%' + name + '%'))
-    if number != "":
-        params.append(Household.hhid == number)
-    if len(params) > 0:
-        q = q.filter(or_(*params))
-    return q
-

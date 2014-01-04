@@ -32,7 +32,7 @@ from frmfindhouseholdresults import FrmFindHouseholdResults
 
 from mixins import MDIDialogMixin
 from data.db import session_scope
-from model.alchemy_schema import house_search
+import alchemy.household as household
 
 
 class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin):
@@ -52,7 +52,7 @@ class FrmFindHousehold(QDialog, Ui_FindHousehold, MDIDialogMixin):
         pid = self.parent.projectid
         count = 0
         with session_scope() as session:
-            query = house_search(session, pid, hhname, hhid)
+            query = household.search(session, pid, hhname, hhid)
             count = query.count()
 
         if ( count != 0 ):

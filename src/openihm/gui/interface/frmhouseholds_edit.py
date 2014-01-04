@@ -23,7 +23,7 @@ from PyQt4.QtGui import *
 from PyQt4 import uic
 
 from data.db import session_scope
-from model.alchemy_schema import house_search
+import alchemy.household as household
 
 Ui_Households_Edit, base_class = uic.loadUiType("gui/designs/ui_households_edit.ui")
 
@@ -53,11 +53,11 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
         ''' Retrieve and display household data '''
 
         with session_scope() as session:
-            q = house_search(session, self.projectid, number=self.hhid)
-            household = q.all()[0]
-            hhid = household.hhid
-            householdname = household.householdname
-            dateofcollection = household.dateofcollection
+            q = household.search(session, self.projectid, number=self.hhid)
+            house = q.all()[0]
+            hhid = house.hhid
+            householdname = house.householdname
+            dateofcollection = house.dateofcollection
         
             self.txtShortHouseHoldName.setText(str(hhid))
             self.dtpDateVisted.setDate(dateofcollection)
@@ -72,11 +72,12 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
         dateofcollection  = self.dtpDateVisted.date().toPyDate()
         
         with session_scope() as session:
-            q = house_search(session, self.projectid, number=self.hhid)
-            household = q.all()[0]
-            household.hhid = hhid
-            household.householdname = householdname
-            household.dateofcollection = dateofcollection
+            q = household.search(session, self.projectid, number=self.hhid)
+            house = q.all()[0]
+            house.hhid = hhid
+            house.householdname = householdname
+            house.dateofcollection = dateofcollection
+            # NOTE: the implicit commit here will cause the changes to be saved.
         
         # close new project window
         self.parent.getHouseholds()

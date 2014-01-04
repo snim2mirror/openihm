@@ -35,7 +35,7 @@ from frmhousehold_data import FrmHouseholdData
 
 from mixins import MDIDialogMixin, TableViewMixin
 from data.db import session_scope
-from model.alchemy_schema import house_search, house_numbers_remove
+import alchemy.household as household
 
 
 class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, MDIDialogMixin):
@@ -68,7 +68,7 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, 
         num = 0
 
         with session_scope() as session:
-            query = house_search(session, self.parent.projectid, hhname, hhid)
+            query = household.search(session, self.parent.projectid, hhname, hhid)
             rows = query.all()
             count = len(rows)
 
@@ -144,7 +144,7 @@ class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, 
             # delete selected households
 
             with session_scope() as session:
-                house_numbers_remove(session, self.parent.projectid, selectedIds)
+                household.remove_house(session, self.parent.projectid, selectedIds)
 
             self.getHouseholds()
 
