@@ -23,8 +23,6 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from data.controller import Controller
-
 # import the Create Project Dialog design class
 Ui_AddHousehold, base_class = uic.loadUiType("gui/designs/ui_addhousehold.ui")
 
@@ -32,41 +30,41 @@ from mixins import MDIDialogMixin
 from data.db import session_scope
 from model.alchemy_schema import Household
 
-class FrmAddHousehold(QDialog, Ui_AddHousehold, MDIDialogMixin):	
-    ''' Creates the add household form '''	
+
+class FrmAddHousehold(QDialog, Ui_AddHousehold, MDIDialogMixin):
+    ''' Creates the add household form '''
 
     def __init__(self, parent):
         ''' Set up the dialog box interface '''
         QDialog.__init__(self)
-        
+
         self.setupUi(self)
         self.parent = parent
         self.mdi = None
-        
+
         # set the dates to the date of today
         now = QDate.currentDate()
         self.dtpDateVisted.setDate(now)
-        
+
         # allow the calendar widget to pop up
         self.dtpDateVisted.setCalendarPopup(True)
-        
+
         # display project name
         self.lblProjectName.setText(self.parent.projectname)
 
-
     def saveHousehold(self):
         ''' Saves newly created household data to database '''
-    
+
         # get the data entered by user
-        hhid                = self.txtShortHouseHoldName.text()
+        hhid = self.txtShortHouseHoldName.text()
         householdname = self.txtHouseholdName.text()
-        dateofcollection       = self.dtpDateVisted.date().toPyDate()
-        pid              = self.parent.projectid
-        
+        dateofcollection = self.dtpDateVisted.date().toPyDate()
+        pid = self.parent.projectid
+
         # save household
         with session_scope() as session:
-            h = Household(hhid=hhid, householdname=householdname, 
-                            pid=pid, dateofcollection=dateofcollection)
+            h = Household(hhid=hhid, householdname=householdname,
+                          pid=pid, dateofcollection=dateofcollection)
             session.add(h)
 
         self.parent.mdi.closeActiveSubWindow()
