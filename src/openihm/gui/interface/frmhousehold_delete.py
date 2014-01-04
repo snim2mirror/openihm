@@ -22,40 +22,36 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from data.config import Config
+from data.db import session_scope
+import alchemy.household as household
 
 # import form design
 Ui_DeleteHousehold, base_class = uic.loadUiType("gui/designs/ui_household_delete.ui")
 
-from mixins import MDIDialogMixin, MySQLMixin
+from mixins import MDIDialogMixin
 
-class FrmDelHousehold(QDialog, Ui_DeleteHousehold, MySQLMixin, MDIDialogMixin):	
-    ''' Creates the Edit Project form. '''	
+
+class FrmDelHousehold(QDialog, Ui_DeleteHousehold, MDIDialogMixin):    
+    ''' Creates the Edit Project form. '''    
     def __init__(self, parent):
         ''' Set up the dialog box interface '''
         QDialog.__init__(self)
         self.setupUi(self)
         self.parent = parent
         
-        self.config = Config.dbinfo().copy()
-        
         # get projects
         self.getHouseholds()
 
     def getHouseholds(self):
-        # connect to mysql database
         
         # select query to retrieve project data
-        query = '''SELECT hhid, householdname 
-                     FROM households WHERE pid=%i''' % (self.parent.projectid)
+        with session_scope() as session:
+            query = household.search(session, self.parent.projectid)
         
-        rows = self.executeResultsQuery(query)
-        
-        for row in rows:
-            hhid = row[0]
-            householdname = row[1]
-            self.cboHouseholdName.addItem(householdname, QVariant(hhid))
-
+            for row in query:
+                hhid = row.hhid
+                householdname = row.householdname
+                self.cboHouseholdName.addItem(householdname, QVariant(hhid))
     
     def delHousehold(self):
         ''' Delete Selected Household '''
@@ -63,24 +59,23 @@ class FrmDelHousehold(QDialog, Ui_DeleteHousehold, MySQLMixin, MDIDialogMixin):
         hhid = temp[0]
 
         # select query to retrieve project data
-        query = '''SELECT * FROM households WHERE pid=%i AND hhid=%s''' % (self.parent.projectid, hhid)
         
-        rows = self.executeResultsQuery(query)
+        count = 0
+        with session_scope() as session:
+            query = household.search(session, self.parent.projectid, number=hhid)
+            count = query.count()
         
-        numresult = len(rows)
-        
-        if numresult:
-        	msg = "Are sure sure you want to delete this household?"
-        	ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
-        	if ret == QMessageBox.Yes:
-        		query = '''DELETE FROM households WHERE pid=%i AND hhid=%s''' % (self.parent.projectid, hhid)
-        		self.executeUpdateQuery(query)
-        		QMessageBox.information(self,"Notice","Household has been deleted")
+        if count:
+            msg = "Are sure sure you want to delete this household?"
+            ret = QMessageBox.question(self,"Confirm Deletion", msg, QMessageBox.Yes|QMessageBox.No)
+            if ret == QMessageBox.Yes:
+                with session_scope() as session:
+                    household.remove_house(session, self.parent.projectid, [hhid])
+                QMessageBox.information(self,"Notice","Household has been deleted")
+                self.close()
         else:
-        	QMessageBox.information(self, "Notice", "Household Not found")
+            QMessageBox.information(self, "Notice", "Household Not found")
 
-        
-        self.mdiClose()
         
         
         
