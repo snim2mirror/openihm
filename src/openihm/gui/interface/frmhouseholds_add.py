@@ -24,6 +24,6 @@ class FrmAddHousehold(frmhousehold_add.FrmAddHousehold):
     ''' Creates the add household form '''
 
     def saveHousehold(self):
-        self._saveHousehold()
-        self.parent.getHouseholds()
-        self.mdiClose()
+        if self._saveHousehold():
+            self.parent.getHouseholds()
+            self.mdiClose()
