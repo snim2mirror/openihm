@@ -23,7 +23,6 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from data.config import Config
 
 # import the Create Project Dialog design class
 #from gui.designs.ui_findhouseholdresults import Ui_FindHouseholdResults
@@ -34,19 +33,18 @@ from frmhouseholds_add import FrmAddHousehold
 from frmhouseholds_edit import FrmEditHousehold
 from frmhousehold_data import FrmHouseholdData
 
-from mixins import MDIDialogMixin, TableViewMixin,  MySQLMixin
+from mixins import MDIDialogMixin, TableViewMixin
 from data.db import session_scope
-from model.alchemy_schema import house_search
+from model.alchemy_schema import house_search, house_numbers_remove
 
 
-class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, MDIDialogMixin, MySQLMixin):
+class FrmFindHouseholdResults(QDialog, Ui_FindHouseholdResults, TableViewMixin, MDIDialogMixin):
     ''' Creates the Find Household Results form. '''    
     def __init__(self, parent, hhid = "", hhname = ""):
         ''' Set up the dialog box interface '''
         QDialog.__init__(self)
         self.setupUi(self)
         self.parent = parent
-        self.config = Config.dbinfo().copy()
 
         self.lblProjectName.setText( self.parent.projectname ) 
         self.txtHouseholdNo.setText( hhid )
