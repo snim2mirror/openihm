@@ -25,7 +25,10 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
         superuser = root
         superuser_password = password
         driver = mysql+mysqldb
+        log_level = WARN
 
+    The database log level can be set to INFO to see the SQL queries
+    being run by SQLalchemy.
     """
 
     def __init__(self):
@@ -81,6 +84,12 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
             return self.defaults
         except ConfigParser.NoSectionError:
             return self.defaults
+
+    def db_log_level(self):
+        try:
+            return self.get('database', 'log_level');
+        except (ConfigParser.NoOptionError, ConfigParser.NoSectionError):
+            return 'WARN'
 
     def dbinfo(self):
         """

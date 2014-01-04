@@ -39,13 +39,24 @@ LOGFILE = 'openihmlog.txt'
 def main():
      log = logging.getLogger(__name__)
      log.setLevel(logging.DEBUG)
+     alchemy_log = logging.getLogger('sqlalchemy.engine')
      handler = logging.handlers.RotatingFileHandler(LOGFILE, backupCount=5)
      log.addHandler(handler)
+     alchemy_log.addHandler(handler)
 
      config = OpenIHMConfig()
      config.read(CONFIGFILE)
      # also set the global Config options config.
      Config.set_config(config)
+     levels = { 
+        'DEBUG': logging.DEBUG,
+        'INFO': logging.INFO,
+        'WARN': logging.WARN,
+        'ERROR': logging.ERROR,
+        'CRITICAL': logging.CRITICAL,
+     }
+     level = levels.get(config.db_log_level(), logging.WARN)
+     alchemy_log.setLevel(level)
 
      #
      # Start open-ihm.

@@ -9,7 +9,7 @@ class Alchemy(object):
     @classmethod
     def setupDB(cls):
         cls.connection_string = Config.config.sqlalchemy_superuser_connection_string()
-        engine = create_engine(cls.connection_string, echo=True) # FIXME: turn off echo
+        engine = create_engine(cls.connection_string)
         cls._session = sessionmaker(bind=engine)
 
     @classmethod
