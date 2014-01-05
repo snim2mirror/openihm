@@ -27,9 +27,9 @@ from PyQt4 import uic
 Ui_AddHousehold, base_class = uic.loadUiType("gui/designs/ui_addhousehold.ui")
 
 from mixins import MDIDialogMixin
-from data.db import session_scope
+from data.db import session_scope, error_wrapper
+from gui.interface.db_errors import QErrorMessage
 from model.alchemy_schema import Household
-from sqlalchemy.exc import IntegrityError
 
 
 class FrmAddHousehold(QDialog, Ui_AddHousehold, MDIDialogMixin):
@@ -64,18 +64,11 @@ class FrmAddHousehold(QDialog, Ui_AddHousehold, MDIDialogMixin):
         pid = self.projectid
 
         # save household
-        try:
+        with error_wrapper(QErrorMessage(self, custom_duplicate_message="Household No already recorded")):
             with session_scope() as session:
                 h = Household(hhid=hhid, householdname=householdname,
                               pid=pid, dateofcollection=dateofcollection)
                 session.add(h)
-        except IntegrityError, e: # IntegrityError
-            if e.message.find('Duplicate entry') == -1:
-                raise
-            # display an error message
-            msg = "Household No already recorded"
-            QMessageBox.information( self, self.windowTitle(), msg )
-            return False
         return True
 
     def saveHousehold(self):
