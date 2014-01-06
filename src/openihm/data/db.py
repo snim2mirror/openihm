@@ -2,6 +2,7 @@ from config import Config
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from contextlib import contextmanager
+import logging
 
 from sqlalchemy.exc import IntegrityError
 
@@ -24,40 +25,50 @@ class Alchemy(object):
         return cls._session()
 
 
-@contextmanager
-def error_wrapper(error_handler):
+class ErrorHandler(object):
     """
     Provides error messages to the user when a problem occurs.
     Designed to be usable with the UI as necessary.  Provide it
     an error message object to call.
 
-    This does not suppress any exception, it simply detects them
-    and uses the error_handler object to tell the user about the
-    problem.  Catching exceptions is programmers problem.  This
-    should be used outside the session scope because it is likely that
-    the UI will block; blocking while in the middle of a transaction
-    would be a bad idea.
+    This will suppress the exceptions it displays an error for.
+    The rest it will log then re-raise for you to catch.
 
-        with error_wrapper(QErrorMessage(self)):
+    If you need to determine whether the code finished okay
+    check the success property of the object.  It will be set
+    to True if your code completes.
+
+        eh = ErrorHandler(QErrorMessage(self))
+        with eh.error_wrapper():
             with session_scope() as session:
                 ...
+        if eh.success:
+            self.close() # only close the window if succeeded
+
     """
-    try:
-        yield
-    except IntegrityError, e:
-        if e.message.find('Duplicate entry') != -1:
-            error_handler.duplicate_entry(e.message)
-        # FIXME: still very much in debug mode, need to determine
-        # what errors we are likely to see.
-        print "Database error"
-        print type(e)
-        print e
-        raise
-    except Exception, e:
-        print "Database error"
-        print type(e)
-        print e
-        raise
+
+    def __init__(self, error_handler):
+        self.success = False
+        self.error_handler = error_handler
+
+    @contextmanager
+    def error_wrapper(self):
+        try:
+            yield
+            self.success = True
+        except IntegrityError, e:
+            if e.message.find('Duplicate entry') != -1:
+                self.error_handler.duplicate_entry(e.message)
+            else:
+                log = logging.getLogger('sqlalchemy.engine')
+                log.warning("Database error - %s", type(e), exc_info=1)
+                raise
+            # FIXME: still very much in debug mode, need to determine
+            # what errors we are likely to see.
+        except Exception, e:
+            log = logging.getLogger('sqlalchemy.engine')
+            log.warning("Database error - %s", type(e), exc_info=1)
+            raise
 
 
 @contextmanager
