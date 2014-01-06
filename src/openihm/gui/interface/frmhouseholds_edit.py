@@ -22,7 +22,8 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from data.db import session_scope
+from data.db import session_scope, ErrorHandler
+from gui.interface.db_errors import QErrorMessage
 import alchemy.household as household
 
 Ui_Households_Edit, base_class = uic.loadUiType("gui/designs/ui_households_edit.ui")
@@ -72,15 +73,17 @@ class FrmEditHousehold(QDialog, Ui_Households_Edit, MDIDialogMixin):
         householdname     = self.txtHouseholdName.text()
         dateofcollection  = self.dtpDateVisted.date().toPyDate()
         
-        with session_scope() as session:
-            q = household.search(session, self.projectid, number=self.hhid)
-            house = q.all()[0]
-            house.hhid = hhid
-            house.householdname = householdname
-            house.dateofcollection = dateofcollection
-            # NOTE: the implicit commit here will cause the changes to be saved.
+        eh = ErrorHandler(QErrorMessage(self, custom_duplicate_message="Household No already recorded"))
+        with eh.error_wrapper():
+            with session_scope() as session:
+                q = household.search(session, self.projectid, number=self.hhid)
+                house = q.all()[0]
+                house.hhid = hhid
+                house.householdname = householdname
+                house.dateofcollection = dateofcollection
+                # NOTE: the implicit commit here will cause the changes to be saved.
 
-        return True
+        return eh.success
         
     def saveHousehold(self):
         # close new project window
