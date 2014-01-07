@@ -75,3 +75,8 @@ class FrmAddHousehold(QDialog, Ui_AddHousehold, MDIDialogMixin):
     def saveHousehold(self):
         if self._saveHousehold():
             self.parent.mdi.closeActiveSubWindow()
+
+    def reject(self):
+        self.mdiClose() # fudge to close the dialog when escape is pressed.
+        super(FrmAddHousehold, self).reject()
+
