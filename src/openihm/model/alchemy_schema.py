@@ -3,7 +3,7 @@
 
 from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relation
+from sqlalchemy.orm import relationship, backref
 from sqlalchemy.dialects.mysql import *
 
 
@@ -24,8 +24,8 @@ class Absencefromhousehold(DeclarativeBase):
     reason = Column(u'reason', VARCHAR(length=200), nullable=False)
     whereto = Column(u'whereto', VARCHAR(length=200), nullable=False)
 
-    #relation definitions
-    householdmembers = relation('Householdmember', primaryjoin="and_(Absencefromhousehold.personid==Householdmember.personid, Absencefromhousehold.hhid==Householdmember.hhid, Absencefromhousehold.pid==Householdmember.pid)")
+    #relationship definitions
+    householdmembers = relationship('Householdmember', primaryjoin="and_(Absencefromhousehold.personid==Householdmember.personid, Absencefromhousehold.hhid==Householdmember.hhid, Absencefromhousehold.pid==Householdmember.pid)")
 
 
 class Asset(DeclarativeBase):
@@ -43,8 +43,8 @@ class Asset(DeclarativeBase):
     unitcost = Column(u'unitcost', DOUBLE(asdecimal=True), nullable=False)
     unitofmeasure = Column(u'unitofmeasure', VARCHAR(length=45), nullable=False)
 
-    #relation definitions
-    households = relation('Household', primaryjoin="and_(Asset.hhid==Household.hhid, Asset.pid==Household.pid)")
+    #relationship definitions
+    households = relationship('Household', primaryjoin="and_(Asset.hhid==Household.hhid, Asset.pid==Household.pid)")
 
 
 class Assettype(DeclarativeBase):
@@ -55,7 +55,7 @@ class Assettype(DeclarativeBase):
     #column definitions
     assettype = Column(u'assettype', VARCHAR(length=100), primary_key=True, nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class Creditandloan(DeclarativeBase):
@@ -70,7 +70,7 @@ class Creditandloan(DeclarativeBase):
     id = Column(u'id', Integer, primary_key=True, autoincrement=False, nullable=False)
     unit = Column(u'unit', VARCHAR(length=45))
 
-    #relation definitions
+    #relationship definitions
 
 
 class Cropincome(DeclarativeBase):
@@ -92,8 +92,8 @@ class Cropincome(DeclarativeBase):
     unitsproduced = Column(u'unitsproduced', DOUBLE(asdecimal=True), server_default=text(u"'0'"))
     unitssold = Column(u'unitssold', DOUBLE(asdecimal=True))
 
-    #relation definitions
-    households = relation('Household', primaryjoin="and_(Cropincome.hhid==Household.hhid, Cropincome.pid==Household.pid)")
+    #relationship definitions
+    households = relationship('Household', primaryjoin="and_(Cropincome.hhid==Household.hhid, Cropincome.pid==Household.pid)")
 
 
 class Currency(DeclarativeBase):
@@ -107,7 +107,7 @@ class Currency(DeclarativeBase):
     id = Column(u'id', Integer, primary_key=True, nullable=False)
     symbol = Column(u'symbol', VARCHAR(length=45))
 
-    #relation definitions
+    #relationship definitions
 
 
 class Dbupdate(DeclarativeBase):
@@ -118,7 +118,7 @@ class Dbupdate(DeclarativeBase):
     #column definitions
     lastupdate = Column(u'lastupdate', VARCHAR(length=50), primary_key=True, nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class Diet(DeclarativeBase):
@@ -135,8 +135,8 @@ class Diet(DeclarativeBase):
     priceperunit = Column(u'priceperunit', DOUBLE(asdecimal=True), nullable=False)
     unitofmeasure = Column(u'unitofmeasure', VARCHAR(length=45), nullable=False)
 
-    #relation definitions
-    projects = relation('Project', primaryjoin='Diet.pid==Project.pid')
+    #relationship definitions
+    projects = relationship('Project', primaryjoin='Diet.pid==Project.pid')
 
 
 class Employmentincome(DeclarativeBase):
@@ -156,8 +156,8 @@ class Employmentincome(DeclarativeBase):
     unitofmeasure = Column(u'unitofmeasure', VARCHAR(length=45))
     unitspaid = Column(u'unitspaid', DOUBLE(asdecimal=True))
 
-    #relation definitions
-    households = relation('Household', primaryjoin="and_(Employmentincome.hhid==Household.hhid, Employmentincome.pid==Household.pid)")
+    #relationship definitions
+    households = relationship('Household', primaryjoin="and_(Employmentincome.hhid==Household.hhid, Employmentincome.pid==Household.pid)")
 
 
 class Expenditure(DeclarativeBase):
@@ -175,8 +175,8 @@ class Expenditure(DeclarativeBase):
     totalunits = Column(u'totalunits', DOUBLE(asdecimal=True))
     unitofmeasure = Column(u'unitofmeasure', VARCHAR(length=45))
 
-    #relation definitions
-    households = relation('Household', primaryjoin="and_(Expenditure.hhid==Household.hhid, Expenditure.pid==Household.pid)")
+    #relationship definitions
+    households = relationship('Household', primaryjoin="and_(Expenditure.hhid==Household.hhid, Expenditure.pid==Household.pid)")
 
 
 class Globalcharacteristic(DeclarativeBase):
@@ -190,7 +190,7 @@ class Globalcharacteristic(DeclarativeBase):
     datatype = Column(u'datatype', Integer, nullable=False)
     description = Column(u'description', VARCHAR(length=250))
 
-    #relation definitions
+    #relationship definitions
 
 
 class Globalhouseholdcharacteristic(DeclarativeBase):
@@ -204,7 +204,7 @@ class Globalhouseholdcharacteristic(DeclarativeBase):
     description = Column(u'description', VARCHAR(length=250))
     id = Column(u'id', Integer, primary_key=True, nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class Globalpersonalcharacteristic(DeclarativeBase):
@@ -218,7 +218,7 @@ class Globalpersonalcharacteristic(DeclarativeBase):
     description = Column(u'description', VARCHAR(length=250))
     id = Column(u'id', Integer, primary_key=True, nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class Household(DeclarativeBase):
@@ -235,8 +235,8 @@ class Household(DeclarativeBase):
     totalexpenditure = Column(u'totalexpenditure', DOUBLE(asdecimal=True), nullable=False, server_default=text(u"'0'"))
     totalincomevalue = Column(u'totalincomevalue', DOUBLE(asdecimal=True), nullable=False, server_default=text(u"'0'"))
 
-    #relation definitions
-    projects = relation('Project', primaryjoin='Household.pid==Project.pid')
+    #relationship definitions
+    projects = relationship('Project', primaryjoin='Household.pid==Project.pid', backref='houses')
 
 
 class Householdcharacteristic(DeclarativeBase):
@@ -250,8 +250,8 @@ class Householdcharacteristic(DeclarativeBase):
     hhid = Column(u'hhid', Integer, ForeignKey('households.hhid'), primary_key=True, nullable=False)
     pid = Column(u'pid', Integer, ForeignKey('households.pid'), primary_key=True, nullable=False)
 
-    #relation definitions
-    households = relation('Household', primaryjoin="and_(Householdcharacteristic.hhid==Household.hhid, Householdcharacteristic.pid==Household.pid)")
+    #relationship definitions
+    households = relationship('Household', primaryjoin="and_(Householdcharacteristic.hhid==Household.hhid, Householdcharacteristic.pid==Household.pid)", backref='characteristic')
 
 
 class Householdmember(DeclarativeBase):
@@ -271,8 +271,8 @@ class Householdmember(DeclarativeBase):
     whereto = Column(u'whereto', VARCHAR(length=200))
     yearofbirth = Column(u'yearofbirth', Integer, nullable=False)
 
-    #relation definitions
-    households = relation('Household', primaryjoin="and_(Householdmember.hhid==Household.hhid, Householdmember.pid==Household.pid)")
+    #relationship definitions
+    households = relationship('Household', primaryjoin="and_(Householdmember.hhid==Household.hhid, Householdmember.pid==Household.pid)")
 
 
 class Incomeseasonality(DeclarativeBase):
@@ -295,7 +295,7 @@ class Incomeseasonality(DeclarativeBase):
     oct = Column(u'oct', DOUBLE(asdecimal=True), nullable=False)
     sep = Column(u'sep', DOUBLE(asdecimal=True), nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class Livestockincome(DeclarativeBase):
@@ -317,8 +317,8 @@ class Livestockincome(DeclarativeBase):
     unitsproduced = Column(u'unitsproduced', DOUBLE(asdecimal=True), server_default=text(u"'0'"))
     unitssold = Column(u'unitssold', DOUBLE(asdecimal=True))
 
-    #relation definitions
-    households = relation('Household', primaryjoin="and_(Livestockincome.hhid==Household.hhid, Livestockincome.pid==Household.pid)")
+    #relationship definitions
+    households = relationship('Household', primaryjoin="and_(Livestockincome.hhid==Household.hhid, Livestockincome.pid==Household.pid)")
 
 
 class LookupEnergyNeed(DeclarativeBase):
@@ -331,7 +331,7 @@ class LookupEnergyNeed(DeclarativeBase):
     kCalNeedF = Column(u'kCalNeedF', Integer)
     kCalNeedM = Column(u'kCalNeedM', Integer)
 
-    #relation definitions
+    #relationship definitions
 
 
 class Personalcharacteristic(DeclarativeBase):
@@ -346,8 +346,8 @@ class Personalcharacteristic(DeclarativeBase):
     personid = Column(u'personid', VARCHAR(length=20), ForeignKey('householdmembers.personid'), primary_key=True, nullable=False)
     pid = Column(u'pid', Integer, ForeignKey('householdmembers.pid'), primary_key=True, nullable=False)
 
-    #relation definitions
-    householdmembers = relation('Householdmember', primaryjoin="and_(Personalcharacteristic.personid==Householdmember.personid, Personalcharacteristic.hhid==Householdmember.hhid, Personalcharacteristic.pid==Householdmember.pid)")
+    #relationship definitions
+    householdmembers = relationship('Householdmember', primaryjoin="and_(Personalcharacteristic.personid==Householdmember.personid, Personalcharacteristic.hhid==Householdmember.hhid, Personalcharacteristic.pid==Householdmember.pid)")
 
 
 class Project(DeclarativeBase):
@@ -363,7 +363,7 @@ class Project(DeclarativeBase):
     projectname = Column(u'projectname', VARCHAR(length=100), nullable=False)
     startdate = Column(u'startdate', DATE(), nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class Projectasset(DeclarativeBase):
@@ -376,8 +376,8 @@ class Projectasset(DeclarativeBase):
     assettype = Column(u'assettype', VARCHAR(length=45), nullable=False)
     pid = Column(u'pid', Integer, ForeignKey('projects.pid'), primary_key=True, nullable=False)
 
-    #relation definitions
-    projects = relation('Project', primaryjoin='Projectasset.pid==Project.pid')
+    #relationship definitions
+    projects = relationship('Project', primaryjoin='Projectasset.pid==Project.pid')
 
 
 class Projectcharacteristic(DeclarativeBase):
@@ -391,8 +391,8 @@ class Projectcharacteristic(DeclarativeBase):
     datatype = Column(u'datatype', Integer, nullable=False)
     pid = Column(u'pid', Integer, ForeignKey('projects.pid'), primary_key=True, nullable=False)
 
-    #relation definitions
-    projects = relation('Project', primaryjoin='Projectcharacteristic.pid==Project.pid')
+    #relationship definitions
+    projects = relationship('Project', primaryjoin='Projectcharacteristic.pid==Project.pid')
 
 
 class Projectincomesource(DeclarativeBase):
@@ -405,8 +405,8 @@ class Projectincomesource(DeclarativeBase):
     incometype = Column(u'incometype', VARCHAR(length=45), primary_key=True, nullable=False)
     pid = Column(u'pid', Integer, ForeignKey('projects.pid'), primary_key=True, nullable=False)
 
-    #relation definitions
-    projects = relation('Project', primaryjoin='Projectincomesource.pid==Project.pid')
+    #relationship definitions
+    projects = relationship('Project', primaryjoin='Projectincomesource.pid==Project.pid')
 
 
 class Savingscategory(DeclarativeBase):
@@ -417,7 +417,7 @@ class Savingscategory(DeclarativeBase):
     #column definitions
     savingscategory = Column(u'savingscategory', VARCHAR(length=100), primary_key=True, nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupAsset(DeclarativeBase):
@@ -430,7 +430,7 @@ class SetupAsset(DeclarativeBase):
     assettype = Column(u'assettype', VARCHAR(length=50), nullable=False)
     unitofmeasure = Column(u'unitofmeasure', VARCHAR(length=45), nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupCrop(DeclarativeBase):
@@ -443,7 +443,7 @@ class SetupCrop(DeclarativeBase):
     foodtype = Column(u'foodtype', VARCHAR(length=100), primary_key=True, nullable=False)
     measuringunit = Column(u'measuringunit', VARCHAR(length=45))
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupEmployment(DeclarativeBase):
@@ -455,7 +455,7 @@ class SetupEmployment(DeclarativeBase):
     id = Column(u'id', Integer, primary_key=True, nullable=False)
     incomesource = Column(u'incomesource', VARCHAR(length=200))
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupExpenditurecategory(DeclarativeBase):
@@ -467,7 +467,7 @@ class SetupExpenditurecategory(DeclarativeBase):
     expenditurecategory = Column(u'expenditurecategory', VARCHAR(length=200))
     id = Column(u'id', Integer, primary_key=True, nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupExpendituretype(DeclarativeBase):
@@ -479,7 +479,7 @@ class SetupExpendituretype(DeclarativeBase):
     expendituretype = Column(u'expendituretype', VARCHAR(length=200))
     id = Column(u'id', Integer, primary_key=True, nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupFoodsCrop(DeclarativeBase):
@@ -493,7 +493,7 @@ class SetupFoodsCrop(DeclarativeBase):
     name = Column(u'name', VARCHAR(length=200), primary_key=True, nullable=False)
     unitofmeasure = Column(u'unitofmeasure', VARCHAR(length=45))
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupLandtype(DeclarativeBase):
@@ -506,7 +506,7 @@ class SetupLandtype(DeclarativeBase):
     landtype = Column(u'landtype', VARCHAR(length=200))
     unitofmeasure = Column(u'unitofmeasure', VARCHAR(length=45))
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupLivestock(DeclarativeBase):
@@ -519,7 +519,7 @@ class SetupLivestock(DeclarativeBase):
     incomesource = Column(u'incomesource', VARCHAR(length=200), primary_key=True, nullable=False, server_default=text(u"''"))
     unitofmeasure = Column(u'unitofmeasure', VARCHAR(length=45))
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupStandardofliving(DeclarativeBase):
@@ -531,7 +531,7 @@ class SetupStandardofliving(DeclarativeBase):
     item = Column(u'item', VARCHAR(length=255), primary_key=True, nullable=False)
     type = Column(u'type', Enum(u'Household', u'Person', u'Both'), nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupTradablegood(DeclarativeBase):
@@ -544,7 +544,7 @@ class SetupTradablegood(DeclarativeBase):
     tradablegoodtype = Column(u'tradablegoodtype', VARCHAR(length=200), nullable=False)
     unitofmeasure = Column(u'unitofmeasure', VARCHAR(length=45), nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupTransfer(DeclarativeBase):
@@ -557,7 +557,7 @@ class SetupTransfer(DeclarativeBase):
     sourceoftransfer = Column(u'sourceoftransfer', VARCHAR(length=200), primary_key=True, nullable=False)
     unitofmeasure = Column(u'unitofmeasure', VARCHAR(length=45))
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupTransfersource(DeclarativeBase):
@@ -569,7 +569,7 @@ class SetupTransfersource(DeclarativeBase):
     id = Column(u'id', Integer, primary_key=True, nullable=False)
     sourcetype = Column(u'sourcetype', Enum(u'Internal', u'External'), nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupTreetype(DeclarativeBase):
@@ -581,7 +581,7 @@ class SetupTreetype(DeclarativeBase):
     measuringunit = Column(u'measuringunit', VARCHAR(length=45))
     treetype = Column(u'treetype', VARCHAR(length=100), primary_key=True, nullable=False)
 
-    #relation definitions
+    #relationship definitions
 
 
 class SetupWildfood(DeclarativeBase):
@@ -594,7 +594,7 @@ class SetupWildfood(DeclarativeBase):
     incomesource = Column(u'incomesource', VARCHAR(length=200), primary_key=True, nullable=False, server_default=text(u"''"))
     unitofmeasure = Column(u'unitofmeasure', VARCHAR(length=45))
 
-    #relation definitions
+    #relationship definitions
 
 
 class Standardofliving(DeclarativeBase):
@@ -613,8 +613,8 @@ class Standardofliving(DeclarativeBase):
     scope = Column(u'scope', Enum(u'Household', u'Person'), nullable=False)
     summary = Column(u'summary', VARCHAR(length=255), primary_key=True, nullable=False)
 
-    #relation definitions
-    projects = relation('Project', primaryjoin='Standardofliving.pid==Project.pid')
+    #relationship definitions
+    projects = relationship('Project', primaryjoin='Standardofliving.pid==Project.pid')
 
 
 class Transfer(DeclarativeBase):
@@ -638,8 +638,8 @@ class Transfer(DeclarativeBase):
     unitsgiven = Column(u'unitsgiven', DOUBLE(asdecimal=True), server_default=text(u"'0'"))
     unitssold = Column(u'unitssold', DOUBLE(asdecimal=True), server_default=text(u"'0'"))
 
-    #relation definitions
-    households = relation('Household', primaryjoin="and_(Transfer.hhid==Household.hhid, Transfer.pid==Household.pid)")
+    #relationship definitions
+    households = relationship('Household', primaryjoin="and_(Transfer.hhid==Household.hhid, Transfer.pid==Household.pid)")
 
 
 class Transferlog(DeclarativeBase):
@@ -654,8 +654,8 @@ class Transferlog(DeclarativeBase):
     pid_access = Column(u'pid_access', Integer, nullable=False)
     projectname = Column(u'projectname', VARCHAR(length=45), nullable=False)
 
-    #relation definitions
-    projects = relation('Project', primaryjoin='Transferlog.pid==Project.pid')
+    #relationship definitions
+    projects = relationship('Project', primaryjoin='Transferlog.pid==Project.pid')
 
 
 class Wildfood(DeclarativeBase):
@@ -677,7 +677,7 @@ class Wildfood(DeclarativeBase):
     unitsproduced = Column(u'unitsproduced', DOUBLE(asdecimal=True), server_default=text(u"'0'"))
     unitssold = Column(u'unitssold', DOUBLE(asdecimal=True))
 
-    #relation definitions
-    households = relation('Household', primaryjoin="and_(Wildfood.hhid==Household.hhid, Wildfood.pid==Household.pid)")
+    #relationship definitions
+    households = relationship('Household', primaryjoin="and_(Wildfood.hhid==Household.hhid, Wildfood.pid==Household.pid)")
 
 
