@@ -3,8 +3,9 @@ from database_helper import DatabaseHelper
 import datetime
 
 from data.db import session_scope
-from model.alchemy_schema import Household
+from model.alchemy_schema import Household, Householdcharacteristic, Project
 import alchemy.household as household
+from sqlalchemy.orm import joinedload
 
 class TestModelHouseHold(unittest.TestCase):
     """
@@ -51,6 +52,8 @@ class TestModelHouseHold(unittest.TestCase):
             session.add(house1)
             session.add(house2)
             session.add(house3)
+            c = Householdcharacteristic(characteristic='Test', charvalue='a', hhid=42, pid=3)
+            session.add(c)
 
     def tearDown(self):
         # drop the database
@@ -128,3 +131,8 @@ class TestModelHouseHold(unittest.TestCase):
             self.assertEqual(q.count(), 0)
             q = household.search(session, 3, '', '')
             self.assertEqual(q.count(), 1)
+
+    def test_eager_loading(self):
+        with session_scope() as session:
+            p = session.query(Project).options(joinedload('houses')).filter(Project.projectname == 'test').one()
+            self.assertEqual(len(p.houses), 2)
