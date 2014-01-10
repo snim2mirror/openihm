@@ -5,6 +5,9 @@ from includes.mysql.connector import errors
 from includes.mysql.connector import Connect
 from data.databaseinitialiser import DatabaseInitialiser, DbConfig
 import unittest
+import logging
+import logging.handlers
+
 
 
 class DatabaseHelper(object):
@@ -28,7 +31,23 @@ class DatabaseHelper(object):
     def getConfig(self):
         return self.config
 
+    def setup_logging(self):
+         log = logging.getLogger('sqlalchemy.engine')
+         handler = logging.handlers.RotatingFileHandler('tests.log', backupCount=5)
+         if not log.handlers:
+             log.addHandler(handler)
+         levels = { 
+            'DEBUG': logging.DEBUG,
+            'INFO': logging.INFO,
+            'WARN': logging.WARN,
+            'ERROR': logging.ERROR,
+            'CRITICAL': logging.CRITICAL,
+         }
+         level = levels.get(self.real_config.db_log_level(), logging.WARN)
+         log.setLevel(level)
+
     def start_tests(self):
+        self.setup_logging()
         self.drop_database()
         self.prev_path = os.getcwd()
         os.chdir(self.test_dir)
