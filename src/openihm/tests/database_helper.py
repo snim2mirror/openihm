@@ -45,6 +45,8 @@ class DatabaseHelper(object):
          }
          level = levels.get(self.real_config.db_log_level(), logging.WARN)
          log.setLevel(level)
+         log.info('------------------- New test --------------------')
+         self.log = log
 
     def start_tests(self):
         self.setup_logging()
