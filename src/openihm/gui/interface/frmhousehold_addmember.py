@@ -23,11 +23,13 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4 import uic
 
-from control.controller import Controller
-
 Ui_AddHouseholdMember, base_class = uic.loadUiType("gui/designs/ui_household_addmember.ui")
 
 from mixins import MDIDialogMixin
+from model.alchemy_schema import Household
+import alchemy.household as household
+from data.db import session_scope, ErrorHandler
+from gui.interface.db_errors import QErrorMessage
 
 
 class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):
@@ -86,10 +88,13 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):
         reason = self.txtReason.text()
         whereto = self.txtWhere.text()
 
-        controller = Controller()
-        household = controller.getProject(pid).getHousehold(self.hhid)
-        household.addMember(memberid, yearofbirth, headhousehold,  sex, education, periodaway, reason, whereto)
+        eh = ErrorHandler(QErrorMessage(self))
+        with eh.error_wrapper():
+            with session_scope() as session:
+                house = Household(pid=pid, hhid=self.hhid)
+                household.addMember(session, house, memberid, yearofbirth, headhousehold, sex, education, periodaway, reason, whereto)
 
-        # close new project window
-        self.parent.retrieveHouseholdMembers()
-        self.mdiClose()
+        if eh.success:
+            # close new project window
+            self.parent.retrieveHouseholdMembers()
+            self.mdiClose()

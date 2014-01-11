@@ -132,6 +132,14 @@ class TestModelHouseHold(unittest.TestCase):
             q = household.search(session, 3, '', '')
             self.assertEqual(q.count(), 1)
 
+    def test_add_member(self):
+        with session_scope() as session:
+            house = Household(hhid=40, pid=2)
+            household.addMember(session, house, 'm4', '2010', 'No', 'Male', '', '', '', '')
+            # ensure that it deals with twins okay.
+            household.addMember(session, house, 'm4', '2010', 'No', 'Male', '', '', '', '')
+            # FIXME: ought to deal with removing and adding members okay.
+
     def test_eager_loading(self):
         with session_scope() as session:
             p = session.query(Project).options(joinedload('houses')).filter(Project.projectname == 'test').one()
