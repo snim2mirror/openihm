@@ -336,7 +336,7 @@
    <sender>cmbYearOfBirth</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>AddHouseholdMember</receiver>
-   <slot>updateYearOfBirth()</slot>
+   <slot>updateAge()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>273</x>

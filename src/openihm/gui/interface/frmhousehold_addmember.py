@@ -39,7 +39,7 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):
         QDialog.__init__(self)
         self.setupUi(self)
         self.parent = parent
-        self.hhid = hhid
+        self.logic = AddHouseHoldMemberLogic(hhid, parent.parent.projectid)
 
         # add years to the year of birth combo box: current year to 150 years ago
         thisyear = date.today().year
@@ -51,18 +51,16 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):
 
     def updateYearOfBirth(self):
         ''' updates year of birth when the value of age is modified '''
-        thisyear = date.today().year
         age = self.txtAge.text()
-        if age is not None and age != "":
-            yearOfBirth = thisyear - int(age)
-            self.cmbYearOfBirth.setCurrentIndex( self.cmbYearOfBirth.findText( "%i" % yearOfBirth ) )
+        yearOfBirth = self.logic.yearOfBirth(age)
+        if yearOfBirth:
+            self.cmbYearOfBirth.setCurrentIndex( self.cmbYearOfBirth.findText( yearOfBirth ) )
 
     def updateAge(self):
         ''' updates age when year of birth is modified'''
         yearOfBirth = self.cmbYearOfBirth.currentText()
-        thisyear = date.today().year
-        age = thisyear - int(yearOfBirth)
-        self.txtAge.setText( "%i" % age )
+        age = self.logic.age(yearOfBirth)
+        self.txtAge.setText( age )
 
     def saveMember(self):
         ''' Saves changes to household to database '''
@@ -70,31 +68,55 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):
         # get the data entered by user
         sex = self.cboSex.currentText()
         age = self.txtAge.text()
-
-        if ( sex == "Male"):
-            memberid = "m%s" % age
-        else:
-            memberid = "f%s" % age
-
-        education = ""
         yearofbirth = self.cmbYearOfBirth.currentText()
-        if self.chkHeadHousehold.isChecked():
-            headhousehold = "Yes"
-        else:
-            headhousehold = "No"
-
-        pid = self.parent.parent.projectid
         periodaway = self.cmbMonthsAbsent.currentText()
         reason = self.txtReason.text()
         whereto = self.txtWhere.text()
 
+        headofhousehold = self.chkHeadHousehold.isChecked()
         eh = ErrorHandler(QErrorMessage(self))
         with eh.error_wrapper():
-            with session_scope() as session:
-                house = Household(pid=pid, hhid=self.hhid)
-                household.addMember(session, house, memberid, yearofbirth, headhousehold, sex, education, periodaway, reason, whereto)
+            if self.logic.saveMember(sex, age, yearofbirth, headofhousehold,
+                                     periodaway, reason, whereto):
+                # close new project window
+                self.parent.retrieveHouseholdMembers()
+                self.mdiClose()
 
-        if eh.success:
-            # close new project window
-            self.parent.retrieveHouseholdMembers()
-            self.mdiClose()
+
+class AddHouseHoldMemberLogic(object):
+    
+    def __init__(self, hhid, pid):
+        self.household = Household(pid=pid, hhid=hhid)
+
+    def thisYear(self):
+        return date.today().year
+
+    def yearOfBirth(self, age):
+        thisyear = self.thisYear()
+        if age is not None and age != "":
+            yearOfBirth = thisyear - int(age)
+            return "%i" % yearOfBirth
+        return None
+
+    def age(self, yearOfBirth):
+        thisyear = self.thisYear()
+        age = thisyear - int(yearOfBirth)
+        return "%i" % age
+
+    def saveMember(self, sex, age, yearofbirth, headOfHousehold, periodaway, reason, whereto):
+        education = ""
+        if ( sex == "Male"):
+            memberid = "m%s" % age
+        else:
+            memberid = "f%s" % age
+        if headOfHousehold:
+            headhousehold = "Yes"
+        else:
+            headhousehold = "No"
+
+        with session_scope() as session:
+            household.addMember(session, self.household, memberid,
+                                yearofbirth, headhousehold, sex,
+                                education, periodaway, reason, whereto)
+        return True
+
