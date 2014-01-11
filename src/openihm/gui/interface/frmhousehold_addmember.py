@@ -51,7 +51,7 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):
         ''' updates year of birth when the value of age is modified '''
         thisyear = date.today().year
         age = self.txtAge.text()
-        if age != None and age != "":
+        if age is not None and age != "":
             yearOfBirth = thisyear - int(age)
             self.cmbYearOfBirth.setCurrentIndex( self.cmbYearOfBirth.findText( "%i" % yearOfBirth ) )
 
