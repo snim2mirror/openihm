@@ -144,3 +144,6 @@ class TestModelHouseHold(unittest.TestCase):
         with session_scope() as session:
             p = session.query(Project).options(joinedload('houses')).filter(Project.projectname == 'test').one()
             self.assertEqual(len(p.houses), 2)
+
+if __name__ == '__main__':
+    unittest.main()
