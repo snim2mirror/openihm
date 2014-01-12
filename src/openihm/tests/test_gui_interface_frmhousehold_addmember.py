@@ -1,5 +1,5 @@
 import unittest
-from gui.interface.frmhousehold_addmember import AddHouseHoldMemberLogic
+from gui.interface.household_addmember import AddHouseHoldMemberLogic
 from database_helper import DatabaseHelper
 from data.db import session_scope
 from model.alchemy_schema import Household
