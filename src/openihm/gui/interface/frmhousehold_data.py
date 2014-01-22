@@ -25,6 +25,8 @@ from PyQt4.QtGui import *
 from PyQt4 import uic
 from data.config import Config
 from control.controller import Controller
+from data.db import session_scope
+from model.alchemy_schema import Householdmember
 
 
 Ui_HouseholdData, base_class = uic.loadUiType("gui/designs/ui_household_data.ui")
@@ -155,10 +157,11 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 			hhid = temp[0]
 			# delete selected members
 			
-			queries = []
-			for memberid in selectedIds:
-				queries.append('''DELETE FROM householdmembers WHERE pid=%i and hhid=%s AND personid='%s' ''' % (self.parent.projectid, hhid, memberid))
-			self.executeMultipleUpdateQueries(queries)
+			with session_scope() as session:
+			    projectid = self.parent.projectid
+			    q = session.query(Householdmember).filter(Householdmember.hhid == hhid, Householdmember.pid == projectid, Householdmember.personid.in_(selectedIds))
+			    q.delete(synchronize_session=False)
+
 			self.retrieveHouseholdMembers()
 
 		else:
