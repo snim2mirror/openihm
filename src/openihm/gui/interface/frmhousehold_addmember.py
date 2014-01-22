@@ -31,14 +31,14 @@ from household_addmember import AddHouseHoldMemberLogic
 from datetime import date
 
 
-class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):
+class BaseMemberForm(QDialog, MDIDialogMixin):
     ''' Creates the Add Household Member form. '''
-    def __init__(self, parent,  hhid, hhname):
+    def __init__(self, parent,  hhid, hhname, memberid=None):
         ''' Set up the dialog box interface '''
         QDialog.__init__(self)
         self.setupUi(self)
         self.parent = parent
-        self.logic = AddHouseHoldMemberLogic(hhid, parent.parent.projectid)
+        self.logic = AddHouseHoldMemberLogic(hhid, parent.parent.projectid, memberid)
 
         # add years to the year of birth combo box: current year to 150 years ago
         thisyear = date.today().year
@@ -47,6 +47,8 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):
 
         # display household name
         self.lblHouseholdName.setText(hhname)
+        if memberid:
+            self.getMemberDetails()
 
     def updateYearOfBirth(self):
         ''' updates year of birth when the value of age is modified '''
@@ -60,6 +62,24 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):
         yearOfBirth = self.cmbYearOfBirth.currentText()
         age = self.logic.age(yearOfBirth)
         self.txtAge.setText( age )
+
+    def getMemberDetails(self):
+        ''' retrieves and displays details of the member being editted '''
+        # query to retrieve member details
+
+        member = self.logic.getExistingMember()
+
+        self.lblMemberID.setText( member.personid )			
+        if member.headofhousehold == "Yes":
+            self.chkHeadHousehold.setChecked(True)	
+        age = date.today().year - member.yearofbirth
+        self.txtAge.setText( "%i" % age )
+        self.cmbYearOfBirth.setCurrentIndex( self.cmbYearOfBirth.findText( "%i" % member.yearofbirth ) )
+
+        self.cboSex.setCurrentIndex(self.cboSex.findText(member.sex))
+        self.cmbMonthsAbsent.setCurrentIndex( self.cmbMonthsAbsent.findText( str( member.periodaway) ) )
+        self.txtReason.setText( member.reason )
+        self.txtWhere.setText( member.whereto )
 
     def saveMember(self):
         ''' Saves changes to household to database '''
@@ -80,3 +100,8 @@ class FrmAddHouseholdMember(QDialog, Ui_AddHouseholdMember, MDIDialogMixin):
                 # close new project window
                 self.parent.retrieveHouseholdMembers()
                 self.mdiClose()
+
+
+class FrmAddHouseholdMember(Ui_AddHouseholdMember, BaseMemberForm):
+
+    pass

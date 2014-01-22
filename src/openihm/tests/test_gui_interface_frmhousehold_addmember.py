@@ -35,7 +35,15 @@ class TestAddHouseHoldMemberLogic(unittest.TestCase):
             house1 = Household(hhid=40, householdname='Test', pid=2, dateofcollection=datetime.date(2012,6,4))
             session.add(house1)
         add_house_hold_member_logic = AddHouseHoldMemberLogic(40, 2)
-        assert add_house_hold_member_logic.saveMember('Male', "10", "2004", "No", "", "", "")
+        assert add_house_hold_member_logic.saveMember('Male', "10", "2004", False, "", "", "")
+        r = AddHouseHoldMemberLogic(40, 2, 'm10')
+        m = r.getExistingMember()
+        self.assertEqual(m.headofhousehold, 'No')
+        self.assertEqual(m.sex, 'Male')
+        assert r.saveMember('Female', "12", "2002", False, "", "", "")
+        m2 = r.getExistingMember()
+        self.assertEqual(m2.personid, 'f12')
+        self.assertEqual(m2.headofhousehold, 'No')
         self.helper.end_tests()
 
     def test_yearOfBirth(self):

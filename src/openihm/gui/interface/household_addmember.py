@@ -1,4 +1,4 @@
-from model.alchemy_schema import Household
+from model.alchemy_schema import Household, Householdmember
 import alchemy.household as household
 from data.db import session_scope
 from datetime import date
@@ -6,8 +6,9 @@ from datetime import date
 
 class AddHouseHoldMemberLogic(object):
 
-    def __init__(self, hhid, pid):
+    def __init__(self, hhid, pid, memberid=None):
         self.household = Household(pid=pid, hhid=hhid)
+        self.memberid = memberid
 
     def thisYear(self):
         return date.today().year
@@ -24,6 +25,18 @@ class AddHouseHoldMemberLogic(object):
         age = thisyear - int(yearOfBirth)
         return "%i" % age
 
+    def getExistingMember(self):
+        with session_scope() as session:
+            member = self._getExistingMember(session)
+            session.expunge(member) # make the item usable outside the session.
+            return member
+
+    def _getExistingMember(self, session):
+        house = self.household
+        personid = self.memberid
+        member = session.query(Householdmember).filter(Householdmember.hhid == house.hhid, Householdmember.pid == house.pid, Householdmember.personid == personid).first()
+        return member
+
     def saveMember(self, sex, age, yearofbirth, headOfHousehold, periodaway,
                    reason, whereto):
         education = ""
@@ -37,7 +50,19 @@ class AddHouseHoldMemberLogic(object):
             headhousehold = "No"
 
         with session_scope() as session:
-            household.addMember(session, self.household, memberid,
-                                yearofbirth, headhousehold, sex,
-                                education, periodaway, reason, whereto)
+            if self.memberid:
+                member = self._getExistingMember(session)
+                member.sex = sex
+                member.yearofbirth = yearofbirth
+                member.headofhousehold = headhousehold
+                member.reason = reason
+                member.whereto = whereto
+                member.periodaway = periodaway
+                member.personid = memberid
+                self.memberid = memberid
+                # end of session implicitly writes data.
+            else:
+                household.addMember(session, self.household, memberid,
+                                    yearofbirth, headhousehold, sex,
+                                    education, periodaway, reason, whereto)
         return True
