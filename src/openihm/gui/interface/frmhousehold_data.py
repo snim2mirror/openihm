@@ -27,6 +27,7 @@ from data.config import Config
 from control.controller import Controller
 from data.db import session_scope
 from model.alchemy_schema import Householdmember
+import alchemy.household_members as household_members
 
 
 Ui_HouseholdData, base_class = uic.loadUiType("gui/designs/ui_household_data.ui")
@@ -159,8 +160,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
 			
 			with session_scope() as session:
 			    projectid = self.parent.projectid
-			    q = session.query(Householdmember).filter(Householdmember.hhid == hhid, Householdmember.pid == projectid, Householdmember.personid.in_(selectedIds))
-			    q.delete(synchronize_session=False)
+			    household_members.remove_members(session, hhid, projectid, selectedIds)
 
 			self.retrieveHouseholdMembers()
 
