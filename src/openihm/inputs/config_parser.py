@@ -41,14 +41,14 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
             'superuser': 'root',
             'superuser_password': '',
         }
-	# Fix a bug found by a user. This is caused by a change 
-	# in the stdlib between Python versions 2.6 and 2.7.
-	version = sys.version_info
-	if version[0] < 3 and version[1] < 7:
-	        ConfigParser.SafeConfigParser.__init__(self, self.defaults)
-	else:
-	        ConfigParser.SafeConfigParser.__init__(self, self.defaults,
-        	                                        allow_no_value=True)
+        # Fix a bug found by a user. This is caused by a change
+        # in the stdlib between Python versions 2.6 and 2.7.
+        version = sys.version_info
+        if version[0] < 3 and version[1] < 7:
+            ConfigParser.SafeConfigParser.__init__(self, self.defaults)
+        else:
+            ConfigParser.SafeConfigParser.__init__(self, self.defaults,
+                                                   allow_no_value=True)
         self.defaults['port'] = int(self.defaults['port'])
 
     def database_config(self):
@@ -78,7 +78,7 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
                 'port':               self.getint('database', 'port'),
                 'superuser':          self.get('database', 'superuser'),
                 'superuser_password': self.get('database',
-                                                  'superuser_password'),
+                                               'superuser_password'),
             }
         except ConfigParser.NoOptionError:
             return self.defaults
@@ -87,7 +87,7 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
 
     def db_log_level(self):
         try:
-            return self.get('database', 'log_level');
+            return self.get('database', 'log_level')
         except (ConfigParser.NoOptionError, ConfigParser.NoSectionError):
             return 'WARN'
 
@@ -137,8 +137,8 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
         config = self.database_config()
         driver = self.get_driver()
         return "%s://%s:%s@%s/%s" % (driver, config['user'],
-                                    config['password'], config['host'],
-                                    config['database'])
+                                     config['password'], config['host'],
+                                     config['database'])
 
     def sqlalchemy_superuser_connection_string(self):
         """
@@ -151,5 +151,5 @@ class OpenIHMConfig(ConfigParser.SafeConfigParser):
         config = self.database_config()
         driver = self.get_driver()
         return "%s://%s:%s@%s/%s" % (driver, config['superuser'],
-                                    config['superuser_password'],
-                                    config['host'], config['database'])
+                                     config['superuser_password'],
+                                     config['host'], config['database'])
