@@ -577,7 +577,7 @@ class FrmHouseholdData(QDialog, Ui_HouseholdData, MySQLMixin, TableViewMixin, MD
         query = '''SELECT id, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed
                 FROM cropincome WHERE hhid=%i AND pid=%s ''' % (hhid, pid)
 
-    rows = self.executeResultsQuery(query)
+        rows = self.executeResultsQuery(query)
         # add  data rows
         num = 0
 
