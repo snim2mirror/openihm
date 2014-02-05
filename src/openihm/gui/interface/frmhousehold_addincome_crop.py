@@ -28,106 +28,106 @@ Ui_AddHouseholdIncomeCrops, base_class = uic.loadUiType("gui/designs/ui_househol
 
 from mixins import MDIDialogMixin, MySQLMixin
 
-class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops, MySQLMixin, MDIDialogMixin):	
-     ''' Form to add or edit a Household Crop Income  '''	
-     def __init__(self, parent,  hhid, hhname, incomeid = 0 ):
-         ''' Set up the dialog box interface '''
-         QDialog.__init__(self)
-         self.setupUi(self)
-         self.parent 	= parent
-         self.hhid 		= hhid
-         self.pid = parent.parent.projectid
-         self.incomeid 	= incomeid
-         
-         self.config = Config.dbinfo().copy()
-         
-         self.getCropTypes()
-         
-         if ( incomeid != 0 ):
-             self.displayIncomeDetails()
-             self.setWindowTitle( "Edit Income Item" )
-             
-         # display household name
-         self.lblHouseholdName.setText(hhname)
-         
-         # lock editing of income source and unit of measure
-         self.cboIncomeType.setEditable( False )
-         self.txtUnitOfMeasure.setReadOnly( True )
-         
-     def displayUnitOfMeasure(self):
-         ''' displays the unit of measure of the selected income source '''
-         unitofmeasure = self.cboIncomeType.itemData( self.cboIncomeType.currentIndex() ).toString()
-         self.txtUnitOfMeasure.setText( unitofmeasure )
-         
-     def getCropTypes(self):
-         ''' Retrieve Crop Types and display them in a combobox '''
-         # select query to Crop Types
-         query = '''SELECT name, unitofmeasure FROM setup_foods_crops WHERE category='crops' '''
-         rows = self.executeResultsQuery(query)
+class FrmHouseholdCropIncome(QDialog, Ui_AddHouseholdIncomeCrops, MySQLMixin, MDIDialogMixin):
+    ''' Form to add or edit a Household Crop Income  '''
+    def __init__(self, parent,  hhid, hhname, incomeid = 0 ):
+        ''' Set up the dialog box interface '''
+        QDialog.__init__(self)
+        self.setupUi(self)
+        self.parent = parent
+        self.hhid = hhid
+        self.pid = parent.parent.projectid
+        self.incomeid = incomeid
 
-         for row in rows:
-             croptype = row[0]
-             measuringunit = row[1]
-             self.cboIncomeType.addItem(croptype, QVariant(measuringunit))
+        self.config = Config.dbinfo().copy()
 
-         unitofmeasure = self.cboIncomeType.itemData( self.cboIncomeType.currentIndex() ).toString()
-         self.txtUnitOfMeasure.setText( unitofmeasure )
-        
-     def displayIncomeDetails(self):
-         ''' Retrieve and display Household Income details '''
-         query = '''SELECT incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed  
-             FROM cropincome WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
-         
-         rows = self.executeResultsQuery(query)
+        self.getCropTypes()
 
-         for row in rows:
-             croptype = row[0]
-             self.cboIncomeType.setCurrentIndex( self.cboIncomeType.findText( croptype ) )
-             unitofmeasure = row[1]
-             self.txtUnitOfMeasure.setText( unitofmeasure )
-             unitsproduced = row[2]
-             self.txtUnitsProduced.setText( str(unitsproduced) )
-             unitssold = row[3]
-             self.txtUnitsSold.setText( str(unitssold) )
-             unitprice = row[4]
-             self.txtUnitPrice.setText( str(unitprice) )
-             otheruses = row[5]
-             self.txtUnitsOtherUses.setText( str(otheruses) )
-             unitsconsumed = row[6]
-             self.txtUnitsConsumed.setText( str(unitsconsumed) )
-        
-     def saveIncome(self):
-         ''' Saves crop income to database '''    	
+        if ( incomeid != 0 ):
+            self.displayIncomeDetails()
+            self.setWindowTitle( "Edit Income Item" )
 
-         # get the data entered by user
-         croptype      	= self.cboIncomeType.currentText()
-         unitofmeasure	= self.txtUnitOfMeasure.text()
-         unitsproduced    = self.txtUnitsProduced.text() if self.txtUnitsProduced.text() != "" else "0"
-         unitsconsumed	= self.txtUnitsConsumed.text() if self.txtUnitsConsumed.text() != "" else "0"
-         unitssold		= self.txtUnitsSold.text() if self.txtUnitsSold.text() != "" else "0"
-         unitprice		= self.txtUnitPrice.text() if self.txtUnitPrice.text() != "" else "0"
-         otheruses       = self.txtUnitsOtherUses.text() if self.txtUnitsOtherUses.text() != "" else "0"
-         
-         totalusage = float(unitsconsumed) + float(unitssold) + float(otheruses)
-         totalproduced = float(unitsproduced)
-         
-         if totalproduced < totalusage:
-             msg = "The total of units consumed, units sold and units for otheruses should not exceed unitsproduced."
-             QMessageBox.information(self,"Add Crop Income", msg)	
-             return
+        # display household name
+        self.lblHouseholdName.setText(hhname)
 
-         # create UPDATE query
-         if (self.incomeid == 0):
-             query = '''INSERT INTO cropincome (hhid, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, 
-                 otheruses, unitsconsumed, pid ) VALUES(%s,'%s','%s',%s,%s,%s, %s, %s, 
-                 %s) ''' % ( self.hhid, croptype, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed, self.pid )
-         else:
-             query = ''' UPDATE cropincome SET incomesource='%s', unitofmeasure='%s', unitsproduced=%s, unitssold=%s,
-                  unitprice=%s, otheruses=%s, unitsconsumed=%s WHERE hhid=%s AND pid=%s AND  
-                  id=%s ''' % ( croptype, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed, self.hhid, self.pid,  self.incomeid)
+        # lock editing of income source and unit of measure
+        self.cboIncomeType.setEditable( False )
+        self.txtUnitOfMeasure.setReadOnly( True )
 
-         self.executeUpdateQuery(query)
+    def displayUnitOfMeasure(self):
+        ''' displays the unit of measure of the selected income source '''
+        unitofmeasure = self.cboIncomeType.itemData( self.cboIncomeType.currentIndex() ).toString()
+        self.txtUnitOfMeasure.setText( unitofmeasure )
 
-         # close new project window
-         self.parent.retrieveHouseholdCropIncome()
-         self.mdiClose()
+    def getCropTypes(self):
+        ''' Retrieve Crop Types and display them in a combobox '''
+        # select query to Crop Types
+        query = '''SELECT name, unitofmeasure FROM setup_foods_crops WHERE category='crops' '''
+        rows = self.executeResultsQuery(query)
+
+        for row in rows:
+            croptype = row[0]
+            measuringunit = row[1]
+            self.cboIncomeType.addItem(croptype, QVariant(measuringunit))
+
+        unitofmeasure = self.cboIncomeType.itemData( self.cboIncomeType.currentIndex() ).toString()
+        self.txtUnitOfMeasure.setText( unitofmeasure )
+
+    def displayIncomeDetails(self):
+        ''' Retrieve and display Household Income details '''
+        query = '''SELECT incomesource, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed
+            FROM cropincome WHERE hhid=%s AND pid=%s AND id=%s ''' % ( self.hhid, self.pid, self.incomeid )
+
+        rows = self.executeResultsQuery(query)
+
+        for row in rows:
+            croptype = row[0]
+            self.cboIncomeType.setCurrentIndex( self.cboIncomeType.findText( croptype ) )
+            unitofmeasure = row[1]
+            self.txtUnitOfMeasure.setText( unitofmeasure )
+            unitsproduced = row[2]
+            self.txtUnitsProduced.setText( str(unitsproduced) )
+            unitssold = row[3]
+            self.txtUnitsSold.setText( str(unitssold) )
+            unitprice = row[4]
+            self.txtUnitPrice.setText( str(unitprice) )
+            otheruses = row[5]
+            self.txtUnitsOtherUses.setText( str(otheruses) )
+            unitsconsumed = row[6]
+            self.txtUnitsConsumed.setText( str(unitsconsumed) )
+
+    def saveIncome(self):
+        ''' Saves crop income to database '''
+
+        # get the data entered by user
+        croptype = self.cboIncomeType.currentText()
+        unitofmeasure = self.txtUnitOfMeasure.text()
+        unitsproduced = self.txtUnitsProduced.text() if self.txtUnitsProduced.text() != "" else "0"
+        unitsconsumed = self.txtUnitsConsumed.text() if self.txtUnitsConsumed.text() != "" else "0"
+        unitssold = self.txtUnitsSold.text() if self.txtUnitsSold.text() != "" else "0"
+        unitprice = self.txtUnitPrice.text() if self.txtUnitPrice.text() != "" else "0"
+        otheruses = self.txtUnitsOtherUses.text() if self.txtUnitsOtherUses.text() != "" else "0"
+
+        totalusage = float(unitsconsumed) + float(unitssold) + float(otheruses)
+        totalproduced = float(unitsproduced)
+
+        if totalproduced < totalusage:
+            msg = "The total of units consumed, units sold and units for otheruses should not exceed unitsproduced."
+            QMessageBox.information(self,"Add Crop Income", msg)
+            return
+
+        # create UPDATE query
+        if (self.incomeid == 0):
+            query = '''INSERT INTO cropincome (hhid, incomesource, unitofmeasure, unitsproduced, unitssold, unitprice,
+                otheruses, unitsconsumed, pid ) VALUES(%s,'%s','%s',%s,%s,%s, %s, %s,
+                %s) ''' % ( self.hhid, croptype, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed, self.pid )
+        else:
+            query = ''' UPDATE cropincome SET incomesource='%s', unitofmeasure='%s', unitsproduced=%s, unitssold=%s,
+                 unitprice=%s, otheruses=%s, unitsconsumed=%s WHERE hhid=%s AND pid=%s AND
+                 id=%s ''' % ( croptype, unitofmeasure, unitsproduced, unitssold, unitprice, otheruses, unitsconsumed, self.hhid, self.pid,  self.incomeid)
+
+        self.executeUpdateQuery(query)
+
+        # close new project window
+        self.parent.retrieveHouseholdCropIncome()
+        self.mdiClose()
