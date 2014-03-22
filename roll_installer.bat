@@ -4,12 +4,7 @@ REM NOTE: if you want to roll an installer for a different branch
 REM for testing purposes, set the IHM-BRANCH environment variable.
 REM e.g. SET IHM-BRANCH=sqlalchemy
 
-if "%ProgramFiles(x86)%"=="" goto :x86
-set PF=%ProgramFiles(x86)%
-goto :pfset
-:x86
-set PF=%ProgramFiles%
-:pfset
+call %~dp0\pf_find.bat
 
 IF EXIST %~dp0\binaries\.hg goto :skip_deps
 echo Downloading dependencies for the first time...
