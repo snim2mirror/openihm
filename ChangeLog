@@ -1,7 +1,40 @@
-2014-03-22 1.5.1.sqlalchemy (colin)
+2014-03-22 1.5.2 (colin)
 
-	Refactored a lot of the household menu options.  They should largely
-	appear unchanged.  
+	This release should be largely similar to 1.5.1.  It is an internal
+	refactoring of some of the database related code to make it easier to
+	maintain.  This involves using a new library named sqlalchemy to talk
+	to the database.  The windows installers will both attempt to install
+	that if it is not present on the system already.  Menu options
+	modified are on the household menu,
+
+	* Add Household
+	* Edit household
+	* Delete household
+	* Find household
+	* View all households
+	* Adding household members
+
+	For information on what to test see -
+	https://code.google.com/p/open-ihm/wiki/EnteringHouseHoldData#Testing
+
+	Support for an ini file named openihm.cfg has been added.  This allows
+	for alternative databases to be used, even database servers setup on
+	different machines can now be specified.
+
+	The ini file can look something like this,
+
+	[database]
+	host=mysql-ohm
+	database = openihm
+	user = openihm
+	password = ihm2012
+	superuser = root
+	superuser_password = testpassword
+	log_level = INFO
+
+	If not all the parameters are specified then the current defaults will
+	be used.
+
 
 2013-03-17  tiomanda  <tiomanda>
 
