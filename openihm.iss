@@ -1,14 +1,16 @@
-; OpenIHM 1.5 setup
+; OpenIHM setup
+
+#include "version.iss"
 
 [Setup]
 AppName=OpenIHM
-AppVersion=1.5.2.sqlalchemy
+AppVersion={#AppVersion}
 DefaultDirName={sd}\Python27\Lib\site-packages\OpenIHM
-DefaultGroupName=OpenIHM_1.5.2.sqlalchemy
+DefaultGroupName=OpenIHM_{#AppVersion}
 UninstallDisplayIcon={app}\resources\images\openihm.png
 Compression=lzma2
 SolidCompression=yes
-OutputBaseFilename=OpenIHM-Setup-1.5.2.sqlalchemy
+OutputBaseFilename=OpenIHM-Setup-{#AppVersion}
 OutputDir=.\setupfiles
 
 [Files]
@@ -16,6 +18,6 @@ Source: ".\src\openihm\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 Source: ".\binaries\sqlalchemy\*"; DestDir: "{app}\..\sqlalchemy"; Flags: onlyifdoesntexist recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{group}\OpenIHM_1.5.2.sqlalchemy"; Filename: "{app}\openihmlauncher.bat"; WorkingDir: "{app}"
+Name: "{group}\OpenIHM_{#AppVersion}"; Filename: "{app}\openihmlauncher.bat"; WorkingDir: "{app}"
 Name: "{group}\Update OpenIHM"; Filename: "{app}\openihmupdator.bat"; WorkingDir: "{app}"
 
