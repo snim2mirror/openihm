@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>About Open-IHM v.1.5 </string>
+   <string>About Open-IHM v.1.5.3 </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -29,7 +29,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Cantarell'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;img src=&quot;:/images/images/EfDChancoComposite.jpg&quot; width=&quot;375&quot; /&gt;&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
-&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;open-ihm v1.5 is a software program used to analyse household income data, collected using the Individual Household Method (IHM). IHM is a method of collecting and analysing individual household income data, and was developed by &lt;a href=&quot;http://www.evidencefordevelopment.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Evidence for Development&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;open-ihm v1.5.3 is a software program used to analyse household income data, collected using the Individual Household Method (IHM). IHM is a method of collecting and analysing individual household income data, and was developed by &lt;a href=&quot;http://www.evidencefordevelopment.com&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Evidence for Development&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;open-ihm was written by Tiwonge Manda and Brown Msiska of &lt;a href=&quot;http://www.chanco.unima.mw/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Chancellor College, University of Malawi&lt;/span&gt;&lt;/a&gt;, with technical support from Sarah Mount, &lt;a href=&quot;http://www.wlv.ac.uk&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;University of Wolverhampton &lt;/span&gt;&lt;/a&gt;and Dai Clegg, &lt;a href=&quot;http://www.netezza.com/&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Netezza Corporation&lt;/span&gt;&lt;/a&gt;. Celia Petty and John Seaman, Evidence for Development, provided domain expertise.  &lt;/p&gt;
 &lt;p align=&quot;justify&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;
