@@ -1,3 +1,8 @@
+2014-03-22 1.5.1.sqlalchemy (colin)
+
+	Refactored a lot of the household menu options.  They should largely
+	appear unchanged.  
+
 2013-03-17  tiomanda  <tiomanda>
 
 	* src/openihm/outputs/routines/report_adultequivalent.py,

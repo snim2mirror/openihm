@@ -23,9 +23,9 @@ cd /d %TEMP%\ihm-build
 IF "%IHM-BRANCH%" == "" goto :nobranch
 hg checkout -C %IHM-BRANCH%
 :nobranch
-"%PF%\Inno Setup 5\ISCC.exe" openihm.iss 
+call source_installer.bat
 if ERRORLEVEL 1 goto :error
-"%PF%\Inno Setup 5\ISCC.exe" openihm-with-requirements.iss 
+call dependencies_installer.bat
 if ERRORLEVEL 1 goto :error
 goto :end
 :error
