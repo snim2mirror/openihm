@@ -1,12 +1,22 @@
 from setuptools import setup, find_packages
+import re
 import sys, os
 
 here = os.path.abspath(os.path.dirname(__file__))
 README = open(os.path.join(here, 'README.rst')).read()
 NEWS = open(os.path.join(here, 'NEWS.txt')).read()
 
+def get_version(config_fname):
+    pattern = re.compile(r'#define AppVersion "(\d.\d.\d)"')
+    with open(config_fname) as config:
+        for line in config:
+            m = pattern.match(line)
+            if m:
+                return m.group(1)
+        else:
+            raise ValueError("%s does not contain a valid version")
 
-version = '0.1'
+version = get_version(os.path.join(here, 'version.iss'))
 
 install_requires = [
     # List your project dependencies here.
