@@ -2,13 +2,13 @@
 
 [Setup]
 AppName=OpenIHM with Requirements
-AppVersion=1.5.1
+AppVersion=1.5.2.sqlalchemy
 DefaultDirName={pf}\OpenIHM
 DisableProgramGroupPage=yes
 Compression=lzma2/ultra64
 ;Compression=bzip/9
 SolidCompression=yes
-OutputBaseFilename=OpenIHM-with-Requirements-1.5.1
+OutputBaseFilename=OpenIHM-with-Requirements-1.5.2.sqlalchemy
 OutputDir=.\setupfiles
 
 [Files]
@@ -16,7 +16,7 @@ Source: ".\binaries\mysql-5.5.36-win32.msi"; DestDir: "{app}"
 Source: ".\binaries\python-2.7.4.msi"; DestDir: "{app}"
 Source: ".\binaries\PyQt4-4.10-gpl-Py2.7-Qt4.8.4-x32.exe"; DestDir: "{app}"
 Source: ".\binaries\pyodbc-3.0.6.win32-py2.7.exe"; DestDir: "{app}"
-Source: ".\setupfiles\OpenIHM-Setup-1.5.1.exe"; DestDir: "{app}"
+Source: ".\setupfiles\OpenIHM-Setup-1.5.2.sqlalchemy.exe"; DestDir: "{app}"
 Source: ".\binaries\mercurial-2.3.1.win32-py2.7.exe"; DestDir: "{app}"
 Source: ".\binaries\MySQL-python-1.2.3.win32-py2.7.exe"; DestDir: "{app}"
 
