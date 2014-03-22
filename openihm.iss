@@ -17,6 +17,7 @@ OutputDir=.\setupfiles
 Source: ".\src\openihm\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; Excludes: "openihm.cfg"
 Source: ".\binaries\sqlalchemy\*"; DestDir: "{app}\..\sqlalchemy"; Flags: onlyifdoesntexist recursesubdirs createallsubdirs
 Source: ".\src\openihm\openihm.cfg"; DestDir: "{app}"; Flags: onlyifdoesntexist
+Source: ".\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\OpenIHM_{#AppVersion}"; Filename: "{app}\openihmlauncher.bat"; WorkingDir: "{app}"
