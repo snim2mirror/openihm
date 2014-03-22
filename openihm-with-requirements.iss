@@ -12,9 +12,9 @@ OutputBaseFilename=OpenIHM-with-Requirements-1.5.1
 OutputDir=.\setupfiles
 
 [Files]
-Source: ".\binaries\mysql-5.5.15-win32.msi"; DestDir: "{app}"
-Source: ".\binaries\python-2.7.3.msi"; DestDir: "{app}"
-Source: ".\binaries\PyQt-Py2.7-x86-gpl-4.9.5-1.exe"; DestDir: "{app}"
+Source: ".\binaries\mysql-5.5.36-win32.msi"; DestDir: "{app}"
+Source: ".\binaries\python-2.7.4.msi"; DestDir: "{app}"
+Source: ".\binaries\PyQt4-4.10-gpl-Py2.7-Qt4.8.4-x32.exe"; DestDir: "{app}"
 Source: ".\binaries\pyodbc-3.0.6.win32-py2.7.exe"; DestDir: "{app}"
 Source: ".\setupfiles\OpenIHM-Setup-1.5.1.exe"; DestDir: "{app}"
 Source: ".\binaries\mercurial-2.3.1.win32-py2.7.exe"; DestDir: "{app}"
@@ -24,11 +24,11 @@ Source: ".\binaries\MySQL-python-1.2.3.win32-py2.7.exe"; DestDir: "{app}"
 Root: "HKLM"; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "C:\Python27;{olddata}"
 
 [Run]
-Filename: "{app}\python-2.7.3.msi"; Description: "Python Programming Language"; Flags: postinstall shellexec waituntilterminated
-Filename: "{app}\PyQt-Py2.7-x86-gpl-4.9.5-1.exe"; Description: "PyQt"; Flags: postinstall shellexec waituntilterminated
+Filename: "{app}\python-2.7.4.msi"; Description: "Python Programming Language"; Flags: postinstall shellexec waituntilterminated
+Filename: "{app}\PyQt4-4.10-gpl-Py2.7-Qt4.8.4-x32.exe"; Description: "PyQt"; Flags: postinstall shellexec waituntilterminated
 Filename: "{app}\pyodbc-3.0.6.win32-py2.7.exe"; Description: "PyODBC"; Flags: postinstall shellexec waituntilterminated
 Filename: "{app}\mercurial-2.3.1.win32-py2.7.exe"; Description: "Mercurial"; Flags: postinstall shellexec waituntilterminated
-Filename: "{app}\mysql-5.5.15-win32.msi"; Description: "MySQL Database Server"; Flags: postinstall shellexec waituntilterminated
+Filename: "{app}\mysql-5.5.36-win32.msi"; Description: "MySQL Database Server"; Flags: postinstall shellexec waituntilterminated
 Filename: "{app}\MySQL-python-1.2.3.win32-py2.7.exe"; Description: "Python MySQL Database Connector"; Flags: postinstall shellexec waituntilterminated
 Filename: "{app}\OpenIHM-Setup-1.5.1.exe"; Description: "OpenIHM 1.5.1 Setup"
 
