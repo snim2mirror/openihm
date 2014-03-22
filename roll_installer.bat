@@ -1,5 +1,9 @@
 @echo off
 
+REM NOTE: if you want to roll an installer for a different branch
+REM for testing purposes, set the IHM-BRANCH environment variable.
+REM e.g. SET IHM-BRANCH=sqlalchemy
+
 if "%ProgramFiles(x86)%"=="" goto :x86
 set PF=%ProgramFiles(x86)%
 goto :pfset
@@ -12,10 +16,13 @@ echo Downloading dependencies for the first time...
 hg clone https://bitbucket.org/colinnewell/open-ihm-installer-dependencies binaries
 :skip_deps
 rmdir /s /q %TEMP%\ihm-build
+cd /d %~dp0
 hg clone %~dp0 %TEMP%\ihm-build
 hg clone %~dp0\binaries %TEMP%\ihm-build\binaries
 cd /d %TEMP%\ihm-build
-
+IF "%IHM-BRANCH%" == "" goto :nobranch
+hg checkout -C %IHM-BRANCH%
+:nobranch
 "%PF%\Inno Setup 5\ISCC.exe" openihm.iss 
 if ERRORLEVEL 1 goto :error
 "%PF%\Inno Setup 5\ISCC.exe" openihm-with-requirements.iss 

@@ -30,5 +30,5 @@ Filename: "{app}\pyodbc-3.0.6.win32-py2.7.exe"; Description: "PyODBC"; Flags: po
 Filename: "{app}\mercurial-2.3.1.win32-py2.7.exe"; Description: "Mercurial"; Flags: postinstall shellexec waituntilterminated
 Filename: "{app}\mysql-5.5.36-win32.msi"; Description: "MySQL Database Server"; Flags: postinstall shellexec waituntilterminated
 Filename: "{app}\MySQL-python-1.2.3.win32-py2.7.exe"; Description: "Python MySQL Database Connector"; Flags: postinstall shellexec waituntilterminated
-Filename: "{app}\OpenIHM-Setup-1.5.1.exe"; Description: "OpenIHM 1.5.1 Setup"
+Filename: "{app}\OpenIHM-Setup-1.5.2.sqlalchemy.exe"; Description: "OpenIHM 1.5.2.sqlalchemy Setup"
 
